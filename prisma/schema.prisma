@@ -1,0 +1,137 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+// schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model btw_kepengurusan {
+  id_btw      Int          @id @default(autoincrement())
+  tahun_kerja String
+  btw_divisi  btw_divisi[]
+
+  @@map("btw_kepengurusan")
+}
+
+model btw_divisi {
+  id_divisi   Int              @id @default(autoincrement())
+  nama_divisi String
+  id_btw      Int
+  btw_kepengurusan btw_kepengurusan @relation(fields: [id_btw], references: [id_btw], onDelete: Cascade)
+  btw_anggota btw_anggota[]
+
+  @@map("btw_divisi")
+}
+
+model btw_anggota {
+  id_anggota   Int     @id @default(autoincrement())
+  nama_anggota String
+  jabatan      String
+  foto_anggota String?
+  id_divisi    Int
+  btw_divisi   btw_divisi @relation(fields: [id_divisi], references: [id_divisi], onDelete: Cascade)
+
+  @@map("btw_anggota")
+}
+
+model kabinet {
+  id_kabinet       Int           @id @default(autoincrement())
+  nama_kabinet     String
+  tahun_kerja      String
+  gambar_logo      String?
+  deskripsi        String?
+  visi             String?
+  misi             String?
+  detail_deskripsi String?
+  elemen_logo      elemen_logo[]
+  departemen       departemen[]
+
+  @@map("kabinet")
+}
+
+model elemen_logo {
+  id_elemen_logo   Int      @id @default(autoincrement())
+  nama_elemen      String
+  deskripsi_elemen String?
+  gambar_elemen    String?
+  id_kabinet       Int
+  kabinet          kabinet  @relation(fields: [id_kabinet], references: [id_kabinet], onDelete: Cascade)
+
+  @@map("elemen_logo")
+}
+
+model departemen {
+  id_departemen    Int        @id @default(autoincrement())
+  logo_departemen  String?
+  nama_departemen  String
+  deskripsi        String?
+  foto_departemen  String?
+  id_kabinet       Int
+  kabinet          kabinet    @relation(fields: [id_kabinet], references: [id_kabinet], onDelete: Cascade)
+  anggota          anggota[]
+  proker           proker[]
+
+  @@map("departemen")
+}
+
+model anggota {
+  id_anggota    Int        @id @default(autoincrement())
+  nama_anggota  String
+  jabatan       String
+  foto_anggota  String?
+  id_departemen Int
+  departemen    departemen @relation(fields: [id_departemen], references: [id_departemen], onDelete: Cascade)
+
+  @@map("anggota")
+}
+
+model event {
+  id_event         Int       @id @default(autoincrement())
+  judul            String
+  deskripsi        String?
+  tanggal_mulai    DateTime
+  tanggal_berakhir DateTime
+  gambar_event     String?
+  berita           String?
+
+  @@map("event")
+}
+
+model proker {
+  id_proker      Int        @id @default(autoincrement())
+  id_departemen  Int
+  foto_proker    String?
+  nama_proker    String
+  deskripsi      String?
+  departemen     departemen @relation(fields: [id_departemen], references: [id_departemen], onDelete: Cascade)
+
+  @@map("proker")
+}
+
+model akun {
+  id            Int     @id @default(autoincrement())
+  nama          String
+  email         String  @unique
+  password_hash String
+  role          Role    @default(admin)
+
+  @@map("akun")
+}
+
+enum Role {
+  superadmin  // Bisa kelola semua (event, kabinet, btw)
+  admin       // Bisa kelola event       
+}
+
+
+
