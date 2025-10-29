@@ -1,8 +1,8 @@
-import Navbar from "./components/NavBar";
+import Navbar from "./components/Navbar";
 
-export function BehindTheWeb() {
+export default function BehindTheWeb() {
   return (<>
-    <h1>Behind The Web</h1>
+    <Navbar/>
   </>
   );
 }
