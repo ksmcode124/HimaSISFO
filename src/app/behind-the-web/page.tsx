@@ -16,6 +16,7 @@ export default function BehindTheWeb() {
             key={social.platform}
             platform={social.platform}
             href={social.href}
+            className="w-[25px] h-[25px]"
           />
         ))}
       </div>
