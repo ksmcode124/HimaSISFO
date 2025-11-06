@@ -10,16 +10,20 @@ const socialMediaList = [
 export default function BehindTheWeb() {
   return (
     <>
-      <div>
+    <div className="min-h-screen bg-black text-white p-8">
+      <div className="flex flex-col gap-8">
         {socialMediaList.map((social) => (
           <SocialMediaLink
             key={social.platform}
             platform={social.platform}
             href={social.href}
+            label="label text"
             className="w-[25px] h-[25px]"
+            withBorder
           />
         ))}
       </div>
+    </div>
     </>
   );
 }
