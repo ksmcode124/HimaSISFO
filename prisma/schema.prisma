@@ -119,42 +119,50 @@ model proker {
 }
 
 model user {
-  id            Int     @id @default(autoincrement())
-  nama          String
-  email         String  @unique
-  password String
-  role          Role    @default(admin)
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  role          Role      @default(admin)
 
   accounts Account[]
   sessions Session[]
-
-  @@map("user")
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             Int
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?
-  access_token       String?
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?
-  session_state      String?
+  id                String    @id @default(cuid())
+  userId            String
+  accountId         String
+  providerId        String
+  accessToken       String?
+  refreshToken      String?
+  idToken           String?
+  expiresAt         DateTime?
+  password          String?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  accessTokenExpiresAt DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope             String?
+  type              String    @default("credential") // ✅ Fix dari error sebelumnya
 
   user user @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([provider, providerAccountId])
+  @@unique([providerId, accountId])
 }
 
 model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       Int
-  expires      DateTime
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  expiresAt DateTime
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   user user @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
@@ -165,13 +173,12 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+  @@map("verification_token")
 }
-
 
 enum Role {
-  superadmin  // Bisa kelola semua (event, kabinet, btw)
-  admin       // Bisa kelola event       
+  superadmin
+  admin
 }
-
 
 
