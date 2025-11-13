@@ -1,16 +1,17 @@
-import { NavLink } from "./NavLink";
-import Logo from "./Logo";
+import Logo from './Logo';
+import MobileNavigation from './MobileNavigation';
+import DesktopNavigation from './DesktopNavigation';
 
 export default function Navbar() {
   return (
-    <nav className="w-full flex flex-col lg:flex-row items-center justify-between px-6 lg:px-20 py-3">
+    <nav className="fixed flex w-full flex-col items-center justify-between px-6 py-3 lg:flex-row lg:px-20">
       <Logo />
-      <ul className="flex flex-col lg:flex-row gap-3 lg:gap-6 mt-4 lg:mt-0">
-        <NavLink href="/behind-the-web">Tentang</NavLink>
-        <NavLink href="/behind-the-web">Sejarah</NavLink>
-        <NavLink href="/behind-the-web">Visi & Misi</NavLink>
-        <NavLink href="/behind-the-web">Departemen</NavLink>
-      </ul>
+
+      {/* Mobile Navigation Menu */}
+      <MobileNavigation className="bg-primary-500 block border px-3 py-2 lg:hidden" />
+
+      {/* Desktop Navigation Menu */}
+      <DesktopNavigation />
     </nav>
   );
 }

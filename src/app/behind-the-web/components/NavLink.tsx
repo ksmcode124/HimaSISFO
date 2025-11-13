@@ -1,5 +1,7 @@
-import Link from "next/link";
-import React from "react";
+'use client';
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import React from 'react';
 
 interface NavProps {
   href: string;
@@ -7,18 +9,46 @@ interface NavProps {
 }
 
 export function NavLink({ href, children }: NavProps) {
-  return (
-    <>
-      <Link
-        href={href}
-        className="relative rounded-xl lg:rounded-2xl px-2 py-1.5 lg:px-3 lg:py-1.5 text-center text-sm lg:text-base bg-[#3A484F]/50
-          shadow-[0_2px_3px_rgba(0,0,0,0.25)] lg:shadow-[0_4px_4px_rgba(0,0,0,0.25)] transition-all active:scale-[0.97]
-          hover:shadow-[inset_5px_5px_4px_rgba(0,0,0,0.4),0_4px_4px_rgba(0,0,0,0.25)] ßtouch-manipulation"
-      >
-        <span className="absolute inset-0 rounded-xl lg:rounded-2xl ring-1 ring-white/30 [mask-[linear-gradient(to-bottom_right,white,transparent)]] pointer-events-none"></span>
+  const [activeHash, setActiveHash] = useState('');
 
-        {children}
-      </Link>
-    </>
+  useEffect(() => {
+    const sections = document.querySelectorAll('section[id]');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.find((entry) => entry.isIntersecting);
+        if (visible) {
+          const newHash = `#${visible.target.id}`;
+          setActiveHash(newHash);
+          history.replaceState(null, '', newHash);
+        }
+      },
+      { threshold: 0.5 }, // section considered "active" when 50% visible
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const target = document.querySelector(href);
+    if (!target) return;
+    target.scrollIntoView({ behavior: 'smooth' });
+    history.replaceState(null, '', href);
+    setActiveHash(href);
+  };
+
+  const isActive = activeHash === href;
+
+  return (
+    <Link
+      href={href}
+      onClick={handleClick}
+      className={`pointer-events-auto relative border px-4 py-1 text-center text-2xl font-bold transition-colors duration-300 hover:bg-white ${
+        isActive ? 'bg-white' : 'bg-primary-500'
+      }`}
+    >
+      {children}
+    </Link>
   );
 }

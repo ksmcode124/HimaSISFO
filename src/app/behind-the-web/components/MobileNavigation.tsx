@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { NavLink } from './NavLink';
 
-export default function HamburgerMenu({ className }: { className: string }) {
+export default function MobileNavigation({ className }: { className: string }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -13,18 +13,18 @@ export default function HamburgerMenu({ className }: { className: string }) {
         aria-label="Toggle menu"
       >
         <span
-          className={`block h-0.5 w-6 bg-black transition-transform ${
-            open ? 'rotate-45' : ''
+          className={`block h-1 w-6 rounded-2xl bg-black transition-transform ${
+            open ? 'rotate-60' : ''
           }`}
         />
         <span
-          className={`block h-0.5 w-6 bg-black transition-opacity ${
+          className={`block h-1 w-6 rounded-2xl bg-black transition-opacity ${
             open ? 'opacity-0' : 'opacity-100'
           }`}
         />
         <span
-          className={`block h-0.5 w-6 bg-black transition-transform ${
-            open ? '-rotate-45' : ''
+          className={`block h-1 w-6 rounded-2xl bg-black transition-transform ${
+            open ? '-rotate-60' : ''
           }`}
         />
       </button>
@@ -36,10 +36,10 @@ export default function HamburgerMenu({ className }: { className: string }) {
             : 'pointer-events-none -translate-y-4 opacity-0'
         }`}
       >
-        <NavLink href="/behind-the-web">TENTANG</NavLink>
-        <NavLink href="/behind-the-web">SEJARAH</NavLink>
-        <NavLink href="/behind-the-web">VISI & MISI</NavLink>
-        <NavLink href="/behind-the-web">DEPARTEMEN</NavLink>
+        <NavLink href="#tentang">TENTANG</NavLink>
+        <NavLink href="#sejarah">SEJARAH</NavLink>
+        <NavLink href="#visimisi">VISI & MISI</NavLink>
+        <NavLink href="#departemen">DEPARTEMEN</NavLink>
       </div>
     </div>
   );
