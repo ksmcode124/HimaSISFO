@@ -1,8 +1,13 @@
-import Navbar from "./components/NavBar";
+import Navbar from './components/Navbar';
 
-export function BehindTheWeb() {
-  return (<>
-    <h1>Behind The Web</h1>
-  </>
+export default function BehindTheWeb() {
+  return (
+    <>
+      <Navbar />
+      <section id="tentang" className="h-screen" />
+      <section id="sejarah" className="h-screen" />
+      <section id="visimisi" className="h-screen" />
+      <section id="departemen" className="h-screen" />
+    </>
   );
 }
