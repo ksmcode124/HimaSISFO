@@ -22,7 +22,7 @@ export function NavLink({ href, children }: NavProps) {
           history.replaceState(null, '', newHash);
         }
       },
-      { threshold: 0.5 }, // section considered "active" when 50% visible
+      { threshold: 0.5 },
     );
 
     sections.forEach((section) => observer.observe(section));
