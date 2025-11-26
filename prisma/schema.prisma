@@ -15,34 +15,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model btw_kepengurusan {
-  id_btw      Int          @id @default(autoincrement())
-  tahun_kerja String
-  btw_divisi  btw_divisi[]
-
-  @@map("btw_kepengurusan")
-}
-
-model btw_divisi {
-  id_divisi   Int              @id @default(autoincrement())
-  nama_divisi String
-  id_btw      Int
-  btw_kepengurusan btw_kepengurusan @relation(fields: [id_btw], references: [id_btw], onDelete: Cascade)
-  btw_anggota btw_anggota[]
-
-  @@map("btw_divisi")
-}
-
-model btw_anggota {
-  id_anggota   Int     @id @default(autoincrement())
-  nama_anggota String
-  jabatan      String
-  foto_anggota String?
-  id_divisi    Int
-  btw_divisi   btw_divisi @relation(fields: [id_divisi], references: [id_divisi], onDelete: Cascade)
-
-  @@map("btw_anggota")
-}
 
 model kabinet {
   id_kabinet       Int           @id @default(autoincrement())
