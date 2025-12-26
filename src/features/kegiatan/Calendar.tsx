@@ -163,7 +163,7 @@ export default function DynamicCalendar() {
   };
 
   return (
-    <div className="max-w-md mx-auto p-4 bg-white rounded-lg shadow-md">
+    <div className="w-full mx-auto p-4 bg-white rounded-lg shadow-md">
       <div className="w-full flex items-center justify-between">
         <h2 className="text-xl font-bold mb-1">{formatMonthTitle(year, month)}</h2>
         <nav className="flex border rounded-lg overflow-hidden my-4">

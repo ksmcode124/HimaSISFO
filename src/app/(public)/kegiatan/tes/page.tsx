@@ -1,6 +1,7 @@
 "use client"
-import DynamicCalendar from "@/features/kegiatan/Calendar";
+
+import { CalendarSection } from "@/features/kegiatan/calendar/CalendarSection";
 
 export default function test() {
-  return <DynamicCalendar />;
+  return <CalendarSection/>;
 }
