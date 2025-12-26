@@ -1,69 +1,120 @@
 @import "tailwindcss";
+
+@plugin "tailwindcss-animate";
 @import "tw-animate-css";
-@config "../../tailwind.config.js";
 
-:root {
-  /* Descriptive Colors */
-  --color-dodger-blue: #3385FF;
-  --color-columbia-blue: #8DDDFF;
+@theme {
+   /* =========================
+     Descriptive Colors
+  ========================= */
+   --color-dodger-blue: #3385FF;
+   --color-columbia-blue: #8DDDFF;
 
-  --color-nile-blue: #1B3C53;
-  --color-blue-bayoux: #456882;
+   --color-nile-blue: #1B3C53;
+   --color-blue-bayoux: #456882;
 
-  --color-white: #FFFFFF;
-  --color-porcelain: #EDF3F6;
-  --color-silver-chalice: #AFAFAF;
-  --color-ironside-grey: #666666;
-  --color-smokey-grey: #747474;
-  --color-cloud-burst: #2D2D51;
-  --color-black: #000000;
+   --color-white: #FFFFFF;
+   --color-porcelain: #EDF3F6;
+   --color-silver-chalice: #AFAFAF;
+   --color-ironside-grey: #666666;
+   --color-smokey-grey: #747474;
+   --color-cloud-burst: #2D2D51;
+   --color-black: #000000;
 
-  --color-parsley: #0D5125;
-  --color-dark-green-blue: #1D5954;
+   --color-parsley: #0D5125;
+   --color-dark-green-blue: #1D5954;
 
-  /* Semantic Colors */
-  --color-primary-100: var(--color-nile-blue);
-  --color-primary-200: var(--color-blue-bayoux);
-  --color-primary: var(--color-primary-100);
+   /* =========================
+     Semantic Palette
+  ========================= */
+   --color-primary: var(--color-nile-blue);
+   --color-primary-foreground: var(--color-white);
 
-  --color-accent-100: var(--color-columbia-blue);
-  --color-accent-200: var(--color-dodger-blue);
-  --color-accent: var(--color-accent-200);
+   --color-accent: var(--color-dodger-blue);
+   --color-accent-foreground: var(--color-white);
 
-  --color-neutral-50:  var(--color-porcelain);
-  --color-neutral-100: var(--color-silver-chalice);
-  --color-neutral-200: var(--color-ironside-grey);
-  --color-neutral-300: var(--color-smokey-grey);
-  --color-neutral-400: var(--color-cloud-burst);
-  --color-neutral: var(--color-neutral-400);
+   --color-secondary: var(--color-blue-bayoux);
+   --color-secondary-foreground: var(--color-white);
 
-  /* Font sizes (xs → xl, optional 2XL, 3XL) */
-  --text-xs: 14px;
-  --text-sm: 16px;
-  --text-md: 18px;
-  --text-lg: 20px;
-  --text-xl: 24px;
-  --text-2xl: 28px;
-  --text-3xl: 32px;
-  --text-4xl: 36px;
-  --text-5xl: 40px;
-  --text-6xl: 44px;
-  --text-7xl: 48px;
-  --text-8xl: 52px;
-  --text-9xl: 56px;
-  --text-10xl: 64px;
+   /* =========================
+     Neutral Scale (mapped)
+  ========================= */
+   --color-neutral-50: var(--color-porcelain);
+   --color-neutral-100: var(--color-silver-chalice);
+   --color-neutral-200: var(--color-ironside-grey);
+   --color-neutral-300: var(--color-smokey-grey);
+   --color-neutral-400: var(--color-cloud-burst);
+   --color-neutral-950: var(--color-black);
+
+   /* =========================
+     Base UI Tokens (shadcn)
+  ========================= */
+   --color-background: var(--color-neutral-50);
+   --color-foreground: var(--color-neutral-950);
+
+   --color-card: var(--color-neutral-50);
+   --color-card-foreground: var(--color-neutral-950);
+
+   --color-popover: var(--color-neutral-50);
+   --color-popover-foreground: var(--color-neutral-950);
+
+   --color-muted: var(--color-neutral-100);
+   --color-muted-foreground: var(--color-neutral-300);
+
+   --color-border: var(--color-neutral-100);
+   --color-input: var(--color-neutral-100);
+   --color-ring: var(--color-accent);
+
+   /* =========================
+     Destructive (reuse only)
+  ========================= */
+   --color-destructive: var(--color-red-900);
+   --color-destructive-foreground: var(--color-white);
+
+   /* =========================
+     Radius
+  ========================= */
+   --radius: 0.625rem;
+
+   --radius-sm: calc(var(--radius) - 4px);
+   --radius-md: calc(var(--radius) - 2px);
+   --radius-lg: var(--radius);
+   --radius-xl: calc(var(--radius) + 4px);
+   --radius-2xl: calc(var(--radius) + 8px);
+   --radius-3xl: calc(var(--radius) + 12px);
+   --radius-4xl: calc(var(--radius) + 16px);
+
+   /* =========================
+     Font Sizes
+  ========================= */
+   --text-xs: 14px;
+   --text-sm: 16px;
+   --text-md: 18px;
+   --text-lg: 20px;
+   --text-xl: 24px;
+   --text-2xl: 28px;
+   --text-3xl: 32px;
+   --text-4xl: 36px;
+   --text-5xl: 40px;
+   --text-6xl: 44px;
+   --text-7xl: 48px;
+   --text-8xl: 52px;
+   --text-9xl: 56px;
+   --text-10xl: 64px;
 }
 
+
 @layer base {
-  * {
-    @apply m-0 p-0 box-border;
-  }
-  
-  html, body {
-    @apply antialiased;
-    font-family: var(--font-primary);
-    color: var(--color-black);
-    background-color: var(--color-porcelain);
-    scroll-behavior: smooth;
-  }
+   * {
+      @apply m-0 p-0 box-border;
+   }
+
+   html,
+   body {
+      @apply antialiased;
+      font-family: var(--font-primary);
+      color: var(--color-black);
+      background-color: var(--color-porcelain);
+      scroll-behavior: smooth;
+   }
 }
