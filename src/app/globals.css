@@ -4,9 +4,7 @@
 @import "tw-animate-css";
 
 @theme {
-   /* =========================
-     Descriptive Colors
-  ========================= */
+   /* Warna Descriptive */
    --color-dodger-blue: #3385FF;
    --color-columbia-blue: #8DDDFF;
 
@@ -24,9 +22,7 @@
    --color-parsley: #0D5125;
    --color-dark-green-blue: #1D5954;
 
-   /* =========================
-     Semantic Palette
-  ========================= */
+   /* Semantic Palette */
    --color-primary: var(--color-nile-blue);
    --color-primary-foreground: var(--color-white);
 
@@ -36,9 +32,7 @@
    --color-secondary: var(--color-blue-bayoux);
    --color-secondary-foreground: var(--color-white);
 
-   /* =========================
-     Neutral Scale (mapped)
-  ========================= */
+   /* Neutral Scale */
    --color-neutral-50: var(--color-porcelain);
    --color-neutral-100: var(--color-silver-chalice);
    --color-neutral-200: var(--color-ironside-grey);
@@ -46,9 +40,7 @@
    --color-neutral-400: var(--color-cloud-burst);
    --color-neutral-950: var(--color-black);
 
-   /* =========================
-     Base UI Tokens (shadcn)
-  ========================= */
+   /* Base UI Tokens (shadcn) */
    --color-background: var(--color-neutral-50);
    --color-foreground: var(--color-neutral-950);
 
@@ -65,15 +57,11 @@
    --color-input: var(--color-neutral-100);
    --color-ring: var(--color-accent);
 
-   /* =========================
-     Destructive (reuse only)
-  ========================= */
+   /* Destructive (reuse only) */
    --color-destructive: var(--color-red-900);
    --color-destructive-foreground: var(--color-white);
 
-   /* =========================
-     Radius
-  ========================= */
+   /* Radius */
    --radius: 0.625rem;
 
    --radius-sm: calc(var(--radius) - 4px);
@@ -84,9 +72,7 @@
    --radius-3xl: calc(var(--radius) + 12px);
    --radius-4xl: calc(var(--radius) + 16px);
 
-   /* =========================
-     Font Sizes
-  ========================= */
+   /* Font Sizes */
    --text-xs: 14px;
    --text-sm: 16px;
    --text-md: 18px;
