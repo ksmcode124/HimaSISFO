@@ -18,7 +18,7 @@ export function DecorationLayer({ children, className }: LayerProps) {
 
 export function ContentLayer({ children, className }: LayerProps) {
   return (
-    <div className={clsx("relative inset-0 z-10 justify-center", className)}>
+    <div className={clsx("relative inset-0 z-10", className)}>
       {children}
     </div>
   );
