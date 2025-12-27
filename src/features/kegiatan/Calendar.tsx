@@ -1,5 +1,6 @@
 "use client";
 
+import { clsx } from "clsx";
 import React, { useEffect, useMemo, useState } from "react";
 
 const WEEK_DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -126,8 +127,11 @@ function generateEvents(
 /* =========================
    COMPONENT
 ========================= */
+interface DynamicCalendarProps {
+  className : string;
+}
 
-export default function DynamicCalendar() {
+export default function DynamicCalendar({className}:DynamicCalendarProps) {
   const [today] = useState(() => new Date());
 
   const [year, setYear] = useState(today.getUTCFullYear());
@@ -163,7 +167,7 @@ export default function DynamicCalendar() {
   };
 
   return (
-    <div className="w-full mx-auto p-4 bg-white rounded-lg shadow-md">
+    <div className={clsx(className, "w-full mx-auto p-4 bg-white rounded-lg shadow-md")}>
       <div className="w-full flex items-center justify-between">
         <h2 className="text-xl font-bold mb-1">{formatMonthTitle(year, month)}</h2>
         <nav className="flex border rounded-lg overflow-hidden my-4">
