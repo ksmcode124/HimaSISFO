@@ -1,10 +1,10 @@
 import DynamicCalendar from "../Calendar"
-export function CalendarBase() {
+export function CalendarContent() {
     return (
-        <div className="relative">
-            <h1 className="py-15 md:py-30 text-xl text-center">Kalender</h1>
+        <div className="relative border-2 border-red">
+            <h1 className="text-xl text-center">Kalender</h1>
             <DynamicCalendar />
-            <div className="p-5 border-2 border-gray-300 h-fit">
+            <div className="p-5 h-fit">
                 <h2>keterangan</h2>
                 <p>Ini adalah keterangan untuk kalender.</p>
             </div>

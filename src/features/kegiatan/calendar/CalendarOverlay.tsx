@@ -1,5 +1,5 @@
 export function CalendarOverlay() {
   return (
-    <p>overlay</p>
+    <p className="w-fit">overlay</p>
   );
 }
