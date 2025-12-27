@@ -1,12 +1,12 @@
-import { ShellLayer } from "@/components/layout/ShellLayer";
+
 import {
   ContentLayer,
   OverlayLayer,
   DecorationLayer,
 } from "@/components/layout/Layer";
-import { CalendarOverlay } from "./CalendarOverlay"
-import { CalendarContent } from "./CalendarContent"
-import { CalendarDecoration } from "./CalenderDecoration"
+import { CalendarOverlay } from "../components/layer/OverlayLayer"
+import { CalendarContent } from "../components/layer/ContentLayer"
+import { CalendarDecoration } from "../components/layer/DecorationLayer"
 
 export function CalendarSection() {
   return (

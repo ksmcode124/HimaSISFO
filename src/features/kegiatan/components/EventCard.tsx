@@ -1,4 +1,4 @@
-import { EventCardProps } from "./event-cart.types";
+import { EventCardProps } from "../types";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 export const EventCard = (props: EventCardProps) => {
