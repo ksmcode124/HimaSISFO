@@ -22,7 +22,7 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
 
   return (
     <header
-      className={`sticky top-5 z-50 max-w-[90vw] py-3 px-20 lg:bg-[#101D2F]/50 rounded-full h-fit mx-auto my-5 ${className}`}
+      className={`fixed w-full top-5 z-50 max-w-[90vw] py-3 px-20 lg:bg-[#101D2F]/50 rounded-full h-fit mx-auto my-5 ${className}`}
       role="banner"
     >
       <nav
