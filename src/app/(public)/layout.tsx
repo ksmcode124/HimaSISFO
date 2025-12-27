@@ -1,10 +1,19 @@
-import { NavigationBar } from "@/components/layout";
+import { NavigationBar, SiteFooter } from "@/components/layout";
 import { navItems } from "@/features/navigation";
+import React from "react";
 
-export default function PublicLayout() {
+interface PublicLayoutProps {
+  children: React.ReactNode
+}
+
+export default function PublicLayout({children}: PublicLayoutProps) {
   return (
     <>
     <NavigationBar items={navItems} />
+    <main>
+      {children}
+    </main>
+    <SiteFooter />
     </>
   )
 }
