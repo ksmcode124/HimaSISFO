@@ -6,11 +6,18 @@ type LayerProps = {
   children: React.ReactNode;
   className?: string;
 };
+export function BackgroundLayer({ children, className }: LayerProps) {
+  return (
+    <div className={clsx("absolute inset-0 z-0 pointer-events-none", className)}>
+      {children}
+    </div>
+  );
+}
 
 export function DecorationLayer({ children, className }: LayerProps) {
   return (
     <div
-      className={clsx("absolute inset-0 z-0 pointer-events-none", className)}>
+      className={clsx("absolute inset-0 z-5 pointer-events-none", className)}>
       {children}
     </div>
   );
