@@ -26,7 +26,7 @@ export function ContentLayer({ children, className }: LayerProps) {
 
 export function OverlayLayer({ children, className }: LayerProps) {
   return (
-    <div className={clsx("absolute inset-0 z-20", className)}>
+    <div className={clsx("absolute z-20", className)}>
       {children}
     </div>
   );
