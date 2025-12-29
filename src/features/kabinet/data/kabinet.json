@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "kabinet_list": [
+    {
+      "slug": "aksayapatra",
+      "tahun_akademik": "2024/2025",
+      "nama_kabinet": "Aksayapatra",
+      "hero": {
+        "title": "SELAMAT DATANG DI HIMASISFO 2024/2025",
+        "subtitle": "Kabinet Aksayapatra"
+      }
+    },
+    {
+      "slug": "gelora-harmoni",
+      "tahun_akademik": "2025/2026",
+      "nama_kabinet": "Gelora Harmoni",
+      "hero": {
+        "title": "SELAMAT DATANG DI HIMASISFO 2025/2026",
+        "subtitle": "Kabinet Gelora Harmoni"
+      }
+    }
+  ]
+}
