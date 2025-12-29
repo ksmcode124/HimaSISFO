@@ -6,14 +6,17 @@ interface PublicLayoutProps {
   children: React.ReactNode
 }
 
-export default function PublicLayout({children}: PublicLayoutProps) {
+export default function PublicLayout({ children }: PublicLayoutProps) {
   return (
     <>
-    <NavigationBar items={navItems} />
-    <main>
-      {children}
-    </main>
-    <SiteFooter />
+      <div className="flex items-center flex-col min-h-screen">
+
+        <NavigationBar items={navItems} />
+        <main>
+          {children}
+        </main>
+        {/* <SiteFooter /> */}
+      </div >
     </>
   )
 }
