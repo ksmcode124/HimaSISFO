@@ -1,4 +1,16 @@
+import { KabinetHeroSection, 
+  KabinetFilosofiSection, 
+  KabinetIntiSection, 
+  KabinetDepartemenSection
+} from "@/features/kabinet";
 
-export default function Page() {
-  return <h1 className="text-9xl">BERANDA</h1>
+export default function KabinetPage() {
+  return (
+    <main>
+      <KabinetHeroSection />
+      <KabinetFilosofiSection />
+      <KabinetIntiSection />
+      <KabinetDepartemenSection />
+    </main>
+  );
 }
