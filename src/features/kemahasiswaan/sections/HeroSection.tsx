@@ -1,0 +1,40 @@
+import Image from "next/image"
+
+interface ContentProps {
+  title: string
+  subtitle: string
+}
+
+export default function HeroSection({title, subtitle} : ContentProps) {
+  return (
+    <>
+    <section className="flex flex-col items-center justify-center min-h-[65vh] px-4 sm:px-6 lg:px-20">
+      <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl text-center">
+        {title}
+      </h1>
+      <h2 className="font-semibold text-base sm:text-lg md:text-xl text-center mt-2 sm:mt-4">
+        {subtitle}
+      </h2>
+    </section>
+
+    <Pita />
+    </>
+  )
+}
+
+function Pita() {
+  return (
+    <div className="relative w-full aspect-4/1">
+      <Image
+        src="/assets/kemahasiswaan/decoration-pita.png"
+        alt=""
+        fill
+        className="object-contain"
+        priority
+      />
+    </div>
+  );
+}
+
+
+

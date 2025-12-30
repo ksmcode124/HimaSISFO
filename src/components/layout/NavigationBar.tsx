@@ -22,7 +22,7 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
 
   return (
     <header
-      className={`fixed w-full top-5 z-50 max-w-[90vw] py-3 px-20 lg:bg-[#101D2F]/50 rounded-full h-fit mx-auto my-5 ${className}`}
+      className={`fixed top-5 left-1/2 transform -translate-x-1/2 z-50 w-[90%] py-3 md:px-15 lg:px-20 lg:bg-[#101D2F]/50 rounded-full h-fit ${className}`}
       role="banner"
     >
       <nav
@@ -94,7 +94,7 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
       </nav>
       {/* Mobile Navigation */}
         { isOpen && (
-          <aside className={`z-30 text-white rounded-l-[5em] h-screen w-[75vw] fixed top-0 right-0 bg-neutral-200 backdrop-blur-md px-10 pt-20 transition-transform duration-500 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+          <aside className={`z-30 text-white rounded-l-[5em] h-screen w-[75vw] fixed top-0 -right-7 bg-neutral-200 backdrop-blur-md px-10 pt-20 transition-transform duration-500 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
             {/* TODO: add asset image here */}
             <ul className='flex flex-col items-center border-b py-10 gap-y-8'>
               {items.map((item) => {

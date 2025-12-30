@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "slug": "pendaftaran-dan-verifikasi",
+  "seo": {
+    "title": "Pendaftaran dan Verifikasi",
+    "description": "Panduan untuk Segala Administrasi Akademik Anda"
+  },
+  "hero": {
+    "title": "Pendaftaran dan Verifikasi",
+    "subtitle": "Panduan untuk Segala Administrasi Akademik Anda"
+  },
+  "sections": [
+    {
+      "type": "accordion",
+      "items": [
+        {
+          "id": "pembuatan-ktm",
+          "title": "Pembuatan KTM",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Langkah 1"
+                },
+                {
+                  "text": "Langkah 2 dengan [Sadewa](https://sadewa.upnyk.ac.id)",
+                  "ordered": false,
+                  "items": [
+                    {
+                      "text": "Catatan A"
+                    },
+                    {
+                      "text": "Catatan B"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "validasi-ktm",
+          "title": "Validasi KTM",
+          "content": []
+        },
+        {
+          "id" : "kehilangan-ktm",
+          "title": "Kehilangan KTM",
+          "content": []
+        }
+      ]
+    },
+    {
+      "type": "item-collection",
+      "items": [
+        {
+          "id": "ubah-data-pddikti",
+          "title": "Ubah Data PDDIKTI",
+          "content": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "slug": "blanko",
+  "seo": {
+    "title": "Blanko",
+    "description": "Download File Blanko Kemahasiswaan Sesuai Kebutuhan Anda"
+  },
+  "hero": {
+    "title": "Blanko",
+    "subtitle": "Download File Blanko Kemahasiswaan Sesuai Kebutuhan Anda"
+  },
+  "sections": [
+    {
+      "type": "item-collection",
+      "items": [
+        {
+          "id" : "cuti",
+          "title": "Blanko Pengajuan Cuti Akademik"
+        },
+        {
+          "id" : "transkrip-sementara",
+          "title": "Blanko Permohonan Transkrip Sementara"
+        },
+        {
+          "id" : "pemulihan-status",
+          "title": "Blanko Pemulihan Status Mahasiswa"
+        },
+        {
+          "id" : "pengunduran-diri",
+          "title": "Blanko Pengunduran Diri"
+        },
+        {
+          "id" : "cetak-ijazah",
+          "title": "Blanko Cetak Ijazah dengan Bahasa Inggris"
+        },
+        {
+          "id" : "legalisir-ijazah",
+          "title": "Blanko Legalisir Ijazah"
+        }
+      ]
+    }
+  ]
+}
