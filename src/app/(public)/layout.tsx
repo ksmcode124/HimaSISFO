@@ -1,5 +1,6 @@
 import { NavigationBar, SiteFooter } from "@/components/layout";
 import { navItems } from "@/features/navigation";
+import { LiquidGlass } from "@liquidglass/react";
 import React from "react";
 
 interface PublicLayoutProps {
