@@ -11,7 +11,7 @@ import { CalendarDecoration } from "../components/layer/DecorationLayer"
 export function CalendarSection() {
   return (
     <section className="p-0 m-0 items-center justify-center">
-      <DecorationLayer className="px-0 ">
+      <DecorationLayer className="px-0 relative">
         <CalendarDecoration />
       </DecorationLayer>
       <ContentLayer className="px-5 md:px-60 pb-30">

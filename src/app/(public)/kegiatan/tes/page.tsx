@@ -1,7 +1,10 @@
 "use client"
 
-import { CalendarSection } from "@/features/kegiatan/sections/CalendarSection";
+import { DecorationLayer } from "@/components/layout/Layer";
+import { CalendarDecoration } from "@/features/kegiatan/components/layer/DecorationLayer";
 
 export default function test() {
-  return <CalendarSection/>;
+  return (<DecorationLayer className="relative w-full">
+    <CalendarDecoration />
+  </DecorationLayer>);
 }
