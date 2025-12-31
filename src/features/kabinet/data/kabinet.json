@@ -19,5 +19,12 @@
         "subtitle": "Kabinet Gelora Harmoni"
       }
     }
-  ]
+  ],
+  
+  "departemen_hero": {
+    "nama": "Akademik dan Keprofesian",
+    "deskripsi": "Departemen yang bertanggung jawab dalam melayani mahasiswa sistem informasi seputar akademik dan keprofesian mulai dari pembelajaran hingga perlombaan",
+    "logo": "/assets/kabinet/icon-advo.svg"
+  }
+  
 }

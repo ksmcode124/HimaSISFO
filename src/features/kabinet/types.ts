@@ -10,6 +10,13 @@ export interface Kabinet {
   hero: HeroData;
 }
 
+export interface DepartemenHeroData {
+  nama: string;
+  deskripsi: string;
+  logo: string;
+  foto_hero?: string;
+}
+
 export interface KabinetDataJSON {
   success: boolean;
   kabinet_list: Kabinet[];
