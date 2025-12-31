@@ -12,12 +12,12 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DIRECT_URL")
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
-
 model kabinet {
-  id_kabinet       Int           @id @default(autoincrement())
+  id_kabinet       Int              @id @default(autoincrement())
   nama_kabinet     String
   tahun_kerja      String
   gambar_logo      String?
@@ -27,48 +27,68 @@ model kabinet {
   detail_deskripsi String?
   elemen_logo      elemen_logo[]
   departemen       departemen[]
+  detailAnggota    detail_anggota[]
+  event            event[]
+  proker           proker[]
 
   @@map("kabinet")
 }
 
 model elemen_logo {
-  id_elemen_logo   Int      @id @default(autoincrement())
+  id_elemen_logo   Int     @id @default(autoincrement())
   nama_elemen      String
   deskripsi_elemen String?
   gambar_elemen    String?
   id_kabinet       Int
-  kabinet          kabinet  @relation(fields: [id_kabinet], references: [id_kabinet], onDelete: Cascade)
+  kabinet          kabinet @relation(fields: [id_kabinet], references: [id_kabinet], onDelete: Cascade)
 
   @@map("elemen_logo")
 }
 
 model departemen {
-  id_departemen    Int        @id @default(autoincrement())
-  logo_departemen  String?
-  nama_departemen  String
-  deskripsi        String?
-  foto_departemen  String?
-  id_kabinet       Int
-  kabinet          kabinet    @relation(fields: [id_kabinet], references: [id_kabinet], onDelete: Cascade)
-  anggota          anggota[]
-  proker           proker[]
+  id_departemen        Int     @id @default(autoincrement())
+  id_kabinet           Int
+  nama_departemen      String
+  deskripsi_departemen String?
 
-  @@map("departemen")
+  kabinet       kabinet          @relation(fields: [id_kabinet], references: [id_kabinet], onDelete: Cascade)
+  detailAnggota detail_anggota[]
+  proker        proker[]
 }
 
 model anggota {
-  id_anggota    Int        @id @default(autoincrement())
-  nama_anggota  String
-  jabatan       String
-  foto_anggota  String?
-  id_departemen Int
-  departemen    departemen @relation(fields: [id_departemen], references: [id_departemen], onDelete: Cascade)
+  id_anggota   Int     @id @default(autoincrement())
+  nama_anggota String
+  foto_anggota String?
 
-  @@map("anggota")
+  detailAnggota detail_anggota[]
+}
+
+model jabatan {
+  id_jabatan   Int    @id @default(autoincrement())
+  nama_jabatan String
+
+  detailAnggota detail_anggota[]
+}
+
+model detail_anggota {
+  id_detail     Int @id @default(autoincrement())
+  id_anggota    Int
+  id_departemen Int
+  id_kabinet    Int
+  id_jabatan    Int
+
+  anggota    anggota    @relation(fields: [id_anggota], references: [id_anggota])
+  departemen departemen @relation(fields: [id_departemen], references: [id_departemen])
+  kabinet    kabinet    @relation(fields: [id_kabinet], references: [id_kabinet])
+  jabatan    jabatan    @relation(fields: [id_jabatan], references: [id_jabatan])
+
+  @@unique([id_anggota, id_kabinet])
 }
 
 model event {
-  id_event         Int       @id @default(autoincrement())
+  id_event         Int      @id @default(autoincrement())
+  id_kabinet       Int
   judul            String
   deskripsi        String?
   tanggal_mulai    DateTime
@@ -76,50 +96,51 @@ model event {
   gambar_event     String?
   berita           String?
 
-  @@map("event")
+  kabinet kabinet @relation(fields: [id_kabinet], references: [id_kabinet], onDelete: Cascade)
 }
 
 model proker {
-  id_proker      Int        @id @default(autoincrement())
-  id_departemen  Int
-  foto_proker    String?
-  nama_proker    String
-  deskripsi      String?
-  departemen     departemen @relation(fields: [id_departemen], references: [id_departemen], onDelete: Cascade)
+  id_proker     Int     @id @default(autoincrement())
+  id_departemen Int
+  id_kabinet    Int
+  nama_proker   String
+  deskripsi     String?
+  foto_proker   String?
 
-  @@map("proker")
+  departemen departemen @relation(fields: [id_departemen], references: [id_departemen])
+  kabinet    kabinet    @relation(fields: [id_kabinet], references: [id_kabinet])
 }
 
 model user {
-  id            String    @id @default(cuid())
+  id            String   @id @default(cuid())
   name          String?
-  email         String    @unique
-  emailVerified Boolean   @default(false)
+  email         String   @unique
+  emailVerified Boolean  @default(false)
   image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  role          Role      @default(admin)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  role          Role     @default(admin)
 
   accounts Account[]
   sessions Session[]
 }
 
 model Account {
-  id                String    @id @default(cuid())
-  userId            String
-  accountId         String
-  providerId        String
-  accessToken       String?
-  refreshToken      String?
-  idToken           String?
-  expiresAt         DateTime?
-  password          String?
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
-  accessTokenExpiresAt DateTime?
+  id                    String    @id @default(cuid())
+  userId                String
+  accountId             String
+  providerId            String
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  expiresAt             DateTime?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  accessTokenExpiresAt  DateTime?
   refreshTokenExpiresAt DateTime?
-  scope             String?
-  type              String    @default("credential") // ✅ Fix dari error sebelumnya
+  scope                 String?
+  type                  String    @default("credential") // ✅ Fix dari error sebelumnya
 
   user user @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -152,5 +173,3 @@ enum Role {
   superadmin
   admin
 }
-
-
