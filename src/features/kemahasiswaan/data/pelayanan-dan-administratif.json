@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "slug": "pelayanan-dan-administratif",
+  "seo": {
+    "title": "Pelayanan dan Administratif",
+    "description": "Panduan untuk Segala Administrasi Anda"
+  },
+  "hero": {
+    "title": "Pelayanan dan Administratif",
+    "subtitle": "Panduan untuk Segala Administrasi Anda"
+  },
+  "sections": [
+    {
+      "type": "accordion",
+      "items": [
+        {
+          "id": "lupa-password",
+          "title": "Lupa Password / Email Kampus",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Langkah 1"
+                },
+                {
+                  "text": "Langkah 2 dengan [Sadewa](https://sadewa.upnyk.ac.id)"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "dana-penghargaan",
+          "title": "Pencairan Dana Penghargaan",
+          "content": []
+        },
+        {
+          "id": "karya-cendika",
+          "title": "Pendaftaran Karya Cendekia",
+          "content": []
+        },
+        {
+          "id": "legalisir-skl",
+          "title": "Legalisir SKL",
+          "content": []
+        },
+        {
+          "id": "pengambilan-skl",
+          "title": "Pengambilan SKL",
+          "content": []
+        },
+        {
+          "id": "tes-toefl",
+          "title": "Pendaftaran Test TOEFL",
+          "content": []
+        }
+      ]
+    }
+  ]
+}

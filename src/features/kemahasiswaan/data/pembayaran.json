@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "slug": "pembayaran",
+  "seo": {
+    "title": "Pembayaran",
+    "description": "Panduan untuk Segala Transaksi Pembayaran Anda"
+  },
+  "hero": {
+    "title": "Pembayaran",
+    "subtitle": "Panduan untuk Segala Transaksi Pembayaran Anda"
+  },
+  "sections": [
+    {
+      "type": "accordion",
+      "items": [
+        {
+          "id": "ukt-mbanking",
+          "title": "Pembayaran UKT melalui M-Banking",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Langkah 1"
+                },
+                {
+                  "text": "Langkah 2 dengan [Sadewa](https://sadewa.upnyk.ac.id)",
+                  "ordered": false,
+                  "items": [
+                    {
+                      "text": "Catatan A"
+                    },
+                    {
+                      "text": "Catatan B"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ukt-atm",
+          "title": "Pembayaran UKT melalui ATM",
+          "content": []
+        },
+        {
+          "id" : "ukt-teller",
+          "title": "Pembayaran UKT melalui Teller Bank",
+          "content": []
+        },
+        {
+          "id" : "hilang-slip",
+          "title": "Kehilangan Slip Pembayaran",
+          "content": []
+        },
+        {
+          "id" : "sanggah-ukt",
+          "title": "Pengajuan Sanggah UKT",
+          "content": []
+        }
+      ]
+    }
+  ]
+}

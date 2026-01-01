@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "slug": "pengumuman-dan-informasi",
+  "seo": {
+    "title": "Pengumuman dan Informasi",
+    "description": "Akses Cepat Informasi dan Administrasi Anda"
+  },
+  "hero": {
+    "title": "Pengumuman dan Informasi",
+    "subtitle": "Akses Cepat Informasi dan Administrasi Anda"
+  },
+  "sections": [
+    {
+      "type": "accordion",
+      "items": [
+        {
+          "id": "berkas-yudisium",
+          "title": "Berkas Yudisium",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Langkah 1"
+                },
+                {
+                  "text": "Langkah 2 dengan [Sadewa](https://sadewa.upnyk.ac.id)",
+                  "ordered": false,
+                  "items": [
+                    {
+                      "text": "Catatan A"
+                    },
+                    {
+                      "text": "Catatan B"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "status-yudisium",
+          "title": "Informasi Status Pengajuan Yudisium",
+          "content": []
+        },
+        {
+          "id" : "daftar-wisuda",
+          "title": "Daftar Wisuda dan Verifikasi Data",
+          "content": []
+        },
+        {
+          "id" : "pengumuman-hasil",
+          "title": "Pengumuman Hasil Ujian dan Yudisium",
+          "content": []
+        }
+      ]
+    }
+  ]
+}

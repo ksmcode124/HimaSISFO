@@ -57,6 +57,52 @@
         {
           "id": "ubah-data-pddikti",
           "title": "Ubah Data PDDIKTI",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Langkah 1"
+                },
+                {
+                  "text": "Langkah 2 dengan [Sadewa](https://sadewa.upnyk.ac.id)",
+                  "ordered": false,
+                  "items": [
+                    {
+                      "text": "Catatan A"
+                    },
+                    {
+                      "text": "Catatan B"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "pengunduran-diri",
+          "title": "Pengunduran Diri",
+          "content": []
+        },
+        {
+          "id": "pengajuan-cuti",
+          "title": "Pengajuan Cuti Akademik",
+          "content": []
+        },
+        {
+          "id": "pengajuan-kkn",
+          "title": "Pengajuan KKN",
+          "content": []
+        },
+        {
+          "id": "pemulihan-status",
+          "title": "Pemulihan Status Mahasiswa",
+          "content": []
+        },
+        {
+          "id": "pengajuan-skripsi",
+          "title": "Pengajuan Judul Skripsi",
           "content": []
         }
       ]
