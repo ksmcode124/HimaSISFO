@@ -10,7 +10,7 @@ export default function KabinetYearButton({
   return (
     <button
       onClick={onClick}
-      className="px-8 py-2 bg-gray-700 rounded-full border border-gray-500 text-xl hover:bg-gray-600 transition-colors"
+      className="px-4 md:px-8 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white md:text-xl hover:bg-gray-600 transition-colors"
     >
       {label}
     </button>
