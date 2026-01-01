@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "slug": "proses-akademik",
+  "seo": {
+    "title": "Proses Akademik",
+    "description": "Informasi Alur Proses Kebutuhan Akademik"
+  },
+  "hero": {
+    "title": "Proses Akademik",
+    "subtitle": "Informasi Alur Proses Kebutuhan Akademik"
+  },
+  "sections": [
+    {
+      "type": "item-collection",
+      "items": [
+        {
+          "id": "cetak-transkrip",
+          "title": "Cetak Transkrip Akademik",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Langkah 1"
+                },
+                {
+                  "text": "Langkah 2 dengan [Sadewa](https://sadewa.upnyk.ac.id)",
+                  "ordered": false,
+                  "items": [
+                    {
+                      "text": "Catatan A"
+                    },
+                    {
+                      "text": "Catatan B"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "surat-keterangan-aktif",
+          "title": "Surat Keterangan Aktif",
+          "content": []
+        },
+        {
+          "id" : "seminar-ta",
+          "title": "Daftar Seminar TA",
+          "content": []
+        },
+        {
+          "id" : "sidang-ta",
+          "title": "Daftar Sidang TA",
+          "content": []
+        },
+        {
+          "id" : "surat-bebas-lab",
+          "title": "Surat Bebas Lab",
+          "content": []
+        }
+      ]
+    }
+  ]
+}

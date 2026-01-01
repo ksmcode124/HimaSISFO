@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Card, CardContent } from "@/components/ui/Card"
+import { Card, CardAction, CardContent } from "@/components/ui/Card"
 import {
   Carousel,
   CarouselContent,
@@ -11,6 +11,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/Carousel"
 import { CardProps } from "../types"
+import Link from "next/link"
 
 interface AlurKemahasiswaanCarouselProps {
   data: CardProps[]
@@ -52,6 +53,14 @@ export default function AlurKemahasiswaanCarousel({
                     {card.description}
                   </p>
                 </CardContent>
+                <CardAction className="mt-4">
+                <Link
+                  href={`kemahasiswaan/${card.id}`}
+                  className="text-sm font-medium underline underline-offset-4"
+                >
+                  Lihat Detail
+                </Link>
+              </CardAction>
               </Card>
             </div>
           </CarouselItem>

@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "slug": "wisuda-dan-yudisium",
+  "seo": {
+    "title": "Wisuda dan Yudisium",
+    "description": "Panduan untuk Membantu Kelulusan Anda"
+  },
+  "hero": {
+    "title": "Wisuda dan Yudisium",
+    "subtitle": "Panduan untuk Membantu Kelulusan Anda"
+  },
+  "sections": [
+    {
+      "type": "item-collection",
+      "items": [
+        {
+          "id": "yudisium",
+          "title": "Yudisium",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Langkah 1"
+                },
+                {
+                  "text": "Langkah 2 dengan [Sadewa](https://sadewa.upnyk.ac.id)",
+                  "ordered": false,
+                  "items": [
+                    {
+                      "text": "Catatan A"
+                    },
+                    {
+                      "text": "Catatan B"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "daftar-wisuda",
+          "title": "Daftar Wisuda",
+          "content": []
+        },
+        {
+          "id" : "peminjaman-toga",
+          "title": "Peminjaman dan Pengembalian Toga",
+          "content": []
+        },
+        {
+          "id" : "legalisir-transkrip",
+          "title": "Legalisir Transkrip Akademik",
+          "content": []
+        },
+        {
+          "id" : "pengambilan-ijazah",
+          "title": "Pengambilan Ijazah",
+          "content": []
+        },
+        {
+          "id" : "legalisir-ijazah",
+          "title": "Legalisir Ijazah",
+          "content": []
+        },
+        {
+          "id" : "pengambilan-transkrip",
+          "title": "Pengambilan Transkrip Akademik",
+          "content": []
+        },
+        {
+          "id" : "cetak-transkrip",
+          "title": "Cetak Transkrip dalam Bahasa Inggris",
+          "content": []
+        }
+      ]
+    }
+  ]
+}

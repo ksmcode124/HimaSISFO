@@ -1,16 +1,16 @@
 import { Card, CardHeader, CardTitle } from "@/components/ui/Card";
-import { HeroSection, ProsesAkademik } from "@/features/kemahasiswaan";
+import { HeroSection, WisudaYudisium } from "@/features/kemahasiswaan";
 
-export default function ProsesAkademikPage() {
-  const itemCollectionSection = ProsesAkademik.sections.find(
+export default function WisudaPage() {
+  const itemCollectionSection = WisudaYudisium.sections.find(
     (section) => section.type === "item-collection"
   )
   const itemCollectionData = itemCollectionSection?.items
   return (
     <>
-    <HeroSection {...ProsesAkademik.hero} />
+    <HeroSection {...WisudaYudisium.hero} />
 
-    <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-6 lg:px-12 max-w-7xl mx-auto">
+    <section className="grid grid-cols-1 sm:grid-cols-2 gap-6 px-6 lg:px-12 max-w-7xl mx-auto">
         {itemCollectionData?.map((item) => (
           <Card
             key={item.id}
