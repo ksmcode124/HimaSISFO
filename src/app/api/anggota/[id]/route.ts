@@ -1,157 +1,92 @@
-// /src/app/api/anggota/[id]/route.ts
-import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-// Import tipe error khusus Prisma untuk penanganan yang lebih baik
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'; 
+import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 
-const prisma = new PrismaClient();
-
-// Helper untuk parsing ID
-function parseAnggotaId(id: string): number | null {
-  const parsedId = parseInt(id);
-  if (isNaN(parsedId)) {
-    return null;
-  }
-  return parsedId;
+// Interface untuk tipe params sesuai standar Next.js terbaru
+interface RouteParams {
+  params: Promise<{ id: string }>;
 }
 
-// --- GET: Mengambil Detail Satu Anggota ---
-
-export async function GET(
-  request: Request,
-  { params }: { params: { id: string } } 
-) {
-  const id_anggota = parseAnggotaId(params.id);
-
-  if (id_anggota === null) {
-    return NextResponse.json({ status: 400, message: 'ID anggota tidak valid.' }, { status: 400 });
-  }
-
+/**
+ * GET: Mengambil detail profil satu anggota beserta riwayat jabatannya
+ */
+export async function GET(req: Request, { params }: RouteParams) {
   try {
-    const anggota = await prisma.anggota.findUnique({
-      where: { id_anggota: id_anggota },
+    const { id } = await params; // Wajib di-await di Next.js 15+
+    const idInt = parseInt(id);
+
+    const data = await prisma.anggota.findUnique({
+      where: { id_anggota: idInt },
       include: {
-        departemen: {
-          select: {
-            nama_departemen: true,
+        detailAnggota: {
+          include: {
+            kabinet: true,
+            departemen: true,
+            jabatan: true,
           },
         },
       },
     });
 
-    if (!anggota) {
-      return NextResponse.json({ status: 404, message: 'Anggota tidak ditemukan.' }, { status: 404 });
+    if (!data) {
+      return NextResponse.json({ error: "Anggota tidak ditemukan" }, { status: 404 });
     }
 
-    return NextResponse.json({ status: 200, message: 'Detail anggota berhasil diambil.', data: anggota }, { status: 200 });
-
+    return NextResponse.json(data);
   } catch (error) {
-    // FIX: Penanganan 'error is of type unknown'
-    console.error('Error saat mengambil detail anggota:', error);
-    return NextResponse.json({ 
-        status: 500, 
-        message: 'Kesalahan server saat mengambil detail anggota.',
-        error: error instanceof Error ? error.message : 'Unknown error'
-    }, { status: 500 });
+    console.error("GET Error:", error);
+    return NextResponse.json({ error: "Terjadi kesalahan server" }, { status: 500 });
   }
 }
 
-// --- PUT: Mengubah Data Anggota ---
+/**
+ * PATCH: Memperbarui informasi master anggota (misalnya nama)
+ */
+export async function PATCH(req: Request, { params }: RouteParams) {
+  try {
+    const { id } = await params;
+    const idInt = parseInt(id);
+    
+    const body = await req.json();
+    const { nama_anggota } = body;
 
-export async function PUT(
-    request: Request,
-    { params }: { params: { id: string } }
-) {
-    const id_anggota = parseAnggotaId(params.id);
-
-    if (id_anggota === null) {
-        return NextResponse.json({ status: 400, message: 'ID anggota tidak valid.' }, { status: 400 });
+    if (!nama_anggota) {
+      return NextResponse.json({ error: "Nama anggota harus diisi" }, { status: 400 });
     }
 
-    try {
-        // FIX: Menggunakan tipe eksplisit yang disembunyikan dari linter
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const body: { [key: string]: any } = await request.json(); 
-        const { id_departemen, ...rest } = body;
-        
-        // FIX: Menggunakan tipe eksplisit
-        const updateData: { [key: string]: string | number | undefined } = rest;
+    const updatedAnggota = await prisma.anggota.update({
+      where: { id_anggota: idInt },
+      data: {
+        nama_anggota: nama_anggota,
+      },
+    });
 
-        if (id_departemen !== undefined) {
-            const parsed_id_departemen = parseInt(id_departemen.toString());
-            if (isNaN(parsed_id_departemen)) {
-                return NextResponse.json({
-                    status: 400,
-                    message: 'id_departemen harus berupa angka yang valid.',
-                }, { status: 400 });
-            }
-            updateData.id_departemen = parsed_id_departemen;
-        }
-
-        const updatedAnggota = await prisma.anggota.update({
-            where: { id_anggota: id_anggota },
-            data: updateData,
-        });
-
-        return NextResponse.json({ status: 200, message: 'Anggota berhasil diubah.', data: updatedAnggota }, { status: 200 });
-
-    } catch (error) {
-        console.error('Error saat mengubah anggota:', error);
-
-        // FIX: Menggunakan 'instanceof' untuk pengecekan tipe error Prisma
-        if (error instanceof PrismaClientKnownRequestError) {
-            // P2025: Record to update not found (Anggota tidak ditemukan)
-            if (error.code === 'P2025') {
-                return NextResponse.json({ status: 404, message: `Anggota dengan ID ${id_anggota} tidak ditemukan.` }, { status: 404 });
-            }
-            // P2003: Foreign key constraint failed (id_departemen tidak valid)
-            if (error.code === 'P2003') {
-                 return NextResponse.json({ status: 400, message: 'ID Departemen yang diberikan tidak valid.' }, { status: 400 });
-            }
-        }
-        
-        // FIX: Penanganan 'error is of type unknown'
-        return NextResponse.json({ 
-            status: 500, 
-            message: 'Kesalahan server saat mengubah anggota.',
-            error: error instanceof Error ? error.message : 'Unknown error' 
-        }, { status: 500 });
-    }
+    return NextResponse.json({
+      message: "Data anggota berhasil diperbarui",
+      data: updatedAnggota
+    });
+  } catch (error) {
+    console.error("PATCH Error:", error);
+    return NextResponse.json({ error: "Gagal memperbarui data anggota" }, { status: 400 });
+  }
 }
 
+/**
+ * DELETE: Hapus anggota secara permanen
+ */
+export async function DELETE(req: Request, { params }: RouteParams) {
+  try {
+    const { id } = await params;
+    const idInt = parseInt(id);
 
-// --- DELETE: Menghapus Anggota ---
+    await prisma.anggota.delete({
+      where: { id_anggota: idInt },
+    });
 
-export async function DELETE(
-    request: Request,
-    { params }: { params: { id: string } }
-) {
-    const id_anggota = parseAnggotaId(params.id);
-
-    if (id_anggota === null) {
-        return NextResponse.json({ status: 400, message: 'ID anggota tidak valid.' }, { status: 400 });
-    }
-
-    try {
-        await prisma.anggota.delete({
-            where: { id_anggota: id_anggota },
-        });
-
-        return NextResponse.json({ status: 200, message: `Anggota ID ${id_anggota} berhasil dihapus.` }, { status: 200 });
-
-    } catch (error) {
-        console.error('Error saat menghapus anggota:', error);
-
-        // FIX: Menggunakan 'instanceof' untuk pengecekan tipe error Prisma
-        if (error instanceof PrismaClientKnownRequestError && error.code === 'P2025') {
-            return NextResponse.json({ status: 404, message: `Anggota dengan ID ${id_anggota} tidak ditemukan.` }, { status: 404 });
-        }
-        
-        // FIX: Penanganan 'error is of type unknown'
-        return NextResponse.json({ 
-            status: 500, 
-            message: 'Kesalahan server saat menghapus anggota.',
-            error: error instanceof Error ? error.message : 'Unknown error'
-        }, { status: 500 });
-    }
+    return NextResponse.json({ message: "Anggota berhasil dihapus dari database" });
+  } catch (error) {
+    console.error("DELETE Error:", error);
+    return NextResponse.json({ 
+      error: "Gagal menghapus anggota. Pastikan ID benar atau tidak ada data yang bergantung." 
+    }, { status: 400 });
+  }
 }
