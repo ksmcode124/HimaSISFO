@@ -1,53 +1,41 @@
-import { NextRequest, NextResponse } from "next/server";
-import {prisma} from "@/lib/prisma";
-import { prokerSchema } from "@/lib/validation";
+import { prisma } from "@/lib/prisma"
+import { NextResponse } from "next/server"
+import { createProkerSchema } from "@/schemas/proker.schema"
 
-// GET /api/proker
-export async function GET(req: NextRequest) {
+// ==========================
+// CREATE PROKER
+// POST /api/proker
+// ==========================
+export async function POST(req: Request) {
   try {
-    const idDepartemen = req.nextUrl.searchParams.get("id_departemen");
+    const body = await req.json()
+    const data = createProkerSchema.parse(body)
 
-    const where = idDepartemen
-      ? { id_departemen: Number(idDepartemen) || undefined }
-      : {};
+    const proker = await prisma.proker.create({
+      data,
+    })
 
-    const data = await prisma.proker.findMany({
-      where,
-      include: {
-        departemen: true, // Bisa dihapus kalau tidak perlu
-      },
-    });
-
-    return NextResponse.json(data);
+    return NextResponse.json(proker, { status: 201 })
   } catch (error) {
-    console.error("GET /api/proker error:", error);
-    return new NextResponse("Internal Server Error", { status: 500 });
+    console.error("POST /api/proker ERROR:", error)
+    return NextResponse.json(
+      { message: "Internal server error" },
+      { status: 500 }
+    )
   }
 }
 
-// POST /api/proker
-export async function POST(req: NextRequest) {
-  try {
-    const body = await req.json();
-    const parsed = prokerSchema.safeParse(body);
+// ==========================
+// READ ALL PROKER
+// GET /api/proker
+// ==========================
+export async function GET() {
+  const proker = await prisma.proker.findMany({
+    include: {
+      departemen: true,
+      kabinet: true,
+    },
+  })
 
-    if (!parsed.success) {
-      return NextResponse.json(
-        {
-          message: "Validasi gagal",
-          errors: parsed.error.format(),
-        },
-        { status: 400 }
-      );
-    }
-
-    const created = await prisma.proker.create({
-      data: parsed.data,
-    });
-
-    return NextResponse.json(created, { status: 201 });
-  } catch (error) {
-    console.error("POST /api/proker error:", error);
-    return new NextResponse("Internal Server Error", { status: 500 });
-  }
+  return NextResponse.json(proker)
 }
