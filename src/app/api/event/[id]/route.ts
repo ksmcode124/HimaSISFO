@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import {prisma} from "@/lib/prisma";
-import { departemenSchema } from "@/lib/validation";
+import { eventSchema } from "@/lib/validation";
 
 type RouteParams = {
-  params: { id: number };
+  params: { id: string };
 };
 
-// GET /api/departemen/[id]
+// GET /api/event/[id]
 export async function GET(_req: NextRequest, { params }: RouteParams) {
   try {
     const id = Number(params.id);
@@ -14,29 +14,40 @@ export async function GET(_req: NextRequest, { params }: RouteParams) {
       return NextResponse.json({ message: "ID tidak valid" }, { status: 400 });
     }
 
-    const departemen = await prisma.departemen.findUnique({
-      where: { id_departemen: id },
-      include: {
-        proker: true,
-        anggota: true,
+    const event = await prisma.event.findUnique({
+      where: { id_event: id },
+       select: {
+        id_event: true,
+        judul: true,
+        deskripsi: true,
+        tanggal_mulai: true,
+        tanggal_berakhir: true,
+        gambar_event: true,
+        kabinet: {
+          select: {
+            id_kabinet: true,
+            nama_kabinet: true,
+            tahun_kerja: true
+          }
+        }
       },
     });
 
-    if (!departemen) {
+    if (!event) {
       return NextResponse.json(
-        { message: "Departemen tidak ditemukan" },
+        { message: "event tidak ditemukan" },
         { status: 404 }
       );
     }
 
-    return NextResponse.json(departemen);
+    return NextResponse.json(event);
   } catch (error) {
-    console.error("GET /api/departemen/[id] error:", error);
+    console.error("GET /api/event/[id] error:", error);
     return new NextResponse("Internal Server Error", { status: 500 });
   }
 }
 
-// PUT /api/departemen/[id]
+// PUT /api/event/[id]
 export async function PUT(req: NextRequest, { params }: RouteParams) {
   try {
     const id = Number(params.id);
@@ -47,7 +58,7 @@ export async function PUT(req: NextRequest, { params }: RouteParams) {
     const body = await req.json();
 
     // partial: supaya bisa update sebagian field saja
-    const parsed = departemenSchema.partial().safeParse(body);
+    const parsed = eventSchema.partial().safeParse(body);
     if (!parsed.success) {
       return NextResponse.json(
         {
@@ -58,19 +69,19 @@ export async function PUT(req: NextRequest, { params }: RouteParams) {
       );
     }
 
-    const updated = await prisma.departemen.update({
-      where: { id_departemen: id },
+    const updated = await prisma.event.update({
+      where: { id_event: id },
       data: parsed.data,
     });
 
     return NextResponse.json(updated);
   } catch (error) {
-    console.error("PUT /api/departemen/[id] error:", error);
+    console.error("PUT /api/event/[id] error:", error);
     return new NextResponse("Internal Server Error", { status: 500 });
   }
 }
 
-// DELETE /api/departemen/[id]
+// DELETE /api/event/[id]
 export async function DELETE(_req: NextRequest, { params }: RouteParams) {
   try {
     const id = Number(params.id);
@@ -78,25 +89,13 @@ export async function DELETE(_req: NextRequest, { params }: RouteParams) {
       return NextResponse.json({ message: "ID tidak valid" }, { status: 400 });
     }
 
-    await prisma.departemen.delete({
-      where: { id_departemen: id },
+    await prisma.event.delete({
+      where: { id_event: id },
     });
 
-    return NextResponse.json({ message: "Departemen dihapus" });
+    return NextResponse.json({ message: "Event berhasil dihapus" });
   } catch (error: any) {
-    console.error("DELETE /api/departemen/[id] error:", error);
-
-    // contoh handling kalau terikat FK
-    if (error.code === "P2003") {
-      return NextResponse.json(
-        {
-          message:
-            "Departemen tidak bisa dihapus karena masih memiliki proker/anggota terkait",
-        },
-        { status: 400 }
-      );
-    }
-
+    console.error("DELETE /api/event/[id] error:", error);
     return new NextResponse("Internal Server Error", { status: 500 });
   }
 }
