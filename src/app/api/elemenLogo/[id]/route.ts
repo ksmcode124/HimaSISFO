@@ -1,49 +1,46 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-// GET elemen logo by ID
-export async function GET(req: Request, { params }: { params: { id: string } }) {
-  try {
-    const elemen = await prisma.elemen_logo.findUnique({
-      where: { id_elemen_logo: Number(params.id) }
-    });
+export async function GET(
+  req: Request,
+  { params }: { params: { id: string } }
+) {
+  const elemen = await prisma.elemen_logo.findUnique({
+    where: { id_elemen_logo: Number(params.id) },
+    include: { kabinet: true },
+  });
 
-    return NextResponse.json(elemen);
-  } catch (error) {
-    return NextResponse.json({ message: "Gagal mengambil data" }, { status: 500 });
+  if (!elemen) {
+    return NextResponse.json(
+      { message: "Elemen logo tidak ditemukan" },
+      { status: 404 }
+    );
   }
+
+  return NextResponse.json(elemen);
 }
 
-// UPDATE elemen
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
-  try {
-    const body = await req.json();
-    const { nama_elemen, deskripsi_elemen, gambar_elemen } = body;
+export async function PUT(
+  req: Request,
+  { params }: { params: { id: string } }
+) {
+  const body = await req.json();
 
-    const elemen = await prisma.elemen_logo.update({
-      where: { id_elemen_logo: Number(params.id) },
-      data: {
-        nama_elemen,
-        deskripsi_elemen,
-        gambar_elemen
-      }
-    });
+  const elemen = await prisma.elemen_logo.update({
+    where: { id_elemen_logo: Number(params.id) },
+    data: body,
+  });
 
-    return NextResponse.json(elemen);
-  } catch (error) {
-    return NextResponse.json({ message: "Gagal update elemen" }, { status: 500 });
-  }
+  return NextResponse.json(elemen);
 }
 
-// DELETE
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
-  try {
-    await prisma.elemen_logo.delete({
-      where: { id_elemen_logo: Number(params.id) }
-    });
+export async function DELETE(
+  req: Request,
+  { params }: { params: { id: string } }
+) {
+  await prisma.elemen_logo.delete({
+    where: { id_elemen_logo: Number(params.id) },
+  });
 
-    return NextResponse.json({ message: "Elemen logo dihapus" });
-  } catch (error) {
-    return NextResponse.json({ message: "Gagal menghapus elemen" }, { status: 500 });
-  }
+  return NextResponse.json({ message: "Elemen logo berhasil dihapus" });
 }

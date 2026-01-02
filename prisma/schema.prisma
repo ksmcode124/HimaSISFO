@@ -13,23 +13,21 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
 }
 
 model kabinet {
-  id_kabinet       Int              @id @default(autoincrement())
-  nama_kabinet     String
-  tahun_kerja      String
-  gambar_logo      String?
-  deskripsi        String?
-  visi             String?
-  misi             String?
-  detail_deskripsi String?
-  elemen_logo      elemen_logo[]
-  departemen       departemen[]
-  detailAnggota    detail_anggota[]
-  event            event[]
-  proker           proker[]
+  id_kabinet    Int              @id @default(autoincrement())
+  nama_kabinet  String
+  tahun_kerja   String
+  gambar_logo   String?
+  deskripsi     String?
+  visi          String?
+  misi          String?
+  elemen_logo   elemen_logo[]
+  departemen    departemen[]
+  detailAnggota detail_anggota[]
+  event         event[]
+  proker        proker[]
 
   @@map("kabinet")
 }
@@ -50,6 +48,7 @@ model departemen {
   id_kabinet           Int
   nama_departemen      String
   deskripsi_departemen String?
+  logo_departemen      String?
 
   kabinet       kabinet          @relation(fields: [id_kabinet], references: [id_kabinet], onDelete: Cascade)
   detailAnggota detail_anggota[]
@@ -57,9 +56,8 @@ model departemen {
 }
 
 model anggota {
-  id_anggota   Int     @id @default(autoincrement())
+  id_anggota   Int    @id @default(autoincrement())
   nama_anggota String
-  foto_anggota String?
 
   detailAnggota detail_anggota[]
 }
@@ -72,11 +70,12 @@ model jabatan {
 }
 
 model detail_anggota {
-  id_detail     Int @id @default(autoincrement())
+  id_detail     Int     @id @default(autoincrement())
   id_anggota    Int
   id_departemen Int
   id_kabinet    Int
   id_jabatan    Int
+  foto_anggota  String?
 
   anggota    anggota    @relation(fields: [id_anggota], references: [id_anggota])
   departemen departemen @relation(fields: [id_departemen], references: [id_departemen])
@@ -94,7 +93,7 @@ model event {
   tanggal_mulai    DateTime
   tanggal_berakhir DateTime
   gambar_event     String?
-  berita           String?
+  kategori         String?
 
   kabinet kabinet @relation(fields: [id_kabinet], references: [id_kabinet], onDelete: Cascade)
 }
