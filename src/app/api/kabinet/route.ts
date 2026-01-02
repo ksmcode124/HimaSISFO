@@ -1,55 +1,35 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-// GET ALL KABINET
 export async function GET() {
-  try {
-    const kabinet = await prisma.kabinet.findMany({
-      orderBy: { id_kabinet: "desc" }
-    });
+  const kabinet = await prisma.kabinet.findMany({
+    select: {
+      id_kabinet: true,
+      nama_kabinet: true,
+      tahun_kerja: true,
+      gambar_logo: true,
+      deskripsi: true,
+      visi: true,
+      misi: true,
+    },
+  });
 
-    return NextResponse.json(kabinet, { status: 200 });
-  } catch (error) {
-    console.error("[GET KABINET ERROR]", error);
-    return NextResponse.json(
-      { message: "Gagal mengambil data kabinet" },
-      { status: 500 }
-    );
-  }
+  return NextResponse.json(kabinet);
 }
 
-// CREATE KABINET
 export async function POST(req: Request) {
-  try {
-    const body = await req.json();
-    const {
-      nama_kabinet,
-      tahun_kerja,
-      gambar_logo,
-      deskripsi,
-      visi,
-      misi,
-      detail_deskripsi
-    } = body;
+  const body = await req.json();
 
-    const kabinet = await prisma.kabinet.create({
-      data: {
-        nama_kabinet,
-        tahun_kerja,
-        gambar_logo,
-        deskripsi,
-        visi,
-        misi,
-        detail_deskripsi
-      }
-    });
+  const kabinet = await prisma.kabinet.create({
+    data: {
+      nama_kabinet: body.nama_kabinet,
+      tahun_kerja: body.tahun_kerja,
+      gambar_logo: body.gambar_logo ?? null,
+      deskripsi: body.deskripsi ?? null,
+      visi: body.visi ?? null,
+      misi: body.misi ?? null,
+    },
+  });
 
-    return NextResponse.json(kabinet, { status: 201 });
-  } catch (error) {
-    console.error("[CREATE KABINET ERROR]", error);
-    return NextResponse.json(
-      { message: "Gagal menambahkan kabinet" },
-      { status: 500 }
-    );
-  }
+  return NextResponse.json(kabinet, { status: 201 });
 }
