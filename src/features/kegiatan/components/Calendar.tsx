@@ -1,152 +1,164 @@
-"use client";
 
-import { clsx } from "clsx";
-import React, { useEffect, useMemo, useState } from "react";
+
+import clsx from "clsx";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import React, { useMemo, useState, useEffect } from "react";
+
+/* =========================
+   TYPES
+========================= */
+
+export interface CalendarEvent {
+  id: number;
+  title: string;
+  date: Date; // "YYYY-MM-DD"
+  type?: "meeting" | "workshop" | "other";
+}
+
+/* =========================
+   CONSTANTS
+========================= */
 
 const WEEK_DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-const EVENT_COLORS = [
-  "bg-pink-500",
-  "bg-blue-400",
-  "bg-green-600",
-  "bg-orange-500",
-  "bg-gray-600",
-  "bg-purple-600",
-  "bg-yellow-500",
-];
+const EVENT_TYPE_COLOR: Record<string, string> = {
+  meeting: "bg-blue-500",
+  workshop: "bg-green-500",
+  other: "bg-purple-500",
+};
 
 const LOCALE = "id-ID";
-const TZ = "UTC";
 
 /* =========================
-   DATE HELPERS (SSR SAFE)
+   DATE HELPERS (LOCAL TIME)
 ========================= */
 
+function toDateKey(date: Date) {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  const d = String(date.getDate()).padStart(2, "0");
+  return `${y}-${m}-${d}`;
+}
+
 function getMonthDays(year: number, month: number) {
-  const firstDay = new Date(Date.UTC(year, month, 1));
-  const lastDay = new Date(Date.UTC(year, month + 1, 0));
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
 
-  const startDayIndex = firstDay.getUTCDay(); // Sun = 0
-  const totalDays = lastDay.getUTCDate();
+  const startDayIndex = firstDay.getDay();
+  const totalDays = lastDay.getDate();
+  const prevLastDay = new Date(year, month, 0).getDate();
 
-  const prevLastDay = new Date(Date.UTC(year, month, 0)).getUTCDate();
-
-  const daysGrid: {
+  const days: {
     day: number;
     isCurrentMonth: boolean;
     dateObj: Date;
   }[] = [];
 
   let dayCounter = 1;
-  let nextMonthDayCounter = 1;
+  let nextMonthDay = 1;
 
   for (let i = 0; i < 42; i++) {
     if (i < startDayIndex) {
       const day = prevLastDay - (startDayIndex - i - 1);
-      daysGrid.push({
+      days.push({
         day,
         isCurrentMonth: false,
-        dateObj: new Date(Date.UTC(year, month - 1, day)),
+        dateObj: new Date(year, month - 1, day),
       });
     } else if (dayCounter <= totalDays) {
-      daysGrid.push({
+      days.push({
         day: dayCounter,
         isCurrentMonth: true,
-        dateObj: new Date(Date.UTC(year, month, dayCounter)),
+        dateObj: new Date(year, month, dayCounter),
       });
       dayCounter++;
     } else {
-      daysGrid.push({
-        day: nextMonthDayCounter,
+      days.push({
+        day: nextMonthDay,
         isCurrentMonth: false,
-        dateObj: new Date(Date.UTC(year, month + 1, nextMonthDayCounter)),
+        dateObj: new Date(year, month + 1, nextMonthDay),
       });
-      nextMonthDayCounter++;
+      nextMonthDay++;
     }
   }
 
-  return daysGrid;
+  return days;
 }
 
-function formatDateRange(year: number, month: number) {
-  const start = new Date(Date.UTC(year, month, 1));
-  const end = new Date(Date.UTC(year, month + 1, 0));
-
-  const fmt = new Intl.DateTimeFormat(LOCALE, {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-    timeZone: TZ,
-  });
-
-  return `${fmt.format(start)} – ${fmt.format(end)}`;
-}
-
-function formatMonthTitle(year: number, month: number) {
+function formatMonthName(month: number) {
   return new Intl.DateTimeFormat(LOCALE, {
     month: "long",
-    year: "numeric",
-    timeZone: TZ,
-  }).format(new Date(Date.UTC(year, month)));
+  }).format(new Date(2000, month, 1));
 }
 
-function getWeekNumber(date: Date) {
-  const d = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
-  const dayNum = d.getUTCDay() || 7;
-  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
-  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-  return Math.ceil(((d.getTime() - yearStart.getTime()) / 86400000 + 1) / 7);
+function formatYear(year: number) {
+  return new Intl.DateTimeFormat(LOCALE, {
+    year: "numeric",
+  }).format(new Date(year, 0, 1));
 }
 
 /* =========================
-   RANDOM EVENTS (CLIENT ONLY)
+   EVENT MAPPING (SAFE)
 ========================= */
 
-function generateEvents(
-  daysGrid: Array<{ dateObj: Date; isCurrentMonth: boolean }>
-) {
-  const events: Record<string, string[]> = {};
+function mapEventsByDate(events: CalendarEvent[] = []) {
+  const map: Record<string, CalendarEvent[]> = {};
 
-  daysGrid.forEach(({ dateObj, isCurrentMonth }) => {
-    if (!isCurrentMonth) return;
+  events.forEach(event => {
+    if (!event?.date) return;
 
-    const count = Math.floor(Math.random() * 4);
-    if (count === 0) return;
+    const key = toDateKey(event.date);
 
-    const picked = new Set<number>();
-    while (picked.size < count) {
-      picked.add(Math.floor(Math.random() * EVENT_COLORS.length));
-    }
-
-    events[dateObj.toISOString()] = Array.from(picked).map(i => EVENT_COLORS[i]);
+    if (!map[key]) map[key] = [];
+    map[key].push(event);
   });
 
-  return events;
+  return map;
 }
+
 
 /* =========================
    COMPONENT
 ========================= */
+
 interface DynamicCalendarProps {
-  className : string;
+  className?: string;
+  events?: CalendarEvent[];
+  onChangeMonth?: (month: string) => void;
 }
 
-export default function DynamicCalendar({className}:DynamicCalendarProps) {
-  const [today] = useState(() => new Date());
+export default function DynamicCalendar({
+  className,
+  events = [],
+  onChangeMonth = () => {}
+}: DynamicCalendarProps) {
 
-  const [year, setYear] = useState(today.getUTCFullYear());
-  const [month, setMonth] = useState(today.getUTCMonth());
+  const today = new Date();
 
-  const daysGrid = useMemo(() => getMonthDays(year, month), [year, month]);
+  const initialDate = events.length
+    ? (() => {
+      const firstEvent = events
+        .map(e => e.date)
+        .sort((a, b) => a.getTime() - b.getTime())[0];
 
-  const [events, setEvents] = useState<Record<string, string[]>>({});
+      return firstEvent;
+    })()
+    : today;
 
-  useEffect(() => {
-    setEvents(generateEvents(daysGrid));
-  }, [daysGrid]);
+  const [year, setYear] = useState(initialDate.getFullYear());
+  const [month, setMonth] = useState(initialDate.getMonth());
 
-  const weekNum = getWeekNumber(new Date(Date.UTC(year, month, today.getUTCDate())));
 
+  const daysGrid = useMemo(
+    () => getMonthDays(year, month),
+    [year, month]
+  );
+
+  const eventsByDate = useMemo(
+    () => mapEventsByDate(events),
+    [events]
+  );
+  // console.log("events:", events);
   const goPrevMonth = () => {
     if (month === 0) {
       setYear(y => y - 1);
@@ -154,67 +166,118 @@ export default function DynamicCalendar({className}:DynamicCalendarProps) {
     } else setMonth(m => m - 1);
   };
 
-  const goNextMonth = () => {
-    if (month === 11) {
-      setYear(y => y + 1);
-      setMonth(0);
-    } else setMonth(m => m + 1);
-  };
+const goNextMonth = () => {
+  if (month === 11) {
+    setYear(y => y + 1);
+    setMonth(0);
+  } else setMonth(m => m + 1);
+};
 
-  const goToday = () => {
-    setYear(today.getUTCFullYear());
-    setMonth(today.getUTCMonth());
-  };
+const goToday = () => {
+  setYear(today.getFullYear());
+  setMonth(today.getMonth());
+};
 
+useEffect(() => {
+  if (onChangeMonth) {
+    onChangeMonth(formatMonthName(month));
+  }
+}, [month, onChangeMonth]);
+
+useEffect(() => {
+  if (!events.length) return;
+
+  const today = new Date();
+
+  const closestEvent = events
+    .map(e => new Date(e.date))
+    .sort((a, b) =>
+      Math.abs(a.getTime() - today.getTime()) -
+      Math.abs(b.getTime() - today.getTime())
+    )[0];
+
+  setYear(closestEvent.getFullYear());
+  setMonth(closestEvent.getMonth());
+}, [events]);
   return (
-    <div className={clsx(className, "w-full mx-auto p-4 bg-white rounded-lg shadow-md")}>
-      <div className="w-full flex items-center justify-between">
-        <h2 className="text-xl font-bold mb-1">{formatMonthTitle(year, month)}</h2>
-        <nav className="flex border rounded-lg overflow-hidden my-4">
-          <button onClick={goPrevMonth} className="px-4 py-2 border-r">←</button>
-          <button onClick={goToday} className="flex-grow text-center">Today</button>
-          <button onClick={goNextMonth} className="px-4 py-2 border-l">→</button>
-        </nav>
+    <div className={clsx(className, "w-full py-4 px-2 md:px-4 bg-white rounded-lg shadow")}>
+      {/* HEADER */}
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-[20px] md:text-xl font-medium md:font-bold">
+          {String(formatMonthName(month))}, {String(formatYear(year))}
+        </h2>
+
+        <div className="flex border-3 border-[#323257] rounded overflow-hidden">
+          <button onClick={goPrevMonth} className="p-1 border-r-3 border-[#323257]">
+           <ChevronLeft />
+          </button>
+          <button onClick={goToday} className="w-[100px] md:w-[116px] py-2 font-bold text-sm uppercase">
+            {String(formatMonthName(month)).slice(0, 3)} {String(formatYear(year))}
+          </button>
+          <button onClick={goNextMonth} className="p-1 border-l-3 border-[#323257]">
+            <ChevronRight />
+          </button>
+        </div>
       </div>
 
-
-      <table className="w-full text-sm border-collapse border">
+      {/* CALENDAR */}
+      <table className="w-full border-collapse border text-sm">
         <thead>
           <tr>
-            {WEEK_DAYS.map(d => (
-              <th key={d} className="text-start border py-2 text-gray-500">{d}</th>
+            {WEEK_DAYS.map(day => (
+              <th key={day} className="border border-[#fff] bg-[#6482A6] pl-2 py-1 text-white text-left font-medium text-[12px] md:text-sm uppercase">
+                {day}
+              </th>
             ))}
           </tr>
         </thead>
-        <tbody>
-          {Array.from({ length: 6 }).map((_, weekIdx) => (
-            <tr key={weekIdx}>
-              {daysGrid.slice(weekIdx * 7, weekIdx * 7 + 7).map(({ day, isCurrentMonth, dateObj }) => {
-                const isToday =
-                  dateObj.toDateString() === today.toDateString();
 
-                return (
-                  <td
-                    key={dateObj.toISOString()}
-                    className={`border py-6 text-start ${isCurrentMonth ? "text-gray-900" : "text-gray-400"
-                      }`}
-                  >
-                    <div className="flex flex-col items-center">
-                      <div
-                        className={`w-6 h-6 flex items-center justify-center rounded-full ${isToday ? "bg-purple-600 text-white" : ""
-                          }`}
-                      >
-                        {day}
+        <tbody>
+          {Array.from({ length: 5 }).map((_, weekIdx) => (
+            <tr key={weekIdx}
+              className="h-[80px] md:h-[125px]"
+            >
+              {daysGrid
+                .slice(weekIdx * 7, weekIdx * 7 + 7)
+                .map(({ day, isCurrentMonth, dateObj }) => {
+                  const key = toDateKey(dateObj);
+                  const dayEvents = eventsByDate[key] || [];
+                  // console.log("dayEvents for", key, ":", dayEvents);
+                  const isToday = key === toDateKey(today);
+                  return (
+                    <td
+                      key={key}
+                      className={clsx(
+                        "border border-[#fff] text-[16px] md:text-sm w-[45px] align-top",
+                        isCurrentMonth ? "bg-[#99B6D9]" : "bg-[#B3C9E4]"
+                      )}
+                    >
+                      <div className="flex">
+                        <div
+                          className={clsx(
+                            "flex items-center justify-center m-1 md:m-2",
+                            isToday ? "bg-[#3978FF] rounded-full w-6 h-6 md:w-7 md:h-7 text-[#fff]" : "text-[#000000]"
+                          )}
+                        >
+                          {day}
+                        </div>
+
+                        {/* <div className="mt-1 flex flex-wrap">
+                          {dayEvents.map(ev => (
+                            <div
+                              key={`${ev.id}-${ev.date}`}
+                              className=" rounded bg-purple-100 text-purple-700 truncate"
+                              title={ev.title}
+                            >
+                              {ev.title}
+                            </div>
+                          ))}
+                        </div> */}
+
                       </div>
-                      <div className="flex mt-1 space-x-1">
-                        {(events[dateObj.toISOString()] || []).map((c, i) => (
-                          <span key={i} className={`w-2.5 h-2.5 rounded-full ${c}`} />
-                        ))}
-                      </div>
-                    </div>
-                  </td>
-                );
-              })}
+                    </td>
+                  );
+                })}
             </tr>
           ))}
         </tbody>
