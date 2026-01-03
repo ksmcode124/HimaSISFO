@@ -16,32 +16,38 @@
         {
           "id" : "pembayaran",
           "title": "Pembayaran",
-          "description": "Metode Pembayaran UKT, Kehilangan Slip Pembayaran UKT, Pengajuan Sanggah UKT, Pembayaran Kegiatan Non-Akademik, Pembayaran Ujian dan Seminar"
+          "description": "Metode Pembayaran UKT, Kehilangan Slip Pembayaran UKT, Pengajuan Sanggah UKT, Pembayaran Kegiatan Non-Akademik, Pembayaran Ujian dan Seminar",
+          "url": "pembayaran"
         },
         {
           "id" : "proses-akademik",
           "title": "Proses Akademik",
-          "description": "Daftar Kerja Praktik, Daftar Seminar Tugas Akhir, Daftar Sidang Tugas Akhir, Cetak Transkrip, Cetak KRP, Pengajuan Dana Lomba, Surat Bebas Lab, Pengajuan Surat Aktif Kuliah"
+          "description": "Daftar Kerja Praktik, Daftar Seminar Tugas Akhir, Daftar Sidang Tugas Akhir, Cetak Transkrip, Cetak KRP, Pengajuan Dana Lomba, Surat Bebas Lab, Pengajuan Surat Aktif Kuliah",
+          "url": "proses-akademik"
         },
         {
           "id" : "wisuda-yudisium",
           "title": "Wisudah & Yudisium",
-          "description": "Layanan ini mencakup pendaftaran yudisium dan wisuda, peminjaman serta pengembalian toga, pengambilan dan legalisir ijazah maupun transkrip akademik."
+          "description": "Layanan ini mencakup pendaftaran yudisium dan wisuda, peminjaman serta pengembalian toga, pengambilan dan legalisir ijazah maupun transkrip akademik.",
+          "url": "wisuda-yudisium"
         },
         {
           "id" : "pengumuman-informasi",
           "title": "Pengumuman & Informasi",
-          "description": "Menerima informasi status pengajuan yudisium, Melakukan pendaftaran wisuda dan verifikasi data, Pengumuman hasil ujian dan yudisium, Pemberitahuan kegiatan akademik dan non-akademik"
+          "description": "Menerima informasi status pengajuan yudisium, Melakukan pendaftaran wisuda dan verifikasi data, Pengumuman hasil ujian dan yudisium, Pemberitahuan kegiatan akademik dan non-akademik",
+          "url": "pengumuman"
         },
         {
           "id" : "pendaftaran-verifikasi",
           "title": "Pendaftaran & Verifikasi",
-          "description": "Pembuatan KTM, Validasi KTM, Ubah Data PDDIKTI, Pengajuan Cuti Akademik, Pemulihan Status Mahasiswa, Pengunduran Diri, Pendaftaran KKN, Pengajuan Judul Skripsi"
+          "description": "Pembuatan KTM, Validasi KTM, Ubah Data PDDIKTI, Pengajuan Cuti Akademik, Pemulihan Status Mahasiswa, Pengunduran Diri, Pendaftaran KKN, Pengajuan Judul Skripsi",
+          "url": "pendaftaran-dan-verifikasi"
         },
         {
           "id" : "pelayanan-administratif",
           "title": "Pelayanan Administratif",
-          "description": "Pengaturan akses akun, Pendaftaran Tes Kemampuan (TOEFL), serta pengajuan dan pencairan dana terkait lomba, penghargaan, dan dokumen kelulusan (SKL)."
+          "description": "Pengaturan akses akun, Pendaftaran Tes Kemampuan (TOEFL), serta pengajuan dan pencairan dana terkait lomba, penghargaan, dan dokumen kelulusan (SKL).",
+          "url": "pelayanan-dan-administratif"
         }
       ]
     },
@@ -50,7 +56,7 @@
       "items" : {
         "title": "Blanko",
         "subtitle": "Temukan Berkas Kemahasiswaan Sesuai Kebutuhan Anda",
-        "cta": "Selengkapnya"
+        "iconUrl": ""
       }
     }
   ]

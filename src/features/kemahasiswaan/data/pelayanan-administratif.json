@@ -21,10 +21,19 @@
               "type": "list",
               "items": [
                 {
-                  "text": "Langkah 1"
+                  "text": "Persyaratan: KTM."
                 },
                 {
-                  "text": "Langkah 2 dengan [Sadewa](https://sadewa.upnyk.ac.id)"
+                  "text": "Mahasiswa datang ke bagian TIK di Kampus 1."
+                },
+                {
+                  "text": "Menceritakan permasalahan dengan detail kemudian mengisi formulir yang telah disediakan."
+                },
+                {
+                  "text": "Menyiapkan email aktif."
+                },
+                {
+                  "text": "Password baru akan dikirimkan via email tersebut kepada mahasiswa."
                 }
               ]
             }
@@ -33,27 +42,105 @@
         {
           "id": "dana-penghargaan",
           "title": "Pencairan Dana Penghargaan",
-          "content": []
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text" : "Mengisi formulir dari TU Jurusan Informatika dan membawa syarat berkas."
+                },
+                {
+                  "text" : "Menemui ketua jurusan untuk meminta surat pengantar dengan membawa formulir."
+                },
+                {
+                  "text" : "Menuju BINWA/BIRO AKPK untuk melakukan proses pencairan dana."
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "karya-cendika",
           "title": "Pendaftaran Karya Cendekia",
-          "content": []
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text" : "Meminta formulir penilaian calon penerima penghargaan karya cendekia ke TU."
+                },
+                {
+                  "text" : "Mengisi formulir penilaian dan melengkapi persyaratan:",
+                  "ordered": false,
+                  "items": [
+                    {
+                      "text" : "Curriculum Vitae"
+                    },
+                    {
+                      "text" : "Fotocopy sertifikat/surat penghargaan kegiatan"
+                    },
+                    {
+                      "text" : "Transkrip nilai"
+                    },
+                    {
+                      "text" : "Fotocopy KTM"
+                    },
+                    {
+                      "text" : "SK Rektor pengangkatan asisten"
+                    },
+                    {
+                      "text" : "Bukti laporan hasil penelitian (untuk asisten penelitian dosen)"
+                    }
+                  ]
+                },
+                {
+                  "text" : "Formulir beserta data lampiran diserahkan dalam bentuk hardcopy ke Bagian TU"
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "legalisir-skl",
           "title": "Legalisir SKL",
-          "content": []
+          "content": [
+            {
+              "text" : "Melengkapi berkas-berkas, yaitu: ",
+              "ordered": false,
+              "items": [
+                {
+                  "text" : "Fotocopy Surat Keterangan Lulus 5 (lima) lembar"
+                }
+              ]
+            },
+            {
+              "text" : "Mengisi [Blanko](/kemahasiswaan/blanko)"
+            },
+            {
+              "text" : "Menyerahkan semua berkas ke loket TU fakultas"
+            }
+          ]
         },
         {
           "id": "pengambilan-skl",
           "title": "Pengambilan SKL",
-          "content": []
+          "content": [
+            {
+              "text" : "Datang ke loket tata usaha fakultas"
+            },
+            {
+              "text" : "Mengambil SKL dengan menyebutkan NIM, nama, dan program studi"
+            }
+          ]
         },
         {
           "id": "tes-toefl",
           "title": "Pendaftaran Test TOEFL",
-          "content": []
+          "content": [
+            {
+              "text" : "--"
+            }
+          ]
         }
       ]
     }

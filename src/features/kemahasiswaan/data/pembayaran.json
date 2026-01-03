@@ -21,19 +21,28 @@
               "type": "list",
               "items": [
                 {
-                  "text": "Langkah 1"
+                  "text": "Masuk ke aplikasi bank mobile."
                 },
                 {
-                  "text": "Langkah 2 dengan [Sadewa](https://sadewa.upnyk.ac.id)",
-                  "ordered": false,
-                  "items": [
-                    {
-                      "text": "Catatan A"
-                    },
-                    {
-                      "text": "Catatan B"
-                    }
-                  ]
+                  "text": "Masukkan password."
+                },
+                {
+                  "text": "Pilih menu \"universitas\""
+                },
+                {
+                  "text": "Pilih Universitas Pembangunan Nasional Veteran Yogyakarta"
+                },
+                {
+                  "text": "Masukkan NIM/kode pembayaran pada kolom nomor tagihan."
+                },
+                {
+                  "text": "Apabila sudah benar, klik kirim."
+                },
+                {
+                  "text": "Apabila NIM benar, maka muncul nominal tagihan."
+                },
+                {
+                  "text": "Bukti pembayaran akan tertampil di layar (bila perlu diprint)"
                 }
               ]
             }
@@ -42,22 +51,97 @@
         {
           "id": "ukt-atm",
           "title": "Pembayaran UKT melalui ATM",
-          "content": []
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Masukkan ATM dan nomor PIN."
+                },
+                {
+                  "text": "Pilih menu transfer."
+                },
+                {
+                  "text": "Pilih menu transfer ke bank lain."
+                },
+                {
+                  "text": "Masukkan kode bank (112) + 7017 + 35 + NIM/kode pendaftaran."
+                },
+                {
+                  "text": "Masukkan nominal transfer pembayaran akademik."
+                },
+                {
+                  "text": "Apabila sudah benar, klik transfer."
+                },
+                {
+                  "text": "ATM akan mengeluarkan slip bukti transfer."
+                },
+                {
+                  "text": "Simpan bukti pembayaran (bila perlu di-fotocopy"
+                }
+              ]
+            }
+          ]
         },
         {
           "id" : "ukt-teller",
           "title": "Pembayaran UKT melalui Teller Bank",
-          "content": []
+          "content": [
+             {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Mendatangi bank yang bermitra dengan UPN 'Veteran' Yogyakarta yaitu Bank BNI, BRI, Mandiri, BSI, dan BTN."
+                },
+                {
+                  "text": "Mengambil nomor antrian pada teller."
+                },
+                {
+                  "text": "Menyebutkan nama universitas dan NIM."
+                },
+                {
+                  "text": "Melakukan pembayaran sesuai dengan nominal UKT yang diperoleh."
+                },
+                {
+                  "text": "Menyimpan bukti pembayaran UKT."
+                }
+              ]
+            }
+          ]
         },
         {
           "id" : "hilang-slip",
           "title": "Kehilangan Slip Pembayaran",
-          "content": []
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Buka web [Sadewa](https://sadewa.upnyk.ac.id/) untuk membuat Surat Keterangan Aktif Kuliah"
+                },
+                {
+                  "text": "Datangi kantor polisi untuk meminta surat kehilangan."
+                },
+                {
+                  "text": "Datangi bagian keuangan (Rektorat Lantai 2 Kampus 1), kemudian jelaskan bahwa slip pembayaran UKT hilang."
+                }
+              ]
+            }
+          ]
         },
         {
           "id" : "sanggah-ukt",
           "title": "Pengajuan Sanggah UKT",
-          "content": []
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "-"
+                }
+              ]
+            }
+          ]
         }
       ]
     }

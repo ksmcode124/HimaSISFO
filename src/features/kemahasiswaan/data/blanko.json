@@ -14,28 +14,40 @@
       "type": "item-collection",
       "items": [
         {
-          "id" : "cuti",
-          "title": "Blanko Pengajuan Cuti Akademik"
+          "id" : "cuti-akademik",
+          "title": "Blanko Pengajuan Cuti Akademik",
+          "image": "",
+          "filepath": ""
         },
         {
           "id" : "transkrip-sementara",
-          "title": "Blanko Permohonan Transkrip Sementara"
+          "title": "Blanko Permohonan Transkrip Sementara",
+          "image": "",
+          "filepath": ""
         },
         {
           "id" : "pemulihan-status",
-          "title": "Blanko Pemulihan Status Mahasiswa"
+          "title": "Blanko Pemulihan Status Mahasiswa",
+          "image": "",
+          "filepath": ""
         },
         {
           "id" : "pengunduran-diri",
-          "title": "Blanko Pengunduran Diri"
+          "title": "Blanko Pengunduran Diri",
+          "image": "",
+          "filepath": ""
         },
         {
           "id" : "cetak-ijazah",
-          "title": "Blanko Cetak Ijazah dengan Bahasa Inggris"
+          "title": "Blanko Cetak Ijazah dengan Bahasa Inggris",
+          "image": "",
+          "filepath": ""
         },
         {
           "id" : "legalisir-ijazah",
-          "title": "Blanko Legalisir Ijazah"
+          "title": "Blanko Legalisir Ijazah",
+          "image": "",
+          "filepath": ""
         }
       ]
     }
