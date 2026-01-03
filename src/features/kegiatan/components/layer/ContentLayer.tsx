@@ -66,7 +66,7 @@ export function EventCardContent() {
       <div className="w-full justify-center flex flex-row py-5 md:py-10">
         <Button
           variant="default"
-          onClick={() => { router.push(`kegiatan/${onSelectedMonth}`) }}
+          onClick={() => { router.push(`kegiatan/`) }}
           className="text-[12px] md:text-sm flex flex-row gap-1 md:gap-2 px-3 md:px-4 py-1 md:py-3 rounded-full "
         >Selengkapnya<ArrowRight className="text-sm md:text-xl" /></Button>
       </div>
