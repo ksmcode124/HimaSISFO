@@ -10,11 +10,11 @@ import { CalendarDecoration } from "../components/layer/DecorationLayer"
 
 export function CalendarSection() {
   return (
-    <section className="p-0 m-0 items-center justify-center">
-      <DecorationLayer className="px-0 relative">
+    <section className="relative p-0 m-0 items-center justify-center">
+      <DecorationLayer className="px-0">
         <CalendarDecoration />
       </DecorationLayer>
-      <ContentLayer className="px-5 md:px-60 pb-30">
+      <ContentLayer className="md:px-30 xl:px-60 pb-30">
         <CalendarContent />
       </ContentLayer>
       <OverlayLayer className="px-5 justify-center">
