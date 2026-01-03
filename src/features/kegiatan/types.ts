@@ -1,4 +1,5 @@
 interface BaseCard {
+    id: number;
     title: string;
     img: string;
     date: string;
