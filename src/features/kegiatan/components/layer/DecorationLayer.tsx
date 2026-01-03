@@ -1,10 +1,10 @@
-import { BackgroundLeft } from "../../../../../public/assets/kegiatan/background/Left";
-import { BackgroundRight } from "../../../../../public/assets/kegiatan/background/Right";
+import { CalendarLeftDecoration} from "../../../../../public/assets/kegiatan/decoration/CalendarLeft";
+import { CalendarRightDecoration } from "../../../../../public/assets/kegiatan/decoration/CalendarRight";
 export function CalendarDecoration() {
     return (
         <div className="w-full overflow-hidden">
-            <BackgroundLeft className="absolute" />
-            <BackgroundRight className="absolute  " />
+            <CalendarLeftDecoration className="absolute" />
+            <CalendarRightDecoration className="absolute  " />
         </div>
     );
 }
