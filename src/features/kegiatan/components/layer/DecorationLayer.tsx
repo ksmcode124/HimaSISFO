@@ -2,10 +2,10 @@ import { BackgroundLeft } from "../../../../../public/assets/kegiatan/background
 import { BackgroundRight } from "../../../../../public/assets/kegiatan/background/Right";
 export function CalendarDecoration() {
     return (
-        <>
-            <BackgroundLeft className="absolute rotate-[20.55deg] top-0 sm:top-[-400px] left-[-120px]" />
-            <BackgroundRight className="absolute top-0 sm:top-[-400px] right-0" />
-        </>
+        <div className="w-full overflow-hidden">
+            <BackgroundLeft className="absolute" />
+            <BackgroundRight className="absolute  " />
+        </div>
     );
 }
 
