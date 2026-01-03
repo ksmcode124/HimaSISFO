@@ -23,12 +23,12 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
 
   return (
     <header
-      className={`fixed w-full top-5 z-50 max-w-[90vw]  lg:bg-[#101D2F]/50 rounded-full h-fit my-5 ${className}`}
+      className={`fixed w-full top-5 z-50 lg:bg-[#101D2F]/50 rounded-full h-fit ${className}`}
       role="banner"
     >
       <LiquidGlass className='border-l-white' borderRadius={200}>
         <nav
-          className="py-3 px-20"
+          className="py-3 px-auto"
           aria-label="Main navigation"
         >
           <div className="flex h-14 justify-between items-center gap-6">
@@ -97,7 +97,7 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
       </LiquidGlass>
       {/* Mobile Navigation */}
       {isOpen && (
-        <aside className={`z-30 text-white rounded-l-[5em] h-screen w-[75vw] fixed top-0 right-0 bg-neutral-200 backdrop-blur-md px-10 pt-20 transition-transform duration-500 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <aside className={`z-30 text-white rounded-l-[5em] h-screen fixed top-0 right-0 bg-neutral-200 backdrop-blur-md px-10 pt-20 transition-transform duration-500 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
           {/* TODO: add asset image here */}
           <ul className='flex flex-col items-center border-b py-10 gap-y-8'>
             {items.map((item) => {

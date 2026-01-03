@@ -124,13 +124,12 @@ function mapEventsByDate(events: CalendarEvent[] = []) {
 interface DynamicCalendarProps {
   className?: string;
   events?: CalendarEvent[];
-  onChangeMonth?: (month: string) => void;
 }
 
 export default function DynamicCalendar({
   className,
   events = [],
-  onChangeMonth = () => {}
+  
 }: DynamicCalendarProps) {
 
   const today = new Date();
@@ -177,12 +176,6 @@ const goToday = () => {
   setYear(today.getFullYear());
   setMonth(today.getMonth());
 };
-
-useEffect(() => {
-  if (onChangeMonth) {
-    onChangeMonth(formatMonthName(month));
-  }
-}, [month, onChangeMonth]);
 
 useEffect(() => {
   if (!events.length) return;
