@@ -21,19 +21,18 @@ export function RoundedBg({
       xmlns="http://www.w3.org/2000/svg"
       preserveAspectRatio="xMidYMid meet"
       className={clsx(
-        "absolute w-fit h-fit pointer-events-none",
-        align === "start" && "left-0 -translate-x-1/3",
-        align === "end" && "right-0 translate-x-1/3",
+        "absolute pointer-events-none",
+        align === "start" && "left-0",
+        align === "end" && "right-0 scale-x-[-1]",
         align === "center" && "left-1/2 -translate-x-1/2",
         className
       )}
-      style={{
-        transform: `
-          translateY(-50%)
-          ${isEnd ? "scaleX(-1)" : ""}
-          scale(${scale})
-        `,
-      }}
+      // style={{
+      //   transform: `
+      //     translateY(-50%)
+      //     scale(${scale})
+      //   `,
+      // }}
     >
       <g opacity="0.63">
         <ellipse
@@ -51,6 +50,7 @@ export function RoundedBg({
           ry="1167.65"
           transform="rotate(-40.3065 -219 911.055)"
           fill="url(#paint1_radial_7824_38851)"
+          className="border-2 border-red"
         />
       </g>
 
