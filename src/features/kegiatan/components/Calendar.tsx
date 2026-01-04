@@ -18,21 +18,21 @@ export default function DynamicCalendar({
 
   const daysGrid = useMemo(() => getMonthDays(year, month), [year, month]);
   const eventsByDate = useMemo(() => {
-  const map: Record<string, typeof events> = {};
+    const map: Record<string, typeof events> = {};
 
-  (events || []) 
-    .filter(e => {
-      const date = e.date instanceof Date ? e.date : new Date(e.date);
-      return date.getFullYear() === year && date.getMonth() === month;
-    })
-    .forEach(event => {
-      const key = toDateKey(event.date);
-      if (!map[key]) map[key] = [];
-      map[key].push(event);
-    });
+    (events || [])
+      .filter(e => {
+        const date = e.date instanceof Date ? e.date : new Date(e.date);
+        return date.getFullYear() === year && date.getMonth() === month;
+      })
+      .forEach(event => {
+        const key = toDateKey(event.date);
+        if (!map[key]) map[key] = [];
+        map[key].push(event);
+      });
 
-  return map;
-}, [events, year, month]);
+    return map;
+  }, [events, year, month]);
 
   const goPrevMonth = () => {
     if (month === 0) {
@@ -55,6 +55,7 @@ export default function DynamicCalendar({
     setYear(today.getFullYear());
     setMonth(today.getMonth());
   };
+  console.log("eventsByDate:", eventsByDate);
   return (
     <div className={clsx(className, "w-full py-4 px-2 md:px-4 bg-white rounded-lg shadow")}>
       <div className="flex flex-row w-full items-center justify-between my-5">
@@ -75,7 +76,7 @@ export default function DynamicCalendar({
       </div>
 
       {/* CALENDAR */}
-      <table className="w-full border-collapse border text-sm">
+      <table className="border-collapse border text-sm w-full table-fixed">
         <thead>
           <tr>
             {WEEK_DAYS.map(day => (
@@ -102,28 +103,32 @@ export default function DynamicCalendar({
                     <td
                       key={key}
                       className={clsx(
-                        "border border-[#fff] text-[16px] md:text-sm w-[45px] align-top",
+                        "border border-[#fff] text-[16px] md:text-sm align-top",
                         isCurrentMonth ? "bg-[#99B6D9]" : "bg-[#B3C9E4]"
                       )}
                     >
-                      <div className="flex flex-col w-fit">
+                      <div className="flex flex-col items-start gap-1">
                         <div
                           className={clsx(
-                            "flex items-start justify-start m-1 md:m-2 w-fit",
+                            "flex items-center justify-center m-1 md:m-2",
                             isToday ? "bg-[#3978FF] rounded-full w-6 h-6 md:w-7 md:h-7 text-[#fff]" : "text-[#000000]"
                           )}
                         >
                           {day}
                         </div>
 
-                        <div className="mt-1 flex flex-wrap w-fit">
-                          {dayEvents.map(ev => (
+                        <div className="flex flex-col w-full gap-2 overflow-hidden">
+                          {dayEvents.map((ev) => (
                             <div
                               key={`${ev.id}-${ev.date}`}
-                              className=" rounded bg-purple-100 text-purple-700 truncate"
-                              title={ev.title}
+                              className={clsx(
+                                "mx-2 py-1 rounded-[4px] text-[10px] md:text-sm font-bold h-fit w-auto text-center truncate text-white ",
+                                ev.jenis === "Hima" && "bg-gradient-to-b from-[#1B3C53] to-[#456882]",
+                                ev.jenis === "Beasiswa" && "bg-gradient-to-b from-[#7F1D1D] to-[#DC2626]",
+                                ev.jenis === "Lomba" && "bg-gradient-to-b from-[#CA8A04] to-[#EAB308]"
+                              )}
                             >
-                              {ev.title}
+                              {ev.jenis}
                             </div>
                           ))}
                         </div>

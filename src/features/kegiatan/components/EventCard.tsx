@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button";
-import { EventCardProps as ExternalProps } from "../types";
+import { WithVariantEventCardProps } from "../types";
 import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { cva } from "class-variance-authority";
@@ -9,10 +9,6 @@ import { cn } from "@/lib/utils";
 import { formatDate } from "../utils/FormatDate";
 import { useEffect, useState } from "react";
 import { useGetCountdown } from "../hooks/useCountDown";
-
-interface EventCardProps extends ExternalProps {
-  variant?: "detail" | "onGoing" | "notGoing";
-}
 
 const eventCard = cva("overflow-hidden transition hover:shadow-md", {
   variants: {
@@ -27,10 +23,10 @@ const eventCard = cva("overflow-hidden transition hover:shadow-md", {
   },
 });
 
-export const EventCard = (props: EventCardProps) => {
+export const EventCard = (props: WithVariantEventCardProps) => {
   const getCountdown = useGetCountdown;
   const router = useRouter();
-  const { id, title, img, slug, date, description, variant = "detail" } = props;
+  const { id, title, img, date, description, variant = "detail" } = props;
 
   const [countDown, setCountDown] = useState("00:00:00");
   useEffect(() => {

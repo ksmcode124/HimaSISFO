@@ -1,6 +1,5 @@
 
 import { EventCardProps } from "../types";
-export type EventVariant = "detail" | "onGoing" | "notGoing";
 
 export interface EventWithVariant extends EventCardProps {
   date: Date;

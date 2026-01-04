@@ -4,10 +4,10 @@ import DynamicCalendar from "../Calendar"
 import { EventCard } from "../EventCard"
 import { Button } from "@/components/ui/button";
 import { formatMonthName } from "../../utils/FormatDate";
+import { createEventIndex, createEventIndexByNameDate } from "../../utils/EventIndexer";
 import { findEventById, FindEventByMonthYear, sortEvents, toEventsWithVariant } from "../../utils/GetEventNow";
 import { EventCardProps } from "../../types";
-import { createEventIndex, createEventIndexByNameDate } from "../../utils/EventIndexer";
-import { create } from "domain";
+import { EventDetailContentProps } from "../../types"
 
 export function CalendarContent({ events }: { events: any }) {
   return (
@@ -85,6 +85,7 @@ export function EventListContent({ events }: { events: EventCardProps[] }) {
               slug={event.slug}
               description={event.description}
               variant="detail"
+              jenis={event.jenis}
             />
           ))}
         </div>
@@ -102,10 +103,6 @@ export function EventListContent({ events }: { events: EventCardProps[] }) {
     </>
   );
 }
-interface EventDetailContentProps {
-  events: EventCardProps[];
-  search: string; 
-}
 
 export function EventDetailContent({ events, search }: EventDetailContentProps) {
   const HelperEvent = createEventIndexByNameDate(events);
@@ -113,9 +110,12 @@ export function EventDetailContent({ events, search }: EventDetailContentProps) 
   const FindEventDetail = findEventById(Number(key), HelperEvent);
   console.log(FindEventDetail);
   return (
-    <div className="relative w-full gap-5 flex flex-col">
-      <img src={`/assets/kegiatan/${FindEventDetail?.img}`} alt="detail event" className="object-cover relative w-full h-[600px]" />
-      <p>{FindEventDetail?.description}</p>
+    <div className="relative w-full flex flex-col gap-10 md:gap-20">
+      <img src={`/assets/kegiatan/${FindEventDetail?.img}`} alt="detail event" className="object-cover relative w-full h-[200px] md:h-[600px] border-gradient-y rounded-[40px]" />
+      <div className="flex flex-col gap-5">
+        <h1 className="text-3xl font-bold">{FindEventDetail?.title}</h1>
+        <p>{FindEventDetail?.description}</p>
+      </div>
     </div>
   )
 }

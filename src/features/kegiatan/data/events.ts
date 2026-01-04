@@ -9,16 +9,18 @@ export const EVENTS: EventCardProps[] = [
     slug: "agenda/workshop-nextjs",
     img: "contohsamping.png",
     description: "Learn the latest features of Next.js in this hands-on workshop.",
-    
+    jenis: "Hima",
+
   },
   {
     id: 2,
     title: "Workshop React",
-    date: new Date("2025-12-20"),
+    date: new Date("2026-1-15"),
     slug: "agenda/workshop-react",
     img: "contohtengah.png",
     description: "Learn the latest features of React in this hands-on workshop.",
-    
+    jenis: "Beasiswa",
+
   },
   {
     id: 3,
@@ -27,7 +29,8 @@ export const EVENTS: EventCardProps[] = [
     slug: "agenda/workshop-vue",
     img: "contohsamping.png",
     description: "Learn the latest features of Vue in this hands-on workshop.",
-    
+    jenis: "Lomba",
+
   },
   {
     id: 4,
@@ -36,7 +39,8 @@ export const EVENTS: EventCardProps[] = [
     slug: "agenda/workshop-svelte",
     img: "contohtengah.png",
     description: "Learn the latest features of Svelte in this hands-on workshop.",
-    
+    jenis: "Hima",
+
   },
   {
     id: 5,
@@ -45,7 +49,8 @@ export const EVENTS: EventCardProps[] = [
     slug: "agenda/workshop-angular",
     img: "contohsamping.png",
     description: "Learn the latest features of Angular in this hands-on workshop.",
-    
+    jenis: "Hima",
+
   },
   {
     id: 6,
@@ -54,7 +59,8 @@ export const EVENTS: EventCardProps[] = [
     slug: "agenda/workshop-solidjs",
     img: "contohtengah.png",
     description: "Learn the latest features of SolidJS in this hands-on workshop.",
-    
+    jenis: "Hima",
+
   },
   {
     id: 7,
@@ -63,7 +69,8 @@ export const EVENTS: EventCardProps[] = [
     slug: "agenda/workshop-svelte",
     img: "contohsamping.png",
     description: "Learn the latest features of Svelte in this hands-on workshop.",
-    
+    jenis: "Hima",
+
   },
   {
     id: 8,
@@ -72,7 +79,8 @@ export const EVENTS: EventCardProps[] = [
     slug: "agenda/workshop-astro",
     img: "contohtengah.png",
     description: "Learn the latest features of Astro in this hands-on workshop.",
-    
+    jenis: "Hima",
+
   },
   {
     id: 9,
@@ -81,6 +89,7 @@ export const EVENTS: EventCardProps[] = [
     slug: "agenda/  workshop-remix",
     img: "contohtengah.png",
     description: "Learn the latest features of Remix in this hands-on workshop.",
-    
+    jenis: "Hima",
+
   }
 ];
