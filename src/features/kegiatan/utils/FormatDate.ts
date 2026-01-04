@@ -1,4 +1,4 @@
-import { LOCALE } from "./Calculate";
+import { LOCALE } from "../data/constant";
 
 export function formatDate(date?: string | Date) {
   if (!date) return '-'; // fallback kalau date kosong

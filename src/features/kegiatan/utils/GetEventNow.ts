@@ -1,26 +1,10 @@
-
-import { EventCardProps } from "../types";
-
-export interface EventWithVariant extends EventCardProps {
-  date: Date;
-}
-
-export interface SortedSingleEvents {
-  pastNotGoing?: EventWithVariant;
-  nextOnGoing?: EventWithVariant;
-  futureNotGoing?: EventWithVariant;
-}
-
-
-export function toEventsWithVariant(events: EventCardProps[]): EventWithVariant[] {
-  return events.map(e => ({
-    ...e,
-    date: e.date instanceof Date ? e.date : new Date(e.date),
-  }));
-}
+import { EventWithVariantProps } from "../types";
+import { SortedSingleEventsProps } from "../types";
+import { FindEventByIdProps  } from "../types";
+import { FindEventByMonthYearProps } from "../types";
 
 // untuk event pass, ongoing, future
-export function sortEvents(events: EventWithVariant[]): SortedSingleEvents {
+export function sortEvents(events: EventWithVariantProps[]): SortedSingleEventsProps {
   const now = new Date();
 
   const pastNotGoing = events
@@ -38,20 +22,13 @@ export function sortEvents(events: EventWithVariant[]): SortedSingleEvents {
   return { pastNotGoing, nextOnGoing, futureNotGoing };
 }
 
-export function FindEventByMonthYear(
-  month: string, 
-  year: number, 
-  indexedEvents: Record<string, any[]>
-) {
-  
+export function FindEventByMonthYear({ month, year, indexedEvents }: FindEventByMonthYearProps) {
+
   const searchKey = `${month}-${year}`;
   
   return indexedEvents[searchKey] || [];
 }
 
-export function findEventById(
-  id : number,
-  indexedEvents: Record<string, any[]>
-) {
+export function FindEventById({ id, indexedEvents }: FindEventByIdProps) {
   return Object.values(indexedEvents).flat().find(event => event.id === id);
 }
