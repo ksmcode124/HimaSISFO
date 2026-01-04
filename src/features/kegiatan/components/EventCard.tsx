@@ -8,7 +8,7 @@ import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { formatDate } from "../utils/FormatDate";
 import { useEffect, useState } from "react";
-
+import { useGetCountdown } from "../hooks/useCountDown";
 
 interface EventCardProps extends ExternalProps {
   variant?: "detail" | "onGoing" | "notGoing";
@@ -27,22 +27,8 @@ const eventCard = cva("overflow-hidden transition hover:shadow-md", {
   },
 });
 
-function getCountdown(targetDate: Date): string {
-  const now = new Date();
-
-  const diffMs = targetDate.getTime() - now.getTime();
-  if (diffMs <= 0) return "00:00:00";
-
-  const totalSeconds = Math.floor(diffMs / 1000);
-  const hours = Math.floor(totalSeconds / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = totalSeconds % 60;
-
-  const pad = (n: number) => n.toString().padStart(2, "0");
-  return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
-}
-
 export const EventCard = (props: EventCardProps) => {
+  const getCountdown = useGetCountdown;
   const router = useRouter();
   const { id, title, img, slug, date, description, variant = "detail" } = props;
 
@@ -80,7 +66,7 @@ export const EventCard = (props: EventCardProps) => {
             : "bg-linear-to-b from-blue-200/60 to-blue-100"
         )}
       >
-        <div className="flex flex-row gap-[30px] items-center">
+        <div className="flex flex-row justify-between">
           <p className="w-fit text-[8px] md:text-xl font-normal">{formatDate(date)}</p>
           {variant === "onGoing" && (
             <p className="w-fit text-[8px] md:text-xl font-normal">
@@ -95,7 +81,7 @@ export const EventCard = (props: EventCardProps) => {
         {variant === "detail" && (
           <div className="w-full relative justify-center flex flex-row mt-3 md:mt-12 mb-3 md:mb-6">
             <Button
-              onClick={() => router.push(`/${slug}`)}
+              route={`/kegiatan/agenda/${title}-${id}`}
               className="flex flex-row gap-3 px-3 py-2 rounded-full"
             >
               More <ArrowRight />
