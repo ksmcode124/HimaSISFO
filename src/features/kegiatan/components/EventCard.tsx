@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import { WithVariantEventCardProps } from "../types";
-import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
@@ -25,7 +24,6 @@ const eventCard = cva("overflow-hidden transition hover:shadow-md", {
 
 export const EventCard = (props: WithVariantEventCardProps) => {
   const getCountdown = useGetCountdown;
-  const router = useRouter();
   const { id, title, img, date, description, variant = "detail" } = props;
 
   const [countDown, setCountDown] = useState("00:00:00");
@@ -58,7 +56,7 @@ export const EventCard = (props: WithVariantEventCardProps) => {
         className={cn(
           "w-full flex flex-col gap-[5px] md:gap-[30px] py-[10px] md:py-[30px] px-[10px] md:px-[15px] backdrop-blur-[4px]",
           variant === "detail"
-            ? "bg-transparent"
+            ? "bg-[#EDF3F6]/50"
             : "bg-linear-to-b from-blue-200/60 to-blue-100"
         )}
       >
