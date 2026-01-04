@@ -5,7 +5,7 @@ import { ContentLayer } from "@/components/layout/Layer";
 export async function EventDetailSection({searchKeyword} : {searchKeyword: string}) {
     const events = await getEvents();
     return (
-        <section className="relative p-0 m-0 items-center justify-center">
+        <section className="relative p-0 m-0 top-0">
             <ContentLayer className="mx-10 md:mx-30">
                 <EventDetailContent events={events} search={searchKeyword} />
             </ContentLayer>

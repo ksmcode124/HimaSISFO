@@ -9,7 +9,7 @@ import { getEvents } from '../services/eventService';
 export async function EventListSection() {
   const events = await getEvents();
   return (
-    <section className="relative p-0 m-0 items-center justify-center">
+    <section className="relative p-0 m-0 top-0">
       <ContentLayer className="mx-10 md:mx-30">
         <EventListContent events={events} />
       </ContentLayer>
