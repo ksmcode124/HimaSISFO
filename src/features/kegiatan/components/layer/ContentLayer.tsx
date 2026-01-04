@@ -5,7 +5,7 @@ import { EventCard } from "../EventCard"
 import { Button } from "@/components/ui/button";
 import { formatMonthName } from "../../utils/FormatDate";
 import { createEventIndex, createEventIndexByNameDate } from "../../utils/EventIndexer";
-import { findEventById, FindEventByMonthYear, sortEvents, toEventsWithVariant } from "../../utils/GetEventNow";
+import { FindEventById, FindEventByMonthYear, sortEvents } from "../../utils/GetEventNow";
 import { EventCardProps } from "../../types";
 import { EventDetailContentProps } from "../../types"
 
@@ -15,20 +15,32 @@ export function CalendarContent({ events }: { events: any }) {
       <h1 className="py-5 md:py-4 md:py-10 text-center font-semibold text-xl md:text-7xl">
         Kalender
       </h1>
-      <DynamicCalendar className="border-[#456882] border-6" events={events}/>
+      <DynamicCalendar className="border-[#456882] border-6" events={events} />
       <div className="mx-2 md:mx-0 flex flex-col gap-[16px] p-5 border-2 border-[#1B3C53] rounded-[10px] bg-white">
         <h2 className="font-bold text-[18px] ">Keterangan</h2>
-        <p>Ini adalah keterangan untuk kalender.</p>
+        <div className="flex flex-row gap-3 md:gap-6 items-start">
+          <div className="flex flex-row gap-2 md:gap-4 items-center">
+            <div className="w-5 h-5 md:w-7 md:h-7 bg-gradient-to-b from-[#1B3C53] to-[#456882]"></div>
+            <span className="text-[13px] md:text-[18px] font-semibold">Acara Hima</span>
+          </div>
+          <div className="flex flex-row gap-2 md:gap-4 items-center">
+            <div className="w-5 h-5 md:w-7 md:h-7 bg-gradient-to-b from-[#7F1D1D] to-[#DC2626]"></div>
+            <span className="text-[13px] md:text-[18px] font-semibold">Beasiswa</span>
+          </div>
+          <div className="flex flex-row gap-2 md:gap-4 items-center">
+            <div className="w-5 h-5 md:w-7 md:h-7 bg-gradient-to-b from-[#CA8A04] to-[#EAB308]"></div>
+            <span className="text-[13px] md:text-[18px] font-semibold">Lomba</span>
+          </div>
+        </div>
       </div>
     </div>
   )
 }
 
 export function EventCardContent({ events }: { events: EventCardProps[] }) {
-  const eventsWithVariant = toEventsWithVariant(events);
-  const { pastNotGoing, nextOnGoing, futureNotGoing } = sortEvents(eventsWithVariant);
+  const { pastNotGoing, nextOnGoing, futureNotGoing } = sortEvents(events);
   return (
-    <div className="relative flex flex-col gap-2 md:gap-5  justify-center w-full mx-auto">
+    <div className="relative flex flex-col gap-3 md:gap-5  justify-center w-full mx-auto">
       <h1 className="w-full h-fit text-center font-semibold text-xl md:text-7xl">
         Agenda
       </h1>
@@ -50,7 +62,7 @@ export function EventCardContent({ events }: { events: EventCardProps[] }) {
         <Button
           variant="default"
           route={`kegiatan/agenda`}
-          className="text-[12px] md:text-sm flex flex-row gap-1 md:gap-2 px-3 md:px-4 py-1 md:py-3 rounded-full "
+          className="text-[12px] md:text-sm flex flex-row gap-1 md:gap-2 px-3 md:px-4 py-1 md:py-3 rounded-full items-center"
         >Selengkapnya<ArrowRight className="text-sm md:text-xl" /></Button>
       </div>
 
@@ -63,14 +75,13 @@ export function EventListContent({ events }: { events: EventCardProps[] }) {
   const tahunIni = new Date().getFullYear();
   const bulanIni = formatMonthName(new Date().getMonth());
   const HelperEvent = createEventIndex(events);
-  const FindEvent = FindEventByMonthYear(bulanIni, tahunIni, HelperEvent);
-  console.log(FindEvent);
+  const FindEvent = FindEventByMonthYear({ month: bulanIni, year: tahunIni, indexedEvents: HelperEvent });
   return (
     <>
-      <h2 className="text-xl w-full h-fit py-5 border-b-2 border-black">Kegiatan / Agenda</h2>
+      <h2 className="text-base md:text-xl w-full h-fit py-3 md:py-5 border-b-2 border-black">Kegiatan / Agenda</h2>
       <div className="relative">
-        <h1 className="text-9xl w-full h-fit text-center py-15 border-b-4 border-black ">Agenda</h1>
-        <div className="flex flex-row justify-between items-center">
+        <h1 className="text-xl md:text-9xl w-full h-fit text-center py-7 md:py-15 border-b-4 border-black ">Agenda</h1>
+        <div className="text-base md:text-4xl flex flex-row justify-between items-center py-3 md:py-5">
           <span>{bulanIni}</span>
           <span>{FindEvent.length} Acara ditemukan</span>
         </div>
@@ -107,14 +118,14 @@ export function EventListContent({ events }: { events: EventCardProps[] }) {
 export function EventDetailContent({ events, search }: EventDetailContentProps) {
   const HelperEvent = createEventIndexByNameDate(events);
   const key = decodeURIComponent(search).split("-").pop();
-  const FindEventDetail = findEventById(Number(key), HelperEvent);
-  console.log(FindEventDetail);
+  const FindEventDetail = FindEventById({ id: Number(key), indexedEvents: HelperEvent });
   return (
     <div className="relative w-full flex flex-col gap-10 md:gap-20">
-      <img src={`/assets/kegiatan/${FindEventDetail?.img}`} alt="detail event" className="object-cover relative w-full h-[200px] md:h-[600px] border-gradient-y rounded-[40px]" />
+      <h2 className="text-base md:text-xl w-full h-fit py-3 md:py-5 border-b-2 border-black">Kegiatan / Agenda / Berita</h2>
+      <img src={`/assets/kegiatan/${FindEventDetail?.img}`} alt="detail event" className="object-cover relative w-full  border-gradient-y rounded-[40px]" />
       <div className="flex flex-col gap-5">
-        <h1 className="text-3xl font-bold">{FindEventDetail?.title}</h1>
-        <p>{FindEventDetail?.description}</p>
+        <h1 className="text-xl md:text-3xl font-bold">{FindEventDetail?.title}</h1>
+        <p className="text-[14px] md:text-xl">{FindEventDetail?.description}</p>
       </div>
     </div>
   )
