@@ -1,208 +1,69 @@
 
-
+"use client"
 import clsx from "clsx";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import React, { useMemo, useState, useEffect } from "react";
-
-/* =========================
-   TYPES
-========================= */
-
-export interface CalendarEvent {
-  id: number;
-  title: string;
-  date: Date; // "YYYY-MM-DD"
-  type?: "meeting" | "workshop" | "other";
-}
-
-/* =========================
-   CONSTANTS
-========================= */
-
-const WEEK_DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-const EVENT_TYPE_COLOR: Record<string, string> = {
-  meeting: "bg-blue-500",
-  workshop: "bg-green-500",
-  other: "bg-purple-500",
-};
-
-const LOCALE = "id-ID";
-
-/* =========================
-   DATE HELPERS (LOCAL TIME)
-========================= */
-
-function toDateKey(date: Date) {
-  const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, "0");
-  const d = String(date.getDate()).padStart(2, "0");
-  return `${y}-${m}-${d}`;
-}
-
-function getMonthDays(year: number, month: number) {
-  const firstDay = new Date(year, month, 1);
-  const lastDay = new Date(year, month + 1, 0);
-
-  const startDayIndex = firstDay.getDay();
-  const totalDays = lastDay.getDate();
-  const prevLastDay = new Date(year, month, 0).getDate();
-
-  const days: {
-    day: number;
-    isCurrentMonth: boolean;
-    dateObj: Date;
-  }[] = [];
-
-  let dayCounter = 1;
-  let nextMonthDay = 1;
-
-  for (let i = 0; i < 42; i++) {
-    if (i < startDayIndex) {
-      const day = prevLastDay - (startDayIndex - i - 1);
-      days.push({
-        day,
-        isCurrentMonth: false,
-        dateObj: new Date(year, month - 1, day),
-      });
-    } else if (dayCounter <= totalDays) {
-      days.push({
-        day: dayCounter,
-        isCurrentMonth: true,
-        dateObj: new Date(year, month, dayCounter),
-      });
-      dayCounter++;
-    } else {
-      days.push({
-        day: nextMonthDay,
-        isCurrentMonth: false,
-        dateObj: new Date(year, month + 1, nextMonthDay),
-      });
-      nextMonthDay++;
-    }
-  }
-
-  return days;
-}
-
-function formatMonthName(month: number) {
-  return new Intl.DateTimeFormat(LOCALE, {
-    month: "long",
-  }).format(new Date(2000, month, 1));
-}
-
-function formatYear(year: number) {
-  return new Intl.DateTimeFormat(LOCALE, {
-    year: "numeric",
-  }).format(new Date(year, 0, 1));
-}
-
-/* =========================
-   EVENT MAPPING (SAFE)
-========================= */
-
-function mapEventsByDate(events: CalendarEvent[] = []) {
-  const map: Record<string, CalendarEvent[]> = {};
-
-  events.forEach(event => {
-    if (!event?.date) return;
-
-    const key = toDateKey(event.date);
-
-    if (!map[key]) map[key] = [];
-    map[key].push(event);
-  });
-
-  return map;
-}
-
-
-/* =========================
-   COMPONENT
-========================= */
-
-interface DynamicCalendarProps {
-  className?: string;
-  events?: CalendarEvent[];
-}
+import React, { useMemo, useState } from "react";
+import { WEEK_DAYS, toDateKey, getMonthDays } from "../utils/Calculate";
+import { formatMonthName, formatYear } from "../utils/FormatDate"
+import { DynamicCalendarProps } from "../types";
 
 export default function DynamicCalendar({
   className,
-  events = [],
-  
+  events,
 }: DynamicCalendarProps) {
 
   const today = new Date();
+  const [year, setYear] = useState(today.getFullYear());
+  const [month, setMonth] = useState(today.getMonth());
 
-  const initialDate = events.length
-    ? (() => {
-      const firstEvent = events
-        .map(e => e.date)
-        .sort((a, b) => a.getTime() - b.getTime())[0];
+  const daysGrid = useMemo(() => getMonthDays(year, month), [year, month]);
+  const eventsByDate = useMemo(() => {
+  const map: Record<string, typeof events> = {};
 
-      return firstEvent;
-    })()
-    : today;
+  (events || []) 
+    .filter(e => {
+      const date = e.date instanceof Date ? e.date : new Date(e.date);
+      return date.getFullYear() === year && date.getMonth() === month;
+    })
+    .forEach(event => {
+      const key = toDateKey(event.date);
+      if (!map[key]) map[key] = [];
+      map[key].push(event);
+    });
 
-  const [year, setYear] = useState(initialDate.getFullYear());
-  const [month, setMonth] = useState(initialDate.getMonth());
+  return map;
+}, [events, year, month]);
 
-
-  const daysGrid = useMemo(
-    () => getMonthDays(year, month),
-    [year, month]
-  );
-
-  const eventsByDate = useMemo(
-    () => mapEventsByDate(events),
-    [events]
-  );
-  // console.log("events:", events);
   const goPrevMonth = () => {
     if (month === 0) {
       setYear(y => y - 1);
       setMonth(11);
-    } else setMonth(m => m - 1);
+    } else {
+      const newMonth = month - 1;
+      setMonth(newMonth);
+    }
   };
 
-const goNextMonth = () => {
-  if (month === 11) {
-    setYear(y => y + 1);
-    setMonth(0);
-  } else setMonth(m => m + 1);
-};
+  const goNextMonth = () => {
+    if (month === 11) {
+      setYear(y => y + 1);
+      setMonth(0);
+    } else setMonth(m => m + 1);
+  };
 
-const goToday = () => {
-  setYear(today.getFullYear());
-  setMonth(today.getMonth());
-};
-
-useEffect(() => {
-  if (!events.length) return;
-
-  const today = new Date();
-
-  const closestEvent = events
-    .map(e => new Date(e.date))
-    .sort((a, b) =>
-      Math.abs(a.getTime() - today.getTime()) -
-      Math.abs(b.getTime() - today.getTime())
-    )[0];
-
-  setYear(closestEvent.getFullYear());
-  setMonth(closestEvent.getMonth());
-}, [events]);
+  const goToday = () => {
+    setYear(today.getFullYear());
+    setMonth(today.getMonth());
+  };
   return (
     <div className={clsx(className, "w-full py-4 px-2 md:px-4 bg-white rounded-lg shadow")}>
-      {/* HEADER */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex flex-row w-full items-center justify-between my-5">
         <h2 className="text-[20px] md:text-xl font-medium md:font-bold">
           {String(formatMonthName(month))}, {String(formatYear(year))}
         </h2>
-
         <div className="flex border-3 border-[#323257] rounded overflow-hidden">
           <button onClick={goPrevMonth} className="p-1 border-r-3 border-[#323257]">
-           <ChevronLeft />
+            <ChevronLeft />
           </button>
           <button onClick={goToday} className="w-[100px] md:w-[116px] py-2 font-bold text-sm uppercase">
             {String(formatMonthName(month)).slice(0, 3)} {String(formatYear(year))}
@@ -245,17 +106,17 @@ useEffect(() => {
                         isCurrentMonth ? "bg-[#99B6D9]" : "bg-[#B3C9E4]"
                       )}
                     >
-                      <div className="flex">
+                      <div className="flex flex-col w-fit">
                         <div
                           className={clsx(
-                            "flex items-center justify-center m-1 md:m-2",
+                            "flex items-start justify-start m-1 md:m-2 w-fit",
                             isToday ? "bg-[#3978FF] rounded-full w-6 h-6 md:w-7 md:h-7 text-[#fff]" : "text-[#000000]"
                           )}
                         >
                           {day}
                         </div>
 
-                        {/* <div className="mt-1 flex flex-wrap">
+                        <div className="mt-1 flex flex-wrap w-fit">
                           {dayEvents.map(ev => (
                             <div
                               key={`${ev.id}-${ev.date}`}
@@ -265,7 +126,7 @@ useEffect(() => {
                               {ev.title}
                             </div>
                           ))}
-                        </div> */}
+                        </div>
 
                       </div>
                     </td>
