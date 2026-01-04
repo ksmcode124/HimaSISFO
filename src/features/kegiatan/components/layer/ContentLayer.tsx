@@ -3,9 +3,11 @@ import { ArrowRight } from "lucide-react"
 import DynamicCalendar from "../Calendar"
 import { EventCard } from "../EventCard"
 import { Button } from "@/components/ui/button";
-import { formatMonthName, formatYear} from "../../utils/FormatDate";
-import { FindEventByMonthYear, sortEvents, toEventsWithVariant } from "../../utils/FilterEvent";
+import { formatMonthName } from "../../utils/FormatDate";
+import { findEventById, FindEventByMonthYear, sortEvents, toEventsWithVariant } from "../../utils/GetEventNow";
 import { EventCardProps } from "../../types";
+import { createEventIndex, createEventIndexByNameDate } from "../../utils/EventIndexer";
+import { create } from "domain";
 
 export function CalendarContent({ events }: { events: any }) {
   return (
@@ -25,8 +27,6 @@ export function CalendarContent({ events }: { events: any }) {
 export function EventCardContent({ events }: { events: EventCardProps[] }) {
   const eventsWithVariant = toEventsWithVariant(events);
   const { pastNotGoing, nextOnGoing, futureNotGoing } = sortEvents(eventsWithVariant);
-  const tahunIni = formatYear(new Date().getFullYear());
-  const bulanIni = formatMonthName(new Date().getMonth());
   return (
     <div className="relative flex flex-col gap-2 md:gap-5  justify-center w-full mx-auto">
       <h1 className="w-full h-fit text-center font-semibold text-xl md:text-7xl">
@@ -49,7 +49,7 @@ export function EventCardContent({ events }: { events: EventCardProps[] }) {
       <div className="w-full justify-center flex flex-row py-5 md:py-10">
         <Button
           variant="default"
-          route={`kegiatan/agenda?tahun=${tahunIni}&bulan=${bulanIni}`}
+          route={`kegiatan/agenda`}
           className="text-[12px] md:text-sm flex flex-row gap-1 md:gap-2 px-3 md:px-4 py-1 md:py-3 rounded-full "
         >Selengkapnya<ArrowRight className="text-sm md:text-xl" /></Button>
       </div>
@@ -60,20 +60,22 @@ export function EventCardContent({ events }: { events: EventCardProps[] }) {
 }
 
 export function EventListContent({ events }: { events: EventCardProps[] }) {
-  const tahunIni = formatYear(new Date().getFullYear());
+  const tahunIni = new Date().getFullYear();
   const bulanIni = formatMonthName(new Date().getMonth());
-  const dapatEvent = FindEventByMonthYear("Januari", 2026, events);
-  console.log(dapatEvent);
+  const HelperEvent = createEventIndex(events);
+  const FindEvent = FindEventByMonthYear(bulanIni, tahunIni, HelperEvent);
+  console.log(FindEvent);
   return (
     <>
       <h2 className="text-xl w-full h-fit py-5 border-b-2 border-black">Kegiatan / Agenda</h2>
       <div className="relative">
         <h1 className="text-9xl w-full h-fit text-center py-15 border-b-4 border-black ">Agenda</h1>
         <div className="flex flex-row justify-between items-center">
-          {bulanIni}
+          <span>{bulanIni}</span>
+          <span>{FindEvent.length} Acara ditemukan</span>
         </div>
-        {/* <div className="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-10 mt-5 md:mt-10">
-          {visibleEvents.map((event) => (
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-10 mt-5 md:mt-10">
+          {FindEvent.map((event) => (
             <EventCard
               key={event.id}
               id={event.id}
@@ -86,7 +88,7 @@ export function EventListContent({ events }: { events: EventCardProps[] }) {
             />
           ))}
         </div>
-        {visibleCount < events.length && (
+        {/* {visibleCount < events.length && (
           <div className="flex justify-center mt-6">
             <Button
               onClick={() => setVisibleCount(prev => prev + STEP)}
@@ -100,12 +102,20 @@ export function EventListContent({ events }: { events: EventCardProps[] }) {
     </>
   );
 }
+interface EventDetailContentProps {
+  events: EventCardProps[];
+  search: string; 
+}
 
-export function EventDetailContent({ image, description }: { image: string; description: string }) {
+export function EventDetailContent({ events, search }: EventDetailContentProps) {
+  const HelperEvent = createEventIndexByNameDate(events);
+  const key = decodeURIComponent(search).split("-").pop();
+  const FindEventDetail = findEventById(Number(key), HelperEvent);
+  console.log(FindEventDetail);
   return (
-    <div className="relative w-full border-2 border-accent gap-5 flex flex-col">
-      <img src={image} alt="detail event" className="relative w-full h-[600px] border-2 border-amber-300" />
-      <p>{description}</p>
+    <div className="relative w-full gap-5 flex flex-col">
+      <img src={`/assets/kegiatan/${FindEventDetail?.img}`} alt="detail event" className="object-cover relative w-full h-[600px]" />
+      <p>{FindEventDetail?.description}</p>
     </div>
   )
 }
