@@ -135,11 +135,7 @@
           "content": [
             {
               "type": "list",
-              "items": [
-                {
-                  "text": "-"
-                }
-              ]
+              "items": []
             }
           ]
         }

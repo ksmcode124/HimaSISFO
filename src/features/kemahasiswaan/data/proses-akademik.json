@@ -15,25 +15,22 @@
       "items": [
         {
           "id": "cetak-transkrip",
-          "title": "Cetak Transkrip Akademik",
+          "title": "Cetak Transkrip Akademik Sementara",
           "content": [
             {
               "type": "list",
               "items": [
                 {
-                  "text": "Langkah 1"
+                  "text": "Mencetak blanko Permohonan Transkrip Sementara dan fotocopy KTM."
                 },
                 {
-                  "text": "Langkah 2 dengan [Sadewa](https://sadewa.upnyk.ac.id)",
-                  "ordered": false,
-                  "items": [
-                    {
-                      "text": "Catatan A"
-                    },
-                    {
-                      "text": "Catatan B"
-                    }
-                  ]
+                  "text": "Menyerahkan surat permohonan ke bagian TU Jurusan Informatika."
+                },
+                {
+                  "text": "Transkrip nilai sementara yang telah diperoleh ditandatangani oleh dosen wali."
+                },
+                {
+                  "text": "Meminta cap ke TU fakultas."
                 }
               ]
             }
@@ -42,22 +39,166 @@
         {
           "id": "surat-keterangan-aktif",
           "title": "Surat Keterangan Aktif",
-          "content": []
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Membuka web [SADEWA](https://sadewa.upnyk.ac.id/)"
+                },
+                {
+                  "text": "Pilih menu kemahasiswaan dan klik sub menu Surat Aktif Kuliah"
+                },
+                {
+                  "text": "Pilih Permohonan Surat Keterangan Aktif lalu pilih keperluan permohonan. Terdapat beberapa keperluan permohonan, yaitu:",
+                  "items": [
+                    {
+                      "text": "Beasiswa"
+                    },
+                    {
+                      "text": "Kehilangan Kartu Tanda Mahasiswa (KTM)"
+                    },
+                    {
+                      "text": "Kehilangan KRP/Slip Pembayaran UKT"
+                    },
+                    {
+                      "text": "Tunjangan gaji orang tua"
+                    },
+                    {
+                      "text": "Tunjangan kesehatan/BPJS"
+                    },
+                    {
+                      "text": "Tunjangan paspor"
+                    }
+                  ]
+                },
+                {
+                  "text": "Isi data yang diperlukan dan unggah screenshot sejarah pembayaran UKT pada web [SIUKT](http://siukt.upnyk.ac.id/)"
+                },
+                {
+                  "text": "Submit data lalu tunggu beberapa saat hingga status pengajuan berubah menjadi selesai dan download Surat Keterangan Aktif Kuliah"
+                }
+              ]
+            }
+          ]
         },
         {
           "id" : "seminar-ta",
           "title": "Daftar Seminar TA",
-          "content": []
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Daftar Seminar Tugas Akhir dengan melengkapi berkas-berkas berikut.",
+                  "items": [
+                    {
+                      "text": "Form pendaftaran Seminar Tugas Akhir"
+                    },
+                    {
+                      "text": "Naskah Tugas Akhir (Bab 1, 2, dan 3) sebanyak 4 eksemplar"
+                    },
+                    {
+                      "text": "Fotocopy Kartu Tanda Mahasiswa (1 lembar)"
+                    },
+                    {
+                      "text": "Fotocopy KRS sebagai bukti sedang menempuh mata kuliah Tugas Akhir I"
+                    },
+                    {
+                      "text": "Bukti telah mengikuti dan lolos tes panduan Tugas Akhir (passing grade > 69)"
+                    },
+                    {
+                      "text": "Form Persetujuan Seminar Tugas Akhir dari Pembimbing (S.02) yang telah ditandatangai oleh dosen pembimbing 1 & 2 dan koordinator TA."
+                    },
+                    {
+                      "text": "Surat Keterangan dari Laboratorium yang menyatakan telah menyelesaikan praktikum serta tidak ada tanggungan administrasi."
+                    },
+                    {
+                      "text": "Pas foto 4x6 hitam putih (5 lembar)"
+                    },
+                    {
+                      "text": "Fotocopy dari Buku Bimbingan bukti telah mengikuti seminar Tugas Akhir (S.03)"
+                    },
+                    {
+                      "text": "Minimal mengikuti 5 seminar Tugas Akhir dan 3 kali memberikan pertanyaan."
+                    }
+                  ]
+                },
+                {
+                  "text": "Mengunjungi TU Jurusan Informatika untuk mendaftar sidang tugas akhir."
+                }
+              ]
+            }
+          ]
         },
         {
           "id" : "sidang-ta",
           "title": "Daftar Sidang TA",
-          "content": []
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Daftar Seminar Tugas Akhir dengan melengkapi berkas-berkas berikut.",
+                  "items": [
+                    {
+                      "text": "Form pendaftaran Sidang Tugas Akhir"
+                    },
+                    {
+                      "text": "Naskah Tugas Akhir sebanyak 4 eksemplar"
+                    },
+                    {
+                      "text": "Melampirkan bukti KRS sedang menempuh mata kuliah Tugas Akhir II"
+                    },
+                    {
+                      "text": "Melampirkan bukti KHS telah menempuh minimal 138 SKS"
+                    },
+                    {
+                      "text": "Bukti telah melaksanakan bimbingan sebanyak minimal 8 kali/pembimbing (Mengumpulkan Buku Bimbingan Tugas Akhir)"
+                    },
+                    {
+                      "text": "Fotocopy Kartu Tanda Mahasiswa (2 lembar)"
+                    },
+                    {
+                      "text": "Fotocopy 4x6 hitam putih (5 lembar)"
+                    },
+                    {
+                      "text": "Fotocopy ijazah terakhir yang telah dilegalisir (2 lembar)"
+                    },
+                    {
+                      "text": "Fotocopy bukti nilai Kerja Praktik"
+                    },
+                    {
+                      "text": "Transkrip nilai yang disahkan oleh dosen wali"
+                    }
+                  ]
+                },
+                {
+                  "text": "Mengunjungi TU Jurusan Informatika untuk mendaftar seminar proposal"
+                }
+              ]
+            }
+          ]
         },
         {
           "id" : "surat-bebas-lab",
           "title": "Surat Bebas Lab",
-          "content": []
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Siapkan transkrip nilai terbaru yang telah ditandatangani oleh dosen wali."
+                },
+                {
+                  "text": "Scan transkrip nilai dan simpan dalam bentuk PDF"
+                },
+                {
+                  "text": "Hasil scan transkrip dikirim ke email [lab.if@upnyk.ac.id](mailto:lab.if@upnyk.ac.id?subject=BebasLab_NAMA_NIM) dengan subjek:BebasLab_NAMA_NIM"
+                }
+              ]
+            }
+          ]
         }
       ]
     }

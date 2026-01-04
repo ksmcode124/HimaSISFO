@@ -60,21 +60,13 @@
           "content": [
             {
               "type": "list",
+              "ordered": false,
               "items": [
                 {
-                  "text": "Langkah 1"
+                  "text": "Siapkan scan Ijazah SMA, KTM, Transkrip Nilai Sementara, KTP, Akta Kelahiran, dan Kartu Keluarga dalam format PDF."
                 },
                 {
-                  "text": "Langkah 2 dengan [Sadewa](https://sadewa.upnyk.ac.id)",
-                  "ordered": false,
-                  "items": [
-                    {
-                      "text": "Catatan A"
-                    },
-                    {
-                      "text": "Catatan B"
-                    }
-                  ]
+                  "text": "Isi data pada link [https://s.id/pdm_upnvy](https://s.id/pdm_upnvy)"
                 }
               ]
             }
@@ -83,27 +75,140 @@
         {
           "id": "pengunduran-diri",
           "title": "Pengunduran Diri",
-          "content": []
+          "content": [
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                {
+                  "text": "Mengunduh dan mengisi blanko Pengunduran Diri."
+                },
+                {
+                  "text": "Menemui dosen wali dan ketua jurusan untuk memohon tanda tangan."
+                },
+                {
+                  "text": "Menyiapkan persyaratan yang diperlukan untuk pengajuan pengunduran diri."
+                },
+                {
+                  "text": "Setiap dokumen persyaratan diserahkan secara langsung ke bagian TU fakultas."
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "pengajuan-cuti",
           "title": "Pengajuan Cuti Akademik",
-          "content": []
+          "content": [
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                {
+                  "text": "Mengunduh dan mengisi blanko Pengajuan Cuti Akademik."
+                },
+                {
+                  "text": "Menemui dosen wali, koordinator prodi, dan ketua jurusan untuk memohon tanda tangan."
+                },
+                {
+                  "text": "Menyiapkan persyaratan yang diperlukan untuk pengajuan cuti."
+                },
+                {
+                  "text": "Setiap dokumen persyaratan diserahkan secara langsung ke bagian TU fakultas."
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "pengajuan-kkn",
           "title": "Pengajuan KKN",
-          "content": []
+          "content": [
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                {
+                  "text": "Sudah lulus 100 SKS."
+                },
+                {
+                  "text": "Input KRS mata kuliah KKN pada website [BIMA](https://bima.upnyk.ac.id)."
+                },
+                {
+                  "text": "Mengisi form pendaftaran KKN secara online."
+                },
+                {
+                  "text": "Melakuakn daftar ulang KKN dan unggah Surat Pernyataan Calon Peserta KKN pada website [SADEWA](https://sadewa.upnyk.ac.id)."
+                },
+                {
+                  "text": "Mengikuti pembekalan KKN."
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "pemulihan-status",
           "title": "Pemulihan Status Mahasiswa",
-          "content": []
+          "content": [
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                {
+                  "text": "Mengunduh dan mengisi blanko Pemulihan Status Mahasiswa."
+                },
+                {
+                  "text": "Menemui dosen wali, koordinator prodi, dan ketua jurusan untuk memohon tanda tangan."
+                },
+                {
+                  "text": "Menyiapkan persyaratan yang diperlukan untuk pemulihan status mahasiswa."
+                },
+                {
+                  "text": "Setiap dokumen persyaratan diserahkan secara langsung ke bagian TU fakultas."
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "pengajuan-skripsi",
           "title": "Pengajuan Judul Skripsi",
-          "content": []
+          "content": [
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                {
+                  "text": "Login web sitasi [https://siupnyk.online/sitasi/](https://siupnyk.online/sitasi/)"
+                },
+                {
+                  "text": "Pilih menu proposal TA."
+                },
+                {
+                  "text": "Klik sub menu form pendaftaran"
+                },
+                {
+                  "text": "Download dan isi form."
+                },
+                {
+                  "text": "Klik sub menu form pendaftaran."
+                },
+                {
+                  "text": "Isi form pendaftaran dan upload file pendaftaran."
+                },
+                {
+                  "text": "Submit. Setelah melakukan submit, dapat melakuakn pengecekan status di sub menu status akhir."
+                },
+                {
+                  "text": "Setelah mendapat persetujuan, pada sub menu form persetujuan dicetak dan diminta tanda tangan dosen pembimbing."
+                },
+                {
+                  "text": "Setelah mendapat tanda tangan, ke TU Jurusan Informatika untuk mendapatkan buku bimbingan"
+                }
+              ]
+            }
+          ]
         }
       ]
     }
