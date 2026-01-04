@@ -3,8 +3,9 @@
 import clsx from "clsx";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import React, { useMemo, useState } from "react";
-import { WEEK_DAYS, toDateKey, getMonthDays } from "../utils/Calculate";
+import { toDateKey, getMonthDays } from "../utils/Calculate";
 import { formatMonthName, formatYear } from "../utils/FormatDate"
+import { WEEK_DAYS } from "../data/constant";
 import { DynamicCalendarProps } from "../types";
 
 export default function DynamicCalendar({
@@ -30,7 +31,6 @@ export default function DynamicCalendar({
         if (!map[key]) map[key] = [];
         map[key].push(event);
       });
-
     return map;
   }, [events, year, month]);
 
@@ -55,7 +55,6 @@ export default function DynamicCalendar({
     setYear(today.getFullYear());
     setMonth(today.getMonth());
   };
-  console.log("eventsByDate:", eventsByDate);
   return (
     <div className={clsx(className, "w-full py-4 px-2 md:px-4 bg-white rounded-lg shadow")}>
       <div className="flex flex-row w-full items-center justify-between my-5">
@@ -97,7 +96,6 @@ export default function DynamicCalendar({
                 .map(({ day, isCurrentMonth, dateObj }) => {
                   const key = toDateKey(dateObj);
                   const dayEvents = eventsByDate[key] || [];
-                  // console.log("dayEvents for", key, ":", dayEvents);
                   const isToday = key === toDateKey(today);
                   return (
                     <td
@@ -110,19 +108,19 @@ export default function DynamicCalendar({
                       <div className="flex flex-col items-start gap-1">
                         <div
                           className={clsx(
-                            "flex items-center justify-center m-1 md:m-2",
+                            "flex items-center justify-center m-2",
                             isToday ? "bg-[#3978FF] rounded-full w-6 h-6 md:w-7 md:h-7 text-[#fff]" : "text-[#000000]"
                           )}
                         >
                           {day}
                         </div>
 
-                        <div className="flex flex-col w-full gap-2 overflow-hidden">
+                        <div className="flex flex-col w-full gap-1 md:gap-2 overflow-hidden">
                           {dayEvents.map((ev) => (
                             <div
                               key={`${ev.id}-${ev.date}`}
                               className={clsx(
-                                "mx-2 py-1 rounded-[4px] text-[10px] md:text-sm font-bold h-fit w-auto text-center truncate text-white ",
+                                "mx-2 rounded-[4px] text-[10px] md:text-sm font-bold h-fit w-auto text-center truncate text-white ",
                                 ev.jenis === "Hima" && "bg-gradient-to-b from-[#1B3C53] to-[#456882]",
                                 ev.jenis === "Beasiswa" && "bg-gradient-to-b from-[#7F1D1D] to-[#DC2626]",
                                 ev.jenis === "Lomba" && "bg-gradient-to-b from-[#CA8A04] to-[#EAB308]"
