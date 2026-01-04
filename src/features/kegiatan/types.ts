@@ -1,22 +1,13 @@
-interface BaseCard {
+export interface EventCardProps {
     id: number;
     title: string;
     img: string;
-    date: string;
-}
-
-export interface OnGoingEvent extends BaseCard {
-    variant : "onGoing";
-    countDown: number;
-}
-
-export interface NotGoingEvent extends BaseCard {
-    variant : "notGoing";
-}
-
-export interface DetailEvent extends BaseCard {
-    variant : "detail";
+    date: Date;
+    slug: string;
     description: string;
-    navigation: string;
 }
-export type EventCardProps = OnGoingEvent | NotGoingEvent | DetailEvent;
+
+export interface DynamicCalendarProps {
+  events: EventCardProps[];
+  className?: string;
+}
