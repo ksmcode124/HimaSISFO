@@ -39,20 +39,33 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
+  route?: string
 }
 
+import { useRouter } from "next/navigation";
+
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button"
+  ({ className, variant, size, asChild = false, route, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button";
+    const router = useRouter();
+
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+      if (route) {
+        router.push(route);
+      }
+      if (props.onClick) {
+        props.onClick(e);
+      }
+    };
+
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
+        onClick={handleClick}
       />
-    )
+    );
   }
-)
-Button.displayName = "Button"
-
-export { Button, buttonVariants }
+);
+export { Button };
