@@ -89,6 +89,21 @@
    --text-10xl: 64px;
 }
 
+.bg-tb-gradient-primary {
+   background: linear-gradient(to bottom, var(--color-nile-blue), var(--color-blue-bayoux));
+}
+
+.bg-bt-gradient-primary {
+   background: linear-gradient(to top, var(--color-nile-blue), var(--color-blue-bayoux));
+}
+
+.bg-lr-gradient-primary {
+   background: linear-gradient(to right, var(--color-nile-blue), var(--color-blue-bayoux));
+}
+
+.bg-rl-gradient-primary {
+   background: linear-gradient(to left, var(--color-nile-blue), var(--color-blue-bayoux));
+}
 
 @layer base {
    * {
