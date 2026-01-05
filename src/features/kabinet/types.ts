@@ -7,7 +7,7 @@ export interface Kabinet {
   nama_kabinet: string;
   tahun_akademik: string;
   logo_url: string;
-  kabinet_images: string[];
+  image_url: string[];
   colors: {
     primary: string;
     secondary: string;
@@ -16,18 +16,21 @@ export interface Kabinet {
   };
   filosofi: {
     arti_nama: { kata: string; makna: string }[];
-    logo_hover_details: { komponen: string; makna: string }[];
+    logo_hover_details: { simbol: string; makna: string }[];
     visi: { text: string }[];
     misi: { text: string }[];
   };
-  inti_himpunan: IntiHimpunan[];
+  inti_himpunan: {
+    logo_url: string;
+    anggota: IntiHimpunan[];
+  };
   departemen: Departemen[];
 }
 
 export interface IntiHimpunan {
   nama: string;
   jabatan: string;
-  foto_url: string;
+  image_url: string;
 }
 
 export interface Departemen {
@@ -35,6 +38,7 @@ export interface Departemen {
   nama: string;
   deskripsi: string;
   logo_url: string;
+  image_url: string;
   program_kerja: Proker[];
   staff: {
     inti: StaffInti[];
@@ -51,7 +55,7 @@ export interface Proker {
 export interface StaffInti {
   nama: string;
   jabatan: string;
-  foto: string;
+  image_url: string;
 }
 
 export interface StaffAnggota {
