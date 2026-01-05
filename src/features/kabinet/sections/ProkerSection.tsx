@@ -1,6 +1,6 @@
 "use client";
 
-export default function KabinetIntiSection() {
+export default function ProkerSection() {
   return (
     <section className="relative w-full min-h-[1000px] flex flex-col items-center py-24 overflow-hidden bg-[#F4E8FF]">
       

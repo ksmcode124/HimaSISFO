@@ -1,9 +1,16 @@
-"use client";
-
 import Image from "next/image";
 import { Pita } from "../components/KabinetOrnaments";
 
-export default function KabinetFilosofiSection() {
+interface FilosofiProps {
+  data: {
+    arti_nama: { kata: string; makna: string }[];
+    visi: { text: string }[];
+    misi: { text: string }[];
+  };
+  logo_url: string;
+}
+
+export default function KabinetFilosofiSection({ logo_url }: FilosofiProps) {
   return (
     <div className="relative w-full">
       <section className="w-full min-h-screen flex items-center justify-center py-20 px-10">
@@ -21,7 +28,11 @@ export default function KabinetFilosofiSection() {
           {/* LOGO */}
           <div className="flex justify-center items-center">
             <div className="relative w-80 h-80 border flex items-center justify-center">
-              <Image src="/assets/kabinet/logo-kabinet.png" alt="Logo Kabinet" fill className="object-contain"
+              <Image 
+                src={logo_url} 
+                alt="Logo Kabinet" 
+                fill 
+                className="object-contain drop-shadow-2xl"
               />
             </div>
           </div>
@@ -35,7 +46,7 @@ export default function KabinetFilosofiSection() {
         </div>
       </section>
 
-      <div className="absolute -bottom-4 md:-bottom-10 w-full z-10 translate-y-1/2">
+      <div className="absolute -bottom-4 md:-bottom-10 w-full z-10 translate-y-1/2 -scale-x-100">
         <Pita />
       </div>
     </div>

@@ -1,5 +1,3 @@
-"use client";
-
 import { Awan, Ornament2 } from "../components/KabinetOrnaments";
 
 export default function KabinetDepartemenSection() {

@@ -3,13 +3,24 @@
 import Image from "next/image";
 import { Awan, Ornamen4 } from "../components/KabinetOrnaments";
 
-export default function KabinetIntiSection() {
+interface IntiProps {
+  data: {
+    logo_url: string;
+    anggota: {
+      nama: string;
+      jabatan: string;
+      image_url: string;
+    }[];
+  };
+}
+
+export default function KabinetIntiSection({ data }: IntiProps) {
   return (
     <section className="relative w-full min-h-[120vh] bg-pink-50 flex flex-col items-center py-24 overflow-hidden">
       <div className="relative z-10 flex flex-row items-center gap-4 mt-20 mb-20">
         <div className="relative w-12 h-12 bg-pink-400 rounded-lg shadow-sm">
           <Image
-            src="/assets/kabinet/logo-inti.png"
+            src={data.logo_url}
             alt="Logo Inti"
             fill
             className="object-contain"

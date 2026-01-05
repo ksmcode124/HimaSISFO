@@ -1,25 +1,25 @@
-"use client";
-
 import Image from "next/image";
 
 interface Props {
   nama: string;
   deskripsi: string;
   logo: string;
+  image_url: string;
 }
 
 export default function DepartemenHeroSection({
   nama,
   deskripsi,
   logo,
+  image_url,
 }: Props) {
   return (
     <section className="relative flex flex-col w-full h-[933px] items-center">
       {/* BACKGROUND IMAGE */}
       <div className="absolute inset-0">
         <Image
-          src="/assets/kabinet/hero-akpro.png"
-          alt="Background Departemen Akpro"
+          src={image_url}
+          alt={`Departemen ${nama}`}
           fill
           className="object-cover opacity-50"
           priority
@@ -31,9 +31,7 @@ export default function DepartemenHeroSection({
       <div className="w-full pt-28 px-6 md:px-20">
         <div className="max-w-7xl mx-auto">
           <div className="w-full h-12 border-2 flex items-center px-4">
-            <span>
-              space buat breadcrumb
-            </span>
+            <span>space buat breadcrumb</span>
           </div>
         </div>
       </div>
@@ -56,8 +54,8 @@ export default function DepartemenHeroSection({
           <div className="flex justify-center md:justify-start">
             <div className="relative w-56 h-56 md:w-100 md:h-100 bg-white flex">
               <Image
-                src={logo || "/assets/kabinet/departemen/logo-akpro.png"}
-                alt="Logo Departemen"
+                src={logo}
+                alt={`Logo Departemen ${nama}`}
                 fill
                 className="object-contain p-6"
               />

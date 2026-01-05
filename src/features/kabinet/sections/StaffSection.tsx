@@ -1,6 +1,4 @@
-"use client";
-
-export default function StaffSectionSkeleton() {
+export default function StaffSection() {
   return (
     <section className="relative w-full py-32 flex flex-col items-center overflow-hidden bg-[#F4E8FF]">
       {/* placeholder ornamen awan */}
