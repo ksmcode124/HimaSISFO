@@ -26,7 +26,7 @@ function Pita() {
   return (
     <div className="relative w-full aspect-4/1">
       <Image
-        src="/assets/kemahasiswaan/decoration-pita.png"
+        src="/assets/kemahasiswaan/decoration-pita.webp"
         alt=""
         fill
         className="object-contain"

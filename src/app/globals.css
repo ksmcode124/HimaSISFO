@@ -93,8 +93,16 @@
    background: linear-gradient(to bottom, var(--color-nile-blue), var(--color-blue-bayoux));
 }
 
+.bg-tb-gradient-primary:hover {
+   background: linear-gradient(to top, var(--color-nile-blue), var(--color-blue-bayoux));
+}
+
 .bg-bt-gradient-primary {
    background: linear-gradient(to top, var(--color-nile-blue), var(--color-blue-bayoux));
+}
+
+.bg-bt-gradient-primary:hover {
+   background: linear-gradient(to bottom, var(--color-nile-blue), var(--color-blue-bayoux));
 }
 
 .bg-lr-gradient-primary {

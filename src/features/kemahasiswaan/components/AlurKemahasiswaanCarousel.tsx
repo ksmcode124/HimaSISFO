@@ -11,11 +11,9 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/Carousel"
-import LiquidGlass from 'liquid-glass-react'
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { CardProps } from "../types"
-import { GlassMorph } from "@/components/ui/GlassMorph"
 
 interface AlurKemahasiswaanCarouselProps {
   data: CardProps[]

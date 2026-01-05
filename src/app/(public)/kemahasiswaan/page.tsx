@@ -19,7 +19,7 @@ export default function Page() {
   return (
     <>
       <HeroSection {...Kemahasiswaan.hero} />
-      <section className="px-6 lg:px-12 max-w-7xl mx-auto">
+      <section className="px-6 lg:px-12 max-w-7xl mx-auto min-h-170 pt-10">
         <AlurKemahasiswaanCarousel data={items} />
       </section>
       <BlankoSection {...blankoContent} />
