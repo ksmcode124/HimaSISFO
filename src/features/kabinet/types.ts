@@ -1,23 +1,60 @@
-export interface HeroData {
-  title: string;
-  subtitle: string;
+export interface KabinetDataJSON {
+  kabinet_list: Kabinet[];
 }
 
 export interface Kabinet {
-  slug: string;
-  tahun_akademik: string;
+  id: string;
   nama_kabinet: string;
-  hero: HeroData;
+  tahun_akademik: string;
+  logo_url: string;
+  kabinet_images: string[];
+  colors: {
+    primary: string;
+    secondary: string;
+    text: string;
+    background: string;
+  };
+  filosofi: {
+    arti_nama: { kata: string; makna: string }[];
+    logo_hover_details: { komponen: string; makna: string }[];
+    visi: { text: string }[];
+    misi: { text: string }[];
+  };
+  inti_himpunan: IntiHimpunan[];
+  departemen: Departemen[];
 }
 
-export interface DepartemenHeroData {
+export interface IntiHimpunan {
+  nama: string;
+  jabatan: string;
+  foto_url: string;
+}
+
+export interface Departemen {
+  id: string;
   nama: string;
   deskripsi: string;
-  logo: string;
-  foto_hero?: string;
+  logo_url: string;
+  program_kerja: Proker[];
+  staff: {
+    inti: StaffInti[];
+    anggota: StaffAnggota[];
+  };
 }
 
-export interface KabinetDataJSON {
-  success: boolean;
-  kabinet_list: Kabinet[];
+export interface Proker {
+  nama: string;
+  deskripsi: string;
+  image_url: string;
+}
+
+export interface StaffInti {
+  nama: string;
+  jabatan: string;
+  foto: string;
+}
+
+export interface StaffAnggota {
+  nama: string;
+  image_url: string;
 }
