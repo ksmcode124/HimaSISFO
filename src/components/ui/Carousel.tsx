@@ -205,6 +205,38 @@ function CarouselNext(
   )
 }
 
+function CarouselIndicators({
+  count,
+  selectedIndex,
+  onSelect,
+}: {
+  count: number
+  selectedIndex: number
+  onSelect: (index: number) => void
+}) {
+  return (
+    <div className="mt-4 flex justify-center items-center gap-2">
+      {Array.from({ length: count }).map((_, index) => {
+        const isActive = index === selectedIndex
+
+        return (
+          <button
+            key={index}
+            aria-label={`Go to slide ${index + 1}`}
+            onClick={() => onSelect(index)}
+            className={cn(
+              "h-4 w-4 rounded-full transition-all duration-300",
+              "focus:outline-none",
+              isActive
+                ? "bg-lr-gradient-primary h-5 w-5"
+                : "bg-neutral-300 hover:bg-blue-bayoux"
+            )}
+          />
+        )
+      })}
+    </div>
+  )
+}
 
 export {
   type CarouselApi,
@@ -214,4 +246,5 @@ export {
   CarouselSpacer,
   CarouselPrevious,
   CarouselNext,
+  CarouselIndicators
 }

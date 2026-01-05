@@ -10,6 +10,7 @@ import {
   CarouselNext,
   CarouselPrevious,
   type CarouselApi,
+  CarouselIndicators,
 } from "@/components/ui/Carousel"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
@@ -123,6 +124,14 @@ export default function AlurKemahasiswaanCarousel({
         </CarouselContent>
         <CarouselNext className="absolute h-15 w-15 right-0 sm:-right-12 lg:-right-16 top-1/2 -translate-y-1/2 z-30 rounded-full" />
       </Carousel>
+      {api && (
+        <CarouselIndicators
+          count={data.length}
+          selectedIndex={selectedIndex}
+          onSelect={(index) => api.scrollTo(index)}
+        />
+      )}
+
     </div>
   )
 }
