@@ -7,7 +7,7 @@ export type CardProps = {
 export type CTASection = {
   title: string,
   subtitle: string,
-  cta: string
+  iconUrl: string
 }
 
 // content-types.ts

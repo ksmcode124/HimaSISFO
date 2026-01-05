@@ -21,19 +21,27 @@
               "type": "list",
               "items": [
                 {
-                  "text": "Langkah 1"
-                },
-                {
-                  "text": "Langkah 2 dengan [Sadewa](https://sadewa.upnyk.ac.id)",
-                  "ordered": false,
+                  "text": "Mahasiswa mengunggah foto di laman [https://pmb.upnyk.ac.id/](https://pmb.upnyk.ac.id/) dengan persyaratan:",
                   "items": [
                     {
-                      "text": "Catatan A"
+                      "text": "Ukuran foto 4x6"
                     },
                     {
-                      "text": "Catatan B"
+                      "text": "Maksimal 1 Mb"
+                    },
+                    {
+                      "text": "Memakai jas almameter"
+                    },
+                    {
+                      "text": "Background foto berwarna merah"
                     }
                   ]
+                },
+                {
+                  "text": "Proses Pencetakan KTM oleh petugas."
+                },
+                {
+                  "text": "Mahasiswa mengambil KTM di loket 5 Gedung Perpustakaan sesuai jadwal."
                 }
               ]
             }
@@ -42,12 +50,59 @@
         {
           "id": "validasi-ktm",
           "title": "Validasi KTM",
-          "content": []
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Mahasiswa bersangkutan menyiapkan berkas berupa:",
+                  "items": [
+                    {
+                      "text": "KTM"
+                    },
+                    {
+                      "text": "Maksimal 1 Mb"
+                    },
+                    {
+                      "text": "Slip Pembayaran"
+                    }
+                  ]
+                },
+                {
+                  "text": "Membawa berkas ke loket 5 Kampus 1 untuk dilakukan validasi."
+                }
+              ]
+            }
+          ]
         },
         {
           "id" : "kehilangan-ktm",
           "title": "Kehilangan KTM",
-          "content": []
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Membua web [SADEWA](https://sadewa.upnyk.ac.id/"
+                },
+                {
+                  "text": "Pilih menu kemahasiswaan dan klik sub menu Surat Aktif Kuliah."
+                },
+                {
+                  "text": "Pilih Permohonan Surat Keterangan Aktif lalu pilih keperluan permohonan kehilangan Kartu Tanda Mahasiswa (KTM)"
+                },
+                {
+                  "text": "Isi data yang diperlukan dan unggah screenshot sejarah pembayaran UKT pada web [https://siukt.upnyk.ac.id/](https://siukt.upnyk.ac.id/)"
+                },
+                {
+                  "text": "Submit data lalu tunggu beberapa saat hingga status pengajuan berubah menjadi selesai dan download Surat Aktif Kuliah."
+                },
+                {
+                  "text": "Membawa Surat Aktif Kuliah dan Surat Kehilangan dari polisi ke loket 5 Kampus 1."
+                }
+              ]
+            }
+          ]
         }
       ]
     },
