@@ -21,10 +21,10 @@
               "type": "list",
               "items": [
                 {
-                  "text": "Form pendaftaran yudisium"
+                  "text": "Formulir pendaftaran yudisium"
                 },
                 {
-                  "text": "Melengkapi berkas-berkas"
+                  "text": "Melengkapi berkas-berkas dan membawa surat keterangan berhak mengikuti yudisium yang telah dicetak sebelumnya ke TU Jurusan Informatika untuk disahkan"
                 },
                 {
                   "text": "Menyerahkan semua berkas ke TU Jurusan Informatika"
@@ -36,7 +36,7 @@
                   "text": "Pilih menu akademik lalu klik sub menu pengajuan yudisium"
                 },
                 {
-                  "text": "Isi data dengan benar dan upload Surat Keterangan Berhak Mengikuti Yudisium yang telah disahkan oleh Kaprodi/Kajur"
+                  "text": "Isi data dengan benar dan upload [Surat Keterangan Berhak Mengikuti Yudisium](https://bakpk.upnyk.ac.id/public/assets/upload/surat-keterangan-berhak-mengikuti-yudisium-fti.pdf) yang telah disahkan oleh Kaprodi/Kajur"
                 },
                 {
                   "text": "Menunggu proses verifikasi data oleh fakultas"
@@ -56,16 +56,16 @@
               "type": "list",
               "items": [
                 {
-                  "text": "Melakukan pendaftaran wisuda melalui [https://wisuda.upnyk.ac.id/daftar/](https://wisuda.upnyk.ac.id/daftar/)"
+                  "text": "Pendaftaran wisuda dilakukan melalui aplikasi [SADEWA](https://sadewa.upnyk.ac.id)"
                 },
                 {
-                  "text": "Masukkan NIM dan PIN untuk melakukan login."
+                  "text": "Pilih menu administrasi dan submenu pendaftaran wisuda"
                 },
                 {
-                  "text": "Pilih menu wisuda dan pilih periode wisuda."
+                  "text": "Pilih periode wisuda."
                 },
                 {
-                  "text": "Pastikan data yang tercantum benar. Setelah itu, klik daftar."
+                  "text": "Pastikan data yang tercantum benar. Setelah itu, klik Simpan."
                 },
                 {
                   "text": "Bagi calon wisudawan wajib melakukan verifikasi dan menyerahkan pas foto 1 (satu) lembar ke Bagian Akademik"
@@ -85,7 +85,7 @@
                   "text": "Sudah melakukan yudisium dan mendaftar wisuda."
                 },
                 {
-                  "text": "Datang ke bagian akademik untuk memberikan foto (Kriteria Foto) dan melakukan verifikasi. Setelah melakukan verifikasi, akan mendapatkan form."
+                  "text": "Datang ke bagian akademik untuk memberikan foto ([Kriteria Foto](https://bit.ly/kriteria-foto)) dan melakukan verifikasi. Setelah melakukan verifikasi, akan mendapatkan formulir untuk pengambilan toga."
                 },
                 {
                   "text": "Waktu pengambilan toga 1-2 minggu sebelum wisuda."
@@ -100,7 +100,23 @@
         {
           "id" : "legalisir-transkrip",
           "title": "Legalisir Transkrip Akademik",
-          "content": []
+          "content": [
+            {
+              "text" : "Melengkapi berkas-berkas, yaitu: ",
+              "ordered": false,
+              "items": [
+                {
+                  "text" : "Fotocopy Transkrip Akademik 5 (lima) lembar"
+                }
+              ]
+            },
+            {
+              "text" : "Mengisi [Blanko Legalisir Transkrip Akademii](/kemahasiswaan/blanko)"
+            },
+            {
+              "text" : "Menyerahkan semua berkas ke loket TU fakultas"
+            }
+          ]
         },
         {
           "id" : "pengambilan-ijazah",
@@ -113,7 +129,10 @@
                   "text": "Membawa surat pengembalian toga."
                 },
                 {
-                  "text": "Jika diwakilkan, yang mewakilkan harus membawa surat kuasa bermaterai."
+                  "text": "Jika diwakilkan, yang mewakilkan harus membawa surat kuasa bermaterai serta lampiran berupa fotocopy KTP kedua belah pihak. [Contoh Surat Kuasa](https://drive.google.com/file/d/1duL8ZfbwdPNLtL8IFfBl2M9k-PQLyzTl/view)"
+                },
+                {
+                  "text": "Menyerahkan persyaratan ke loket 5 gedung perpustakaan pusat."
                 }
               ]
             }
@@ -135,7 +154,7 @@
                   ]
                 },
                 {
-                  "text": "Mengisi blanko Legalisir Ijazah."
+                  "text": "Mengisi blanko [Legalisir Ijazah](/kemahasiswaan/blanko)."
                 },
                 {
                   "text": "Menyerahkan semua berkas ke loket TU fakultas"
@@ -155,7 +174,7 @@
                   "text": "Melengkapi berkas-berkas, yaitu",
                   "items": [
                     {
-                      "text": "Form transkrip"
+                      "text": "Surat bebas perpustakaan universitas asli"
                     },
                     {
                       "text": "Fotocopy ijazah"
@@ -165,9 +184,6 @@
                     },
                     {
                       "text": "Fotocopy KTP"
-                    },
-                    {
-                      "text": "Surat bebas perpustakaan universitas asli"
                     }
                   ]
                 },
@@ -180,13 +196,16 @@
         },
         {
           "id" : "cetak-transkrip",
-          "title": "Cetak Transkrip dalam Bahasa Inggris",
+          "title": "Cetak Transkrip dalam bahasa Inggris",
           "content": [
             {
+              "type": "list",
+              "items": [
+                {
                   "text": "Melengkapi berkas-berkas, yaitu",
                   "items": [
                     {
-                      "text": "Formulir permohonan terjemahan transkrip dalam bahasa Inggris"
+                      "text": "Formulir permohonan terjemahan transkrip dalam bahasa Inggris ([Blanko](/kemahasiswaan/blanko))"
                     },
                     {
                       "text": "Fotocopy transkrip akademik"
@@ -196,6 +215,23 @@
                 {
                   "text": "Menyerahkan semua berkas ke TU fakultas."
                 }
+              ]
+            }
+          ]
+        },
+        {
+          "id" : "cetak-ijazah",
+          "title" : "Cetak Ijazah dalam bahasa Inggris",
+          "content": [
+            {
+              "text": "Mengisi blanko [Cetak Ijazah dengan bahasa Inggris](/kemahasiswaan/blanko)"
+            },
+            {
+              "text": "Melampirkan fotocopy ijazah"
+            },
+            {
+              "text": "Menyerahkan semua berkas ke TU fakultas"
+            }
           ]
         }
       ]

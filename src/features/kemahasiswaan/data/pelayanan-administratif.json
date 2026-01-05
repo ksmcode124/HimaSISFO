@@ -14,26 +14,23 @@
       "type": "accordion",
       "items": [
         {
-          "id": "lupa-password",
+          "id": "lupa-password-email",
           "title": "Lupa Password / Email Kampus",
           "content": [
             {
               "type": "list",
               "items": [
                 {
-                  "text": "Persyaratan: KTM."
+                  "text": "Unduh formulir yang ada pada website [https://tik.upnyk.ac.id](https://tik.upnyk.ac.id/"
                 },
                 {
-                  "text": "Mahasiswa datang ke bagian TIK di Kampus 1."
+                  "text": "Pilih menu download > formulir aduan"
                 },
                 {
-                  "text": "Menceritakan permasalahan dengan detail kemudian mengisi formulir yang telah disediakan."
+                  "text": "Isi formulir dengan menuliskan nama, NIM, nomor HP, email pribadi, email institusi, dll"
                 },
                 {
-                  "text": "Menyiapkan email aktif."
-                },
-                {
-                  "text": "Password baru akan dikirimkan via email tersebut kepada mahasiswa."
+                  "text": "Mengirimkan formulir yang sudah diisi ke alamat email [layanan.tik@upnyk.ac.id](mailto:layanan.tik@upnyk.ac.id)"
                 }
               ]
             }
@@ -47,7 +44,7 @@
               "type": "list",
               "items": [
                 {
-                  "text" : "Mengisi formulir dari TU Jurusan Informatika dan membawa syarat berkas."
+                  "text" : "Mengisi formulir dari TU Jurusan dan membawa syarat berkas."
                 },
                 {
                   "text" : "Menemui ketua jurusan untuk meminta surat pengantar dengan membawa formulir."
@@ -60,14 +57,14 @@
           ]
         },
         {
-          "id": "karya-cendika",
+          "id": "karya-cendekia",
           "title": "Pendaftaran Karya Cendekia",
           "content": [
             {
               "type": "list",
               "items": [
                 {
-                  "text" : "Meminta formulir penilaian calon penerima penghargaan karya cendekia ke TU."
+                  "text" : "Meminta formulir penilaian calon penerima penghargaan karya cendekia ke TU Jurusan Informatika [Formulir](https://docs.google.com/spreadsheets/d/1Q67PtgSVnW_ACf-ziyGkXomcIufu1jdo/)."
                 },
                 {
                   "text" : "Mengisi formulir penilaian dan melengkapi persyaratan:",
@@ -86,7 +83,7 @@
                       "text" : "Fotocopy KTM"
                     },
                     {
-                      "text" : "SK Rektor pengangkatan asisten"
+                      "text" : "SK Rektor pengangkatan asisten/sertifikat asisten"
                     },
                     {
                       "text" : "Bukti laporan hasil penelitian (untuk asisten penelitian dosen)"
@@ -94,7 +91,7 @@
                   ]
                 },
                 {
-                  "text" : "Formulir beserta data lampiran diserahkan dalam bentuk hardcopy ke Bagian TU"
+                  "text" : "Formulir beserta data lampiran diserahkan dalam bentuk hardcopy ke TU Jurusan Informatika/Koorprodi Sistem Informasi"
                 }
               ]
             }
@@ -114,7 +111,7 @@
               ]
             },
             {
-              "text" : "Mengisi [Blanko](/kemahasiswaan/blanko)"
+              "text" : "Mengisi [Blanko Legalisir Surat Keterangan Lulus](/kemahasiswaan/blanko)"
             },
             {
               "text" : "Menyerahkan semua berkas ke loket TU fakultas"
@@ -135,10 +132,22 @@
         },
         {
           "id": "tes-toefl",
-          "title": "Pendaftaran Test TOEFL",
+          "title": "Pendaftaran Test TOEFL di Lab Terpadu UPNVY",
           "content": [
             {
-              "text" : "--"
+              "text" : "Mengisi [Formulir Pendaftaran](https://docs.google.com/forms/d/e/1FAIpQLScGo_9fRPpRHU3vwhfo_S5I-T_9aROdvAEgV7MttboYownu2g/viewform) dan mengisi jadwal tes yang tersedia yaitu setiap hari Selasa dan Kamis paling lambat 2 (dua) hari sebelum tes"
+            },
+            {
+              "text" : "Melakukan pembayaran sebesar Rp100.000 untuk mahasiswa UPN \"Veteran\" Yogyakarta dan Rp150.000 untuk masyarakat umum, disetor ke rekening BNI No. 1262815269 (RPL 030 KS UPNVY untuk LPPM Pemerintah)"
+            },
+            {
+              "text" : "Wajib melakukan konfirmasi pendaftaran ke [085868796605](wa.me/6285868796605) (Pak Ngatimin)"
+            },
+            {
+              "text" : "Pada hari tes membawa KTM dan bukti pembayaran"
+            },
+            {
+              "text" : "Datang ke Laboratorium Terpadu UPNVY Lantai 4 Ruang 404 Kampus 1 30 menit sebelum tes dimulai"
             }
           ]
         }

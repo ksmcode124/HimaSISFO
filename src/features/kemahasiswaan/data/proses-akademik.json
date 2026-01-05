@@ -21,16 +21,42 @@
               "type": "list",
               "items": [
                 {
-                  "text": "Mencetak blanko Permohonan Transkrip Sementara dan fotocopy KTM."
+                  "text": "Membuka Web [BIMA](https://bima.upnyk.ac.id/"
                 },
                 {
-                  "text": "Menyerahkan surat permohonan ke bagian TU Jurusan Informatika."
+                  "text": "Tekan tombol navigasi (sebelah kiri nama mahasiswa)"
                 },
                 {
-                  "text": "Transkrip nilai sementara yang telah diperoleh ditandatangani oleh dosen wali."
+                  "text": "Pilih Transkrip Sementara"
                 },
                 {
-                  "text": "Meminta cap ke TU fakultas."
+                  "text": "Untuk Transkrip Sementara"
+                },
+                {
+                  "text": "Minta tanda tangan ke dosen walki jika ada keperluan lebih lanjut"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "cetak-krp",
+          "title": "Cetak KRP",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Login melalui web [BIMA](https://bima.upnyk.ac.id"
+                },
+                {
+                  "text": "Pilih menu Cetak KRP"
+                },
+                {
+                  "text": "Kemudian pilih sesi kuliah yang ingin dicetak"
+                },
+                {
+                  "text": "Klik Unduh KRP"
                 }
               ]
             }
@@ -51,6 +77,7 @@
                 },
                 {
                   "text": "Pilih Permohonan Surat Keterangan Aktif lalu pilih keperluan permohonan. Terdapat beberapa keperluan permohonan, yaitu:",
+                  "ordered": false,
                   "items": [
                     {
                       "text": "Beasiswa"
@@ -73,54 +100,171 @@
                   ]
                 },
                 {
-                  "text": "Isi data yang diperlukan dan unggah screenshot sejarah pembayaran UKT pada web [SIUKT](http://siukt.upnyk.ac.id/)"
+                  "text": "Isi data yang diperlukan dan unggah screenshot sejarah pembayaran UKT pada web [SI-UKT](http://siukt.upnyk.ac.id/)"
                 },
                 {
                   "text": "Submit data lalu tunggu beberapa saat hingga status pengajuan berubah menjadi selesai dan download Surat Keterangan Aktif Kuliah"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "text": "Note: Apabila keperluan untuk membuat surat aktif kuliah tidak tersedia, maka dapat langsung mengunjungi Binwa (Kemahasiswaan) di Gedung Rektorat Kampus 1 UPNVY lantai dasar"
                 }
               ]
             }
           ]
         },
         {
+          "id" : "daftar-kp",
+          "title": "Daftar Kerja Praktik",
+          "content": [
+            {
+              "text": "Mahasiswa menentukan jenis KP yang dipilih, lokasi pelaksanaan, topik masalah yang akan dikerjakan atau dibahas, dan telah mejalin komunikasi dengan pimpinan/contact person di lokasi pelaksanaan KP"
+            },
+            {
+              "text": "Mahasiswa menyiapkan persyaratan administrasi untuk pengajuan KP yang terdiri dari: ",
+              "ordered": false,
+              "items": [
+                {
+                  "text": "[Surat pernyataan pengambilan MK KP](https://docs.google.com/document/d/1F_IT8TdcL-Tpth22t7Qt9hXYbPjh3FnN/)"
+                },
+                {
+                  "text": "[Proposal KP untuk perusahaan sesuai format](https://docs.google.com/document/d/1kmL2szxSuop-HslRFtuMs5ubMuw9dbmL/)"
+                },
+                {
+                  "text": "Kartu Rencana Studi (KRS) terbaru"
+                },
+                {
+                  "text": "Transkrip nilai terbaru"
+                },
+                {
+                  "text": "Sertifikat kompetensi teknis"
+                }
+              ]
+            },
+            {
+              "text": "Mahasiswa melakukan pendaftaran pada web [SADEWA](https://sadewa.upnyk.ac.id/) dengan menginput pengajuan KP dan melengkapi dokumen dan data yang diperlukan"
+            },
+            {
+              "text": "Mahasiswa menunggu dosen wali memeriksa kelengkapan berkas dan persyaratan"
+            },
+            {
+              "text": "Dosen wali memverifikasi kelengkapan dokumen dan memberikan persetujuan KP apabila persyaratan telah sesuai"
+            },
+            {
+              "text": "Mahasiswa menginput informasi detail mengenai instansi KP setelah menerima persetujuan dari dosen wali"
+            },
+            {
+              "text": "Mahasiswa menunggu koordinator KP memeriksa kelengkapan berkas, persyaratan, dan kelayakan instansi yang dipilih untuk pelaksanaan KP"
+            },
+            {
+              "text": "Koordinator KP memverifikasi kelengkapan dokumen dan informasi instansi yang diberikan oleh mahasiswa, serta memberikan persetujuan pelaksanaan KP apabila informasi mengenai instansi KP, persyaratan dan kelengkapan telah sesuai"
+            },
+            {
+              "text": "Fakultas memproses surat pengantar permohonan KP"
+            },
+            {
+              "text": "Mahasiswa mengirimkan surat pengantar permohonan KP disertai dengan proposal KP (apabila dibutuhkan) ke perusahaan tempat pelaksanaan KP"
+            },
+            {
+              "text": "Setelah mendapat surat balasan dari perusahaan tempat pelaksanaan KP, mahasiswa melengkapi data pada sistem KP berupa:",
+              "ordered": false,
+              "items": [
+                {
+                  "text" : "Surat balasan dari perusahaan"
+                },
+                {
+                  "text" : "Informasi waktu pelaksanaan KP sesuai persetujuan dengan perusahaan"
+                },
+                {
+                  "text" : "Mahasiswa yang permohonannya ditolak, tetap mengunggah surat balasan, memilih opsi \"ditolak\" pada halaman sistem KP, dan mengulang pengajuan KP pada tahap ke-6"
+                }
+              ]
+            },
+            {
+              "text": "Koordinator KP menunjuk seorang dosen sebagai dosen pembimbing KP sesuai dengan kesesuaian kompetensi dosen dengan objek KP dan distribusi beban minimal KP dosen"
+            },
+            {
+              "text": "Dosen pembimbing KP memberikan persetujuan dan review mengenai rencana pelaksanaan KP yang diusulkan mahasiswa"
+            },
+            {
+              "text": "Fakultas memproses surat tugas KP"
+            },
+            {
+              "text": "Mahasiswa melaksanakan KP sesuai jadwal dengan: ",
+              "ordered": false,
+              "items": [
+                {
+                  "text": "Membawa salinan surat tugas KP"
+                },
+                {
+                  "text": "Mengisi catatan harian kerja praktik (logbook) pada sistem KP, dilengkapi dengan dokumentasi kegiatan untuk dilampirkan pada laporan akhir KP"
+                },
+                {
+                  "text": "Mempersiapkan dokumentasi kegiatan dan aktivitas yang dibutuhkan untuk seminar KP"
+                },
+                {
+                  "text": "Rutin melakukan bimbingan dengan pembimbing lapangan dengan mengisi [lembar konsultasi pembimbing](https://docs.google.com/document/d/1_T_4hQtqnS6po6bBqU_8gzsdrO6GTz1X/) lapangan dengan format yang telah ditentukan, dan mengagendakan konsultasi rutin dengan dosen pembimbing melalui sistem KP"
+                }
+              ]
+            },
+            {
+              "text": "Mahasiswa yang telah selesai melakukan KP wajib membuat laporan KP dan menunjukkan kepada dosen pembimbing dan pembimbing lapangan untuk dievaluasi"
+            },
+            {
+              "text": "Mahasiswa menyerahkan formulir nilai ke pembimbing lapangan untuk diberikan penilaian KP"
+            },
+            {
+              "text": "Mahasiswa menunggah laporan KP final setelah memperoleh persetujuan dari dosen pembimbing KP untuk dilakukan penilaian"
+            }
+          ]
+        },
+        {
           "id" : "seminar-ta",
-          "title": "Daftar Seminar TA",
+          "title": "Daftar Seminar Tugas Akhir",
           "content": [
             {
               "type": "list",
               "items": [
                 {
-                  "text": "Daftar Seminar Tugas Akhir dengan melengkapi berkas-berkas berikut.",
+                  "text": "Mengisi dan melengkapi data formulir pendaftaran seminar tugas akhir pada web [SITASI](https://siupnyk.online/sitasi/)"
+                },
+                {
+                  "text": "Submit kemudian cetak formulir pendaftaran"
+                },
+                {
+                  "text": "Melengkapi persyaratan yang diperlukan:",
+                  "ordered": false,
                   "items": [
                     {
-                      "text": "Form pendaftaran Seminar Tugas Akhir"
+                      "text": "Formulir pendaftaran Seminar Tugas Akhir"
                     },
                     {
                       "text": "Naskah Tugas Akhir (Bab 1, 2, dan 3) sebanyak 4 eksemplar"
                     },
                     {
-                      "text": "Fotocopy Kartu Tanda Mahasiswa (1 lembar)"
+                      "text": "Fotocopy Kartu Tanda Mahasiswa (KTM)"
                     },
                     {
-                      "text": "Fotocopy KRS sebagai bukti sedang menempuh mata kuliah Tugas Akhir I"
+                      "text": "Fotocopy KRS sebagai bukti sedang menempuh mata kuliah seminar tugas akhir"
                     },
                     {
-                      "text": "Bukti telah mengikuti dan lolos tes panduan Tugas Akhir (passing grade > 69)"
+                      "text": "Halaman persetujuan seminar tugas akhir dari pembimbing [S.02](https://docs.google.com/document/d/1PSW5VDDBmUmnmxIdxnN1hls6qWjqhT7U/)"
                     },
                     {
-                      "text": "Form Persetujuan Seminar Tugas Akhir dari Pembimbing (S.02) yang telah ditandatangai oleh dosen pembimbing 1 & 2 dan koordinator TA."
+                      "text": "Surat keterangan dari laboratorium yang menyatakan telah menyelesaikan praktikum serta tidak ada tanggungan administrasi"
                     },
                     {
-                      "text": "Surat Keterangan dari Laboratorium yang menyatakan telah menyelesaikan praktikum serta tidak ada tanggungan administrasi."
+                      "text": "Fotocopy buku bimbingan bukti telah mengikuti seminar tugas akhir [S.03](https://docs.google.com/document/d/1bUNzLt1w_uiXTNgWRQru0S3mQLAKKoWH/) minimal mengikuti 5 seminar Tugas Akhir dan 3 kali memberikan pertanyaan"
                     },
                     {
-                      "text": "Pas foto 4x6 hitam putih (5 lembar)"
+                      "text": "Lembar transkrip akademik terakhir (telah mencantumkan nilai kerja praktik)"
                     },
                     {
-                      "text": "Fotocopy dari Buku Bimbingan bukti telah mengikuti seminar Tugas Akhir (S.03)"
-                    },
-                    {
-                      "text": "Minimal mengikuti 5 seminar Tugas Akhir dan 3 kali memberikan pertanyaan."
+                      "text": "Bukti telah mendaftar seminar tugas akhir pada web [SITASI](https://siupnyk.online/sitasi/)"
                     }
                   ]
                 },
@@ -139,42 +283,67 @@
               "type": "list",
               "items": [
                 {
-                  "text": "Daftar Seminar Tugas Akhir dengan melengkapi berkas-berkas berikut.",
+                  "text": "Mengisi dan melengkapi data formulir pendaftaran seminar tugas akhir pada web [SITASI](https://siupnyk.online/sitasi/)"
+                },
+                {
+                  "text": "Submit kemudian cetak formulir pendaftaran"
+                },
+                {
+                  "text": "Melengkapi persyaratan yang diperlukan:",
+                  "ordered": false,
                   "items": [
                     {
-                      "text": "Form pendaftaran Sidang Tugas Akhir"
+                      "text": "Formulir pendaftaran Sidang Tugas Akhir"
                     },
                     {
-                      "text": "Naskah Tugas Akhir sebanyak 4 eksemplar"
+                      "text": "Fotocopy Kartu Tanda Mahasiswa (KTM) (2 lembar)"
                     },
                     {
-                      "text": "Melampirkan bukti KRS sedang menempuh mata kuliah Tugas Akhir II"
+                      "text": "Fotocopy KTP"
                     },
                     {
-                      "text": "Melampirkan bukti KHS telah menempuh minimal 138 SKS"
+                      "text": "Fotocopy Ijazah terakhir yang telah dilegalisir (2 lembar)"
                     },
                     {
-                      "text": "Bukti telah melaksanakan bimbingan sebanyak minimal 8 kali/pembimbing (Mengumpulkan Buku Bimbingan Tugas Akhir)"
+                      "text": "Fotocopy akte kelahiran (2 lembar)"
                     },
                     {
-                      "text": "Fotocopy Kartu Tanda Mahasiswa (2 lembar)"
+                      "text": "Fotocopy bukti nilai kerja praktik (screenshot KHS BIMA) (2 lembar)"
                     },
                     {
-                      "text": "Fotocopy 4x6 hitam putih (5 lembar)"
+                      "text": "KRS yang mencantumkan mata kuliah tugas akhir"
                     },
                     {
-                      "text": "Fotocopy ijazah terakhir yang telah dilegalisir (2 lembar)"
+                      "text": "KHS yang memperlihatkan menempuh minimal 138 SKS ([Template KHS Kurikulum 2021](https://docs.google.com/document/d/1KUMJ9_Or0pU3-ZzRyQy6jKU5cDUGaBSV/))"
                     },
                     {
-                      "text": "Fotocopy bukti nilai Kerja Praktik"
+                      "text": "Transkrip nilai akademik terakhir yang telah ditandatangani dosen wali"
                     },
                     {
-                      "text": "Transkrip nilai yang disahkan oleh dosen wali"
+                      "text": "Bukti telah melaksanakan bimbingan (minimal 8 kali) (mengumpulkan buku bimbingan tugas akhir)"
+                    },
+                    {
+                      "text": "Halaman persetujuan sidang tugas akhir dari pembimbing ([SP.02](https://docs.google.com/document/d/15jDcfrhU0Aze0o7Hj3lifK25qBz1GRsB/))"
+                    },
+                    {
+                      "text": "Formulir catatan revisi seminar tugas akhir yang telah disahkan pembimbing ([S.06](https://docs.google.com/document/d/1JeDyjY5NKmJ63sfwiRrw9J7Lz4mGT_9r/))"
+                    },
+                    {
+                      "text": "Hasil cek plagiasi naskah tugas akhir"
+                    },
+                    {
+                      "text": "Draft jurnal ilmiah ([Template](https://docs.google.com/document/d/1HmklY9svmwZpUep8MLu-96Mfe_F1VPqU))"
+                    },
+                    {
+                      "text": "Bukti pembayaran UKT semester berjalan (screenshot sejarah pembayaran SI-UKT)"
+                    },
+                    {
+                      "text": "Bukti telah mendaftar sidang tugas akhir pada web [SITASI](https://siupnyk.online/sitasi/)"
                     }
                   ]
                 },
                 {
-                  "text": "Mengunjungi TU Jurusan Informatika untuk mendaftar seminar proposal"
+                  "text": "Mengunjungi TU Jurusan Informatika untuk mendaftar sidang tugas akhir."
                 }
               ]
             }
@@ -195,6 +364,193 @@
                 },
                 {
                   "text": "Hasil scan transkrip dikirim ke email [lab.if@upnyk.ac.id](mailto:lab.if@upnyk.ac.id?subject=BebasLab_NAMA_NIM) dengan subjek:BebasLab_NAMA_NIM"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "surat-bebas-perpustakaan-universitas",
+          "title": "Surat Bebas Perpustakaan Pusat",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Mahasiswa melengkapi persyaratan: ",
+                  "ordered": false,
+                  "items": [
+                    {
+                      "text": "Naskah TA lengkap dengan format PDF dan DOCX"
+                    },
+                    {
+                      "text": "Scan lembar pengesahan pembimbing dan penguji"
+                    },
+                    {
+                      "text": "Source code program yang belum di-compile dan kompilasi program"
+                    },
+                    {
+                      "text": "Dokumen penunjang Tugas Akhir"
+                    },
+                    {
+                      "text": "Naskah publikasi ilmiah/jurnal dengan format PDF dan DOCX"
+                    }
+                  ]
+                },
+                {
+                  "text": "Mengumpulkan CD yang didalamnya dokumen skripsi sesuai persyaratan yang telah ditentukan:",
+                  "ordered": false,
+                  "items": [
+                    {
+                      "text": "Folder LAPORAN_NIM_NAMA MAHASISWA. Folder ini berisi semua file laporan tugas akhir dalam format PDF dan DOCX.",
+                      "ordered": true,
+                      "items": [
+                        {
+                          "text": "Cover, berisi: ",
+                          "ordered": true,
+                          "items": [
+                            {
+                              "text": "Halaman judul"
+                            },
+                            {
+                              "text": "Lembar pengesahan yang harus dilengkapi dengan tanda tangan"
+                            },
+                            {
+                              "text": "Surat pernyataan persetujuan publikasi karya ilmiah untuk kepentingan akademik yang harus dilengkapi dengan tanda tangan"
+                            },
+                            {
+                              "text": "Kata pengantar"
+                            }
+                          ]
+                        },
+                        {
+                          "text": "Abstrak"
+                        },
+                        {
+                          "text": "Bab I dan seterusnya sesuai dengan jumlah bab"
+                        },
+                        {
+                          "text": "Daftar pustaka"
+                        },
+                        {
+                          "text": "Lampiran"
+                        }
+                      ]
+                    },
+                    {
+                      "text": "Folder GAMBAR_NIM_NAMA MAHASISWA. Folder ini berisi semua file gambar"
+                    },
+                    {
+                      "text": "Folder PROGRAM_NIM_NAMA MAHASISWA. Folder ini berisi file source code dan file aplikasi"
+                    },
+                    {
+                      "text": "Folder PUBLIKASI_NIM_NAMA MAHASISWA. Folder ini berisi naskah karya ilmiah dalam format PDF dan DOCX"
+                    },
+                    {
+                      "text": "Folder MANUAL_NIM_NAMA MAHASISWA. Folder ini berisi manual book untuk program jika ada"
+                    },
+                    {
+                      "text": "File index.pdf, berisi",
+                      "ordered": true,
+                      "items": [
+                        {
+                          "text" : "Judul tugas akhir"
+                        },
+                        {
+                          "text" : "NIM"
+                        },
+                        {
+                          "text" : "Nama"
+                        },
+                        {
+                          "text" : "Dosen pembimbing"
+                        },
+                        {
+                          "text" : "Tahun lulus tugas akhir"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "surat-bebas-perpustakaan-fakultas",
+          "title": "Surat Bebas Perpustakaan Fakultas",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Melengkapi persyaratan:",
+                  "items": [
+                    {
+                      "text": "CD dan skripsi dengan hardcover dengan sampul berwarna biru gelap"
+                    },
+                    {
+                      "text": "Skripsi full (PDF dan DOCX)"
+                    },
+                    {
+                      "text": "Scan lembar pengesahan"
+                    },
+                    {
+                      "text": "Source code yang belum di-compile (PDF dan DOCX)"
+                    },
+                    {
+                      "text": "Dokumen penunjang TA:",
+                      "ordered": false,
+                      "items": [
+                        {
+                          "text": "Gambar (semua gambar di dalam skripsi"
+                        },
+                        {
+                          "text": "Pemisahan masing-masing bagian skripsi dan dijadikan dalam satu folder (Cover, Abstrak, Bab 1, Bab 2, Bab 3, Bab 4, Bab 5, Daftar Pustaka, Lampiran"
+                        }
+                      ]
+                    },
+                    {
+                      "text": "Naskah jurnal (PDF dan Word)"
+                    }
+                  ]
+                },
+                {
+                  "text": "Mengumpulkan CD yang didalamnya dokumen skripsi sesuai persyaratan yang telah ditentukan"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "pengajuan-dana-lomba",
+          "title": "Pengajuan Dana Lomba",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Mengajukan proposal ke jurusan dan melampirkan persyaratan yang dibutuhkan:",
+                  "items": [
+                    {
+                      "text": "Brosur atau pamflet info lomba"
+                    },
+                    {
+                      "text": "Daftar mahasiswa yang mengikuti lomba"
+                    },
+                    {
+                      "text": "Jenis lomba yang ingin diikuti"
+                    },
+                    {
+                      "text": "Rincian agenda"
+                    },
+                    {
+                      "text": "Rincian anggaran"
+                    },
+                    {
+                      "text": "Data rekening"
+                    }
+                  ]
                 }
               ]
             }

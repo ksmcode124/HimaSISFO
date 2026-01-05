@@ -17,7 +17,7 @@
           "id" : "cuti-akademik",
           "title": "Blanko Pengajuan Cuti Akademik",
           "image": "",
-          "filepath": ""
+          "filepath": "https://docs.google.com/document/d/1rjP7tLK3HeWjX6_cTEYqaa3rf_pQOnRN/"
         },
         {
           "id" : "transkrip-sementara",
@@ -29,25 +29,43 @@
           "id" : "pemulihan-status",
           "title": "Blanko Pemulihan Status Mahasiswa",
           "image": "",
-          "filepath": ""
+          "filepath": "https://docs.google.com/document/d/1J6gCnvpoYB9g4SGz-Q62xsXIbZ4_jpoK/"
         },
         {
           "id" : "pengunduran-diri",
           "title": "Blanko Pengunduran Diri",
           "image": "",
-          "filepath": ""
+          "filepath": "https://docs.google.com/document/d/1XEmOhtjAnkO2MlGmpcgnKqrrnh9ttlDT/"
         },
         {
           "id" : "cetak-ijazah",
           "title": "Blanko Cetak Ijazah dengan Bahasa Inggris",
           "image": "",
-          "filepath": ""
+          "filepath": "https://docs.google.com/document/d/17YKOt1PJbGy-JRoXwon_JWBBAqUBobyJ/"
+        },
+        {
+          "id" : "cetak-transkrip",
+          "title": "Blanko Cetak Transkrip dengan Bahasa Inggris",
+          "image": "",
+          "filepath": "https://docs.google.com/document/d/1A9fmuVXR4li-Oh_Ln1TnGNBMGipxlido/"
         },
         {
           "id" : "legalisir-ijazah",
           "title": "Blanko Legalisir Ijazah",
           "image": "",
-          "filepath": ""
+          "filepath": "https://docs.google.com/document/d/1hq2y-qNCDjR8E_XKD2jULHP2WDPOJgX5/"
+        },
+        {
+          "id" : "legalisir-transkrip",
+          "title": "Blanko Legalisir Transkrip Akademik",
+          "image": "",
+          "filepath": "https://docs.google.com/document/d/1B8_dx2odLHDDuamsoFgE10NkF16NE9DW/"
+        },
+        {
+          "id" : "legalisir-skl",
+          "title": "Blanko Legalisir Surat Keterangan Lulus",
+          "image": "",
+          "filepath": "https://docs.google.com/document/d/1yLQdd_6VMxaLkbt_qk04gHb_yOsbjisw/"
         }
       ]
     }
