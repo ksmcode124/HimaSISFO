@@ -8,7 +8,7 @@ import { formatMonthName, formatYear } from "../utils/FormatDate"
 import { WEEK_DAYS } from "../data/constant";
 import { DynamicCalendarProps } from "../types";
 
-export default function DynamicCalendar({
+export function DynamicCalendar({
   className,
   events,
 }: DynamicCalendarProps) {
