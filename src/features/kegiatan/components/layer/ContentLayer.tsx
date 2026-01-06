@@ -1,13 +1,14 @@
 
 import { ArrowRight } from "lucide-react"
-import DynamicCalendar from "../Calendar"
+import { DynamicCalendar } from "../Calendar"
 import { EventCard } from "../EventCard"
 import { Button } from "@/components/ui/button";
 import { formatMonthName } from "../../utils/FormatDate";
 import { createEventIndex, createEventIndexByNameDate } from "../../utils/EventIndexer";
-import { FindEventById, FindEventByMonthYear, sortEvents } from "../../utils/GetEventNow";
+import { findEventById, findEventByMonthYear, sortEvents } from "../../utils/GetEventNow";
 import { EventCardProps } from "../../types";
 import { EventDetailContentProps } from "../../types"
+import { FilterComp } from "../FilterComp";
 
 export function CalendarContent({ events }: { events: any }) {
   return (
@@ -71,18 +72,18 @@ export function EventCardContent({ events }: { events: EventCardProps[] }) {
   )
 }
 
-export function EventListContent({ events }: { events: EventCardProps[] }) {
+export async function EventListContent({ events, filter }: { events: EventCardProps[] , filter?: string }) {
   const tahunIni = new Date().getFullYear();
-  const bulanIni = formatMonthName(new Date().getMonth());
+  const bulanIni = filter || formatMonthName(new Date().getMonth());
   const HelperEvent = createEventIndex(events);
-  const FindEvent = FindEventByMonthYear({ month: bulanIni, year: tahunIni, indexedEvents: HelperEvent });
+  const FindEvent = findEventByMonthYear({ month: bulanIni, year: tahunIni, indexedEvents: HelperEvent });
   return (
     <>
       <h2 className="text-base md:text-xl w-full h-fit py-3 md:py-5 border-b-2 border-black">Kegiatan / Agenda</h2>
       <div className="relative">
         <h1 className="text-xl md:text-9xl w-full h-fit text-center py-7 md:py-15 border-b-4 border-black ">Agenda</h1>
         <div className="text-base md:text-4xl flex flex-row justify-between items-center py-3 md:py-5">
-          <span>{bulanIni}</span>
+          <FilterComp/>
           <span>{FindEvent.length} Acara ditemukan</span>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-10 mt-5 md:mt-10">
@@ -118,7 +119,7 @@ export function EventListContent({ events }: { events: EventCardProps[] }) {
 export function EventDetailContent({ events, search }: EventDetailContentProps) {
   const HelperEvent = createEventIndexByNameDate(events);
   const key = decodeURIComponent(search).split("-").pop();
-  const FindEventDetail = FindEventById({ id: Number(key), indexedEvents: HelperEvent });
+  const FindEventDetail = findEventById({ id: Number(key), indexedEvents: HelperEvent });
   return (
     <div className="relative w-full flex flex-col gap-10 md:gap-20">
       <h2 className="text-base md:text-xl w-full h-fit py-3 md:py-5 border-b-2 border-black">Kegiatan / Agenda / Berita</h2>
