@@ -1,3 +1,4 @@
+
 import { EventWithVariantProps } from "../types";
 import { SortedSingleEventsProps } from "../types";
 import { FindEventByIdProps  } from "../types";
@@ -22,13 +23,13 @@ export function sortEvents(events: EventWithVariantProps[]): SortedSingleEventsP
   return { pastNotGoing, nextOnGoing, futureNotGoing };
 }
 
-export function FindEventByMonthYear({ month, year, indexedEvents }: FindEventByMonthYearProps) {
+export function findEventByMonthYear({ month, year, indexedEvents }: FindEventByMonthYearProps) {
 
   const searchKey = `${month}-${year}`;
   
   return indexedEvents[searchKey] || [];
 }
 
-export function FindEventById({ id, indexedEvents }: FindEventByIdProps) {
+export function findEventById({ id, indexedEvents }: FindEventByIdProps) {
   return Object.values(indexedEvents).flat().find(event => event.id === id);
 }
