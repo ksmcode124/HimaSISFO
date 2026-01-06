@@ -18,6 +18,7 @@ datasource db {
 model kabinet {
   id_kabinet    Int              @id @default(autoincrement())
   nama_kabinet  String
+  foto_kabinet  String?
   tahun_kerja   String
   gambar_logo   String?
   deskripsi     String?
@@ -49,6 +50,7 @@ model departemen {
   nama_departemen      String
   deskripsi_departemen String?
   logo_departemen      String?
+  foto_departemen      String?
 
   kabinet       kabinet          @relation(fields: [id_kabinet], references: [id_kabinet], onDelete: Cascade)
   detailAnggota detail_anggota[]
