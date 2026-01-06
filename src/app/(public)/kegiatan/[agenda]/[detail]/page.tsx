@@ -1,9 +1,9 @@
 import { EventDetailSection } from "@/features/kegiatan/sections/EventDetailSection";
 import { BackgroundLayer } from "@/components/layout/Layer";
 import { RoundedBg } from "@/features/kegiatan/components/RoundedBg";
-import { use } from "react";
 
-export default function Page({ params }: { params: Promise<{ detail: string }> }) {
+export default async function Page({ params }: { params: Promise<{ detail: string }> }) {
+    const { detail } = await params;
     return (
         <>
             <BackgroundLayer>
@@ -11,7 +11,7 @@ export default function Page({ params }: { params: Promise<{ detail: string }> }
                 <RoundedBg align="end" />
             </BackgroundLayer>
             <div className="relative flex-col items-start">
-                <EventDetailSection searchKeyword={use(params).detail} />
+                <EventDetailSection id={detail} />
             </div>
         </>
     )
