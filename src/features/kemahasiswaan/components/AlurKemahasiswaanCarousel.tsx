@@ -11,6 +11,7 @@ import {
   CarouselPrevious,
   type CarouselApi,
   CarouselIndicators,
+  KemahasiswaanCarouselSpacer,
 } from "@/components/ui/Carousel"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
@@ -52,7 +53,7 @@ export default function AlurKemahasiswaanCarousel({data}: AlurKemahasiswaanCarou
       >
         <CarouselPrevious className="absolute h-15 w-15 left-0 sm:-left-12 lg:-left-16 top-1/2 -translate-y-1/2 z-30 rounded-full" />
         <CarouselContent>
-          <CarouselSpacer />
+          <KemahasiswaanCarouselSpacer />
 
           {data.map((card, index) => {
             /**
@@ -133,7 +134,7 @@ export default function AlurKemahasiswaanCarousel({data}: AlurKemahasiswaanCarou
               </CarouselItem>
             )
           })}
-          <CarouselSpacer />
+          <KemahasiswaanCarouselSpacer />
         </CarouselContent>
         <CarouselNext className="absolute h-15 w-15 right-0 sm:-right-12 lg:-right-16 top-1/2 -translate-y-1/2 z-30 rounded-full" />
       </Carousel>

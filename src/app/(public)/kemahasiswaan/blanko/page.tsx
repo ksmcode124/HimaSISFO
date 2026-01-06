@@ -3,18 +3,18 @@ import {
   BlankoCarousel,
   HeroSection
 } from "@/features/kemahasiswaan"
-import { CardProps } from "@/features/kemahasiswaan/types";
+import { BlankoProps } from "@/features/kemahasiswaan/types";
 
 export default function Page() {
   const carouselSection = Blanko.sections.find(
     (section) => section.type === "item-collection"
   )
-  const items = carouselSection?.items as CardProps[]
+  const items = carouselSection?.items as BlankoProps[]
 
   return (
     <>
       <HeroSection {...Blanko.hero} />
-      <section className="px-6 lg:px-12 max-w-7xl mx-auto overflow-hidden">
+      <section className="px-6 lg:px-12 max-w-7xl mx-auto min-h-170 pt-10">
         <BlankoCarousel data={items} />
       </section>
     </>

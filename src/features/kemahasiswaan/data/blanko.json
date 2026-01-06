@@ -16,14 +16,8 @@
         {
           "id" : "cuti-akademik",
           "title": "Blanko Pengajuan Cuti Akademik",
-          "image": "",
+          "image": "/assets/kemahasiswaan/bg-blanko.webp",
           "filepath": "https://docs.google.com/document/d/1rjP7tLK3HeWjX6_cTEYqaa3rf_pQOnRN/"
-        },
-        {
-          "id" : "transkrip-sementara",
-          "title": "Blanko Permohonan Transkrip Sementara",
-          "image": "",
-          "filepath": ""
         },
         {
           "id" : "pemulihan-status",

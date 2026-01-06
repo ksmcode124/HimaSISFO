@@ -4,6 +4,13 @@ export type CardProps = {
   description: string,
 }
 
+export type BlankoProps = {
+  id: string,
+  title: string,
+  image: string,
+  filepath: string
+}
+
 export type CTASection = {
   title: string,
   subtitle: string,

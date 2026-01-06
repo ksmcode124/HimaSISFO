@@ -155,7 +155,7 @@ function CarouselItem({ className, ...props }: React.ComponentProps<"div">) {
 
 /* Spacer digunakan untuk memberi ruang visual di sisi kiri & kanan
     agar item pertama/terakhir bisa benar-benar berada di tengah */
-function CarouselSpacer() {
+function KemahasiswaanCarouselSpacer() {
   const { orientation } = useCarousel()
   
   return (
@@ -168,6 +168,22 @@ function CarouselSpacer() {
     />
   )
 }
+
+function CarouselSpacer() {
+  const { orientation } = useCarousel()
+
+  return (
+    <div
+      aria-hidden
+      className={cn(
+        "hidden sm:block shrink-0 grow-0 min-w-0",
+        "basis-[var(--carousel-item-basis)]",
+        orientation === "horizontal" ? "pl-0 sm:pl-4" : "pt-4",
+      )}
+    />
+  )
+}
+
 
 function CarouselPrevious(
   { className, ...props }: React.ComponentProps<typeof Button>
@@ -246,6 +262,7 @@ export {
   CarouselContent,
   CarouselItem,
   CarouselSpacer,
+  KemahasiswaanCarouselSpacer,
   CarouselPrevious,
   CarouselNext,
   CarouselIndicators
