@@ -17,21 +17,52 @@ export default function Page() {
     <>
       <HeroSection {...PelayananAdministratif.hero} />
       
-      <section className="px-6 lg:px-12 max-w-7xl mx-auto overflow-hidden">
+      <section className="max-w-7xl min-h-[55vh] mx-auto">
         <Accordion
           type="single"
           collapsible
-          className="w-full"
+          className="w-full flex flex-col lg:flex-row gap-4"
         >
           {accordionData.map((item) => (
-            <AccordionItem value={item.id} key={item.id}>
-              <AccordionTrigger>
-                {item.title}
-              </AccordionTrigger>
+            <AccordionItem
+              key={item.id}
+              value={item.id}
+              className="group border rounded-xl lg:h-160 max-w-170 p-0 overflow-hidden"
+            >
+              <div className="flex flex-col h-full justify-between">
+                {/* CONTENT */}
+                <AccordionContent
+                  className="
+                    hidden
+                    group-data-[state=open]:block
+                    px-6 py-4
+                  "
+                >
+                  <ContentRenderer content={item.content} />
+                </AccordionContent>
 
-              <AccordionContent className="flex flex-col gap-4 text-balance">
-                <ContentRenderer content={item.content} />
-              </AccordionContent>
+                {/* TITLE */}
+                <AccordionTrigger
+                  hasChevron={false}
+                  writingMode="vertical-btt"
+                  className="
+                    px-4 py-6
+                    bg-rl-gradient-primary
+                    text-white
+                    w-full
+
+                    /* KEY FIX */
+                    lg:group-data-[state=closed]:h-full
+                    lg:group-data-[state=open]:h-auto
+
+                    flex-row
+                    justify-between
+                  "
+                >
+                  {item.title}
+                </AccordionTrigger>
+
+              </div>
             </AccordionItem>
           ))}
         </Accordion>

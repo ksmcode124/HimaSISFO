@@ -11,13 +11,15 @@ type PageProps = {
   }
 }
 
-export default function DetailPage({ params }: PageProps) {
+export default async function DetailPage({ params }: PageProps) {
+  const { id } = await params
+
   const section = PendaftaranVerifikasi.sections.find(
     (section) => section.type === "item-collection"
   )
 
   const item = section?.items.find(
-    (item) => item.id === params.id
+    (item) => item.id === id
   )
 
   if (!item) {

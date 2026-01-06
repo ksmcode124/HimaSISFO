@@ -38,13 +38,13 @@
           "url": "pengumuman"
         },
         {
-          "id" : "pendaftaran-verifikasi",
+          "id" : "pendaftaran-dan-verifikasi",
           "title": "Pendaftaran & Verifikasi",
           "description": "Pembuatan KTM, Validasi KTM, Ubah Data PDDIKTI, Pengajuan Cuti Akademik, Pemulihan Status Mahasiswa, Pengunduran Diri, Pendaftaran KKN, Pengajuan Judul Skripsi",
           "url": "pendaftaran-dan-verifikasi"
         },
         {
-          "id" : "pelayanan-administratif",
+          "id" : "pelayanan-dan-administratif",
           "title": "Pelayanan Administratif",
           "description": "Pengaturan akses akun, Pendaftaran Tes Kemampuan (TOEFL), serta pengajuan dan pencairan dana terkait lomba, penghargaan, dan dokumen kelulusan (SKL).",
           "url": "pelayanan-dan-administratif"

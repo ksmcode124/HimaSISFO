@@ -102,19 +102,24 @@
           "title": "Legalisir SKL",
           "content": [
             {
-              "text" : "Melengkapi berkas-berkas, yaitu: ",
-              "ordered": false,
+              "type": "list",
               "items": [
                 {
-                  "text" : "Fotocopy Surat Keterangan Lulus 5 (lima) lembar"
+                  "text" : "Melengkapi berkas-berkas, yaitu: ",
+                  "ordered": false,
+                  "items": [
+                    {
+                      "text" : "Fotocopy Surat Keterangan Lulus 5 (lima) lembar"
+                    }
+                  ]
+                },
+                {
+                  "text" : "Mengisi [Blanko Legalisir Surat Keterangan Lulus](/kemahasiswaan/blanko)"
+                },
+                {
+                  "text" : "Menyerahkan semua berkas ke loket TU fakultas"
                 }
               ]
-            },
-            {
-              "text" : "Mengisi [Blanko Legalisir Surat Keterangan Lulus](/kemahasiswaan/blanko)"
-            },
-            {
-              "text" : "Menyerahkan semua berkas ke loket TU fakultas"
             }
           ]
         },
@@ -123,10 +128,15 @@
           "title": "Pengambilan SKL",
           "content": [
             {
-              "text" : "Datang ke loket tata usaha fakultas"
-            },
-            {
-              "text" : "Mengambil SKL dengan menyebutkan NIM, nama, dan program studi"
+              "type": "list",
+              "items": [
+                {
+                  "text" : "Datang ke loket tata usaha fakultas"
+                },
+                {
+                  "text" : "Mengambil SKL dengan menyebutkan NIM, nama, dan program studi"
+                }
+              ]
             }
           ]
         },
@@ -135,19 +145,24 @@
           "title": "Pendaftaran Test TOEFL di Lab Terpadu UPNVY",
           "content": [
             {
-              "text" : "Mengisi [Formulir Pendaftaran](https://docs.google.com/forms/d/e/1FAIpQLScGo_9fRPpRHU3vwhfo_S5I-T_9aROdvAEgV7MttboYownu2g/viewform) dan mengisi jadwal tes yang tersedia yaitu setiap hari Selasa dan Kamis paling lambat 2 (dua) hari sebelum tes"
-            },
-            {
-              "text" : "Melakukan pembayaran sebesar Rp100.000 untuk mahasiswa UPN \"Veteran\" Yogyakarta dan Rp150.000 untuk masyarakat umum, disetor ke rekening BNI No. 1262815269 (RPL 030 KS UPNVY untuk LPPM Pemerintah)"
-            },
-            {
-              "text" : "Wajib melakukan konfirmasi pendaftaran ke [085868796605](wa.me/6285868796605) (Pak Ngatimin)"
-            },
-            {
-              "text" : "Pada hari tes membawa KTM dan bukti pembayaran"
-            },
-            {
-              "text" : "Datang ke Laboratorium Terpadu UPNVY Lantai 4 Ruang 404 Kampus 1 30 menit sebelum tes dimulai"
+              "type": "list",
+              "items": [
+                {
+                  "text" : "Mengisi [Formulir Pendaftaran](https://docs.google.com/forms/d/e/1FAIpQLScGo_9fRPpRHU3vwhfo_S5I-T_9aROdvAEgV7MttboYownu2g/viewform) dan mengisi jadwal tes yang tersedia yaitu setiap hari Selasa dan Kamis paling lambat 2 (dua) hari sebelum tes"
+                },
+                {
+                  "text" : "Melakukan pembayaran sebesar Rp100.000 untuk mahasiswa UPN \"Veteran\" Yogyakarta dan Rp150.000 untuk masyarakat umum, disetor ke rekening BNI No. 1262815269 (RPL 030 KS UPNVY untuk LPPM Pemerintah)"
+                },
+                {
+                  "text" : "Wajib melakukan konfirmasi pendaftaran ke [085868796605](wa.me/6285868796605) (Pak Ngatimin)"
+                },
+                {
+                  "text" : "Pada hari tes membawa KTM dan bukti pembayaran"
+                },
+                {
+                  "text" : "Datang ke Laboratorium Terpadu UPNVY Lantai 4 Ruang 404 Kampus 1 30 menit sebelum tes dimulai"
+                }
+              ]
             }
           ]
         }

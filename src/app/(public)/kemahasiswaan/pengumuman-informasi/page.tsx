@@ -28,25 +28,33 @@ export default function Page() {
     <>
       <HeroSection {...Pengumuman.hero} />
 
-      <section className="px-6 lg:px-12 max-w-7xl mx-auto overflow-hidden">
+      <section className="max-w-7xl min-h-[55vh] mx-auto">
         <Accordion
           type="single"
           collapsible
-          className="w-full"
+          className="w-full flex flex-col gap-4"
         >
           {accordionData.map((item) => (
-            <AccordionItem value={item.id} key={item.id}>
-              <AccordionTrigger>
+            <AccordionItem
+              key={item.id}
+              value={item.id}
+              className="
+                space-y-5
+                overflow-hidden
+              "
+            >
+              <AccordionTrigger className="justify-between items-center rounded-xl border-black border">
                 {item.title}
               </AccordionTrigger>
 
-              <AccordionContent className="flex flex-col gap-4 text-balance">
+              <AccordionContent className="flex flex-col gap-4 py-4 px-6 text-balance border border-black rounded-xl">
                 <ContentRenderer content={item.content} />
               </AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>
       </section>
+
     </>
   )
 }

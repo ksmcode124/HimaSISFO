@@ -11,6 +11,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/Accordion"
+import Image from "next/image"
 
 type AccordionItemData = {
   id: string
@@ -28,19 +29,55 @@ export default function Page() {
     <>
       <HeroSection {...Pembayaran.hero} />
 
-      <section className="px-6 lg:px-12 max-w-7xl mx-auto overflow-hidden">
+      <section className="max-w-7xl min-h-[55vh] mx-auto space-y-5">
+        <div className="grid lg:grid-cols-[1fr_3fr] grid-rows-2 lg:grid-rows-1 justify-items-center items-center">
+          <div className="relative h-50 w-50">
+            <Image src="/assets/kemahasiswaan/icon-pembayaran.webp" alt={""} fill className="object-contain" />
+          </div>
+          <Accordion
+            type="single"
+            collapsible
+            className="w-full flex flex-col gap-4"
+          >
+            {accordionData.slice(0, 3).map((item) => (
+              <AccordionItem
+                key={item.id}
+                value={item.id}
+                className="
+                  space-y-5
+                  overflow-hidden
+                "
+              >
+                <AccordionTrigger className="justify-between items-center rounded-xl border-black border">
+                  {item.title}
+                </AccordionTrigger>
+
+                <AccordionContent className="flex flex-col gap-4 py-4 px-6 text-balance border border-black rounded-xl">
+                  <ContentRenderer content={item.content} />
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
         <Accordion
           type="single"
           collapsible
-          className="w-full"
+          className="w-full flex flex-col gap-4"
         >
-          {accordionData.map((item) => (
-            <AccordionItem value={item.id} key={item.id}>
-              <AccordionTrigger>
+          {accordionData.slice(3).map((item) => (
+            <AccordionItem
+              key={item.id}
+              value={item.id}
+              className="
+                space-y-5
+                overflow-hidden
+              "
+            >
+              <AccordionTrigger className="justify-between items-center rounded-xl border-black border">
                 {item.title}
               </AccordionTrigger>
 
-              <AccordionContent className="flex flex-col gap-4 text-balance">
+              <AccordionContent className="flex flex-col gap-4 py-4 px-6 text-balance border border-black rounded-xl">
                 <ContentRenderer content={item.content} />
               </AccordionContent>
             </AccordionItem>

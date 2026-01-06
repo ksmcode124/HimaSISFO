@@ -133,19 +133,19 @@
               "type": "list",
               "items": [
                 {
-                  "text": "Melakukan pendaftaran wisuda melalui [http://wisuda.upnyk.ac.id/daftar/](http://wisuda.upnyk.ac.id/daftar/)."
+                  "text": "Pendaftaran wisuda dilakukan melalui aplikasi [SADEWA](https://sadewa.upnyk.ac.id)"
                 },
                 {
-                  "text": "Masukan NIM dan PIN untuk melakukan login."
+                  "text": "Pilih menu administrasi dan submenu pendaftaran wisuda"
                 },
                 {
-                  "text": "Pilih menu wisuda dan pilih periode wisuda."
+                  "text": "Pilih periode wisuda."
                 },
                 {
-                  "text": "Pastikan data yang tercantum benar. Setelah itu, klik daftar."
+                  "text": "Pastikan data yang tercantum benar. Setelah itu, klik Simpan."
                 },
                 {
-                  "text": "Bagi calon wisudawan wajib melakukan verifikasi dan menyerahkan pas foto satu lembar ke Bagian Akademik."
+                  "text": "Bagi calon wisudawan wajib melakukan verifikasi dan menyerahkan pas foto 1 (satu) lembar ke Bagian Akademik"
                 }
               ]
             }
