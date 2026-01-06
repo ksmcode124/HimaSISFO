@@ -28,11 +28,25 @@ export function Ornament2() {
   );
 }
 
-export function Ornamen4() {
+export function Ornament4() {
   return (
     <div className="relative w-full aspect-4/1">
       <Image
         src="/assets/kabinet/ornament-4.png"
+        alt=""
+        fill
+        className="object-contain"
+        priority
+      />
+    </div>
+  );
+}
+
+export function Ornament5() {
+  return (
+    <div className="relative w-full aspect-4/1">
+      <Image
+        src="/assets/kabinet/ornament-5.png"
         alt=""
         fill
         className="object-contain"

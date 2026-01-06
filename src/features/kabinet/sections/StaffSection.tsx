@@ -1,9 +1,35 @@
+import { Awan, Ornament2, Ornament5 } from "../components/KabinetOrnaments";
+
 export default function StaffSection() {
   return (
     <section className="relative w-full py-32 flex flex-col items-center overflow-hidden bg-[#F4E8FF]">
-      {/* placeholder ornamen awan */}
-      <div className="relative w-[600px] h-[180px] mb-12">
-        <div className="w-full h-full bg-pink-300/30 rounded-full absolute" />
+
+      <div className="absolute -right-10 bottom-[23%] w-[400vw] z-0">
+        <div className="w-full translate-x-[43%]">
+          <Ornament5 />
+        </div>
+      </div>
+
+      <div className="absolute -right-10 top-[27%] w-[400vw] z-0">
+        <div className="w-full translate-x-[30%] -scale-x-100 rotate-[-15deg]">
+          <Ornament5 />
+        </div>
+      </div>
+
+      <div className="relative z-10 flex flex-col items-center -mb-10 w-full">
+        <div className="flex flex-row gap-4 md:gap-6">
+          <div className="hidden md:block w-40 md:w-64 mt-25">
+            <Ornament2 />
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="w-48 md:w-[600px] mb-4">
+              <Awan />
+            </div>
+          </div>
+          <div className="hidden mt-20 md:block w-40 md:w-64 -scale-x-100">
+            <Ornament2 />
+          </div>
+        </div>
       </div>
 
       {/* INTI DEPARTEMEN */}
@@ -15,7 +41,7 @@ export default function StaffSection() {
         </div>
 
         {/* CONTAINER */}
-        <div className="flex justify-center items-center gap-12">
+        <div className="flex justify-center items-center gap-12 z-10">
           {/* wakadep */}
           <div className="w-60 h-80 border-2 flex items-center justify-center">
             Wakadep
