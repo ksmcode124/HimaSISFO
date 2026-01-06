@@ -20,12 +20,14 @@ interface AlurKemahasiswaanCarouselProps {
   data: CardProps[]
 }
 
-export default function AlurKemahasiswaanCarousel({
-  data,
-}: AlurKemahasiswaanCarouselProps) {
+export default function AlurKemahasiswaanCarousel({data}: AlurKemahasiswaanCarouselProps) {
+  
+  // Embla Carousel API yang digunakan untuk sinkronisasi state carousel & indicator
   const [api, setApi] = React.useState<CarouselApi>()
   const [selectedIndex, setSelectedIndex] = React.useState(0)
 
+  // Sinkronisasi index aktif dengan posisi scroll Embla
+  // Dipanggil setiap kali user scroll / klik navigation
   React.useEffect(() => {
     if (!api) return
 
@@ -53,7 +55,17 @@ export default function AlurKemahasiswaanCarousel({
           <CarouselSpacer />
 
           {data.map((card, index) => {
-            const isActive = index === selectedIndex
+            /**
+             * diff digunakan untuk menentukan relasi posisi item
+             * terhadap item aktif:
+             *  0  → aktif (tengah)
+             * ±1 → tetangga langsung (prev / next)
+             * lainnya → item jauh (tidak overlap)
+             */
+            const diff = index - selectedIndex
+            const isActive = diff === 0
+            const isNeighbor = Math.abs(diff) === 1
+
 
             return (
               <CarouselItem
@@ -61,11 +73,12 @@ export default function AlurKemahasiswaanCarousel({
                 className={cn(
                   "transition-all duration-300 h-90 z-20",
                   "motion-reduce:transition-none motion-reduce:transform-none",
-                  isActive
-                    ? "basis-full sm:basis-1/2"
-                    : "basis-full sm:basis-1/3 sm:-mx-10 z-10"
+                  isActive && "basis-full sm:basis-1/2 z-30 bg-transparent",
+                  isNeighbor && "basis-full sm:basis-1/3 sm:-mx-30 z-20",
+                  !isActive && !isNeighbor && "basis-full sm:mx-30 sm:basis-1/3 z-10"
                 )}
               >
+
                 <div className="h-full px-2 sm:px-0">
                   <Card className={cn(
                     "h-full flex flex-col transition-transform duration-300",
@@ -83,7 +96,7 @@ export default function AlurKemahasiswaanCarousel({
                         "font-semibold transition-all duration-300",
                         isActive 
                           ? "text-base sm:text-sm lg:text-md" 
-                          : "text-sm sm:text-lg lg:text-xl"
+                          : "mx-15 text-sm sm:text-lg lg:text-xl"
                         )}>
                         {card.title}
                       </p>
@@ -124,6 +137,7 @@ export default function AlurKemahasiswaanCarousel({
         </CarouselContent>
         <CarouselNext className="absolute h-15 w-15 right-0 sm:-right-12 lg:-right-16 top-1/2 -translate-y-1/2 z-30 rounded-full" />
       </Carousel>
+
       {api && (
         <CarouselIndicators
           count={data.length}

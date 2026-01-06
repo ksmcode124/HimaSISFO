@@ -153,6 +153,8 @@ function CarouselItem({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/* Spacer digunakan untuk memberi ruang visual di sisi kiri & kanan
+    agar item pertama/terakhir bisa benar-benar berada di tengah */
 function CarouselSpacer() {
   const { orientation } = useCarousel()
   
@@ -225,10 +227,10 @@ function CarouselIndicators({
             aria-label={`Go to slide ${index + 1}`}
             onClick={() => onSelect(index)}
             className={cn(
-              "h-4 w-4 rounded-full transition-all duration-300",
+              "h-3 w-3 rounded-full transition-all duration-300",
               "focus:outline-none",
               isActive
-                ? "bg-lr-gradient-primary h-5 w-5"
+                ? "bg-lr-gradient-primary h-4 w-4"
                 : "bg-neutral-300 hover:bg-blue-bayoux"
             )}
           />

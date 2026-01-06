@@ -7,7 +7,6 @@ interface ContentRendererProps {
   content: ContentBlock[]
 }
 
-
 export default function ContentRenderer({ content }: ContentRendererProps) {
   return (
     <div className="space-y-4">

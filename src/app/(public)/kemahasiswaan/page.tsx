@@ -7,6 +7,7 @@ import {
 import { CardProps, CTASection } from "@/features/kemahasiswaan/types";
 
 export default function Page() {
+  /** Membaca dan mencari data dari type section yang ada dari data json */
   const carouselSection = Kemahasiswaan.sections.find(
     (section) => section.type === "item-collection"
   )

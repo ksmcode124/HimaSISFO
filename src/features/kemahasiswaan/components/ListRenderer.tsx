@@ -7,6 +7,7 @@ interface ListRendererProps {
   items: ListItem[]
 }
 
+/** ListRenderer dibuat rekursif agar bisa menampilkan multi-level list */
 export function ListRenderer({ ordered = true, items }: ListRendererProps) {
   const ListTag = ordered ? "ol" : "ul"
 
