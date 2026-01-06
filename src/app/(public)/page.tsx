@@ -1,7 +1,113 @@
 import HeroBeranda from "@/components/beranda/hero";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import { ScaleCarousel } from "@/components/ui/scale-carousel";
 import { cn } from "@/lib/utils";
 import { ArrowRight, Bookmark, Calendar } from "lucide-react";
+
+const data = {
+  "hero": {
+    "title": "Selamat Datang di HIMASISFO",
+    "description": "Organisasi kemahasiswaan yang bergerak di bidang eksekutif yang ada pada Program Studi Sistem Informasi Universitas Pembangunan Nasional \"Veteran\" Yogyakarta",
+    "images_carousel": [
+      "image_hero_1.jpg",
+      "image_hero_2.jpg",
+      "image_hero_3.jpg"
+    ]
+  },
+
+  "visi_misi": {
+    "visi": "Mewujudkan himpunan yang harmonis dan berdaya saing dengan menjunjung tinggi nilai kekeluargaan dan keseimbangan antara kerja dan istirahat",
+    "misi": [
+      "Mengimprovisasi pelaksanaan beberapa program agar lebih relevan dan optimal",
+      "Menyediakan pelayanan yang responsif terhadap kebutuhan akademik, non-akademik, dan aspirasi mahasiswa",
+      "Membuka ruang partisipasi aktif yang lebih luas bagi seluruh mahasiswa untuk terlibat aktif dalam kegiatan himpunan",
+      "Membangun kolaborasi aktif dengan program studi untuk menyelaraskan kegiatan himpunan dengan visi akademik yang mendukung pengembangan mahasiswa",
+      "Mengembangkan soft skill dan hard skill mahasiswa sistem informasi untuk mendukung kinerja organisasi dan pengembangan diri yang berkelanjutan"
+    ],
+    "tujuan": "HIMASISFO menampung seluruh elemen mahasiswa Program Studi Sistem Informasi Jurusan Informatika Fakultas Teknik Industri Universitas Pembangunan Nasional \"Veteran\" Yogyakarta menuju kehidupan kampus kritis yang bertanggung jawab, dinamis, demokratis, dan harmonis.",
+  },
+
+
+  "sejarah": {
+    "title": "Sejarah HIMASISFO",
+    "image_url": "image_sejarah.jpg",
+    "content": "Sejarah Himpunan Mahasiswa Sistem Informasi (HIMASISFO) tidak dapat dipisahkan dari riwayat berdirinya Program Sistem Informasi di Universitas Pembangunan Nasional \"Veteran\" Yogyakarta. Prodi S1 Sistem Informasi secara resmi didirikan berdasarkan Surat Keputusan Pendirian Program Studi nomor 82/KPT/I/2016. UPN \"Veteran\" Yogyakarta mulai menerima mahasiswa baru pada tahun 2017. Proses perumusan organisasi dimotori oleh tujuh mahasiswa angkatan 2017: Azyumardi Azra, Lintang Hakimi, Fagil Arya Baskoro, Daffa Aulia Zakharia, Fairuz Akmal Lanang, Brilliant Hanif Almubarak, dan Naufal Fakhri. Setelah melalui proses diskusi dan perumusan intensif, HIMASISFO resmi diresmikan pada Jumat, 16 November 2018.",
+  },
+
+  "statistics": [
+    {
+      "label": "Est. 2017",
+      "description": "Program studi yang berdiri sejak 2017 di UPN \"Veteran\" Yogyakarta"
+    },
+    {
+      "label": "1000+",
+      "description": "Memiliki lebih dari 1000 lulusan dan mahasiswa aktif hingga saat ini"
+    }
+  ],
+
+  "informasi_terbaru": {
+    "title": "Informasi Terbaru",
+    "items": [
+      {
+        "title": "Judul Pengumuman",
+        "date": "2025-05-11",
+        "category": "Beasiswa",
+        "image_url": "image_pengumuman.jpg",
+        "excerpt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      },
+      {
+        "title": "Judul Pengumuman",
+        "date": "2025-05-11",
+        "category": "Beasiswa",
+        "image_url": "image_pengumuman.jpg",
+        "excerpt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      },
+      {
+        "title": "Judul Pengumuman",
+        "date": "2025-05-11",
+        "category": "Beasiswa",
+        "image_url": "image_pengumuman.jpg",
+        "excerpt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      }
+    ]
+  },
+
+  "kabinet": [
+    {
+      "name": "Kabinet Gelora Harmoni",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "image_url": "image_kabinet_1.jpg"
+    },
+    {
+      "name": "Kabinet 2",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "image_url": "image_kabinet_2.jpg"
+    },
+    {
+      "name": "Kabinet 3",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "image_url": "image_kabinet_3.jpg"
+    },
+  ],
+
+  "behind_the_web": {
+    "section_title": "Behind The Web",
+    "author": "CODE124",
+    "image_url": "image_behind_the_web.jpg"
+  },
+  "spotify": [
+    {
+      "title": "S2 Eps. 2: Maba 25 problematik??",
+      "date": "2025-06-30",
+      "images_carousel": [
+        "image_media_1.jpg",
+        "image_media_2.jpg"
+      ]
+    }
+  ]
+}
+
 
 export default function Page() {
   return <>
@@ -31,9 +137,39 @@ function Pita() {
 }
 
 function VisiMisi() {
-  return <div className="h-96 my-60 mx-16 border-4 border-gray-400 rounded-4xl overflow-hidden">
-    <div className="flex items-center justify-center w-full h-full">
-      <span className="text-[128px]">VISI MISI</span>
+  return <div className="h-96 mt-20 mb-34 lg:my-60 mx-16">
+    <div className="grid md:grid-cols-2 h-full">
+      <div className="flex items-center justify-center">
+        <img src={'/assets/shared/logos/logo-himasisfo.webp'}
+          alt="" className="h-3/4" />
+      </div>
+      <div className="flex w-full items-center">
+        <Accordion type="single" collapsible className="w-full">
+          <AccordionItem value="visi">
+            <AccordionTrigger>Visi</AccordionTrigger>
+            <AccordionContent className="text-justify">
+              {data.visi_misi.visi}
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="misi">
+            <AccordionTrigger>misi</AccordionTrigger>
+            <AccordionContent className="text-justify">
+              <ol className="gap-2 grid">
+
+                {data.visi_misi.misi.map((misiPoint, index) => (
+                  <li key={index}>{index + 1}. {misiPoint}</li>
+                ))}
+              </ol>
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="tujuan">
+            <AccordionTrigger>tujuan</AccordionTrigger>
+            <AccordionContent className="text-justify">
+              {data.visi_misi.tujuan}
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </div>
     </div>
   </div>
 }
@@ -42,17 +178,15 @@ function Sejarah() {
     <img className="w-full" src="/assets/beranda/sejarah.png" alt="" />
     <div className="flex flex-col gap-10">
       <h2 className="text-4xl font-bold">SEJARAH <br /> HIMASISFO</h2>
-      <p className="text-sm text-justify"> Sejarah Himpunan Mahasiswa Sistem Informasi (HIMASISFO) tidak dapat dipisahkan dari riwayat berdirinya Program  Sistem Informasi itu sendiri di Universitas Pembangunan Nasional "Veteran" Yogyakarta. Prodi S1 Sistem Informasi  secara resmi didirikan berdasarkan Surat Keputusan Pendirian Program Studi nomor 82/KPT/I/2016. Berbekal  hal tersebut, UPN "Veteran" Yogyakarta membuka penerimaan mahasiswa baru untuk pertama kalin pada tahun 2017. Proses perumusan organisasi ini dimotori oleh tujuh mahasiswa dari angkatan 2017 yaitu: Azyumardi Azra, Lintang Hakimi, Fagil Arya Baskoro, Daffa Aulia Zakharia, Fairuz Akmal Lanang, Brilliant Hanif Almubarak, dan Naufal Fakhri. Setelah melalui serangkaian diskusi dan proses perumusan yang intensif, Himpunan Mahasiswa Program Studi Sistem Informasi, yang kemudian disingkat menjadi HIMASISFO, secara resmi diresmikan pada hari Jumat, tanggal 16 November 2018. Tanggal ini menjadi tonggak sejarah yang menandai lahirnya sebuah institusi kemahasiswaan yang dibangun dari nol oleh para perintisnya.</p>
+      <p className="text-sm text-justify">{data.sejarah.content}</p>
     </div>
     <div className="absolute -bottom-20 flex gap-8 justify-end w-full right-20">
-      <div className="rounded-4xl w-sm border-gray-400 p-10 border bg-white">
-        <span className="text-xl font-semibold">Est.2017</span>
-        <p className="text-sm">Program studi yang berdiri sejak 2017 di UPN “Veteran” Yogyakarta</p>
-      </div>
-      <div className="rounded-4xl w-sm border-gray-400 p-10 border bg-white">
-        <span className="text-xl font-semibold">1000+</span>
-        <p className="text-sm">Memiliki lebih dari 1000 lulusan dan mahasiswa aktif hingga saat ini.</p>
-      </div>
+      {data.statistics.map((statistic, index) => (
+        <div key={index} className="rounded-4xl w-sm border-gray-400 p-10 border bg-white">
+          <span className="text-xl font-semibold">{statistic.label}</span>
+          <p className="text-sm">{statistic.description}</p>
+        </div>
+      ))}
     </div>
   </div>
 }
@@ -62,16 +196,16 @@ function Informasi() {
     <h2 className="text-4xl font-bold">INFORMASI TERBARU</h2>
     <img src="/assets/beranda/informasi-decorative.png" className="-mb-200 mt-60 w-full" alt="" />
     <div className="grid md:grid-cols-3 px-12">
-      {Array.from({ length: 3 }).map((_, i) => (
+      {data.informasi_terbaru.items.map((info, i) => (
         <div key={i} className="h-fit bg-linear-to-tl from-[#000000] via-[#23445B] to-[#060400] m-8 rounded-2xl shadow-lg p-4 text-background">
           <img src="/assets/beranda/informasi.png" alt="" className="w-full aspect-3/2 bg-accent rounded-xl" />
           <div className="mt-4">
             <div className="flex gap-4">
-              <span className="text-sm flex w-fit gap-2 items-center"><Calendar />12 Maret 2024</span>
-              <span className="text-sm flex w-fit gap-2 items-center"><Bookmark /> Lomba</span>
+              <span className="text-sm flex w-fit gap-2 items-center"><Calendar />{info.date}</span>
+              <span className="text-sm flex w-fit gap-2 items-center"><Bookmark /> {info.category}</span>
             </div>
-            <h3 className="font-semibold text-4xl mt-4">Judul Informasi {i + 1}</h3>
-            <p className="text-sm mt-2 line-clamp-2">Ringkasan singkat tentang informasi terbaru yang disajikan di sini. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione similique non minus ipsum eaque nulla ad fugiat iusto molestiae beatae.</p>
+            <h3 className="font-semibold text-4xl mt-4">{info.title}</h3>
+            <p className="text-sm mt-2 line-clamp-2">{info.excerpt}</p>
           </div>
         </div>
       ))}
@@ -105,9 +239,20 @@ function Awan({ className }: { className?: string }) {
 }
 
 function Kabinet() {
-  return <div className="h-100 bg-amber-100">
-    <div className="flex items-center justify-center w-full h-full">
-      <span className="text-[128px]">Kabinet</span>
+  return <div className="">
+    <div className="grid lg:grid-cols-2 bg-[url('/assets/beranda/kabinet-bg.png')] bg-cover bg-center">
+      <div className="flex items-center justify-center">
+        <div className="w-sm text-justify">
+          <h2 className="text-2xl font-bold">KABINET GELORA HARMONI</h2>
+          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident molestias ipsam molestiae autem harum repellat recusandae laudantium nobis! Non, quod?</p>
+          <Button className="mt-4 rounded-full" size={"lg"}>Selengkapnya <ArrowRight /></Button>
+        </div>
+      </div>
+      <ScaleCarousel>
+        {Array.from({ length: 5 }).map((_, i) => (
+          <div key={i} className="h-100 bg-amber-50 rounded-lg border"></div>
+        ))}
+      </ScaleCarousel>
     </div>
   </div>
 }
@@ -115,7 +260,7 @@ function Kabinet() {
 function Graphics() {
   return <div className="h-100 bg-blue-100">
     <div className="flex items-center justify-center w-full h-full">
-      <span className="text-[128px]">Grafis gedung IF</span>
+      <img src="/assets/beranda/web-prodi.png" className="w-full" alt="" />
     </div>
   </div>
 }
@@ -133,7 +278,7 @@ function BehindTheWeb() {
 }
 
 function Spotify() {
-  return <div className="h-100 bg-black mt-50 text-white flex flex-col justify-center items-center">
+  return <div className="h-100 bg-black mt-50 text-white flex flex-col justify-center items-center perspective-distant">
     <span className="text-2xl mb-4">Dengarkan Podcast Kami di</span>
     <Button variant="secondary">Spotify <ArrowRight /></Button>
   </div>
