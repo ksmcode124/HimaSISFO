@@ -1,5 +1,7 @@
-import { Card, CardHeader, CardTitle } from "@/components/ui/Card";
-import { HeroSection, WisudaYudisium } from "@/features/kemahasiswaan";
+// import { Card, CardHeader, CardTitle } from "@/components/ui/Card";
+import { ContentBlock, ContentRenderer, FlipCard, HeroSection, WisudaYudisium } from "@/features/kemahasiswaan";
+import { FlipHorizontal, Folder, GraduationCap } from "lucide-react";
+
 
 export default function WisudaPage() {
   const itemCollectionSection = WisudaYudisium.sections.find(
@@ -10,20 +12,43 @@ export default function WisudaPage() {
     <>
     <HeroSection {...WisudaYudisium.hero} breadcrumbItems={WisudaYudisium.breadcrumbItems} />
 
-    {/** TODO: Menyesuaikan UI UX folder & modal */}
-    <section className="grid grid-cols-1 sm:grid-cols-2 gap-6 px-6 lg:px-12 max-w-7xl mx-auto">
-        {itemCollectionData?.map((item) => (
-          <Card
-            key={item.id}
-            className="w-full h-40 sm:h-48 md:h-52 lg:h-60 overflow-hidden rounded-md shadow-md relative"
-          >
-            <CardHeader className="pt-8 px-4 h-full flex flex-col justify-center">
-              <CardTitle className="text-base sm:text-sm md:text-md lg:text-lg font-semibold line-clamp-2">
+    <section className="flex flex-wrap justify-center gap-6 px-6 lg:px-8 max-w-7xl mx-auto">
+      {itemCollectionData?.map((item) => (
+        <FlipCard
+          key={item.id}
+          className="
+            w-full 
+            sm:w-88 
+            md:w-104 
+            lg:w-120
+            h-60 
+            sm:h-68 
+            lg:h-76
+            overflow-hidden
+            rounded-xl 
+            shadow-md 
+            relative
+          "
+          front={
+            <>
+              <h3 className="text-base sm:text-lg text-center font-semibold">
                 {item.title}
-              </CardTitle>
-            </CardHeader>
-          </Card>
-        ))}
+              </h3>
+              <FlipHorizontal className="absolute bottom-4 left-4 text-[#BCCCDC]" />
+              <GraduationCap className="absolute top-4 right-4 text-[#BCCCDC]" />
+            </>
+          }
+          back={
+            <>
+              <div className="flex flex-col text-2xs gap-2">
+                <h3 className="font-semibold text-center text-xs">{item.title}</h3>
+                <ContentRenderer content={item.content as ContentBlock[]} />
+              </div>
+              <GraduationCap className="absolute top-4 right-4 text-black" />
+            </>
+          }
+        />
+      ))}
     </section>
     </>
   )

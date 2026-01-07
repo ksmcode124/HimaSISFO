@@ -7,7 +7,7 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator,
-} from "@/components/ui/Breadcrumbs"
+} from "@/components/ui/Breadcrumb"
 import { Fragment } from "react"
 import { cn } from "@/lib/utils"
 

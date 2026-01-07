@@ -73,6 +73,7 @@
    --radius-4xl: calc(var(--radius) + 16px);
 
    /* Font Sizes */
+   --text-2xs: 12px;
    --text-xs: 14px;
    --text-sm: 16px;
    --text-md: 18px;
@@ -82,11 +83,10 @@
    --text-3xl: 32px;
    --text-4xl: 36px;
    --text-5xl: 40px;
-   --text-6xl: 44px;
-   --text-7xl: 48px;
-   --text-8xl: 52px;
-   --text-9xl: 56px;
-   --text-10xl: 64px;
+   --text-6xl: 48px;
+   --text-7xl: 56px;
+   --text-8xl: 64px;
+
 }
 
 .bg-tb-gradient-primary {

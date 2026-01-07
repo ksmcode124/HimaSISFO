@@ -13,4 +13,5 @@ export {default as BlankoSection} from "./sections/BlankoSection"
 export {default as AlurKemahasiswaanCarousel} from "./components/AlurKemahasiswaanCarousel"
 export {default as BlankoCarousel} from "./components/BlankoCarousel"
 export {default as ContentRenderer} from "./components/ContentRenderer"
+export {default as FlipCard} from "./components/Flipcard"
 export type {ContentBlock} from "./types";

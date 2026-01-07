@@ -112,19 +112,24 @@
           "title": "Legalisir Transkrip Akademik",
           "content": [
             {
-              "text" : "Melengkapi berkas-berkas, yaitu: ",
-              "ordered": false,
+              "type": "list",
               "items": [
                 {
-                  "text" : "Fotocopy Transkrip Akademik 5 (lima) lembar"
+                  "text" : "Melengkapi berkas-berkas, yaitu: ",
+                  "ordered": false,
+                  "items": [
+                    {
+                      "text" : "Fotocopy Transkrip Akademik 5 (lima) lembar"
+                    }
+                  ]
+                },
+                {
+                  "text" : "Mengisi [Blanko Legalisir Transkrip Akademii](/kemahasiswaan/blanko)"
+                },
+                {
+                  "text" : "Menyerahkan semua berkas ke loket TU fakultas"
                 }
               ]
-            },
-            {
-              "text" : "Mengisi [Blanko Legalisir Transkrip Akademii](/kemahasiswaan/blanko)"
-            },
-            {
-              "text" : "Menyerahkan semua berkas ke loket TU fakultas"
             }
           ]
         },
@@ -234,13 +239,18 @@
           "title" : "Cetak Ijazah dalam bahasa Inggris",
           "content": [
             {
-              "text": "Mengisi blanko [Cetak Ijazah dengan bahasa Inggris](/kemahasiswaan/blanko)"
-            },
-            {
-              "text": "Melampirkan fotocopy ijazah"
-            },
-            {
-              "text": "Menyerahkan semua berkas ke TU fakultas"
+              "type": "list",
+              "items": [
+                {
+                  "text": "Mengisi blanko [Cetak Ijazah dengan bahasa Inggris](/kemahasiswaan/blanko)"
+                },
+                {
+                  "text": "Melampirkan fotocopy ijazah"
+                },
+                {
+                  "text": "Menyerahkan semua berkas ke TU fakultas"
+                }
+              ]
             }
           ]
         }
