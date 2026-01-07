@@ -1,3 +1,4 @@
+export const dynamic = "force-static"
 import { notFound } from "next/navigation"
 import {
   PendaftaranVerifikasi,
@@ -6,20 +7,20 @@ import {
 } from "@/features/kemahasiswaan"
 
 type PageProps = {
-  params: {
-    id: string
-  }
+  params: Promise<{
+    slug: string
+  }>
 }
 
 export default async function DetailPage({ params }: PageProps) {
-  const { id } = await params
+  const { slug } = await params
 
   const section = PendaftaranVerifikasi.sections.find(
     (section) => section.type === "item-collection"
   )
 
   const item = section?.items.find(
-    (item) => item.id === id
+    (item) => item.id === slug
   )
 
   if (!item) {

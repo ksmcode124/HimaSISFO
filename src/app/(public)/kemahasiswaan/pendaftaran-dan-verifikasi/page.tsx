@@ -69,7 +69,6 @@ export default function Page() {
 
       <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-6 lg:px-12 max-w-7xl mx-auto py-5 border border-black rounded-2xl mb-5">
         {itemCollectionData?.map((item) => {
-          
           return (
             <Link
               key={item.id}

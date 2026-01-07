@@ -177,7 +177,7 @@ function CarouselSpacer() {
       aria-hidden
       className={cn(
         "hidden sm:block shrink-0 grow-0 min-w-0",
-        "basis-[var(--carousel-item-basis)]",
+        "basis-(--carousel-item-basis)",
         orientation === "horizontal" ? "pl-0 sm:pl-4" : "pt-4",
       )}
     />

@@ -6,7 +6,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselSpacer,
   CarouselNext,
   CarouselPrevious,
   type CarouselApi,

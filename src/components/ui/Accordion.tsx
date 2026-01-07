@@ -87,7 +87,7 @@ function AccordionTrigger({
             `
             block text-center
             whitespace-normal
-            break-words
+            wrap-break-word
             max-w-full
             `,
             isVertical &&
