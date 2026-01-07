@@ -9,6 +9,16 @@
     "title": "Blanko",
     "subtitle": "Download File Blanko Kemahasiswaan Sesuai Kebutuhan Anda"
   },
+  "breadcrumbItems": [
+    {
+      "display": "Kemahasiswaan",
+      "link": "/kemahasiswaan"
+    },
+    {
+      "display": "Blanko",
+      "link": "/kemahasiswaan/blanko"
+    }
+  ],
   "sections": [
     {
       "type": "item-collection",

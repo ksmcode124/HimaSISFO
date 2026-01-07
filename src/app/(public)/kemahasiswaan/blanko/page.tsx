@@ -13,7 +13,7 @@ export default function Page() {
 
   return (
     <>
-      <HeroSection {...Blanko.hero} />
+      <HeroSection {...Blanko.hero} breadcrumbItems={Blanko.breadcrumbItems} />
       <section className="px-6 lg:px-12 max-w-7xl mx-auto min-h-170 pt-10">
         <BlankoCarousel data={items} />
       </section>

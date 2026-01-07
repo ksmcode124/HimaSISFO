@@ -9,6 +9,16 @@
     "title": "Pelayanan dan Administratif",
     "subtitle": "Panduan untuk Segala Administrasi Anda"
   },
+  "breadcrumbItems": [
+    {
+      "display": "Kemahasiswaan",
+      "link": "/kemahasiswaan"
+    },
+    {
+      "display": "Pelayanan & Administratif",
+      "link": "/kemahasiswaan/pelayanan-dan-administratif"
+    }
+  ],
   "sections": [
     {
       "type": "accordion",

@@ -9,6 +9,16 @@
     "title": "Pembayaran",
     "subtitle": "Panduan untuk Segala Transaksi Pembayaran Anda"
   },
+  "breadcrumbItems": [
+    {
+      "display": "Kemahasiswaan",
+      "link": "/kemahasiswaan"
+    },
+    {
+      "display": "Pembayaran",
+      "link": "/kemahasiswaan/pembayaran"
+    }
+  ],
   "sections": [
     {
       "type": "accordion",

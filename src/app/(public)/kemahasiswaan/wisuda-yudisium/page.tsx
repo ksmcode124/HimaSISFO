@@ -8,8 +8,9 @@ export default function WisudaPage() {
   const itemCollectionData = itemCollectionSection?.items
   return (
     <>
-    <HeroSection {...WisudaYudisium.hero} />
+    <HeroSection {...WisudaYudisium.hero} breadcrumbItems={WisudaYudisium.breadcrumbItems} />
 
+    {/** TODO: Menyesuaikan UI UX folder & modal */}
     <section className="grid grid-cols-1 sm:grid-cols-2 gap-6 px-6 lg:px-12 max-w-7xl mx-auto">
         {itemCollectionData?.map((item) => (
           <Card

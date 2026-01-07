@@ -9,6 +9,16 @@
     "title": "Pengumuman dan Informasi",
     "subtitle": "Akses Cepat Informasi dan Administrasi Anda"
   },
+  "breadcrumbItems": [
+    {
+      "display": "Kemahasiswaan",
+      "link": "/kemahasiswaan"
+    },
+    {
+      "display": "Pengumuman & Informasi",
+      "link": "/kemahasiswaan/pengumuman-informasi"
+    }
+  ],
   "sections": [
     {
       "type": "accordion",
@@ -180,7 +190,7 @@
                   "text": "Menunggu proses verifikasi data oleh fakultas."
                 },
                 {
-                  "text": "Menerima infomrasi status pengajuan yudisium."
+                  "text": "Menerima informasi status pengajuan yudisium."
                 }
               ]
             }

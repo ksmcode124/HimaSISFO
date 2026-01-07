@@ -8,8 +8,9 @@ export default function ProsesAkademikPage() {
   const itemCollectionData = itemCollectionSection?.items
   return (
     <>
-    <HeroSection {...ProsesAkademik.hero} />
+    <HeroSection {...ProsesAkademik.hero} breadcrumbItems={ProsesAkademik.breadcrumbItems}/>
 
+    {/** TODO: Menyesuaikan UI UX Flip Card */}
     <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-6 lg:px-12 max-w-7xl mx-auto">
         {itemCollectionData?.map((item) => (
           <Card

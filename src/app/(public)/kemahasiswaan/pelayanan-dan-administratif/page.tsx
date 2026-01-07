@@ -15,13 +15,13 @@ export default function Page() {
   
   return (
     <>
-      <HeroSection {...PelayananAdministratif.hero} />
+      <HeroSection {...PelayananAdministratif.hero} breadcrumbItems={PelayananAdministratif.breadcrumbItems} />
       
       <section className="max-w-7xl min-h-[55vh] mx-auto">
         <Accordion
           type="single"
           collapsible
-          className="w-full flex flex-col lg:flex-row gap-4"
+          className="w-full flex flex-col justify-center lg:flex-row gap-4"
         >
           {accordionData.map((item) => (
             <AccordionItem

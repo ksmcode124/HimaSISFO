@@ -26,7 +26,7 @@ export default function Page() {
 
   return (
     <>
-      <HeroSection {...Pengumuman.hero} />
+      <HeroSection {...Pengumuman.hero} breadcrumbItems={Pengumuman.breadcrumbItems} />
 
       <section className="max-w-7xl min-h-[55vh] mx-auto">
         <Accordion

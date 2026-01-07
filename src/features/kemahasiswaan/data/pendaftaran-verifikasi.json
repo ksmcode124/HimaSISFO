@@ -9,6 +9,16 @@
     "title": "Pendaftaran dan Verifikasi",
     "subtitle": "Panduan untuk Segala Administrasi Akademik Anda"
   },
+  "breadcrumbItems": [
+    {
+      "display": "Kemahasiswaan",
+      "link": "/kemahasiswaan"
+    },
+    {
+      "display": "Pendaftaran & Verifikasi",
+      "link": "/kemahasiswaan/pendaftaran-dan-verifikasi"
+    }
+  ],
   "sections": [
     {
       "type": "accordion",

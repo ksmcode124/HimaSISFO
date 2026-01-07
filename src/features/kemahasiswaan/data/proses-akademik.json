@@ -9,6 +9,16 @@
     "title": "Proses Akademik",
     "subtitle": "Informasi Alur Proses Kebutuhan Akademik"
   },
+  "breadcrumbItems": [
+    {
+      "display": "Kemahasiswaan",
+      "link": "/kemahasiswaan"
+    },
+    {
+      "display": "Proses Akademik",
+      "link": "/kemahasiswaan/proses-akademik"
+    }
+  ],
   "sections": [
     {
       "type": "item-collection",

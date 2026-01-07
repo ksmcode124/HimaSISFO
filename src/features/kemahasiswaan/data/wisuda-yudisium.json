@@ -9,6 +9,16 @@
     "title": "Wisuda dan Yudisium",
     "subtitle": "Panduan untuk Membantu Kelulusan Anda"
   },
+  "breadcrumbItems": [
+    {
+      "display": "Kemahasiswaan",
+      "link": "/kemahasiswaan"
+    },
+    {
+      "display": "Wisuda & Yudisium",
+      "link": "/kemahasiswaan/wisuda-yudisium"
+    }
+  ],
   "sections": [
     {
       "type": "item-collection",

@@ -33,7 +33,7 @@ export default function Page() {
   const itemCollectionData = itemCollectionSection?.items
   return (
     <>
-      <HeroSection {...PendaftaranVerifikasi.hero} />
+      <HeroSection {...PendaftaranVerifikasi.hero} breadcrumbItems={PendaftaranVerifikasi.breadcrumbItems} />
 
       <section className="max-w-7xl min-h-[55vh] mx-auto space-y-5">
         <div className="grid lg:grid-cols-[1fr_3fr] grid-rows-2 lg:grid-rows-1 justify-items-center items-center">
