@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { KemahasiswaanBreadcrumb, BreadcrumbItem } from "../components/KemahasiswaanBreadcrumbs"
+import { cn } from "@/lib/utils"
 
 interface ContentProps {
   title: string
@@ -15,7 +16,7 @@ export default function HeroSection({title, subtitle, breadcrumbItems} : Content
         <KemahasiswaanBreadcrumb items={breadcrumbItems} />
       </section>
     }
-    <section className="flex flex-col items-center justify-center min-h-[55vh] px-4 sm:px-6 lg:px-20">
+    <section className={cn(`flex flex-col items-center justify-center px-4 sm:px-6 lg:px-20`, breadcrumbItems ? "min-h-[30vh]" : "min-h-[55vh]")}>
       <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl text-center">
         {title}
       </h1>

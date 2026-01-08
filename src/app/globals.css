@@ -105,12 +105,18 @@
    background: linear-gradient(to bottom, var(--color-nile-blue), var(--color-blue-bayoux));
 }
 
-.bg-lr-gradient-primary {
-   background: linear-gradient(to right, var(--color-nile-blue), var(--color-blue-bayoux));
+.bg-rl-gradient-primary {
+   background: linear-gradient(to right, var(--color-columbia-blue), var(--color-cloud-burst), var(--color-blue-bayoux), var(--color-nile-blue));
+   background-size: 400% 100%;
+   background-position: right;
 }
 
-.bg-rl-gradient-primary {
-   background: linear-gradient(to left, var(--color-nile-blue), var(--color-blue-bayoux));
+.bg-lr-gradient-primary {
+   background: linear-gradient(to right, var(--color-blue-bayoux), var(--color-nile-blue));
+}
+
+.bg-rl-gradient-primary:hover {
+   background-position: left;
 }
 
 @layer base {

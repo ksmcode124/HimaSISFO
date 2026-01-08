@@ -23,7 +23,7 @@ interface AlurKemahasiswaanCarouselProps {
 export default function AlurKemahasiswaanCarousel({data}: AlurKemahasiswaanCarouselProps) {
   
   // Embla Carousel API yang digunakan untuk sinkronisasi state carousel & indicator
-  const [api, setApi] = React.useState<CarouselApi>()
+  const [api, setApi] = React.useState<CarouselApi | null>()
   const [selectedIndex, setSelectedIndex] = React.useState(0)
 
   // Sinkronisasi index aktif dengan posisi scroll Embla
@@ -70,6 +70,7 @@ export default function AlurKemahasiswaanCarousel({data}: AlurKemahasiswaanCarou
             return (
               <CarouselItem
                 key={card.id}
+                onClick={() => api?.scrollTo(index)}
                 className={cn(
                   "transition-all duration-300 h-90 z-20",
                   "motion-reduce:transition-none motion-reduce:transform-none",
@@ -103,10 +104,10 @@ export default function AlurKemahasiswaanCarousel({data}: AlurKemahasiswaanCarou
 
                       <p
                         className={cn(
-                          "text-xs sm:text-[10px] lg:text-md text-justify transition-all duration-300",
+                          "text-xs sm:text-[10px] lg:text-md text-justify transition-opacity",
                           isActive 
-                            ? "opacity-100 max-h-96" 
-                            : "opacity-0 max-h-0 overflow-hidden"
+                            ? "opacity-100 max-h-96 duration-1000" 
+                            : "opacity-0 max-h-0 overflow-hidden duration-200"
                         )}
                       >
                         {card.description}
@@ -115,10 +116,10 @@ export default function AlurKemahasiswaanCarousel({data}: AlurKemahasiswaanCarou
 
                     <CardAction
                       className={cn(
-                        "pb-4 w-full grid justify-items-center text-center transition-all duration-300",
+                        "pb-4 w-full grid justify-items-center text-center transition-opacity",
                         isActive 
-                          ? "opacity-100 max-h-20" 
-                          : "opacity-0 max-h-0 overflow-hidden pointer-events-none"
+                          ? "opacity-100 max-h-20 duration-500" 
+                          : "opacity-0 max-h-0 overflow-hidden pointer-events-none duration-100"
                       )}
                     >
                       <Link

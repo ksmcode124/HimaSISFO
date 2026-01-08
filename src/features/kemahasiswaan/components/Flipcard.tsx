@@ -22,7 +22,7 @@ export default function FlipCard({ front, back, className }: FlipCardProps) {
         }`}
       >
         {/* Front */}
-        <div className="absolute inset-0 backface-hidden flex items-center justify-center rounded-xl bg-rl-gradient-primary text-white p-6">
+        <div className="absolute inset-0 backface-hidden flex items-center justify-center rounded-xl bg-rl-gradient-primary transition-all duration-500 text-white p-6">
           {front}
         </div>
 

@@ -131,105 +131,110 @@
           "id" : "daftar-kp",
           "title": "Daftar Kerja Praktik",
           "content": [
-            {
-              "text": "Mahasiswa menentukan jenis KP yang dipilih, lokasi pelaksanaan, topik masalah yang akan dikerjakan atau dibahas, dan telah mejalin komunikasi dengan pimpinan/contact person di lokasi pelaksanaan KP"
-            },
-            {
-              "text": "Mahasiswa menyiapkan persyaratan administrasi untuk pengajuan KP yang terdiri dari: ",
-              "ordered": false,
-              "items": [
-                {
-                  "text": "[Surat pernyataan pengambilan MK KP](https://docs.google.com/document/d/1F_IT8TdcL-Tpth22t7Qt9hXYbPjh3FnN/)"
-                },
-                {
-                  "text": "[Proposal KP untuk perusahaan sesuai format](https://docs.google.com/document/d/1kmL2szxSuop-HslRFtuMs5ubMuw9dbmL/)"
-                },
-                {
-                  "text": "Kartu Rencana Studi (KRS) terbaru"
-                },
-                {
-                  "text": "Transkrip nilai terbaru"
-                },
-                {
-                  "text": "Sertifikat kompetensi teknis"
-                }
-              ]
-            },
-            {
-              "text": "Mahasiswa melakukan pendaftaran pada web [SADEWA](https://sadewa.upnyk.ac.id/) dengan menginput pengajuan KP dan melengkapi dokumen dan data yang diperlukan"
-            },
-            {
-              "text": "Mahasiswa menunggu dosen wali memeriksa kelengkapan berkas dan persyaratan"
-            },
-            {
-              "text": "Dosen wali memverifikasi kelengkapan dokumen dan memberikan persetujuan KP apabila persyaratan telah sesuai"
-            },
-            {
-              "text": "Mahasiswa menginput informasi detail mengenai instansi KP setelah menerima persetujuan dari dosen wali"
-            },
-            {
-              "text": "Mahasiswa menunggu koordinator KP memeriksa kelengkapan berkas, persyaratan, dan kelayakan instansi yang dipilih untuk pelaksanaan KP"
-            },
-            {
-              "text": "Koordinator KP memverifikasi kelengkapan dokumen dan informasi instansi yang diberikan oleh mahasiswa, serta memberikan persetujuan pelaksanaan KP apabila informasi mengenai instansi KP, persyaratan dan kelengkapan telah sesuai"
-            },
-            {
-              "text": "Fakultas memproses surat pengantar permohonan KP"
-            },
-            {
-              "text": "Mahasiswa mengirimkan surat pengantar permohonan KP disertai dengan proposal KP (apabila dibutuhkan) ke perusahaan tempat pelaksanaan KP"
-            },
-            {
-              "text": "Setelah mendapat surat balasan dari perusahaan tempat pelaksanaan KP, mahasiswa melengkapi data pada sistem KP berupa:",
-              "ordered": false,
-              "items": [
-                {
-                  "text" : "Surat balasan dari perusahaan"
-                },
-                {
-                  "text" : "Informasi waktu pelaksanaan KP sesuai persetujuan dengan perusahaan"
-                },
-                {
-                  "text" : "Mahasiswa yang permohonannya ditolak, tetap mengunggah surat balasan, memilih opsi \"ditolak\" pada halaman sistem KP, dan mengulang pengajuan KP pada tahap ke-6"
-                }
-              ]
-            },
-            {
-              "text": "Koordinator KP menunjuk seorang dosen sebagai dosen pembimbing KP sesuai dengan kesesuaian kompetensi dosen dengan objek KP dan distribusi beban minimal KP dosen"
-            },
-            {
-              "text": "Dosen pembimbing KP memberikan persetujuan dan review mengenai rencana pelaksanaan KP yang diusulkan mahasiswa"
-            },
-            {
-              "text": "Fakultas memproses surat tugas KP"
-            },
-            {
-              "text": "Mahasiswa melaksanakan KP sesuai jadwal dengan: ",
-              "ordered": false,
-              "items": [
-                {
-                  "text": "Membawa salinan surat tugas KP"
-                },
-                {
-                  "text": "Mengisi catatan harian kerja praktik (logbook) pada sistem KP, dilengkapi dengan dokumentasi kegiatan untuk dilampirkan pada laporan akhir KP"
-                },
-                {
-                  "text": "Mempersiapkan dokumentasi kegiatan dan aktivitas yang dibutuhkan untuk seminar KP"
-                },
-                {
-                  "text": "Rutin melakukan bimbingan dengan pembimbing lapangan dengan mengisi [lembar konsultasi pembimbing](https://docs.google.com/document/d/1_T_4hQtqnS6po6bBqU_8gzsdrO6GTz1X/) lapangan dengan format yang telah ditentukan, dan mengagendakan konsultasi rutin dengan dosen pembimbing melalui sistem KP"
-                }
-              ]
-            },
-            {
-              "text": "Mahasiswa yang telah selesai melakukan KP wajib membuat laporan KP dan menunjukkan kepada dosen pembimbing dan pembimbing lapangan untuk dievaluasi"
-            },
-            {
-              "text": "Mahasiswa menyerahkan formulir nilai ke pembimbing lapangan untuk diberikan penilaian KP"
-            },
-            {
-              "text": "Mahasiswa menunggah laporan KP final setelah memperoleh persetujuan dari dosen pembimbing KP untuk dilakukan penilaian"
-            }
+           {
+            "type": "list",
+            "items": [
+              {
+                "text": "Mahasiswa menentukan jenis KP yang dipilih, lokasi pelaksanaan, topik masalah yang akan dikerjakan atau dibahas, dan telah mejalin komunikasi dengan pimpinan/contact person di lokasi pelaksanaan KP"
+              },
+              {
+                "text": "Mahasiswa menyiapkan persyaratan administrasi untuk pengajuan KP yang terdiri dari: ",
+                "ordered": false,
+                "items": [
+                  {
+                    "text": "[Surat pernyataan pengambilan MK KP](https://docs.google.com/document/d/1F_IT8TdcL-Tpth22t7Qt9hXYbPjh3FnN/)"
+                  },
+                  {
+                    "text": "[Proposal KP untuk perusahaan sesuai format](https://docs.google.com/document/d/1kmL2szxSuop-HslRFtuMs5ubMuw9dbmL/)"
+                  },
+                  {
+                    "text": "Kartu Rencana Studi (KRS) terbaru"
+                  },
+                  {
+                    "text": "Transkrip nilai terbaru"
+                  },
+                  {
+                    "text": "Sertifikat kompetensi teknis"
+                  }
+                ]
+              },
+              {
+                "text": "Mahasiswa melakukan pendaftaran pada web [SADEWA](https://sadewa.upnyk.ac.id/) dengan menginput pengajuan KP dan melengkapi dokumen dan data yang diperlukan"
+              },
+              {
+                "text": "Mahasiswa menunggu dosen wali memeriksa kelengkapan berkas dan persyaratan"
+              },
+              {
+                "text": "Dosen wali memverifikasi kelengkapan dokumen dan memberikan persetujuan KP apabila persyaratan telah sesuai"
+              },
+              {
+                "text": "Mahasiswa menginput informasi detail mengenai instansi KP setelah menerima persetujuan dari dosen wali"
+              },
+              {
+                "text": "Mahasiswa menunggu koordinator KP memeriksa kelengkapan berkas, persyaratan, dan kelayakan instansi yang dipilih untuk pelaksanaan KP"
+              },
+              {
+                "text": "Koordinator KP memverifikasi kelengkapan dokumen dan informasi instansi yang diberikan oleh mahasiswa, serta memberikan persetujuan pelaksanaan KP apabila informasi mengenai instansi KP, persyaratan dan kelengkapan telah sesuai"
+              },
+              {
+                "text": "Fakultas memproses surat pengantar permohonan KP"
+              },
+              {
+                "text": "Mahasiswa mengirimkan surat pengantar permohonan KP disertai dengan proposal KP (apabila dibutuhkan) ke perusahaan tempat pelaksanaan KP"
+              },
+              {
+                "text": "Setelah mendapat surat balasan dari perusahaan tempat pelaksanaan KP, mahasiswa melengkapi data pada sistem KP berupa:",
+                "ordered": false,
+                "items": [
+                  {
+                    "text" : "Surat balasan dari perusahaan"
+                  },
+                  {
+                    "text" : "Informasi waktu pelaksanaan KP sesuai persetujuan dengan perusahaan"
+                  },
+                  {
+                    "text" : "Mahasiswa yang permohonannya ditolak, tetap mengunggah surat balasan, memilih opsi \"ditolak\" pada halaman sistem KP, dan mengulang pengajuan KP pada tahap ke-6"
+                  }
+                ]
+              },
+              {
+                "text": "Koordinator KP menunjuk seorang dosen sebagai dosen pembimbing KP sesuai dengan kesesuaian kompetensi dosen dengan objek KP dan distribusi beban minimal KP dosen"
+              },
+              {
+                "text": "Dosen pembimbing KP memberikan persetujuan dan review mengenai rencana pelaksanaan KP yang diusulkan mahasiswa"
+              },
+              {
+                "text": "Fakultas memproses surat tugas KP"
+              },
+              {
+                "text": "Mahasiswa melaksanakan KP sesuai jadwal dengan: ",
+                "ordered": false,
+                "items": [
+                  {
+                    "text": "Membawa salinan surat tugas KP"
+                  },
+                  {
+                    "text": "Mengisi catatan harian kerja praktik (logbook) pada sistem KP, dilengkapi dengan dokumentasi kegiatan untuk dilampirkan pada laporan akhir KP"
+                  },
+                  {
+                    "text": "Mempersiapkan dokumentasi kegiatan dan aktivitas yang dibutuhkan untuk seminar KP"
+                  },
+                  {
+                    "text": "Rutin melakukan bimbingan dengan pembimbing lapangan dengan mengisi [lembar konsultasi pembimbing](https://docs.google.com/document/d/1_T_4hQtqnS6po6bBqU_8gzsdrO6GTz1X/) lapangan dengan format yang telah ditentukan, dan mengagendakan konsultasi rutin dengan dosen pembimbing melalui sistem KP"
+                  }
+                ]
+              },
+              {
+                "text": "Mahasiswa yang telah selesai melakukan KP wajib membuat laporan KP dan menunjukkan kepada dosen pembimbing dan pembimbing lapangan untuk dievaluasi"
+              },
+              {
+                "text": "Mahasiswa menyerahkan formulir nilai ke pembimbing lapangan untuk diberikan penilaian KP"
+              },
+              {
+                "text": "Mahasiswa menunggah laporan KP final setelah memperoleh persetujuan dari dosen pembimbing KP untuk dilakukan penilaian"
+              }
+            ]
+           }
           ]
         },
         {
