@@ -24,20 +24,20 @@ const eventCard = cva("overflow-hidden transition hover:shadow-md", {
 
 export const EventCard = (props: WithVariantEventCardProps) => {
   const getCountdown = useGetCountdown;
-  const { id, title, img, date, description, variant = "detail" } = props;
+  const { id, title, img, start, end, description, variant = "detail" } = props;
 
   const [countDown, setCountDown] = useState("00:00:00");
   useEffect(() => {
     if (variant !== "onGoing") return;
 
     const interval = setInterval(() => {
-      setCountDown(getCountdown(date));
+      setCountDown(getCountdown(start));
     }, 1000);
 
-    setCountDown(getCountdown(date));
+    setCountDown(getCountdown(start));
 
     return () => clearInterval(interval);
-  }, [date, variant]);
+  }, [start, variant]);
 
   return (
     <div
@@ -61,9 +61,10 @@ export const EventCard = (props: WithVariantEventCardProps) => {
         )}
       >
         <div className="flex flex-row justify-between">
-          <p className="w-fit text-[8px] md:text-xl font-normal">{formatDate(date)}</p>
+          <p className="w-fit text-[10px] md:text-xl font-normal">{formatDate(start) === formatDate(end) ?
+          `${formatDate(start)}` : `${formatDate(start)} - ${formatDate(end)}`}</p>
           {variant === "onGoing" && (
-            <p className="w-fit text-[8px] md:text-xl font-normal">
+            <p className="w-fit text-[10px] md:text-xl font-normal">
               {countDown || "Waktu Habis"}
             </p>
           )}
