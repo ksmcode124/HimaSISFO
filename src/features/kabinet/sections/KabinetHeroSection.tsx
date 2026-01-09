@@ -2,7 +2,7 @@
 
 import kabinetDataRaw from "../data/kabinet.json";
 import KabinetYearButton from "../components/YearButton";
-import { Pita, Ornament1, Ornament2 } from "../components/KabinetOrnaments";
+import { Pita, Ornament2 } from "../components/KabinetOrnaments";
 import { HeroMobilePreview } from "../components/PhotoSlideshowMobile";
 import { KabinetDataJSON } from "../types";
 import { useRouter } from "next/navigation";
@@ -79,12 +79,12 @@ export default function KabinetHeroSection() {
             }}
           />
           {/* Logo Kabinet */}
-          <div className=" relative w-15 h-15 mt-15 md:mt-0 md:w-40 md:h-40 bg-gray-200 rounded-full flex items-center justify-center border-4 border-pink-500">
+          <div className=" relative w-15 h-15 mt-15 md:mt-0 md:w-40 md:h-40 flex items-center justify-center ">
             <Image
               src={currentKabinet.logo_url}
               alt="Logo Kabinet"
               fill
-              className="object-contain"
+              className="object-contain md:mt-10 bg-gray-200 rounded-full border-4 border-pink-500"
             />
           </div>
           <KabinetYearButton
@@ -101,8 +101,8 @@ export default function KabinetHeroSection() {
 
         <div className="absolute inset-0 flex justify-center items-center mb-[360px] md:mb-50">
           <div className="grid grid-cols-2 w-full max-w-[1200px] drop-shadow-[5px_5px_2px_rgba(0,0,0,0.3)]">
-            <div className="flex justify-end">
-              <Ornament1 />
+            <div className="flex justify-start -scale-x-100">
+              <Ornament2 />
             </div>
             <div className="flex justify-start">
               <Ornament2 />

@@ -13,35 +13,45 @@ interface FilosofiProps {
 export default function KabinetFilosofiSection({ logo_url }: FilosofiProps) {
   return (
     <div className="relative w-full">
-      <section className="w-full min-h-screen flex items-center justify-center py-20 px-10">
+      <section className="w-full bg-[#F4E8FF] min-h-screen flex items-center justify-center py-20 px-10">
         {/* Background */}
-        <div className="absolute inset-0">
-          <Image src="/assets/kabinet/bg-layer.png" alt="Background Kabinet" fill className="object-cover" priority />
-        </div>
+        <div
+          className="absolute inset-0 z-0 bg-size-[150%_40%] md:bg-size-[100%_auto] bg-repeat-y bg-top"
+          style={{
+            backgroundImage: `url('/assets/kabinet/filosofi-bg.png')`,
+          }}
+        />
 
-        <div className="relative z-10 w-full max-w-7xl grid grid-cols-1 md:grid-cols-3 items-center">
-          {/* TENTANG */}
-          <div className="flex flex-col gap-4">
-            <div className="border p-10 h-72 flex flex-col gap-6"></div>
-          </div>
-
+        <div className="relative z-10 w-full max-w-7xl mt-20 grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
           {/* LOGO */}
-          <div className="flex justify-center items-center">
-            <div className="relative w-80 h-80 border flex items-center justify-center">
-              <Image 
-                src={logo_url} 
-                alt="Logo Kabinet" 
-                fill 
+          <div className="flex justify-center items-center md:order-2">
+            <div className="relative w-60 h-60 md:w-90 md:h-90 border flex items-center justify-center">
+              <Image
+                src={logo_url}
+                alt="Logo Kabinet"
+                fill
                 className="object-contain drop-shadow-2xl"
               />
             </div>
           </div>
 
-          <div className="flex flex-col gap-10">
-            {/* Visi */}
-            <div className="border flex items-center w-full h-16 px-6"></div>
-            {/* Misi */}
-            <div className="border flex items-center w-full h-16 px-6"></div>
+          {/* TENTANG */}
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-6 border md:w-98 h-60">
+              Tentang Card
+            </div>
+          </div>
+
+          <div className="md:flex-col md:-ml-6 md:gap-10 md:order-3 hidden md:block">
+            {/* Visi Desktop */}
+            <div className="md:mb-10 md:border md:flex md:items-center md:w-full md:h-16">Visi</div>
+            {/* Misi Desktop */}
+            <div className="md:border md:flex md:items-center md:w-full md:h-16">Misi</div>
+          </div>
+
+          <div className="flex-col gap-10 block md:order-3 md:hidden">
+            {/* Visi Misi Mobile */}
+            <div className="border flex items-center w-full h-16">Visi & Misi</div>
           </div>
         </div>
       </section>
