@@ -84,7 +84,7 @@ export function EventListContent({ events, filter }: { events: EventCardProps[] 
         <h1 className="text-xl md:text-9xl w-full h-fit text-center py-7 md:py-15 border-b-4 border-black ">Agenda</h1>
         <div className="text-base md:text-4xl flex flex-row justify-between items-center py-3 md:py-5">
           <FilterComp className="text-xl"/>
-          <span className="text-xl">{FindEvent.length} Acara ditemukan</span>
+          <span className="text-[14px] md:text-xl">{FindEvent.length} Acara ditemukan</span>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-10 mt-5 md:mt-10">
           {FindEvent.map((event) => (

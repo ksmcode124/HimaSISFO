@@ -15,13 +15,13 @@ export function FilterComp({ className }: { className?: string }) {
 
   const selectedBulan = searchParams.get("bulan") || formatMonthName(new Date().getMonth());
 
-  const currentIndex = MONTHS_NAME.indexOf(selectedBulan);
-  const start = currentIndex !== -1 ? currentIndex : 0;
-  const end = (start + 3) % 12;
+  // const currentIndex = MONTHS_NAME.indexOf(selectedBulan);
+  // const start = currentIndex !== -1 ? currentIndex : 0;
+  // const end = (start + 3) % 12;
 
-  const currentData = start < end
-    ? MONTHS_NAME.slice(start, end)
-    : [...MONTHS_NAME.slice(start), ...MONTHS_NAME.slice(0, end)];
+  // const currentData = start < end
+  //   ? MONTHS_NAME.slice(start, end)
+  //   : [...MONTHS_NAME.slice(start), ...MONTHS_NAME.slice(0, end)];
 
   const handleSelection = (bulan: string) => {
     setActive(false);
@@ -51,24 +51,32 @@ export function FilterComp({ className }: { className?: string }) {
           </svg>
         </div>
 
-        <span className={clsx(className, "truncate")}>{active ? selectedBulan : "Filter"}</span>
+        <span className={clsx(className, "truncate text-[14px] md:text-xl")}>Filter</span>
       </div>
 
       {active && (
-        <div className="absolute z-50 w-fit mt-2 p-1 bg-white border rounded-md shadow-md">
-          <div className="flex flex-col gap-1">
-            {currentData.map((bulan) => (
-              <div
-                key={bulan}
-                className={clsx(className, "cursor-pointer rounded-sm px-2 py-1.5 text-sm hover:bg-gray-100 transition-colors")}
-                onClick={() => handleSelection(bulan)}
-              >
-                {bulan}
-              </div>
-            ))}
-          </div>
+        <div className="absolute z-50 mt-2 bg-white border rounded-md shadow-md">
+          <table className="border-collapse">
+            <tbody>
+              {Array.from({ length: 4 }).map((_, row) => (
+                <tr key={row}>
+                  {MONTHS_NAME.slice(row * 3, row * 3 + 3).map((bulan) => (
+                    <td
+                      key={bulan}
+                      onClick={() => handleSelection(bulan)}
+                      className="border border-accent px-3 py-2 text-sm text-center cursor-pointer hover:bg-gray-100"
+                    >
+                      {bulan}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
+
+
     </div>
   );
 }
