@@ -3,7 +3,7 @@ export function createEventIndex(events: any[]) {
   const eventMap: Record<string, any[]> = {};
 
   events.forEach((event) => {
-    const d = new Date(event.date);
+    const d = new Date(event.start);
     if (isNaN(d.getTime())) return;
 
     const monthName = d.toLocaleString('id-ID', { month: 'long' }); 
