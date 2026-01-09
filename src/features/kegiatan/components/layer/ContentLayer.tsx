@@ -72,19 +72,19 @@ export function EventCardContent({ events }: { events: EventCardProps[] }) {
   )
 }
 
-export async function EventListContent({ events, filter }: { events: EventCardProps[] , filter?: string }) {
+export function EventListContent({ events, filter }: { events: EventCardProps[] , filter?: string }) {
   const tahunIni = new Date().getFullYear();
-  const bulanIni = filter || formatMonthName(new Date().getMonth());
+  const bulan = filter || formatMonthName(new Date().getMonth());
   const HelperEvent = createEventIndex(events);
-  const FindEvent = findEventByMonthYear({ month: bulanIni, year: tahunIni, indexedEvents: HelperEvent });
+  const FindEvent = findEventByMonthYear({ month: bulan, year: tahunIni, indexedEvents: HelperEvent });
   return (
     <>
       <h2 className="text-base md:text-xl w-full h-fit py-3 md:py-5 border-b-2 border-black">Kegiatan / Agenda</h2>
       <div className="relative">
         <h1 className="text-xl md:text-9xl w-full h-fit text-center py-7 md:py-15 border-b-4 border-black ">Agenda</h1>
         <div className="text-base md:text-4xl flex flex-row justify-between items-center py-3 md:py-5">
-          <FilterComp/>
-          <span>{FindEvent.length} Acara ditemukan</span>
+          <FilterComp className="text-xl"/>
+          <span className="text-xl">{FindEvent.length} Acara ditemukan</span>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-10 mt-5 md:mt-10">
           {FindEvent.map((event) => (
@@ -92,12 +92,12 @@ export async function EventListContent({ events, filter }: { events: EventCardPr
               key={event.id}
               id={event.id}
               title={event.title}
-              date={event.date}
+              start={event.start}
+              end={event.end}
               img={event.img ?? ""}
-              slug={event.slug}
               description={event.description}
               variant="detail"
-              jenis={event.jenis}
+              type={event.type}
             />
           ))}
         </div>
