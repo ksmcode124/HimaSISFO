@@ -2,6 +2,7 @@
 import { EventCardProps } from "../types";
 import { EVENTS } from "../data/events"
 
+//atur fetch woi BE 
 async function fetchFromApi(): Promise<EventCardProps[]> {
   const res = await fetch("https://api.example.com/events", {
     cache: "no-store",
