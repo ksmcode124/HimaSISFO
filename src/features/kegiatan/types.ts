@@ -2,10 +2,10 @@ export interface EventCardProps {
     id: number;
     title: string;
     img: string;
-    date: Date;
-    slug: string;
+    start: Date;
+    end: Date;
     description: string;
-    jenis : string;
+    type : string;
 }
 
 export interface DynamicCalendarProps {
@@ -23,7 +23,7 @@ export interface WithVariantEventCardProps extends EventCardProps {
 }
 
 export interface EventWithVariantProps extends EventCardProps {
-  date: Date;
+  start: Date;
 }
 
 export interface SortedSingleEventsProps {
