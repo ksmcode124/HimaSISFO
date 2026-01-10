@@ -1,71 +1,69 @@
-export type CardProps = {
-  id: string,
-  title: string,
-  description: string,
-}
-
-export type BlankoProps = {
-  id: string,
-  title: string,
-  image: string,
-  filepath: string
-}
-
-export type CTASection = {
-  title: string,
-  subtitle: string,
-  iconUrl: string
-}
-
-// content-types.ts
-export type TextNode = {
-  type: "text"
-  text: string
-  bold?: boolean
-  italic?: boolean
-  underline?: boolean
-}
-
-export type LinkNode = {
-  type: "link"
-  href: string
-  children: InlineNode[]
-}
-
-export type InlineNode = TextNode | LinkNode
-
-
+/* JSON Data-related TYPES */
 export type ParagraphNode = {
   type: "paragraph"
-  children: InlineNode[]
+  text: string
 }
 
 export type ListNode = {
   type: "list"
   ordered?: boolean
-  items: ListItemNode[]
+  items: ListItem[]
 }
 
-export type ListItemNode = {
-  content: InlineNode[]
-  children?: ListNode
+export type AccordionItemBlock = {
+  id: string
+  title: string
+  content: ContentBlock[]
 }
 
-export interface ListItem {
+export type ListItem = {
   text: string
   ordered?: boolean
   items?: ListItem[]
 }
 
 export type ContentBlock =
-  | {
-      type: "list"
-      ordered?: boolean
-      items: ListItem[]
-    }
-  | {
-      type: "paragraph"
-      text: string
-    }
+  | ListNode
+  | ParagraphNode
 
-export type BlockNode = ParagraphNode | ListNode
+export type SectionType = "item-collection" | "section" | "accordion"
+export type Section = {
+  type: SectionType
+  items: any[]
+}
+
+export type KemahasiswaanDataFile = {
+  schemaVersion: number
+  slug: string
+  seo: {
+    title: string
+    description: string
+  };
+  hero: {
+    title: string
+    subtitle: string
+  };
+  sections: Section[];
+  [key: string]: any;
+}
+
+
+/* UI-Centric Types */
+export interface CardProps {
+  id: string,
+  title: string,
+  description: string,
+}
+
+export interface BlankoItem {
+  id: string,
+  title: string,
+  image: string,
+  filepath: string
+}
+
+export interface CTASection {
+  title: string,
+  subtitle: string,
+  iconUrl: string
+}

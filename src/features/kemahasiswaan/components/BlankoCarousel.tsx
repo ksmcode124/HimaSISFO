@@ -1,6 +1,5 @@
 "use client"
-
-import * as React from "react"
+import { useState, useEffect } from "react"
 import { Card, CardAction, CardContent } from "@/components/ui/Card"
 import {
   Carousel,
@@ -12,22 +11,24 @@ import {
   type CarouselApi,
   CarouselSpacer,
 } from "@/components/ui/Carousel"
-import { BlankoProps } from "../types"
+
+import { BlankoItem } from "../types"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
+
 import { Download } from "lucide-react"
 
 interface BlankoCarouselProps {
-  data: BlankoProps[]
+  blankoItems: BlankoItem[]
 }
 
-export default function BlankoCarousel({ data }: BlankoCarouselProps) {
-  const [api, setApi] = React.useState<CarouselApi | null>(null)
-  const [selectedIndex, setSelectedIndex] = React.useState(0)
+export default function BlankoCarousel({ blankoItems }: BlankoCarouselProps) {
+  const [api, setApi] = useState<CarouselApi | null>(null)
+  const [selectedIndex, setSelectedIndex] = useState(0)
 
   // Sinkronisasi index aktif dengan posisi scroll Embla
   // Dipanggil setiap kali user scroll / klik navigation
-  React.useEffect(() => {
+  useEffect(() => {
     if (!api) return
 
     const onSelect = () => {
@@ -57,7 +58,7 @@ export default function BlankoCarousel({ data }: BlankoCarouselProps) {
         <CarouselContent>
           <CarouselSpacer />
 
-          {data.map((card, index) => {
+          {blankoItems?.map((card, index) => {
             const diff = index - selectedIndex
             const isActive = diff === 0
             const isNeighbor = Math.abs(diff) === 1
@@ -111,7 +112,7 @@ export default function BlankoCarousel({ data }: BlankoCarouselProps) {
 
       {api && (
         <CarouselIndicators
-          count={data.length}
+          count={blankoItems.length}
           selectedIndex={selectedIndex}
           onSelect={(index) => api.scrollTo(index)}
         />

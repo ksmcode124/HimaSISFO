@@ -15,4 +15,4 @@ export {default as BlankoCarousel} from "./components/BlankoCarousel"
 export {default as ContentRenderer} from "./components/ContentRenderer"
 export {default as FlipCard} from "./components/Flipcard"
 export {default as Modal} from "./components/Modal"
-export type {ContentBlock} from "./types";
+export type * from "./types";

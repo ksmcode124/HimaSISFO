@@ -1,5 +1,5 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/Accordion";
-import { ContentBlock, ContentRenderer, HeroSection, PelayananAdministratif } from "@/features/kemahasiswaan";
+import { AccordionItemBlock, ContentBlock, ContentRenderer, HeroSection, PelayananAdministratif } from "@/features/kemahasiswaan";
 
 type AccordionItemData = {
   id: string
@@ -11,7 +11,7 @@ export default function Page() {
   const accordionSection = PelayananAdministratif.sections.find(
     (section) => section.type === "accordion"
   )
-  const accordionData = accordionSection?.items as AccordionItemData[]
+  const accordionData = accordionSection?.items as AccordionItemBlock[]
   
   return (
     <>

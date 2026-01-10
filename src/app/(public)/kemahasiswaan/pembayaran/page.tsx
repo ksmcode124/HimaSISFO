@@ -2,7 +2,7 @@ import {
   Pembayaran,
   HeroSection,
   ContentRenderer,
-  ContentBlock
+  AccordionItemBlock
 } from "@/features/kemahasiswaan"
 
 import {
@@ -11,19 +11,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/Accordion"
-import Image from "next/image"
 
-type AccordionItemData = {
-  id: string
-  title: string
-  content: ContentBlock[]
-}
+import Image from "next/image"
 
 export default function Page() {
   const accordionSection = Pembayaran.sections.find(
     (section) => section.type === "accordion"
   )
-  const accordionData = accordionSection?.items as AccordionItemData[]
+  const accordionData = accordionSection?.items as AccordionItemBlock[]
 
   return (
     <>
