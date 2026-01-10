@@ -41,7 +41,7 @@ export function CalendarContent({ events }: { events: any }) {
 export function EventCardContent({ events }: { events: EventCardProps[] }) {
   const { pastNotGoing, nextOnGoing, futureNotGoing } = sortEvents(events);
   return (
-    <div className="relative flex flex-col gap-3 md:gap-5  justify-center w-full mx-auto">
+    <div className="relative flex flex-col gap-3 md:gap-5 justify-center w-full mx-auto">
       <h1 className="w-full h-fit text-center font-semibold text-xl md:text-7xl">
         Agenda
       </h1>
@@ -78,10 +78,14 @@ export function EventListContent({ events, filter }: { events: EventCardProps[],
   const HelperEvent = createEventIndex(events);
   const FindEvent = findEventByMonthYear({ month: bulan, year: tahunIni, indexedEvents: HelperEvent });
   return (
-    <>
-      <h2 className="text-base md:text-xl w-full h-fit py-3 md:py-5 border-b-2 border-black">Kegiatan / Agenda</h2>
-      <div className="relative">
-        <h1 className="text-xl md:text-9xl w-full h-fit text-center py-7 md:py-15 border-b-4 border-black ">Agenda</h1>
+    <div className="relative justify-center items-center">
+      <h2 className="text-base md:text-xl w-full h-fit py-3 md:py-5 border-b-2 border-black">
+        Kegiatan / Agenda
+      </h2>
+      <div className="relative mx-10">
+        <h1 className="text-xl md:text-9xl w-full h-fit text-center py-7 md:py-15 border-b-4 border-black ">
+          Agenda
+        </h1>
         <div className="text-base md:text-4xl flex flex-row justify-between items-center py-3 md:py-5">
           <FilterComp className="text-xl" />
           <span className="text-[14px] md:text-xl">{FindEvent.length} Acara ditemukan</span>
@@ -112,7 +116,7 @@ export function EventListContent({ events, filter }: { events: EventCardProps[],
           </div>
         )} */}
       </div>
-    </>
+    </div>
   );
 }
 
@@ -121,24 +125,25 @@ export function EventDetailContent({ events, search }: EventDetailContentProps) 
   const key = decodeURIComponent(search).split("-").pop();
   const FindEventDetail = findEventById({ id: Number(key), indexedEvents: HelperEvent });
   return (
-    <div className="relative w-full h-screen flex flex-col gap-10 md:gap-20">
+    <div className="relative justify-center items-center">
       <h2 className="text-base md:text-xl w-full h-fit py-3 md:py-5 border-b-2 border-black">
         Kegiatan / Agenda / Berita
       </h2>
 
-      <img
-        src={`/assets/kegiatan/${FindEventDetail?.img}`}
-        alt="detail event"
-        className="w-full aspect-[2/1] object-cover border-gradient-y rounded-[20px] md:rounded-[40px]"
-      />
-
-      <div className="flex flex-col gap-5">
-        <h1 className="text-xl md:text-3xl font-bold">
-          {FindEventDetail?.title}
-        </h1>
-        <p className="text-[14px] md:text-xl">
-          {FindEventDetail?.description}
-        </p>
+      <div className="relative mx-10 flex flex-col gap-10 md:gap-20 mt-10 md:mt-20">
+        <img
+          src={`/assets/kegiatan/${FindEventDetail?.img}`}
+          alt="detail event"
+          className="w-full aspect-[2/1] object-cover border-gradient-y rounded-[20px] md:rounded-[40px]"
+        />
+        <div className="flex flex-col gap-5">
+          <h1 className="text-xl md:text-3xl font-bold">
+            {FindEventDetail?.title}
+          </h1>
+          <p className="text-[14px] md:text-xl">
+            {FindEventDetail?.description}
+          </p>
+        </div>
       </div>
     </div>
   )
