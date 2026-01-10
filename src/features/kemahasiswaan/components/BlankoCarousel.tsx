@@ -91,7 +91,7 @@ export default function BlankoCarousel({ data }: BlankoCarouselProps) {
 
                     <CardAction className="pb-4 w-full grid justify-items-center">
                       <Link
-                        href={`${card.filepath}/export`}
+                        href={`${card.filepath}/export?format=docx`}
                         className="text-xs flex gap-2 items-center rounded-full border px-4 py-2 bg-tb-gradient-primary text-white"
                       >
                         Unduh <Download size={14} />

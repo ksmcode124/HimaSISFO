@@ -17,12 +17,12 @@ export default function FlipCard({ front, back, className }: FlipCardProps) {
       onClick={() => setFlipped(!flipped)}
     >
       <div
-        className={`relative h-full w-full transition-transform duration-500 transform-3d cursor-pointer ${
+        className={`relative h-full w-full transition-transform duration-500 transform-3d ${
           flipped ? "rotate-y-180" : ""
         }`}
       >
         {/* Front */}
-        <div className="absolute inset-0 backface-hidden flex items-center justify-center rounded-xl bg-rl-gradient-primary transition-all duration-500 text-white p-6">
+        <div className="absolute inset-0 backface-hidden cursor-pointer flex items-center justify-center rounded-xl bg-rl-gradient-primary transition-all duration-500 text-white p-6">
           {front}
         </div>
 
