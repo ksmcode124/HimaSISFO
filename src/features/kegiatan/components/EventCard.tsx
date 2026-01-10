@@ -1,5 +1,4 @@
-
-
+"use client"
 import { Button } from "@/components/ui/button";
 import { WithVariantEventCardProps } from "../types";
 import { ArrowRight } from "lucide-react";
