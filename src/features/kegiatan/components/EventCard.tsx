@@ -1,4 +1,4 @@
-"use client"
+
 
 import { Button } from "@/components/ui/button";
 import { WithVariantEventCardProps } from "../types";
@@ -23,7 +23,7 @@ const eventCard = cva("overflow-hidden transition hover:shadow-md", {
 });
 
 export const EventCard = (props: WithVariantEventCardProps) => {
-  const getCountdown = useGetCountdown;
+  const g7etCountdown = useGetCountdown;
   const { id, title, img, start, end, description, variant = "detail" } = props;
 
   const [countDown, setCountDown] = useState("00:00:00");
