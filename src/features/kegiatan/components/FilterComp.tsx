@@ -56,17 +56,17 @@ export function FilterComp({ className }: { className?: string }) {
       </div>
 
       {active && (
-        <div className="absolute z-50 mt-2 rounded-md">
-          <table className="w-[200px] table-fixed overflow-hidden">
-            <tbody>
+        <div className="absolute z-50 mt-2 rounded-md px-2 md:px-4 pt-2 md:pt-4 bg-[#EDF3F6CC] backdrop-blur-[2px]">
+          <table className="w-[200px] md:w-[400px] overflow-hidden">
+            <tbody >
               {Array.from({ length: 4 }).map((_, row) => (
-                <tr key={row} className="flex w-full gap-2 mb-2">
+                <tr key={row} className="flex w-full gap-2 md:gap-4 mb-2 md:mb-4">
                   {MONTHS_NAME.slice(row * 3, row * 3 + 3).map((bulan) => (
                     <td
                       key={bulan}
                       onClick={() => handleSelection(bulan)}
-                      className={clsx("w-1/3 rounded-[3px] p-2 text-[14px] text-sm text-center cursor-pointer hover:bg-gray-100  ",
-                        selectedBulan === bulan ? "bg-[#6482A6]" : "bg-accent-foreground"
+                      className={clsx("w-1/3 rounded-[3px] p-2 text-[14px] md:text-xl text-center cursor-pointer hover:bg-neutral-100   ",
+                        selectedBulan === bulan ? "bg-[#6482A6]" : "bg-[#D1E6FF]"
                       )}
                     >
                       {bulan.slice(0, 3)}
