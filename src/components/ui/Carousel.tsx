@@ -116,6 +116,7 @@ function Carousel({
   )
 }
 
+
 function CarouselContent({ className, ...props }: React.ComponentProps<"div">) {
   const { carouselRef, orientation } = useCarousel()
 
@@ -161,8 +162,9 @@ function KemahasiswaanCarouselSpacer() {
   return (
      <div
       aria-hidden
+      data-embla-ignore
       className={cn(
-        "hidden sm:block min-w-0 shrink-0 grow-0 sm:basis-1/3 sm:-mx-15 z-10",
+        "block min-w-0 shrink-0 grow-0 sm:basis-1/3 sm:-mx-15 z-10",
         orientation === "horizontal" ? "pl-0 sm:pl-4" : "pt-4",
       )}
     />
@@ -175,9 +177,9 @@ function CarouselSpacer() {
   return (
     <div
       aria-hidden
+      data-embla-ignore
       className={cn(
-        "hidden sm:block shrink-0 grow-0 min-w-0",
-        "basis-(--carousel-item-basis)",
+        "block min-w-0 shrink-0 grow-0 sm:basis-1/3 z-10",
         orientation === "horizontal" ? "pl-0 sm:pl-4" : "pt-4",
       )}
     />

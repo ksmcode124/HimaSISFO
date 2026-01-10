@@ -40,7 +40,7 @@ export default function WisudaPage() {
           }
           back={
             <>
-              <div className="flex flex-col text-2xs gap-2">
+              <div className="flex flex-col text-[10px] gap-2">
                 <h3 className="font-semibold text-center text-xs">{item.title}</h3>
                 <ContentRenderer content={item.content as ContentBlock[]} />
               </div>

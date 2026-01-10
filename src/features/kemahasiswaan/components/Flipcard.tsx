@@ -13,7 +13,7 @@ export default function FlipCard({ front, back, className }: FlipCardProps) {
 
   return (
     <div
-      className={`perspective-midrange w-full max-w-sm rounded-xl ${className ?? ""}`}
+      className={`perspective-midrange w-full rounded-xl ${className ?? ""}`}
       onClick={() => setFlipped(!flipped)}
     >
       <div
