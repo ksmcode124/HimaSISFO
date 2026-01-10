@@ -8,6 +8,7 @@ export {default as Pengumuman} from "./data/pengumuman.json"
 export {default as PelayananAdministratif} from "./data/pelayanan-administratif.json"
 export {default as ProsesAkademik} from "./data/proses-akademik.json"
 export {default as WisudaYudisium} from "./data/wisuda-yudisium.json"
+
 export {default as HeroSection} from "./sections/HeroSection"
 export {default as BlankoSection} from "./sections/BlankoSection"
 export {default as AlurKemahasiswaanCarousel} from "./components/AlurKemahasiswaanCarousel"
@@ -15,7 +16,10 @@ export {default as BlankoCarousel} from "./components/BlankoCarousel"
 export {default as ContentRenderer} from "./components/ContentRenderer"
 export {default as FlipCard} from "./components/Flipcard"
 export {default as Modal} from "./components/Modal"
-
+export {default as VerticalAccordion} from "./components/VerticalAccordion"
+export {default as HorizontalAccordion} from "./components/HorizontalAccordion"
+export {FeaturedHorizontalAccordion} from "./components/HorizontalAccordion"
+export {default as PembayaranSection} from "./sections/PembayaranSection"
 export { getSectionData } from "./services/getSectionData"
 
 export type * from "./types";

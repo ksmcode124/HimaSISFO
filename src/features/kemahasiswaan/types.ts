@@ -14,6 +14,7 @@ export type AccordionItemBlock = {
   id: string
   title: string
   content: ContentBlock[]
+  image?: string
 }
 
 export type ListItem = {
