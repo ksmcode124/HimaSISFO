@@ -3,9 +3,9 @@ import {
   BlankoCarousel,
   HeroSection,
   BlankoItem,
-  KemahasiswaanDataFile
+  KemahasiswaanDataFile,
+  getSectionData
 } from "@/features/kemahasiswaan"
-import { getSectionData } from "@/lib/utils";
 
 export default function Page() {
   const blankoItems = getSectionData<BlankoItem[]>(Blanko as KemahasiswaanDataFile, "item-collection");
