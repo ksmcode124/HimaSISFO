@@ -82,7 +82,7 @@ export function EventListContent({ events, filter }: { events: EventCardProps[],
       <h2 className="text-base md:text-xl w-full h-fit py-3 md:py-5 border-b-2 border-black">
         Kegiatan / Agenda
       </h2>
-      <div className="relative mx-10">
+      <div className="relative mx-4 md:mx-8">
         <h1 className="text-xl md:text-9xl w-full h-fit text-center py-7 md:py-15 border-b-4 border-black ">
           Agenda
         </h1>
@@ -130,7 +130,7 @@ export function EventDetailContent({ events, search }: EventDetailContentProps) 
         Kegiatan / Agenda / Berita
       </h2>
 
-      <div className="relative mx-10 flex flex-col gap-10 md:gap-20 mt-10 md:mt-20">
+      <div className="relative mx-4 md:mx-8 flex flex-col gap-10 md:gap-20 mt-10 md:mt-20">
         <img
           src={`/assets/kegiatan/${FindEventDetail?.img}`}
           alt="detail event"
