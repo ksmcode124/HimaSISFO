@@ -63,7 +63,7 @@ export function EventCardContent({ events }: { events: EventCardProps[] }) {
         <Button
           variant="default"
           route={`kegiatan/agenda`}
-          className="text-[12px] md:text-sm flex flex-row gap-1 md:gap-2 px-3 md:px-4 py-1 md:py-3 rounded-full items-center"
+          className="text-[12px] md:text-sm flex flex-row gap-1 md:gap-2 px-3 md:px-4 py-1 md:py-3 rounded-full items-center shadow-[4.38px_4.38px_3.5px_0px_rgba(0,0,0,0.25)]"
         >Selengkapnya<ArrowRight className="text-sm md:text-xl" /></Button>
       </div>
 

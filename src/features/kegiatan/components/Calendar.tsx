@@ -132,7 +132,7 @@ export function DynamicCalendar({
                       <div className="flex flex-col items-start gap-1">
                         <div
                           className={clsx(
-                            "flex justify-center m-1 md:m-2 h-[22px] md:h-[28px]",
+                            "flex justify-center m-1 md:m-2 h-[22px] md:h-[28px] font-medium",
                             isToday ? "bg-[#3978FF] rounded-full w-6 h-6 md:w-7 md:h-7 text-[#fff] items-center" : "text-[#000000] items-start"
                           )}
                         >

@@ -60,11 +60,11 @@ export const EventCard = (props: WithVariantEventCardProps) => {
             : "bg-linear-to-b from-blue-200/60 to-blue-100"
         )}
       >
-        <div className="flex flex-row justify-between">
-          <p className="w-fit text-[10px] md:text-xl font-normal">{formatDate(start) === formatDate(end) ?
+        <div className="flex flex-row justify-start gap-1 md:gap-3">
+          <p className="shadow-[4.38px_4.38px_3.5px_0px_rgba(0,0,0,0.25)] w-fit text-white text-[10px] md:text-xl font-normal px-2 md:px-3 py-1 md:py-2 rounded-[25px] md:rounded-[50px] bg-gradient-to-b from-[#1B3C53] to-[#456882]">{formatDate(start) === formatDate(end) ?
           `${formatDate(start)}` : `${formatDate(start)} - ${formatDate(end)}`}</p>
           {variant === "onGoing" && (
-            <p className="w-fit text-[10px] md:text-xl font-normal">
+            <p className="shadow-[4.38px_4.38px_3.5px_0px_rgba(0,0,0,0.25)] w-fit text-white text-[10px] md:text-xl font-normal px-2 md:px-3 py-1 md:py-2 rounded-[25px] md:rounded-[50px] bg-gradient-to-b from-[#1B3C53] to-[#456882]">
               {countDown || "Waktu Habis"}
             </p>
           )}
@@ -77,7 +77,7 @@ export const EventCard = (props: WithVariantEventCardProps) => {
           <div className="w-full relative justify-center flex flex-row mt-3 md:mt-12 mb-3 md:mb-6">
             <Button
               route={`/kegiatan/agenda/${title}-${id}`}
-              className="flex flex-row gap-3 px-3 py-2 rounded-full"
+              className="flex flex-row gap-3 px-3 py-2 rounded-full shadow-[4.38px_4.38px_3.5px_0px_rgba(0,0,0,0.25)]"
             >
               More <ArrowRight />
             </Button>
