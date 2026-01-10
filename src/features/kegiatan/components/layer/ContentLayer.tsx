@@ -72,7 +72,7 @@ export function EventCardContent({ events }: { events: EventCardProps[] }) {
   )
 }
 
-export function EventListContent({ events, filter }: { events: EventCardProps[] , filter?: string }) {
+export function EventListContent({ events, filter }: { events: EventCardProps[], filter?: string }) {
   const tahunIni = new Date().getFullYear();
   const bulan = filter || formatMonthName(new Date().getMonth());
   const HelperEvent = createEventIndex(events);
@@ -83,7 +83,7 @@ export function EventListContent({ events, filter }: { events: EventCardProps[] 
       <div className="relative">
         <h1 className="text-xl md:text-9xl w-full h-fit text-center py-7 md:py-15 border-b-4 border-black ">Agenda</h1>
         <div className="text-base md:text-4xl flex flex-row justify-between items-center py-3 md:py-5">
-          <FilterComp className="text-xl"/>
+          <FilterComp className="text-xl" />
           <span className="text-[14px] md:text-xl">{FindEvent.length} Acara ditemukan</span>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-10 mt-5 md:mt-10">
@@ -121,12 +121,24 @@ export function EventDetailContent({ events, search }: EventDetailContentProps) 
   const key = decodeURIComponent(search).split("-").pop();
   const FindEventDetail = findEventById({ id: Number(key), indexedEvents: HelperEvent });
   return (
-    <div className="relative w-full flex flex-col gap-10 md:gap-20">
-      <h2 className="text-base md:text-xl w-full h-fit py-3 md:py-5 border-b-2 border-black">Kegiatan / Agenda / Berita</h2>
-      <img src={`/assets/kegiatan/${FindEventDetail?.img}`} alt="detail event" className="object-cover relative w-full  border-gradient-y rounded-[40px]" />
+    <div className="relative w-full h-screen flex flex-col gap-10 md:gap-20">
+      <h2 className="text-base md:text-xl w-full h-fit py-3 md:py-5 border-b-2 border-black">
+        Kegiatan / Agenda / Berita
+      </h2>
+
+      <img
+        src={`/assets/kegiatan/${FindEventDetail?.img}`}
+        alt="detail event"
+        className="w-full aspect-[2/1] object-cover border-gradient-y rounded-[20px] md:rounded-[40px]"
+      />
+
       <div className="flex flex-col gap-5">
-        <h1 className="text-xl md:text-3xl font-bold">{FindEventDetail?.title}</h1>
-        <p className="text-[14px] md:text-xl">{FindEventDetail?.description}</p>
+        <h1 className="text-xl md:text-3xl font-bold">
+          {FindEventDetail?.title}
+        </h1>
+        <p className="text-[14px] md:text-xl">
+          {FindEventDetail?.description}
+        </p>
       </div>
     </div>
   )
