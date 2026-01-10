@@ -18,7 +18,7 @@ export default function KabinetFilosofiSection({ logo_url }: FilosofiProps) {
         <div
           className="absolute inset-0 z-0 bg-size-[150%_40%] md:bg-size-[100%_auto] bg-repeat-y bg-top"
           style={{
-            backgroundImage: `url('/assets/kabinet/filosofi-bg.png')`,
+            backgroundImage: `url('/assets/kabinet/filosofi-bg.webp')`,
           }}
         />
 

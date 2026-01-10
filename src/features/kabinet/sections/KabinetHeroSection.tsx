@@ -59,7 +59,7 @@ export default function KabinetHeroSection() {
         {/* Background Mobile */}
         <div className="absolute inset-0 md:hidden">
           <Image
-            src="/assets/kabinet/bg-hero-mobile.png"
+            src="/assets/kabinet/bg-hero-mobile.webp"
             alt="Background"
             fill
             className="object-cover"

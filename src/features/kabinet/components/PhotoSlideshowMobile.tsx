@@ -6,7 +6,7 @@ interface Props {
 }
 
 export function HeroMobilePreview({
-imageSrc = "/assets/kabinet/gelora-harmoni-1.png",
+imageSrc = "/assets/kabinet/gelora-harmoni-1.webp",
 }: Props) {
   return (
     <div className="relative z-20 mt-10 w-full max-w-[350px] px-4 md:hidden">
@@ -33,7 +33,7 @@ imageSrc = "/assets/kabinet/gelora-harmoni-1.png",
       {/* Layer Belakang */}
       <div className="absolute w-100 -ml-17 top-1 aspect-video rounded-2xl drop-shadow-[5px_5px_2px_rgba(0,0,0,0.3)] overflow-hidden z-10">
         <Image
-          src="/assets/kabinet/bg-layer2.png"
+          src="/assets/kabinet/bg-layer2.webp"
           alt=""
           fill
           className="object-cover"

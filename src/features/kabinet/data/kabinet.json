@@ -4,11 +4,11 @@
       "id": "gelora-harmoni",
       "nama_kabinet": "Gelora Harmoni",
       "tahun_akademik": "2025/2026",
-      "logo_url": "/assets/kabinet/logo-gelora-harmoni.png",
+      "logo_url": "/assets/kabinet/logo-gelora-harmoni.webp",
       "image_url": [
-        "/assets/kabinet/gelora-harmoni-1.png",
-        "/assets/kabinet/gelora-harmoni-2.png",
-        "/assets/kabinet/gelora-harmoni-3.png"
+        "/assets/kabinet/gelora-harmoni-1.webp",
+        "/assets/kabinet/gelora-harmoni-2.webp",
+        "/assets/kabinet/gelora-harmoni-3.webp"
       ],
       "colors": {
         "primary": "#E63258",
@@ -64,17 +64,17 @@
         ]
       },
       "inti_himpunan": {
-        "logo_url": "/assets/kabinet/logo-inti.png",
+        "logo_url": "/assets/kabinet/logo-inti.webp",
         "anggota": [
           {
             "nama": "Mohammed Fadhillah R.M.N.A",
             "jabatan": "Ketua",
-            "image_url": "/assets/kabinet/kahim.png"
+            "image_url": "/assets/kabinet/kahim.webp"
           },
           {
             "nama": "Nabil Daffariq",
             "jabatan": "Wakil",
-            "image_url": "/assets/kabinet/wakahim.png"
+            "image_url": "/assets/kabinet/wakahim.webp"
           }
         ]
       },
@@ -83,13 +83,13 @@
           "id": "akpro",
           "nama": "Akademik dan Keprofesian",
           "deskripsi": "Departemen yang bertanggung jawab dalam melayani mahasiswa sistem informasi seputar akademik dan keprofesian mulai dari pembelajaran hingga perlombaan",
-          "logo_url": "/assets/kabinet/akpro.png",
-          "image_url": "/assets/kabinet/hero-akpro.png",
+          "logo_url": "/assets/kabinet/akpro.webp",
+          "image_url": "/assets/kabinet/hero-akpro.webp",
           "program_kerja": [
             {
               "nama": "ARSIP",
               "deskripsi": "Mengarsipkan soal dan materi mata kuliah serta kelola folder Google Drive AR-SI-P.",
-              "image_url": "/assets/kabinet/proker-arsip.png"
+              "image_url": "/assets/kabinet/proker-arsip.webp"
             }
           ],
           "staff": {
@@ -97,27 +97,27 @@
               { 
                 "nama": "Umar Andhika F.", 
                 "jabatan": "Kepala Departemen", 
-                "image_url": "/assets/kabinet/umar-andhika.png" 
+                "image_url": "/assets/kabinet/umar-andhika.webp" 
               },
               { 
                 "nama": "Ferawati Ginting", 
                 "jabatan": "Wakil Kepala Departemen", 
-                "image_url": "/assets/kabinet/ferawati-ginting.png" 
+                "image_url": "/assets/kabinet/ferawati-ginting.webp" 
               },
               { 
                 "nama": "Ghielbrant Ahnaf", 
                 "jabatan": "Sekbend Departemen", 
-                "image_url": "/assets/kabinet/ghielbrant-ahnaf.png" 
+                "image_url": "/assets/kabinet/ghielbrant-ahnaf.webp" 
               }
             ],
             "anggota": [
               { 
                 "nama": "Galang Ivandry", 
-                "image_url": "/assets/kabinet/galang-ivandry.png" 
+                "image_url": "/assets/kabinet/galang-ivandry.webp" 
               },
               { 
                 "nama": "Andhika Guntur R.", 
-                "image_url": "/assets/kabinet/andhika-guntur.png" }
+                "image_url": "/assets/kabinet/andhika-guntur.webp" }
             ]
           }
         }
