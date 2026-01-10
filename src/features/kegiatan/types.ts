@@ -42,3 +42,9 @@ export interface FindEventByMonthYearProps {
   year: number;
   indexedEvents: Record<string, any[]>;
 }
+
+//data ui
+export interface BreadCrumbItems {
+  display: string;
+  link: string;
+}
