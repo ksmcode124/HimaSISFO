@@ -60,10 +60,10 @@ export const EventCard = (props: WithVariantEventCardProps) => {
         )}
       >
         <div className="flex flex-row justify-start gap-1 md:gap-3">
-          <p className="shadow-[4.38px_4.38px_3.5px_0px_rgba(0,0,0,0.25)] w-fit text-white text-[10px] md:text-xl font-normal px-2 md:px-3 py-1 md:py-2 rounded-[25px] md:rounded-[50px] bg-gradient-to-b from-[#1B3C53] to-[#456882]">{formatDate(start) === formatDate(end) ?
+          <p className="shadow-[4.38px_4.38px_3.5px_0px_rgba(0,0,0,0.25)] w-fit h-fit text-white text-[10px] md:text-xl font-normal px-1 md:px-3 py-1 md:py-2 rounded-[15px] md:rounded-[50px] bg-gradient-to-b from-[#1B3C53] to-[#456882] text-center">{formatDate(start) === formatDate(end) ?
           `${formatDate(start)}` : `${formatDate(start)} - ${formatDate(end)}`}</p>
           {variant === "onGoing" && (
-            <p className="shadow-[4.38px_4.38px_3.5px_0px_rgba(0,0,0,0.25)] w-fit text-white text-[10px] md:text-xl font-normal px-2 md:px-3 py-1 md:py-2 rounded-[25px] md:rounded-[50px] bg-gradient-to-b from-[#1B3C53] to-[#456882]">
+            <p className="shadow-[4.38px_4.38px_3.15px_0px_rgba(0,0,0,0.25)] w-fit h-fit text-white text-[10px] md:text-xl font-normal px-1 md:px-3 py-1 md:py-2 rounded-[15px] md:rounded-[50px] bg-gradient-to-b from-[#1B3C53] to-[#456882] text-center">
               {countDown || "Waktu Habis"}
             </p>
           )}
