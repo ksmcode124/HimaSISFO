@@ -22,7 +22,7 @@ const eventCard = cva("overflow-hidden transition hover:shadow-md", {
 });
 
 export const EventCard = (props: WithVariantEventCardProps) => {
-  const g7etCountdown = useGetCountdown;
+  const getCountdown = useGetCountdown;
   const { id, title, img, start, end, description, variant = "detail" } = props;
 
   const [countDown, setCountDown] = useState("00:00:00");
