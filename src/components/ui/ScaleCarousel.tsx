@@ -8,7 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
   type CarouselApi,
-} from '@/components/ui/carousel'
+} from '@/components/ui/Carousel'
 import type { EmblaCarouselType, EmblaEventType } from 'embla-carousel'
 
 const TWEEN_FACTOR = 0.52
