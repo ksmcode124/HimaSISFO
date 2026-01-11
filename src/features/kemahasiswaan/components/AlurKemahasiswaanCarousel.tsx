@@ -20,14 +20,12 @@ interface AlurKemahasiswaanCarouselProps {
   data: CardProps[]
 }
 
-export default function AlurKemahasiswaanCarousel({data}: AlurKemahasiswaanCarouselProps) {
-  
-  // Embla Carousel API yang digunakan untuk sinkronisasi state carousel & indicator
-  const [api, setApi] = React.useState<CarouselApi | null>()
+export default function AlurKemahasiswaanCarousel({
+  data,
+}: AlurKemahasiswaanCarouselProps) {
+  const [api, setApi] = React.useState<CarouselApi | null>(null)
   const [selectedIndex, setSelectedIndex] = React.useState(0)
 
-  // Sinkronisasi index aktif dengan posisi scroll Embla
-  // Dipanggil setiap kali user scroll / klik navigation
   React.useEffect(() => {
     if (!api) return
 
@@ -37,10 +35,7 @@ export default function AlurKemahasiswaanCarousel({data}: AlurKemahasiswaanCarou
 
     onSelect()
     api.on("select", onSelect)
-
-    return () => {
-      api.off("select", onSelect)
-    }
+    return () => { api.off("select", onSelect) }
   }, [api])
 
   return (
@@ -51,75 +46,77 @@ export default function AlurKemahasiswaanCarousel({data}: AlurKemahasiswaanCarou
         className="w-full"
       >
         <CarouselPrevious className="absolute h-15 w-15 left-0 sm:-left-12 lg:-left-16 top-1/2 -translate-y-1/2 z-30 rounded-full" />
+
         <CarouselContent>
           <KemahasiswaanCarouselSpacer />
 
           {data.map((card, index) => {
-            /**
-             * diff digunakan untuk menentukan relasi posisi item
-             * terhadap item aktif:
-             *  0  → aktif (tengah)
-             * ±1 → tetangga langsung (prev / next)
-             * lainnya → item jauh (tidak overlap)
-             */
             const diff = index - selectedIndex
             const isActive = diff === 0
             const isNeighbor = Math.abs(diff) === 1
 
-
             return (
               <CarouselItem
                 key={card.id}
-                onClick={() => api?.scrollTo(index)}
+                onClick={() => api?.scrollTo(index, false)}
                 className={cn(
-                  "transition-all duration-300 h-90 z-20",
-                  "motion-reduce:transition-none motion-reduce:transform-none",
-                  isActive && "basis-full sm:basis-1/2 z-30 bg-transparent",
-                  isNeighbor && "basis-full sm:basis-1/3 sm:-mx-30 z-20",
-                  !isActive && !isNeighbor && "basis-full sm:mx-30 sm:basis-1/3 z-10"
+                  "h-90 z-20 ease-in",
+                  isActive && "transition-[flex,margin] basis-full sm:basis-1/2 z-30 duration-900",
+                  isNeighbor && "transition-[flex,margin] basis-full sm:basis-1/3 sm:-mx-30 z-20 duration-500",
+                  !isActive && !isNeighbor && "transition-[flex,margin] basis-full sm:basis-1/3 sm:mx-30 z-10 duration-700"
                 )}
               >
-
                 <div className="h-full px-2 sm:px-0">
-                  <Card className={cn(
-                    "h-full flex flex-col transition-transform duration-300",
-                    isActive
-                      ? "scale-100 opacity-100"
-                      : "scale-90 sm:scale-65 opacity-70 sm:opacity-90 bg-lr-gradient-primary text-white text-center"
-                  )}>
+                  <Card
+                    className={cn(
+                      "h-full flex flex-col will-change-transform",
+                      "transition-[transform,opacity] duration-2000 ease-[cubic-bezier(0.16,1,0.3,1)]",
+                      isActive
+                        ? "scale-100 opacity-100"
+                        : "scale-90 sm:scale-65 opacity-70 bg-lr-gradient-primary text-white text-center"
+                    )}
+                  >
                     <CardContent
                       className={cn(
-                        "flex flex-col flex-1 gap-2 sm:gap-3 p-4 lg:p-6 transition-all duration-500",
+                        "flex flex-col flex-1 gap-2 sm:gap-3 p-4 lg:p-6",
+                        "transition-all duration-800 ease-out delay-700",
                         isActive ? "justify-start" : "justify-center"
                       )}
                     >
-                      <p className={cn(
-                        "font-semibold transition-all duration-300",
-                        isActive 
-                          ? "text-base sm:text-sm lg:text-md" 
-                          : "mx-15 text-sm sm:text-lg lg:text-xl"
-                        )}>
+                      {/* TITLE */}
+                      <p
+                        className={cn(
+                          "font-semibold transtition-colors duration-0",
+                          isActive
+                            ? "text-base sm:text-sm lg:text-md delay-0"
+                            : "mx-15 text-sm sm:text-lg lg:text-xl delay-250"
+                        )}
+                      >
                         {card.title}
                       </p>
 
+                      {/* DESCRIPTION */}
                       <p
                         className={cn(
-                          "text-xs sm:text-[10px] lg:text-md text-justify transition-opacity",
-                          isActive 
-                            ? "opacity-100 max-h-96 duration-1000" 
-                            : "opacity-0 max-h-0 overflow-hidden duration-200"
+                          "text-xs sm:text-[10px] lg:text-md text-justify",
+                          "transition-[opacity,transform,max-height] duration-0 ease-in",
+                          isActive
+                            ? "opacity-100 translate-y-0 max-h-96 delay-1000"
+                            : "opacity-0 translate-y-2 max-h-0 overflow-hidden delay-0"
                         )}
                       >
                         {card.description}
                       </p>
                     </CardContent>
 
+                    {/* ACTION */}
                     <CardAction
                       className={cn(
-                        "pb-4 w-full grid justify-items-center text-center transition-opacity",
-                        isActive 
-                          ? "opacity-100 max-h-20 duration-500" 
-                          : "opacity-0 max-h-0 overflow-hidden pointer-events-none duration-100"
+                        "pb-4 w-full grid justify-items-center text-center",
+                        "transition-[opacity,transform,max-height] duration-200 ease-in",
+                        isActive
+                          ? "opacity-100 translate-y-0 max-h-20 delay-1000"
+                          : "opacity-0 translate-y-2 max-h-0 overflow-hidden pointer-events-none delay-0"
                       )}
                     >
                       <Link
@@ -134,8 +131,10 @@ export default function AlurKemahasiswaanCarousel({data}: AlurKemahasiswaanCarou
               </CarouselItem>
             )
           })}
+
           <KemahasiswaanCarouselSpacer />
         </CarouselContent>
+
         <CarouselNext className="absolute h-15 w-15 right-0 sm:-right-12 lg:-right-16 top-1/2 -translate-y-1/2 z-30 rounded-full" />
       </Carousel>
 
@@ -146,7 +145,6 @@ export default function AlurKemahasiswaanCarousel({data}: AlurKemahasiswaanCarou
           onSelect={(index) => api.scrollTo(index)}
         />
       )}
-
     </div>
   )
 }

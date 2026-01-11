@@ -1,36 +1,19 @@
 import {
   PendaftaranVerifikasi,
   HeroSection,
-  ContentRenderer,
-  ContentBlock
+  AccordionItemBlock,
+  KemahasiswaanDataFile,
+  getSectionData,
+  HorizontalAccordion,
 } from "@/features/kemahasiswaan"
-
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/Accordion"
 
 import Link from "next/link"
 import Image from "next/image"
 
-type AccordionItemData = {
-  id: string
-  title: string
-  content: ContentBlock[]
-}
-
 export default function Page() {
-  const accordionSection = PendaftaranVerifikasi.sections.find(
-    (section) => section.type === "accordion"
-  )
-  const accordionData = accordionSection?.items as AccordionItemData[]
+  const itemCollectionData = getSectionData<AccordionItemBlock[]>(PendaftaranVerifikasi as KemahasiswaanDataFile, "item-collection")
+  const ktmItems = getSectionData<AccordionItemBlock[]>(PendaftaranVerifikasi as KemahasiswaanDataFile, "accordion")
 
-  const itemCollectionSection = PendaftaranVerifikasi.sections.find(
-    (section) => section.type === "item-collection"
-  )
-  const itemCollectionData = itemCollectionSection?.items
   return (
     <>
       <HeroSection {...PendaftaranVerifikasi.hero} breadcrumbItems={PendaftaranVerifikasi.breadcrumbItems} />
@@ -40,30 +23,7 @@ export default function Page() {
           <div className="relative h-50 w-50">
             <Image src="/assets/kemahasiswaan/icon-pendaftaran-dan-verifikasi.webp" alt={""} fill className="object-contain" />
           </div>
-          <Accordion
-            type="single"
-            collapsible
-            className="w-full flex flex-col gap-4"
-          >
-            {accordionData.map((item) => (
-              <AccordionItem
-                key={item.id}
-                value={item.id}
-                className="
-                  space-y-5
-                  overflow-hidden
-                "
-              >
-                <AccordionTrigger className="justify-between items-center rounded-xl border-black border">
-                  {item.title}
-                </AccordionTrigger>
-
-                <AccordionContent className="flex flex-col gap-4 py-4 px-6 text-balance border border-black rounded-xl">
-                  <ContentRenderer content={item.content} />
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+          <HorizontalAccordion items={ktmItems} />
         </div>
       </section>
 

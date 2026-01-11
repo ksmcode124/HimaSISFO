@@ -15,10 +15,7 @@ export default function Page() {
 
   return (
     <>
-      <HeroSection
-        {...Pembayaran.hero}
-        breadcrumbItems={Pembayaran.breadcrumbItems}
-      />
+      <HeroSection {...Pembayaran.hero} breadcrumbItems={Pembayaran.breadcrumbItems} />
 
       <section className="max-w-7xl min-h-[55vh] mx-auto space-y-5">
         <PembayaranSection

@@ -1,6 +1,6 @@
 // components/ui/Modal.tsx
 'use client'
-import { ReactNode, useEffect } from "react";
+import { useEffect } from "react";
 import ContentRenderer from "./ContentRenderer";
 import { ContentBlock, ProsesAkademik } from "..";
 

@@ -54,6 +54,7 @@ function Carousel({
       axis: orientation === "horizontal" ? "x" : "y",
       containScroll: "trimSnaps",
       slidesToScroll: 1,
+      duration: 40,
       ...opts,
     },
     plugins
@@ -164,7 +165,7 @@ function KemahasiswaanCarouselSpacer() {
       aria-hidden
       data-embla-ignore
       className={cn(
-        "block min-w-0 shrink-0 grow-0 sm:basis-1/3 sm:-mx-15 z-10",
+        "block min-w-0 shrink-0 grow-0 sm:basis-1/3 sm:-mx-15 z-10 transition-[flex,margin] duration-500",
         orientation === "horizontal" ? "pl-0 sm:pl-4" : "pt-4",
       )}
     />

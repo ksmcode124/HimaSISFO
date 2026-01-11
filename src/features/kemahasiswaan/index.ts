@@ -20,6 +20,7 @@ export {default as VerticalAccordion} from "./components/VerticalAccordion"
 export {default as HorizontalAccordion} from "./components/HorizontalAccordion"
 export {FeaturedHorizontalAccordion} from "./components/HorizontalAccordion"
 export {default as PembayaranSection} from "./sections/PembayaranSection"
+export {default as BreadcrumbSection} from "./sections/BreadcrumbSection"
 export { getSectionData } from "./services/getSectionData"
 
 export type * from "./types";

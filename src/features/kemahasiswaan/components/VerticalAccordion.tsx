@@ -28,13 +28,13 @@ function VerticalAccordionItem( {item} : {item: AccordionItemBlock}) {
      <AccordionItem
       key={item.id}
       value={item.id}
-      className="group border rounded-xl lg:h-160 max-w-170 p-0 overflow-hidden"
+      className="group border transform-all duration-700 data-[state=open]:scale-x-100 rounded-xl lg:h-160 max-w-170 p-0 overflow-hidden"
     >
       <div className="flex flex-col h-full justify-between">
         <AccordionContent
           className="
-            hidden
-            group-data-[state=open]:block
+            max-w-0
+            group-data-[state=open]:max-w-full
             px-6 py-4
           "
         >
@@ -46,13 +46,11 @@ function VerticalAccordionItem( {item} : {item: AccordionItemBlock}) {
           writingMode="vertical-btt"
           className="
             px-4 py-6
-            bg-rl-gradient-primary
             text-white
             w-full
-
+            group-data-[state=closed]:scale-x-100
             lg:group-data-[state=closed]:h-full
             lg:group-data-[state=open]:h-auto
-
             flex-row
             justify-between
           "
