@@ -27,7 +27,7 @@ export default function BlankoSection({ title, subtitle, iconUrl }: CTASection) 
 
         <Link
           href="kemahasiswaan/blanko"
-          className="text-[10px] sm:text-xs lg:text-sm rounded-full border px-3 sm:px-4 py-1.5 sm:py-2 bg-tb-gradient-primary text-white"
+          className="text-[10px] sm:text-xs lg:text-sm rounded-full border px-3 sm:px-4 py-1.5 sm:py-2 bg-linear-to-t from-[#456882] to-50%-[#1F445F] to-[#1B3C53] text-white"
         >
           Selengkapnya ➔
         </Link>

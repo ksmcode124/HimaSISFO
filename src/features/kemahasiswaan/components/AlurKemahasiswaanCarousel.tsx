@@ -61,8 +61,8 @@ export default function AlurKemahasiswaanCarousel({
                 onClick={() => api?.scrollTo(index, false)}
                 className={cn(
                   "h-90 z-20 ease-in",
-                  isActive && "transition-[flex,margin] basis-full sm:basis-1/2 z-30 duration-900",
-                  isNeighbor && "transition-[flex,margin] basis-full sm:basis-1/3 sm:-mx-30 z-20 duration-500",
+                  isActive && "transition-[flex] basis-full sm:basis-1/2 z-30 duration-900",
+                  isNeighbor && "transition-[margin] basis-full sm:basis-1/3 sm:-mx-30 z-20 duration-500",
                   !isActive && !isNeighbor && "transition-[flex,margin] basis-full sm:basis-1/3 sm:mx-30 z-10 duration-700"
                 )}
               >
@@ -73,7 +73,7 @@ export default function AlurKemahasiswaanCarousel({
                       "transition-[transform,opacity] duration-2000 ease-[cubic-bezier(0.16,1,0.3,1)]",
                       isActive
                         ? "scale-100 opacity-100"
-                        : "scale-90 sm:scale-65 opacity-70 bg-lr-gradient-primary text-white text-center"
+                        : "scale-80 sm:scale-65 bg-linear-to-r from-[#456882] to-50%-[#1F445F] to-[#1B3C53] text-white text-center"
                     )}
                   >
                     <CardContent
@@ -121,7 +121,7 @@ export default function AlurKemahasiswaanCarousel({
                     >
                       <Link
                         href={`kemahasiswaan/${card.id}`}
-                        className="text-xs rounded-full border px-4 py-2 bg-tb-gradient-primary text-white"
+                        className="text-xs rounded-full border px-4 py-2 bg-linear-to-t from-[#456882] to-[#1B3C53] text-white"
                       >
                         Selengkapnya ➔
                       </Link>

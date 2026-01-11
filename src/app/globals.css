@@ -89,34 +89,15 @@
 
 }
 
-.bg-tb-gradient-primary {
-   background: linear-gradient(to bottom, var(--color-nile-blue), var(--color-blue-bayoux));
-}
-
-.bg-tb-gradient-primary:hover {
-   background: linear-gradient(to top, var(--color-nile-blue), var(--color-blue-bayoux));
-}
-
-.bg-bt-gradient-primary {
-   background: linear-gradient(to top, var(--color-nile-blue), var(--color-blue-bayoux));
-}
-
-.bg-bt-gradient-primary:hover {
-   background: linear-gradient(to bottom, var(--color-nile-blue), var(--color-blue-bayoux));
-}
-
-.bg-rl-gradient-primary {
-   background: linear-gradient(to right, var(--color-columbia-blue), var(--color-cloud-burst), var(--color-blue-bayoux), var(--color-nile-blue));
+.flip-card {
+   background: linear-gradient(to right, #A6CFE1, #265A8C 50%, #456882, #1F445F,#1B3C53);
    background-size: 400% 100%;
    background-position: right;
 }
 
-.bg-lr-gradient-primary {
-   background: linear-gradient(to right, var(--color-blue-bayoux), var(--color-nile-blue));
-}
-
-.bg-rl-gradient-primary:hover {
+.flip-card:hover {
    background-position: left;
+   transition-duration: 900ms;
 }
 
 
