@@ -3,13 +3,13 @@ import { Ornament1, Ornament2, Ornament4, Ornament5 } from "../components/Kabine
 export default function StaffSection() {
   return (
     <section className="relative w-full py-32 flex flex-col items-center overflow-hidden bg-[#F4E8FF]">
-      <div className="absolute right-30 md:right-20 bottom-[10%] md:top-[0%] w-[700vw] md:w-[400vw] z-0">
+      <div className="absolute right-30 md:right-20 bottom-[10%] md:top-[12%] lg:top-[0%] w-[700vw] md:w-[400vw] z-0">
         <div className="w-full translate-x-[43%] -rotate-235 md:rotate-0">
           <Ornament5 />
         </div>
       </div>
 
-      <div className="absolute -right-60 md:-right-10 top-[30%] md:top-[22%] w-[700vw] md:w-[400vw] z-0">
+      <div className="absolute -right-60 md:-right-10 top-[30%] lg:top-[22%] w-[700vw] md:w-[400vw] z-0">
         <div className="w-full translate-x-[40%] md:translate-x-[30%] -scale-x-100 -rotate-250 md:rotate-[-15deg]">
           <Ornament5 />
         </div>
@@ -52,24 +52,24 @@ export default function StaffSection() {
       </div>
 
       {/* CONTAINER */}
-      <div className="grid grid-cols-2 md:flex md:flex-wrap md:justify-center -mt-44 mb-16 gap-8 md:gap-22 z-10 w-full max-w-4xl">
+      <div className="grid grid-cols-2 md:flex md:flex-wrap md:justify-center -mt-44 mb-16 gap-8 lg:gap-22 z-10 w-full max-w-4xl">
         {/* Kadep */}
         <div className="col-span-2 flex justify-center md:contents">
-          <div className="w-40 h-52 md:w-60 md:h-80 md:order-2 border-2 flex items-center justify-center">
+          <div className="w-40 h-52 md:w-50 md:h-62 lg:w-60 lg:h-80 md:order-2 border-2 flex items-center justify-center">
             Kadep
           </div>
         </div>
 
         {/* Wakadep */}
         <div className="col-span-1 flex justify-center md:contents">
-          <div className="w-36 h-46 md:w-60 md:h-80 md:order-1 ml-12 md:ml-0 border-2 flex items-center justify-center">
+          <div className="w-36 h-46 md:w-50 md:h-62 lg:w-60 lg:h-80 md:order-1 ml-12 md:ml-0 border-2 flex items-center justify-center">
             Wakadep
           </div>
         </div>
 
         {/* Sekbend */}
         <div className="col-span-1 flex justify-center md:contents">
-          <div className="w-36 h-46 md:w-60 md:h-80 md:order-3 mr-12 md:mr-0 border-2 flex items-center justify-center">
+          <div className="w-36 h-46 md:w-50 md:h-62 lg:w-60 lg:h-80 md:order-3 mr-12 md:mr-0 border-2 flex items-center justify-center">
             Sekbend
           </div>
         </div>
@@ -84,7 +84,7 @@ export default function StaffSection() {
         </div>
 
         {/* GRID POSISI: STAFF (3 Kolom Desktop, 2 Kolom Mobile) */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-y-16 md:gap-y-36 gap-x-8 md:gap-x-32">
+        <div className="grid grid-cols-2 lg::grid-cols-3 gap-y-16 md:gap-y-36 gap-x-8 md:gap-x-32">
           {[...Array(6)].map((_, i) => (
             <div key={i} className="flex flex-col items-center">
               {/* foto & nama staff */}

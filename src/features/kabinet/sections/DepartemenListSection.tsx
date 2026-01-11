@@ -1,6 +1,11 @@
 import { Ornament1, Ornament2 } from "../components/KabinetOrnaments";
+import { Departemen } from "../types";
+import { useParams } from "next/navigation";
 
-export default function KabinetDepartemenSection() {
+export default function DepartemenListSection({ data }: { data: Departemen[] }) {
+  const params = useParams();
+  const kabinetId = params.kabinetId as string;
+
   return (
     <section className="relative w-full min-h-screen bg-[#F4E8FF] flex flex-col items-center py-20 overflow-hidden">
       <div className="relative z-10 flex flex-col items-center mb-20 w-full">
@@ -28,7 +33,7 @@ export default function KabinetDepartemenSection() {
       </h2>
 
       <div className="relative z-10 w-full max-w-6xl flex flex-col items-center gap-10 px-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 justify-items-center gap-6 md:gap-14 w-full">
+        <div className="grid grid-cols-2 lg:grid-cols-4 justify-items-center gap-6 md:gap-14 w-full">
           {[1, 2, 3, 4].map((i) => (
             <div
               key={i}

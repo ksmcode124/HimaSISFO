@@ -5,7 +5,7 @@ interface Props {
   imageSrc?: string;
 }
 
-export function HeroMobilePreview({
+export default function PhotoSlideshowMobile({
 imageSrc = "/assets/kabinet/gelora-harmoni-1.webp",
 }: Props) {
   return (
@@ -33,7 +33,7 @@ imageSrc = "/assets/kabinet/gelora-harmoni-1.webp",
       {/* Layer Belakang */}
       <div className="absolute w-100 -ml-17 top-1 aspect-video rounded-2xl drop-shadow-[5px_5px_2px_rgba(0,0,0,0.3)] overflow-hidden z-10">
         <Image
-          src="/assets/kabinet/bg-layer2.webp"
+          src="/assets/kabinet/layer-photo-mobile.webp"
           alt=""
           fill
           className="object-cover"

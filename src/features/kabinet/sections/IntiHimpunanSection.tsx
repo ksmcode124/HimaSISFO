@@ -14,7 +14,7 @@ interface IntiProps {
   };
 }
 
-export default function KabinetIntiSection({ data }: IntiProps) {
+export default function IntiHimpunanSection({ data }: IntiProps) {
   return (
     <section className="relative w-full md:min-h-[120vh] bg-[#F4E8FF] flex flex-col items-center py-24 overflow-hidden">
       <div className="relative z-10 flex flex-row items-center gap-4 md:mt-20 mb-20">
@@ -42,7 +42,7 @@ export default function KabinetIntiSection({ data }: IntiProps) {
 
       <div className="relative z-10 w-full max-w-7xl flex items-center justify-between -mt-10 md:mt-0 md:px-10">
         {/* Carousel Inti */}
-        <div className="flex-1 flex justify-center items-center md:mx-10">
+        <div className="flex-1 flex justify-center items-center lg:mx-10">
           <div className="w-[380px] md:w-full h-[300px] md:h-[500px] border-2 flex items-center">
             <div className="flex flex-col items-center gap-6">
               Carousel Inti

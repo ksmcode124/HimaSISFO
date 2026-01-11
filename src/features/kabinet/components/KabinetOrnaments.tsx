@@ -4,7 +4,7 @@ export function Ornament1() {
   return (
     <div className="relative w-full aspect-4/1">
       <Image
-        src="/assets/kabinet/cloud.webp"
+        src="/assets/kabinet/ornament-1.webp"
         alt=""
         fill
         className="object-contain"

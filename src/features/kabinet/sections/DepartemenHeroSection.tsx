@@ -44,16 +44,16 @@ export default function DepartemenHeroSection({
             {nama}
           </h1>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center w-full max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-20 md:mt-10 lg:mt-0 items-center w-full max-w-6xl mx-auto">
             {/* Deskripsi Departemen */}
-            <div className="flex w-80 md:w-full -mt-12 md:mt-0 items-center justify-center md:justify-end">
+            <div className="flex w-80 md:w-96 lg:w-full md:pl-10 -mt-12 md:mt-0 items-center justify-center md:justify-end">
               <p className="text-white text-xs md:text-lg text-center max-w-md">
                 {deskripsi}
               </p>
             </div>
 
             {/* Logo Departemen*/}
-            <div className="flex justify-center md:justify-start order-first md:order-0">
+            <div className="flex justify-center md:justify-start order-first md:order-0 md:pr-10">
               <div className="relative w-25 h-25 md:w-100 md:h-100 bg-white flex">
                 <Image
                   src={logo}
@@ -67,7 +67,7 @@ export default function DepartemenHeroSection({
         </div>
       </section>
 
-      <div className="absolute -bottom-4 md:-bottom-72 w-full z-10 translate-y-1/2">
+      <div className="absolute -bottom-4 md:-bottom-4 w-full z-10 translate-y-1/2">
         <Pita />
       </div>
     </div>

@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import { Pita } from "../components/KabinetOrnaments";
+import TentangCard from "../components/TentangCard";
 
 interface FilosofiProps {
   data: {
@@ -10,7 +13,10 @@ interface FilosofiProps {
   logo_url: string;
 }
 
-export default function KabinetFilosofiSection({ logo_url }: FilosofiProps) {
+export default function FilosofiSection({
+  logo_url,
+  data,
+}: FilosofiProps) {
   return (
     <div className="relative w-full">
       <section className="w-full bg-[#F4E8FF] min-h-screen flex items-center justify-center py-20 px-10">
@@ -22,10 +28,10 @@ export default function KabinetFilosofiSection({ logo_url }: FilosofiProps) {
           }}
         />
 
-        <div className="relative z-10 w-full max-w-7xl mt-20 grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
+        <div className="relative z-10 w-full max-w-7xl mt-14 mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10 items-center">
           {/* LOGO */}
-          <div className="flex justify-center items-center md:order-2">
-            <div className="relative w-60 h-60 md:w-90 md:h-90 border flex items-center justify-center">
+          <div className="flex justify-center items-center lg:order-2">
+            <div className="relative w-60 h-60 lg:w-[420px] lg:h-[420px] border flex items-center justify-center">
               <Image
                 src={logo_url}
                 alt="Logo Kabinet"
@@ -37,21 +43,27 @@ export default function KabinetFilosofiSection({ logo_url }: FilosofiProps) {
 
           {/* TENTANG */}
           <div className="flex flex-col gap-4">
-            <div className="flex flex-col gap-6 border md:w-98 h-60">
-              Tentang Card
+            <div className="flex justify-center lg:justify-start order-2 lg:order-1 h-full">
+              <TentangCard data={data.arti_nama} />
             </div>
           </div>
 
-          <div className="md:flex-col md:-ml-6 md:gap-10 md:order-3 hidden md:block">
+          <div className="md:flex-col md:-ml-6 md:gap-10 md:order-3 hidden lg:block">
             {/* Visi Desktop */}
-            <div className="md:mb-10 md:border md:flex md:items-center md:w-full md:h-16">Visi</div>
+            <div className="md:mb-10 md:border md:flex md:items-center lg:w-full md:h-16">
+              Visi
+            </div>
             {/* Misi Desktop */}
-            <div className="md:border md:flex md:items-center md:w-full md:h-16">Misi</div>
+            <div className="md:border md:flex md:items-center md:w-full md:h-16">
+              Misi
+            </div>
           </div>
 
-          <div className="flex-col gap-10 block md:order-3 md:hidden">
+          <div className="flex-col gap-10 block md:order-3 lg:hidden">
             {/* Visi Misi Mobile */}
-            <div className="border flex items-center w-full h-16">Visi & Misi</div>
+            <div className="border flex items-center w-full h-16">
+              Visi & Misi
+            </div>
           </div>
         </div>
       </section>

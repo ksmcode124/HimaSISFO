@@ -9,7 +9,7 @@ interface TentangCardProps {
 
 export default function TentangCard({ data }: TentangCardProps) {
   return (
-    <div className="relative md:w-[390px] rounded-t-[40px] drop-shadow-[10px_8px_2px_rgba(0,0,0,0.2)] overflow-hidden">
+    <div className="relative w-full max-w-[390px] lg:max-w-[400px] rounded-t-[40px] drop-shadow-[10px_8px_2px_rgba(0,0,0,0.2)] overflow-hidden">
       <div className="bg-white/80 p-6 pr-1.5 flex flex-col gap-1">
         <h3 className="text-lg mb-1.5 md:mb-0 md:text-xl font-semibold bg-linear-to-r from-[#D6336C] to-[#7048E8] bg-clip-text text-transparent">
           Tentang
