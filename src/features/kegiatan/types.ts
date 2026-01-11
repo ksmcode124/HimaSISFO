@@ -13,11 +13,6 @@ export interface DynamicCalendarProps {
   className?: string;
 }
 
-export interface EventDetailContentProps {
-  events: EventCardProps[];
-  search: string; 
-}
-
 export interface WithVariantEventCardProps extends EventCardProps {
   variant?: "detail" | "onGoing" | "notGoing";
 }
