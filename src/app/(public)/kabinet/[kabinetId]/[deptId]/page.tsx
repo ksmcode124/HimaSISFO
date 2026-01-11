@@ -9,6 +9,11 @@ import {
   ProkerSection,
 } from "@/features/kabinet";
 
+/**
+ * Page ini melakukan pemfilteran data bertingkat (Nested Filtering) berdasarkan URL:
+ * Mencari kabinet via 'kabinetId', lalu mencari departemen spesifik via 'deptId'
+ */
+
 const data = kabinetDataRaw as unknown as KabinetDataJSON;
 
 export default function DepartemenPage() {
@@ -31,7 +36,7 @@ export default function DepartemenPage() {
   return (
     <main>
       <DepartemenHeroSection
-        nama={dept.nama} 
+        nama={dept.nama}
         deskripsi={dept.deskripsi}
         logo={dept.logo_url}
         image_url={dept.image_url}

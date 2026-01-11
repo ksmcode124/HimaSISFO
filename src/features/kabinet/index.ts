@@ -2,11 +2,13 @@
 // export {default as NamaMethod/Variable} from "./path-to-file"
 
 export { default as KabinetHeroSection } from './sections/KabinetHeroSection';
-export { default as KabinetFilosofiSection } from './sections/FilosofiSection';
-export { default as KabinetIntiSection } from './sections/IntiHimpunanSection';
-export { default as KabinetDepartemenSection } from './sections/DepartemenListSection';
+export { default as FilosofiSection } from './sections/FilosofiSection';
+export { default as IntiHimpunanSection } from './sections/IntiHimpunanSection';
+export { default as DepartemenListSection } from './sections/DepartemenListSection';
 export { default as DepartemenHeroSection } from './sections/DepartemenHeroSection';
 export { default as ProkerSection } from "./sections/ProkerSection";
 export { default as StaffSection } from './sections/StaffSection';
-export { default as KabinetYearButton } from './components/YearButton';
+export { default as PhotoSlideshowMobile } from  './components/PhotoSlideshowMobile';
+export { default as TentangCard } from  './components/TentangCard';
+export * from './components/KabinetOrnaments';
 export type * from './types';
