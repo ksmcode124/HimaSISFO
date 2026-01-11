@@ -31,7 +31,7 @@
               "type": "list",
               "items": [
                 {
-                  "text": "Membuka Web [BIMA](https://bima.upnyk.ac.id/"
+                  "text": "Membuka Web [BIMA](https://bima.upnyk.ac.id/)"
                 },
                 {
                   "text": "Tekan tombol navigasi (sebelah kiri nama mahasiswa)"
@@ -57,7 +57,7 @@
               "type": "list",
               "items": [
                 {
-                  "text": "Login melalui web [BIMA](https://bima.upnyk.ac.id"
+                  "text": "Login melalui web [BIMA](https://bima.upnyk.ac.id)"
                 },
                 {
                   "text": "Pilih menu Cetak KRP"
@@ -110,7 +110,7 @@
                   ]
                 },
                 {
-                  "text": "Isi data yang diperlukan dan unggah screenshot sejarah pembayaran UKT pada web [SI-UKT](http://siukt.upnyk.ac.id/)"
+                  "text": "Isi data yang diperlukan dan unggah screenshot sejarah pembayaran UKT pada web [SI-UKT](https://siukt.upnyk.ac.id/)"
                 },
                 {
                   "text": "Submit data lalu tunggu beberapa saat hingga status pengajuan berubah menjadi selesai dan download Surat Keterangan Aktif Kuliah"
@@ -418,11 +418,11 @@
                   "items": [
                     {
                       "text": "Folder LAPORAN_NIM_NAMA MAHASISWA. Folder ini berisi semua file laporan tugas akhir dalam format PDF dan DOCX.",
-                      "ordered": true,
+                      "listStyle": "list-lower-alpha",
                       "items": [
                         {
                           "text": "Cover, berisi: ",
-                          "ordered": true,
+                          "listStyle": "list-lower-roman",
                           "items": [
                             {
                               "text": "Halaman judul"
@@ -467,6 +467,7 @@
                     {
                       "text": "File index.pdf, berisi",
                       "ordered": true,
+                      "listStyle": "list-lower-alpha",
                       "items": [
                         {
                           "text" : "Judul tugas akhir"
@@ -500,6 +501,8 @@
               "items": [
                 {
                   "text": "Melengkapi persyaratan:",
+                  "ordered": true,
+                  "listStyle": "list-lower-alpha",
                   "items": [
                     {
                       "text": "CD dan skripsi dengan hardcover dengan sampul berwarna biru gelap"
@@ -518,7 +521,7 @@
                       "ordered": false,
                       "items": [
                         {
-                          "text": "Gambar (semua gambar di dalam skripsi"
+                          "text": "Gambar (semua gambar di dalam skripsi)"
                         },
                         {
                           "text": "Pemisahan masing-masing bagian skripsi dan dijadikan dalam satu folder (Cover, Abstrak, Bab 1, Bab 2, Bab 3, Bab 4, Bab 5, Daftar Pustaka, Lampiran"
@@ -546,6 +549,7 @@
               "items": [
                 {
                   "text": "Mengajukan proposal ke jurusan dan melampirkan persyaratan yang dibutuhkan:",
+                  "ordered": false,
                   "items": [
                     {
                       "text": "Brosur atau pamflet info lomba"

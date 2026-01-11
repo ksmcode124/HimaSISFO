@@ -160,6 +160,7 @@
                 },
                 {
                   "text": "Pilih alasan pengajuan sanggah:",
+                  "ordered": false,
                   "items": [
                     {
                       "text": "Penetapan ulang: Karena ada perubahan kemampuan ekonomi (penurunan) orang tua/wali/mahasiswa yang menanggung UKT"

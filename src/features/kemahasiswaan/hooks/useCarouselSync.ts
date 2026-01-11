@@ -1,22 +1,49 @@
-import { useState, useEffect } from "react"
+"use client"
+
+import { useEffect, useState } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 import type { CarouselApi } from "@/components/ui/Carousel"
 
-// Sinkronisasi index aktif dengan posisi scroll Embla
-export function useCarouselSync(api: CarouselApi | null) {
+export function useCarouselSync(
+  api: CarouselApi | null,
+  items: { id: string }[],
+) {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+
   const [selectedIndex, setSelectedIndex] = useState(0)
 
   useEffect(() => {
-    if (!api) return;
+    if (!api) return
 
-    const onSelect = () => setSelectedIndex(api.selectedScrollSnap());
-    onSelect();
-    api.on("select", onSelect);
+    const itemId = searchParams.get("item")
+    if (!itemId) return
 
-    // pastikan ini void
+    const index = items.findIndex((i) => i.id === itemId)
+    if (index === -1) return
+
+    api.scrollTo(index, true)
+    setSelectedIndex(index)
+  }, [api, searchParams, items])
+
+  useEffect(() => {
+    if (!api) return
+
+    const onSelect = () => {
+      const index = api.selectedScrollSnap()
+      const id = items[index]?.id
+      if (!id) return
+
+      setSelectedIndex(index)
+
+      router.replace(`?item=${id}`, { scroll: false })
+    }
+
+    api.on("select", onSelect)
     return () => {
-      api.off("select", onSelect);
-    };
-  }, [api]);
+      api.off("select", onSelect)
+    }
+  }, [api, items, router])
 
   return selectedIndex
 }

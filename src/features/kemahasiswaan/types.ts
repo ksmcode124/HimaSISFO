@@ -10,7 +10,7 @@ export type ListNode = {
   items: ListItem[]
 }
 
-export type AccordionItemBlock = {
+export type ItemDataJSON = {
   id: string
   title: string
   content: ContentBlock[]
@@ -20,6 +20,14 @@ export type AccordionItemBlock = {
 export type ListItem = {
   text: string
   ordered?: boolean
+  listStyle?: | "list-disc"
+    | "list-circle"
+    | "list-square"
+    | "list-decimal"
+    | "list-upper-roman"
+    | "list-lower-roman"
+    | "list-upper-alpha"
+    | "list-lower-alpha"
   items?: ListItem[]
 }
 
@@ -30,7 +38,7 @@ export type ContentBlock =
 export type SectionType = "item-collection" | "section" | "accordion"
 export type Section = {
   type: SectionType
-  items: any[]
+  items: unknown[]
 }
 
 export type KemahasiswaanDataFile = {
@@ -45,7 +53,7 @@ export type KemahasiswaanDataFile = {
     subtitle: string
   };
   sections: Section[];
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 

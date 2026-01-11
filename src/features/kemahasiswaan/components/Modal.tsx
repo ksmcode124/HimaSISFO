@@ -30,7 +30,8 @@ export default function Modal({ open, onClose, id }: ModalProps) {
         className="absolute inset-0 bg-black/40"
         onClick={onClose}
       />
-      <div className="relative z-10 -[95vw] sm:max-w-xl md:max-w-3xl lg:max-w-5xl rounded-lg bg-white p-6 max-h-[90vh] overflow-auto shadow-lg animate-in fade-in zoom-in">
+      <div className="relative z-10 -[95vw] sm:w-xl md:w-3xl lg:w-5xl rounded-lg bg-white p-6 max-h-[90vh] overflow-auto shadow-lg animate-in fade-in zoom-in">
+        <h1 className="text-lg font-medium text-center">{data?.title}</h1>
         <ContentRenderer content={data?.content as ContentBlock[]} />
       </div>
     </div>

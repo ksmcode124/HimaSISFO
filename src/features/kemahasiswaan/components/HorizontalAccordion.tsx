@@ -4,10 +4,10 @@ import {
   AccordionItem, 
   AccordionTrigger 
 } from "@/components/ui/Accordion";
-import { AccordionItemBlock } from "../types";
+import { ItemDataJSON } from "../types";
 import ContentRenderer from "./ContentRenderer";
 
-export default function HorizontalAccordion({ items }: { items: AccordionItemBlock[] }) {
+export default function HorizontalAccordion({ items }: { items: ItemDataJSON[] }) {
   return (
     <Accordion
       type="single"
@@ -22,7 +22,7 @@ export default function HorizontalAccordion({ items }: { items: AccordionItemBlo
 }
 
 interface Props {
-  items: AccordionItemBlock[]
+  items: ItemDataJSON[]
   activeIndex: number
   onChange: (index: number) => void
 }
@@ -52,7 +52,7 @@ export function FeaturedHorizontalAccordion({ items, activeIndex, onChange }:  P
 }
 
 /** --- Internal Components --- */
-function HorizontalAccordionItem( {item} : {item: AccordionItemBlock}) {
+function HorizontalAccordionItem( {item} : {item: ItemDataJSON}) {
   return (
     <AccordionItem
       key={item.id}

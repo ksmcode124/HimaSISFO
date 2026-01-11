@@ -79,17 +79,16 @@ export default function AlurKemahasiswaanCarousel({
                     <CardContent
                       className={cn(
                         "flex flex-col flex-1 gap-2 sm:gap-3 p-4 lg:p-6",
-                        "transition-all duration-800 ease-out delay-700",
                         isActive ? "justify-start" : "justify-center"
                       )}
                     >
                       {/* TITLE */}
                       <p
                         className={cn(
-                          "font-semibold transtition-colors duration-0",
+                          "font-semibold",
                           isActive
-                            ? "text-base sm:text-sm lg:text-md delay-0"
-                            : "mx-15 text-sm sm:text-lg lg:text-xl delay-250"
+                            ? "text-base sm:text-sm lg:text-md"
+                            : "mx-15 text-sm sm:text-lg lg:text-xl"
                         )}
                       >
                         {card.title}
@@ -113,10 +112,9 @@ export default function AlurKemahasiswaanCarousel({
                     <CardAction
                       className={cn(
                         "pb-4 w-full grid justify-items-center text-center",
-                        "transition-[opacity,transform,max-height] duration-200 ease-in",
                         isActive
-                          ? "opacity-100 translate-y-0 max-h-20 delay-1000"
-                          : "opacity-0 translate-y-2 max-h-0 overflow-hidden pointer-events-none delay-0"
+                          ? "opacity-100 translate-y-0 max-h-20 delay-1000 duration-500 transition-[opacity,transform] ease-in"
+                          : "opacity-0 translate-y-2 max-h-0 overflow-hidden pointer-events-none"
                       )}
                     >
                       <Link

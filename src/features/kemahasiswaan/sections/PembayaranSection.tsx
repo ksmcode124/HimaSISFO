@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import {
-  AccordionItemBlock,
+  ItemDataJSON,
   HorizontalAccordion,
   FeaturedHorizontalAccordion
 } from "@/features/kemahasiswaan"
@@ -10,8 +10,8 @@ import {
 import AccordionVisualImage from "../components/AccordionVisualImage"
 
 interface Props {
-  featuredItems: AccordionItemBlock[]
-  otherItems: AccordionItemBlock[]
+  featuredItems: ItemDataJSON[]
+  otherItems: ItemDataJSON[]
 }
 
 export default function PembayaranSection({

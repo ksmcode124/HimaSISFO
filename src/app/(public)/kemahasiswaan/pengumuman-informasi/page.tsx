@@ -2,13 +2,13 @@ import {
   Pengumuman,
   HeroSection,
   getSectionData,
-  AccordionItemBlock,
+  ItemDataJSON,
   KemahasiswaanDataFile,
   HorizontalAccordion
 } from "@/features/kemahasiswaan"
 
 export default function Page() {
-  const informasiItems = getSectionData<AccordionItemBlock[]>(Pengumuman as KemahasiswaanDataFile, "accordion")
+  const informasiItems = getSectionData<ItemDataJSON[]>(Pengumuman as KemahasiswaanDataFile, "accordion")
 
   return (
     <>

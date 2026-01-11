@@ -1,8 +1,8 @@
 import Image from "next/image"
-import { AccordionItemBlock } from "../types"
+import { ItemDataJSON } from "../types"
 
 interface Props {
-  items: AccordionItemBlock[]
+  items: ItemDataJSON[]
   activeIndex: number
   onSelect: (index: number) => void
 }

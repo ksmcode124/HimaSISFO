@@ -5,7 +5,7 @@ import {
   ContentBlock,
   BreadcrumbSection,
   getSectionData,
-  AccordionItemBlock,
+  ItemDataJSON,
   KemahasiswaanDataFile,
 } from "@/features/kemahasiswaan"
 import FolderCard from "@/features/kemahasiswaan/components/FolderCard"
@@ -19,7 +19,7 @@ type PageProps = {
 export default async function DetailPage({ params }: PageProps) {
   const { slug } = await params
 
-  const items = getSectionData<AccordionItemBlock[]>(PendaftaranVerifikasi as KemahasiswaanDataFile, "item-collection");
+  const items = getSectionData<ItemDataJSON[]>(PendaftaranVerifikasi as KemahasiswaanDataFile, "item-collection");
 
   const item = items.find(
     (item) => item.id === slug
@@ -46,7 +46,7 @@ export default async function DetailPage({ params }: PageProps) {
   )
 }
 
-function DetailSection({item} : {item: AccordionItemBlock}) {
+function DetailSection({item} : {item: ItemDataJSON}) {
   return (
     <section className="px-6 lg:px-12 mx-auto min-h-[65vh] flex justify-center">
       <FolderCard title="Pendaftaran & Verifikasi" hasLayer={true}>

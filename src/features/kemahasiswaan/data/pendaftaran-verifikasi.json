@@ -167,7 +167,7 @@
               "ordered": false,
               "items": [
                 {
-                  "text": "Mengunduh dan mengisi blanko [Pengunduran Diri](/kemahasiswaan/blanko)."
+                  "text": "Mengunduh dan mengisi blanko [Pengunduran Diri](/kemahasiswaan/blanko/item=pengunduran-diri)."
                 },
                 {
                   "text": "Menemui dosen wali dan ketua jurusan untuk memohon tanda tangan."
@@ -194,7 +194,7 @@
               "ordered": false,
               "items": [
                 {
-                  "text": "Mengunduh dan mengisi blanko [Pengajuan Cuti Akademik](/kemahasiswaan/blanko)."
+                  "text": "Mengunduh dan mengisi blanko [Pengajuan Cuti Akademik](/kemahasiswaan/blanko?item=cuti-akademik)."
                 },
                 {
                   "text": "Menemui dosen wali, koorprodi, dan ketua jurusan untuk memohon tanda tangan."

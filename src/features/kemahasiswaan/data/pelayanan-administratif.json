@@ -31,7 +31,7 @@
               "type": "list",
               "items": [
                 {
-                  "text": "Unduh formulir yang ada pada website [https://tik.upnyk.ac.id](https://tik.upnyk.ac.id/"
+                  "text": "Unduh formulir yang ada pada website [https://tik.upnyk.ac.id](https://tik.upnyk.ac.id/)"
                 },
                 {
                   "text": "Pilih menu download > formulir aduan"
@@ -124,7 +124,7 @@
                   ]
                 },
                 {
-                  "text" : "Mengisi [Blanko Legalisir Surat Keterangan Lulus](/kemahasiswaan/blanko)"
+                  "text" : "Mengisi [Blanko Legalisir Surat Keterangan Lulus](/kemahasiswaan/blanko?item=legalisir-skl)"
                 },
                 {
                   "text" : "Menyerahkan semua berkas ke loket TU fakultas"
@@ -164,7 +164,7 @@
                   "text" : "Melakukan pembayaran sebesar Rp100.000 untuk mahasiswa UPN \"Veteran\" Yogyakarta dan Rp150.000 untuk masyarakat umum, disetor ke rekening BNI No. 1262815269 (RPL 030 KS UPNVY untuk LPPM Pemerintah)"
                 },
                 {
-                  "text" : "Wajib melakukan konfirmasi pendaftaran ke [085868796605](wa.me/6285868796605) (Pak Ngatimin)"
+                  "text" : "Wajib melakukan konfirmasi pendaftaran ke [085868796605](https://wa.me/6285868796605) (Pak Ngatimin)"
                 },
                 {
                   "text" : "Pada hari tes membawa KTM dan bukti pembayaran"

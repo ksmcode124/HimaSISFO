@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Card, CardAction, CardContent } from "@/components/ui/Card"
 import {
   Carousel,
@@ -24,7 +24,7 @@ interface BlankoCarouselProps {
 
 export default function BlankoCarousel({ blankoItems }: BlankoCarouselProps) {
   const [api, setApi] = useState<CarouselApi | null>(null)
-  const selectedIndex = useCarouselSync(api)
+  const selectedIndex = useCarouselSync(api, blankoItems)
 
   // function untuk menentukan styling carousel item berdasarkan posisi
   const getItemStyle = (index: number) => {
@@ -90,7 +90,7 @@ function BlankoCardItem({ card, className }: { card: BlankoItem; className: stri
           <CardAction className="pb-4 w-full grid justify-items-center">
             <Link
               href={`${card.filepath}/export?format=docx`}
-              className="text-xs flex gap-2 items-center rounded-full border px-4 py-2 bg-tb-gradient-primary text-white"
+              className="text-xs flex gap-2 items-center rounded-full border px-4 py-2 bg-linear-to-t from-[#456882] to-[#1B3C53] text-white"
             >
               Unduh <Download size={14} />
             </Link>

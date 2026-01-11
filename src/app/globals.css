@@ -100,6 +100,22 @@
    transition-duration: 900ms;
 }
 
+.list-upper-roman {
+  list-style-type: upper-roman;
+}
+
+.list-lower-roman {
+  list-style-type: lower-roman;
+}
+
+.list-upper-alpha {
+  list-style-type: upper-alpha;
+}
+
+.list-lower-alpha {
+  list-style-type: lower-alpha;
+}
+
 
 @layer base {
    * {

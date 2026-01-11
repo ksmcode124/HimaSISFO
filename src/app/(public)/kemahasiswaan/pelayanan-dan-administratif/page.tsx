@@ -1,6 +1,6 @@
 import { 
   PelayananAdministratif,
-  AccordionItemBlock, 
+  ItemDataJSON, 
   HeroSection, 
   KemahasiswaanDataFile, 
   getSectionData,
@@ -8,7 +8,7 @@ import {
 } from "@/features/kemahasiswaan";
 
 export default function Page() { 
-  const pelayananAdministratifItems = getSectionData<AccordionItemBlock[]>(PelayananAdministratif as KemahasiswaanDataFile, "accordion")
+  const pelayananAdministratifItems = getSectionData<ItemDataJSON[]>(PelayananAdministratif as KemahasiswaanDataFile, "accordion")
   
   return (
     <>

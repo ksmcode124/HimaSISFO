@@ -1,6 +1,6 @@
 // import { Card, CardHeader, CardTitle } from "@/components/ui/Card";
 import {
-  AccordionItemBlock,
+  ItemDataJSON,
   ContentBlock,
   ContentRenderer,
   FlipCard,
@@ -13,8 +13,8 @@ import {
 import { FlipHorizontal, GraduationCap } from "lucide-react";
 
 export default function WisudaPage() {
-  const wisudaAccordionItems = getSectionData<AccordionItemBlock[]>(WisudaYudisium as KemahasiswaanDataFile, "accordion")
-  const itemCollectionData = getSectionData<AccordionItemBlock[]>(WisudaYudisium as KemahasiswaanDataFile, "item-collection")
+  const wisudaAccordionItems = getSectionData<ItemDataJSON[]>(WisudaYudisium as KemahasiswaanDataFile, "accordion")
+  const itemCollectionData = getSectionData<ItemDataJSON[]>(WisudaYudisium as KemahasiswaanDataFile, "item-collection")
 
   return (
     <>
@@ -33,7 +33,7 @@ export default function WisudaPage() {
   );
 }
 
-function ItemCard({item}: {item: AccordionItemBlock}) {
+function ItemCard({item}: {item: ItemDataJSON}) {
   return (
     <FlipCard
       className="

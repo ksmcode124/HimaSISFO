@@ -1,10 +1,10 @@
 "use client"
 import { Card, CardHeader, CardTitle } from "@/components/ui/Card";
-import { AccordionItemBlock, getSectionData, HeroSection, KemahasiswaanDataFile, Modal, ProsesAkademik } from "@/features/kemahasiswaan";
+import { ItemDataJSON, getSectionData, HeroSection, KemahasiswaanDataFile, Modal, ProsesAkademik } from "@/features/kemahasiswaan";
 import { useState } from "react";
 
 export default function ProsesAkademikPage() {
-  const itemCollectionData = getSectionData<AccordionItemBlock[]>(ProsesAkademik as KemahasiswaanDataFile, "item-collection")
+  const itemCollectionData = getSectionData<ItemDataJSON[]>(ProsesAkademik as KemahasiswaanDataFile, "item-collection")
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   return (

@@ -1,7 +1,7 @@
 import {
   PendaftaranVerifikasi,
   HeroSection,
-  AccordionItemBlock,
+  ItemDataJSON,
   KemahasiswaanDataFile,
   getSectionData,
   HorizontalAccordion,
@@ -11,8 +11,8 @@ import Link from "next/link"
 import Image from "next/image"
 
 export default function Page() {
-  const itemCollectionData = getSectionData<AccordionItemBlock[]>(PendaftaranVerifikasi as KemahasiswaanDataFile, "item-collection")
-  const ktmItems = getSectionData<AccordionItemBlock[]>(PendaftaranVerifikasi as KemahasiswaanDataFile, "accordion")
+  const itemCollectionData = getSectionData<ItemDataJSON[]>(PendaftaranVerifikasi as KemahasiswaanDataFile, "item-collection")
+  const ktmItems = getSectionData<ItemDataJSON[]>(PendaftaranVerifikasi as KemahasiswaanDataFile, "accordion")
 
   return (
     <>
@@ -23,7 +23,7 @@ export default function Page() {
   )
 }
 
-function ItemCollectionSection({items} : {items: AccordionItemBlock[]}){ 
+function ItemCollectionSection({items} : {items: ItemDataJSON[]}){ 
   return (
     <section className="grid grid-cols-2 md:grid-cols-3 gap-6 px-6 lg:px-12 max-w-7xl mx-auto py-5 border border-black rounded-2xl mb-5">
       {items?.map((item) => 
@@ -33,7 +33,7 @@ function ItemCollectionSection({items} : {items: AccordionItemBlock[]}){
   )
 }
 
-function ItemCard({item} : {item: AccordionItemBlock}) {
+function ItemCard({item} : {item: ItemDataJSON}) {
   return (
     <Link
       href={`pendaftaran-dan-verifikasi/${item.id}`}
@@ -56,7 +56,7 @@ function ItemCard({item} : {item: AccordionItemBlock}) {
   )
 }
 
-function AccordionSection({items} : {items: AccordionItemBlock[]}){
+function AccordionSection({items} : {items: ItemDataJSON[]}){
   return(
     <section className="max-w-7xl min-h-[55vh] mx-auto space-y-5">
       <div className="grid lg:grid-cols-[1fr_3fr] grid-rows-2 lg:grid-rows-1 justify-items-center items-center">

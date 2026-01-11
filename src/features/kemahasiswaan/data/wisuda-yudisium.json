@@ -37,13 +37,13 @@
                   "text": "Telah menempuh 144 SKS dengan nilai D maksimum 20% dari jumlah SKS dan tidak mempunyai nilai E dibuktikan dengan melampirkan KHS yang disahkan oleh dosen wali."
                 },
                 {
-                  "text": "Bukti Jurnal telah dinyatakan diterima oleh Reviewer (PTA.04)"
+                  "text": "Bukti Jurnal telah dinyatakan diterima oleh Reviewer [PTA.04](https://docs.google.com/document/d/1IF6gg-Tu3ocMHjYz-PK8K8MODAaA-wZq/)"
                 },
                 {
                   "text": "Bukti unggah jurnal"
                 },
                 {
-                  "text": "Persetujuan bebas revisi dari penguji (PTA.05)"
+                  "text": "Persetujuan bebas revisi dari penguji [SP.05](https://docs.google.com/document/d/1hVwGVOMy3y7XwCOzDbENd-iaqVgmX-RG/edit)"
                 },
                 {
                   "text": "CD Dokumentasi Tugas Akhir berisi:",
@@ -88,7 +88,7 @@
                   "text": "Transkrip nilai terbaru (2 buah)"
                 },
                 {
-                  "text": "Foto Hitam Putih 4x6 (Kertas Doff) Hitam Putih 6 lembar"
+                  "text": "Foto Hitam Putih 4x6 (Kertas Doff) Hitam Putih 6 lembar. [(Kriteria Foto)](https://bit.ly/kriteria-foto)"
                 },
                 {
                   "text": "Lembar Pengesahan Pembimbing dan Lembar Pengesahan Penguji 2 Lembar (Tanda Tangan Basah Asli)"
@@ -206,7 +206,7 @@
                   ]
                 },
                 {
-                  "text" : "Mengisi [Blanko Legalisir Transkrip Akademii](/kemahasiswaan/blanko)"
+                  "text" : "Mengisi [Blanko Legalisir Transkrip Akademik](/kemahasiswaan/blanko?item=legalisir-transkrip)"
                 },
                 {
                   "text" : "Menyerahkan semua berkas ke loket TU fakultas"
@@ -244,6 +244,7 @@
               "items": [
                 {
                   "text": "Melengkapi berkas-berkas, yaitu",
+                  "ordered": false,
                   "items": [
                     {
                       "text": "Fotocopy ijazah sebanyak 5 (lima) lembar"
@@ -251,7 +252,7 @@
                   ]
                 },
                 {
-                  "text": "Mengisi blanko [Legalisir Ijazah](/kemahasiswaan/blanko)."
+                  "text": "Mengisi blanko [Legalisir Ijazah](/kemahasiswaan/blanko?item=legalisir-ijazah)."
                 },
                 {
                   "text": "Menyerahkan semua berkas ke loket TU fakultas"
@@ -269,6 +270,7 @@
               "items": [
                 {
                   "text": "Melengkapi berkas-berkas, yaitu",
+                  "ordered": false,
                   "items": [
                     {
                       "text": "Surat bebas perpustakaan universitas asli"
@@ -300,9 +302,10 @@
               "items": [
                 {
                   "text": "Melengkapi berkas-berkas, yaitu",
+                  "ordered": false,
                   "items": [
                     {
-                      "text": "Formulir permohonan terjemahan transkrip dalam bahasa Inggris ([Blanko](/kemahasiswaan/blanko))"
+                      "text": "Formulir permohonan terjemahan transkrip dalam bahasa Inggris ([Blanko](/kemahasiswaan/blanko?item=cetak-transkrip))"
                     },
                     {
                       "text": "Fotocopy transkrip akademik"
@@ -324,7 +327,7 @@
               "type": "list",
               "items": [
                 {
-                  "text": "Mengisi blanko [Cetak Ijazah dengan bahasa Inggris](/kemahasiswaan/blanko)"
+                  "text": "Mengisi blanko [Cetak Ijazah dengan bahasa Inggris](/kemahasiswaan/blanko?item=cetak-ijazah)"
                 },
                 {
                   "text": "Melampirkan fotocopy ijazah"

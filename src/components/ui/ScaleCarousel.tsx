@@ -5,8 +5,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
   type CarouselApi,
 } from '@/components/ui/Carousel'
 import type { EmblaCarouselType, EmblaEventType } from 'embla-carousel'
@@ -43,7 +41,7 @@ export function ScaleCarousel({ children, className }: ScaleCarouselProps) {
   const applyScale = (embla: EmblaCarouselType, event?: EmblaEventType) => {
     const progress = embla.scrollProgress()
     embla.scrollSnapList().forEach((snap, idx) => {
-      let diff = snap - progress
+      const diff = snap - progress
       const scale = clamp(1 - Math.abs(diff * TWEEN_FACTOR))
       const el = itemsRef.current[idx]
       if (el) el.style.transform = `scale(${scale})`

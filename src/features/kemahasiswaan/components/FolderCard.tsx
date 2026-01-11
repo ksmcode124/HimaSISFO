@@ -82,7 +82,7 @@ export default function FolderCard({
             ${contentBgClass}
             border-2 ${borderClass}
             rounded-b-xl rounded-tr-xl
-            -mt-[2px]
+            -mt-0.5
             overflow-y-auto
             px-4 sm:px-6 md:px-8 lg:px-10
             pt-6 sm:pt-7 md:pt-8 lg:pt-9

@@ -13,6 +13,7 @@ export function InlineRenderer({ text }: InlineRendererProps) {
         p: ({ children }) => <>{children}</>,
         a: ({ href, children }) => (
           <a
+            target="_blank"
             href={href}
             className="text-primary underline underline-offset-4"
           >
