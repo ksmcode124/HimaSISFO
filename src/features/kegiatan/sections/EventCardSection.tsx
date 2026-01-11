@@ -20,20 +20,20 @@ function EventCardContent({ events }: { events: EventCardProps[] }) {
   const { pastNotGoing, nextOnGoing, futureNotGoing } = sortEvents(events);
   return (
     <div className="relative flex flex-col gap-3 md:gap-5 justify-center w-full mx-auto">
-      <h1 className="w-full h-fit text-center font-semibold text-xl md:text-7xl">
+      <h1 className="w-full h-fit text-center font-semibold text-xl md:text-4xl xl:text-7xl">
         Agenda
       </h1>
-      <div className="grid grid-cols-3 xl:grid-cols-[285fr_479fr_285fr] gap-1 md:gap-8">
-        <div>
-          <h2 className="h-fit w-full text-center uppercase py-5 md:py-10 font-semibold text-[12px] md:text-3xl">Sebelum</h2>
+      <div className="grid grid-cols-3 md:grid-cols-[1fr_2fr_1fr] gap-1 sm:gap-4 xl:gap-8">
+        <div className="w-full min-w-0">
+          <h2 className="h-fit w-full text-center uppercase py-5 md:py-10 font-semibold text-[12px] md:text-2xl xl:text-3xl">Sebelum</h2>
           {pastNotGoing && <EventCard variant="notGoing" {...pastNotGoing} />}
         </div>
-        <div>
-          <h2 className="h-fit w-full text-center uppercase py-5 md:py-10 font-semibold text-[12px] md:text-3xl">Berikutnya</h2>
+        <div className="w-full min-w-0">
+          <h2 className="h-fit w-full text-center uppercase py-5 md:py-10 font-semibold text-[12px] md:text-2xl xl:text-3xl">Berikutnya</h2>
           {nextOnGoing && <EventCard variant="onGoing" {...nextOnGoing} />}
         </div>
-        <div>
-          <h2 className="h-fit w-full text-center uppercase py-5 md:py-10 font-semibold text-[12px] md:text-3xl">Mendatang</h2>
+        <div className="w-full min-w-0">
+          <h2 className="h-fit w-full text-center uppercase py-5 md:py-10 font-semibold text-[12px] md:text-2xl xl:text-3xl">Mendatang</h2>
           {futureNotGoing && <EventCard variant="notGoing" {...futureNotGoing} />}
         </div>
       </div>

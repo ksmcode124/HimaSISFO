@@ -22,7 +22,7 @@ function CalendarDecoration() {
 function CalendarContent({ events }: { events: EventCardProps[] }) {
   return (
     <div className="relative flex flex-col gap-5">
-      <h1 className="py-5 md:py-4 md:py-10 text-center font-semibold text-xl md:text-7xl">
+      <h1 className="py-5 md:py-4 md:py-10 text-center font-semibold text-xl md:text-4xl xl:text-7xl">
         Kalender
       </h1>
       <DynamicCalendar className="border-[#456882] border-6" events={events} />
