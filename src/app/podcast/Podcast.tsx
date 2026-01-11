@@ -5,7 +5,7 @@ export default function Podcast() {
   const [podcast, setPodcast] = useState<any>(null);
 
   useEffect(() => {
-    fetch("/api/spotify")
+    fetch("/api/display/spotify")
       .then((res) => res.json())
       .then((data) => setPodcast(data));
   }, []);

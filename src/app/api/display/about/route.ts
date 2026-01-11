@@ -50,7 +50,7 @@ export async function GET(request: NextRequest) {
       nama_kabinet: kabinet.nama_kabinet,
       deskripsi_kabinet: kabinet.deskripsi,
       logo_kabinet: kabinet.gambar_logo,
-      // elemen_logo: kabinet.elemen_logo,
+      elemen_logo: kabinet.elemen_logo,
       departemen: departemenWithMembers,
       tahunList,
     };
