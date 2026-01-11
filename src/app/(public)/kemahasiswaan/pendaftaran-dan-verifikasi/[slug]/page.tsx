@@ -41,8 +41,15 @@ export default async function DetailPage({ params }: PageProps) {
     <>
     {breadcrumbItems && <BreadcrumbSection items={breadcrumbItems!} />}
     
+    <DetailSection item={item} />
+    </>
+  )
+}
+
+function DetailSection({item} : {item: AccordionItemBlock}) {
+  return (
     <section className="px-6 lg:px-12 mx-auto min-h-[65vh] flex justify-center">
-      <div className="relative max-h-[75vh] sm:w-[40vw] overflow-visible">
+      <div className="relative max-h-[75vh] lg:w-[60vw] max-w-3xl overflow-visible">
         <div className="relative">
           
           {/* background offset layer */}
@@ -51,6 +58,7 @@ export default async function DetailPage({ params }: PageProps) {
               absolute inset-0 h-[90%]
               bg-linear-to-r to-[#1B3C53] from-50%-[#1F445F] from-[#456882] rounded-xl
               z-0
+              border-2 border-[#D9D9D9]
               translate-y-15 -translate-x-6
               sm:translate-y-17 sm:-translate-x-8
               lg:translate-y-25 lg:-translate-x-10
@@ -61,13 +69,13 @@ export default async function DetailPage({ params }: PageProps) {
           <h1
             className="
               relative z-20
-              bg-[#EDF3F6] rounded-xl
+              bg-[#EDF3F6] rounded-t-xl
               font-medium
-              px-4 py-2
+              px-4
               text-base
               max-w-[80%]
-              sm:text-md border-t-2 border-[#CECECE]
-              md:text-lg md:px-5 md:py-3
+              sm:text-md border-t-2 border-x-2 border-[#404040]
+              md:text-lg md:px-5
               lg:text-xl lg:max-w-[70%]
             "
           >
@@ -78,15 +86,15 @@ export default async function DetailPage({ params }: PageProps) {
           <div
             className="
               relative z-10
-              border-2 border-[#CECECE]
-              bg-[#EDF3F6] rounded-xl
+              border-2 border-[#404040]
+              bg-[#EDF3F6] rounded-b-xl rounded-tr-xl
               overflow-y-auto
-              -mt-4
               pt-6 pb-8
               px-4
-              sm:px-6 sm:-mt-5 sm:pt-7
-              md:px-8 md:-mt-6 md:pt-8
-              lg:px-10 lg:-mt-7 lg:pt-9
+              -mt-[2.3px]
+              sm:px-6 sm:pt-7
+              md:px-8 md:pt-8
+              lg:px-10 lg:pt-9
             "
           >
             <h1 className="text-lg sm:text-xl lg:text-2xl font-semibold mb-6 text-center">
@@ -100,6 +108,5 @@ export default async function DetailPage({ params }: PageProps) {
       </div>
 
     </section>
-    </>
   )
 }
