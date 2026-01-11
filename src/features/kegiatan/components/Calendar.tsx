@@ -102,7 +102,7 @@ export function DynamicCalendar({
         <thead>
           <tr>
             {WEEK_DAYS.map(day => (
-              <th key={day} className="border border-[#fff] bg-[#6482A6] pl-2 py-1 text-white text-left font-medium text-[12px] md:text-sm uppercase">
+              <th key={day} className="border border-[#fff] bg-[#6482A6] pl-2 py-1 text-white text-left font-medium text-[14px] md:text-md uppercase">
                 {day}
               </th>
             ))}
@@ -125,7 +125,7 @@ export function DynamicCalendar({
                     <td
                       key={key}
                       className={clsx(
-                        "border border-[#fff] text-[10px] md:text-[16px] md:text-sm align-top",
+                        "border border-[#fff] text-[14px] md:text-md align-top",
                         isCurrentMonth ? "bg-[#99B6D9]" : "bg-[#B3C9E4]"
                       )}
                     >
