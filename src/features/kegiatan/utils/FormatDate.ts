@@ -10,6 +10,26 @@ export function formatDate(date?: string | Date) {
     year: 'numeric',
   }).format(dateObj);
 }
+
+export function formatDateID(
+  date?: string | Date,
+  options?: Intl.DateTimeFormatOptions
+): string {
+  if (!date) return "-";
+
+  const dateObj = new Date(date);
+  if (isNaN(dateObj.getTime())) return "-";
+
+  return new Intl.DateTimeFormat(
+    "id-ID",
+    options ?? {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }
+  ).format(dateObj);
+}
+
 export function formatMonthName(month: number) {
   return new Intl.DateTimeFormat(LOCALE, {
     month: "long",
