@@ -2,19 +2,20 @@
 
 import Image from "next/image";
 import { Ornament1, Ornament4 } from "../components/KabinetOrnaments";
+import { Anggota } from "../components/IntiHimpunanCard";
+import IntiHimpunanCard from "../components/IntiHimpunanCard";
 
-interface IntiProps {
-  data: {
-    logo_url: string;
-    anggota: {
-      nama: string;
-      jabatan: string;
-      image_url: string;
-    }[];
-  };
+interface IntiHimpunanData {
+  logo_url: string;
+  anggota: Anggota[];
 }
 
-export default function IntiHimpunanSection({ data }: IntiProps) {
+interface SectionProps {
+  data: IntiHimpunanData;
+}
+
+export default function KabinetIntiSection({ data }: SectionProps) {
+  if (!data) return null;
   return (
     <section className="relative w-full md:min-h-[120vh] bg-[#F4E8FF] flex flex-col items-center py-24 overflow-hidden">
       <div className="relative z-10 flex flex-row items-center gap-4 md:mt-20 mb-20">
@@ -28,9 +29,7 @@ export default function IntiHimpunanSection({ data }: IntiProps) {
           />
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-bold">
-          Inti Himpunan
-        </h2>
+        <h2 className="text-2xl md:text-3xl font-bold">Inti Himpunan</h2>
       </div>
 
       <div className="absolute z-0 top-36 md:top-40 -right-28 md:-right-72 w-[400px] md:w-[1000px]">
@@ -40,14 +39,12 @@ export default function IntiHimpunanSection({ data }: IntiProps) {
         <Ornament4 />
       </div>
 
-      <div className="relative z-10 w-full max-w-7xl flex items-center justify-between -mt-10 md:mt-0 md:px-10">
-        {/* Carousel Inti */}
-        <div className="flex-1 flex justify-center items-center lg:mx-10">
-          <div className="w-[380px] md:w-full h-[300px] md:h-[500px] border-2 flex items-center">
-            <div className="flex flex-col items-center gap-6">
-              Carousel Inti
-            </div>
-          </div>
+      {/* Grid Card Langsung (Tanpa Carousel) */}
+      <div className="relative z-10 w-full max-w-6xl px-6">
+        <div className="flex flex-row flex-wrap justify-center gap-y-16 gap-x-10 w-full">
+          {data.anggota.map((item, index) => (
+            <IntiHimpunanCard key={index} data={item} index={index} />
+          ))}
         </div>
       </div>
 

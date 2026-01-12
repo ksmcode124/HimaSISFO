@@ -1,6 +1,7 @@
 "use client";
 
 import { Pita } from "../components/KabinetOrnaments";
+import ProkerList from "../components/CarouselProker";
 
 export default function ProkerSection() {
   return (
@@ -24,9 +25,9 @@ export default function ProkerSection() {
         </div>
 
         {/* Carousel Proker */}
-        <div className="relative w-full max-w-7xl h-[250px] md:h-[550px] border-2 flex items-center justify-center z-10">
+        <div className="relative w-full max-w-7xl h-[250px] md:h-[550px] flex items-center justify-center z-10">
           <div className="flex flex-col items-center text-black font-bold">
-            CAROUSEL PROKER
+            <ProkerList />
           </div>
         </div>
       </section>

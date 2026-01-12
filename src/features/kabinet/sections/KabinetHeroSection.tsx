@@ -153,7 +153,9 @@ export default function KabinetHeroSection({
             </h3>
           </div>
         </div>
-        <PhotoSlideshowMobile />
+        <PhotoSlideshowMobile
+          imageSrc={images[currentImgIndex] || "/assets/kabinet/fallback.webp"}
+        />
 
         <div className="hidden md:block absolute bottom-0 left-0 w-full h-48 lg:h-64 bg-linear-to-t from-white via-white/20 to-transparent z-0" />
       </section>

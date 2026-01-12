@@ -1,6 +1,24 @@
-import { Ornament1, Ornament2, Ornament4, Ornament5 } from "../components/KabinetOrnaments";
+import {
+  Ornament1,
+  Ornament2,
+  Ornament4,
+  Ornament5,
+} from "../components/KabinetOrnaments";
+import StaffCard from "../components/StaffCard";
 
-export default function StaffSection() {
+interface StaffSectionProps {
+  data: {
+    staff: {
+      inti: { nama: string; jabatan: string; image_url: string }[];
+      anggota: { nama: string; image_url: string }[];
+    };
+  };
+}
+
+export default function StaffSection({ data }: StaffSectionProps) {
+  const intiDepartemen = data.staff.inti;
+  const staffDepartemen = data.staff.anggota;
+
   return (
     <section className="relative w-full py-32 flex flex-col items-center overflow-hidden bg-[#F4E8FF]">
       <div className="absolute right-30 md:right-20 bottom-[10%] md:top-[12%] lg:top-[0%] w-[700vw] md:w-[400vw] z-0">
@@ -45,10 +63,10 @@ export default function StaffSection() {
       </div>
 
       <div className="absolute w-120 top-64 right-22 z-0 rotate-45 md:hidden">
-          <Ornament4 />
+        <Ornament4 />
       </div>
       <div className="absolute w-120 top-64 left-22 z-0 rotate-135 -scale-y-100 md:hidden">
-          <Ornament4 />
+        <Ornament4 />
       </div>
 
       {/* CONTAINER */}
@@ -70,7 +88,7 @@ export default function StaffSection() {
         {/* Sekbend */}
         <div className="col-span-1 flex justify-center md:contents">
           <div className="w-36 h-46 md:w-50 md:h-62 lg:w-60 lg:h-80 md:order-3 mr-12 md:mr-0 border-2 flex items-center justify-center">
-            Sekbend
+            Sekben
           </div>
         </div>
       </div>
@@ -85,11 +103,10 @@ export default function StaffSection() {
 
         {/* GRID POSISI: STAFF (3 Kolom Desktop, 2 Kolom Mobile) */}
         <div className="grid grid-cols-2 lg::grid-cols-3 gap-y-16 md:gap-y-36 gap-x-8 md:gap-x-32">
-          {[...Array(6)].map((_, i) => (
+          {staffDepartemen.map((staff, i) => (
             <div key={i} className="flex flex-col items-center">
-              {/* foto & nama staff */}
-              <div className="w-30 h-40 md:w-52 md:h-52 border-2 flex items-center justify-center relative">
-                Staff {i + 1}
+              <div className="w-36 md:w-52 flex items-center justify-center relative">
+                <StaffCard data={staff} />
               </div>
             </div>
           ))}

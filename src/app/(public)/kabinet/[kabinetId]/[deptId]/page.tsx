@@ -42,7 +42,7 @@ export default function DepartemenPage() {
         image_url={dept.image_url}
       />
       <ProkerSection />
-      <StaffSection />
+      <StaffSection data={dept} />
     </main>
   );
 }

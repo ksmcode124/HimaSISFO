@@ -1,13 +1,12 @@
 import Image from "next/image";
 import { Ornament2, Ornament3 } from "../components/KabinetOrnaments";
+import { motion } from "framer-motion";
 
 interface Props {
-  imageSrc?: string;
+  imageSrc: string;
 }
 
-export default function PhotoSlideshowMobile({
-imageSrc = "/assets/kabinet/gelora-harmoni-1.webp",
-}: Props) {
+export default function PhotoSlideshowMobile({ imageSrc }: Props) {
   return (
     <div className="relative z-20 mt-10 w-full max-w-[350px] px-4 md:hidden">
       {/* Ornamen Atas Kiri */}
@@ -17,12 +16,20 @@ imageSrc = "/assets/kabinet/gelora-harmoni-1.webp",
 
       {/* Foto Utama */}
       <div className="relative w-95 -ml-15 aspect-video rounded-2xl overflow-hidden z-20">
-        <Image
-          src={imageSrc}
-          alt="Foto Kabinet"
-          fill
-          className="object-cover"
-        />
+        <motion.div
+          key={imageSrc}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          className="relative w-full h-full"
+        >
+          <Image
+            src={imageSrc}
+            alt="Foto Kabinet"
+            fill
+            className="object-cover"
+          />
+        </motion.div>
 
         {/* Ornamen Bawah Kanan */}
         <div className="absolute left-44 -bottom-24 w-40 h-40">
