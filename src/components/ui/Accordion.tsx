@@ -49,10 +49,10 @@ function AccordionTrigger({
         {...props}
         className={cn(
           `
-          flex flex-1 gap-4
+          group flex flex-1 gap-4
           rounded-md px-4 py-4
           text-sm font-medium
-          transition-shadow outline-none
+          transition-shadow duration-500 outline-none
           hover:underline
           disabled:pointer-events-none disabled:opacity-50
 
@@ -74,8 +74,6 @@ function AccordionTrigger({
 
           /* OPEN — FORCE NORMAL FLOW */
           lg:data-[state=open]:flex-row
-          lg:data-[state=open]:items-center
-          lg:data-[state=open]:justify-center
           lg:data-[state=open]:[writing-mode:horizontal-tb]
           `,
           className
@@ -85,7 +83,7 @@ function AccordionTrigger({
         <span
           className={cn(
             `
-            block text-center
+            block flex-1 group-data-[state=open]:text-center
             whitespace-normal
             wrap-break-word
             max-w-full
@@ -108,9 +106,9 @@ function AccordionTrigger({
               `
               pointer-events-none size-6 shrink-0
               transition-transform duration-200
-              data-[state=open]:rotate-180
+              group-data-[state=open]:rotate-180
               `,
-              isVertical && "lg:data-[state=closed]:rotate-90"
+              isVertical && "lg:group-data-[state=closed]:rotate-90"
             )}
           />
         )}

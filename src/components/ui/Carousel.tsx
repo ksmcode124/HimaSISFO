@@ -54,6 +54,7 @@ function Carousel({
       axis: orientation === "horizontal" ? "x" : "y",
       containScroll: "trimSnaps",
       slidesToScroll: 1,
+      duration: 40,
       ...opts,
     },
     plugins
@@ -164,7 +165,7 @@ function KemahasiswaanCarouselSpacer() {
       aria-hidden
       data-embla-ignore
       className={cn(
-        "block min-w-0 shrink-0 grow-0 sm:basis-1/3 sm:-mx-15 z-10",
+        "block min-w-0 shrink-0 grow-0 sm:basis-1/3 sm:-mx-15 z-10 transition-[margin] duration-500",
         orientation === "horizontal" ? "pl-0 sm:pl-4" : "pt-4",
       )}
     />
@@ -248,7 +249,7 @@ function CarouselIndicators({
               "h-3 w-3 rounded-full transition-all duration-300",
               "focus:outline-none",
               isActive
-                ? "bg-lr-gradient-primary h-4 w-4"
+                ? "bg-linear-to-r from-[#456882] to-50%-[#1F445F] to-[#1B3C53] h-4 w-4"
                 : "bg-neutral-300 hover:bg-blue-bayoux"
             )}
           />
