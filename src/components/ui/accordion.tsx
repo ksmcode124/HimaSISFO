@@ -2,56 +2,135 @@
 
 import * as React from "react"
 import * as AccordionPrimitive from "@radix-ui/react-accordion"
-import { ChevronDown } from "lucide-react"
+import { ChevronDownIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-const Accordion = AccordionPrimitive.Root
+function Accordion({
+  ...props
+}: React.ComponentProps<typeof AccordionPrimitive.Root>) {
+  return <AccordionPrimitive.Root data-slot="accordion" {...props} />
+}
 
-const AccordionItem = React.forwardRef<
-  React.ElementRef<typeof AccordionPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
->(({ className, ...props }, ref) => (
-  <AccordionPrimitive.Item
-    ref={ref}
-    className={cn("border-b", className)}
-    {...props}
-  />
-))
-AccordionItem.displayName = "AccordionItem"
+function AccordionItem({
+  className,
+  ...props
+}: React.ComponentProps<typeof AccordionPrimitive.Item>) {
+  return (
+    <AccordionPrimitive.Item
+      data-slot="accordion-item"
+      className={cn("px-4 bg-none", className)}
+      {...props}
+    />
+  )
+}
 
-const AccordionTrigger = React.forwardRef<
-  React.ElementRef<typeof AccordionPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
->(({ className, children, ...props }, ref) => (
-  <AccordionPrimitive.Header className="flex">
-    <AccordionPrimitive.Trigger
-      ref={ref}
-      className={cn(
-        "flex flex-1 items-center justify-between py-4 text-sm font-medium transition-all hover:underline text-left [&[data-state=open]>svg]:rotate-180",
-        className
-      )}
+type AccordionTriggerProps =
+  React.ComponentProps<typeof AccordionPrimitive.Trigger> & {
+    hasChevron?: boolean
+    writingMode?: "horizontal" | "vertical-btt"
+  }
+
+function AccordionTrigger({
+  className,
+  children,
+  hasChevron = true,
+  writingMode = "horizontal",
+  ...props
+}: AccordionTriggerProps) {
+  const isVertical = writingMode === "vertical-btt"
+
+  return (
+    <AccordionPrimitive.Header 
+      data-slot="accordion-trigger"
+      className="flex sm:data-[state=closed]:h-full">
+      <AccordionPrimitive.Trigger
+        data-slot="accordion-trigger"
+        {...props}
+        className={cn(
+          `
+          group flex flex-1 gap-4
+          rounded-md px-4 py-4
+          text-sm font-medium
+          transition-shadow duration-500 outline-none
+          hover:underline
+          disabled:pointer-events-none disabled:opacity-50
+
+          /* DEFAULT (mobile + open) */
+          flex-row items-center justify-between
+          [writing-mode:horizontal-tb]
+
+          /* CLOSED — VERTICAL MODE */
+          ${isVertical ? `
+            lg:data-[state=closed]:flex
+            lg:data-[state=closed]:items-center
+            lg:data-[state=closed]:justify-end
+            lg:data-[state=closed]:-rotate-180
+            lg:data-[state=closed]:[writing-mode:vertical-rl]
+            lg:data-[state=closed]:[direction:rtl]
+            lg:data-[state=closed]:h-full
+            lg:data-[state=closed]:overflow-hidden
+          ` : ""}
+
+          /* OPEN — FORCE NORMAL FLOW */
+          lg:data-[state=open]:flex-row
+          lg:data-[state=open]:[writing-mode:horizontal-tb]
+          `,
+          className
+        )}
+      >
+        {/* TEXT */}
+        <span
+          className={cn(
+            `
+            block flex-1 group-data-[state=open]:text-center
+            whitespace-normal
+            wrap-break-word
+            max-w-full
+            `,
+            isVertical &&
+              `
+              lg:data-[state=closed]:flex
+              lg:data-[state=closed]:items-center
+              lg:data-[state=closed]:justify-center
+              `
+          )}
+        >
+          {children}
+        </span>
+
+        {/* CHEVRON */}
+        {hasChevron && (
+          <ChevronDownIcon
+            className={cn(
+              `
+              pointer-events-none size-6 shrink-0
+              transition-transform duration-200
+              group-data-[state=open]:rotate-180
+              `,
+              isVertical && "lg:group-data-[state=closed]:rotate-90"
+            )}
+          />
+        )}
+      </AccordionPrimitive.Trigger>
+    </AccordionPrimitive.Header>
+  )
+}
+
+function AccordionContent({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<typeof AccordionPrimitive.Content>) {
+  return (
+    <AccordionPrimitive.Content
+      data-slot="accordion-content"
+      className="data-[state=closed]:opacity-0 data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-sm"
       {...props}
     >
-      {children}
-      <ChevronDown className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" />
-    </AccordionPrimitive.Trigger>
-  </AccordionPrimitive.Header>
-))
-AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName
-
-const AccordionContent = React.forwardRef<
-  React.ElementRef<typeof AccordionPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
->(({ className, children, ...props }, ref) => (
-  <AccordionPrimitive.Content
-    ref={ref}
-    className="overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
-    {...props}
-  >
-    <div className={cn("pb-4 pt-0", className)}>{children}</div>
-  </AccordionPrimitive.Content>
-))
-AccordionContent.displayName = AccordionPrimitive.Content.displayName
+      <div className={cn("pt-0 pb-4", className)}>{children}</div>
+    </AccordionPrimitive.Content>
+  )
+}
 
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent }

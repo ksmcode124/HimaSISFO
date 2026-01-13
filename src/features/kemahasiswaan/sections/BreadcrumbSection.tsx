@@ -1,4 +1,4 @@
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbItemData, BreadcrumbSeparator } from "@/components/ui/Breadcrumb";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbItemData, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Fragment } from "react";
 import Link from "next/link";
 import { SlashIcon } from "lucide-react";

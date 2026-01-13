@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import { Card, CardAction, CardContent } from "@/components/ui/Card"
+import { Card, CardAction, CardContent } from "@/components/ui/card"
 import {
   Carousel,
   CarouselContent,
@@ -9,8 +9,8 @@ import {
   CarouselPrevious,
   CarouselIndicators,
   type CarouselApi,
-  CarouselSpacer,
-} from "@/components/ui/Carousel"
+  useCarousel,
+} from "@/components/ui/carousel"
 
 import { BlankoItem } from "../types"
 import Link from "next/link"
@@ -98,5 +98,20 @@ function BlankoCardItem({ card, className }: { card: BlankoItem; className: stri
         </Card>
       </div>
     </CarouselItem>
+  )
+}
+
+function CarouselSpacer() {
+  const { orientation } = useCarousel()
+
+  return (
+    <div
+      aria-hidden
+      data-embla-ignore
+      className={cn(
+        "block min-w-0 shrink-0 grow-0 sm:basis-1/3 z-10",
+        orientation === "horizontal" ? "pl-0 sm:pl-4" : "pt-4",
+      )}
+    />
   )
 }

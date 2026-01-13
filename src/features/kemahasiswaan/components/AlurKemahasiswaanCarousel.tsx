@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Card, CardAction, CardContent } from "@/components/ui/Card"
+import { Card, CardAction, CardContent } from "@/components/ui/card"
 import {
   Carousel,
   CarouselContent,
@@ -10,8 +10,8 @@ import {
   CarouselPrevious,
   type CarouselApi,
   CarouselIndicators,
-  KemahasiswaanCarouselSpacer,
-} from "@/components/ui/Carousel"
+  useCarousel,
+} from "@/components/ui/carousel"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { CardProps } from "../types"
@@ -144,5 +144,22 @@ export default function AlurKemahasiswaanCarousel({
         />
       )}
     </div>
+  )
+}
+
+/* Spacer digunakan untuk memberi ruang visual di sisi kiri & kanan
+    agar item pertama/terakhir bisa benar-benar berada di tengah */
+function KemahasiswaanCarouselSpacer() {
+  const { orientation } = useCarousel()
+  
+  return (
+     <div
+      aria-hidden
+      data-embla-ignore
+      className={cn(
+        "block min-w-0 shrink-0 grow-0 sm:basis-1/3 sm:-mx-15 z-10 transition-[margin] duration-500",
+        orientation === "horizontal" ? "pl-0 sm:pl-4" : "pt-4",
+      )}
+    />
   )
 }

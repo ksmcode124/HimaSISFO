@@ -5,7 +5,7 @@ export type NavItem = {
 
 export const navItems: NavItem[] = [
   { label: 'Beranda', href: '/' },
-  { label: 'Tentang', href: '/tentang' },
+  { label: 'Tentang', href: '/kabinet' },
   { label: 'Kemahasiswaan', href: '/kemahasiswaan' },
   { label: 'Kegiatan', href: '/kegiatan' },
 ]

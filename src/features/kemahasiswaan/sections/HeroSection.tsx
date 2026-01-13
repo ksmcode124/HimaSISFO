@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import BreadcrumbSection from "./BreadcrumbSection";
-import { BreadcrumbItemData } from "@/components/ui/Breadcrumb";
+import { BreadcrumbItemData } from "@/components/ui/breadcrumb";
 
 interface HeroSectionProps {
   title: string;

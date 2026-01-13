@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import kabinetDataRaw from "../data/kabinet.json";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { Pita, Ornament2 } from "../components/KabinetOrnaments";
 import PhotoSlideshowMobile from "../components/PhotoSlideshowMobile";
 import { KabinetDataJSON, Kabinet } from "../types";

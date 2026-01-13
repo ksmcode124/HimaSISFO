@@ -1,5 +1,5 @@
 "use client"
-import { Card, CardHeader, CardTitle } from "@/components/ui/Card";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { ItemDataJSON, getSectionData, HeroSection, KemahasiswaanDataFile, Modal, ProsesAkademik } from "@/features/kemahasiswaan";
 import { useState } from "react";
 

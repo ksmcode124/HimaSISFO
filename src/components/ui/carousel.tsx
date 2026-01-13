@@ -252,6 +252,39 @@ const CarouselNext = React.forwardRef<
 })
 CarouselNext.displayName = "CarouselNext"
 
+function CarouselIndicators({
+  count,
+  selectedIndex,
+  onSelect,
+}: {
+  count: number
+  selectedIndex: number
+  onSelect: (index: number) => void
+}) {
+  return (
+    <div className="mt-4 flex justify-center items-center gap-2">
+      {Array.from({ length: count }).map((_, index) => {
+        const isActive = index === selectedIndex
+
+        return (
+          <button
+            key={index}
+            aria-label={`Go to slide ${index + 1}`}
+            onClick={() => onSelect(index)}
+            className={cn(
+              "h-3 w-3 rounded-full transition-all duration-300",
+              "focus:outline-none",
+              isActive
+                ? "bg-linear-to-r from-[#456882] to-50%-[#1F445F] to-[#1B3C53] h-4 w-4"
+                : "bg-neutral-300 hover:bg-blue-bayoux"
+            )}
+          />
+        )
+      })}
+    </div>
+  )
+}
+
 export {
   type CarouselApi,
   Carousel,
@@ -259,4 +292,6 @@ export {
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
+  useCarousel,
+  CarouselIndicators
 }

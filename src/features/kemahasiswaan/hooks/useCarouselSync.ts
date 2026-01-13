@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
-import type { CarouselApi } from "@/components/ui/Carousel"
+import type { CarouselApi } from "@/components/ui/carousel"
 
 export function useCarouselSync(
   api: CarouselApi | null,
