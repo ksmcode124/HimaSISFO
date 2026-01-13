@@ -75,7 +75,8 @@ export const EventCard = (props: WithVariantEventCardProps) => {
         )}
 
         <div className="w-full relative justify-center flex flex-row mt-3 md:mt-12 mb-3 md:mb-6">
-          {variant === "detail" && new Date(start).getTime() < Date.now() ? (
+          {variant === "onGoing" || variant === "notGoing" ? 
+          <></> : variant === "detail" && new Date(start).getTime() < Date.now() ? (
             <Button
               route={`/kegiatan/agenda/${title}-${id}`}
               className="flex flex-row gap-3 px-3 py-2 rounded-full shadow-[4.38px_4.38px_3.5px_0px_rgba(0,0,0,0.25)]"
@@ -91,6 +92,8 @@ export const EventCard = (props: WithVariantEventCardProps) => {
             </Button>
 
           )}
+          
+          
           <Modal open={open} onClose={() => setOpen(false)} >
             <div className="flex w-fit h-fit flex-col rounded-[20px] overflow-hidden">
               <header className="p-4 text-[13px] md:text-sm font-semibold text-white flex flex-row items-center gap-3 bg-gradient-to-b from-[#1B3C53] to-[#456882]">
