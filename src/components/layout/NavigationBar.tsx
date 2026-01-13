@@ -28,7 +28,7 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
     >
       <LiquidGlass className='border-l-white' borderRadius={200}>
         <nav
-          className="py-3 px-auto"
+          className="py-3 px-20"
           aria-label="Main navigation"
         >
           <div className="flex h-14 justify-between items-center gap-6">
