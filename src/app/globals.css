@@ -73,6 +73,7 @@
    --radius-4xl: calc(var(--radius) + 16px);
 
    /* Font Sizes */
+   --text-2xs: 12px;
    --text-xs: 14px;
    --text-sm: 16px;
    --text-md: 18px;
@@ -82,11 +83,37 @@
    --text-3xl: 32px;
    --text-4xl: 36px;
    --text-5xl: 40px;
-   --text-6xl: 44px;
-   --text-7xl: 48px;
-   --text-8xl: 52px;
-   --text-9xl: 56px;
-   --text-10xl: 64px;
+   --text-6xl: 48px;
+   --text-7xl: 56px;
+   --text-8xl: 64px;
+
+}
+
+.flip-card {
+   background: linear-gradient(to right, #A6CFE1, #265A8C 50%, #456882, #1F445F,#1B3C53);
+   background-size: 400% 100%;
+   background-position: right;
+}
+
+.flip-card:hover {
+   background-position: left;
+   transition-duration: 900ms;
+}
+
+.list-upper-roman {
+  list-style-type: upper-roman;
+}
+
+.list-lower-roman {
+  list-style-type: lower-roman;
+}
+
+.list-upper-alpha {
+  list-style-type: upper-alpha;
+}
+
+.list-lower-alpha {
+  list-style-type: lower-alpha;
 }
 
 
@@ -104,3 +131,35 @@
       scroll-behavior: smooth;
    }
 }
+
+.border-gradient-y {
+  border: solid transparent;
+
+  background:
+    linear-gradient(transparent, transparent),
+    linear-gradient(to bottom, #1B3C53, #456882);
+
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+.border-gradient-x {
+  position: relative;
+  border-radius: 1rem; /* radius border */
+  overflow: hidden;
+}
+
+.border-gradient-x::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 4px; /* tebal border */
+  background: linear-gradient(to right, #1B3C53, #456882);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 10; /* pastikan di atas */
+}
+

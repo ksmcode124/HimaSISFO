@@ -10,14 +10,11 @@ interface PublicLayoutProps {
 export default function PublicLayout({ children }: PublicLayoutProps) {
   return (
     <>
-      <div className="flex items-center flex-col min-h-screen">
-
-        <NavigationBar items={navItems} />
-        <main>
-          {children}
-        </main>
-        {/* <SiteFooter /> */}
-      </div >
+    <NavigationBar items={navItems} />
+    <main className="pb-5 pt-18">
+      {children}
+    </main>
+    <SiteFooter />
     </>
   )
 }

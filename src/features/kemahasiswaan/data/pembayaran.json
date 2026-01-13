@@ -1,0 +1,224 @@
+{
+  "schemaVersion": 1,
+  "slug": "pembayaran",
+  "seo": {
+    "title": "Pembayaran",
+    "description": "Panduan untuk Segala Transaksi Pembayaran Anda"
+  },
+  "hero": {
+    "title": "Pembayaran",
+    "subtitle": "Panduan untuk Segala Transaksi Pembayaran Anda"
+  },
+  "breadcrumbItems": [
+    {
+      "display": "Kemahasiswaan",
+      "link": "/kemahasiswaan"
+    },
+    {
+      "display": "Pembayaran",
+      "link": "/kemahasiswaan/pembayaran"
+    }
+  ],
+  "sections": [
+    {
+      "type": "accordion",
+      "items": [
+        {
+          "id": "ukt-mbanking",
+          "title": "Pembayaran UKT melalui M-Banking",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Masuk ke aplikasi bank mobile."
+                },
+                {
+                  "text": "Masukkan password."
+                },
+                {
+                  "text": "Pilih menu \"pendidikan\""
+                },
+                {
+                  "text": "Pilih UPN \"Veteran\" Yogyakarta"
+                },
+                {
+                  "text": "Masukkan NIM/kode pembayaran pada kolom nomor tagihan."
+                },
+                {
+                  "text": "Apabila sudah benar, klik kirim."
+                },
+                {
+                  "text": "Apabila NIM benar, maka muncul nominal tagihan."
+                },
+                {
+                  "text": "Bukti pembayaran akan tertampil di layar (bila perlu diprint)"
+                }
+              ]
+            }
+          ],
+          "image": "icon-pembayaran-mbanking.png"
+        },
+        {
+          "id": "ukt-atm",
+          "title": "Pembayaran UKT melalui ATM",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Masukkan ATM dan nomor PIN."
+                },
+                {
+                  "text": "Pilih menu lain."
+                },
+                {
+                  "text": "Pilih menu pembayaran."
+                },
+                {
+                  "text": "Masukkan kode bank UPNYK (untuk kodenya bisa dilihat [disini](https://drive.google.com/drive/folders/13d_W43RETEgMLjYGeuZef1_cL-sDTKxK)) + NIM/kode pendaftaran."
+                },
+                {
+                  "text": "Masukkan nominal transfer pembayaran akademik."
+                },
+                {
+                  "text": "Apabila sudah benar, klik transfer."
+                },
+                {
+                  "text": "ATM akan mengeluarkan slip bukti transfer."
+                },
+                {
+                  "text": "Simpan bukti pembayaran (bila perlu di-fotocopy)"
+                }
+              ]
+            }
+          ],
+          "image": "icon-pembayaran-atm.png"
+        },
+        {
+          "id" : "ukt-teller",
+          "title": "Pembayaran UKT melalui Teller Bank",
+          "content": [
+             {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Mendatangi bank yang bermitra dengan UPN 'Veteran' Yogyakarta yaitu Bank BNI, BRI, Mandiri, BSI, BPD DIY, dan BTN."
+                },
+                {
+                  "text": "Mengambil nomor antrian pada teller."
+                },
+                {
+                  "text": "Menyebutkan nama universitas dan NIM."
+                },
+                {
+                  "text": "Melakukan pembayaran sesuai dengan nominal UKT yang diperoleh."
+                },
+                {
+                  "text": "Menyimpan bukti pembayaran UKT."
+                }
+              ]
+            }
+          ],
+          "image": "icon-pembayaran-teller.png"
+        },
+        {
+          "id" : "hilang-slip",
+          "title": "Kehilangan Slip Pembayaran",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Buka web [Sadewa](https://sadewa.upnyk.ac.id/) untuk membuat Surat Keterangan Aktif Kuliah"
+                },
+                {
+                  "text": "Datangi kantor polisi untuk meminta surat kehilangan."
+                },
+                {
+                  "text": "Datangi bagian keuangan di Gedung Rektorat Lantai 2 Kampus 1, kemudian jelaskan bahwa slip pembayaran UKT hilang."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id" : "sanggah-ukt",
+          "title": "Pengajuan Sanggah UKT",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Login pada web [SI-UKT](https://siukt.upnyk.ac.id) dengan memasukkan NIM dan PIN"
+                },
+                {
+                  "text": "Setelah login, pilih menu Pengajuan"
+                },
+                {
+                  "text": "Kemudian, klik \"Saya mengajukan sanggah\" untuk pengajuan sanggah"
+                },
+                {
+                  "text": "Pilih alasan pengajuan sanggah:",
+                  "ordered": false,
+                  "items": [
+                    {
+                      "text": "Penetapan ulang: Karena ada perubahan kemampuan ekonomi (penurunan) orang tua/wali/mahasiswa yang menanggung UKT"
+                    },
+                    {
+                      "text": "Pembebasan karena bencana: Bencana alam mengakibatkan meninggalnya anggota keluarga yang menanggung biaya kuliah dan/atau hilangnya pekerjaan dan/atau penghasilan dan/atau harga benda sehingga tidak memiliki kemampuan membayar UKT "
+                    },
+                    {
+                      "text": "Pembebasan karena telah menyelesaikan studi atau cuti kuliah"
+                    },
+                    {
+                      "text": "Pengajuan angsuran UKT"
+                    },
+                    {
+                      "text": "Pengurangan paling banyak 50% untuk mahasiswa yang mengambil Tugas Akhir dan/atau matkul selain TA < 7 SKS"
+                    }
+                  ]
+                },
+                {
+                  "text": "Klik \"Isi Data\" untuk mengisi data sanggah yang diperlukan sesuai dengan alasan pengajuan sanggah"
+                },
+                {
+                  "text": "Cek kembali data yang diinputkan sebelum kunci data"
+                },
+                {
+                  "text": "Klik YAKIN jika sudah tidak ada perubahan data"
+                },
+                {
+                  "text": "Pengumuman dapat dilihat melalui web yang sama"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "dispensasi-pembayaran",
+          "title": "Dispensasi Pembayaran UKT",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text" : "Membuat Surat Permohonan Dispensasi Pembayaran UKT"
+                },
+                {
+                  "text" : "Menyerahkan surat tersebut kepada Wakil Rektor Bidang Umum dan Keuangan"
+                },
+                {
+                  "text" : "Menghubungi bagian TIK untuk dibukakan laman Sistem Pembayaran UKT"
+                },
+                {
+                  "text" : "Menuju ke bank dengan membawa Surat Keputusan untuk membayar UKT"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

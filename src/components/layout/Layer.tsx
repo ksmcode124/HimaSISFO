@@ -41,7 +41,7 @@ export function OverlayLayer({ children, className }: LayerProps) {
 
 export function ModalLayer({ children, className }: LayerProps) {
   return (
-    <div className={clsx("absolute inset-0 z-30 justify-center", className)}>
+    <div className={clsx("absolute inset-0 z-30 grid place-items-center h-screen", className)}>
       {children}
     </div>
   );
