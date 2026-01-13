@@ -1,18 +1,19 @@
-// src/app/(public)/layout.tsx
-import { NavigationBar } from "@/components/layout";
+import { NavigationBar, SiteFooter } from "@/components/layout";
 import { navItems } from "@/features/navigation";
+import React from "react";
 
-export default function PublicLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+interface PublicLayoutProps {
+  children: React.ReactNode
+}
+
+export default function PublicLayout({children}: PublicLayoutProps) {
   return (
-    <div className="min-h-screen flex flex-col pt-[110px] w-full">
-      <NavigationBar items={navItems} />
-      <main className="w-full">
-        {children}
-      </main>
-    </div>
-  );
+    <>
+    <NavigationBar items={navItems} />
+    <main className="pb-5 pt-18">
+      {children}
+    </main>
+    <SiteFooter />
+    </>
+  )
 }

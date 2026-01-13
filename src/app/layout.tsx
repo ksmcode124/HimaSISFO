@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="id">
       <body
-        className={`${poppins.variable} antialiased`}
+        className={`${poppins.variable} min-h-screen antialiased`}
       >
         {children}
       </body>
