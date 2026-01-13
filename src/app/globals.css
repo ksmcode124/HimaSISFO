@@ -131,3 +131,35 @@
       scroll-behavior: smooth;
    }
 }
+
+.border-gradient-y {
+  border: solid transparent;
+
+  background:
+    linear-gradient(transparent, transparent),
+    linear-gradient(to bottom, #1B3C53, #456882);
+
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+.border-gradient-x {
+  position: relative;
+  border-radius: 1rem; /* radius border */
+  overflow: hidden;
+}
+
+.border-gradient-x::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 4px; /* tebal border */
+  background: linear-gradient(to right, #1B3C53, #456882);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 10; /* pastikan di atas */
+}
+

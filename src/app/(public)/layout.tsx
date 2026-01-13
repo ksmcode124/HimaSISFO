@@ -10,7 +10,7 @@ export default function PublicLayout({children}: PublicLayoutProps) {
   return (
     <>
     <NavigationBar items={navItems} />
-    <main className="pb-5 pt-14">
+    <main className="pb-5 pt-18">
       {children}
     </main>
     <SiteFooter />
