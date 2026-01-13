@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-type Episode = {
+interface Episode {
   id: string;
   name: string;
   description: string;
@@ -18,7 +18,7 @@ export default function PodcastPage() {
   // Fetch Spotify Episodes (ganti showId sesuai podcast-mu)
   useEffect(() => {
     const fetchEpisodes = async () => {
-      const res = await fetch(`/api/spotify?showId=4ne6bsylYJdVmMrfG3mLCG`);
+      const res = await fetch(`/api/display/spotify?showId=4ne6bsylYJdVmMrfG3mLCG`);
       const data = await res.json();
       setEpisodes(data.episodes || []);
     };
