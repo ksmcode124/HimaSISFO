@@ -1,3 +1,5 @@
+import { EventCardProps } from "../types";
+
 // Fungsi ini hanya dijalankan SEKALI untuk memproses seluruh data
 export function createEventIndex(events: any[]) {
   const eventMap: Record<string, any[]> = {};
@@ -18,8 +20,8 @@ export function createEventIndex(events: any[]) {
   return eventMap;
 }
 
-export function createEventIndexByNameDate(events: any[]) {
-  const eventMap: Record<string, any[]> = {};
+export function createEventIndexByNameDate(events: EventCardProps[]) {
+  const eventMap: Record<string, EventCardProps[]> = {};
 
   events.forEach((event) => {
     const { id } = event;
