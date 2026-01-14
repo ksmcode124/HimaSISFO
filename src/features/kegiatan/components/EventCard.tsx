@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { formatDate, formatDateID } from "../utils/FormatDate";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useGetCountdown } from "../hooks/useCountDown";
 import { Modal } from "../components/PopUp";
 
@@ -23,21 +23,8 @@ const eventCard = cva("overflow-hidden transition hover:shadow-md", {
 });
 
 export const EventCard = (props: WithVariantEventCardProps) => {
-  const getCountdown = useGetCountdown;
   const { id, title, img, start, end, description, variant = "detail" } = props;
-
-  const [countDown, setCountDown] = useState("00:00:00");
-  useEffect(() => {
-    if (variant !== "onGoing") return;
-
-    const interval = setInterval(() => {
-      setCountDown(getCountdown(start));
-    }, 1000);
-
-    setCountDown(getCountdown(start));
-
-    return () => clearInterval(interval);
-  }, [start, variant]);
+  const countDown = useGetCountdown(start);
   const [open, setOpen] = useState(false);
   return (
     <div
@@ -50,6 +37,8 @@ export const EventCard = (props: WithVariantEventCardProps) => {
       <img
         src={`/assets/kegiatan/${img}`}
         alt={img}
+        width={1600}
+        height={1000}
         className={cn("object-cover w-full h-full", eventCard({ variant }))}
       />
       <div
@@ -75,25 +64,25 @@ export const EventCard = (props: WithVariantEventCardProps) => {
         )}
 
         <div className="w-full relative justify-center flex flex-row mt-3 md:mt-12 mb-3 md:mb-6">
-          {variant === "onGoing" || variant === "notGoing" ? 
-          <></> : variant === "detail" && new Date(start).getTime() < Date.now() ? (
-            <Button
-              route={`/kegiatan/agenda/${title}-${id}`}
-              className="flex flex-row gap-3 px-3 py-2 rounded-full shadow-[4.38px_4.38px_3.5px_0px_rgba(0,0,0,0.25)]"
-            >
-              More <ArrowRight />
-            </Button>
-          ) : (
-            <Button
-              onClick={() => setOpen(true)}
-              className="flex flex-row gap-3 px-3 py-2 rounded-full shadow-[4.38px_4.38px_3.5px_0px_rgba(0,0,0,0.25)]"
-            >
-              More <ArrowRight />
-            </Button>
+          {variant === "onGoing" || variant === "notGoing" ?
+            <></> : variant === "detail" && new Date(start).getTime() < Date.now() ? (
+              <Button
+                route={`/kegiatan/agenda/${title}-${id}`}
+                className="flex flex-row gap-3 px-3 py-2 rounded-full shadow-[4.38px_4.38px_3.5px_0px_rgba(0,0,0,0.25)]"
+              >
+                More <ArrowRight />
+              </Button>
+            ) : (
+              <Button
+                onClick={() => setOpen(true)}
+                className="flex flex-row gap-3 px-3 py-2 rounded-full shadow-[4.38px_4.38px_3.5px_0px_rgba(0,0,0,0.25)]"
+              >
+                More <ArrowRight />
+              </Button>
 
-          )}
-          
-          
+            )}
+
+
           <Modal open={open} onClose={() => setOpen(false)} >
             <div className="flex w-fit h-fit flex-col rounded-[20px] overflow-hidden">
               <header className="p-4 text-[13px] md:text-sm font-semibold text-white flex flex-row items-center gap-3 bg-gradient-to-b from-[#1B3C53] to-[#456882]">
