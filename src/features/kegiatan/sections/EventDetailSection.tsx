@@ -4,7 +4,7 @@ import { ContentLayer } from "@/components/layout/Layer";
 import { createEventIndexByNameDate } from "../utils/EventIndexer";
 import { findEventById } from "../utils/GetEventNow";
 import { EventCardProps } from "../types"
-
+import Image from "next/image";
 
 function EventDetailContent({ events }: { events: EventCardProps}) {
   return (
@@ -14,10 +14,12 @@ function EventDetailContent({ events }: { events: EventCardProps}) {
       </h2>
 
       <div className="relative mx-4 md:mx-8 flex flex-col gap-10 md:gap-20 mt-10 md:mt-20">
-        <img
+        <Image
           src={`/assets/kegiatan/${events.img}`}
           alt="detail event"
           className="w-full aspect-[2/1] object-cover border-gradient-y rounded-[20px] md:rounded-[40px]"
+          width={1600}
+          height={1000} 
         />
         <div className="flex flex-col gap-5">
           <h1 className="text-xl md:text-3xl font-bold">
