@@ -1,8 +1,8 @@
 import { EventCardProps } from "../types";
 
 // Fungsi ini hanya dijalankan SEKALI untuk memproses seluruh data
-export function createEventIndex(events: any[]) {
-  const eventMap: Record<string, any[]> = {};
+export function createEventIndex(events: EventCardProps[]) {
+  const eventMap: Record<string, EventCardProps[]> = {};
 
   events.forEach((event) => {
     const d = new Date(event.start);
