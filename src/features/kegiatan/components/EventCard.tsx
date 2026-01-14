@@ -8,6 +8,7 @@ import { formatDate, formatDateID } from "../utils/FormatDate";
 import { useState } from "react";
 import { useGetCountdown } from "../hooks/useCountDown";
 import { Modal } from "../components/PopUp";
+import Image from "next/image";
 
 const eventCard = cva("overflow-hidden transition hover:shadow-md", {
   variants: {
@@ -34,7 +35,7 @@ export const EventCard = (props: WithVariantEventCardProps) => {
         variant === "detail" ? "border-gradient-x" : "border-gradient-y"
       )}
     >
-      <img
+      <Image
         src={`/assets/kegiatan/${img}`}
         alt={img}
         width={1600}
