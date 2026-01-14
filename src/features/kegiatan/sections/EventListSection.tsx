@@ -1,7 +1,6 @@
 import { 
     DecorationLayer, 
     ContentLayer, 
-    OverlayLayer, 
  } from '@/components/layout/Layer'   
 import { getEvents } from '../services/eventService';
 import { EventCardProps } from '../types';
@@ -63,6 +62,9 @@ export async function EventListSection({ filter }: { filter?: string }) {
   
   return (
     <section className="relative p-0 m-0 top-0">
+      <DecorationLayer>
+        <div></div>
+      </DecorationLayer>
       <ContentLayer className="mx-10 md:mx-30">
         <EventListContent events={FindEvent}/>
       </ContentLayer>
