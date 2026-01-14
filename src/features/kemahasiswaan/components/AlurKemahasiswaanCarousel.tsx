@@ -39,7 +39,7 @@ export default function AlurKemahasiswaanCarousel({
   }, [api])
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full max-w-7xl">
       <Carousel
         setApi={setApi}
         opts={{ align: "center" }}
