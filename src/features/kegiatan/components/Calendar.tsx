@@ -12,7 +12,6 @@ export function DynamicCalendar({
   className,
   events,
 }: DynamicCalendarProps) {
-  if (!events) return "kosonh";
   const today = new Date();
   const [year, setYear] = useState(today.getFullYear());
   const [month, setMonth] = useState(today.getMonth());
@@ -137,35 +136,35 @@ export function DynamicCalendar({
                           )}
                         >
                           {day}
-                          
+
                         </div>
 
                         <div className="flex flex-col w-full gap-1 md:gap-2 overflow-visible">
                           {dayEvents?.map((ev) => (
-                              <div
-                                key={`${ev.id}-${ev.start}`}
-                                className={clsx(
-                                  "text-[10px] md:text-sm font-bold h-[18px] md:h-[25px] w-auto truncate text-white items-center flex ",
-                                  ev.start.getDate().toString().trim() === ev.end.getDate().toString().trim() ? "mx-1 rounded-[5px] px-2" :
-                                  ev.start.getDate().toString().trim() === day.toString().trim() ? "ml-1 rounded-l-[5px] px-2" : 
-                                  ev.end.getDate().toString().trim() === day.toString().trim() ? "mr-1 rounded-r-[5px]" : 
-                                  day > ev.start.getDate() && day < ev.end.getDate() && posisi % 7 === 0 ? "-ml-1" : 
-                                  day > ev.start.getDate() && day < ev.end.getDate() && posisi % 7 === 1 ? "-mr-1" : "-mx-1",
-                                  ev.type === "Hima" && "bg-gradient-to-b from-[#1B3C53] to-[#456882]",
-                                  ev.type === "Beasiswa" && "bg-gradient-to-b from-[#7F1D1D] to-[#DC2626]",
-                                  ev.type === "Lomba" && "bg-gradient-to-b from-[#CA8A04] to-[#EAB308]"
-                                )}
-                              >
-                                {ev.start.getDate().toString().trim() === ev.end.getDate().toString().trim() ? 
-                                <>{ev.title}</> : 
+                            <div
+                              key={`${ev.id}-${ev.start}`}
+                              className={clsx(
+                                "text-[10px] md:text-sm font-bold h-[18px] md:h-[25px] w-auto truncate text-white items-center flex ",
+                                ev.start.getDate().toString().trim() === ev.end.getDate().toString().trim() ? "mx-1 rounded-[5px] px-2" :
+                                  ev.start.getDate().toString().trim() === day.toString().trim() ? "ml-1 rounded-l-[5px] px-2" :
+                                    ev.end.getDate().toString().trim() === day.toString().trim() ? "mr-1 rounded-r-[5px]" :
+                                      day > ev.start.getDate() && day < ev.end.getDate() && posisi % 7 === 0 ? "-ml-1" :
+                                        day > ev.start.getDate() && day < ev.end.getDate() && posisi % 7 === 1 ? "-mr-1" : "-mx-1",
+                                ev.type === "Hima" && "bg-gradient-to-b from-[#1B3C53] to-[#456882]",
+                                ev.type === "Beasiswa" && "bg-gradient-to-b from-[#7F1D1D] to-[#DC2626]",
+                                ev.type === "Lomba" && "bg-gradient-to-b from-[#CA8A04] to-[#EAB308]"
+                              )}
+                            >
+                              {ev.start.getDate().toString().trim() === ev.end.getDate().toString().trim() ?
+                                <>{ev.title}</> :
                                 ev.start.getDate().toString().trim() === day.toString().trim() ?
-                                <>{ev.title}</> : 
-                                ev.end.getDate().toString().trim() === day.toString().trim() ?
-                                <></> : 
-                                day > ev.start.getDate() && day < ev.end.getDate() ? 
-                                <></> : null}
-                              </div>
-                            ))}
+                                  <>{ev.title}</> :
+                                  ev.end.getDate().toString().trim() === day.toString().trim() ?
+                                    <></> :
+                                    day > ev.start.getDate() && day < ev.end.getDate() ?
+                                      <></> : null}
+                            </div>
+                          ))}
                         </div>
 
                       </div>
@@ -178,5 +177,5 @@ export function DynamicCalendar({
       </table>
     </div>
   );
-  
+
 }
