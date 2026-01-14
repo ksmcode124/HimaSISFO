@@ -1,22 +1,20 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { detailIdParamSchema, updateAnggotaDetailSchema } from "@/schemas/anggota-detail.schema";
 
-// Interface untuk menangani asinkronus params pada Next.js 15+
 interface RouteParams {
   params: Promise<{ id: string }>;
 }
 
-/**
- * GET: Mengambil data detail spesifik
- * Digunakan saat ingin melihat profil jabatan anggota tertentu secara mendalam.
- */
 export async function GET(req: Request, { params }: RouteParams) {
   try {
-    const { id } = await params;
-    const idInt = parseInt(id);
+    const raw = await params;
+
+    // Validasi params id
+    const { id } = detailIdParamSchema.parse(raw);
 
     const detail = await prisma.detail_anggota.findUnique({
-      where: { id_detail: idInt },
+      where: { id_detail: id },
       include: {
         anggota: true,
         kabinet: true,
@@ -26,72 +24,81 @@ export async function GET(req: Request, { params }: RouteParams) {
     });
 
     if (!detail) {
-      return NextResponse.json(
-        { error: "Detail anggota tidak ditemukan" },
-        { status: 404 }
-      );
+      return NextResponse.json({ message: "Detail anggota tidak ditemukan" }, { status: 404 });
     }
 
     return NextResponse.json(detail);
-  } catch (error) {
+  } catch (error: any) {
+    if (error?.name === "ZodError") {
+      return NextResponse.json({ errors: error.flatten() }, { status: 400 });
+    }
+
     console.error("GET Detail Error:", error);
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 }
-    );
+    return NextResponse.json({ message: "Internal server error" }, { status: 500 });
   }
 }
 
-/**
- * PATCH: Memperbarui data penugasan
- * Contoh: Mengubah jabatan atau mengupdate foto anggota.
- */
 export async function PATCH(req: Request, { params }: RouteParams) {
   try {
-    const { id } = await params;
-    const idInt = parseInt(id);
-    
+    const raw = await params;
+    const { id } = detailIdParamSchema.parse(raw);
+
     const body = await req.json();
-    const { id_jabatan, id_departemen, foto_anggota } = body;
+    const data = updateAnggotaDetailSchema.parse(body);
 
     const updatedDetail = await prisma.detail_anggota.update({
-      where: { id_detail: idInt },
+      where: { id_detail: id },
       data: {
-        id_jabatan,
-        id_departemen,
-        foto_anggota,
+        ...(data.id_jabatan !== undefined ? { id_jabatan: data.id_jabatan } : {}),
+        ...(data.id_departemen !== undefined ? { id_departemen: data.id_departemen } : {}),
+        ...(data.foto_anggota !== undefined ? { foto_anggota: data.foto_anggota ?? null } : {}),
       },
     });
 
     return NextResponse.json(updatedDetail);
-  } catch (error) {
+  } catch (error: any) {
+    if (error?.name === "ZodError") {
+      return NextResponse.json({ errors: error.flatten() }, { status: 400 });
+    }
+
+    // Prisma "record not found"
+    if (error?.code === "P2025") {
+      return NextResponse.json({ message: "Detail anggota tidak ditemukan" }, { status: 404 });
+    }
+
+    // FK invalid
+    if (error?.code === "P2003") {
+      return NextResponse.json(
+        { message: "Data referensi tidak ditemukan (FK invalid)" },
+        { status: 400 }
+      );
+    }
+
     console.error("PATCH Detail Error:", error);
-    return NextResponse.json(
-      { error: "Gagal memperbarui detail anggota" },
-      { status: 400 }
-    );
+    return NextResponse.json({ message: "Gagal memperbarui detail anggota" }, { status: 400 });
   }
 }
 
-/**
- * DELETE: Menghapus anggota dari kabinet
- * Ini hanya menghapus 'penugasan' saja, data Master Anggota tetap ada.
- */
 export async function DELETE(req: Request, { params }: RouteParams) {
   try {
-    const { id } = await params;
-    const idInt = parseInt(id);
+    const raw = await params;
+    const { id } = detailIdParamSchema.parse(raw);
 
     await prisma.detail_anggota.delete({
-      where: { id_detail: idInt },
+      where: { id_detail: id },
     });
 
     return NextResponse.json({ message: "Penugasan anggota berhasil dihapus" });
-  } catch (error) {
+  } catch (error: any) {
+    if (error?.name === "ZodError") {
+      return NextResponse.json({ errors: error.flatten() }, { status: 400 });
+    }
+
+    if (error?.code === "P2025") {
+      return NextResponse.json({ message: "Detail anggota tidak ditemukan" }, { status: 404 });
+    }
+
     console.error("DELETE Detail Error:", error);
-    return NextResponse.json(
-      { error: "Gagal menghapus data" },
-      { status: 400 }
-    );
+    return NextResponse.json({ message: "Gagal menghapus data" }, { status: 400 });
   }
 }

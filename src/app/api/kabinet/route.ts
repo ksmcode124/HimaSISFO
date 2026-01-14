@@ -1,35 +1,47 @@
-import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
-
-export async function GET() {
-  const kabinet = await prisma.kabinet.findMany({
-    select: {
-      id_kabinet: true,
-      nama_kabinet: true,
-      tahun_kerja: true,
-      gambar_logo: true,
-      deskripsi: true,
-      visi: true,
-      misi: true,
-    },
-  });
-
-  return NextResponse.json(kabinet);
-}
+import { createKabinetSchema } from "@/schemas/kabinet.schema"
+import { prisma } from "@/lib/prisma"
+import { NextResponse } from "next/server"
 
 export async function POST(req: Request) {
-  const body = await req.json();
+  try {
+    const body = await req.json()
 
-  const kabinet = await prisma.kabinet.create({
-    data: {
-      nama_kabinet: body.nama_kabinet,
-      tahun_kerja: body.tahun_kerja,
-      gambar_logo: body.gambar_logo ?? null,
-      deskripsi: body.deskripsi ?? null,
-      visi: body.visi ?? null,
-      misi: body.misi ?? null,
+    // Validasi request
+    const data = createKabinetSchema.parse(body)
+
+    // Simpan ke database
+    const kabinet = await prisma.kabinet.create({
+      data,
+    })
+
+    return NextResponse.json(kabinet, { status: 201 })
+  } catch (error: any) {
+    // Error dari Zod
+    if (error.name === "ZodError") {
+      return NextResponse.json({ errors: error.flatten() }, { status: 400 })
+    }
+
+    return NextResponse.json({ message: "Internal server error" }, { status: 500 })
+  }
+}
+
+// GET /api/kabinet (LIST)
+export async function GET() {
+  const data = await prisma.kabinet.findMany({
+    include: {
+      elemen_logo: true,
+      departemen: true,
+      detailAnggota: {
+        include: {
+          anggota: true,
+          jabatan: true,
+          departemen: true,
+        },
+      },
+      event: true,
+      proker: true,
     },
-  });
+  })
 
-  return NextResponse.json(kabinet, { status: 201 });
+  return NextResponse.json(data)
 }

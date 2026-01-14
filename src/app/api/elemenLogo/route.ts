@@ -1,33 +1,42 @@
-import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
-
-export async function GET() {
-  const elemen = await prisma.elemen_logo.findMany({
-    include: {
-      kabinet: {
-        select: {
-          id_kabinet: true,
-          nama_kabinet: true,
-          tahun_kerja: true,
-        },
-      },
-    },
-  });
-
-  return NextResponse.json(elemen);
-}
+import { prisma } from "@/lib/prisma"
+import { createElemenLogoSchema } from "@/schemas/elemenLogo.schema"
+import { NextResponse } from "next/server"
 
 export async function POST(req: Request) {
-  const body = await req.json();
+  try {
+    const body = await req.json()
 
-  const elemen = await prisma.elemen_logo.create({
-    data: {
-      nama_elemen: body.nama_elemen,
-      deskripsi_elemen: body.deskripsi_elemen,
-      gambar_elemen: body.gambar_elemen,
-      id_kabinet: body.id_kabinet,
+    // Validasi request
+    const data = createElemenLogoSchema.parse(body)
+
+    // Simpan ke database
+    const elemen = await prisma.elemen_logo.create({
+      data,
+    })
+
+    return NextResponse.json(elemen, { status: 201 })
+  } catch (error: any) {
+    if (error.name === "ZodError") {
+      return Response.json(
+        { errors: error.flatten() },
+        { status: 400 }
+      )
+    }
+
+    return NextResponse.json(
+      { message: "Internal server error" },
+      { status: 500 }
+    )
+  }
+}
+
+// GET /api/elemen-logo (LIST)
+export async function GET() {
+  const data = await prisma.elemen_logo.findMany({
+    include: {
+      kabinet: true,
     },
-  });
+  })
 
-  return NextResponse.json(elemen, { status: 201 });
+  return NextResponse.json(data)
 }
