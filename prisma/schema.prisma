@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 // schema.prisma
 
 generator client {
@@ -15,31 +9,40 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+/**
+ * =========================
+ * MASTER DATA (sesuai ERD)
+ * =========================
+ */
+
 model kabinet {
-  id_kabinet    Int              @id @default(autoincrement())
+  id_kabinet    Int      @id @default(autoincrement())
   nama_kabinet  String
-  foto_kabinet  String?
   tahun_kerja   String
-  gambar_logo   String?
-  deskripsi     String?
   visi          String?
   misi          String?
+  deskripsi     String?
+  foto_kabinet  String?  // di ERD tertulis integer, tapi untuk url/path paling aman String
+  gambar_logo   String?
+
   elemen_logo   elemen_logo[]
   departemen    departemen[]
   detailAnggota detail_anggota[]
   event         event[]
   proker        proker[]
+  komunitas     komunitas[]
 
   @@map("kabinet")
 }
 
 model elemen_logo {
   id_elemen_logo   Int     @id @default(autoincrement())
+  id_kabinet       Int
   nama_elemen      String
   deskripsi_elemen String?
   gambar_elemen    String?
-  id_kabinet       Int
-  kabinet          kabinet @relation(fields: [id_kabinet], references: [id_kabinet], onDelete: Cascade)
+
+  kabinet kabinet @relation(fields: [id_kabinet], references: [id_kabinet], onDelete: Cascade)
 
   @@map("elemen_logo")
 }
@@ -55,6 +58,8 @@ model departemen {
   kabinet       kabinet          @relation(fields: [id_kabinet], references: [id_kabinet], onDelete: Cascade)
   detailAnggota detail_anggota[]
   proker        proker[]
+
+  @@map("departemen")
 }
 
 model anggota {
@@ -62,6 +67,8 @@ model anggota {
   nama_anggota String
 
   detailAnggota detail_anggota[]
+
+  @@map("anggota")
 }
 
 model jabatan {
@@ -69,22 +76,39 @@ model jabatan {
   nama_jabatan String
 
   detailAnggota detail_anggota[]
+
+  @@map("jabatan")
 }
 
 model detail_anggota {
   id_detail     Int     @id @default(autoincrement())
   id_anggota    Int
-  id_departemen Int
-  id_kabinet    Int
   id_jabatan    Int
-  foto_anggota  String?
+  id_kabinet    Int
+  id_departemen Int
+  foto_anggota  String? // ERD: text
 
-  anggota    anggota    @relation(fields: [id_anggota], references: [id_anggota])
-  departemen departemen @relation(fields: [id_departemen], references: [id_departemen])
-  kabinet    kabinet    @relation(fields: [id_kabinet], references: [id_kabinet])
-  jabatan    jabatan    @relation(fields: [id_jabatan], references: [id_jabatan])
+  anggota    anggota    @relation(fields: [id_anggota], references: [id_anggota], onDelete: Cascade)
+  jabatan    jabatan    @relation(fields: [id_jabatan], references: [id_jabatan], onDelete: Cascade)
+  kabinet    kabinet    @relation(fields: [id_kabinet], references: [id_kabinet], onDelete: Cascade)
+  departemen departemen @relation(fields: [id_departemen], references: [id_departemen], onDelete: Cascade)
 
   @@unique([id_anggota, id_kabinet])
+  @@map("detail_anggota")
+}
+
+model proker {
+  id_proker     Int     @id @default(autoincrement())
+  id_departemen Int
+  id_kabinet    Int
+  nama_proker   String
+  deskripsi     String?
+  foto_proker   String?
+
+  departemen departemen @relation(fields: [id_departemen], references: [id_departemen], onDelete: Cascade)
+  kabinet    kabinet    @relation(fields: [id_kabinet], references: [id_kabinet], onDelete: Cascade)
+
+  @@map("proker")
 }
 
 model event {
@@ -98,19 +122,43 @@ model event {
   kategori         String?
 
   kabinet kabinet @relation(fields: [id_kabinet], references: [id_kabinet], onDelete: Cascade)
+
+  @@map("event")
 }
 
-model proker {
-  id_proker     Int     @id @default(autoincrement())
-  id_departemen Int
-  id_kabinet    Int
-  nama_proker   String
-  deskripsi     String?
-  foto_proker   String?
+/**
+ * =========================
+ * KOMUNITAS (sesuai ERD terbaru)
+ * =========================
+ */
 
-  departemen departemen @relation(fields: [id_departemen], references: [id_departemen])
-  kabinet    kabinet    @relation(fields: [id_kabinet], references: [id_kabinet])
+model komunitas {
+  id_komunitas   Int     @id @default(autoincrement())
+  id_kabinet     Int
+  foto_komunitas String? // ERD: text (bukan json)
+
+  kabinet     kabinet               @relation(fields: [id_kabinet], references: [id_kabinet], onDelete: Cascade)
+  pencapaian  komunitas_pencapaian[]
+
+  @@map("komunitas")
 }
+
+model komunitas_pencapaian {
+  id_pencapaian   Int     @id @default(autoincrement())
+  id_komunitas    Int
+  judul           String  // ERD: text (prisma tidak punya "text", pakai String)
+  foto_pencapaian String? // ERD: text
+
+  komunitas komunitas @relation(fields: [id_komunitas], references: [id_komunitas], onDelete: Cascade)
+
+  @@map("komunitas_pencapaian")
+}
+
+/**
+ * =========================
+ * AUTH (biarkan seperti punyamu)
+ * =========================
+ */
 
 model user {
   id            String   @id @default(cuid())
@@ -141,7 +189,7 @@ model Account {
   accessTokenExpiresAt  DateTime?
   refreshTokenExpiresAt DateTime?
   scope                 String?
-  type                  String    @default("credential") // ✅ Fix dari error sebelumnya
+  type                  String    @default("credential")
 
   user user @relation(fields: [userId], references: [id], onDelete: Cascade)
 
