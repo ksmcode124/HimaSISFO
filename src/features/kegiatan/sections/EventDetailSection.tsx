@@ -7,12 +7,19 @@ import { EventCardProps } from "../types"
 import Image from "next/image";
 import { breadcrumbItems } from "../data/routedata.json";
 import { ListBreadcrumb } from "@/components/ui/ListBreadCrumb";
+ const newBreadcrumbItems = [
+    ...breadcrumbItems,
+    {
+      display: "Detail",
+      link: `/kegiatan/agenda/detail`
+    }
+  ]
 
 function EventDetailContent({ events }: { events: EventCardProps }) {
 
   return (
     <div className="relative justify-center items-center">
-      <ListBreadcrumb items={breadcrumbItems} />
+      <ListBreadcrumb items={newBreadcrumbItems} />
       <div className="relative mx-4 md:mx-8 flex flex-col gap-10 md:gap-20 mt-10 md:mt-20 text-[var(--color-dark-blue)]">
         <Image
           src={`/assets/kegiatan/${events.img}`}
