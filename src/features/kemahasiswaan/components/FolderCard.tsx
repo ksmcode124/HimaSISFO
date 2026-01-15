@@ -35,7 +35,7 @@ export default function FolderCard({
 }: FolderCardProps) {
   return (
     <div
-      className={`relative overflow-visible mx-auto ${widthClass} ${maxHeightClass}`}
+      className={`relative mx-auto ${widthClass} ${maxHeightClass}`}
     >
       <div className="relative">
 

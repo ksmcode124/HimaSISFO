@@ -19,7 +19,7 @@ export default function Page() {
 
   return (
     <>
-      <HeroSection {...Pembayaran.hero} breadcrumbItems={Pembayaran.breadcrumbItems} />
+    <HeroSection {...Pembayaran.hero} breadcrumbItems={Pembayaran.breadcrumbItems} />
 
     <ShellLayer>
       <BackgroundLayer>

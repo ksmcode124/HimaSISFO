@@ -1,4 +1,8 @@
 // import { Card, CardHeader, CardTitle } from "@/components/ui/Card";
+import { BackgroundLayer, ContentLayer, DecorationLayer } from "@/components/layout/Layer";
+import { ShellLayer } from "@/components/layout/ShellLayer";
+import Image from "next/image";
+import RadialBackground from "@/components/ui/radial-bg";
 import {
   ItemDataJSON,
   ContentBlock,
@@ -11,6 +15,7 @@ import {
   WisudaYudisium,
 } from "@/features/kemahasiswaan";
 import { FlipHorizontal, GraduationCap } from "lucide-react";
+import CloudDecoration from "@/components/ui/cloud-decoration";
 
 export default function WisudaPage() {
   const wisudaAccordionItems = getSectionData<ItemDataJSON[]>(WisudaYudisium as KemahasiswaanDataFile, "accordion")
@@ -19,16 +24,52 @@ export default function WisudaPage() {
   return (
     <>
       <HeroSection {...WisudaYudisium.hero} breadcrumbItems={WisudaYudisium.breadcrumbItems} />
-      
-      <section className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 mb-10">
-        <HorizontalAccordion items={wisudaAccordionItems}/>
-      </section>
+      <ShellLayer>
+        <BackgroundLayer>
+          <RadialBackground />
+        </BackgroundLayer>
+        <DecorationLayer className="rotate-y-180">
+          <div className="absolute w-full aspect-2/1 scale-x-150 lg:scale-y-90 translate-y-[30%]">
+            <Image src={"/assets/kemahasiswaan/bg-shape-1.webp"} alt={""} fill className=""/>
+          </div>
+          <div className="absolute w-full aspect-2/1 scale-x-150 lg:scale-y-90 -translate-y-[25%] rotate-y-180">
+            <Image src={"/assets/kemahasiswaan/bg-shape-1.webp"} alt={""} fill className=""/>
+          </div>
+        </DecorationLayer>
+        <ContentLayer>
+          <section className="px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 2xl:px-18 min-h-screen pb-10">
+            <ShellLayer>
+              <ContentLayer>
+                <div className="flex-col flex justify-center items-center">
+                <section className="w-full max-w-7xl px-2 sm:px-6 lg:px-8 mb-10">
+                  <HorizontalAccordion items={wisudaAccordionItems}/>
+                </section>
 
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {itemCollectionData?.map((item) => (
-          <ItemCard key={item.id} item={item} />
-        ))}
-      </section>
+                <section className="w-full max-w-7xl px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 gap-6 pb-10 lg:pb-30">
+                  {itemCollectionData?.map((item, index) => {
+                    const isFirst = index == 0
+                    const isOdd = itemCollectionData.length % 2 !== 0
+
+                    return (
+                      <div
+                        key={item.id}
+                        className={
+                          isFirst && isOdd
+                            ? "sm:col-span-2 w-full justify-self-center"
+                            : ""
+                        }
+                      >
+                        <ItemCard item={item} />
+                      </div>
+                  )})}
+                </section>
+                <CloudDecoration />
+                </div>
+              </ContentLayer>
+            </ShellLayer>
+          </section>
+        </ContentLayer>
+      </ShellLayer>
     </>
   );
 }
