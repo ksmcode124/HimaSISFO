@@ -3,16 +3,17 @@ import { updateElemenLogoSchema } from "@/schemas/elemenLogo.schema"
 import { NextResponse } from "next/server"
 
 type Params = {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 // GET /api/elemen-logo/[id]
 export async function GET(_: Request, { params }: Params) {
-  const id = Number(params.id)
+  const { id } = await params
+  const elemenLogoId = Number(id)
 
-  if (Number.isNaN(id)) {
+  if (Number.isNaN(elemenLogoId)) {
     return NextResponse.json(
       { message: "ID elemen logo tidak valid" },
       { status: 400 }
@@ -20,7 +21,7 @@ export async function GET(_: Request, { params }: Params) {
   }
 
   const elemen = await prisma.elemen_logo.findUnique({
-    where: { id_elemen_logo: id },
+    where: { id_elemen_logo: elemenLogoId },
     include: {
       kabinet: true,
     },
@@ -39,9 +40,10 @@ export async function GET(_: Request, { params }: Params) {
 // PATCH /api/elemen-logo/[id]
 export async function PATCH(req: Request, { params }: Params) {
   try {
-    const id = Number(params.id)
+    const { id } = await params
+    const elemenLogoId = Number(id)
 
-    if (Number.isNaN(id)) {
+    if (Number.isNaN(elemenLogoId)) {
       return NextResponse.json(
         { message: "ID elemen logo tidak valid" },
         { status: 400 }
@@ -52,7 +54,7 @@ export async function PATCH(req: Request, { params }: Params) {
     const data = updateElemenLogoSchema.parse(body)
 
     const elemen = await prisma.elemen_logo.update({
-      where: { id_elemen_logo: id },
+      where: { id_elemen_logo: elemenLogoId },
       data,
     })
 
@@ -82,9 +84,10 @@ export async function PATCH(req: Request, { params }: Params) {
 // DELETE /api/elemen-logo/[id]
 export async function DELETE(_: Request, { params }: Params) {
   try {
-    const id = Number(params.id)
+    const { id } = await params
+    const elemenLogoId = Number(id)
 
-    if (Number.isNaN(id)) {
+    if (Number.isNaN(elemenLogoId)) {
       return NextResponse.json(
         { message: "ID elemen logo tidak valid" },
         { status: 400 }
@@ -92,7 +95,7 @@ export async function DELETE(_: Request, { params }: Params) {
     }
 
     await prisma.elemen_logo.delete({
-      where: { id_elemen_logo: id },
+      where: { id_elemen_logo: elemenLogoId },
     })
 
     return NextResponse.json({ message: "Elemen logo berhasil dihapus" })

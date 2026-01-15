@@ -3,16 +3,17 @@ import { updateKabinetSchema } from "@/schemas/kabinet.schema"
 import { NextResponse } from "next/server"
 
 type Params = {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 // GET /api/kabinet/[id]
 export async function GET(_: Request, { params }: Params) {
-  const id = Number(params.id)
+  const { id } = await params
+  const kabinetId = Number(id)
 
-  if (Number.isNaN(id)) {
+  if (Number.isNaN(kabinetId)) {
     return NextResponse.json(
       { message: "ID kabinet tidak valid" },
       { status: 400 }
@@ -20,7 +21,7 @@ export async function GET(_: Request, { params }: Params) {
   }
 
   const kabinet = await prisma.kabinet.findUnique({
-    where: { id_kabinet: id },
+    where: { id_kabinet: kabinetId },
     include: {
       departemen: true,
       elemen_logo: true,
@@ -40,9 +41,10 @@ export async function GET(_: Request, { params }: Params) {
 // PATCH /api/kabinet/[id]
 export async function PATCH(req: Request, { params }: Params) {
   try {
-    const id = Number(params.id)
+    const { id } = await params
+    const kabinetId = Number(id)
 
-    if (Number.isNaN(id)) {
+    if (Number.isNaN(kabinetId)) {
       return NextResponse.json(
         { message: "ID kabinet tidak valid" },
         { status: 400 }
@@ -53,7 +55,7 @@ export async function PATCH(req: Request, { params }: Params) {
     const data = updateKabinetSchema.parse(body)
 
     const kabinet = await prisma.kabinet.update({
-      where: { id_kabinet: id },
+      where: { id_kabinet: kabinetId },
       data,
     })
 
@@ -84,9 +86,10 @@ export async function PATCH(req: Request, { params }: Params) {
 // DELETE /api/kabinet/[id]
 export async function DELETE(_: Request, { params }: Params) {
   try {
-    const id = Number(params.id)
+    const { id } = await params
+    const kabinetId = Number(id)
 
-    if (Number.isNaN(id)) {
+    if (Number.isNaN(kabinetId)) {
       return NextResponse.json(
         { message: "ID kabinet tidak valid" },
         { status: 400 }
@@ -94,7 +97,7 @@ export async function DELETE(_: Request, { params }: Params) {
     }
 
     await prisma.kabinet.delete({
-      where: { id_kabinet: id },
+      where: { id_kabinet: kabinetId },
     })
 
     return NextResponse.json({ message: "Kabinet berhasil dihapus" })
