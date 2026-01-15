@@ -111,7 +111,6 @@ export function DynamicCalendar({
         <tbody>
           {Array.from({ length: 5 }).map((_, weekIdx) => (
             <tr key={weekIdx}
-              className="h-[80px] md:h-[125px]"
             >
               {daysGrid
                 .slice(weekIdx * 7, weekIdx * 7 + 7)
@@ -128,18 +127,19 @@ export function DynamicCalendar({
                         isCurrentMonth ? "bg-[#99B6D9]" : "bg-[#B3C9E4]"
                       )}
                     >
-                      <div className="flex flex-col items-start gap-1">
-                        <div
-                          className={clsx(
-                            "flex justify-center m-1 md:m-2 h-[22px] md:h-[28px] font-medium",
-                            isToday ? "bg-[#3978FF] rounded-full w-6 h-6 md:w-7 md:h-7 text-[#fff] items-center" : "text-[#000000] items-start"
-                          )}
-                        >
-                          {day}
-
+                      <div className="flex flex-col items-start aspect-[12/13]">
+                        <div className="aspect-[3/1] w-full flex justify-start items-start pl-1 md:pl-2 pt-1 md:pt-2">
+                          <div
+                            className={clsx(
+                              "flex justify-center font-medium ",
+                              isToday ? "bg-[#3978FF] rounded-full w-6 h-6 md:w-8 md:h-8 text-[#fff] items-center" : "text-[#000000] items-start"
+                            )}
+                          >
+                            {day}
+                          </div>
                         </div>
 
-                        <div className="flex flex-col w-full gap-1 md:gap-2 overflow-visible">
+                        <div className="flex flex-col w-full gap-1 md:gap-2 overflow-visible ">
                           {dayEvents?.map((ev) => (
                             <div
                               key={`${ev.id}-${ev.start}`}

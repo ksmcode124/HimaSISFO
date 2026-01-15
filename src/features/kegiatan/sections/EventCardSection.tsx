@@ -23,7 +23,7 @@ function EventCardContent({ events }: { events: EventCardProps[] }) {
       <h1 className="w-full h-fit text-center font-semibold text-xl md:text-4xl xl:text-7xl">
         Agenda
       </h1>
-      <div className="grid grid-cols-3 md:grid-cols-[1fr_2fr_1fr] gap-1 sm:gap-4 xl:gap-8">
+      <div className="grid grid-cols-3 md:grid-cols-[2fr_3fr_2fr] gap-1 sm:gap-4 xl:gap-8">
         <div className="w-full min-w-0">
           <h2 className="h-fit w-full text-center uppercase py-5 md:py-10 font-semibold text-[12px] md:text-2xl xl:text-3xl">Sebelum</h2>
           {pastNotGoing && <EventCard variant="notGoing" {...pastNotGoing} />}

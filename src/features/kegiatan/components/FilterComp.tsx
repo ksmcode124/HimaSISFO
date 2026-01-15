@@ -14,14 +14,6 @@ export function FilterComp({ className }: { className?: string }) {
 
   const selectedBulan = searchParams.get("bulan") || formatMonthName(new Date().getMonth());
 
-  // const currentIndex = MONTHS_NAME.indexOf(selectedBulan);
-  // const start = currentIndex !== -1 ? currentIndex : 0;
-  // const end = (start + 3) % 12;
-
-  // const currentData = start < end
-  //   ? MONTHS_NAME.slice(start, end)
-  //   : [...MONTHS_NAME.slice(start), ...MONTHS_NAME.slice(0, end)];
-
   const handleSelection = (bulan: string) => {
     setActive(false);
     const params = new URLSearchParams(searchParams.toString());
@@ -52,7 +44,7 @@ export function FilterComp({ className }: { className?: string }) {
           </svg>
         </div>
 
-        <span className={clsx(className, "truncate text-[14px] md:text-xl")}>Filter</span>
+        <span className={clsx(className, "truncate text-[14px] md:text-xl")}>{selectedBulan ? selectedBulan : "Filter"}</span>
       </div>
 
       {active && (
