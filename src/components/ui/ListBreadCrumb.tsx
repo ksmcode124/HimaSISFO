@@ -29,15 +29,16 @@ export function ListBreadcrumb({items} : {items?: BreadcrumbItem[]}) {
           <Fragment key={index}>
           <BreadcrumbItem>
             <BreadcrumbLink asChild className={cn(
-              isLast ? "text-black" : "",
+              isLast ? "text-[var(--color-cloud-burst)]" : "text-[var(--color-smokey-grey)] hover:text-[var(--color-cloud-burst)]",
               "text-md sm:text-lg lg:text-xl font-medium"
             )}>
               <Link href={item.link}>{item.display}</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
           { !isLast &&
-            <BreadcrumbSeparator>
-              <SlashIcon />
+            <BreadcrumbSeparator className=" text-md md:text-2xl">
+              /
+              {/* <SlashIcon />   ini sebelum dihapus*/}
             </BreadcrumbSeparator>
           }
           </Fragment>
