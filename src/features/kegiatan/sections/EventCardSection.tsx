@@ -20,20 +20,20 @@ function EventCardContent({ events }: { events: EventCardProps[] }) {
   const { pastNotGoing, nextOnGoing, futureNotGoing } = sortEvents(events);
   return (
     <div className="relative flex flex-col gap-3 md:gap-5 justify-center w-full mx-auto">
-      <h1 className="w-full h-fit text-center font-semibold text-xl md:text-4xl xl:text-7xl">
+      <h1 className="w-full h-fit text-center font-semibold text-xl md:text-4xl xl:text-7xl text-[var(--color-dark-blue)]">
         Agenda
       </h1>
-      <div className="grid grid-cols-3 md:grid-cols-[2fr_3fr_2fr] gap-1 sm:gap-4 xl:gap-8">
+      <div className="grid grid-cols-3 md:grid-cols-[2fr_3fr_2fr] gap-1 sm:gap-4 xl:gap-8 ">
         <div className="w-full min-w-0">
-          <h2 className="h-fit w-full text-center uppercase py-5 md:py-10 font-semibold text-[12px] md:text-2xl xl:text-3xl">Sebelum</h2>
+          <h2 className="h-fit w-full text-center uppercase py-5 md:py-10 font-semibold text-[12px] md:text-2xl xl:text-3xl text-[var(--color-nile-blue)]">Sebelum</h2>
           {pastNotGoing && <EventCard variant="notGoing" {...pastNotGoing} />}
         </div>
         <div className="w-full min-w-0">
-          <h2 className="h-fit w-full text-center uppercase py-5 md:py-10 font-semibold text-[12px] md:text-2xl xl:text-3xl">Berikutnya</h2>
+          <h2 className="h-fit w-full text-center uppercase py-5 md:py-10 font-semibold text-[12px] md:text-2xl xl:text-3xl text-[var(--color-nile-blue)]">Berikutnya</h2>
           {nextOnGoing && <EventCard variant="onGoing" {...nextOnGoing} />}
         </div>
         <div className="w-full min-w-0">
-          <h2 className="h-fit w-full text-center uppercase py-5 md:py-10 font-semibold text-[12px] md:text-2xl xl:text-3xl">Mendatang</h2>
+          <h2 className="h-fit w-full text-center uppercase py-5 md:py-10 font-semibold text-[12px] md:text-2xl xl:text-3xl text-[var(--color-nile-blue)]">Mendatang</h2>
           {futureNotGoing && <EventCard variant="notGoing" {...futureNotGoing} />}
         </div>
       </div>
@@ -42,6 +42,7 @@ function EventCardContent({ events }: { events: EventCardProps[] }) {
           variant="default"
           route={`kegiatan/agenda`}
           className="text-[12px] md:text-sm flex flex-row gap-1 md:gap-2 px-3 md:px-4 py-1 md:py-3 rounded-full items-center shadow-[4.38px_4.38px_3.5px_0px_rgba(0,0,0,0.25)]"
+          size="lg"
         >Selengkapnya<ArrowRight className="text-sm md:text-xl" /></Button>
       </div>
 
@@ -54,7 +55,7 @@ export async function EventCardSection() {
     const events = await getEvents();
     return (
         <section className="relative p-0 m-0 top-0">
-            <DecorationLayer className="h-[231px] md:h-[617px] mt-35 md:mt-60">
+            <DecorationLayer className=" top-1/4">
                 <EventCardDecoration />
             </DecorationLayer>
             <ContentLayer className="px-5 md:px-10 xl:px-40 pb-30">

@@ -80,17 +80,17 @@ export function DynamicCalendar({
   return (
     <div className={clsx(className, "w-full py-4 px-2 md:px-4 bg-white rounded-lg shadow")}>
       <div className="flex flex-row w-full items-center justify-between my-5">
-        <h2 className="text-[20px] md:text-xl font-medium md:font-bold">
+        <h2 className="text-[20px] md:text-xl font-medium md:font-bold text-[var(--color-dark-blue)]">
           {String(formatMonthName(month))}, {String(formatYear(year))}
         </h2>
-        <div className="flex border-3 border-[#323257] rounded overflow-hidden">
-          <button onClick={goPrevMonth} className="p-1 border-r-3 border-[#323257]">
+        <div className="flex border-3 border-[var(--color-dark-blue)] rounded overflow-hidden">
+          <button onClick={goPrevMonth} className="p-1 border-r-3 border-[var(--color-dark-blue)]">
             <ChevronLeft />
           </button>
           <button onClick={goToday} className="w-[100px] md:w-[116px] py-2 font-bold text-sm uppercase">
             {String(formatMonthName(month)).slice(0, 3)} {String(formatYear(year))}
           </button>
-          <button onClick={goNextMonth} className="p-1 border-l-3 border-[#323257]">
+          <button onClick={goNextMonth} className="p-1 border-l-3 border-[var(--color-dark-blue)]">
             <ChevronRight />
           </button>
         </div>
@@ -127,24 +127,29 @@ export function DynamicCalendar({
                         isCurrentMonth ? "bg-[#99B6D9]" : "bg-[#B3C9E4]"
                       )}
                     >
-                      <div className="flex flex-col items-start aspect-[12/13]">
-                        <div className="aspect-[3/1] w-full flex justify-start items-start pl-1 md:pl-2 pt-1 md:pt-2">
+                      <div className="flex flex-col items-start aspect-[12/14] md:aspect-[12/13]">
+                        <div className="h-[45%] md:h-[35%] w-full flex justify-start items-start pl-1 md:pl-2 pt-1 md:pt-2">
                           <div
                             className={clsx(
-                              "flex justify-center font-medium ",
-                              isToday ? "bg-[#3978FF] rounded-full w-6 h-6 md:w-8 md:h-8 text-[#fff] items-center" : "text-[#000000] items-start"
+                              "flex items-center justify-center font-medium leading-none text-[var(--color-dark-blue)]",
+                              isCurrentMonth ?
+                               "opacity-100" : "opacity-50",
+                              isToday
+                                ? "bg-[#3978FF] rounded-full w-5 h-5 md:w-8 md:h-8 text-white"
+                                : ""
                             )}
                           >
                             {day}
                           </div>
                         </div>
 
-                        <div className="flex flex-col w-full gap-1 md:gap-2 overflow-visible ">
+
+                        <div className="flex flex-col w-full gap-[2px] md:gap-2 overflow-visible">
                           {dayEvents?.map((ev) => (
                             <div
                               key={`${ev.id}-${ev.start}`}
                               className={clsx(
-                                "text-[10px] md:text-sm font-bold h-[18px] md:h-[25px] w-auto truncate text-white items-center flex ",
+                                "text-[10px] md:text-sm font-bold h-[15px] md:h-[30px] w-auto truncate text-white items-center flex ",
                                 ev.start.getDate().toString().trim() === ev.end.getDate().toString().trim() ? "mx-1 rounded-[5px] px-2" :
                                   ev.start.getDate().toString().trim() === day.toString().trim() ? "ml-1 rounded-l-[5px] px-2" :
                                     ev.end.getDate().toString().trim() === day.toString().trim() ? "mr-1 rounded-r-[5px]" :

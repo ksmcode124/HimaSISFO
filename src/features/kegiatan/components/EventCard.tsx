@@ -31,7 +31,7 @@ export const EventCard = (props: WithVariantEventCardProps) => {
     <div
       key={id}
       className={cn(
-        "flex-col rounded-md md:rounded-3xl h-fit overflow-hidden mask-clip-content",
+        "flex-col rounded-md md:rounded-3xl h-fit overflow-hidden mask-clip-content text-[var(--color-dark-blue)]",
         variant === "detail" ? "border-gradient-x" : "border-gradient-y"
       )}
     >
@@ -44,17 +44,17 @@ export const EventCard = (props: WithVariantEventCardProps) => {
       />
       <div
         className={cn(
-          "w-full flex flex-col gap-[5px] md:gap-[30px] py-[10px] md:py-[30px] px-[10px] md:px-[15px] backdrop-blur-[4px]",
+          "w-full flex flex-col gap-1 md:gap-3 py-[10px] md:py-[30px] px-[10px] md:px-[15px] backdrop-blur-[4px]",
           variant === "detail"
             ? "bg-[#EDF3F6]/50"
             : "bg-linear-to-b from-blue-200/60 to-blue-100"
         )}
       >
         <div className="flex flex-row justify-start gap-1 md:gap-3">
-          <p className="shadow-[4.38px_4.38px_3.5px_0px_rgba(0,0,0,0.25)] w-fit h-fit text-white text-[10px] md:text-[22px] font-normal px-1 md:px-3 py-1 md:py-2 rounded-[15px] md:rounded-[50px] bg-gradient-to-b from-[#1B3C53] to-[#456882] text-center">{formatDate(start) === formatDate(end) ?
-            `${formatDate(start)}` : `${formatDate(start)} - ${formatDate(end)}`}</p>
+          <p className="shadow-[4.38px_4.38px_3.5px_0px_rgba(0,0,0,0.25)] w-fit h-fit text-white text-[9.5px] md:text-[22px] font-normal px-1 md:px-3 py-1 md:py-2 rounded-full md:rounded-[50px] bg-gradient-to-b from-[#1B3C53] to-[#456882] text-center">{formatDate(start) === formatDate(end) ?
+            `${formatDate(start)}` : `${formatDate(start)}-${formatDate(end)}`}</p>
           {variant === "onGoing" && (
-            <p className="shadow-[4.38px_4.38px_3.15px_0px_rgba(0,0,0,0.25)] w-fit h-fit text-white text-[10px] md:text-[22px] font-normal px-1 md:px-3 py-1 md:py-2 rounded-[15px] md:rounded-[50px] bg-gradient-to-b from-[#1B3C53] to-[#456882] text-center">
+            <p className="shadow-[4.38px_4.38px_3.15px_0px_rgba(0,0,0,0.25)] w-fit h-fit text-white text-[10px] md:text-[22px] font-normal px-1 md:px-3 py-1 md:py-2 rounded-full md:rounded-[50px] bg-gradient-to-b from-[#1B3C53] to-[#456882] text-center">
               {countDown || "Waktu Habis"}
             </p>
           )}
@@ -70,15 +70,17 @@ export const EventCard = (props: WithVariantEventCardProps) => {
               <Button
                 route={`/kegiatan/agenda/${title}-${id}`}
                 className="flex flex-row gap-3 px-3 py-2 rounded-full shadow-[4.38px_4.38px_3.5px_0px_rgba(0,0,0,0.25)]"
+                size="lg"
               >
-                More <ArrowRight />
+                Selengkapnya <ArrowRight />
               </Button>
             ) : (
               <Button
                 onClick={() => setOpen(true)}
-                className="flex flex-row gap-3 px-3 py-2 rounded-full shadow-[4.38px_4.38px_3.5px_0px_rgba(0,0,0,0.25)]"
+                className="flex flex-row gap-3 px-3 py-2 rounded-full shadow-[4.38px_4.38px_3.5px_0px_rgba(0,0,0,0.25)] opacity-50"
+                size="lg"
               >
-                More <ArrowRight />
+                Selengkapnya <ArrowRight />
               </Button>
 
             )}
