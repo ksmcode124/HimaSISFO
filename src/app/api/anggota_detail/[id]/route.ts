@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { detailIdParamSchema, updateAnggotaDetailSchema } from "@/schemas/anggota-detail.schema";
+import { detailIdParamSchema, updateAnggotaDetailSchema } from "@/schemas/anggota_detail.schema";
 
 interface RouteParams {
   params: Promise<{ id: string }>;
