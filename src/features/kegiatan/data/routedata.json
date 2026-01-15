@@ -1,0 +1,16 @@
+{
+    "breadcrumbItems": [
+    {
+      "display": "Kegiatan",
+      "link": "/kegiatan"
+    },
+    {
+      "display": "Agenda",
+      "link": "/kegiatan/agenda"
+    },
+    {
+      "display": "Detail",
+      "link": "/kegiatan/agenda/detail"
+    }
+  ]
+}
