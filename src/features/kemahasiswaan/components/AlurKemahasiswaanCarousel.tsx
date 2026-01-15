@@ -113,7 +113,7 @@ export default function AlurKemahasiswaanCarousel({
                       className={cn(
                         "pb-4 w-full grid justify-items-center text-center",
                         isActive
-                          ? "opacity-100 translate-y-0 max-h-20 delay-1000 duration-500 transition-[opacity,transform] ease-in"
+                          ? "opacity-100 translate-y-0 max-h-20 delay-300 sm:delay-1000 duration-500 transition-[opacity,transform] ease-in"
                           : "opacity-0 translate-y-2 max-h-0 overflow-hidden pointer-events-none"
                       )}
                     >

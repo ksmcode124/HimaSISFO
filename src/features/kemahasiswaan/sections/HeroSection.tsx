@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import BreadcrumbSection from "./BreadcrumbSection";
-import { BreadcrumbItemData } from "@/components/ui/breadcrumb";
+import { BreadcrumbItemData } from "@/components/ui/Breadcrumb";
 import { ShellLayer } from "@/components/layout/ShellLayer";
 import { BackgroundLayer, ContentLayer, DecorationLayer, OverlayLayer } from "@/components/layout/Layer";
 
@@ -45,7 +45,7 @@ function HeroContent({ title, subtitle, hasBreadcrumb }: { title: string; subtit
 
 function PitaDecoration() {
   return (
-    <div className="relative -translate-y-10 w-full aspect-4/1">
+    <div className="relative z-5 w-full aspect-4/1">
       <Image
         src="/assets/kemahasiswaan/decoration-pita.webp"
         alt=""
