@@ -51,7 +51,7 @@ export function FilterComp({ className, type, selected, onChange }: { className?
   };
 
   return (
-    <div className="relative font-medium text-[10px] md:text-[22px] text-[var(--color-dark-blue)]">
+    <div className="relative font-medium text-[var(--color-dark-blue)] text-[14px] md:text-[18px]">
       {type === "list" ? (
         <div
           className="flex items-center justify-start gap-2 md:gap-4 w-full py-2 rounded-md z-999"
@@ -74,7 +74,7 @@ export function FilterComp({ className, type, selected, onChange }: { className?
             </svg>
           </div>
 
-          <span className={clsx(className, "truncate text-[14px] md:text-xl")}>{selectedBulan ? selectedBulan : "Filter"}</span>
+          <span className={clsx(className, "truncate")}>{selectedBulan ? selectedBulan : "Filter"}</span>
         </div>
       ) : type === "calendar" ? (
         <div className="flex items-center justify-center gap-2 md:gap-4 w-full cursor-pointer"
@@ -85,20 +85,20 @@ export function FilterComp({ className, type, selected, onChange }: { className?
 
       {active && (
         <div className={clsx(
-          "absolute z-99 mt-2 rounded-md px-2 md:px-4 pt-2 md:pt-4 bg-[#EDF3F6CC] backdrop-blur-[2px]  ",
+          "absolute z-99 mt-2 rounded-md px-2 md:px-4 bg-[#EDF3F6CC] backdrop-blur-[2px] ",
           {
             "left-0": type === "list",
             "right-0": type === "calendar",
           }
         )}>
 
-          <div className="w-[200px] md:w-[280px] overflow-hidden">
+          <div className="w-[200px] md:w-[300px] overflow-hidden">
             {type === "calendar" ? (
               <div className="relative">
-                <div className="pb-2 text-[16px]">
+                <div className="pb-2 pt-3">
                   Tahun
                 </div>
-                <div className="flex flex-row w-full justify-between border-2 border-[var(--color-dark-blue)] bg-[var(--color-porcelain)] rounded-[4px] text-sm items-center py-2 px-4" onClick={() => {
+                <div className="flex flex-row w-full justify-between border-2 border-[var(--color-dark-blue)] bg-[var(--color-porcelain)] rounded-[4px] items-center py-2 px-4" onClick={() => {
                   setOpen(true);
                   open ? setOpen(false) : setOpen(true);
                 }}>
@@ -107,15 +107,15 @@ export function FilterComp({ className, type, selected, onChange }: { className?
                 </div>
                 {open ?
                   <div className="absolute left-0 my-3 flex flex-col z-999 border-2 border-[var(--color-dark-blue)] bg-[var(--color-porcelain)] rounded-[4px] w-full">
-                    <span className="py-2 px-4 text-[14px] md:text-sm hover:bg-neutral-100 hover:text-white" onClick={() => (setSelectedYear(prevYear), setOpen(false))}>{prevYear}</span>
-                    <span className="py-2 px-4 text-[14px] md:text-sm hover:bg-neutral-100 hover:text-white" onClick={() => (setSelectedYear(selectedYear), setOpen(false))}>{!isNaN(selectedYear) ? selectedYear : ""}</span>
-                    <span className="py-2 px-4 text-[14px] md:text-sm hover:bg-neutral-100 hover:text-white" onClick={() => (setSelectedYear(nextYear), setOpen(false))}>{nextYear}</span>
+                    <span className="py-2 px-4 hover:bg-neutral-100 hover:text-white" onClick={() => (setSelectedYear(prevYear), setOpen(false))}>{prevYear}</span>
+                    <span className="py-2 px-4 hover:bg-neutral-100 hover:text-white" onClick={() => (setSelectedYear(selectedYear), setOpen(false))}>{!isNaN(selectedYear) ? selectedYear : ""}</span>
+                    <span className="py-2 px-4 hover:bg-neutral-100 hover:text-white" onClick={() => (setSelectedYear(nextYear), setOpen(false))}>{nextYear}</span>
                   </div> : null}
               </div>
             ) : null}
 
             <div>
-              <div className="pb-2 pt-3 text-[16px]">
+              <div className="pb-2 pt-3">
                 Bulan
               </div>
 
@@ -128,7 +128,7 @@ export function FilterComp({ className, type, selected, onChange }: { className?
                         if (type === "list") handleSelection(bulan);
                         if (type === "calendar") setSelectedMonth(bulan);
                       }}
-                      className={clsx("w-1/3 rounded-[3px] p-2 text-[14px] md:text-sm text-center cursor-pointer hover:bg-neutral-100 hover:text-white",
+                      className={clsx("w-1/3 rounded-[3px] p-2 text-center cursor-pointer hover:bg-neutral-100 hover:text-white",
                         {
                           "bg-[#6482A6] text-white":
                             (type === "list" && selectedBulan === bulan) ||
@@ -152,7 +152,7 @@ export function FilterComp({ className, type, selected, onChange }: { className?
             {type === "list" ? null : (
               <div className="w-full flex gap-5 pb-5">
                 <Button
-                  className="flex-1 bg-[#D1E6FF] text-[var(--color-dark-blue)]"
+                  className="flex-1 bg-[#D1E6FF] text-[var(--color-dark-blue)] text-[14px] md:text-[18px]"
                   onClick={() => {
                     setActive(false)
                     setSelectedMonth(selected.slice(0, 3))
@@ -163,7 +163,7 @@ export function FilterComp({ className, type, selected, onChange }: { className?
                 </Button>
 
                 <Button
-                  className="flex-1 bg-[#6482A6]"
+                  className="flex-1 bg-[#6482A6] text-[14px] md:text-[18px]"
                   onClick={() => {
                     handleSelectedMonthYear(selectedMonth, selectedYear);
                   }}

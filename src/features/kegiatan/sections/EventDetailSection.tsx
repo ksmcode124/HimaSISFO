@@ -10,7 +10,7 @@ import BreadcrumbSection from "./BreadcrumbSection";
  const newBreadcrumbItems = [
     ...breadcrumbItems,
     {
-      display: "Detail",
+      display: "Berita",
       link: `/kegiatan/agenda/detail`
     }
   ]
@@ -20,7 +20,7 @@ function EventDetailContent({ events }: { events: EventCardProps }) {
   return (
     <div className="relative justify-center items-center">
       <BreadcrumbSection items={newBreadcrumbItems} />
-      <div className="relative mx-4 md:mx-8 flex flex-col gap-15 md:gap-30 text-[var(--color-dark-blue)]">
+      <div className="relative mx-4 md:mx-8 mt-5 flex flex-col gap-10 md:gap-20 xl:gap-30 text-[var(--color-dark-blue)]">
         <Image
           src={`/assets/kegiatan/${events.img}`}
           alt="detail event"
@@ -28,11 +28,11 @@ function EventDetailContent({ events }: { events: EventCardProps }) {
           width={1600}
           height={1000}
         />
-        <div className="flex flex-col gap-6 md:gap-12">
-          <h1 className="text-xl md:text-6xl font-bold">
+        <div className="flex flex-col gap-6 md:gap-8 xl:gap-12">
+          <h1 className="text-xl md:text-3xl xl:text-6xl font-bold">
             {events.title}
           </h1>
-          <p className="text-[12px] md:text-xl font-normal h-[400px] overflow-hidden ">
+          <p className="text-[12px] md:text-[18px] xl:text-xl font-normal h-[400px] overflow-hidden ">
             {events.description}
           </p>
         </div>
@@ -51,7 +51,7 @@ export async function EventDetailSection({ id }: { id: string }) {
 
   return (
     <section className="relative p-0 m-0 top-0">
-      <ContentLayer className="mx-10 md:mx-30">
+      <ContentLayer className="mx-10 md:mx-10 xl:mx-30">
         <EventDetailContent events={FindEventDetail} />
       </ContentLayer>
     </section>

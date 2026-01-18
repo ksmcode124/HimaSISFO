@@ -91,7 +91,7 @@ export function DynamicCalendar({
           <button onClick={goPrevMonth} className="p-1 border-r-3 border-[var(--color-dark-blue)]">
             <ChevronLeft />
           </button>
-          <FilterComp className="w-[100px] md:w-[140px] py-1 md:py-2 font-bold uppercase" type="calendar" selected={`${String(formatMonthName(month)).slice(0, 3)} ${Number(formatYear(year))}`} onChange={(month, year) => {
+          <FilterComp className="w-[100px] md:w-[140px] py-1 md:py-2 font-bold uppercase text-sm md:text-xl" type="calendar" selected={`${String(formatMonthName(month)).slice(0, 3)} ${Number(formatYear(year))}`} onChange={(month, year) => {
             setMonth(month-1);
             setYear(year as number);
           }}/>
@@ -132,7 +132,7 @@ export function DynamicCalendar({
                     <td
                       key={key}
                       className={clsx(
-                        "border border-[#fff] text-[14px] md:text-md align-top",
+                        "border border-[#fff] align-top",
                         isCurrentMonth ? "bg-[#99B6D9]" : "bg-[#B3C9E4]"
                       )}
                     >

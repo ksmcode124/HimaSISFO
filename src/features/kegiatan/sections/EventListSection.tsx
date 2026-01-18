@@ -7,12 +7,15 @@ import { EventCardProps } from '../types';
 import { formatMonthName } from '../utils/FormatDate';
 import { createEventIndex } from '../utils/EventIndexer';
 import { findEventByMonthYear } from '../utils/FindEvent';
-import { EventCard } from '../components/EventCard';
+import { chunkArray } from '../utils/EventIndexer';
 import { FilterComp } from '../components/FilterComp';
 import { breadcrumbItems  } from '../data/routedata.json';
 import BreadcrumbSection from './BreadcrumbSection';
+import { EventList } from '../components/EventList';
 
 function EventListContent({ events }: { events: EventCardProps[] }) {
+  console.log(events.length);
+  const visibleEvent = chunkArray(events, 9);
   return (
     <div className="relative justify-center items-center">
       <BreadcrumbSection items={breadcrumbItems} />
@@ -20,11 +23,12 @@ function EventListContent({ events }: { events: EventCardProps[] }) {
         <h1 className="text-xl md:text-4xl xl:text-7xl font-bold w-full h-fit text-center pb-5 md:pb-15 border-b-4 border-[var(--color-dark-blue)]">
           Agenda
         </h1>
-        <div className="text-base md:text-4xl flex flex-row justify-between items-center py-3 md:py-5">
-          <FilterComp className="text-xl" type="list" selected="none"/>
+        <div className="flex flex-row justify-between items-center py-3 md:py-5">
+          <FilterComp className="text-[14px] md:text-xl" type="list" selected="none"/>
           <span className="text-[14px] md:text-xl px-2 md:px-3 py-1 md:py-2 bg-gradient-to-b from-[#F0F4F8] to-[#E6EEF5] rounded-full">{events.length} Acara ditemukan</span>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-10 mt-5 md:mt-10">
+        <EventList events={events} />
+        {/* <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-10 my-5 md:my-10">
           {events.map((event) => (
             <EventCard
               key={event.id}
@@ -38,7 +42,8 @@ function EventListContent({ events }: { events: EventCardProps[] }) {
               type={event.type}
             />
           ))}
-        </div>
+        </div> */}
+        
         {/* {visibleCount < events.length && (
           <div className="flex justify-center mt-6">
             <Button
@@ -65,7 +70,7 @@ export async function EventListSection({ filter }: { filter?: string }) {
       <DecorationLayer>
         <div></div>
       </DecorationLayer>
-      <ContentLayer className="mx-4 md:mx-30">
+      <ContentLayer className="mx-4 md:mx-10 xl:mx-30">
         <EventListContent events={FindEvent} />
       </ContentLayer>
     </section>
