@@ -7,8 +7,9 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react"
 import { getEvents } from '../services/eventService';
 import { EventCardProps } from '../types';
-import { sortEvents } from '../utils/GetEventNow';
+import { sortEvents } from '../utils/SortEvent';
 import { EventCard } from '../components/EventCard';
+import { formatMonthName } from '../utils/FormatDate';
 
 function EventCardDecoration() {
     return (
@@ -40,7 +41,7 @@ function EventCardContent({ events }: { events: EventCardProps[] }) {
       <div className="w-full justify-center flex flex-row py-5 md:py-10">
         <Button
           variant="default"
-          route={`kegiatan/agenda`}
+          route={`kegiatan/agenda?bulan=${formatMonthName(new Date().getMonth())}`}
           className="text-[12px] md:text-sm flex flex-row gap-1 md:gap-2 px-3 md:px-4 py-1 md:py-3 rounded-full items-center shadow-[4.38px_4.38px_3.5px_0px_rgba(0,0,0,0.25)]"
           size="lg"
         >Selengkapnya<ArrowRight className="text-sm md:text-xl" /></Button>
