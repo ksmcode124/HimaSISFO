@@ -4,10 +4,10 @@ import {
   AccordionItem, 
   AccordionTrigger 
 } from "@/components/ui/accordion";
-import { ItemDataJSON } from "../types";
-import ContentRenderer from "./ContentRenderer";
+import { ItemDataJSON } from "../types/data";
+import { ContentRenderer } from "./ContentRenderer";
 
-export default function HorizontalAccordion({ items }: { items: ItemDataJSON[] }) {
+export function HorizontalAccordion({ items }: { items: ItemDataJSON[] }) {
   return (
     <Accordion
       type="single"

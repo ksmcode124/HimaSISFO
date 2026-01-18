@@ -8,7 +8,7 @@ type FlipCardProps = {
   className?: string;
 };
 
-export default function FlipCard({ front, back, className }: FlipCardProps) {
+export function FlipCard({ front, back, className }: FlipCardProps) {
   const [flipped, setFlipped] = useState(false);
 
   return (

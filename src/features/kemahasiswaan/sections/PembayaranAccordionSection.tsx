@@ -1,20 +1,16 @@
 "use client"
 
 import { useState } from "react"
-import {
-  ItemDataJSON,
-  HorizontalAccordion,
-  FeaturedHorizontalAccordion
-} from "@/features/kemahasiswaan"
-
-import AccordionVisualImage from "../components/AccordionVisualImage"
+import { ItemDataJSON } from "@/features/kemahasiswaan"
+import { HorizontalAccordion, FeaturedHorizontalAccordion } from "../components/HorizontalAccordion"
+import { AccordionVisualCarousel } from "../components/AccordionVisualCarousel"
 
 interface Props {
   featuredItems: ItemDataJSON[]
   otherItems: ItemDataJSON[]
 }
 
-export default function PembayaranSection({
+export function PembayaranAccordionSection({
   featuredItems,
   otherItems
 }: Props) {
@@ -23,7 +19,7 @@ export default function PembayaranSection({
   return (
     <>
       <div className="grid lg:grid-cols-[1fr_3fr] grid-rows-2 lg:grid-rows-1 justify-items-center items-center">
-        <AccordionVisualImage
+        <AccordionVisualCarousel
           items={featuredItems}
           activeIndex={activeIndex}
           onSelect={setActiveIndex}

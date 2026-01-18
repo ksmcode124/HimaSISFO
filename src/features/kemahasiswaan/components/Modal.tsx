@@ -1,7 +1,7 @@
 // components/ui/Modal.tsx
 'use client'
 import { useEffect } from "react";
-import ContentRenderer from "./ContentRenderer";
+import { ContentRenderer } from "./ContentRenderer";
 import { ContentBlock, ProsesAkademik } from "..";
 
 type ModalProps = {
@@ -10,7 +10,7 @@ type ModalProps = {
   id: string | null
 };
 
-export default function Modal({ open, onClose, id }: ModalProps) {
+export function Modal({ open, onClose, id }: ModalProps) {
   useEffect(() => {
     if (!open) return;
     const esc = (e: KeyboardEvent) => e.key === "Escape" && onClose();

@@ -1,13 +1,13 @@
 // ContentRenderer.tsx
 import React from "react"
 import { ListRenderer } from "./ListRenderer"
-import { ContentBlock } from "../types"
+import { ContentBlock } from "../types/content"
 
 interface ContentRendererProps {
   content: ContentBlock[]
 }
 
-export default function ContentRenderer({ content }: ContentRendererProps) {
+export function ContentRenderer({ content }: ContentRendererProps) {
   return (
     <div className="space-y-4">
       {content.map((block, index) => {

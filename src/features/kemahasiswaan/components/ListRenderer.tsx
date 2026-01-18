@@ -1,6 +1,6 @@
 import React from "react"
 import { InlineRenderer } from "./InlineRenderer"
-import { ListItem } from "../types"
+import { ListItem } from "../types/content"
 import { cn } from "@/lib/utils"
 
 interface ListRendererProps {

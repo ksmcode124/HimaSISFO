@@ -15,7 +15,7 @@ interface FolderCardProps {
   borderClass?: string
 }
 
-export default function FolderCard({
+export function FolderCard({
   title = "",
   children,
   hasLayer = false,

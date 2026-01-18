@@ -12,7 +12,7 @@ import {
   useCarousel,
 } from "@/components/ui/carousel"
 
-import { BlankoItem } from "../types"
+import { BlankoItem } from "../types/ui"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { Download } from "lucide-react"
@@ -22,9 +22,10 @@ interface BlankoCarouselProps {
   blankoItems: BlankoItem[]
 }
 
-export default function BlankoCarousel({ blankoItems }: BlankoCarouselProps) {
+export function BlankoCarousel({ blankoItems }: BlankoCarouselProps) {
   const [api, setApi] = useState<CarouselApi | null>(null)
   const selectedIndex = useCarouselSync(api, blankoItems)
+  const scrollTo = (index: number) => api?.scrollTo(index, false)
 
   // function untuk menentukan styling carousel item berdasarkan posisi
   const getItemStyle = (index: number) => {
@@ -67,7 +68,7 @@ export default function BlankoCarousel({ blankoItems }: BlankoCarouselProps) {
         <CarouselIndicators
           count={blankoItems.length}
           selectedIndex={selectedIndex}
-          onSelect={(index) => api.scrollTo(index)}
+          onSelect={scrollTo}
         />
       )}
     </div>

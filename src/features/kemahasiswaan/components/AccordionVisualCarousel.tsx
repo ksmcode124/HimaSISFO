@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { ItemDataJSON } from "../types"
+import { ItemDataJSON } from "../types/data"
 
 interface Props {
   items: ItemDataJSON[]
@@ -7,7 +7,7 @@ interface Props {
   onSelect: (index: number) => void
 }
 
-export default function VisualCarousel({ items, activeIndex, onSelect }: Props) {
+export function AccordionVisualCarousel({ items, activeIndex, onSelect }: Props) {
   return (
     <div className="relative h-50 w-50">
       {items.map((item, index) => {
