@@ -1,9 +1,8 @@
-// app/api/spotify/route.ts
+// app/api/display/spotify/route.ts
 import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
-  const showId = searchParams.get("showId");
+  const showId = "4ne6bsylYJdVmMrfG3mLCG"
 
   if (!showId) {
     return NextResponse.json({ error: "Missing showId" }, { status: 400 });

@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
           }
         : undefined;
 
-    const data = await prisma.event.findMany({
+    const events = await prisma.event.findMany({
       where, // ✅ pakai where-nya
       select: {
         id_event: true,
@@ -27,6 +27,7 @@ export async function GET(req: NextRequest) {
         tanggal_mulai: true,
         tanggal_berakhir: true,
         gambar_event: true,
+        kategori: true,
         kabinet: {
           select: {
             id_kabinet: true,
@@ -37,7 +38,22 @@ export async function GET(req: NextRequest) {
       },
     });
 
-    return NextResponse.json(data);
+    const response = events.map((event) => ({
+      id: event.id_event,
+      title: event.judul,
+      start: event.tanggal_mulai,
+      end: event.tanggal_berakhir,
+      img: event.gambar_event,
+      description: event.deskripsi,
+      type: event.kategori,
+      kabinet: {
+        id: event.kabinet.id_kabinet,
+        nama: event.kabinet.nama_kabinet,
+        tahun_kerja: event.kabinet.tahun_kerja,
+      },
+    }));
+
+    return NextResponse.json(response);
   } catch (error) {
     console.error("GET /api/display/event error:", error);
     return new NextResponse("Internal Server Error", { status: 500 });

@@ -18,7 +18,7 @@ export default function PodcastPage() {
   // Fetch Spotify Episodes (ganti showId sesuai podcast-mu)
   useEffect(() => {
     const fetchEpisodes = async () => {
-      const res = await fetch(`/api/display/spotify?showId=4ne6bsylYJdVmMrfG3mLCG`);
+      const res = await fetch(`/api/display/spotify`);
       const data = await res.json();
       setEpisodes(data.episodes || []);
     };
