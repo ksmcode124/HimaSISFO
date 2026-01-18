@@ -1,19 +1,18 @@
 import { prisma } from "@/lib/prisma"
 import { updateKomunitasSchema } from "@/schemas/komunitas.schema"
+import { NextRequest } from "next/server"
 
 // ==========================
 // GET /api/komunitas/:id
-// Ambil 1 komunitas
 // ==========================
 export async function GET(
-  _: Request,
-  { params }: { params: { id: string } }
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = Number(params.id)
-
+    const { id } = await params
     const komunitas = await prisma.komunitas.findUnique({
-      where: { id_komunitas: id },
+      where: { id_komunitas: Number(id) },
       include: {
         kabinet: true,
         pencapaian: true,
@@ -21,10 +20,7 @@ export async function GET(
     })
 
     if (!komunitas) {
-      return Response.json(
-        { message: "Komunitas tidak ditemukan" },
-        { status: 404 }
-      )
+      return Response.json({ message: "Komunitas tidak ditemukan" }, { status: 404 })
     }
 
     return Response.json(komunitas)
@@ -35,23 +31,19 @@ export async function GET(
 
 // ==========================
 // PUT /api/komunitas/:id
-// Update komunitas
 // ==========================
 export async function PUT(
-  req: Request,
-  { params }: { params: { id: string } }
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const body = await req.json()
     const data = updateKomunitasSchema.parse(body)
 
     const komunitas = await prisma.komunitas.update({
-      where: { id_komunitas: Number(params.id) },
+      where: { id_komunitas: Number(id) },
       data,
-      include: {
-        kabinet: true,
-        pencapaian: true,
-      },
     })
 
     return Response.json(komunitas)
@@ -59,29 +51,26 @@ export async function PUT(
     if (error.name === "ZodError") {
       return Response.json({ errors: error.errors }, { status: 400 })
     }
-
     return Response.json({ message: "Internal server error" }, { status: 500 })
   }
 }
 
 // ==========================
 // DELETE /api/komunitas/:id
-// Hapus komunitas
 // ==========================
 export async function DELETE(
-  _: Request,
-  { params }: { params: { id: string } }
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
+
     await prisma.komunitas.delete({
-      where: { id_komunitas: Number(params.id) },
+      where: { id_komunitas: Number(id) },
     })
 
     return Response.json({ message: "Komunitas berhasil dihapus" })
   } catch {
-    return Response.json(
-      { message: "Gagal menghapus komunitas" },
-      { status: 500 }
-    )
+    return Response.json({ message: "Gagal menghapus komunitas" }, { status: 500 })
   }
 }
