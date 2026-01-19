@@ -1,12 +1,13 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { anggotaIdParamSchema, updateAnggotaSchema } from "@/schemas/anggota.schema";
+import { isZodError, isPrismaError } from "@/lib/validation";
 
 interface RouteParams {
   params: Promise<{ id: string }>;
 }
 
-export async function GET(req: Request, { params }: RouteParams) {
+export async function GET(_req: Request, { params }: RouteParams) {
   try {
     const raw = await params;
 
@@ -31,8 +32,8 @@ export async function GET(req: Request, { params }: RouteParams) {
     }
 
     return NextResponse.json(data);
-  } catch (error: any) {
-    if (error?.name === "ZodError") {
+  } catch (error: unknown) {
+    if (isZodError(error)) {
       return NextResponse.json({ errors: error.flatten() }, { status: 400 });
     }
 
@@ -58,18 +59,22 @@ export async function PATCH(req: Request, { params }: RouteParams) {
       message: "Data anggota berhasil diperbarui",
       data: updatedAnggota,
     });
-  } catch (error: any) {
-    if (error?.name === "ZodError") {
+  } catch (error: unknown) {
+    if (isZodError(error)) {
       return NextResponse.json({ errors: error.flatten() }, { status: 400 });
     }
 
+    // Prisma: record not found
+    if (isPrismaError(error) && error.code === "P2025") {
+      return NextResponse.json({ message: "Anggota tidak ditemukan" }, { status: 404 });
+    }
+
     console.error("PATCH Error:", error);
-    // Prisma "record not found" biasanya cocok 404, tapi aman 400/500.
     return NextResponse.json({ message: "Gagal memperbarui data anggota" }, { status: 400 });
   }
 }
 
-export async function DELETE(req: Request, { params }: RouteParams) {
+export async function DELETE(_req: Request, { params }: RouteParams) {
   try {
     const raw = await params;
     const { id } = anggotaIdParamSchema.parse(raw);
@@ -79,9 +84,22 @@ export async function DELETE(req: Request, { params }: RouteParams) {
     });
 
     return NextResponse.json({ message: "Anggota berhasil dihapus dari database" });
-  } catch (error: any) {
-    if (error?.name === "ZodError") {
+  } catch (error: unknown) {
+    if (isZodError(error)) {
       return NextResponse.json({ errors: error.flatten() }, { status: 400 });
+    }
+
+    // Prisma: record not found
+    if (isPrismaError(error) && error.code === "P2025") {
+      return NextResponse.json({ message: "Anggota tidak ditemukan" }, { status: 404 });
+    }
+
+    // Prisma: FK constraint (misal detail_anggota masih bergantung)
+    if (isPrismaError(error) && error.code === "P2003") {
+      return NextResponse.json(
+        { message: "Tidak bisa hapus anggota karena masih ada data yang bergantung (FK constraint)" },
+        { status: 409 }
+      );
     }
 
     console.error("DELETE Error:", error);

@@ -1,33 +1,45 @@
-import { prisma } from "@/lib/prisma"
-import { updateKomunitasPencapaianSchema } from "@/schemas/komunitas_pencapaian.schema"
-import { NextRequest } from "next/server"
+import { prisma } from "@/lib/prisma";
+import { updateKomunitasPencapaianSchema } from "@/schemas/komunitas_pencapaian.schema";
+import { NextResponse } from "next/server";
+import { isPrismaError, isZodError } from "@/lib/validation";
+import { z } from "zod";
+
+const idParamSchema = z.object({
+  id: z.coerce.number().int().positive(),
+});
 
 // ==========================
 // GET /api/komunitas_pencapaian/:id
 // ==========================
 export async function GET(
-  req: NextRequest,
+  _req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = await params
+    const raw = await params;
+    const { id } = idParamSchema.parse(raw);
 
     const pencapaian = await prisma.komunitas_pencapaian.findUnique({
-      where: { id_pencapaian: Number(id) },
+      where: { id_pencapaian: id },
       include: {
         komunitas: {
           include: { kabinet: true },
         },
       },
-    })
+    });
 
     if (!pencapaian) {
-      return Response.json({ message: "Pencapaian tidak ditemukan" }, { status: 404 })
+      return NextResponse.json({ message: "Pencapaian tidak ditemukan" }, { status: 404 });
     }
 
-    return Response.json(pencapaian)
-  } catch {
-    return Response.json({ message: "Internal server error" }, { status: 500 })
+    return NextResponse.json(pencapaian);
+  } catch (error: unknown) {
+    if (isZodError(error)) {
+      return NextResponse.json({ errors: error.flatten() }, { status: 400 });
+    }
+
+    console.error("GET Komunitas Pencapaian by ID Error:", error);
+    return NextResponse.json({ message: "Internal server error" }, { status: 500 });
   }
 }
 
@@ -35,25 +47,42 @@ export async function GET(
 // PUT /api/komunitas_pencapaian/:id
 // ==========================
 export async function PUT(
-  req: NextRequest,
+  req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = await params
-    const body = await req.json()
-    const data = updateKomunitasPencapaianSchema.parse(body)
+    const raw = await params;
+    const { id } = idParamSchema.parse(raw);
+
+    const body = await req.json();
+    const data = updateKomunitasPencapaianSchema.parse(body);
 
     const pencapaian = await prisma.komunitas_pencapaian.update({
-      where: { id_pencapaian: Number(id) },
+      where: { id_pencapaian: id },
       data,
-    })
+    });
 
-    return Response.json(pencapaian)
-  } catch (error: any) {
-    if (error.name === "ZodError") {
-      return Response.json({ errors: error.errors }, { status: 400 })
+    return NextResponse.json(pencapaian);
+  } catch (error: unknown) {
+    if (isZodError(error)) {
+      return NextResponse.json({ errors: error.flatten() }, { status: 400 });
     }
-    return Response.json({ message: "Internal server error" }, { status: 500 })
+
+    // Prisma: record not found
+    if (isPrismaError(error) && error.code === "P2025") {
+      return NextResponse.json({ message: "Pencapaian tidak ditemukan" }, { status: 404 });
+    }
+
+    // Prisma: FK invalid (kalau update id_komunitas misalnya)
+    if (isPrismaError(error) && error.code === "P2003") {
+      return NextResponse.json(
+        { message: "Relasi tidak valid (FK invalid)" },
+        { status: 400 }
+      );
+    }
+
+    console.error("PUT Komunitas Pencapaian Error:", error);
+    return NextResponse.json({ message: "Internal server error" }, { status: 500 });
   }
 }
 
@@ -61,18 +90,28 @@ export async function PUT(
 // DELETE /api/komunitas_pencapaian/:id
 // ==========================
 export async function DELETE(
-  req: NextRequest,
+  _req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = await params
+    const raw = await params;
+    const { id } = idParamSchema.parse(raw);
 
     await prisma.komunitas_pencapaian.delete({
-      where: { id_pencapaian: Number(id) },
-    })
+      where: { id_pencapaian: id },
+    });
 
-    return Response.json({ message: "Pencapaian berhasil dihapus" })
-  } catch {
-    return Response.json({ message: "Gagal menghapus pencapaian" }, { status: 500 })
+    return NextResponse.json({ message: "Pencapaian berhasil dihapus" });
+  } catch (error: unknown) {
+    if (isZodError(error)) {
+      return NextResponse.json({ errors: error.flatten() }, { status: 400 });
+    }
+
+    if (isPrismaError(error) && error.code === "P2025") {
+      return NextResponse.json({ message: "Pencapaian tidak ditemukan" }, { status: 404 });
+    }
+
+    console.error("DELETE Komunitas Pencapaian Error:", error);
+    return NextResponse.json({ message: "Gagal menghapus pencapaian" }, { status: 500 });
   }
 }
