@@ -1,76 +1,119 @@
-import { prisma } from "@/lib/prisma"
-import { updateKomunitasSchema } from "@/schemas/komunitas.schema"
-import { NextRequest } from "next/server"
+import { prisma } from "@/lib/prisma";
+import { updateKomunitasSchema } from "@/schemas/komunitas.schema";
+import { NextResponse } from "next/server";
+import { isPrismaError, isZodError } from "@/lib/validation";
+import { z } from "zod";
 
-// ==========================
-// GET /api/komunitas/:id
-// ==========================
+const idParamSchema = z.object({
+  id: z.coerce.number().int().positive(),
+});
+
 export async function GET(
-  req: NextRequest,
+  _req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = await params
+    const raw = await params;
+    const { id } = idParamSchema.parse(raw);
+
     const komunitas = await prisma.komunitas.findUnique({
-      where: { id_komunitas: Number(id) },
+      where: { id_komunitas: id },
       include: {
         kabinet: true,
         pencapaian: true,
       },
-    })
+    });
 
     if (!komunitas) {
-      return Response.json({ message: "Komunitas tidak ditemukan" }, { status: 404 })
+      return NextResponse.json({ message: "Komunitas tidak ditemukan" }, { status: 404 });
     }
 
-    return Response.json(komunitas)
-  } catch {
-    return Response.json({ message: "Internal server error" }, { status: 500 })
+    return NextResponse.json(komunitas);
+  } catch (error: unknown) {
+    if (isZodError(error)) {
+      return NextResponse.json({ errors: error.flatten() }, { status: 400 });
+    }
+
+    console.error("GET Komunitas by ID Error:", error);
+    return NextResponse.json({ message: "Internal server error" }, { status: 500 });
   }
 }
 
-// ==========================
-// PUT /api/komunitas/:id
-// ==========================
 export async function PUT(
-  req: NextRequest,
+  req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = await params
-    const body = await req.json()
-    const data = updateKomunitasSchema.parse(body)
+    const raw = await params;
+    const { id } = idParamSchema.parse(raw);
+
+    const body = await req.json();
+    const data = updateKomunitasSchema.parse(body);
 
     const komunitas = await prisma.komunitas.update({
-      where: { id_komunitas: Number(id) },
+      where: { id_komunitas: id },
       data,
-    })
+    });
 
-    return Response.json(komunitas)
-  } catch (error: any) {
-    if (error.name === "ZodError") {
-      return Response.json({ errors: error.errors }, { status: 400 })
+    return NextResponse.json(komunitas);
+  } catch (error: unknown) {
+    if (isZodError(error)) {
+      return NextResponse.json({ errors: error.flatten() }, { status: 400 });
     }
-    return Response.json({ message: "Internal server error" }, { status: 500 })
+
+    if (isPrismaError(error) && error.code === "P2025") {
+      return NextResponse.json({ message: "Komunitas tidak ditemukan" }, { status: 404 });
+    }
+
+    if (isPrismaError(error) && error.code === "P2002") {
+      return NextResponse.json(
+        { message: "Data komunitas duplikat (unique constraint)" },
+        { status: 409 }
+      );
+    }
+
+    if (isPrismaError(error) && error.code === "P2003") {
+      return NextResponse.json(
+        { message: "Relasi tidak valid (FK invalid)" },
+        { status: 400 }
+      );
+    }
+
+    console.error("PUT Komunitas Error:", error);
+    return NextResponse.json({ message: "Internal server error" }, { status: 500 });
   }
 }
 
-// ==========================
-// DELETE /api/komunitas/:id
-// ==========================
 export async function DELETE(
-  req: NextRequest,
+  _req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = await params
+    const raw = await params;
+    const { id } = idParamSchema.parse(raw);
 
     await prisma.komunitas.delete({
-      where: { id_komunitas: Number(id) },
-    })
+      where: { id_komunitas: id },
+    });
 
-    return Response.json({ message: "Komunitas berhasil dihapus" })
-  } catch {
-    return Response.json({ message: "Gagal menghapus komunitas" }, { status: 500 })
+    return NextResponse.json({ message: "Komunitas berhasil dihapus" });
+  } catch (error: unknown) {
+    if (isZodError(error)) {
+      return NextResponse.json({ errors: error.flatten() }, { status: 400 });
+    }
+
+    if (isPrismaError(error) && error.code === "P2025") {
+      return NextResponse.json({ message: "Komunitas tidak ditemukan" }, { status: 404 });
+    }
+
+    if (isPrismaError(error) && error.code === "P2003") {
+      return NextResponse.json(
+        { message: "Tidak bisa hapus komunitas karena masih ada data yang bergantung (FK constraint)" },
+        { status: 409 }
+      );
+    }
+
+    console.error("DELETE Komunitas Error:", error);
+    return NextResponse.json({ message: "Gagal menghapus komunitas" }, { status: 500 });
   }
 }

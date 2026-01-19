@@ -1,15 +1,19 @@
-import { prisma } from "@/lib/prisma"
-import { NextResponse } from "next/server"
-import { createKomunitasPencapaianSchema } from "@/schemas/komunitas_pencapaian.schema"
+import { prisma } from "@/lib/prisma";
+import { NextResponse } from "next/server";
+import { createKomunitasPencapaianSchema } from "@/schemas/komunitas_pencapaian.schema";
+import { isPrismaError, isZodError } from "@/lib/validation";
+import { z } from "zod";
 
-// ==========================
-// POST /api/komunitas_pencapaian
-// Buat pencapaian komunitas
-// ==========================
+// Schema untuk query ?id_komunitas=...
+const idKomunitasQuerySchema = z
+  .string()
+  .transform((v) => Number(v))
+  .refine((v) => Number.isInteger(v) && v > 0, { message: "id_komunitas tidak valid" });
+
 export async function POST(req: Request) {
   try {
-    const body = await req.json()
-    const data = createKomunitasPencapaianSchema.parse(body)
+    const body = await req.json();
+    const data = createKomunitasPencapaianSchema.parse(body);
 
     const pencapaian = await prisma.komunitas_pencapaian.create({
       data,
@@ -20,29 +24,43 @@ export async function POST(req: Request) {
           },
         },
       },
-    })
+    });
 
-    return Response.json(pencapaian, { status: 201 })
-  } catch (error: any) {
-    if (error.name === "ZodError") {
-      return Response.json({ errors: error.errors }, { status: 400 })
+    return NextResponse.json(pencapaian, { status: 201 });
+  } catch (error: unknown) {
+    if (isZodError(error)) {
+      return NextResponse.json({ errors: error.flatten() }, { status: 400 });
     }
 
-    return Response.json({ message: "Internal server error" }, { status: 500 })
+    // FK invalid (misal id_komunitas tidak ada)
+    if (isPrismaError(error) && error.code === "P2003") {
+      return NextResponse.json(
+        { message: "Komunitas tidak ditemukan (FK invalid)" },
+        { status: 400 }
+      );
+    }
+
+    // Duplicate (kalau ada unique constraint)
+    if (isPrismaError(error) && error.code === "P2002") {
+      return NextResponse.json(
+        { message: "Pencapaian duplikat (unique constraint)" },
+        { status: 409 }
+      );
+    }
+
+    console.error("POST Komunitas Pencapaian Error:", error);
+    return NextResponse.json({ message: "Internal server error" }, { status: 500 });
   }
 }
 
-// ==========================
-// GET /api/komunitas_pencapaian (LIST)
-// Optional filter: ?id_komunitas=1
-// ==========================
 export async function GET(req: Request) {
   try {
-    const { searchParams } = new URL(req.url)
-    const idKomunitas = searchParams.get("id_komunitas")
-    const where = idKomunitas
-      ? { id_komunitas: Number(idKomunitas) }
-      : undefined
+    const { searchParams } = new URL(req.url);
+    const idKomunitasRaw = searchParams.get("id_komunitas");
+
+    const where = idKomunitasRaw
+      ? { id_komunitas: idKomunitasQuerySchema.parse(idKomunitasRaw) }
+      : undefined;
 
     const data = await prisma.komunitas_pencapaian.findMany({
       where,
@@ -53,16 +71,17 @@ export async function GET(req: Request) {
           },
         },
       },
-      orderBy: {
-        id_pencapaian: "desc",
-      },
-    })
+      orderBy: { id_pencapaian: "desc" },
+    });
 
-    return NextResponse.json(data)
-  } catch {
-    return NextResponse.json(
-      { message: "Internal server error" },
-      { status: 500 }
-    )
+    return NextResponse.json(data);
+  } catch (error: unknown) {
+    // kalau query param invalid (zod)
+    if (isZodError(error)) {
+      return NextResponse.json({ errors: error.flatten() }, { status: 400 });
+    }
+
+    console.error("GET Komunitas Pencapaian Error:", error);
+    return NextResponse.json({ message: "Internal server error" }, { status: 500 });
   }
 }
