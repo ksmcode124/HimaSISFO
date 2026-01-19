@@ -51,7 +51,7 @@ export async function EventDetailSection({ id }: { id: string }) {
 
   return (
     <section className="relative p-0 m-0 top-0">
-      <ContentLayer className="mx-10 md:mx-10 xl:mx-30">
+      <ContentLayer className="mx-5 md:mx-10 xl:mx-30">
         <EventDetailContent events={FindEventDetail} />
       </ContentLayer>
     </section>

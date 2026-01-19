@@ -48,16 +48,17 @@ export function EventList({ events }: { events: EventCardProps[] }) {
             </div>
 
             {/* Pagination buttons */}
-            <div className="flex justify-center items-center gap-5 mt-6 w-full">
-                <button
-                    onClick={goPrev}
-                    disabled={currentPage === 1}
-                    className="items-center justify-center p-4 bg-gradient-to-b from-[#1B3C53] to-[#456882] disabled:opacity-50 rounded-full"
+            {totalPages > 1 && (
+                <div className="flex justify-center items-center gap-3 md:gap-5 mt-6 w-full">
+                    <button
+                        onClick={goPrev}
+                        disabled={currentPage === 1}
+                        className="items-center justify-center p-2 md:p-4 bg-gradient-to-b from-[#1B3C53] to-[#456882] disabled:opacity-50 rounded-full"
                 >
-                    <ChevronLeft size={36} className="text-white" />
+                    <ChevronLeft className="text-white text-[18px] md:text-[36px]" />
                 </button>
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                    <span key={page} className={`flex items-center justify-center w-10 h-10 rounded-full ${currentPage === page ? "bg-gradient-to-b from-[#1B3C53] to-[#456882] text-white" : "text-[var(--color-dark-blue)]"}`}>
+                    <span key={page} className={`flex items-center justify-center text-[16px] md:text-[27px] w-7 md:w-10 h-7 md:h-10 rounded-full ${currentPage === page ? "bg-gradient-to-b from-[#1B3C53] to-[#456882] text-white" : "text-[var(--color-dark-blue)]"}`}>
                         {page}
                     </span>
 
@@ -66,11 +67,11 @@ export function EventList({ events }: { events: EventCardProps[] }) {
                 <button
                     onClick={goNext}
                     disabled={currentPage === totalPages}
-                    className="items-center justify-center p-4 bg-gradient-to-b from-[#1B3C53] to-[#456882] disabled:opacity-50 rounded-full"
+                    className="items-center justify-center p-2 md:p-4 bg-gradient-to-b from-[#1B3C53] to-[#456882] disabled:opacity-50 rounded-full"
                 >
-                    <ChevronRight size={36} className="text-white" />
+                    <ChevronRight className="text-white text-[18px] md:text-[36px]" />
                 </button>
-            </div>
+            </div>)}
         </div>
     )
 }

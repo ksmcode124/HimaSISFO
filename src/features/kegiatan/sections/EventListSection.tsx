@@ -70,7 +70,7 @@ export async function EventListSection({ filter }: { filter?: string }) {
       <DecorationLayer>
         <div></div>
       </DecorationLayer>
-      <ContentLayer className="mx-4 md:mx-10 xl:mx-30">
+      <ContentLayer className="mx-5 md:mx-10 xl:mx-30">
         <EventListContent events={FindEvent} />
       </ContentLayer>
     </section>
