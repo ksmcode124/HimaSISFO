@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import {prisma} from "@/lib/prisma";
-import { eventSchema } from "@/lib/validation";
+import { eventSchema } from "@/schemas/event.schema";
 
 // GET /api/event
 export async function GET() {

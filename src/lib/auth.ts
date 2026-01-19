@@ -6,6 +6,7 @@ import { nextCookies } from "better-auth/next-js";
 
 const prisma = new PrismaClient();
 export const auth = betterAuth({
+    basePath: "/api/admin/auth", // base path, login buat admin doang
     database: prismaAdapter(prisma, {
         provider: "postgresql", // or "mysql", "postgresql", ...etc
     }), 

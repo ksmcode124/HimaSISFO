@@ -1,15 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import {prisma} from "@/lib/prisma";
-import { eventSchema } from "@/lib/validation";
+import { eventSchema } from "@/schemas/event.schema";
 
 type RouteParams = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 // GET /api/event/[id]
 export async function GET(_req: NextRequest, { params }: RouteParams) {
   try {
-    const id = Number(params.id);
+    const id = Number((await params).id);
     if (Number.isNaN(id)) {
       return NextResponse.json({ message: "ID tidak valid" }, { status: 400 });
     }
@@ -50,7 +50,7 @@ export async function GET(_req: NextRequest, { params }: RouteParams) {
 // PUT /api/event/[id]
 export async function PUT(req: NextRequest, { params }: RouteParams) {
   try {
-    const id = Number(params.id);
+    const id = Number((await params).id);
     if (Number.isNaN(id)) {
       return NextResponse.json({ message: "ID tidak valid" }, { status: 400 });
     }
@@ -84,7 +84,7 @@ export async function PUT(req: NextRequest, { params }: RouteParams) {
 // DELETE /api/event/[id]
 export async function DELETE(_req: NextRequest, { params }: RouteParams) {
   try {
-    const id = Number(params.id);
+    const id = Number((await params).id);
     if (Number.isNaN(id)) {
       return NextResponse.json({ message: "ID tidak valid" }, { status: 400 });
     }
