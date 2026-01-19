@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { detailIdParamSchema, updateAnggotaDetailSchema } from "@/schemas/anggota_detail.schema";
+import { isZodError, isPrismaError } from "@/lib/validation";
 
 interface RouteParams {
   params: Promise<{ id: string }>;
@@ -9,8 +10,6 @@ interface RouteParams {
 export async function GET(req: Request, { params }: RouteParams) {
   try {
     const raw = await params;
-
-    // Validasi params id
     const { id } = detailIdParamSchema.parse(raw);
 
     const detail = await prisma.detail_anggota.findUnique({
@@ -28,8 +27,8 @@ export async function GET(req: Request, { params }: RouteParams) {
     }
 
     return NextResponse.json(detail);
-  } catch (error: any) {
-    if (error?.name === "ZodError") {
+  } catch (error: unknown) {
+    if (isZodError(error)) {
       return NextResponse.json({ errors: error.flatten() }, { status: 400 });
     }
 
@@ -56,22 +55,21 @@ export async function PATCH(req: Request, { params }: RouteParams) {
     });
 
     return NextResponse.json(updatedDetail);
-  } catch (error: any) {
-    if (error?.name === "ZodError") {
+  } catch (error: unknown) {
+    if (isZodError(error)) {
       return NextResponse.json({ errors: error.flatten() }, { status: 400 });
     }
 
-    // Prisma "record not found"
-    if (error?.code === "P2025") {
-      return NextResponse.json({ message: "Detail anggota tidak ditemukan" }, { status: 404 });
-    }
-
-    // FK invalid
-    if (error?.code === "P2003") {
-      return NextResponse.json(
-        { message: "Data referensi tidak ditemukan (FK invalid)" },
-        { status: 400 }
-      );
+    if (isPrismaError(error)) {
+      if (error.code === "P2025") {
+        return NextResponse.json({ message: "Detail anggota tidak ditemukan" }, { status: 404 });
+      }
+      if (error.code === "P2003") {
+        return NextResponse.json(
+          { message: "Data referensi tidak ditemukan (FK invalid)" },
+          { status: 400 }
+        );
+      }
     }
 
     console.error("PATCH Detail Error:", error);
@@ -89,12 +87,12 @@ export async function DELETE(req: Request, { params }: RouteParams) {
     });
 
     return NextResponse.json({ message: "Penugasan anggota berhasil dihapus" });
-  } catch (error: any) {
-    if (error?.name === "ZodError") {
+  } catch (error: unknown) {
+    if (isZodError(error)) {
       return NextResponse.json({ errors: error.flatten() }, { status: 400 });
     }
 
-    if (error?.code === "P2025") {
+    if (isPrismaError(error) && error.code === "P2025") {
       return NextResponse.json({ message: "Detail anggota tidak ditemukan" }, { status: 404 });
     }
 

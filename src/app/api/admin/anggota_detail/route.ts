@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { createAnggotaDetailSchema } from "@/schemas/anggota_detail.schema";
+import { isZodError, isPrismaError } from "@/lib/validation";
 
 export async function GET() {
   try {
@@ -39,15 +40,15 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json(mapping, { status: 201 });
-  } catch (error: any) {
+  } catch (error: unknown) {
     // Zod error
-    if (error?.name === "ZodError") {
+    if (isZodError(error)) {
       return NextResponse.json({ errors: error.flatten() }, { status: 400 });
     }
 
     // Prisma error (unique/foreign key)
     // P2002: unique constraint failed (@@unique([id_anggota, id_kabinet]) misalnya)
-    if (error?.code === "P2002") {
+    if (isPrismaError(error) && error.code === "P2002") {
       return NextResponse.json(
         { message: "Anggota sudah terdaftar di kabinet ini" },
         { status: 409 }
@@ -55,7 +56,7 @@ export async function POST(req: Request) {
     }
 
     // P2003: foreign key constraint failed (id referensi tidak ada)
-    if (error?.code === "P2003") {
+    if (isPrismaError(error) && error.code === "P2003") {
       return NextResponse.json(
         { message: "Data referensi tidak ditemukan (FK invalid)" },
         { status: 400 }

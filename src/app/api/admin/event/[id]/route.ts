@@ -94,7 +94,7 @@ export async function DELETE(_req: NextRequest, { params }: RouteParams) {
     });
 
     return NextResponse.json({ message: "Event berhasil dihapus" });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("DELETE /api/event/[id] error:", error);
     return new NextResponse("Internal Server Error", { status: 500 });
   }
