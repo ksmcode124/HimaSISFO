@@ -2,14 +2,14 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import React from 'react'
 import { berandaData } from '@/features/beranda'
 import Pita from '@/components/beranda/pita';
+import Logo from '../components/logo';
 export default function Vision() {
     const data = berandaData.vision_mission;
     return <div className="relative">
         <div className="min-h-screen flex items-center justify-center lg:my-30 mx-16">
             <div className="grid md:grid-cols-2 h-full w-full">
                 <div className="flex items-center justify-center">
-                    <img src={'/assets/shared/logos/logo-himasisfo.webp'}
-                        alt="" className="h-3/4" />
+                    <Logo />
                 </div>
                 <div className="flex w-full items-center">
                     <Accordion type="single" collapsible className="w-full">
