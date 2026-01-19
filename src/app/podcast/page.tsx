@@ -2,14 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-interface Episode {
-  id: string;
-  name: string;
-  description: string;
-  images: { url: string }[];
-  external_urls: { spotify: string };
-};
+import { Episode } from "@/lib/types/interface";
 
 export default function PodcastPage() {
   const [episodes, setEpisodes] = useState<Episode[]>([]);
