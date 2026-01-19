@@ -7,13 +7,12 @@ import { prisma } from "@/lib/prisma"
 // ==========================
 export async function GET(
   _: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = Number(params.id)
-
+    const { id } = await params
     const departemen = await prisma.departemen.findUnique({
-      where: { id_departemen: id },
+      where: { id_departemen: Number(id) },
       include: {
         kabinet: true,
         proker: true,
@@ -42,27 +41,25 @@ export async function GET(
 // ==========================
 export async function PUT(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
-    const body = await req.json()
-    const data = updateDepartemenSchema.parse(body)
+    const { id } = await params
+    const body = await req.json();
+    const data = updateDepartemenSchema.parse(body);
 
     const departemen = await prisma.departemen.update({
-      where: { id_departemen: Number(params.id) },
+      where: { id_departemen: Number(id) },
       data,
-    })
+    });
 
-    return Response.json(departemen)
+    return Response.json(departemen);
   } catch (error: any) {
     if (error.name === "ZodError") {
-      return Response.json({ errors: error.errors }, { status: 400 })
+      return Response.json({ errors: error.errors }, { status: 400 });
     }
 
-    return Response.json(
-      { message: "Internal server error" },
-      { status: 500 }
-    )
+    return Response.json({ message: "Internal server error" }, { status: 500 });
   }
 }
 
@@ -72,11 +69,12 @@ export async function PUT(
 // ==========================
 export async function DELETE(
   _: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     await prisma.departemen.delete({
-      where: { id_departemen: Number(params.id) },
+      where: { id_departemen: Number(id) },
     })
 
     return Response.json({
