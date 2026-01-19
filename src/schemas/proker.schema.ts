@@ -1,5 +1,14 @@
 import { z } from "zod"
 
+
+// Validasi param /api/proker/:id
+export const prokerIdParamSchema = z.object({
+  id: z.coerce
+    .number()
+    .int()
+    .positive("ID proker harus berupa angka positif"),
+})
+
 export const createProkerSchema = z.object({
   id_departemen: z.number(),
   id_kabinet: z.number(),

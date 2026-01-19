@@ -1,5 +1,11 @@
 import { z } from "zod"
 
+
+export const departemenIdParamSchema = z.object({
+  id: z.coerce.number().int().positive(),
+});
+
+
 /**
  * Schema untuk CREATE departemen
  * Digunakan saat POST
