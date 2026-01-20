@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { Card, CardAction, CardContent } from "@/components/ui/card"
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils/cn"
 import { CardProps } from "../types/ui"
 
 interface Props {

@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils/cn"
 import { useCarousel } from "@/components/ui/carousel"
 
 export function KemahasiswaanCarouselSpacer() {
