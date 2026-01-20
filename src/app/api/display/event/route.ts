@@ -41,8 +41,8 @@ export async function GET(req: NextRequest) {
     const response = events.map((event) => ({
       id: event.id_event,
       title: event.judul,
-      start: event.tanggal_mulai,
-      end: event.tanggal_berakhir,
+      start: event.tanggal_mulai.toISOString(),
+      end: event.tanggal_berakhir.toISOString(),
       img: event.gambar_event,
       description: event.deskripsi,
       type: event.kategori,

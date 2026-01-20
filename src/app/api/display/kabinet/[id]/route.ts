@@ -46,6 +46,7 @@ export async function GET(
     const allKabinet = await prisma.kabinet.findMany({
       select: {
         id_kabinet: true,
+        nama_kabinet: true,
         tahun_kerja: true,
       },
       orderBy: { tahun_kerja: "asc" },
@@ -112,26 +113,29 @@ export async function GET(
 
      const response: KabinetResponse = {
       kabinet: {
-        id_kabinet: kabinet.id_kabinet,
+        id: kabinet.id_kabinet,
         nama_kabinet: kabinet.nama_kabinet,
         tahun_kerja: kabinet.tahun_kerja,
+        visi: kabinet.visi,
+        misi: kabinet.misi,
+        foto_kabinet: kabinet.foto_kabinet,
         deskripsi: kabinet.deskripsi,
         logo: kabinet.gambar_logo,
         elemen_logo: kabinet.elemen_logo.map((el) => ({
-          id_elemen_logo: el.id_elemen_logo,
+          id: el.id_elemen_logo,
           nama_elemen: el.nama_elemen,
           gambar_elemen: el.gambar_elemen,
           deskripsi_elemen: el.deskripsi_elemen,
         })),
           departemenInti: {
-          id_departemen: departemenInti.id_departemen,
+          id: departemenInti.id_departemen,
           nama_departemen: departemenInti.nama_departemen,
           logo_departemen: departemenInti.logo_departemen,
               anggota: departemenInti.detailAnggota.map((d) => ({
                 id: d.id_detail,
-                nama: d.anggota.nama_anggota,         
+                nama_anggota: d.anggota.nama_anggota,         
                 jabatan: d.jabatan.nama_jabatan,      
-                foto: d.foto_anggota,                 
+                foto_anggota: d.foto_anggota,                 
               })),
             },
       },

@@ -60,13 +60,13 @@ export async function GET(
         logo_departemen: departemen.logo_departemen,
       },
       proker: departemen.proker.map((p) => ({
-        id_proker: p.id_proker,
+        id: p.id_proker,
         nama_proker: p.nama_proker,
         foto_proker: p.foto_proker,
         deskripsi_proker: p.deskripsi,
       })),
       anggota: departemen.detailAnggota.map((d) => ({
-        id_detail: d.id_detail,
+        id: d.id_detail,
         nama_anggota: d.anggota.nama_anggota,
         jabatan: d.jabatan.nama_jabatan,
         foto_anggota: d.foto_anggota,
