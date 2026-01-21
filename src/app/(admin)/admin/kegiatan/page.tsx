@@ -1,27 +1,27 @@
 'use client';
 
-import { kabinetColumns } from '@/features/admin/components/columns/kabinet-columns';
+import { kegiatanColumns } from '@/features/admin/components/columns/kegiatan-columns';
 import { HeaderSection } from '@/features/admin/components/HeaderSection';
 import { HimpunanTable } from '@/features/admin/components/HimpunanTable';
-import { useKabinet } from '@/features/admin/hooks/useKabinet';
+import { useKegiatan } from '@/features/admin/hooks/useKegiatan';
 import { useModal } from '@/features/admin/hooks/useModal';
-import { KabinetListItem } from '@/lib/types/interface';
+import { EventDetailResponse } from '@/lib/types/interface';
 import * as React from 'react';
 
-export default function KabinetPage() {
-  const { data, setData, isLoading } = useKabinet();
-  const modal = useModal<KabinetListItem>();
+export default function KegiatanPage() {
+  const { data, setData, isLoading } = useKegiatan();
+  const modal = useModal<EventDetailResponse>();
 
   return (
     <>
       <HeaderSection
-        page="Kabinet"
-        title="Kabinet"
+        page="Kegiatan"
+        title="Kegiatan"
       />
 
       <HimpunanTable
         data={data}
-        columns={kabinetColumns({
+        columns={kegiatanColumns({
           onView: modal.openView,
           onEdit: modal.openEdit,
           onDelete: modal.openDelete,

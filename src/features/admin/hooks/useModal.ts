@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-type Mode = 'create' | 'edit' | 'delete' | null;
+type Mode = 'create' | 'edit' | 'delete' | 'view' | null;
 
 export function useModal<T>() {
   const [mode, setMode] = React.useState<Mode>(null);
@@ -21,6 +21,11 @@ export function useModal<T>() {
     setActiveItem(item);
   };
 
+  const openView = (item: T) => {
+    setMode('view');
+    setActiveItem(item);
+  }
+
   const close = () => {
     setMode(null);
     setActiveItem(null);
@@ -33,11 +38,13 @@ export function useModal<T>() {
     isCreate: mode === 'create',
     isEdit: mode === 'edit',
     isDelete: mode === 'delete',
+    isView: mode === 'view',
     isOpen: mode !== null,
 
     openCreate,
     openEdit,
     openDelete,
+    openView,
     close,
   };
 }

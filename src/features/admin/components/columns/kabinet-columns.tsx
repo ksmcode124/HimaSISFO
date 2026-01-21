@@ -1,27 +1,22 @@
-import { Button } from '@/components/ui/button';
 import { KabinetListItem } from '@/lib/types/interface';
 import { ColumnDef } from '@tanstack/react-table';
-import { Edit, Eye, Trash2 } from 'lucide-react';
+import { TableActionButtons } from '../TableActionButtons';
 
-// interface ColumnActions {
-//   onEdit?: (row: KabinetResponse) => void;
-//   onDelete?: (row: KabinetResponse) => void;
-// }
+interface ColumnActions {
+  onView?: (row: KabinetListItem) => void
+  onEdit?: (row: KabinetListItem) => void
+  onDelete?: (row: KabinetListItem) => void
+}
 
-export function kabinetColumns(): ColumnDef<KabinetListItem>[] {
+export function kabinetColumns({
+  onView,
+  onEdit,
+  onDelete,
+}: ColumnActions): ColumnDef<KabinetListItem>[] {
   return [
-    {
-      accessorKey: 'id_kabinet',
-      header: 'ID Kabinet',
-    },
-    {
-      accessorKey: 'tahun_kerja',
-      header: 'Tahun',
-    },
-    {
-      accessorKey: 'nama_kabinet',
-      header: 'Nama Kabinet',
-    },
+    { accessorKey: 'id_kabinet', header: 'ID Kabinet' },
+    { accessorKey: 'tahun_kerja', header: 'Tahun' },
+    { accessorKey: 'nama_kabinet', header: 'Nama Kabinet' },
     {
       id: 'actions',
       header: 'Aksi',
@@ -30,31 +25,11 @@ export function kabinetColumns(): ColumnDef<KabinetListItem>[] {
         const data = row.original;
 
         return (
-          <div className="flex justify-center gap-2">
-            <Button
-              variant="ghost"
-              className="h-10 w-10 p-0"
-              // onClick={() => onEdit(data)}
-            >
-              <Eye className="h-5 w-5 text-blue-600" />
-            </Button>
-            <Button
-
-              variant="ghost"
-              className="h-10 w-10 p-0"
-              // onClick={() => onEdit(data)}
-            >
-              <Edit className="h-5 w-5 text-blue-600" />
-            </Button>
-
-            <Button
-              variant="ghost"
-              className="h-10 w-10 p-0"
-              // onClick={() => onDelete(data)}
-            >
-              <Trash2 className="h-5 w-5 text-red-600" />
-            </Button>
-          </div>
+          <TableActionButtons
+            onView={onView ? () => onView(data) : undefined}
+            onEdit={onEdit ? () => onEdit(data) : undefined}
+            onDelete={onDelete ? () => onDelete(data) : undefined}
+          />
         );
       },
     },
