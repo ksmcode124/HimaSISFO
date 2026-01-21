@@ -44,12 +44,13 @@ export default function SiteFooter() {
       </div>
       <div className={`
         relative
-        top-20
+        top-10
         grid
         z-20
         grid-cols-3
         lg:grid-cols-[3fr_3fr_2fr_1fr]
-        gap-10 xl:gap-20
+        gap-x-10 xl:gap-x-20
+        gap-y-5
         px-5 py-15 md:px-30 xl:px-45
         text-[#FFFCFC]
         text-shadow-[0_2px_2px_#000]
