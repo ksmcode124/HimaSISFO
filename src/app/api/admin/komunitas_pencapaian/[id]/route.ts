@@ -1,12 +1,7 @@
 import { prisma } from "@/lib/prisma";
-import { updateKomunitasPencapaianSchema } from "@/schemas/komunitas_pencapaian.schema";
+import { updateKomunitasPencapaianSchema, komunitas_pencapaianIdParamSchema } from "@/schemas/komunitas_pencapaian.schema";
 import { NextResponse } from "next/server";
 import { isPrismaError, isZodError } from "@/lib/validation";
-import { z } from "zod";
-
-const idParamSchema = z.object({
-  id: z.coerce.number().int().positive(),
-});
 
 // ==========================
 // GET /api/komunitas_pencapaian/:id
@@ -17,7 +12,7 @@ export async function GET(
 ) {
   try {
     const raw = await params;
-    const { id } = idParamSchema.parse(raw);
+    const { id } = komunitas_pencapaianIdParamSchema.parse(raw);
 
     const pencapaian = await prisma.komunitas_pencapaian.findUnique({
       where: { id_pencapaian: id },
@@ -52,7 +47,7 @@ export async function PUT(
 ) {
   try {
     const raw = await params;
-    const { id } = idParamSchema.parse(raw);
+    const { id } = komunitas_pencapaianIdParamSchema.parse(raw);
 
     const body = await req.json();
     const data = updateKomunitasPencapaianSchema.parse(body);
@@ -95,7 +90,7 @@ export async function DELETE(
 ) {
   try {
     const raw = await params;
-    const { id } = idParamSchema.parse(raw);
+    const { id } = komunitas_pencapaianIdParamSchema.parse(raw);
 
     await prisma.komunitas_pencapaian.delete({
       where: { id_pencapaian: id },

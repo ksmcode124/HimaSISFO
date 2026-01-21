@@ -14,7 +14,7 @@ export const createElemenLogoSchema = z.object({
   nama_elemen: z.string().min(2, "Nama elemen minimal 2 karakter"),
 
   deskripsi_elemen: z.string().optional(),
-  gambar_elemen: z.string().optional(),
+  gambar_elemen: z.string().url("Gambar elemen harus berupa URL").optional(),
 });
 
 /**
@@ -25,7 +25,7 @@ export const updateElemenLogoSchema = z
   .object({
     nama_elemen: z.string().min(2).optional(),
     deskripsi_elemen: z.string().optional(),
-    gambar_elemen: z.string().optional(),
+    gambar_elemen: z.string().url("Gambar elemen harus berupa URL").optional(),
   })
   .refine((data) => Object.keys(data).length > 0, {
     message: "Minimal isi 1 field untuk update",

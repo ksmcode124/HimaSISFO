@@ -1,12 +1,7 @@
 import { prisma } from "@/lib/prisma";
-import { updateKomunitasSchema } from "@/schemas/komunitas.schema";
+import { updateKomunitasSchema, komunitasIdParamSchema } from "@/schemas/komunitas.schema";
 import { NextResponse } from "next/server";
 import { isPrismaError, isZodError } from "@/lib/validation";
-import { z } from "zod";
-
-const idParamSchema = z.object({
-  id: z.coerce.number().int().positive(),
-});
 
 export async function GET(
   _req: Request,
@@ -14,7 +9,7 @@ export async function GET(
 ) {
   try {
     const raw = await params;
-    const { id } = idParamSchema.parse(raw);
+    const { id } = komunitasIdParamSchema.parse(raw);
 
     const komunitas = await prisma.komunitas.findUnique({
       where: { id_komunitas: id },
@@ -45,7 +40,7 @@ export async function PUT(
 ) {
   try {
     const raw = await params;
-    const { id } = idParamSchema.parse(raw);
+    const { id } = komunitasIdParamSchema.parse(raw);
 
     const body = await req.json();
     const data = updateKomunitasSchema.parse(body);
@@ -90,7 +85,7 @@ export async function DELETE(
 ) {
   try {
     const raw = await params;
-    const { id } = idParamSchema.parse(raw);
+    const { id } = komunitasIdParamSchema.parse(raw);
 
     await prisma.komunitas.delete({
       where: { id_komunitas: id },

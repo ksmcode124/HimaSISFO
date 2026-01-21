@@ -23,6 +23,7 @@ export const createDepartemenSchema = z.object({
 
   deskripsi_departemen: z.string().optional(),
   logo_departemen: z.string().optional(),
+  foto_departemen: z.string().optional(),
 });
 /**
  * Schema untuk UPDATE departemen
@@ -32,4 +33,7 @@ export const updateDepartemenSchema = z.object({
   nama_departemen: z.string().min(3).optional(),
   deskripsi_departemen: z.string().optional(),
   logo_departemen: z.string().optional(),
+  foto_departemen: z.string().optional(),
+}).refine((data) => Object.keys(data).length > 0, {
+  message: "Minimal isi 1 field untuk update",
 })
