@@ -37,10 +37,21 @@ export interface AdminAnggotaRow{
   jabatan: string
 }
 
-export interface AdminKomunitasRow{
+export interface AdminKomunitasRow {
   id: number,
   nama_komunitas: string,
   foto_komunitas: string,
   pencapaian: string,
   foto_pencapaian: string
+}
+
+export interface AdminKabinetDetail {
+  id: number,
+  tahun_kerja: string,
+  nama_kabinet: string,
+  logo: string,
+  visi: string,
+  misi: string,
+  departemen_count: number,
+  deskripsi: string
 }

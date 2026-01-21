@@ -3,17 +3,19 @@
 import { ConfirmationModal } from '@/features/admin/components/ConfirmationModal';
 import { HeaderSection } from '@/features/admin/components/HeaderSection';
 import { AdminTable } from '@/features/admin/components/AdminTable';
-import { useKabinet } from '@/features/admin/hooks/useKabinet';
+import { useKabinet, useKabinetDetail } from '@/features/admin/hooks/useKabinet';
 import { useModal } from '@/features/admin/hooks/useModal';
 import * as React from 'react';
 import { useConfirm } from '@/features/admin/hooks/useConfirm';
 import { Kabinet } from '@/lib/types/interface';
 import { kegiatanColumns } from '@/features/admin/components/columns/kegiatan-columns';
 import { kabinetColumns } from '@/features/admin/components/columns/kabinet-columns';
+import { DetailModal } from '@/features/admin/components/DetailModal';
 
 export default function KabinetPage() {
   const { data, isLoading, saveData, deleteData } = useKabinet();
   const modal = useModal();
+  const { detail } = useKabinetDetail(modal.id);
   const confirm = useConfirm();;
 
   const onSaveRequest = (data: Kabinet) => {
@@ -29,7 +31,6 @@ export default function KabinetPage() {
       modal.close();
     });
   };
-
 
   return (
     <>
@@ -47,6 +48,25 @@ export default function KabinetPage() {
           onEdit: modal.openEdit,
           onDelete: onDeleteRequest,
         })}
+      />
+
+      <DetailModal
+        open={modal.isView}
+        onOpenChange={(v) => !v && modal.close()}
+        onEdit={modal.openEdit}
+        onDelete={onDeleteRequest}
+        title={detail?.nama_kabinet}
+        subtitle={detail?.tahun_kerja}
+        meta={
+          detail
+            ? [
+                { label: 'Visi', value: detail.visi },
+                { label: 'Misi', value: detail.misi },
+                // { label: 'Departemen', value: detail. },
+              ]
+            : []
+        }
+        description={detail?.deskripsi}
       />
 
       <ConfirmationModal {...confirm} />

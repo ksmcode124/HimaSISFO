@@ -1,7 +1,7 @@
 'use client';
 
 import { Kabinet } from '@/lib/types/interface';
-import { AdminKabinetRow } from '../types';
+import { AdminKabinetDetail, AdminKabinetRow } from '../types';
 import { useEffect, useState } from 'react';
 
 
@@ -67,4 +67,31 @@ export function useKabinet() {
     deleteData,
     reload: load,
   };
+}
+
+export function useKabinetDetail(id: number | null) {
+  const [detail, setDetail] = useState<AdminKabinetDetail | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    // if (!id) return;
+
+    // setLoading(true);
+    // fetchKabinetById(id)
+    //   .then(setDetail)
+    //   .finally(() => setLoading(false));
+    const res: AdminKabinetDetail = {
+      id: 1,
+      tahun_kerja: "2025/2026",
+      nama_kabinet:"gelora harmoni",
+      departemen_count: 10,
+      deskripsi: "LOREM IPSUM",
+      logo: "IMG.jpg",
+      misi: "Foya",
+      visi: "Foya",
+    }
+    setDetail(res);
+  }, [id]);
+
+  return { detail, isLoading: loading };
 }
