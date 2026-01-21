@@ -1,44 +1,58 @@
 "use client";
 
 import { useParams } from "next/navigation";
+import { useMemo } from "react";
+import kabinetDataRaw from "@/features/kabinet/data/kabinet.json";
+import {
+  Kabinet,
+  KabinetListItem,
+  DepartemenListItem,
+} from "@/features/kabinet/types";
 import {
   KabinetHeroSection,
   FilosofiSection,
   IntiHimpunanSection,
   DepartemenListSection,
 } from "@/features/kabinet";
-import kabinetDataRaw from "@/features/kabinet/data/kabinet.json";
-import { KabinetDataJSON } from "@/features/kabinet/types";
 
-/**
- * Page ini menerapkan Dynamic Routing untuk menampilkan detail kabinet secara spesifik
- * berdasarkan 'kabinetId' dari URL.
- */
+interface KabinetExtended extends Kabinet {
+  departemen_list: DepartemenListItem[];
+}
 
-const data = kabinetDataRaw as unknown as KabinetDataJSON;
+interface KabinetDataSchema {
+  kabinet: KabinetExtended[];
+  kabinetList: KabinetListItem[];
+}
 
 export default function Page() {
   const params = useParams();
-  const kabinetId = params.kabinetId;
+  const kabinetId = Number(params.kabinetId);
 
-  const currentData = data.kabinet_list.find((k) => k.id === kabinetId);
+  const { currentKabinet, kabinetList } = useMemo(() => {
+    const data = kabinetDataRaw as unknown as KabinetDataSchema;
+    return {
+      currentKabinet: data.kabinet.find((k) => k.id === kabinetId),
+      kabinetList: data.kabinetList,
+    };
+  }, [kabinetId]);
 
-  if (!currentData)
+  if (!currentKabinet) {
     return (
-      <div className="p-20 text-center">
-        <h1 className="text-xl font-bold">Kabinet Tidak Ditemukan</h1>
+      <div className="flex min-h-[60vh] items-center justify-center">
+        <h1>Kabinet Tidak Ditemukan.</h1>
       </div>
     );
+  }
 
   return (
-    <main>
-      <KabinetHeroSection currentKabinet={currentData} />
-      <FilosofiSection
-        data={currentData.filosofi}
-        logo_url={currentData.logo_url}
+    <main className="bg-white antialiased">
+      <KabinetHeroSection
+        currentKabinet={currentKabinet}
+        kabinetList={kabinetList}
       />
-      <IntiHimpunanSection data={currentData.inti_himpunan} />
-      <DepartemenListSection data={currentData.departemen} />
+      <FilosofiSection data={currentKabinet} />
+      <IntiHimpunanSection data={currentKabinet.departemenInti} />
+      <DepartemenListSection data={currentKabinet.departemen_list} />
     </main>
   );
 }

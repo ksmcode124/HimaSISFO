@@ -1,36 +1,37 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/Card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface DepartmentCardProps {
-  id: string;
+interface DepartemenCardProps {
+  id: string | number;
   nama: string;
-  logo_url: string;
+  logo: string | null;
   className?: string;
 }
-
-export default function DepartmentCard({
+export default function DepartemenCard({
   id,
   nama,
-  logo_url,
-  className = "w-[230px] h-[295px]",
-}: DepartmentCardProps) {
+  logo,
+  className = "w-30 h-42 md:w-56 md:h-72",
+}: DepartemenCardProps) {
   const params = useParams();
   const kabinetId = params.kabinetId;
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
+
+  const displayLogo = logo || "/assets/shared/logos/logo_himasisfo.webp";
 
   return (
     <motion.div
@@ -40,7 +41,7 @@ export default function DepartmentCard({
       className="flex justify-center items-center w-fit"
     >
       <Card
-        className={`overflow-hidden relative flex flex-col items-center justify-center text-center border-[3px] border-[#A43DA5] bg-white/60 backdrop-blur-2xl ${className}`}
+        className={`overflow-hidden relative flex flex-col items-center text-center border-[3px] border-[#A43DA5] bg-white/60 backdrop-blur-2xl p-1 md:p-6 ${className}`}
       >
         <CardContent className="flex flex-col items-center w-full p-0">
           <motion.div
@@ -52,26 +53,25 @@ export default function DepartmentCard({
             className="relative w-[60%] aspect-square"
           >
             <Image
-              src={logo_url}
+              src={displayLogo}
               alt={nama}
-              width={130}
-              height={130}
+              fill
               className="object-contain"
             />
           </motion.div>
           <motion.div
             variants={{
-              rest: { opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 20 },
+              rest: { opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 80 },
               hover: { opacity: 1, y: 0 },
             }}
             transition={{ duration: 0.3 }}
-            className="font-bold text-[0.7rem] md:text-[0.85rem] px-6"
+            className="font-bold text-[0.65rem] md:text-[0.85rem] px-2 flex items-center justify-center"
           >
-            <p>{nama}</p>
+            <p className="line-clamp-3 md:line-clamp-4 mt-2">{nama}</p>
           </motion.div>
         </CardContent>
 
-        <CardFooter className="w-full p-0 mt-auto">
+        <CardFooter className="w-full p-0 -mt-2 md:mt-auto">
           <motion.div
             variants={{
               rest: { opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 80 },
@@ -83,7 +83,7 @@ export default function DepartmentCard({
             <Button
               asChild
               variant="default"
-              className="w-full h-11 rounded-full font-light bg-linear-to-br from-[#E63258] to-[#A43DA5]"
+              className="w-full h-8 md:h-11 rounded-full font-light text-2xs md:text-sm bg-linear-to-br from-[#E63258] to-[#A43DA5] hover:shadow-[inset_0_4px_8px_rgba(0,0,0,0.4)]"
             >
               <Link href={`/kabinet/${kabinetId}/${id}`}>Selengkapnya</Link>
             </Button>

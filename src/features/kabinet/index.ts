@@ -8,9 +8,11 @@ export { default as DepartemenListSection } from './sections/DepartemenListSecti
 export { default as DepartemenHeroSection } from './sections/DepartemenHeroSection';
 export { default as ProkerSection } from "./sections/ProkerSection";
 export { default as StaffSection } from './sections/StaffSection';
+export { default as BreadcrumbSection } from  './sections/BreadcrumbSection';
 export { default as PhotoSlideshowMobile } from  './components/PhotoSlideshowMobile';
 export { default as TentangCard } from  './components/TentangCard';
 export { default as VisiMisiAccordion } from  './components/VisiMisiAccordion';
+export { default as VisiMisiMobile } from './components/VisiMisiMobile';
 export { default as IntiHimpunanCard } from  './components/IntiHimpunanCard';
 export { default as CarouselIntiHimpunan } from  './components/CarouselIntiHimpunan';
 export { default as DepartemenCard } from  './components/DepartemenCard';

@@ -16,13 +16,13 @@ export function Ornament1() {
 
 export function Ornament2() {
   return (
-    <div className="relative w-[300px] md:w-[500px] aspect-4/1">
+    <div className="relative w-full aspect-4/1">
       <Image
         src="/assets/kabinet/ornament-2.webp"
         alt=""
         fill
         className="object-contain"
-        priority    
+        priority
       />
     </div>
   );
@@ -30,13 +30,13 @@ export function Ornament2() {
 
 export function Ornament3() {
   return (
-    <div className="relative w-[300px] md:w-[500px] aspect-4/1">
+    <div className="relative w-full aspect-4/1">
       <Image
         src="/assets/kabinet/ornament-3.webp"
         alt=""
         fill
         className="object-contain"
-        priority    
+        priority
       />
     </div>
   );
