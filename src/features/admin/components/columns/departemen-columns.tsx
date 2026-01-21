@@ -1,6 +1,6 @@
 import { ColumnDef } from '@tanstack/react-table';
 import { TableActionButtons } from '../TableActionButtons';
-import { AdminKabinetRow } from '../../types';
+import { AdminDepartemenRow, } from '../../types';
 import Link from 'next/link';
 
 interface ColumnActions {
@@ -9,29 +9,29 @@ interface ColumnActions {
   onDelete?: (id: number) => void
 }
 
-export function kabinetColumns({
+export function departemenColumns({
   onView,
   onEdit,
   onDelete,
-}: ColumnActions): ColumnDef<AdminKabinetRow>[] {
+}: ColumnActions): ColumnDef<AdminDepartemenRow>[] {
   return [
-    { accessorKey: 'id', header: 'ID Kabinet' },
-    { accessorKey: 'tahun_kerja', header: 'Tahun' },
-    { accessorKey: 'nama_kabinet', header: 'Nama Kabinet' },
+    { accessorKey: 'id', header: 'ID' },
+    { accessorKey: 'nama_departemen', header: 'Nama Departemen' },
     { accessorKey: 'logo', header: 'Logo'},
     {
-      accessorKey: 'departemen_count', 
-      header: "Departemen",
+      accessorKey: 'anggota_count', 
+      header: "Anggota",
       cell: ({ row }) => {
         const data = row.original
 
         return (
-          <Link href={`/admin/kabinet/nama-kabinet`} className='text-accent underline'>
-            {data.departemen_count}
+          <Link href={`/admin/kabinet/nama-kabinet/nama-departemen`} className='text-accent underline'>
+            {data.anggota_count}
           </Link>
         )
       }
     },
+    { accessorKey: 'proker_count', header: 'Program Kerja' },
     {
       id: 'actions',
       header: 'Aksi',

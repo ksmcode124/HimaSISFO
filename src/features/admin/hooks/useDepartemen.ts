@@ -1,11 +1,11 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { AdminEventRow } from "../types";
-import { EventDetailResponse } from "@/lib/types/interface";
+import { AdminDepartemenRow } from "../types";
+import { Departemen } from "@/lib/types/interface";
 
-export function useEvent() {
-  const [data, setData] = useState<AdminEventRow[]>([]);
+export function useDepartemen() {
+  const [data, setData] = useState<AdminDepartemenRow[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -15,23 +15,28 @@ export function useEvent() {
   const load = async () => {
     setIsLoading(true);
     try {
-      const res: AdminEventRow[] = [
+      const res: AdminDepartemenRow[] = [
         {
+          anggota_count: 50,
           id: 1,
-          description: "description",
-          title: "title",
-          type: "beasiswa",
-          end: new Date(2025, 12, 11, 1, 1, 1, 10),
-          start: new Date(2025, 12, 10, 0, 0, 0, 0),
+          logo: "IMG_03.jpg",
+          nama_departemen: "Inti",
+          proker_count: 10
         },
         {
-          id: 2,
-          description: "description",
-          title: "title",
-          type: "dore",
-          end: new Date(2025, 12, 11, 1, 1, 1, 10),
-          start: new Date(2025, 12, 10, 0, 0, 0, 0),
+          anggota_count: 50,
+          id: 1,
+          logo: "IMG_03.jpg",
+          nama_departemen: "Akademik dan Keprofesian",
+          proker_count: 10
         },
+        {
+          anggota_count: 50,
+          id: 1,
+          logo: "IMG_03.jpg",
+          nama_departemen: "Sosial Masyarakat",
+          proker_count: 10
+        }
       ]
       setData(res);
     } finally {
@@ -40,7 +45,7 @@ export function useEvent() {
   };
 
   // TODO: change to form data types
-  const saveData = async(data: EventDetailResponse) => {
+  const saveData = async(data: Departemen) => {
     setIsLoading(true)
 
     try {

@@ -1,11 +1,11 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { AdminEventRow } from "../types";
-import { EventDetailResponse } from "@/lib/types/interface";
+import { AdminAnggotaRow, AdminKomunitasRow } from "../types";
+import { Anggota } from "@/lib/types/interface";
 
-export function useEvent() {
-  const [data, setData] = useState<AdminEventRow[]>([]);
+export function useKomunitas() {
+  const [data, setData] = useState<AdminKomunitasRow[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -15,23 +15,21 @@ export function useEvent() {
   const load = async () => {
     setIsLoading(true);
     try {
-      const res: AdminEventRow[] = [
+      const res: AdminKomunitasRow[] = [
         {
           id: 1,
-          description: "description",
-          title: "title",
-          type: "beasiswa",
-          end: new Date(2025, 12, 11, 1, 1, 1, 10),
-          start: new Date(2025, 12, 10, 0, 0, 0, 0),
+          nama_komunitas: "Futsal",
+          foto_komunitas: "IMG_01.jpg",
+          foto_pencapaian: "IMG_02.jpg",
+          pencapaian: "LOREM IPSUM"
         },
         {
           id: 2,
-          description: "description",
-          title: "title",
-          type: "dore",
-          end: new Date(2025, 12, 11, 1, 1, 1, 10),
-          start: new Date(2025, 12, 10, 0, 0, 0, 0),
-        },
+          nama_komunitas: "Voli",
+          foto_komunitas: "IMG_02.jpg",
+          foto_pencapaian: "IMG_03.jpg",
+          pencapaian: "LOREM IPSUM"
+        }
       ]
       setData(res);
     } finally {
@@ -39,8 +37,8 @@ export function useEvent() {
     }
   };
 
-  // TODO: change to form data types
-  const saveData = async(data: EventDetailResponse) => {
+  // TODO: change to komunitas form data types 
+  const saveData = async(data: Anggota) => {
     setIsLoading(true)
 
     try {

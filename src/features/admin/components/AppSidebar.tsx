@@ -41,8 +41,8 @@ const items = [
     icon: Users2,
   },
   {
-    title: 'Kegiatan',
-    url: '/admin/kegiatan',
+    title: 'Event',
+    url: '/admin/event',
     icon: Calendar,
   },
   {
@@ -57,12 +57,12 @@ export function AppSidebar() {
   const handleLogout = async () => {
     try {
       router.replace('/login');
-      const res = await fetch('/api/auth/logout', { method: 'POST' });
+      // const res = await fetch('/api/auth/logout', { method: 'POST' });
 
-      if (!res.ok) {
-        console.error('[LOGOUT] Failed');
-        return;
-      }
+      // if (!res.ok) {
+      //   console.error('[LOGOUT] Failed');
+      //   return;
+      // }
     } catch (err) {
       console.error('[LOGOUT] Error', err);
     }

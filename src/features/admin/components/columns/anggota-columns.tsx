@@ -1,7 +1,7 @@
 import { ColumnDef } from '@tanstack/react-table';
 import { TableActionButtons } from '../TableActionButtons';
-import { AdminKabinetRow } from '../../types';
 import Link from 'next/link';
+import { AdminAnggotaRow } from '../../types';
 
 interface ColumnActions {
   onView?: (id: number) => void
@@ -9,29 +9,16 @@ interface ColumnActions {
   onDelete?: (id: number) => void
 }
 
-export function kabinetColumns({
+export function anggotaColumns({
   onView,
   onEdit,
   onDelete,
-}: ColumnActions): ColumnDef<AdminKabinetRow>[] {
+}: ColumnActions): ColumnDef<AdminAnggotaRow>[] {
   return [
-    { accessorKey: 'id', header: 'ID Kabinet' },
-    { accessorKey: 'tahun_kerja', header: 'Tahun' },
-    { accessorKey: 'nama_kabinet', header: 'Nama Kabinet' },
-    { accessorKey: 'logo', header: 'Logo'},
-    {
-      accessorKey: 'departemen_count', 
-      header: "Departemen",
-      cell: ({ row }) => {
-        const data = row.original
-
-        return (
-          <Link href={`/admin/kabinet/nama-kabinet`} className='text-accent underline'>
-            {data.departemen_count}
-          </Link>
-        )
-      }
-    },
+    { accessorKey: 'id', header: 'ID' },
+    { accessorKey: 'nama_anggota', header: 'Nama Anggota' },
+    { accessorKey: 'kabinet', header: 'Kabinet'},
+    { accessorKey: 'jabatan', header: 'Jabatan'},
     {
       id: 'actions',
       header: 'Aksi',

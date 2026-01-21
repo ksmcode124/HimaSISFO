@@ -9,33 +9,61 @@ import {
 import { Button } from '@/components/ui/button';
 import { PlusCircle } from 'lucide-react';
 
-export function HeaderSection({
-  page,
-  title,
-  handleTambah,
-}: {
-  page: string;
+type BreadcrumbItemConfig = {
+  label: string;
+  href?: string;
+};
+
+interface HeaderSectionProps {
+  breadcrumbs: BreadcrumbItemConfig[];
   title: string;
   handleTambah?: () => void;
-}) {
+}
+
+export function HeaderSection({
+  breadcrumbs,
+  title,
+  handleTambah,
+}: HeaderSectionProps) {
   return (
     <div className="mb-10 flex w-full flex-col gap-5 uppercase">
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink href="/admin">Dashboard</BreadcrumbLink>
+            <BreadcrumbLink href='/admin'>
+              DASHBOARD
+            </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator>/</BreadcrumbSeparator>
-          <BreadcrumbItem>
-            <BreadcrumbPage>{page}</BreadcrumbPage>
-          </BreadcrumbItem>
+          {breadcrumbs.map((item, index) => {
+            const isLast = index === breadcrumbs.length - 1;
+
+            return (
+              <div key={index} className="flex items-center">
+                <BreadcrumbItem>
+                  {isLast || !item.href ? (
+                    <BreadcrumbPage>{item.label}</BreadcrumbPage>
+                  ) : (
+                    <BreadcrumbLink href={item.href}>
+                      {item.label}
+                    </BreadcrumbLink>
+                  )}
+                </BreadcrumbItem>
+
+                {!isLast && <BreadcrumbSeparator>/</BreadcrumbSeparator>}
+              </div>
+            );
+          })}
         </BreadcrumbList>
       </Breadcrumb>
-      <div className="flex justify-between">
+
+      <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold italic">{title}</h1>
+
         {handleTambah && (
           <Button onClick={handleTambah}>
-            <PlusCircle /> Tambah Baru
+            <PlusCircle />
+            Tambah Baru
           </Button>
         )}
       </div>

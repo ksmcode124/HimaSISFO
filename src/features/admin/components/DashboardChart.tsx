@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/chart';
 
 interface DashboardChartProps {
-  data: { kabinet: string; kegiatan: number }[];
+  data: { kabinet: string; event: number }[];
 }
 
 const chartConfig = {
@@ -45,7 +45,7 @@ export function DashboardChart({ data }: DashboardChartProps) {
 
           <ChartTooltip content={<ChartTooltipContent />} />
 
-          <Bar dataKey="kegiatan" fill="url(#barGradient)" radius={4} />
+          <Bar dataKey="event" fill="url(#barGradient)" radius={4} />
         </BarChart>
       </ChartContainer>
     </div>

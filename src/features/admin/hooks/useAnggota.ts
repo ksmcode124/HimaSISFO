@@ -1,11 +1,11 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { AdminEventRow } from "../types";
-import { EventDetailResponse } from "@/lib/types/interface";
+import { AdminAnggotaRow } from "../types";
+import { Anggota } from "@/lib/types/interface";
 
-export function useEvent() {
-  const [data, setData] = useState<AdminEventRow[]>([]);
+export function useAnggota() {
+  const [data, setData] = useState<AdminAnggotaRow[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -15,23 +15,13 @@ export function useEvent() {
   const load = async () => {
     setIsLoading(true);
     try {
-      const res: AdminEventRow[] = [
+      const res: AdminAnggotaRow[] = [
         {
           id: 1,
-          description: "description",
-          title: "title",
-          type: "beasiswa",
-          end: new Date(2025, 12, 11, 1, 1, 1, 10),
-          start: new Date(2025, 12, 10, 0, 0, 0, 0),
-        },
-        {
-          id: 2,
-          description: "description",
-          title: "title",
-          type: "dore",
-          end: new Date(2025, 12, 11, 1, 1, 1, 10),
-          start: new Date(2025, 12, 10, 0, 0, 0, 0),
-        },
+          nama_anggota: "Nobel",
+          jabatan: "Staff",
+          kabinet: "Gelora Harmoni"
+        }
       ]
       setData(res);
     } finally {
@@ -40,7 +30,7 @@ export function useEvent() {
   };
 
   // TODO: change to form data types
-  const saveData = async(data: EventDetailResponse) => {
+  const saveData = async(data: Anggota) => {
     setIsLoading(true)
 
     try {

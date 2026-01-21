@@ -107,3 +107,4 @@ export interface Episode {
   images: { url: string }[];
   external_urls: { spotify: string };
 };
+

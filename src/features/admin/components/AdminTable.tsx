@@ -6,15 +6,15 @@ import { DataTable } from './DataTable';
 import { TablePagination } from './TablePagination';
 import { ColumnDef } from '@tanstack/react-table';
 
-interface HimpunanTable<TData> {
+interface AdminTable<TData> {
   columns: ColumnDef<TData>[];
   data: TData[];
 }
 
-export function HimpunanTable<TData>({
+export function AdminTable<TData>({
   columns,
   data,
-}: HimpunanTable<TData>) {
+}: AdminTable<TData>) {
   const state = useTable(data, columns);
 
   return (

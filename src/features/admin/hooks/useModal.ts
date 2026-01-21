@@ -1,50 +1,33 @@
 import * as React from 'react';
 
-type Mode = 'create' | 'edit' | 'delete' | 'view' | null;
+type Mode = 'create' | 'edit' | 'view' | 'delete' | null;
 
-export function useModal<T>() {
-  const [mode, setMode] = React.useState<Mode>(null);
-  const [activeItem, setActiveItem] = React.useState<T | null>(null);
+type ModalState =
+  | { mode: null; id: null }
+  | { mode: 'create'; id: null }
+  | { mode: 'edit' | 'view' | 'delete'; id: number };
 
-  const openCreate = () => {
-    setMode('create');
-    setActiveItem(null);
-  };
-
-  const openEdit = (item: T) => {
-    setMode('edit');
-    setActiveItem(item);
-  };
-
-  const openDelete = (item: T) => {
-    setMode('delete');
-    setActiveItem(item);
-  };
-
-  const openView = (item: T) => {
-    setMode('view');
-    setActiveItem(item);
-  }
-
-  const close = () => {
-    setMode(null);
-    setActiveItem(null);
-  };
+export function useModal() {
+  const [state, setState] = React.useState<ModalState>({
+    mode: null,
+    id: null,
+  });
 
   return {
-    mode,
-    activeItem,
+    // state
+    mode: state.mode,
+    id: state.id,
+    isOpen: state.mode !== null,
+    isCreate: state.mode === 'create',
+    isEdit: state.mode === 'edit',
+    isView: state.mode === 'view',
+    isDelete: state.mode === 'delete',
 
-    isCreate: mode === 'create',
-    isEdit: mode === 'edit',
-    isDelete: mode === 'delete',
-    isView: mode === 'view',
-    isOpen: mode !== null,
-
-    openCreate,
-    openEdit,
-    openDelete,
-    openView,
-    close,
+    // actions
+    openCreate: () => setState({ mode: 'create', id: null }),
+    openEdit: (id: number) => setState({ mode: 'edit', id }),
+    openView: (id: number) => setState({ mode: 'view', id }),
+    openDelete: (id: number) => setState({ mode: 'delete', id }),
+    close: () => setState({ mode: null, id: null }),
   };
 }

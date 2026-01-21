@@ -17,7 +17,7 @@ import { Spinner } from '@/components/ui/spinner';
 
 export default function AdminPage() {
   const [chartData, setChartData] = React.useState<
-    { kabinet: string; kegiatan: number }[]
+    { kabinet: string; event: number }[]
   >([]);
   const [isLoading, setIsLoading] = React.useState(true);
 
@@ -35,10 +35,10 @@ export default function AdminPage() {
       link: '/admin/kabinet',
     },
     {
-      title: 'Kegiatan',
+      title: 'event',
       icon: Calendar,
       count: 30,
-      link: '/admin/kegiatan',
+      link: '/admin/event',
     },
   ]);
 
@@ -50,11 +50,11 @@ export default function AdminPage() {
         const chartDataMock = [
           {
             kabinet: "aksayapatra",
-            kegiatan: 30
+            event: 30
           },
           {
             kabinet: "gelora harmoni",
-            kegiatan: 30
+            event: 30
           },
         ]
         setChartData(chartDataMock);
@@ -74,7 +74,11 @@ export default function AdminPage() {
 
   return (
     <>
-      <HeaderSection page="Home" title="Dashboard Admin HIMASISFO" />
+      <HeaderSection 
+        breadcrumbs={[
+          {label:"Home", href:"/admin"}
+        ]}
+        title="Dashboard Admin HIMASISFO" />
 
       <div className="card flex gap-5 rounded-xl border border-black px-6 py-4 text-white shadow-lg">
         {summary.map((item, index) => (

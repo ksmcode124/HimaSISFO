@@ -3,20 +3,19 @@
 import { ConfirmationModal } from '@/features/admin/components/ConfirmationModal';
 import { HeaderSection } from '@/features/admin/components/HeaderSection';
 import { AdminTable } from '@/features/admin/components/AdminTable';
-import { useKabinet } from '@/features/admin/hooks/useKabinet';
 import { useModal } from '@/features/admin/hooks/useModal';
 import * as React from 'react';
 import { useConfirm } from '@/features/admin/hooks/useConfirm';
-import { Kabinet } from '@/lib/types/interface';
-import { kegiatanColumns } from '@/features/admin/components/columns/kegiatan-columns';
-import { kabinetColumns } from '@/features/admin/components/columns/kabinet-columns';
+import { Departemen } from '@/lib/types/interface';
+import { departemenColumns } from '@/features/admin/components/columns/departemen-columns';
+import { useDepartemen } from '@/features/admin/hooks/useDepartemen';
 
-export default function KabinetPage() {
-  const { data, isLoading, saveData, deleteData } = useKabinet();
+export default function DepartemenPage() {
+  const { data, isLoading, saveData, deleteData } = useDepartemen();
   const modal = useModal();
   const confirm = useConfirm();;
 
-  const onSaveRequest = (data: Kabinet) => {
+  const onSaveRequest = (data: Departemen) => {
     confirm.confirm('save', async () => {
       await saveData(data);
       modal.close();
@@ -34,15 +33,17 @@ export default function KabinetPage() {
   return (
     <>
       <HeaderSection
+      // breadcrumbs seharusnya mengikut nama kabinet
         breadcrumbs={[
           {label: "Kabinet", href: '/admin/kabinet'},
+          {label: "Nama Kabinet", href:'/admin/nama-kabinet'}
         ]}
-        title="Kabinet"
+        title="Nama Kabinet"
       />
 
       <AdminTable
         data={data}
-        columns={kabinetColumns({
+        columns={departemenColumns({
           onView: modal.openView,
           onEdit: modal.openEdit,
           onDelete: onDeleteRequest,
