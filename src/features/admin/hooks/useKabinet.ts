@@ -83,7 +83,7 @@ export function useKabinetDetail(id: number | null) {
     const res: AdminKabinetDetail = {
       id: 1,
       tahun_kerja: "2025/2026",
-      nama_kabinet:"gelora harmoni",
+      nama_kabinet:"aksayaPatra",
       departemen_count: 10,
       deskripsi: "LOREM IPSUM",
       logo: "IMG.jpg",
@@ -93,5 +93,5 @@ export function useKabinetDetail(id: number | null) {
     setDetail(res);
   }, [id]);
 
-  return { detail, isLoading: loading };
+  return { detail, isLoadingModal: loading };
 }

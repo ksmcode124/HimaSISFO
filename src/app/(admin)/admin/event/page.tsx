@@ -7,12 +7,14 @@ import { useModal } from '@/features/admin/hooks/useModal';
 import * as React from 'react';
 import { useConfirm } from '@/features/admin/hooks/useConfirm';
 import { EventDetailResponse } from '@/lib/types/interface';
-import { useEvent } from '@/features/admin/hooks/useKegiatan';
+import { useEvent, useEventDetail } from '@/features/admin/hooks/useKegiatan';
 import { kegiatanColumns } from '@/features/admin/components/columns/kegiatan-columns';
+import { DetailModal } from '@/features/admin/components/DetailModal';
 
-export default function KabinetPage() {
+export default function EventPage() {
   const { data, isLoading, saveData, deleteData } = useEvent();
   const modal = useModal();
+  const {detail, isLoadingModal } = useEventDetail(modal.id)
   const confirm = useConfirm();;
 
   const onSaveRequest = (data: EventDetailResponse) => {
@@ -48,6 +50,25 @@ export default function KabinetPage() {
         })}
       />
 
+      <DetailModal
+        open={modal.isView}
+        onOpenChange={(v) => !v && modal.close()}
+        onEdit={modal.openEdit}
+        onDelete={onDeleteRequest}
+        id={detail?.id}
+        title={detail?.title}
+        subtitle={detail?.id.toString()}
+        meta={
+          detail
+            ? [
+                { label: 'Tanggal', value: detail.date },
+                { label: 'Kategori', value: detail.type },
+              ]
+            : []
+        }
+        description={detail?.description}
+      />
+      
       <ConfirmationModal {...confirm} />
 
     </>

@@ -15,7 +15,7 @@ import { DetailModal } from '@/features/admin/components/DetailModal';
 export default function KabinetPage() {
   const { data, isLoading, saveData, deleteData } = useKabinet();
   const modal = useModal();
-  const { detail } = useKabinetDetail(modal.id);
+  const { detail, isLoadingModal } = useKabinetDetail(modal.id);
   const confirm = useConfirm();;
 
   const onSaveRequest = (data: Kabinet) => {
@@ -55,6 +55,7 @@ export default function KabinetPage() {
         onOpenChange={(v) => !v && modal.close()}
         onEdit={modal.openEdit}
         onDelete={onDeleteRequest}
+        id={detail?.id}
         title={detail?.nama_kabinet}
         subtitle={detail?.tahun_kerja}
         meta={

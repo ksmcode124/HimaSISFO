@@ -13,6 +13,7 @@ interface MetaItem {
 interface DetailModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  id: number | undefined,
 
   title?: string;
   subtitle?: string;
@@ -30,6 +31,7 @@ interface DetailModalProps {
 export function DetailModal({
   open,
   onOpenChange,
+  id,
   title,
   subtitle,
   imageUrl,
@@ -48,6 +50,7 @@ export function DetailModal({
               <Image
                 src={imageUrl}
                 alt={title ?? ''}
+                fill
                 className="h-full w-full object-cover"
               />
             ) : (
@@ -81,8 +84,8 @@ export function DetailModal({
           {(onEdit || onDelete) && (
             <div className="mt-2 flex gap-3">
               <TableActionButtons 
-               onEdit={onEdit}
-               onDelete={onDelete}
+               onEdit={() => onEdit && id ? onEdit(id) : null}
+               onDelete={() => onDelete && id ? onDelete(id) : null}
               />
             </div>
           )}

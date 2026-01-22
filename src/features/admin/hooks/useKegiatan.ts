@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { AdminEventRow } from "../types";
+import { AdminEventDetail, AdminEventRow } from "../types";
 import { EventDetailResponse } from "@/lib/types/interface";
 
 export function useEvent() {
@@ -68,4 +68,29 @@ export function useEvent() {
     deleteData,
     reload: load,
   };
+}
+
+export function useEventDetail(id: number | null) {
+  const [detail, setDetail] = useState<AdminEventDetail | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    // if (!id) return;
+
+    // setLoading(true);
+    // fetchKabinetById(id)
+    //   .then(setDetail)
+    //   .finally(() => setLoading(false));
+    const res: AdminEventDetail = {
+      id: 1,
+      title: "JUDUL",
+      type: "BEASISWA",
+      description: "LOREM IPSUM DOLOR SIT AMET",
+      date: "12/11/2020 - 13/11/2020",
+      foto_event: "/IMG_01.jpg"  
+    }
+    setDetail(res);
+  }, [id]);
+
+  return { detail, isLoadingModal: loading };
 }

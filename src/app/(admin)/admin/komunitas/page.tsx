@@ -8,11 +8,13 @@ import * as React from 'react';
 import { useConfirm } from '@/features/admin/hooks/useConfirm';
 import { Anggota } from '@/lib/types/interface';
 import { komunitasColumns } from '@/features/admin/components/columns/komunitas-columns';
-import { useKomunitas } from '@/features/admin/hooks/useKomunitas';
+import { useKomunitas, useKomunitasDetail } from '@/features/admin/hooks/useKomunitas';
+import { DetailModal } from '@/features/admin/components/DetailModal';
 
 export default function KomunitasPage() {
   const { data, isLoading, saveData, deleteData } = useKomunitas();
   const modal = useModal();
+  const { detail, isLoadingModal } = useKomunitasDetail(modal.id);
   const confirm = useConfirm();;
 
   const onSaveRequest = (data: Anggota) => {
@@ -47,6 +49,23 @@ export default function KomunitasPage() {
           onEdit: modal.openEdit,
           onDelete: onDeleteRequest,
         })}
+      />
+
+      <DetailModal
+        open={modal.isView}
+        onOpenChange={(v) => !v && modal.close()}
+        onEdit={modal.openEdit}
+        onDelete={onDeleteRequest}
+        id={detail?.id}
+        title={detail?.nama_komunitas}
+        subtitle={detail?.id.toString()}
+        meta={
+          detail
+            ? [
+                { label: 'Pencapaian', value: detail.pencapaian },
+              ]
+            : []
+        }
       />
 
       <ConfirmationModal {...confirm} />

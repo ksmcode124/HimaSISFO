@@ -55,3 +55,35 @@ export interface AdminKabinetDetail {
   departemen_count: number,
   deskripsi: string
 }
+
+export interface AdminDepartemenDetail {
+  id: number,
+  nama_departemen: string,
+  anggota_count: number,
+  proker_count: number,
+  deskripsi: string
+}
+
+export interface AdminAnggotaDetail{
+  id: number,
+  foto_anggota: string,
+  nama_anggota: string,
+  kabinet: string,
+  jabatan: string
+}
+
+export interface AdminEventDetail {
+  id: number,
+  title: string,
+  description: string,
+  type: string,
+  date: string,
+  foto_event: string,
+}
+
+export interface AdminKomunitasDetail {
+  id: number,
+  nama_komunitas: string,
+  foto_komunitas: string,
+  pencapaian: string,
+}

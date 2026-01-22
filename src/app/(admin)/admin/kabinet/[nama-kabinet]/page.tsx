@@ -8,11 +8,13 @@ import * as React from 'react';
 import { useConfirm } from '@/features/admin/hooks/useConfirm';
 import { Departemen } from '@/lib/types/interface';
 import { departemenColumns } from '@/features/admin/components/columns/departemen-columns';
-import { useDepartemen } from '@/features/admin/hooks/useDepartemen';
+import { useDepartemen, useDepartemenDetail } from '@/features/admin/hooks/useDepartemen';
+import { DetailModal } from '@/features/admin/components/DetailModal';
 
 export default function DepartemenPage() {
   const { data, isLoading, saveData, deleteData } = useDepartemen();
   const modal = useModal();
+  const { detail, isLoadingModal } = useDepartemenDetail(modal.id);
   const confirm = useConfirm();;
 
   const onSaveRequest = (data: Departemen) => {
@@ -48,6 +50,25 @@ export default function DepartemenPage() {
           onEdit: modal.openEdit,
           onDelete: onDeleteRequest,
         })}
+      />
+
+      <DetailModal
+        open={modal.isView}
+        onOpenChange={(v) => !v && modal.close()}
+        onEdit={modal.openEdit}
+        onDelete={onDeleteRequest}
+        id={detail?.id}
+        title={detail?.nama_departemen}
+        subtitle={detail?.id.toString()}
+        meta={
+          detail
+            ? [
+                { label: 'Anggota', value: detail.anggota_count },
+                { label: 'Proker', value: detail.proker_count },
+              ]
+            : []
+        }
+        description={detail?.deskripsi}
       />
 
       <ConfirmationModal {...confirm} />

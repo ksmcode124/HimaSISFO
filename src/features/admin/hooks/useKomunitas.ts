@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { AdminAnggotaRow, AdminKomunitasRow } from "../types";
+import { AdminAnggotaRow, AdminKomunitasDetail, AdminKomunitasRow } from "../types";
 import { Anggota } from "@/lib/types/interface";
 
 export function useKomunitas() {
@@ -66,4 +66,27 @@ export function useKomunitas() {
     deleteData,
     reload: load,
   };
+}
+
+export function useKomunitasDetail(id: number | null) {
+  const [detail, setDetail] = useState<AdminKomunitasDetail | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    // if (!id) return;
+
+    // setLoading(true);
+    // fetchKabinetById(id)
+    //   .then(setDetail)
+    //   .finally(() => setLoading(false));
+    const res: AdminKomunitasDetail = {
+      id: 1,
+      nama_komunitas: "Nama Komunitas",
+      foto_komunitas: "/IMG_01.jpg",
+      pencapaian: "list pencapaian?"
+    }
+    setDetail(res);
+  }, [id]);
+
+  return { detail, isLoadingModal: loading };
 }

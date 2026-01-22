@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { AdminDepartemenRow } from "../types";
+import { AdminDepartemenDetail, AdminDepartemenRow } from "../types";
 import { Departemen } from "@/lib/types/interface";
 
 export function useDepartemen() {
@@ -73,4 +73,28 @@ export function useDepartemen() {
     deleteData,
     reload: load,
   };
+}
+
+export function useDepartemenDetail(id: number | null) {
+  const [detail, setDetail] = useState<AdminDepartemenDetail | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    // if (!id) return;
+
+    // setLoading(true);
+    // fetchKabinetById(id)
+    //   .then(setDetail)
+    //   .finally(() => setLoading(false));
+    const res: AdminDepartemenDetail = {
+      id: 1,
+      deskripsi: "LOREM IPSUM DOLOR SIT AMET",
+      anggota_count: 10,
+      nama_departemen: "SOSMAS",
+      proker_count: 3
+    }
+    setDetail(res);
+  }, [id]);
+
+  return { detail, isLoadingModal: loading };
 }
