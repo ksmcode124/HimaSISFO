@@ -2,6 +2,8 @@ import Link from "next/link"
 import { Card, CardAction, CardContent } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 import { CardProps } from "../types/ui"
+import { motion, AnimatePresence } from "framer-motion"
+import { Button } from "@/components/ui/button"
 
 interface Props {
   data: CardProps
@@ -12,45 +14,61 @@ export function KemahasiswaanCard({ data, active }: Props) {
   return (
     <Card
       className={cn(
-        "h-full flex flex-col transition-[transform,opacity]",
+        "h-full w-full flex flex-col border-0 overflow-hidden",
         active
-          ? "scale-100 opacity-100"
-          : "scale-80 bg-linear-to-r from-[#456882] to-[#1B3C53] text-white"
+          ? "bg-transparent"
+          : "bg-linear-to-r from-[#456882] to-[#1B3C53] text-white"
       )}
     >
       <CardContent
         className={cn(
-          "flex flex-col flex-1 gap-3 p-6",
+          "flex flex-col flex-1 gap-3 px-17 py-6",
           active ? "justify-start" : "justify-center"
         )}
       >
-        <p className={cn("font-semibold", active ? "text-md" : "text-xl")}>
-          {data.title}
-        </p>
-
-        <p
-          className={cn(
-            "text-sm transition-all",
-            active ? "opacity-100 max-h-96" : "opacity-0 max-h-0 overflow-hidden"
-          )}
+        <motion.p
+          className="font-semibold origin-left text-md sm:text-lg"
+          transition={{ duration: 0.45, ease: "easeOut" }}
         >
-          {data.description}
-        </p>
+          {data.title}
+        </motion.p>
+
+        {active && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{
+              delay: 0.4,
+              duration: 0.4,
+              ease: "easeOut",
+            }}
+            className="text-sm sm:text-md"
+          >
+            {data.description}
+          </motion.p>
+        )}
       </CardContent>
 
-      <CardAction
-        className={cn(
-          "pb-4 grid justify-items-center w-full",
-          active ? "opacity-100" : "opacity-0 pointer-events-none"
-        )}
-      >
-        <Link
-          href={`/kemahasiswaan/${data.id}`}
-          className="text-xs rounded-full border px-4 py-2 bg-linear-to-t from-[#456882] to-[#1B3C53] text-white"
+      {active && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{
+            delay: 0.6,
+            duration: 0.4,
+            ease: "easeOut",
+          }}
+          className="pb-4 grid justify-items-center w-full"
         >
-          Selengkapnya ➔
-        </Link>
-      </CardAction>
+          <Button variant="hima" asChild>
+            <Link href={`/kemahasiswaan/${data.id}`}>
+              Selengkapnya ➔
+            </Link>
+          </Button>
+        </motion.div>
+      )}
     </Card>
   )
 }
+
+
