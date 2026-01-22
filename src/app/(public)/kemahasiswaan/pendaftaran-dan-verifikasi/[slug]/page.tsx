@@ -1,3 +1,6 @@
+import { BackgroundLayer, ContentLayer } from "@/components/layout/Layer"
+import { ShellLayer } from "@/components/layout/ShellLayer"
+import Image from "next/image"
 import { 
   BreadcrumbSection, 
   getPendaftaranVerifikasiDetail,
@@ -15,8 +18,21 @@ export default async function DetailPage({ params }: PageProps) {
 
   return (
     <>
-      <BreadcrumbSection items={breadcrumbItems} />
-      <PendaftaranVerifikasiDetailSection item={item} />
+    <ShellLayer>
+      <BackgroundLayer>
+        <Image
+          src="/assets/kemahasiswaan/bg-hero.webp"
+          alt=""
+          fill
+          className="object-cover"
+          priority
+        />
+      </BackgroundLayer>
+      <ContentLayer>
+        <BreadcrumbSection items={breadcrumbItems} />
+        <PendaftaranVerifikasiDetailSection item={item} />
+      </ContentLayer>
+    </ShellLayer>
     </>
   )
 }

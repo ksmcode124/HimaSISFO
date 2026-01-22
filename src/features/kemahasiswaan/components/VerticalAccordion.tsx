@@ -3,7 +3,7 @@ import {
   Accordion, 
   AccordionContent, 
   AccordionItem, 
-  AccordionTrigger 
+  AccordionTriggerVertical
 } from "@/components/ui/accordion";
 import { ItemDataJSON } from "../types/data";
 import { ContentRenderer } from "./ContentRenderer";
@@ -20,7 +20,7 @@ export function VerticalAccordion({ items }: VerticalAccordionProps) {
       type="single"
       defaultValue={items[0]?.id}
       collapsible
-      className="w-full flex flex-col lg:flex-row gap-4 py-10"
+      className="w-full flex flex-col justify-center lg:flex-row gap-4 py-10"
     >
       {items.map((item) => (
         <VerticalAccordionItem key={item.id} item={item} />
@@ -35,9 +35,9 @@ function VerticalAccordionItem({ item }: { item: ItemDataJSON }) {
     <AccordionItem
       value={item.id}
       className="group flex flex-col sm:max-h-150 overflow-hidden p-0 max-w-170"
-    >
+    >       
       {/* Content */}
-      <AccordionContent className="p-0 overflow-hidden">
+      <AccordionContent className="overflow-hidden p-0 translate-y-5">
         <AnimatePresence initial={false}>
           <motion.div
             key={item.id}
@@ -52,7 +52,7 @@ function VerticalAccordionItem({ item }: { item: ItemDataJSON }) {
               saturation={1.2}
               elasticity={0}
               borderRadius={16}
-              className="w-full min-h-80 lg:min-h-150 px-6 py-4 border border-black rounded-xl flex flex-col"
+              className="w-full min-h-80 lg:min-h-150 border border-neutral-400 rounded-2xl flex flex-col"
             >
               <ContentRenderer content={item.content} />
             </LiquidGlass>
@@ -61,20 +61,19 @@ function VerticalAccordionItem({ item }: { item: ItemDataJSON }) {
       </AccordionContent>
 
       {/* Trigger */}
-      <AccordionTrigger
+      <AccordionTriggerVertical
         hasChevron={false}
-        writingMode="vertical-btt"
+        writingMode= "vertical-btt"
         className="
           px-4 py-6
           text-white
-          bg-linear-to-r from-[#1F445F] to-[#1B3C53]
           w-full
           flex-row
-          justify-between
+          justify-end
         "
       >
         {item.title}
-      </AccordionTrigger>
+      </AccordionTriggerVertical>
     </AccordionItem>
   )
 }

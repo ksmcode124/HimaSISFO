@@ -6,7 +6,7 @@ interface Props {
 
 export function WisudaAccordionSection({ items }: Props) {
   return (
-    <section className="w-full max-w-7xl px-2 sm:px-6 lg:px-8 mb-10">
+    <section className="w-full max-w-7xl sm:px-6 lg:px-8 mb-10">
       <HorizontalAccordion items={items} />
     </section>
   )

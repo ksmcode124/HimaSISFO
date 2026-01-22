@@ -5,11 +5,14 @@ import { ContentRenderer } from "./ContentRenderer"
 
 interface Props {
   item: ItemDataJSON
+  setSelectedId: (id: string | null) => void
 }
 
-export function WisudaFlipCard({ item }: Props) {
+export function WisudaFlipCard({ item, setSelectedId }: Props) {
   return (
     <FlipCard
+      id={item.id}
+      setSelectedId={setSelectedId}
       className="
         w-full h-72 sm:h-80 lg:h-88
         rounded-xl shadow-md overflow-hidden relative
@@ -25,14 +28,14 @@ export function WisudaFlipCard({ item }: Props) {
       }
       back={
         <>
-          <div className="flex flex-col h-full relative">
-            <div className="sticky top-0 z-10 py-2">
+          <div className="flex flex-col h-full relative w-full">
+            <div className="sticky top-0 z-10 py-2 w-full">
               <h3 className="font-semibold text-center text-xs">
                 {item.title}
               </h3>
             </div>
 
-            <div className="flex-1 overflow-y-auto text-xs pr-1">
+            <div className="flex-1 overflow-y-auto text-xs pr-1 w-full">
               <ContentRenderer content={item.content as ContentBlock[]} />
             </div>
           </div>

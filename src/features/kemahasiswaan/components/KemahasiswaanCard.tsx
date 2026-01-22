@@ -42,7 +42,7 @@ export function KemahasiswaanCard({ data, active }: Props) {
               duration: 0.4,
               ease: "easeOut",
             }}
-            className="text-xs sm:text-sm line-clamp-4"
+            className="text-xs sm:text-sm line-clamp-5 text-justify"
           >
             {data.description}
           </motion.p>

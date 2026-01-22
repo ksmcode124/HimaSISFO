@@ -48,7 +48,7 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
 
   return (
     <div className="relative w-full max-w-7xl">
-      <Carousel className="flex items-center" setApi={setApi} opts={{ align: isMobile ? "start" : "center" }}>
+      <Carousel className="relative flex items-center" setApi={setApi} opts={{ align: isMobile ? "start" : "center" }}>
         <CarouselPrevious />
 
         <CarouselContent className="touch-pan-x flex-1">
@@ -62,7 +62,7 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
                 key={item.id}
                 className={cn(
                   getCarouselItemClass(state),
-                  isMobile && "basis-[100%] shrink-0"
+                  isMobile && "basis-full shrink-0"
                 )}
               >
                 <div

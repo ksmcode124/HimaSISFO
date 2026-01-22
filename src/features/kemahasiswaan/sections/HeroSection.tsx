@@ -28,7 +28,7 @@ export function HeroSection({ data }: HeroSectionProps) {
         />
       </BackgroundLayer>
 
-      <ContentLayer>
+      <ContentLayer className="lg:pt-15">
         {hasBreadcrumb && (
           <BreadcrumbSection items={data.breadcrumbItems!} />
         )}
@@ -47,7 +47,7 @@ export function HeroSection({ data }: HeroSectionProps) {
 
 function PitaDecoration() {
   return (
-    <div className="relative z-5 w-full aspect-4/1">
+    <div className="relative z-5 w-full aspect-4/1 lg:translate-y-[5vh] -translate-y-[5vh]">
       <Image
         src="/assets/kemahasiswaan/decoration-pita.webp"
         alt=""

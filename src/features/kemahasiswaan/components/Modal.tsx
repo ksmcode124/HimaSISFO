@@ -2,15 +2,16 @@
 'use client'
 import { useEffect } from "react";
 import { ContentRenderer } from "./ContentRenderer";
-import { ContentBlock, ProsesAkademik } from "..";
+import { ContentBlock, ItemDataJSON, KemahasiswaanDataFile, ProsesAkademik } from "..";
 
 type ModalProps = {
   open: boolean;
   onClose: () => void;
-  id: string | null
+  selectedId: string | null
+  items?: ItemDataJSON[]
 };
 
-export function Modal({ open, onClose, id }: ModalProps) {
+export function Modal({ open, onClose, selectedId, items }: ModalProps) {
   useEffect(() => {
     if (!open) return;
     const esc = (e: KeyboardEvent) => e.key === "Escape" && onClose();
@@ -18,11 +19,10 @@ export function Modal({ open, onClose, id }: ModalProps) {
     return () => window.removeEventListener("keydown", esc);
   }, [open, onClose]);
 
-  if (!open) return null;
+  if (!open || !selectedId || !items) return null
 
-  const itemCollection = ProsesAkademik.sections.find((item) => item.type == "item-collection" )?.items;
-  const data = itemCollection?.find((item) => item.id == id)
-  if (!data) return null;
+  const selectedItem = items.find(item => item.id === selectedId)
+  if (!selectedItem) return null
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -30,9 +30,9 @@ export function Modal({ open, onClose, id }: ModalProps) {
         className="absolute inset-0 bg-black/40"
         onClick={onClose}
       />
-      <div className="relative z-10 w-[95vw] sm:w-xl md:w-3xl lg:w-5xl rounded-lg bg-white p-6 max-h-[70vh] overflow-auto shadow-lg animate-in fade-in zoom-in">
-        <h1 className="text-lg sticky bg-white top-0 font-medium text-center">{data?.title}</h1>
-        <ContentRenderer content={data?.content as ContentBlock[]} />
+      <div className="relative z-10 w-[95vw] sm:w-xl md:w-3xl lg:w-5xl rounded-lg bg-white px-6 pb-3 max-h-[70vh] overflow-auto shadow-lg animate-in fade-in zoom-in">
+        <h1 className="text-lg sticky bg-white top-0 py-3 font-medium text-center">{selectedItem.title}</h1>
+        <ContentRenderer content={selectedItem.content as ContentBlock[]} />
       </div>
     </div>
   );

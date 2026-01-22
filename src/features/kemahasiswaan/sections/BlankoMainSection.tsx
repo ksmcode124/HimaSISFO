@@ -21,13 +21,13 @@ export function BlankoMainSection({ items }: Props) {
         <RadialBackground />
       </BackgroundLayer>
 
+      <DecorationLayer>
+        <DecorationAssets />
+      </DecorationLayer>
+
       <ContentLayer>
         <section className="px-6 lg:px-12 overflow-clip pb-10">
           <ShellLayer>
-            <DecorationLayer>
-              <DecorationAssets />
-            </DecorationLayer>
-
             <ContentLayer>
               <div className="flex items-center justify-center min-h-[75vh]">
                 <Suspense fallback={null}>

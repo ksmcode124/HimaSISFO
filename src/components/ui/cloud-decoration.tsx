@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export function CloudDecoration({className}: {className?: string}) {
   return (
-    <div className={cn("grid grid-cols-3 gap-4 w-full mb-10 py-10 scale-120 sm:scale-100", className)}>
+    <div className={cn("grid grid-cols-3 mt-5 gap-4 w-full mb-10 py-10 scale-120 sm:scale-100", className)}>
       {[1, 2, 3].map((_, i) => (
         <div
           key={i}

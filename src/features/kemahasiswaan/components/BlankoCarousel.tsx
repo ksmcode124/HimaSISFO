@@ -35,7 +35,7 @@ export function BlankoCarousel({ blankoItems }: BlankoCarouselProps) {
         className="w-full flex items-center"
       >
         <CarouselPrevious />
-        <CarouselContent>
+        <CarouselContent className="flex-1">
           <CarouselSpacer />
 
           {blankoItems.map((card, index) => (
@@ -115,7 +115,7 @@ function BlankoCardItem({
             >
               <Link
                 href={`${card.filepath}/export?format=docx`}
-                className="text-xs flex gap-2 items-center rounded-full border px-4 py-2 bg-linear-to-t from-[#456882] to-[#1B3C53] text-white"
+                className="text-xs flex gap-2 items-center rounded-full border px-8 py-2 bg-linear-to-t from-[#456882] to-[#1B3C53] text-white"
               >
                 Unduh <Download size={14} />
               </Link>

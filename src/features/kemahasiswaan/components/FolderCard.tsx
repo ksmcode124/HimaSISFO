@@ -21,7 +21,7 @@ export function FolderCard({
   hasLayer = false,
 
   widthClass = "lg:w-[60vw] max-w-3xl",
-  maxHeightClass = "max-h-[75vh]",
+  maxHeightClass = "h-[50vh] lg:h-[75vh]",
   headerWidthClass = "max-w-[80%] lg:max-w-[70%]",
   layerOffsetClass = `
     translate-y-15 -translate-x-6

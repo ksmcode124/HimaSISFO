@@ -6,8 +6,8 @@ export function useHeroSection(hero: HeroData) {
     hero.breadcrumbItems.length > 0
 
   const minHeightClass = hasBreadcrumb
-    ? "min-h-[20vh] lg:min-h-[30vh]"
-    : "min-h-[45vh] lg:min-h-[50vh]"
+    ? "min-h-[20vh] lg:min-h-[30vh] -translate-y-[7vh] lg:translate-y-0"
+    : "min-h-[50vh] lg:min-h-[55vh] translate-y-[8vh] lg:translate-y-[12vh]"
 
   return {
     hasBreadcrumb,

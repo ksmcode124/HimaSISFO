@@ -11,9 +11,9 @@ interface Props {
 export function PendaftaranVerifikasiDetailSection({ item }: Props) {
   return (
     <section className="px-12 mx-auto min-h-[65vh] flex justify-center relative">
-      <div className="relative">
+      <div className="relative h-60 max-h-80">
         {/* Decorations */}
-        <div className="aspect-4/3 w-70 absolute z-30 right-0 translate-x-[65%] -translate-y-[30%]">
+        <div className="aspect-4/3 w-40 :w-48 xl:w-60 absolute z-30 right-0 translate-x-[45%] -translate-y-[20%]">
           <Image
             src="/assets/kemahasiswaan/decoration-cloud-3.webp"
             alt=""
@@ -22,7 +22,7 @@ export function PendaftaranVerifikasiDetailSection({ item }: Props) {
           />
         </div>
 
-        <div className="aspect-4/3 w-120 absolute left-0 top-1/2 -translate-x-[45%] rotate-15 -translate-y-[10%]">
+        <div className="aspect-4/3 w-72 absolute left-0 bottom-0 -translate-x-[45%] lg:-translate-x-[65%] rotate-15 translate-y-[150%] lg:translate-y-[160%]">
           <Image
             src="/assets/kemahasiswaan/decoration-cloud-1.webp"
             alt=""
@@ -40,5 +40,6 @@ export function PendaftaranVerifikasiDetailSection({ item }: Props) {
         </FolderCard>
       </div>
     </section>
+
   )
 }

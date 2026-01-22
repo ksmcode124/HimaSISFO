@@ -9,6 +9,7 @@ import { ItemDataJSON } from "../types/data";
 import { ContentRenderer } from "./ContentRenderer";
 import { LiquidGlass } from "@liquidglass/react";
 import { AnimatePresence, motion } from "framer-motion";
+import { ChevronsUpDown } from "lucide-react";
 
 export function HorizontalAccordion({ items }: { items: ItemDataJSON[] }) {
   return (
@@ -35,7 +36,6 @@ export function FeaturedHorizontalAccordion({ items, activeIndex, onChange }:  P
   return (
     <Accordion
       type="single"
-      collapsible
       className="w-full flex flex-col gap-4"
       value={activeIndex >= 0 ? items[activeIndex]?.id : ""}
       onValueChange={(id) => {
@@ -63,6 +63,7 @@ function HorizontalAccordionItem( {item} : {item: ItemDataJSON}) {
       className="
         space-y-5
         overflow-hidden
+        w-full
       "
     >
       <LiquidGlass
@@ -70,15 +71,15 @@ function HorizontalAccordionItem( {item} : {item: ItemDataJSON}) {
         saturation={1.2}
         elasticity={0}
         borderRadius={16}
-        className="border border-black rounded-xl"
+        className="border border-black rounded-xl w-full"
       >
-        <AccordionTrigger className="justify-between rounded-xl">
+        <AccordionTrigger className="justify-between w-full rounded-xl">
           {item.title}
         </AccordionTrigger>
       </LiquidGlass>  
 
       
-      <AccordionContent className="flex flex-col text-balance">
+      <AccordionContent className="flex flex-col text-balance w-full">
         <AnimatePresence initial={false}>
           <motion.div
             key={item.id}
@@ -92,8 +93,12 @@ function HorizontalAccordionItem( {item} : {item: ItemDataJSON}) {
               saturation={1.2}
               elasticity={0}
               borderRadius={16}
-              className="border border-black rounded-xl px-6 py-4 mt-2"
+              className="border border-black flex flex-col rounded-xl px-6 py-4 mt-2"
             >
+              <div className="flex w-full justify-between">
+                <h3 className="flex-1 text-sm sm:text-md">Panduan: </h3>
+                <ChevronsUpDown />
+              </div>
               <ContentRenderer content={item.content} />
             </LiquidGlass>
           </motion.div>
