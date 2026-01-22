@@ -51,10 +51,7 @@ export default function FilosofiSection({ data }: FilosofiProps) {
           {/* LOGO */}
           <div className="flex justify-center items-center lg:order-2 w-full">
             <div className="relative w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80 xl:w-md xl:h-112 2xl:w-137 2xl:h-137">
-              {/* <InteractiveLogo 
-                logoUrl={data.logo || "/assets/default-logo.png"}
-                elemenLogo={data.elemen_logo}
-              /> */}
+              <InteractiveLogo/>
             </div>
           </div>
 
