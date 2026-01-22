@@ -1,3 +1,4 @@
+'use client'
 import { 
   Accordion, 
   AccordionContent, 
@@ -6,6 +7,8 @@ import {
 } from "@/components/ui/accordion";
 import { ItemDataJSON } from "../types/data";
 import { ContentRenderer } from "./ContentRenderer";
+import { LiquidGlass } from "@liquidglass/react";
+import { AnimatePresence, motion } from "framer-motion";
 
 export function HorizontalAccordion({ items }: { items: ItemDataJSON[] }) {
   return (
@@ -62,12 +65,39 @@ function HorizontalAccordionItem( {item} : {item: ItemDataJSON}) {
         overflow-hidden
       "
     >
-      <AccordionTrigger className="justify-between items-center rounded-xl border-black border">
-        {item.title}
-      </AccordionTrigger>
+      <LiquidGlass
+        blur={12}
+        saturation={1.2}
+        elasticity={0}
+        borderRadius={16}
+        className="border border-black rounded-xl"
+      >
+        <AccordionTrigger className="justify-between rounded-xl">
+          {item.title}
+        </AccordionTrigger>
+      </LiquidGlass>  
 
-      <AccordionContent className="flex flex-col gap-4 py-4 px-6 text-balance border border-black rounded-xl">
-        <ContentRenderer content={item.content} />
+      
+      <AccordionContent className="flex flex-col text-balance">
+        <AnimatePresence initial={false}>
+          <motion.div
+            key={item.id}
+            initial={{ opacity: 0, height: 0, scale: 0.98 }}
+            animate={{ opacity: 1, height: "auto", scale: 1 }}
+            exit={{ opacity: 0, height: 0, scale: 0.98 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          >
+            <LiquidGlass
+              blur={12}
+              saturation={1.2}
+              elasticity={0}
+              borderRadius={16}
+              className="border border-black rounded-xl px-6 py-4 mt-2"
+            >
+              <ContentRenderer content={item.content} />
+            </LiquidGlass>
+          </motion.div>
+        </AnimatePresence>
       </AccordionContent>
     </AccordionItem>
   )

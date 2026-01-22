@@ -70,7 +70,7 @@ function AccordionTrigger({
             lg:data-[state=closed]:[direction:rtl]
             lg:data-[state=closed]:h-full
             lg:data-[state=closed]:overflow-hidden
-          ` : ""}
+          ` : "w-full"}
 
           /* OPEN — FORCE NORMAL FLOW */
           lg:data-[state=open]:flex-row

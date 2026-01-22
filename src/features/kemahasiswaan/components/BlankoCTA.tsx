@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -30,12 +31,13 @@ export function BlankoCTA({ title, subtitle, iconUrl, href }: Props) {
           {subtitle}
         </p>
 
-        <Link
-          href={href}
-          className="text-[10px] sm:text-xs lg:text-sm rounded-full border px-3 sm:px-4 py-1.5 sm:py-2 bg-linear-to-t from-[#456882] to-50%-[#1F445F] to-[#1B3C53] text-white"
-        >
-          Selengkapnya ➔
-        </Link>
+        <Button asChild variant="hima">
+          <Link
+            href={href}
+          >
+            Selengkapnya ➔
+          </Link>
+        </Button>
       </div>
     </section>
   )

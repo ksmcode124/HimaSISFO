@@ -38,11 +38,11 @@ export function KemahasiswaanCard({ data, active }: Props) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{
-              delay: 0.4,
+              delay: 1,
               duration: 0.4,
               ease: "easeOut",
             }}
-            className="text-xs sm:text-sm md:text-md"
+            className="text-xs sm:text-sm line-clamp-4"
           >
             {data.description}
           </motion.p>
@@ -54,11 +54,11 @@ export function KemahasiswaanCard({ data, active }: Props) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{
-            delay: 0.6,
+            delay: 1,
             duration: 0.4,
             ease: "easeOut",
           }}
-          className="pb-4 grid justify-items-center w-full"
+          className="grid justify-items-center w-full"
         >
           <Button variant="hima" asChild>
             <Link href={`/kemahasiswaan/${data.id}`}>
