@@ -29,7 +29,7 @@ export function BlankoMainSection({ items }: Props) {
             </DecorationLayer>
 
             <ContentLayer>
-              <div className="flex items-center justify-center min-h-screen">
+              <div className="flex items-center justify-center min-h-[75vh]">
                 <Suspense fallback={null}>
                   <BlankoCarousel blankoItems={items} />
                 </Suspense>
