@@ -16,7 +16,7 @@ export default function ProsesAkademikPage() {
   return (
     <>
       <HeroSection data={hero} />
-      <ProsesAkademikMainSection items={items} openModal={openModal}/>
+      <ProsesAkademikMainSection selectedId={selectedId} items={items} openModal={openModal}/>
 
       <Modal open={!!selectedId} onClose={closeModal} id={selectedId} />
     </>
