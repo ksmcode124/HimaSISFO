@@ -1,15 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, PanInfo } from "framer-motion";
 import { cn } from "@/lib/utils";
-import kabinetDataRaw from "../data/kabinet.json";
 import ProkerCard from "@/features/kabinet/components/ProkerCard";
+import { DepartemenResponse } from "../types";
 
-export default function CarouselProker() {
-  const prokerList =
-    kabinetDataRaw.kabinet_list[0]?.departemen[0]?.program_kerja || [];
+interface CarouselProkerProps {
+  prokerList: DepartemenResponse["proker"];
+}
+
+export default function CarouselProker({
+  prokerList = [],
+}: CarouselProkerProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const DRAG_THRESHOLD = 50;
   const totalData = prokerList.length;
@@ -28,7 +40,7 @@ export default function CarouselProker() {
 
   const onDragEnd = (
     _event: MouseEvent | TouchEvent | PointerEvent,
-    info: PanInfo
+    info: PanInfo,
   ) => {
     if (info.offset.x < -DRAG_THRESHOLD) {
       handleNext();
@@ -37,18 +49,32 @@ export default function CarouselProker() {
     }
   };
 
-  const visibleIndices = [
-    getLoopIndex(currentIndex),
-    getLoopIndex(currentIndex + 1),
-    getLoopIndex(currentIndex + 2),
-    getLoopIndex(currentIndex + 3),
-  ];
+  if (totalData === 0) return null;
+
+  // LOGIC TAMPILAN
+  // Desktop: 4 item (inactive - active - active - inactive)
+  // Mobile: 3 item (inactive - active - inactive)
+  const visibleIndices = isMobile
+    ? [
+        getLoopIndex(currentIndex - 1),
+        getLoopIndex(currentIndex),
+        getLoopIndex(currentIndex + 1),
+      ]
+    : [
+        getLoopIndex(currentIndex),
+        getLoopIndex(currentIndex + 1),
+        getLoopIndex(currentIndex + 2),
+        getLoopIndex(currentIndex + 3),
+      ];
 
   return (
     <div className="relative flex flex-col items-center w-full overflow-visible touch-none">
-      <div className="flex items-center justify-center gap-4 md:gap-16 min-h-[600px] w-full overflow-visible">
+      <div className="flex items-center justify-center gap-4 md:gap-16 min-h-150 w-full overflow-visible">
         {visibleIndices.map((dataIndex, displayOrder) => {
-          const isActive = displayOrder === 1 || displayOrder === 2;
+          const isActive = isMobile
+            ? displayOrder === 1
+            : displayOrder === 1 || displayOrder === 2;
+
           const proker = prokerList[dataIndex];
 
           return (
@@ -61,7 +87,7 @@ export default function CarouselProker() {
               animate={{
                 opacity: 1,
                 x: 0,
-                scale: isActive ? 1 : 0.8,
+                scale: isActive ? 0.5 : 0.8,
                 zIndex: isActive ? 20 : 10,
               }}
               exit={{ opacity: 0, x: -20 }}
@@ -71,14 +97,17 @@ export default function CarouselProker() {
                 damping: 30,
               }}
               className={cn(
-                "cursor-grab active:cursor-grabbing transition-opacity duration-300",
-                !isActive && "opacity-60"
+                "cursor-grab active:cursor-grabbing transition-opacity duration-300 shrink-0",
+
+                isMobile ? (isActive ? "w-fit" : "-mx-44") : "w-auto md:gap-16",
+
+                !isActive && "opacity-60",
               )}
             >
               <ProkerCard
-                nama={proker.nama}
-                deskripsi={proker.deskripsi}
-                image_url={proker.image_url}
+                nama={proker.nama_proker}
+                deskripsi={proker.deskripsi_proker}
+                image={proker.foto_proker}
                 isActive={isActive}
               />
             </motion.div>
