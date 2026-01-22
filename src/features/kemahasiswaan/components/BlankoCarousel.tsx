@@ -5,8 +5,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
   CarouselIndicators,
   type CarouselApi,
   useCarousel,
@@ -17,6 +15,7 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { Download } from "lucide-react"
 import { useCarouselSync } from "../hooks/useCarouselSync"
+import { CarouselNext, CarouselPrevious } from "./CarouselButtons"
 
 interface BlankoCarouselProps {
   blankoItems: BlankoItem[]
@@ -46,12 +45,9 @@ export function BlankoCarousel({ blankoItems }: BlankoCarouselProps) {
       <Carousel
         setApi={setApi}
         opts={{ align: "center", containScroll: "trimSnaps" }}
-        className="w-full"
+        className="w-full flex items-center"
       >
-        {/* Navigation arrows */}
-        <CarouselPrevious className="absolute h-15 w-15 left-0 sm:-left-12 lg:-left-16 top-1/2 -translate-y-1/2 z-30 rounded-full" />
-        <CarouselNext className="absolute h-15 w-15 right-0 sm:-right-12 lg:-right-16 top-1/2 -translate-y-1/2 z-30 rounded-full" />
-
+        <CarouselPrevious />
         <CarouselContent>
           <CarouselSpacer />
 
@@ -61,6 +57,7 @@ export function BlankoCarousel({ blankoItems }: BlankoCarouselProps) {
 
           <CarouselSpacer />
         </CarouselContent>
+        <CarouselNext />
       </Carousel>
 
       {/* Indicators */}

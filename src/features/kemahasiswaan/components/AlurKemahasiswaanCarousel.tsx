@@ -3,8 +3,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
   CarouselIndicators,
   CarouselApi,
 } from "@/components/ui/carousel"
@@ -19,6 +17,7 @@ import { useEffect, useState } from "react"
 import { LiquidGlass } from "@liquidglass/react"
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
+import { CarouselNext, CarouselPrevious } from "./CarouselButtons"
 
 const MOBILE_BREAKPOINT = 768
 export function useIsMobile() {
@@ -49,10 +48,10 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
 
   return (
     <div className="relative w-full max-w-7xl">
-      <Carousel setApi={setApi} opts={{ align: isMobile ? "start" : "center" }}>
-        <CarouselPrevious className="absolute left-0 top-1/2 -translate-y-1/2 z-10" />
+      <Carousel className="flex items-center" setApi={setApi} opts={{ align: isMobile ? "start" : "center" }}>
+        <CarouselPrevious />
 
-        <CarouselContent className="touch-pan-x">
+        <CarouselContent className="touch-pan-x flex-1">
           {!isMobile && <KemahasiswaanCarouselSpacer />}
 
           {data.map((item, index) => {
@@ -113,7 +112,7 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
           {!isMobile && <KemahasiswaanCarouselSpacer />}
         </CarouselContent>
 
-        <CarouselNext className="absolute right-0 top-1/2 -translate-y-1/2 z-10" />
+        <CarouselNext />
       </Carousel>
 
       {api && (
