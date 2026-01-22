@@ -7,6 +7,8 @@ import PhotoSlideshowMobile from "../components/PhotoSlideshowMobile";
 import { Kabinet, KabinetListItem } from "../types";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { LiquidGlass } from "@liquidglass/react";
 import Image from "next/image";
 
 interface KabinetHeroSectionProps {
@@ -187,22 +189,28 @@ const YearButton = ({
   onClick: () => void;
   disabled?: boolean;
 }) => (
-  <Button
-    onClick={onClick}
-    disabled={disabled}
-    className="group relative overflow-hidden w-fit h-8 md:h-auto px-3 md:px-8 py-2 rounded-full border md:border-2 border-white/50 bg-white/20 text-white text-xs md:text-xl font-medium backdrop-blur-3xl drop-shadow-[5px_5px_2px_rgba(0,0,0,0.4)] hover:bg-black/95 transition-all duration-400 bg-[linear-gradient(to_right,black_50%,transparent_50%)] bg-size-[210%_100%] bg-position-[99%_0] hover:bg-position-[0%_0]! hover:border-white/50! disabled:opacity-50 disabled:cursor-not-allowed"
-  >
-    <motion.div
-      initial={{ x: "-250%", skewX: 45 }}
-      animate={{ x: "350%", skewX: 45 }}
-      transition={{
-        repeat: Infinity,
-        duration: 0.5,
-        repeatDelay: 2,
-        ease: "linear",
-      }}
-      className="absolute inset-y-0 w-12 bg-linear-to-r from-transparent via-white/40 to-transparent z-10"
-    />
-    <span className="relative z-20">{label}</span>
-  </Button>
+  <div className="relative group">
+    <LiquidGlass className="rounded-full overflow-hidden">
+      <Button
+        onClick={onClick}
+        disabled={disabled}
+        className={cn(
+          "group relative overflow-hidden w-fit h-8 md:h-auto px-3 md:px-8 py-2 rounded-3xl border md:border-2 border-white/50 bg-white/20 text-white text-xs md:text-xl font-medium hover:bg-black/95 transition-all duration-400 bg-[linear-gradient(to_right,black_50%,transparent_50%)] bg-size-[210%_100%] bg-position-[99%_0] hover:bg-position-[0%_0]! hover:border-white/50! disabled:opacity-50",
+        )}
+      >
+        <motion.div
+          initial={{ x: "-250%", skewX: 45 }}
+          animate={{ x: "350%", skewX: 45 }}
+          transition={{
+            repeat: Infinity,
+            duration: 0.5,
+            repeatDelay: 2,
+            ease: "linear",
+          }}
+          className="absolute inset-y-0 w-12 bg-linear-to-r from-transparent via-white/40 to-transparent z-10"
+        />
+        <span className="relative z-20">{label}</span>
+      </Button>
+    </LiquidGlass>
+  </div>
 );
