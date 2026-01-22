@@ -8,6 +8,7 @@ import {
 import { HeroData } from "../types/hero"
 import { useHeroSection } from "../hooks/useHeroSection"
 import { HeroView } from "../components/HeroView"
+import { cn } from "@/lib/utils"
 
 interface HeroSectionProps {
   data: HeroData
@@ -28,33 +29,37 @@ export function HeroSection({ data }: HeroSectionProps) {
         />
       </BackgroundLayer>
 
-      <ContentLayer className="lg:pt-15">
+      <ContentLayer className={cn(minHeightClass, "relative flex flex-col")}>
         {hasBreadcrumb && (
           <BreadcrumbSection items={data.breadcrumbItems!} />
         )}
 
-        <HeroView
-          title={data.title}
-          subtitle={data.subtitle}
-          minHeightClass={minHeightClass}
-        />
+        <div className={cn("flex-1 flex justify-center items-center", hasBreadcrumb ? "" : "pt-[72px] lg:pt-[96px]")}> {/* Ubah setinggi Navbar & BreadCrumbs*/}
+          <HeroView
+            title={data.title}
+            subtitle={data.subtitle}
+          />
+        </div>
 
         <PitaDecoration />
       </ContentLayer>
+
+
     </ShellLayer>
   )
 }
 
 function PitaDecoration() {
   return (
-    <div className="relative z-5 w-full aspect-4/1 lg:translate-y-[5vh] -translate-y-[5vh]">
+    <div className="absolute -bottom-[20%] left-0 z-5 w-full aspect-5/1 pointer-events-none">
       <Image
         src="/assets/kemahasiswaan/decoration-pita.webp"
         alt=""
         fill
-        className="object-contain pointer-events-none"
+        className="object-contain"
         priority
       />
     </div>
   )
 }
+

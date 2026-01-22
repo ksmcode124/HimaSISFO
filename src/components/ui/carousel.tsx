@@ -4,10 +4,11 @@ import * as React from "react"
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react"
-import { ArrowLeft, ArrowRight } from "lucide-react"
+import { Triangle } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { Glass } from "./Glass"
 
 type CarouselApi = UseEmblaCarouselType[1]
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
@@ -206,9 +207,9 @@ const CarouselPrevious = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        "absolute h-8 w-8 rounded-full",
+        "absolute h-20 w-20 sm:h-24 sm:w-24 rounded-full",
         orientation === "horizontal"
-          ? "-left-12 top-1/2 -translate-y-1/2"
+          ? "-left-12 top-1/2 translate-x-[50%] lg:translate-x-0 -translate-y-1/2"
           : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
         className
       )}
@@ -216,7 +217,20 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       {...props}
     >
-      <ArrowLeft className="h-4 w-4" />
+      <Glass
+        borderRadius={9999}
+        className="flex items-center justify-center"
+      >
+        <svg width="0" height="0" style={{ position: 'absolute' }}>
+          <defs>
+            <linearGradient id="triangleGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="50%" stopColor="#456882" />
+              <stop offset="100%" stopColor="#1B3C53" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <Triangle className="-rotate-90 size-12 m-8" fill="url(#triangleGradient2)" strokeWidth={0} />
+      </Glass>
       <span className="sr-only">Previous slide</span>
     </Button>
   )
@@ -235,9 +249,9 @@ const CarouselNext = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        "absolute h-8 w-8 rounded-full",
+        "absolute h-20 w-20 sm:h-24 sm:w-24 rounded-full",
         orientation === "horizontal"
-          ? "-right-12 top-1/2 -translate-y-1/2"
+          ? "-right-12 top-1/2 -translate-x-[50%] lg:translate-x-0 -translate-y-1/2"
           : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
         className
       )}
@@ -245,7 +259,20 @@ const CarouselNext = React.forwardRef<
       onClick={scrollNext}
       {...props}
     >
-      <ArrowRight className="h-4 w-4" />
+      <Glass
+        borderRadius={9999}
+        className="flex items-center justify-center"
+      >
+        <svg width="0" height="0" style={{ position: 'absolute' }}>
+          <defs>
+            <linearGradient id="triangleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="50%" stopColor="#456882" />
+              <stop offset="100%" stopColor="#1B3C53" />
+            </linearGradient>
+          </defs>
+        </svg>
+         <Triangle className="rotate-90 size-12" fill="url(#triangleGradient)" strokeWidth={0}/>
+      </Glass>
       <span className="sr-only">Next slide</span>
     </Button>
   )

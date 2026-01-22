@@ -7,17 +7,13 @@ interface Props {
 }
 
 export function WisudaYudisiumItemsSection({ items, setSelectedId }: Props) {
-  const isOdd = items.length % 2 !== 0
-
   return (
-    <section className="w-full max-w-7xl px-4 sm:px-6 lg:px-8 grid grid-cols-2 sm:grid-cols-2 gap-6 pb-10 lg:pb-30">
-      {items.map((item, index) => {
-        const isFirst = index === 0
-
+    <section className="w-full max-w-7xl px-4 sm:px-6 lg:px-8 grid grid-cols-12 gap-6 pb-10 lg:pb-30 *:last:col-start-4">
+      {items.map((item) => {
         return (
           <div
             key={item.id}
-            className={isFirst && isOdd ? "sm:col-span-2" : ""}
+            className={"col-span-6"}
           >
             <WisudaFlipCard setSelectedId={setSelectedId} item={item} />
           </div>

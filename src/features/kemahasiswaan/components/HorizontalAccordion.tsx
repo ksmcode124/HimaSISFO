@@ -7,9 +7,9 @@ import {
 } from "@/components/ui/accordion";
 import { ItemDataJSON } from "../types/data";
 import { ContentRenderer } from "./ContentRenderer";
-import { LiquidGlass } from "@liquidglass/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronsUpDown } from "lucide-react";
+import { Glass } from "@/components/ui/Glass";
 
 export function HorizontalAccordion({ items }: { items: ItemDataJSON[] }) {
   return (
@@ -36,6 +36,7 @@ export function FeaturedHorizontalAccordion({ items, activeIndex, onChange }:  P
   return (
     <Accordion
       type="single"
+      collapsible
       className="w-full flex flex-col gap-4"
       value={activeIndex >= 0 ? items[activeIndex]?.id : ""}
       onValueChange={(id) => {
@@ -66,17 +67,14 @@ function HorizontalAccordionItem( {item} : {item: ItemDataJSON}) {
         w-full
       "
     >
-      <LiquidGlass
-        blur={12}
-        saturation={1.2}
-        elasticity={0}
+      <Glass
         borderRadius={16}
         className="border border-black rounded-xl w-full"
       >
         <AccordionTrigger className="justify-between w-full rounded-xl">
           {item.title}
         </AccordionTrigger>
-      </LiquidGlass>  
+      </Glass>  
 
       
       <AccordionContent className="flex flex-col text-balance w-full">
@@ -88,10 +86,7 @@ function HorizontalAccordionItem( {item} : {item: ItemDataJSON}) {
             exit={{ opacity: 0, height: 0, scale: 0.98 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
           >
-            <LiquidGlass
-              blur={12}
-              saturation={1.2}
-              elasticity={0}
+            <Glass
               borderRadius={16}
               className="border border-black flex flex-col rounded-xl px-6 py-4 mt-2"
             >
@@ -100,7 +95,7 @@ function HorizontalAccordionItem( {item} : {item: ItemDataJSON}) {
                 <ChevronsUpDown />
               </div>
               <ContentRenderer content={item.content} />
-            </LiquidGlass>
+            </Glass>
           </motion.div>
         </AnimatePresence>
       </AccordionContent>

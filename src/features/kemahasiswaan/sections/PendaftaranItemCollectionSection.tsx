@@ -2,6 +2,7 @@ import Image from "next/image"
 import { ItemDataJSON } from "@/features/kemahasiswaan"
 import { PendaftaranItemCard } from "../components/PendaftaranItemCard"
 import { LiquidGlass } from "@liquidglass/react"
+import { Glass } from "@/components/ui/Glass"
 
 interface Props {
   items: ItemDataJSON[]
@@ -10,10 +11,7 @@ interface Props {
 export function PendaftaranItemCollectionSection({ items }: Props) {
   return (
     <section className="relative flex items-center justify-center w-[90%] mb-5 mx-auto">
-      <LiquidGlass
-        blur={18}
-        saturation={1.2}
-        elasticity={0}
+      <Glass
         borderRadius={24}
         className="w-[90%] max-w-7xl p-6 relative flex justify-center border border-neutral-400"
       >
@@ -24,7 +22,7 @@ export function PendaftaranItemCollectionSection({ items }: Props) {
             <PendaftaranItemCard key={item.id} item={item} />
           ))}
         </div>
-      </LiquidGlass>
+      </Glass>
       <Decoration />
     </section>
   )

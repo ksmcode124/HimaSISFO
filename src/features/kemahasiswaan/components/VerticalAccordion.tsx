@@ -9,6 +9,7 @@ import { ItemDataJSON } from "../types/data";
 import { ContentRenderer } from "./ContentRenderer";
 import { AnimatePresence, motion } from "framer-motion";
 import { LiquidGlass } from "@liquidglass/react";
+import { Glass } from "@/components/ui/Glass";
 
 interface VerticalAccordionProps {
   items: ItemDataJSON[]
@@ -47,15 +48,12 @@ function VerticalAccordionItem({ item }: { item: ItemDataJSON }) {
             transition={{ duration: 1.2, ease: [0.25, 1, 0.5, 1] }}
             className="w-full"
           >
-            <LiquidGlass
-              blur={12}
-              saturation={1.2}
-              elasticity={0}
+            <Glass
               borderRadius={16}
               className="w-full min-h-80 lg:min-h-150 border border-neutral-400 rounded-2xl flex flex-col"
             >
               <ContentRenderer content={item.content} />
-            </LiquidGlass>
+            </Glass>
           </motion.div>
         </AnimatePresence>
       </AccordionContent>

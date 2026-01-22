@@ -5,6 +5,8 @@ import {
   CarouselItem,
   CarouselIndicators,
   CarouselApi,
+  CarouselPrevious,
+  CarouselNext,
 } from "@/components/ui/carousel"
 
 import { CardProps } from "../types/ui"
@@ -17,7 +19,7 @@ import { useEffect, useState } from "react"
 import { LiquidGlass } from "@liquidglass/react"
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
-import { CarouselNext, CarouselPrevious } from "./CarouselButtons"
+import { Glass } from "@/components/ui/Glass"
 
 const MOBILE_BREAKPOINT = 768
 export function useIsMobile() {
@@ -48,8 +50,8 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
 
   return (
     <div className="relative w-full max-w-7xl">
-      <Carousel className="relative flex items-center" setApi={setApi} opts={{ align: isMobile ? "start" : "center" }}>
-        <CarouselPrevious />
+      <Carousel className="py-8" setApi={setApi} opts={{ align: isMobile ? "start" : "center" }}>
+        <CarouselPrevious className="z-20 opacity-60" />
 
         <CarouselContent className="touch-pan-x flex-1">
           {!isMobile && <KemahasiswaanCarouselSpacer />}
@@ -91,17 +93,14 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
                         />
                       </div>
                     ) : (
-                      <LiquidGlass
-                        blur={state.isActive ? 10 : 5}
-                        elasticity={0}
-                        borderRadius={20}
-                        className="h-full border"
+                      <Glass
+                        className="flex items-center justify-center"
                       >
                         <KemahasiswaanCard
                           data={item}
                           active={state.isActive}
                         />
-                      </LiquidGlass>
+                      </Glass>
                     )}
                   </motion.div>
                 </div>
@@ -112,7 +111,7 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
           {!isMobile && <KemahasiswaanCarouselSpacer />}
         </CarouselContent>
 
-        <CarouselNext />
+        <CarouselNext className="z-20 opacity-60"/>
       </Carousel>
 
       {api && (
