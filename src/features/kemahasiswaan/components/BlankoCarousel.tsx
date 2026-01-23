@@ -18,6 +18,7 @@ import { cn } from "@/lib/utils"
 import { Download } from "lucide-react"
 import { useCarouselSync } from "../hooks/useCarouselSync"
 import { motion } from "framer-motion"
+import { Button } from "@/components/ui/button"
 
 interface BlankoCarouselProps {
   blankoItems: BlankoItem[]
@@ -29,7 +30,7 @@ export function BlankoCarousel({ blankoItems }: BlankoCarouselProps) {
   const scrollTo = (index: number) => api?.scrollTo(index)
 
   return (
-    <div className="relative w-full max-w-7xl">
+    <div className="relative w-full max-w-7xl mx-auto py-8">
       <Carousel
         setApi={setApi}
         opts={{ align: "center", containScroll: "trimSnaps" }}
@@ -74,6 +75,10 @@ function BlankoCardItem({
   index: number
   selectedIndex: number
 }) {
+  const isGoogleDocs = card.filepath.startsWith(
+    "https://docs.google.com/"
+  )
+
   const diff = index - selectedIndex
   const isActive = diff === 0
   const isNeighbor = Math.abs(diff) === 1
@@ -83,25 +88,24 @@ function BlankoCardItem({
   const zIndex = isActive ? 30 : isNeighbor ? 20 : 10
 
   return (
-    <CarouselItem className="h-100 basis-full sm:basis-1/3">
+    <CarouselItem className="h-100 basis-full sm:basis-full md:basis-1/3">
       <motion.div
         layout
         animate={{ scale, opacity, zIndex }}
         transition={{ type: "spring", stiffness: 200, damping: 24, mass: 0.8 }}
-        className="h-full px-3 sm:px-1"
+        className="h-full px-2"
       >
         <Card
           style={{ backgroundImage: `url(${card.image})` }}
-          className="h-full flex flex-col bg-cover bg-center bg-no-repeat"
+          className="h-full flex flex-col bg-cover bg-center bg-no-repeat rounded-xl"
         >
-          {/* Konten animasi masuk halus */}
-          <CardContent className="flex flex-col flex-1 p-4 lg:p-6 justify-end text-center">
+          <CardContent className="flex flex-col flex-1 p-4 justify-end text-center">
             <motion.p
               key={card.id + "-title"}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="font-semibold text-sm lg:text-md"
+              className="font-semibold text-sm lg:text-md text-white"
             >
               {card.title}
             </motion.p>
@@ -114,12 +118,14 @@ function BlankoCardItem({
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
             >
-              <Link
-                href={`${card.filepath}/export?format=docx`}
-                className="text-xs flex gap-2 items-center rounded-full border px-8 py-2 bg-linear-to-t from-[#456882] to-[#1B3C53] text-white"
-              >
-                Unduh <Download size={14} />
-              </Link>
+              <Button variant={"hima"} asChild>
+                <Link
+                  href={isGoogleDocs ? `${encodeURIComponent(card.filepath)}/export?format=docx` : "#"}
+                  className="flex gap-2 items-center"
+                  >
+                  Unduh <Download size={14} />
+                </Link>
+              </Button>
             </motion.div>
           </CardAction>
         </Card>
@@ -136,8 +142,8 @@ function CarouselSpacer() {
       aria-hidden
       data-embla-ignore
       className={cn(
-        "block min-w-0 shrink-0 grow-0 sm:basis-1/3 z-10",
-        orientation === "horizontal" ? "pl-0 sm:pl-4" : "pt-4"
+        "block min-w-0 shrink-0 grow-0 sm:basis-full md:basis-1/3 z-10",
+        orientation === "horizontal" ? "pl-0 sm:pl-2 md:pl-4" : "pt-4"
       )}
     />
   )
