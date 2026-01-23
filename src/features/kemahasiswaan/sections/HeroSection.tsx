@@ -18,7 +18,7 @@ export function HeroSection({ data }: HeroSectionProps) {
   const { hasBreadcrumb, minHeightClass } = useHeroSection(data)
 
   return (
-    <ShellLayer>
+    <ShellLayer className="z-10 mb-[3svh] md:m -[2svh] lg:mb-[15vh]">
       <BackgroundLayer
         className="
           bg-[url('/assets/kemahasiswaan/bg-hero.webp')]

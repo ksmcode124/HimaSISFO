@@ -14,7 +14,7 @@ export function ProsesAkademikCard({ title, onClick, active }: Props) {
       <Card
         onClick={onClick}
         className={`
-          border-0 w-[90%] h-40 sm:h-48 md:h-52 lg:h-60
+          border-0 w-[90%] h-40 sm:h-48 md:h-52 lg:h-60 aspect-4/3
           overflow-hidden bg-[#D9D9D9]
           rounded-md shadow-md
           cursor-pointer
@@ -36,6 +36,7 @@ export function ProsesAkademikCard({ title, onClick, active }: Props) {
         className={`
           absolute bottom-0 translate-y-[25%] sm:translate-y-[20%]
           pointer-events-none
+          aspect-4/3
           transition-all duration-500
           ${active ? 'z-10' : 'z-20'}
         `}

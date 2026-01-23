@@ -1,7 +1,7 @@
 // components/FlipCard.tsx
 "use client"
 import { useState } from "react";
-import { useIsMobile } from "./AlurKemahasiswaanCarousel";
+import { useDeviceType } from "./AlurKemahasiswaanCarousel";
 
 type FlipCardProps = {
   front: React.ReactNode;
@@ -13,10 +13,10 @@ type FlipCardProps = {
 
 export function FlipCard({ front, back, className, setSelectedId, id }: FlipCardProps) {
   const [flipped, setFlipped] = useState(false);
-  const isMobile = useIsMobile()
+  const device = useDeviceType()
 
   const handleClick = () => {
-    if (isMobile) {
+    if (device === 'mobile') {
       if (setSelectedId && id !== undefined) {
         setSelectedId(id); // buka modal dari parent
       }

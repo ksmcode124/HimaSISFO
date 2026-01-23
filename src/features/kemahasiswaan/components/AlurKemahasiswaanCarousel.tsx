@@ -171,7 +171,7 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
               </linearGradient>
             </defs>
           </svg>
-          <Triangle className="-rotate-90 size-12 m-8" fill="url(#triangleGradient2)" strokeWidth={0} />
+          <Triangle className="-rotate-90 size-12" fill="url(#triangleGradient2)" strokeWidth={0} />
         </Glass>
         <span className="sr-only">Previous slide</span>
       </button>

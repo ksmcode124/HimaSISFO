@@ -10,36 +10,43 @@ interface Props {
 
 export function PendaftaranVerifikasiDetailSection({ item }: Props) {
   return (
-    <section className="px-12 mx-auto min-h-[65vh] flex justify-center relative">
-      <div className="relative h-60 max-h-80">
-        {/* Decorations */}
-        <div className="aspect-4/3 w-40 :w-48 xl:w-60 absolute z-30 right-0 translate-x-[45%] -translate-y-[20%]">
-          <Image
-            src="/assets/kemahasiswaan/decoration-cloud-3.webp"
-            alt=""
-            fill
-            className="object-contain"
-          />
-        </div>
-
-        <div className="aspect-4/3 w-72 absolute left-0 bottom-0 -translate-x-[45%] lg:-translate-x-[65%] rotate-15 translate-y-[150%] lg:translate-y-[160%]">
-          <Image
-            src="/assets/kemahasiswaan/decoration-cloud-1.webp"
-            alt=""
-            fill
-            className="object-contain"
-          />
-        </div>
-
-        <FolderCard title="Pendaftaran & Verifikasi" hasLayer>
-          <h1 className="text-lg sm:text-xl lg:text-2xl font-semibold mb-6 text-center">
-            {item.title}
-          </h1>
-
-          <ContentRenderer content={item.content as ContentBlock[]} />
-        </FolderCard>
+    <section className="relative px-6 sm:px-12 w-fit flex justify-center py-12">
+      
+      {/* Decorations */}
+      <div className="absolute z-30 right-0 -translate-x-[10%] -translate-y-[20%] w-20 sm:w-28 xl:w-30 aspect-[4/3]">
+        <Image
+          src="/assets/kemahasiswaan/decoration-cloud-3.webp"
+          alt=""
+          fill
+          className="object-contain"
+        />
       </div>
-    </section>
 
+      <div className="absolute left-0 bottom-0 -translate-x-[15%] lg:-translate-x-[25%] rotate-[15deg] translate-y-[50%] lg:translate-y-[60%] w-72 aspect-[4/3]">
+        <Image
+          src="/assets/kemahasiswaan/decoration-cloud-1.webp"
+          alt=""
+          fill
+          className="object-contain"
+        />
+      </div>
+
+      {/* FolderCard */}
+      <FolderCard
+        title="Pendaftaran & Verifikasi"
+        hasLayer
+        widthClass="w-full max-w-3xl"
+        maxHeightClass="max-h-[70vh] lg:max-h-[75vh]" // batas maksimal tinggi
+      >
+        <h1 className="sticky top-0 bg-[#EDF3F6] py-2 sm:py-4 md:py-6 lg:py-8 text-lg sm:text-xl lg:text-2xl font-semibold mb-6 text-center">
+          {item.title}
+        </h1>
+
+        {/* Content scrollable */}
+        <div className="overflow-y-auto max-h-[calc(70vh-6rem)] lg:max-h-[calc(60vh-6rem)]">
+          <ContentRenderer content={item.content as ContentBlock[]} />
+        </div>
+      </FolderCard>
+    </section>
   )
 }

@@ -2,6 +2,7 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { CardProps } from "../types/ui"
 import { motion, AnimatePresence } from "framer-motion"
+import { Button } from "@/components/ui/button"
 
 interface KemahasiswaanCardProps {
   data: CardProps
@@ -74,14 +75,15 @@ export function KemahasiswaanCard({ data, active, device }: KemahasiswaanCardPro
             }}
             className="grid justify-items-center w-full pb-4"
           >
-            <button className={cn(
-              "px-4 py-2 rounded-full bg-gradient-to-r from-[#456882] to-[#1B3C53] text-white font-medium transition-all hover:scale-105",
+            <Button variant={"hima"} className={cn(
               device === 'mobile' && "text-xs",
               device === 'tablet' && "text-sm",
               device === 'desktop' && "text-base px-6"
-            )}>
-              Selengkapnya ➔
-            </button>
+            )} asChild>
+              <Link href={`/kemahasiswaan/${data.id}`}>
+                Selengkapnya ➔
+              </Link>
+            </Button>
           </motion.div>
         )}
       </AnimatePresence>

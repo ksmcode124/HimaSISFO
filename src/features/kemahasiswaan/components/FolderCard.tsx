@@ -5,8 +5,8 @@ interface FolderCardProps {
 
   /** layout */
   widthClass?: string
+  heightClass?: string
   maxHeightClass?: string
-  headerWidthClass?: string
   layerOffsetClass?: string
 
   /** appearance */
@@ -20,13 +20,13 @@ export function FolderCard({
   children,
   hasLayer = false,
 
-  widthClass = "lg:w-[60vw] max-w-3xl",
-  maxHeightClass = "h-[50vh] lg:h-[75vh]",
-  headerWidthClass = "max-w-[80%] lg:max-w-[70%]",
+  widthClass = "w-[80%] max-w-3xl",
+  heightClass = "h-[30svh] lg:h-[40vh]", // ✅ height konsisten
+  maxHeightClass,
   layerOffsetClass = `
-    translate-y-15 -translate-x-6
-    sm:translate-y-17 sm:-translate-x-8
-    lg:translate-y-25 lg:-translate-x-10
+    translate-y-13 -translate-x-6
+    sm:translate-y-15 sm:-translate-x-8
+    lg:translate-y-17 lg:-translate-x-10
   `,
 
   headerBgClass = "bg-[#EDF3F6]",
@@ -35,16 +35,16 @@ export function FolderCard({
 }: FolderCardProps) {
   return (
     <div
-      className={`relative mx-auto ${widthClass} ${maxHeightClass}`}
+      className={`relative flex justify-center items-center  ${widthClass} ${heightClass} ${maxHeightClass ?? ""}`}
     >
-      <div className="relative">
+      <div className="relative h-full w-[80%] flex flex-col">
 
         {/* background offset layer */}
         {hasLayer && (
           <div
             className={`
-              absolute inset-0 h-[90%]
-              bg-linear-to-r to-[#1B3C53] from-[#456882] from-50%-[#1F445F]
+              absolute inset-0
+              bg-linear-to-r to-[#1B3C53] from-[#456882]
               rounded-xl
               border-2 border-[#D9D9D9]
               z-0
@@ -53,17 +53,18 @@ export function FolderCard({
           />
         )}
 
-        {/* HEADER (always rendered → geometry preserved) */}
+        {/* HEADER (fixed height naturally) */}
         <div
           className={`
             relative z-20
             ${headerBgClass}
-            ${headerWidthClass}
+            w-[40%]
             min-h-10 sm:min-h-11 md:min-h-12
             rounded-t-xl
             border-t-2 border-x-2 ${borderClass}
             px-4 md:px-5
             flex items-center
+            shrink-0
           `}
         >
           {title ? (
@@ -75,7 +76,7 @@ export function FolderCard({
           )}
         </div>
 
-        {/* CONTENT */}
+        {/* CONTENT (auto ambil sisa tinggi) */}
         <div
           className={`
             relative z-10
@@ -83,10 +84,9 @@ export function FolderCard({
             border-2 ${borderClass}
             rounded-b-xl rounded-tr-xl
             -mt-0.5
+            flex-1
             overflow-y-auto
             px-4 sm:px-6 md:px-8 lg:px-10
-            pt-6 sm:pt-7 md:pt-8 lg:pt-9
-            pb-8
           `}
         >
           {children}

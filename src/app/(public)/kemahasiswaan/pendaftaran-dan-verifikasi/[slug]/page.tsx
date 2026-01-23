@@ -28,7 +28,7 @@ export default async function DetailPage({ params }: PageProps) {
           priority
         />
       </BackgroundLayer>
-      <ContentLayer>
+      <ContentLayer className="flex flex-col justify-center items-center w-full">
         <BreadcrumbSection items={breadcrumbItems} />
         <PendaftaranVerifikasiDetailSection item={item} />
       </ContentLayer>

@@ -37,7 +37,7 @@ export function FeaturedHorizontalAccordion({ items, activeIndex, onChange }:  P
     <Accordion
       type="single"
       collapsible
-      className="w-full flex flex-col gap-4"
+      className="w-full flex flex-col justify-around gap-4"
       value={activeIndex >= 0 ? items[activeIndex]?.id : ""}
       onValueChange={(id) => {
         if (!id) {
@@ -72,7 +72,9 @@ function HorizontalAccordionItem( {item} : {item: ItemDataJSON}) {
         className="border border-black rounded-xl w-full"
       >
         <AccordionTrigger className="justify-between w-full rounded-xl">
-          {item.title}
+          <span className="line-clamp-1">
+            {item.title}
+          </span>
         </AccordionTrigger>
       </Glass>  
 
