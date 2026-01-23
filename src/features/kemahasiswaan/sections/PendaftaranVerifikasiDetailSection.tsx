@@ -38,7 +38,7 @@ export function PendaftaranVerifikasiDetailSection({ item }: Props) {
         widthClass="w-full max-w-3xl"
         maxHeightClass="max-h-[70vh] lg:max-h-[75vh]" // batas maksimal tinggi
       >
-        <h1 className="sticky top-0 bg-[#EDF3F6] py-2 sm:py-4 md:py-6 lg:py-8 text-lg sm:text-xl lg:text-2xl font-semibold mb-6 text-center">
+        <h1 className="sticky top-0 bg-[#EDF3F6] text-base sm:text-lg md:text-xl lg:text-3xl py-2 sm:py-4 md:py-6 lg:py-8 font-semibold mb-6 text-center">
           {item.title}
         </h1>
 

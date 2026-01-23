@@ -35,7 +35,7 @@ export function FolderCard({
 }: FolderCardProps) {
   return (
     <div
-      className={`relative flex justify-center items-center  ${widthClass} ${heightClass} ${maxHeightClass ?? ""}`}
+      className={`relative flex justify-center items-center text-[#323257] ${widthClass} ${heightClass} ${maxHeightClass ?? ""}`}
     >
       <div className="relative h-full w-[80%] flex flex-col">
 
@@ -68,7 +68,7 @@ export function FolderCard({
           `}
         >
           {title ? (
-            <h1 className="text-base sm:text-md md:text-lg lg:text-xl font-medium truncate">
+            <h1 className="text-base sm:text-lg md:text-xl lg:text-3xl font-semibold truncate">
               {title}
             </h1>
           ) : (

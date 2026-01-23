@@ -11,7 +11,7 @@ interface Props {
 
 export function PengumumanMainSection({informasiItems}: Props) {
   return (
-    <ShellLayer className="mt-[5vh] lg:mt-[15vh]">
+    <ShellLayer>
       <BackgroundLayer>
         <RadialBackground />
       </BackgroundLayer>

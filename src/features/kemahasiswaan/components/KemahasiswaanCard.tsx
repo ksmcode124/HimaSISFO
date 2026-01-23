@@ -16,22 +16,19 @@ export function KemahasiswaanCard({ data, active, device }: KemahasiswaanCardPro
       className={cn(
         "h-full w-full flex flex-col rounded-lg overflow-hidden",
         active
-          ? "bg-transparent"
-          : "bg-gradient-to-r from-[#456882] to-[#1B3C53] text-white"
+          ? "bg-transparent px-2.5 pt-1.5 pb-2.5"
+          : "bg-gradient-to-r from-[#456882] to-[#1B3C53] text-white px-5 py-15"
       )}
     >
       <div
         className={cn(
-          "flex flex-col flex-1 gap-2 sm:gap-3 px-4 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6",
-          active ? "justify-start" : "justify-center"
+          "flex flex-col flex-1 gap-2 sm:gap-3 lg:px-5 lg:py-2.5",
+          active ? "justify-start" : "justify-center "
         )}
       >
         <motion.p
           className={cn(
-            "font-semibold origin-left",
-            device === 'mobile' && "text-sm",
-            device === 'tablet' && "text-base",
-            device === 'desktop' && "text-lg"
+            "font-semibold origin-left text-xs sm:text-sm md:text-base lg:text-xl",
           )}
           transition={{ duration: 0.45, ease: "easeOut" }}
         >
@@ -50,10 +47,8 @@ export function KemahasiswaanCard({ data, active, device }: KemahasiswaanCardPro
                 ease: "easeOut",
               }}
               className={cn(
-                "line-clamp-5 text-justify",
-                device === 'mobile' && "text-xs",
-                device === 'tablet' && "text-sm line-clamp-2",
-                device === 'desktop' && "text-base"
+                "line-clamp-5 text-justify text-3xs sm:text-2xs md:text-xs lg:text-base 2xl:text-base",
+                device === 'tablet' && " line-clamp-2",
               )}
             >
               {data.description}
@@ -76,9 +71,7 @@ export function KemahasiswaanCard({ data, active, device }: KemahasiswaanCardPro
             className="grid justify-items-center w-full pb-4"
           >
             <Button variant={"hima"} className={cn(
-              device === 'mobile' && "text-xs",
-              device === 'tablet' && "text-sm",
-              device === 'desktop' && "text-base px-6"
+              "text-xs lg:text-base px-1.5 py-1 sm:px-2 sm:py-1.5 md:px-3 md:py-2 lg:px-5 lg:py-4 2xl:px-6 2xl:py-5",
             )} asChild>
               <Link href={`/kemahasiswaan/${data.id}`}>
                 Selengkapnya ➔

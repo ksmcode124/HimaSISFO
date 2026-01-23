@@ -24,7 +24,7 @@ export function ProsesAkademikCard({ title, onClick, active }: Props) {
         `}
       >
         <CardHeader className="px-4 h-full flex flex-col">
-          <CardTitle className="text-xs sm:text-sm md:text-base font-medium line-clamp-1">
+          <CardTitle className="text-3xs sm:text-2xs md:text-xs lg:text-sm font-medium line-clamp-1">
             {title}
           </CardTitle>
         </CardHeader>

@@ -64,6 +64,7 @@ function VerticalAccordionItem({ item }: { item: ItemDataJSON }) {
         writingMode= "vertical-btt"
         className="
           px-4 py-6
+          text-3xs sm:text-xs md:text-base lg:text-xl
           text-white
           w-full
           flex-row

@@ -16,7 +16,7 @@ export function WisudaFlipCard({ item, setSelectedId }: Props) {
       className="w-full aspect-square lg:aspect-4/3 rounded-xl shadow-md overflow-hidden relative"
       front={
         <>
-          <h3 className="text-sm sm:text-base lg:text-lg text-center font-semibold transition-transform duration-500 group-hover:-translate-y-2">
+          <h3 className="   text-center font-semibold transition-transform duration-500 group-hover:-translate-y-2">
             {item.title}
           </h3>
           <FlipHorizontal className="absolute bottom-4 left-4 text-[#BCCCDC]" />
@@ -33,10 +33,10 @@ export function WisudaFlipCard({ item, setSelectedId }: Props) {
         <>
           <div className="flex flex-col h-full relative w-full">
             <div className="sticky top-0 z-10 py-2 w-full">
-              <h3 className="font-semibold text-center text-xs">{item.title}</h3>
+              <h3 className="font-semibold text-center ">{item.title}</h3>
             </div>
 
-            <div className="flex-1 overflow-y-auto text-xs pr-1 w-full">
+            <div className="flex-1 overflow-y-auto  pr-1 w-full">
               <ContentRenderer content={item.content as ContentBlock[]} />
             </div>
           </div>

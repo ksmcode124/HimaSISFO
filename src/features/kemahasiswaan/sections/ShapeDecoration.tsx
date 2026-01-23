@@ -10,7 +10,7 @@ export function ShapeDecoration({
     <div
       className={cn(
         "relative pointer-events-none select-none",
-        "w-60 sm:w-[320px] md:w-100 lg:w-130",
+        "w-61.25 sm:w-80 lg:110 lg:w-170",
         "aspect-5/1",
         position === "top-right" && [
           "sm:hidden self-end -right-10 md:-right-15 lg:-right-20",
