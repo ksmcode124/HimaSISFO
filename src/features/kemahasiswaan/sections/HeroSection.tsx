@@ -19,14 +19,13 @@ export function HeroSection({ data }: HeroSectionProps) {
 
   return (
     <ShellLayer>
-      <BackgroundLayer>
-        <Image
-          src="/assets/kemahasiswaan/bg-hero.webp"
-          alt=""
-          fill
-          className="object-cover"
-          priority
-        />
+      <BackgroundLayer
+        className="
+          bg-[url('/assets/kemahasiswaan/bg-hero.webp')]
+          bg-cover
+          bg-center
+        "
+      >
       </BackgroundLayer>
 
       <ContentLayer className={cn(minHeightClass, "relative flex flex-col")}>
@@ -43,15 +42,13 @@ export function HeroSection({ data }: HeroSectionProps) {
 
         <PitaDecoration />
       </ContentLayer>
-
-
     </ShellLayer>
   )
 }
 
 function PitaDecoration() {
   return (
-    <div className="absolute -bottom-[20%] left-0 z-5 w-full aspect-5/1 pointer-events-none">
+    <div className="absolute bottom-[5%] max-sm:bottom-0 lg:-bottom-[20%] left-0 z-5 w-full aspect-5/1 pointer-events-none">
       <Image
         src="/assets/kemahasiswaan/decoration-pita.webp"
         alt=""

@@ -3,7 +3,7 @@ import React from "react";
 import clsx from "clsx";
 
 type LayerProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
 };
 export function BackgroundLayer({ children, className }: LayerProps) {

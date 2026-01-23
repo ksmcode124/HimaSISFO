@@ -1,35 +1,34 @@
 import Image from "next/image"
+import { cn } from "@/lib/utils"
 
 export function ShapeDecoration({
   position,
 }: {
   position: "top-right" | "bottom-left"
 }) {
-  const className =
-    position === "top-right"
-      ? `
-        block absolute right-0
-        w-70 sm:w-120 md:w-150 lg:w-200
-        aspect-[5/1]
-        rotate-180
-        translate-x-2 sm:translate-x-4 md:translate-x-6 lg:translate-x-[13%]
-        top-0
-      `
-      : `
-        absolute bottom-0
-        w-70 sm:w-120 md:w-150 lg:w-200
-        aspect-[5/1]
-        translate-x-[-5%] sm:translate-x-[-8%] md:translate-x-[-10%] lg:translate-x-[-13%]
-        translate-y-[-10%] sm:translate-y-[-15%] md:translate-y-[-20%] lg:translate-y-[-30%]
-      `
-
   return (
-    <div className={className}>
+    <div
+      className={cn(
+        "relative pointer-events-none select-none",
+        "w-60 sm:w-[320px] md:w-100 lg:w-130",
+        "aspect-5/1",
+        position === "top-right" && [
+          "sm:hidden self-end -right-10 md:-right-15 lg:-right-20",
+          "rotate-180",
+          "mb-6 sm:mb-8 md:mb-10",
+        ],
+        position === "bottom-left" && [
+          "self-start -left-10 md:-left-15 lg:-left-20 ",
+          "mt-6 sm:mt-8 md:mt-10",
+        ]
+      )}
+    >
       <Image
         src="/assets/kemahasiswaan/decoration-cloud-2.webp"
         alt=""
-        fill
         className="object-contain"
+        priority
+        fill
       />
     </div>
   )
