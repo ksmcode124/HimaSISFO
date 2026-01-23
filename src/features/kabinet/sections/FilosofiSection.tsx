@@ -4,7 +4,8 @@ import { Pita } from "../components/KabinetOrnaments";
 import TentangCard from "../components/TentangCard";
 import VisiMisiAccordion from "../components/VisiMisiAccordion";
 import VisiMisiMobile from "../components/VisiMisiMobile";
-import InteractiveLogo from "../components/InteractiveLogo";
+import LogoGeloraHarmoni from "../components/LogoGeloraHarmoni";
+import LogoAksayapatra from "../components/LogoAksayapatra";
 import React, { useState } from "react";
 import { Kabinet } from "../types";
 
@@ -26,7 +27,6 @@ export default function FilosofiSection({ data }: FilosofiProps) {
       };
     });
 
-  // ubah string jadi array berdasar penomoran
   const visiArray = (data.visi || "")
     .split(/ \d\. /)
     .map((item) => item.replace(/^\d\. /, "").trim())
@@ -51,7 +51,8 @@ export default function FilosofiSection({ data }: FilosofiProps) {
           {/* LOGO */}
           <div className="flex justify-center items-center lg:order-2 w-full">
             <div className="relative w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80 xl:w-md xl:h-112 2xl:w-137 2xl:h-137">
-              <InteractiveLogo/>
+              {data.nama_kabinet === "Gelora Harmoni" && <LogoGeloraHarmoni />}
+              {data.nama_kabinet === "Aksayapatra" && <LogoAksayapatra />}
             </div>
           </div>
 

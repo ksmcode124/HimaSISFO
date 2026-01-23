@@ -9,6 +9,7 @@ export { default as DepartemenHeroSection } from './sections/DepartemenHeroSecti
 export { default as ProkerSection } from "./sections/ProkerSection";
 export { default as StaffSection } from './sections/StaffSection';
 export { default as BreadcrumbSection } from  './sections/BreadcrumbSection';
+export { default as ComingSoonSection } from  './sections/ComingSoonSection';
 export { default as PhotoSlideshowMobile } from  './components/PhotoSlideshowMobile';
 export { default as TentangCard } from  './components/TentangCard';
 export { default as VisiMisiAccordion } from  './components/VisiMisiAccordion';
@@ -19,5 +20,7 @@ export { default as DepartemenCard } from  './components/DepartemenCard';
 export { default as ProkerCard } from  './components/ProkerCard';
 export { default as CarouselProker } from  './components/CarouselProker';
 export { default as StaffCard } from  './components/StaffCard';
+export { default as LogoGeloraHarmoni } from  './components/LogoGeloraHarmoni';
+export { default as LogoAksayapatra } from  './components/LogoAksayapatra';
 export * from './components/KabinetOrnaments';
 export type * from './types';
