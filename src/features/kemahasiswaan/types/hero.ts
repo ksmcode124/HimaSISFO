@@ -1,4 +1,4 @@
-import { BreadcrumbItemData } from "@/components/ui/Breadcrumb"
+import { BreadcrumbItemData } from "@/components/ui/breadcrumb"
 
 export interface HeroData {
   title: string

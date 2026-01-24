@@ -2,7 +2,7 @@ import HeroBeranda from "@/components/beranda/hero";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { ScaleCarousel } from "@/components/ui/scale-carousel";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/cn";
 import { ArrowRight, Bookmark, Calendar } from "lucide-react";
 
 const data = {

@@ -8,7 +8,7 @@ import {
 import { HeroData } from "../types/hero"
 import { useHeroSection } from "../hooks/useHeroSection"
 import { HeroView } from "../components/HeroView"
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils/cn"
 
 interface HeroSectionProps {
   data: HeroData

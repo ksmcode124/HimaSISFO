@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils/cn"
 import { CardProps } from "../types/ui"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"

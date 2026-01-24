@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, PanInfo } from "framer-motion";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/cn";
 import kabinetDataRaw from "../data/kabinet.json";
 import ProkerCard from "@/features/kabinet/components/ProkerCard";
 

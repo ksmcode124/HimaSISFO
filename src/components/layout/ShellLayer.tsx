@@ -1,5 +1,5 @@
 // components/layout/ShellLayer.tsx
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/cn";
 import React from "react";
 
 export function ShellLayer({ children, className }: { children: React.ReactNode, className?: string }) {

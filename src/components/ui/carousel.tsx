@@ -6,7 +6,7 @@ import useEmblaCarousel, {
 } from "embla-carousel-react"
 import { Triangle } from "lucide-react"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils/cn"
 import { Button } from "@/components/ui/button"
 import { Glass } from "./Glass"
 

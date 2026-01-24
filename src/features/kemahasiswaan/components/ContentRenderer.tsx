@@ -2,7 +2,7 @@
 import React from "react"
 import { ListRenderer } from "./ListRenderer"
 import { ContentBlock } from "../types/content"
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils/cn"
 
 interface ContentRendererProps {
   content: ContentBlock[]

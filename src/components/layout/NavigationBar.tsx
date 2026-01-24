@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { NavItem } from '@/features/navigation/'
 import Image from 'next/image'
-import { LiquidGlass } from '@liquidglass/react'
 import { Glass } from '../ui/Glass'
 
 const pillStyle = "bg-neutral-100 rounded-2xl p-1 shadow-[0_4px_10px_var(--color-neutral-400)]"

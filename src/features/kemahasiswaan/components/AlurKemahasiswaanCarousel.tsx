@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules'
 import type { Swiper as SwiperType } from 'swiper'
 import { motion } from "framer-motion"
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils/cn"
 import { Glass } from "@/components/ui/Glass"
 import { KemahasiswaanCard } from "./KemahasiswaanCard"
 import { Triangle } from "lucide-react"

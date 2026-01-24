@@ -14,7 +14,7 @@ import {
 
 import { BlankoItem } from "../types/ui"
 import Link from "next/link"
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils/cn"
 import { Download } from "lucide-react"
 import { useCarouselSync } from "../hooks/useCarouselSync"
 import { motion } from "framer-motion"

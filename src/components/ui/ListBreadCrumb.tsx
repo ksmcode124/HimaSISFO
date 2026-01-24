@@ -7,9 +7,9 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator,
-} from "@/components/ui/Breadcrumb"
+} from "@/components/ui/breadcrumb"
 import { Fragment } from "react"
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils/cn"
 
 export type BreadcrumbItem = {
   display: string,
