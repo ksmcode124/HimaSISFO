@@ -2,14 +2,16 @@
 import React from "react"
 import { ListRenderer } from "./ListRenderer"
 import { ContentBlock } from "../types/content"
+import { cn } from "@/lib/utils"
 
 interface ContentRendererProps {
   content: ContentBlock[]
+  className?: string
 }
 
-export function ContentRenderer({ content }: ContentRendererProps) {
+export function ContentRenderer({ content, className }: ContentRendererProps) {
   return (
-    <div className="space-y-4 w-full">
+    <div className={cn("w-full", className)}>
       {content.map((block, index) => {
         switch (block.type) {
           case "list":

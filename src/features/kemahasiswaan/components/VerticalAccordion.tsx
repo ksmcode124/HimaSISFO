@@ -20,7 +20,6 @@ export function VerticalAccordion({ items }: VerticalAccordionProps) {
     <Accordion
       type="single"
       defaultValue={items[0]?.id}
-      collapsible
       className="w-full flex flex-col justify-center lg:flex-row gap-4 py-10"
     >
       {items.map((item) => (
@@ -38,7 +37,7 @@ function VerticalAccordionItem({ item }: { item: ItemDataJSON }) {
       className="group flex flex-col sm:max-h-150 overflow-hidden p-0 max-w-170"
     >       
       {/* Content */}
-      <AccordionContent className="overflow-hidden p-0 translate-y-5">
+      <AccordionContent>
         <AnimatePresence initial={false}>
           <motion.div
             key={item.id}
@@ -50,9 +49,11 @@ function VerticalAccordionItem({ item }: { item: ItemDataJSON }) {
           >
             <Glass
               borderRadius={16}
-              className="w-full min-h-80 lg:min-h-150 border border-neutral-400 rounded-2xl flex flex-col"
+              className="flex w-full min-h-90 px-10 pt-1.5 pb-2.5 lg:min-h-150 border border-neutral-400 rounded-2xl"
             >
-              <ContentRenderer content={item.content} />
+              <div className="h-[70%] p-5">
+                <ContentRenderer content={item.content} className="text-3xs sm:text-2xs md:text-xs" />
+              </div>
             </Glass>
           </motion.div>
         </AnimatePresence>
@@ -64,7 +65,7 @@ function VerticalAccordionItem({ item }: { item: ItemDataJSON }) {
         writingMode= "vertical-btt"
         className="
           px-4 py-6
-          text-3xs sm:text-xs md:text-base lg:text-xl
+          text-3xs sm:text-xs md:text-base lg:text-lg
           text-white
           w-full
           flex-row
