@@ -21,33 +21,31 @@ const chartConfig = {
 
 export function DashboardChart({ data }: DashboardChartProps) {
   return (
-    <div className="max-w-7xl mx-auto rounded-xl border p-4">
-      <ChartContainer config={chartConfig} className="w-full">
-        <BarChart accessibilityLayer data={data}>
-          <defs>
-            <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#102F41" />
-              <stop offset="100%" stopColor="#DBFCFF" />
-            </linearGradient>
-          </defs>
+    <ChartContainer config={chartConfig} className="w-full">
+      <BarChart accessibilityLayer data={data}>
+        <defs>
+          <linearGradient id="barGradient" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0%" stopColor="#8DDDFF" />
+            <stop offset="100%" stopColor="#3385FF" />
+          </linearGradient>
+        </defs>
 
-          <CartesianGrid vertical={false} />
+        <CartesianGrid vertical={false} />
 
-          <YAxis tickLine={false} axisLine={false} tickMargin={10} />
+        <YAxis tickLine={false} axisLine={false} tickMargin={10} />
 
-          <XAxis
-            dataKey="kabinet"
-            interval={0}
-            textAnchor="middle"
-            tickLine={false}
-            axisLine={false}
-          />
+        <XAxis
+          dataKey="kabinet"
+          interval={0}
+          textAnchor="middle"
+          tickLine={false}
+          axisLine={false}
+        />
 
-          <ChartTooltip content={<ChartTooltipContent />} />
+        <ChartTooltip content={<ChartTooltipContent />} />
 
-          <Bar dataKey="event" fill="url(#barGradient)" radius={4} />
-        </BarChart>
-      </ChartContainer>
-    </div>
+        <Bar dataKey="event" fill="url(#barGradient)" radius={4} />
+      </BarChart>
+    </ChartContainer>
   );
 }

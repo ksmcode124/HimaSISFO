@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { ArrowUpDown, ChevronDown, Filter } from 'lucide-react';
 import { Table } from '@tanstack/react-table';
+import { useEffect } from 'react';
 
 export type FilterMeta = {
   filterable?: boolean;
@@ -38,9 +39,19 @@ export function TableToolbar<TData>({
       const meta = column.columnDef.meta as FilterMeta | undefined;
       return meta?.filterable === true && meta.filterType === 'checkbox';
     });
+    
+    useEffect(() => {
+      if (table.getState().sorting.length === 0) {
+        const firstColumn = table.getAllColumns()[0];
+        if (firstColumn.getCanSort()) {
+          table.setSorting([{ id: firstColumn.id, desc: false }]);
+        }
+      }
+    }, [table]);
+
 
   return (
-    <div className="bg-muted/40 flex flex-col gap-4 border-b px-6 py-5">
+    <div className="flex flex-col gap-4 border-b border-[#939393] px-6 py-5">
       {/* TOP ROW */}
       <div className="flex items-center justify-between gap-6">
         {/* GLOBAL SEARCH */}
@@ -48,14 +59,14 @@ export function TableToolbar<TData>({
           placeholder="Search..."
           value={globalFilter}
           onChange={(e) => setGlobalFilter(e.target.value)}
-          className="bg-muted h-12 max-w-md text-base"
+          className="bg-[#F2F2F2] border-2 border-[#BFBFBF] h-12 max-w-md text-base"
         />
 
         <div className="flex gap-3">
           {/* FILTER */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="h-11 px-5 gap-2">
+              <Button variant="ghost" className="h-11 px-5 gap-2">
                 <Filter />
                 Filter
               </Button>
@@ -113,7 +124,7 @@ export function TableToolbar<TData>({
           {/* SORT BY */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="h-11 px-5 gap-2">
+              <Button variant="ghost" className="h-11 px-5 gap-2">
                 <ArrowUpDown />
                   Sort by
                 <ChevronDown />
@@ -141,8 +152,8 @@ export function TableToolbar<TData>({
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
-                variant="outline"
-                className="h-11 px-5 min-w-32"
+                variant="ghost"
+                className="h-11 px-5 min-w-32 w-80 bg-none border-[#BFBFBF] border"
                 disabled={!activeSort}
               >
                 {activeSort?.desc ? 'Z–A' : 'A–Z'}

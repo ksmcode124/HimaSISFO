@@ -11,6 +11,8 @@ import { Kabinet } from '@/lib/types/interface';
 import { kegiatanColumns } from '@/features/admin/components/columns/kegiatan-columns';
 import { kabinetColumns } from '@/features/admin/components/columns/kabinet-columns';
 import { DetailModal } from '@/features/admin/components/DetailModal';
+import { FormModal } from '@/features/admin/components/FormModal';
+import { cabinetEditFields } from '@/features/admin/components/forms/kabinet-form-config';
 
 export default function KabinetPage() {
   const { data, isLoading, saveData, deleteData } = useKabinet();
@@ -49,6 +51,27 @@ export default function KabinetPage() {
           onDelete: onDeleteRequest,
         })}
       />
+
+      {/* Edit Modal */}
+      {/* <FormModal
+        open={modal.isEdit}
+        onOpenChange={(v: boolean) => !v && modal.close()}
+        title="Edit Kabinet"
+        fields={cabinetEditFields}
+        onSubmit={saveData}
+        submitLabel="Update"
+        schema={}
+      /> */}
+      
+      {/* <FormModal
+        open={isCreateOpen}
+        onOpenChange={setIsCreateOpen}
+        title="Buat Kabinet Baru"
+        fields={kabinetCreateFields}
+        schema={createKabinetSchema}
+        onSubmit={handleCreate}
+        submitLabel="Buat Kabinet"
+      /> */}
 
       <DetailModal
         open={modal.isView}

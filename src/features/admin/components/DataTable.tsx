@@ -23,13 +23,13 @@ export function DataTable<TData>({
   return (
     <div className="overflow-auto">
       <UiTable>
-        <TableHeader className="bg-muted/60">
+        <TableHeader className="bg-[#EAEAEA]">
           {table.getHeaderGroups().map((hg) => (
-            <TableRow key={hg.id} className="[&>*:last-child]:text-center">
+            <TableRow key={hg.id} className="[&>*:last-child]:text-center border-[#939393]">
               {hg.headers.map((header) => (
                 <TableHead
                   key={header.id}
-                  className="px-5 py-4 text-lg font-bold uppercase"
+                  className="px-5 py-4 text-sm font-regular uppercase text-black"
                 >
                   {flexRender(
                     header.column.columnDef.header,
@@ -44,7 +44,7 @@ export function DataTable<TData>({
         <TableBody>
           {rows.length ? (
             rows.map((row) => (
-              <TableRow key={row.id}>
+              <TableRow key={row.id} className='border-[#939393]'>
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id} className="px-5 py-4">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -53,7 +53,7 @@ export function DataTable<TData>({
               </TableRow>
             ))
           ) : (
-            <TableRow>
+            <TableRow className='border-[#939393]'>
               <TableCell colSpan={columnsLength} className="h-24 text-center">
                 Tidak ada data
               </TableCell>

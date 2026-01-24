@@ -26,7 +26,7 @@ export function HeaderSection({
   handleTambah,
 }: HeaderSectionProps) {
   return (
-    <div className="mb-10 flex w-full flex-col gap-5 uppercase">
+    <div className="mb-10 flex w-full flex-col gap-5 uppercase text-2xs font-semibold px-8">
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -58,10 +58,10 @@ export function HeaderSection({
       </Breadcrumb>
 
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold italic">{title}</h1>
+        <h1 className="text-lg font-bold italic">{title}</h1>
 
-        {handleTambah && (
-          <Button onClick={handleTambah}>
+        {!handleTambah && (
+          <Button variant={"ghost"} onClick={handleTambah} className='text-[#3385FF] text-sm font-semibold'>
             <PlusCircle />
             Tambah Baru
           </Button>

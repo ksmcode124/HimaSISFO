@@ -15,49 +15,41 @@ import { cn } from '@/lib/utils/cn';
 import { HeaderSection } from '@/features/admin/components/HeaderSection';
 import { Spinner } from '@/components/ui/spinner';
 
+const fetchSummary = async () => {
+  // TODO: Replace with real API call
+  return [
+    { title: 'Komunitas', count: 5, link: '/admin/komunitas', icon: Handshake },
+    { title: 'Kabinet', count: 8, link: '/admin/kabinet', icon: Users },
+    { title: 'Event', count: 30, link: '/admin/event', icon: Calendar },
+  ];
+};
+
+const fetchChartData = async () => {
+  // TODO: Replace with real API call
+  return [
+    { kabinet: 'Aksayapatra', event: 12 },
+    { kabinet: 'Gelora Harmoni', event: 8 },
+  ];
+};
+
+
 export default function AdminPage() {
-  const [chartData, setChartData] = React.useState<
-    { kabinet: string; event: number }[]
+  const [summary, setSummary] = React.useState<
+    { title: string; count: number; link: string; icon: React.ElementType }[]
   >([]);
+  const [chartData, setChartData] = React.useState<{ kabinet: string; event: number }[]>([]);
   const [isLoading, setIsLoading] = React.useState(true);
 
-  const [summary, setSummary] = React.useState([
-    {
-      title: 'Komunitas',
-      icon: Handshake,
-      count: 5,
-      link: '/admin/komunitas',
-    },
-    {
-      title: 'Kabinet',
-      icon: Users,
-      count: 8,
-      link: '/admin/kabinet',
-    },
-    {
-      title: 'event',
-      icon: Calendar,
-      count: 30,
-      link: '/admin/event',
-    },
-  ]);
-
   React.useEffect(() => {
-    const loadSummary = async () => {
+    const loadData = async () => {
       setIsLoading(true);
       try {
-        // TODO: API should be called here & calculated the length of each API calls then set to chartData
-        const chartDataMock = [
-          {
-            kabinet: "aksayapatra",
-            event: 30
-          },
-          {
-            kabinet: "gelora harmoni",
-            event: 30
-          },
-        ]
-        setChartData(chartDataMock);
+        const [summaryData, chartDataData] = await Promise.all([
+          fetchSummary(),
+          fetchChartData(),
+        ]);
+        setSummary(summaryData);
+        setChartData(chartDataData);
       } catch (err) {
         console.error(err);
       } finally {
@@ -65,44 +57,42 @@ export default function AdminPage() {
       }
     };
 
-    loadSummary();
+    loadData();
   }, []);
 
   if (isLoading) {
-    return <Spinner className="size-16" />; // <-- Loading keseluruhan page
+    return (
+      <div className='w-full h-full flex items-center justify-center'>
+        <Spinner className="size-24" />;
+      </div>
+    )
   }
 
   return (
     <>
-      <HeaderSection 
-        breadcrumbs={[
-          {label:"Home", href:"/admin"}
-        ]}
-        title="Dashboard Admin HIMASISFO" />
+      <HeaderSection
+        breadcrumbs={[{ label: 'Home', href: '/admin' }]}
+        title="Dashboard Admin HIMASISFO"
+      />
 
-      <div className="card flex gap-5 rounded-xl border border-black px-6 py-4 text-white shadow-lg">
+      <div className="flex gap-5 rounded-xl border border-black px-6 py-4 shadow-lg">
         {summary.map((item, index) => (
           <Card
             key={index}
             className={cn(
-              'flex w-full flex-col justify-between p-0 pt-8 text-center shadow-md bg-accent',
+              'flex w-full flex-col justify-between p-0 pt-8 text-center shadow-md bg-linear-to-t from-columbia-blue to-[#3385FF]'
             )}
           >
             <CardHeader>
-              <CardTitle className="flex items-center justify-center gap-2 text-2xl text-white">
+              <CardTitle className="flex items-center justify-center gap-2 text-lg font-semibold text-white">
                 <item.icon /> {item.title}
               </CardTitle>
             </CardHeader>
             <CardContent className="py-6">
-              <span className="text-5xl font-bold text-white">
-                {item.count}
-              </span>
+              <span className="text-5xl font-bold text-white">{item.count}</span>
             </CardContent>
-            <CardFooter className="h-full bg-black/40 text-white">
-              <Link
-                className="flex w-full items-center justify-center gap-2"
-                href={item.link}
-              >
+            <CardFooter className="h-full bg-white rounded-b-xl">
+              <Link className="flex w-full items-center justify-center gap-2" href={item.link}>
                 More Info <ChevronRight />
               </Link>
             </CardFooter>
@@ -110,7 +100,7 @@ export default function AdminPage() {
         ))}
       </div>
 
-      <div className="mt-6">
+      <div className="mx-auto mt-6 max-w-7xl w-full rounded-xl border p-4">
         <DashboardChart data={chartData} />
       </div>
     </>

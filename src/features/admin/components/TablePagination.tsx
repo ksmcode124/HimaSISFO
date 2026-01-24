@@ -30,8 +30,8 @@ export function TablePagination({
 }: PaginationProps) {
   return (
     <div className="flex items-center justify-between gap-4 p-4">
-      <div className="flex items-center gap-2 text-sm">
-        Rows per page
+      <div className="flex items-center gap-2 text-xs">
+        Show
         <Select
           value={String(pageSize)}
           onValueChange={(v) => {
@@ -53,7 +53,7 @@ export function TablePagination({
       </div>
 
       <div className="flex items-center gap-6">
-        <span className="text-sm">
+        <span className="text-xs">
           {total === 0 ? 0 : `${start + 1}-${Math.min(end, total)}`} of {total}
         </span>
 

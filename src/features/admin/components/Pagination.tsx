@@ -30,7 +30,7 @@ export function Pagination({
       <button
         onClick={() => onPageChange(1)}
         disabled={currentPage === 1}
-        className="p-2 text-gray-500 hover:text-blue-500 disabled:opacity-50"
+        className="p-2 text-neutral-200 hover:text-[#3385FF] disabled:opacity-50"
       >
         <ChevronsLeft className="h-8 w-8" />
       </button>
@@ -39,14 +39,14 @@ export function Pagination({
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="p-2 text-gray-500 hover:text-blue-500 disabled:opacity-50"
+        className="p-2 text-neutral-200 hover:text-[#3385FF] disabled:opacity-50"
       >
         <ChevronLeft className="h-8 w-8" />
       </button>
 
       {pages.map((page, idx) =>
         page === 'ellipsis' ? (
-          <span key={`e-${idx}`} className="px-2 text-gray-400">
+          <span key={`e-${idx}`} className="px-2 text-[#BFBFBF]">
             …
           </span>
         ) : (
@@ -55,8 +55,8 @@ export function Pagination({
             onClick={() => onPageChange(page)}
             className={`rounded-md px-6 py-2 transition ${
               page === currentPage
-                ? 'bg-blue-500 text-white shadow'
-                : 'hover:bg-gray-100'
+                ? 'border-[#3385FF] border-2 text-[#3385FF] shadow'
+                : 'hover:bg-[#3385FF] text-white'
             }`}
           >
             {page}
@@ -68,7 +68,7 @@ export function Pagination({
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="p-2 text-gray-500 hover:text-blue-500 disabled:opacity-50"
+        className="p-2 text-neutral-400 hover:text-[#3385FF] disabled:opacity-50"
       >
         <ChevronRight className="h-8 w-8" />
       </button>
@@ -77,7 +77,7 @@ export function Pagination({
       <button
         onClick={() => onPageChange(totalPages)}
         disabled={currentPage === totalPages}
-        className="p-2 text-gray-500 hover:text-blue-500 disabled:opacity-50"
+        className="p-2 text-neutral-400 hover:text-[#3385FF] disabled:opacity-50"
       >
         <ChevronsRight className="h-8 w-8" />
       </button>

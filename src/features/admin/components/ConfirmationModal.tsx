@@ -20,21 +20,6 @@ const confirmationContent = {
   },
 };
 
-const iconVariants = cva(
-  'flex h-14 w-14 items-center justify-center rounded-full',
-  {
-    variants: {
-      variant: {
-        save: 'bg-blue-100 text-blue-600',
-        delete: 'bg-red-100 text-red-600',
-      },
-    },
-    defaultVariants: {
-      variant: 'delete',
-    },
-  },
-);
-
 type ConfirmVariant = 'save' | 'delete'
 
 const confirmToButtonVariant: Record<ConfirmVariant, 
@@ -68,13 +53,14 @@ export function ConfirmationModal({
       title={content.title}
       footer={
         <>
-          <Button variant="outline" onClick={() => onOpenChange(false)}>
+          <Button variant="outline" onClick={() => onOpenChange(false)} className='text-base font-semibold'>
             Cancel
           </Button>
           <Button
             variant={confirmToButtonVariant[variant]}
             onClick={handleConfirm}
             disabled={loading}
+            className='text-base font-semibold'
           >
             {loading ? content.loadingText : content.confirmText}
           </Button>
@@ -83,19 +69,19 @@ export function ConfirmationModal({
     >
       <div className="flex flex-col items-center gap-4 text-center">
         {/* ICON */}
-        <div className={iconVariants({ variant })}>
+        <div className="text-black">
           {variant === 'delete' ? (
-            <Trash2 className="h-7 w-7" />
+            <Trash2 className="size-10" />
           ) : (
-            <Info className="h-7 w-7" />
+            <Info className="size-10" />
           )}
         </div>
 
         {/* TITLE */}
-        <h2 className="text-lg font-semibold">{content.title}</h2>
+        <h2 className="text-sm font-bold">{content.title}</h2>
 
         {/* DESCRIPTION */}
-        <p className="text-sm text-muted-foreground max-w-sm">
+        <p className="text-xs max-w-sm">
           {content.description}
         </p>
       </div>

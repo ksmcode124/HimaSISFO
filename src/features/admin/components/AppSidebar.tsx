@@ -69,16 +69,16 @@ export function AppSidebar() {
   };
 
   return (
-    <Sidebar className="flex h-screen flex-col bg-[#102F41] py-10 text-white">
-      <SidebarHeader className="bg-[#102F41]">
+    <Sidebar className="flex h-screen flex-col bg-linear-to-t from-[#8DDDFF] to-[#3385FF] py-10 text-white">
+      <SidebarHeader className="">
         <div className="flex items-center justify-center gap-x-3">
           <div className="relative aspect-square h-10">
             <Image priority fill src={'/assets/shared/logos/logo-himasisfo.webp'} alt={''} />
           </div>
-          <p className="text-2xl font-bold italic">DASHBOARD</p>
+          <p className="text-xl font-bold">DASHBOARD</p>
         </div>
       </SidebarHeader>
-      <SidebarContent className="bg-[#102F41] px-5 py-10">
+      <SidebarContent className="px-5 py-10">
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu className="flex h-full flex-col gap-y-10">
@@ -86,8 +86,8 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <a href={item.url}>
-                      <item.icon />
-                      <span className="text-lg">{item.title}</span>
+                      <item.icon className='size-8 stroke-2'/>
+                      <span className=" font-semibold text-sm">{item.title}</span>
                     </a>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -96,14 +96,14 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="bg-[#102F41] px-5 py-20">
+      <SidebarFooter className="px-5 py-20">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
               onClick={handleLogout}
-              className="flex cursor-pointer items-center gap-3 text-xl"
+              className="flex cursor-pointer items-center gap-3 text-lg text-[#FF5549] font-bold"
             >
-              <LogOut />
+              <LogOut className='size-24'/>
               <span>Keluar</span>
             </SidebarMenuButton>
           </SidebarMenuItem>

@@ -15,7 +15,7 @@ export function kabinetColumns({
   onDelete,
 }: ColumnActions): ColumnDef<AdminKabinetRow>[] {
   return [
-    { accessorKey: 'id', header: 'ID Kabinet' },
+    { accessorKey: 'id', header: 'ID' },
     { accessorKey: 'tahun_kerja', header: 'Tahun' },
     { accessorKey: 'nama_kabinet', header: 'Nama Kabinet' },
     { accessorKey: 'logo', header: 'Logo'},
@@ -34,7 +34,7 @@ export function kabinetColumns({
     },
     {
       id: 'actions',
-      header: 'Aksi',
+      header: 'Actions',
       enableSorting: false,
       cell: ({ row }) => {
         const data = row.original;

@@ -18,7 +18,7 @@ export function AdminTable<TData>({
   const state = useTable(data, columns);
 
   return (
-    <div className="grid h-[80vh] grid-rows-[auto_1fr_auto] rounded-xl border">
+    <div className="grid h-[80vh] grid-rows-[auto_1fr_auto] rounded-xl border border-[#939393]">
       <TableToolbar {...state} />
       <DataTable
         table={state.table}

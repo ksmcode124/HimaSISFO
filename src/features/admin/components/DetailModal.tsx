@@ -42,10 +42,10 @@ export function DetailModal({
 }: DetailModalProps) {
   return (
     <BaseModal open={open} onOpenChange={onOpenChange} title={title} size="lg">
-      <div className="flex gap-6">
+      <div className="flex justify-center gap-12">
         {/* LEFT */}
-        <div className="w-1/3">
-          <div className="aspect-square w-full overflow-hidden rounded-lg bg-muted flex items-center justify-center">
+        <div className="w-1/2">
+          <div className="aspect-square w-full overflow-hidden rounded-lg bg-[#D9D9D9] flex items-center justify-center">
             {imageUrl ? (
               <Image
                 src={imageUrl}
@@ -54,18 +54,18 @@ export function DetailModal({
                 className="h-full w-full object-cover"
               />
             ) : (
-              <ImageIcon className="h-10 w-10 text-muted-foreground" />
+              <ImageIcon className="h-10 w-10" />
             )}
           </div>
         </div>
 
         {/* RIGHT */}
-        <div className="flex w-2/3 flex-col gap-4">
+        <div className="flex w-1/2 flex-col gap-4">
           <div>
-            <h2 className="text-xl font-semibold italic">{title}</h2>
+            <h2 className="text-lg font-semibold italic">{title}</h2>
             {subtitle && (
-              <p className="text-sm text-muted-foreground">
-                {subtitle}
+              <p className="text-2xs">
+                ({subtitle})
               </p>
             )}
           </div>
@@ -73,10 +73,10 @@ export function DetailModal({
           <div className="space-y-2">
             {meta.map((item, i) => (
               <div key={i}>
-                <p className="text-xs font-semibold uppercase text-muted-foreground">
+                <p className="text-2xs font-semibold uppercase">
                   {item.label}
                 </p>
-                <p className="text-sm">{item.value}</p>
+                <p className="text-2xs font-light">{item.value}</p>
               </div>
             ))}
           </div>
@@ -94,10 +94,10 @@ export function DetailModal({
 
       {description && (
         <div className="mt-6">
-          <p className="text-xs font-semibold uppercase text-muted-foreground mb-1">
+          <p className="text-2xs font-semibold uppercase mb-1">
             Deskripsi
           </p>
-          <p className="text-sm leading-relaxed text-muted-foreground">
+          <p className="text-2xs leading-relaxed font-light block overflow-y-auto max-h-35">
             {description}
           </p>
         </div>
