@@ -29,8 +29,8 @@ export function ListBreadcrumb({items} : {items?: BreadcrumbItem[]}) {
           <Fragment key={index}>
           <BreadcrumbItem>
             <BreadcrumbLink asChild className={cn(
-              isLast ? "text-black" : "text-[#747474]",
-              "font-semibold text-xs sm:text-sm md:text-md lg:text-xl"
+              isLast ? "text-[var(--color-cloud-burst)]" : "text-[var(--color-smokey-grey)] hover:text-[var(--color-cloud-burst)]",
+              "text-md sm:text-lg lg:text-xl font-medium"
             )}>
               <Link href={item.link}>{item.display}</Link>
             </BreadcrumbLink>

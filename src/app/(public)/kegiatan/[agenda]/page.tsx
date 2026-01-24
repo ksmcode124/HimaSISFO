@@ -14,7 +14,7 @@ export default async function Page({
         <RoundedBg align="start" />
         <RoundedBg align="end" />
       </BackgroundLayer>
-      <div className="relative flex-col items-start">
+      <div className="relative flex-col items-start mt-10">
         <EventListSection filter={bulan} />
       </div>
     </>

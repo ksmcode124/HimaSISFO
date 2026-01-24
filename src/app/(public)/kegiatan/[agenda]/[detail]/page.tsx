@@ -10,7 +10,7 @@ export default async function Page({ params }: { params: Promise<{ detail: strin
                 <RoundedBg align="start" />
                 <RoundedBg align="end" />
             </BackgroundLayer>
-            <div className="relative flex-col items-start">
+            <div className="relative flex-col items-start mt-10">
                 <EventDetailSection id={detail} />
             </div>
         </>
