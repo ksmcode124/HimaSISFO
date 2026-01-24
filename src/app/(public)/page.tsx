@@ -177,14 +177,14 @@ function Sejarah() {
   return <div className="grid lg:grid-cols-2 my-60 mx-16 gap-8 relative">
     <img className="w-full" src="/assets/beranda/sejarah.png" alt="" />
     <div className="flex flex-col gap-10">
-      <h2 className="text-4xl font-bold">SEJARAH <br /> HIMASISFO</h2>
-      <p className="text-sm text-justify">{data.sejarah.content}</p>
+      <h2 className=" font-bold">SEJARAH <br /> HIMASISFO</h2>
+      <p className=" text-justify">{data.sejarah.content}</p>
     </div>
     <div className="absolute -bottom-20 flex gap-8 justify-end w-full right-20">
       {data.statistics.map((statistic, index) => (
         <div key={index} className="rounded-4xl w-sm border-gray-400 p-10 border bg-white">
-          <span className="text-xl font-semibold">{statistic.label}</span>
-          <p className="text-sm">{statistic.description}</p>
+          <span className=" font-semibold">{statistic.label}</span>
+          <p className="">{statistic.description}</p>
         </div>
       ))}
     </div>
@@ -193,7 +193,7 @@ function Sejarah() {
 
 function Informasi() {
   return <div className="flex items-center flex-col justify-center">
-    <h2 className="text-4xl font-bold">INFORMASI TERBARU</h2>
+    <h2 className=" font-bold">INFORMASI TERBARU</h2>
     <img src="/assets/beranda/informasi-decorative.png" className="-mb-200 mt-60 w-full" alt="" />
     <div className="grid md:grid-cols-3 px-12">
       {data.informasi_terbaru.items.map((info, i) => (
@@ -201,16 +201,16 @@ function Informasi() {
           <img src="/assets/beranda/informasi.png" alt="" className="w-full aspect-3/2 bg-accent rounded-xl" />
           <div className="mt-4">
             <div className="flex gap-4">
-              <span className="text-sm flex w-fit gap-2 items-center"><Calendar />{info.date}</span>
-              <span className="text-sm flex w-fit gap-2 items-center"><Bookmark /> {info.category}</span>
+              <span className=" flex w-fit gap-2 items-center"><Calendar />{info.date}</span>
+              <span className=" flex w-fit gap-2 items-center"><Bookmark /> {info.category}</span>
             </div>
-            <h3 className="font-semibold text-4xl mt-4">{info.title}</h3>
-            <p className="text-sm mt-2 line-clamp-2">{info.excerpt}</p>
+            <h3 className="font-semibold  mt-4">{info.title}</h3>
+            <p className=" mt-2 line-clamp-2">{info.excerpt}</p>
           </div>
         </div>
       ))}
     </div>
-    <Button className="rounded-full py-4 px-5 mt-8 text-lg" size={'lg'}>Selengkapnya <ArrowRight /></Button>
+    <Button className="rounded-full py-4 px-5 mt-8 " size={'lg'}>Selengkapnya <ArrowRight /></Button>
   </div>
 }
 
@@ -243,7 +243,7 @@ function Kabinet() {
     <div className="grid lg:grid-cols-2 bg-[url('/assets/beranda/kabinet-bg.png')] bg-cover bg-center">
       <div className="flex items-center justify-center">
         <div className="w-sm text-justify">
-          <h2 className="text-2xl font-bold">KABINET GELORA HARMONI</h2>
+          <h2 className=" font-bold">KABINET GELORA HARMONI</h2>
           <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident molestias ipsam molestiae autem harum repellat recusandae laudantium nobis! Non, quod?</p>
           <Button className="mt-4 rounded-full" size={"lg"}>Selengkapnya <ArrowRight /></Button>
         </div>
@@ -279,7 +279,7 @@ function BehindTheWeb() {
 
 function Spotify() {
   return <div className="h-100 bg-black mt-50 text-white flex flex-col justify-center items-center perspective-distant">
-    <span className="text-2xl mb-4">Dengarkan Podcast Kami di</span>
+    <span className=" mb-4">Dengarkan Podcast Kami di</span>
     <Button variant="secondary">Spotify <ArrowRight /></Button>
   </div>
 }

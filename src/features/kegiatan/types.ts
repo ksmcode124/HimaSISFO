@@ -29,13 +29,13 @@ export interface SortedSingleEventsProps {
 
 export interface FindEventByIdProps {
   id: number;
-  indexedEvents: Record<string, any[]>;
+  indexedEvents: Record<string, EventCardProps[]>;
 }
 
 export interface FindEventByMonthYearProps {
   month: string;
   year: number;
-  indexedEvents: Record<string, any[]>;
+  indexedEvents: Record<string, EventCardProps[]>;
 }
 
 //data ui

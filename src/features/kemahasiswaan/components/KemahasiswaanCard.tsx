@@ -1,56 +1,86 @@
 import Link from "next/link"
-import { Card, CardAction, CardContent } from "@/components/ui/card"
 import { cn } from "@/lib/utils/cn"
 import { CardProps } from "../types/ui"
+import { motion, AnimatePresence } from "framer-motion"
+import { Button } from "@/components/ui/button"
 
-interface Props {
+interface KemahasiswaanCardProps {
   data: CardProps
   active: boolean
+  device: 'mobile' | 'tablet' | 'desktop'
 }
 
-export function KemahasiswaanCard({ data, active }: Props) {
+export function KemahasiswaanCard({ data, active, device }: KemahasiswaanCardProps) {
   return (
-    <Card
+    <div
       className={cn(
-        "h-full flex flex-col transition-[transform,opacity]",
+        "h-full w-full flex flex-col rounded-lg overflow-hidden",
         active
-          ? "scale-100 opacity-100"
-          : "scale-80 bg-linear-to-r from-[#456882] to-[#1B3C53] text-white"
+          ? "bg-transparent px-2.5 pt-1.5 pb-2.5"
+          : "bg-gradient-to-r from-[#456882] to-[#1B3C53] text-white px-5 py-15"
       )}
     >
-      <CardContent
+      <div
         className={cn(
-          "flex flex-col flex-1 gap-3 p-6",
-          active ? "justify-start" : "justify-center"
+          "flex flex-col flex-1 gap-2 sm:gap-3 px-10 py-5 lg:px-5 lg:py-2.5",
+          active ? "justify-start" : "justify-center "
         )}
       >
-        <p className={cn("font-semibold", active ? "text-md" : "text-xl")}>
-          {data.title}
-        </p>
-
-        <p
+        <motion.p
           className={cn(
-            "text-sm transition-all",
-            active ? "opacity-100 max-h-96" : "opacity-0 max-h-0 overflow-hidden"
+            "font-semibold origin-left text-xs sm:text-sm md:text-base lg:text-xl wrap-break-word",
+            !active ? "text-center px-[20%]" : ""
           )}
+          transition={{ duration: 0.45, ease: "easeOut" }}
         >
-          {data.description}
-        </p>
-      </CardContent>
+          {data.title}
+        </motion.p>
 
-      <CardAction
-        className={cn(
-          "pb-4 grid justify-items-center w-full",
-          active ? "opacity-100" : "opacity-0 pointer-events-none"
+        <AnimatePresence>
+          {active && (
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{
+                delay: 0.2,
+                duration: 0.3,
+                ease: "easeOut",
+              }}
+              className={cn(
+                "line-clamp-5 text-justify text-3xs sm:text-2xs md:text-xs lg:text-base 2xl:text-base",
+                device === 'tablet' && " line-clamp-2",
+              )}
+            >
+              {data.description}
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </div>
+
+      <AnimatePresence>
+        {active && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{
+              delay: 0.2,
+              duration: 0.3,
+              ease: "easeOut",
+            }}
+            className="grid justify-items-center w-full pb-4"
+          >
+            <Button variant={"hima"} className={cn(
+              "text-xs lg:text-base px-1.5 py-1 sm:px-2 sm:py-1.5 md:px-3 md:py-2 lg:px-5 lg:py-4 2xl:px-6 2xl:py-5",
+            )} asChild>
+              <Link href={`/kemahasiswaan/${data.id}`}>
+                Selengkapnya ➔
+              </Link>
+            </Button>
+          </motion.div>
         )}
-      >
-        <Link
-          href={`/kemahasiswaan/${data.id}`}
-          className="text-xs rounded-full border px-4 py-2 bg-linear-to-t from-[#456882] to-[#1B3C53] text-white"
-        >
-          Selengkapnya ➔
-        </Link>
-      </CardAction>
-    </Card>
+      </AnimatePresence>
+    </div>
   )
 }

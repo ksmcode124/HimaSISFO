@@ -10,9 +10,10 @@ import { CloudDecoration } from "@/components/ui/cloud-decoration";
 interface Props {
   accordionItems: ItemDataJSON[],
   itemCollectionItems: ItemDataJSON[],
+  setSelectedId: (id: string | null) => void
 }
 
-export function WisudaYudisiumMainSection({accordionItems, itemCollectionItems}: Props) {
+export function WisudaYudisiumMainSection({accordionItems, itemCollectionItems, setSelectedId}: Props) {
   return (
     <ShellLayer>
       <BackgroundLayer>
@@ -26,7 +27,7 @@ export function WisudaYudisiumMainSection({accordionItems, itemCollectionItems}:
           <ShellLayer>
             <ContentLayer className="flex flex-col items-center">
               <WisudaAccordionSection items={accordionItems} />
-              <WisudaYudisiumItemsSection items={itemCollectionItems} />
+              <WisudaYudisiumItemsSection setSelectedId={setSelectedId} items={itemCollectionItems} />
               <CloudDecoration />
             </ContentLayer>
           </ShellLayer>

@@ -18,7 +18,7 @@ export function PembayaranAccordionSection({
 
   return (
     <>
-      <div className="grid lg:grid-cols-[1fr_3fr] grid-rows-2 lg:grid-rows-1 justify-items-center items-center">
+      <div className="grid lg:grid-cols-[3fr_9fr] grid-rows-[200px_auto] gap-x-5 lg:grid-rows-1 justify-items-center items-center mb-4">
         <AccordionVisualCarousel
           items={featuredItems}
           activeIndex={activeIndex}

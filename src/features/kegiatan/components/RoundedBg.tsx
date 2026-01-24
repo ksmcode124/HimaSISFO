@@ -4,16 +4,13 @@ type Align = "start" | "end" | "center";
 
 interface RoundedBgProps {
   align?: Align;
-  scale?: number;
   className?: string;
 }
 
 export function RoundedBg({
   align = "start",
-  scale = 1,
   className,
 }: RoundedBgProps) {
-  const isEnd = align === "end";
 
   return (
     <svg

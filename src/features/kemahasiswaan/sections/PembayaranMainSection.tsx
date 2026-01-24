@@ -35,10 +35,10 @@ export function PembayaranMainSection({
       </DecorationLayer>
 
       <ContentLayer>
-        <section className="px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 2xl:px-18 mx-auto pt-30 pb-10">
+        <section className="px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 2xl:px-18 mx-auto lg:pt-30 pb-10">
           <ShellLayer>
             <ContentLayer>
-              <section className="max-w-7xl min-h-[55vh] mx-auto">
+              <section className="max-w-7xl min-h-[35vh] lg:min-h-[55vh] mx-auto">
                 <PembayaranAccordionSection
                   featuredItems={featuredItems}
                   otherItems={otherItems}

@@ -17,7 +17,7 @@ export function AccordionVisualCarousel({ items, activeIndex, onSelect }: Props)
         return (
           <button
             key={item.id}
-            onClick={() => activeIndex === index ? onSelect(-1) : onSelect(index)}
+            onClick={() => activeIndex === index ? onSelect(index) : onSelect(index)}
             className={`
               absolute inset-0
               flex items-center justify-center
@@ -58,11 +58,11 @@ function getTransform(offset: number) {
   }
 
   if (offset === -1) {
-    return "-translate-x-16 -rotate-45 scale-90 opacity-70 z-20"
+    return "-translate-x-20 -rotate-45 scale-90 opacity-70 z-20"
   }
 
   if (offset === 1) {
-    return "translate-x-16 rotate-45 scale-90 opacity-70 z-20"
+    return "translate-x-20 rotate-45 scale-90 opacity-70 z-20"
   }
 
   if (offset === -2) {

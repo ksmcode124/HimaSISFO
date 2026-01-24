@@ -1,29 +1,18 @@
-import { cn } from "@/lib/utils/cn"
-
 interface HeroViewProps {
   title: string
   subtitle: string
-  minHeightClass: string
 }
 
-export function HeroView({
-  title,
-  subtitle,
-  minHeightClass,
-}: HeroViewProps) {
+export function HeroView({ title, subtitle }: HeroViewProps) {
   return (
-    <section
-      className={cn(
-        "flex flex-col items-center justify-center px-4 sm:px-6 lg:px-20",
-        minHeightClass
-      )}
-    >
-      <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl text-center">
+    <section className="px-4 sm:px-6 lg:px-20 text-center">
+      <h2 className="font-bold font-heading text-xl sm:text-2xl md:text-3xl lg:text-5xl 2xl:text-5xl leading-tight">
         {title}
-      </h1>
-      <h2 className="font-semibold text-base sm:text-lg md:text-xl text-center mt-2 sm:mt-4">
-        {subtitle}
       </h2>
+
+      <h3 className="mt-2 sm:mt-4 font-body font-semibold text-base sm:text-lg md:text-xl lg:text-3xl 2xl:text-3xl leading-snug">
+        {subtitle}
+      </h3>
     </section>
   )
 }

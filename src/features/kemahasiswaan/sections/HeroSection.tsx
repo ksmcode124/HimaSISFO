@@ -8,6 +8,7 @@ import {
 import { HeroData } from "../types/hero"
 import { useHeroSection } from "../hooks/useHeroSection"
 import { HeroView } from "../components/HeroView"
+import { cn } from "@/lib/utils/cn"
 
 interface HeroSectionProps {
   data: HeroData
@@ -17,27 +18,27 @@ export function HeroSection({ data }: HeroSectionProps) {
   const { hasBreadcrumb, minHeightClass } = useHeroSection(data)
 
   return (
-    <ShellLayer>
-      <BackgroundLayer>
-        <Image
-          src="/assets/kemahasiswaan/bg-hero.webp"
-          alt=""
-          fill
-          className="object-cover"
-          priority
-        />
+    <ShellLayer className="z-10 mb-[3svh] md:mb-[2svh] lg:mb-[15vh]">
+      <BackgroundLayer
+        className="
+          bg-[url('/assets/kemahasiswaan/bg-hero.webp')]
+          bg-cover
+          bg-center
+        "
+      >
       </BackgroundLayer>
 
-      <ContentLayer>
+      <ContentLayer className={cn(minHeightClass, "relative flex flex-col")}>
         {hasBreadcrumb && (
           <BreadcrumbSection items={data.breadcrumbItems!} />
         )}
 
-        <HeroView
-          title={data.title}
-          subtitle={data.subtitle}
-          minHeightClass={minHeightClass}
-        />
+        <div className={cn("flex-1 flex justify-center items-center", hasBreadcrumb ? "" : "pt-[72px] lg:pt-[96px]")}> {/* Ubah setinggi Navbar & BreadCrumbs*/}
+          <HeroView
+            title={data.title}
+            subtitle={data.subtitle}
+          />
+        </div>
 
         <PitaDecoration />
       </ContentLayer>
@@ -47,14 +48,15 @@ export function HeroSection({ data }: HeroSectionProps) {
 
 function PitaDecoration() {
   return (
-    <div className="relative z-5 w-full aspect-4/1">
+    <div className="absolute bottom-[5%] max-sm:bottom-0 lg:-bottom-[20%] left-0 z-5 w-full aspect-5/1 pointer-events-none">
       <Image
         src="/assets/kemahasiswaan/decoration-pita.webp"
         alt=""
         fill
-        className="object-contain pointer-events-none"
+        className="object-contain"
         priority
       />
     </div>
   )
 }
+

@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -11,7 +12,7 @@ interface Props {
 export function BlankoCTA({ title, subtitle, iconUrl, href }: Props) {
   return (
     <section className="w-full min-h-[55vh] grid grid-cols-2 items-center justify-items-center px-2">
-      <div className="relative -translate-x-15 h-32 w-32 sm:h-64 sm:w-64 lg:h-96 lg:w-96 z-20">
+      <div className="relative -translate-x-5 lg:-translate-x-15 h-32 w-32 sm:h-64 sm:w-64 lg:h-96 lg:w-96 z-20">
         <Image
           src={iconUrl}
           alt="Blanko Icon"
@@ -22,20 +23,22 @@ export function BlankoCTA({ title, subtitle, iconUrl, href }: Props) {
       </div>
 
       <div className="flex flex-col gap-3 sm:gap-4 text-center items-center max-w-xl z-20">
-        <h1 className="font-bold text-lg sm:text-xl lg:text-2xl leading-tight">
+        <h1 className="font-semibold font-heading text-xl sm:text-2xl md:text-4xl lg:text-6xl leading-tight">
           {title}
         </h1>
 
-        <p className="font-medium text-sm sm:text-base lg:text-xl leading-relaxed">
+        <p className="text-2xs sm:text-xs md:text-sm lg:text-xl leading-relaxed">
           {subtitle}
         </p>
 
-        <Link
-          href={href}
-          className="text-[10px] sm:text-xs lg:text-sm rounded-full border px-3 sm:px-4 py-1.5 sm:py-2 bg-linear-to-t from-[#456882] to-50%-[#1F445F] to-[#1B3C53] text-white"
-        >
-          Selengkapnya ➔
-        </Link>
+        <Button asChild variant="hima">
+          <Link
+            href={href}
+            className="text-xs lg:text-base px-1.5 py-1 sm:px-2 sm:py-1.5 md:px-3 md:py-2 lg:px-5 lg:py-4 2xl:px-6 2xl:py-5"
+          >
+            Selengkapnya ➔
+          </Link>
+        </Button>
       </div>
     </section>
   )
