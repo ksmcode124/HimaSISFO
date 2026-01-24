@@ -50,7 +50,7 @@
         {
           "id" : "cetak-transkrip",
           "title": "Blanko Cetak Transkrip dengan Bahasa Inggris",
-          "image": "",
+          "image": "/assets/kemahasiswaan/blanko-cetak-transkrip-inggris.webp",
           "filepath": "https://docs.google.com/document/d/1A9fmuVXR4li-Oh_Ln1TnGNBMGipxlido"
         },
         {
@@ -68,7 +68,7 @@
         {
           "id" : "legalisir-skl",
           "title": "Blanko Legalisir Surat Keterangan Lulus",
-          "image": "",
+          "image": "/assets/kemahasiswaan/blanko-legalisir-skl.webp",
           "filepath": "https://docs.google.com/document/d/1yLQdd_6VMxaLkbt_qk04gHb_yOsbjisw"
         }
       ]

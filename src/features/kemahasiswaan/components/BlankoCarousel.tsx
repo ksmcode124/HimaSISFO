@@ -34,7 +34,7 @@ export function BlankoCarousel({ blankoItems }: BlankoCarouselProps) {
       <Carousel
         setApi={setApi}
         opts={{ align: "center", containScroll: "trimSnaps" }}
-        className="w-full flex items-center"
+        className="w-full flex items-center overflow-visible"
       >
         <CarouselPrevious className="z-20 opacity-60" />
         <CarouselContent className="flex-1">
@@ -88,7 +88,7 @@ function BlankoCardItem({
   const zIndex = isActive ? 30 : isNeighbor ? 20 : 10
 
   return (
-    <CarouselItem className="h-100 basis-full sm:basis-full md:basis-1/3">
+    <CarouselItem className="h-110 basis-full sm:basis-full lg:basis-1/3">
       <motion.div
         layout
         animate={{ scale, opacity, zIndex }}
@@ -97,9 +97,17 @@ function BlankoCardItem({
       >
         <Card
           style={{ backgroundImage: `url(${card.image})` }}
-          className="h-full flex flex-col bg-cover bg-center bg-no-repeat rounded-xl"
+          className="relative h-full flex flex-col bg-cover bg-center bg-no-repeat rounded-xl"
         >
-          <CardContent className="flex flex-col flex-1 p-4 justify-end text-center">
+          {/* Gradient overlay */}
+          <div
+            className="absolute inset-0 rounded-xl pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 80%",
+            }}
+          />
+          <CardContent className="flex flex-col flex-1 p-4 z-10 justify-end text-center">
             <motion.p
               key={card.id + "-title"}
               initial={{ opacity: 0, y: 10 }}
@@ -111,17 +119,18 @@ function BlankoCardItem({
             </motion.p>
           </CardContent>
 
-          <CardAction className="pb-4 w-full grid justify-items-center">
+          <CardAction className="pb-4 w-full grid z-10 justify-items-center">
             <motion.div
               key={card.id + "-action"}
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
+              className="w-full flex items-center justify-center"
             >
               <Button variant={"hima"} asChild>
                 <Link
                   href={isGoogleDocs ? `${encodeURIComponent(card.filepath)}/export?format=docx` : "#"}
-                  className="flex gap-2 items-center text-xs lg:text-base px-3.5 py-1 sm:px-6 sm:py-1.5 md:px-8.5 md:py-2 lg:px-11 lg:py-4 2xl:px-11 2xl:py-5" 
+                  className="flex gap-2 min-w-[70%] items-center text-xs lg:text-base px-3.5 py-1 sm:px-6 sm:py-1.5 md:px-8.5 md:py-2 lg:px-11 lg:py-4 2xl:px-11 2xl:py-5" 
                   >
                   Unduh <Download size={14} />
                 </Link>

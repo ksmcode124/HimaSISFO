@@ -26,10 +26,10 @@ export function BlankoMainSection({ items }: Props) {
       </DecorationLayer>
 
       <ContentLayer>
-        <section className="px-6 lg:px-12 overflow-clip pb-10">
+        <section className="pb-10">
           <ShellLayer>
             <ContentLayer>
-              <div className="flex items-center justify-center min-h-[75vh]">
+              <div className="flex items-center justify-center lg:min-h-[65vh]">
                 <Suspense fallback={null}>
                   <BlankoCarousel blankoItems={items} />
                 </Suspense>
@@ -47,19 +47,19 @@ export function BlankoMainSection({ items }: Props) {
 function DecorationAssets() {
   return (
     <>
-      <div className="absolute left-0 rotate-27 -translate-x-[20%] w-50 sm:w-60 lg:w-80 aspect-2/1">
+      <div className="absolute left-0 rotate-27 -translate-x-[20%] w-38 sm:w-48 md:w-64 lg:w-88 aspect-2/1">
         <Image src="/assets/kemahasiswaan/decoration-cloud-1.webp" alt="" fill />
       </div>
 
-      <div className="absolute bottom-0 rotate-13 right-0 translate-x-[40%] w-50 sm:w-60 lg:w-80 aspect-2/1">
+      <div className="absolute bottom-0 rotate-13 right-0 translate-x-[40%] w-38 sm:w-48 md:w-64 lg:w-88 aspect-2/1">
         <Image src="/assets/kemahasiswaan/decoration-cloud-1.webp" alt="" fill />
       </div>
 
-      <div className="absolute bottom-0 translate-y-[15%] -translate-x-[4%] aspect-3/3 max-w-6xl w-full">
+      <div className="absolute bottom-0 translate-y-[40%] -translate-x-[4%] aspect-square w-75 sm:w-125 md:w-3xl lg:w-6xl">
         <Image src="/assets/kemahasiswaan/decoration-shape-1.webp" alt="" fill />
       </div>
 
-      <div className="absolute right-0 -translate-y-[40%] translate-x-[4%] aspect-3/3 max-w-6xl w-full">
+      <div className="absolute right-0  -translate-y-[50%] translate-x-[4%] aspect-square w-75 sm:w-125 md:w-3xl lg:w-6xl">
         <Image src="/assets/kemahasiswaan/decoration-shape-2.webp" alt="" fill />
       </div>
     </>

@@ -22,13 +22,14 @@ export function KemahasiswaanCard({ data, active, device }: KemahasiswaanCardPro
     >
       <div
         className={cn(
-          "flex flex-col flex-1 gap-2 sm:gap-3 lg:px-5 lg:py-2.5",
+          "flex flex-col flex-1 gap-2 sm:gap-3 px-10 py-5 lg:px-5 lg:py-2.5",
           active ? "justify-start" : "justify-center "
         )}
       >
         <motion.p
           className={cn(
-            "font-semibold origin-left text-xs sm:text-sm md:text-base lg:text-xl",
+            "font-semibold origin-left text-xs sm:text-sm md:text-base lg:text-xl wrap-break-word",
+            !active ? "text-center px-[20%]" : ""
           )}
           transition={{ duration: 0.45, ease: "easeOut" }}
         >

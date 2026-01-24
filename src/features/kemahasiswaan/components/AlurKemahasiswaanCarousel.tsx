@@ -44,7 +44,7 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
   const device = useDeviceType()
 
   return (
-    <div className="relative w-full max-w-7xl py-8">
+    <div className="relative w-full max-w-7xl py-8 min-h-75 h-full">
       <style jsx global>{`
         .swiper {
           overflow: visible !important;
@@ -63,31 +63,15 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
       <Swiper
         modules={[Navigation]}
         onSwiper={setSwiper}
-        onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
-        centeredSlides={device !== 'mobile'}
-        slidesPerView={device === 'mobile' ? 1 : 3}
-        spaceBetween={device === 'mobile' ? 16 : 24}
-        loop={false}
+        onSlideChange={(s) => setActiveIndex(s.realIndex)}
+        loop={true}
+        centeredSlides={true}
+        centeredSlidesBounds={true}
+        slidesPerView={device === 'mobile' ? 1 : 'auto'} // important: auto width
+        spaceBetween={device === 'mobile' ? 16 : -90}
         speed={900}
         grabCursor
         watchSlidesProgress
-        breakpoints={{
-          0: {
-            slidesPerView: 1,
-            centeredSlides: false,
-            spaceBetween: 16,
-          },
-          540: {
-            slidesPerView: 3,
-            centeredSlides: true,
-            spaceBetween: 20,
-          },
-          768: {
-            slidesPerView: 3,
-            centeredSlides: true,
-            spaceBetween: 24,
-          },
-        }}
         className="!overflow-visible"
       >
         {data.map((item, index) => {
@@ -96,64 +80,46 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
           const isNeighbor = diff === 1
 
           return (
-            <SwiperSlide key={item.id} className="!h-auto">
+            <SwiperSlide
+              key={item.id}
+              className={cn("flex justify-center", isActive ? "z-20" : "z-0")}
+              style={{
+                width: device === 'mobile' ? '90%' : device === 'tablet' ? '350px' : '450px',
+                height: isActive
+                  ? device === 'mobile' ? '300px' : device === 'tablet' ? '300px' : '300px' // tengah tinggi
+                  : device === 'mobile' ? '300px' : device === 'tablet' ? '300px' : '300px', // neighbor square
+              }}
+            >
               {({ isActive: swiperActive }) => (
-                <div
-                  className="w-full aspect-square cursor-pointer py-4"
+                <motion.div
+                  className="w-full h-full cursor-pointer"
                   onClick={() => {
-                    if (!swiperActive && swiper) {
-                      swiper.slideTo(index)
-                    }
+                    if (!swiperActive && swiper) swiper.slideToLoop(index)
                   }}
+                  animate={{
+                    scale: isActive ? 1 : 0.75,
+                    opacity: isActive ? 1 : isNeighbor ? 0.85 : 0,
+                    zIndex: isActive ? 30 : 20,
+                  }}
+                  transition={{ type: "spring", stiffness: 220, damping: 26, mass: 0.9 }}
                 >
-                  <motion.div
-                    className="w-full h-full"
-                    animate={{
-                      scale: device === 'mobile'
-                        ? 1
-                        : device === 'tablet'
-                        ? isActive
-                          ? 1
-                          : 0.85
-                        : isActive
-                        ? 1
-                        : 0.75,
-                      opacity: device === 'mobile'
-                        ? 1
-                        : isActive
-                        ? 1
-                        : isNeighbor
-                        ? 0.8
-                        : 0,
-                    }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 220,
-                      damping: 26,
-                      mass: 0.9,
-                    }}
-                  >
-                    <Glass className="w-full h-full flex items-center justify-center">
-                      <KemahasiswaanCard
-                        data={item}
-                        active={isActive}
-                        device={device}
-                      />
-                    </Glass>
-                  </motion.div>
-                </div>
+                  <Glass className={cn("w-full h-full flex items-center justify-center")}>
+                    <KemahasiswaanCard data={item} active={isActive} device={device} />
+                  </Glass>
+                </motion.div>
               )}
             </SwiperSlide>
           )
         })}
       </Swiper>
 
+
       {/* Custom Navigation Buttons */}
       <button
         onClick={() => swiper?.slidePrev()}
         disabled={activeIndex === 0}
         className={cn(
-          "absolute -left-12 top-1/2 translate-x-[50%] lg:translate-x-0 -translate-y-1/2 z-50",
+          "absolute -left-12 top-1/2 translate-x-[50%] lg:-translate-x-full -translate-y-full z-50",
           "h-20 w-20 sm:h-24 sm:w-24 rounded-full",
           "disabled:opacity-30 disabled:cursor-not-allowed",
           "transition-opacity"
@@ -180,9 +146,9 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
         onClick={() => swiper?.slideNext()}
         disabled={activeIndex === data.length - 1}
         className={cn(
-          "absolute -right-12 top-1/2 -translate-x-[50%] lg:translate-x-0 -translate-y-1/2 z-50",
+          "absolute -right-12 top-1/2 -translate-x-[50%] lg:translate-x-full -translate-y-full z-50",
           "h-20 w-20 sm:h-24 sm:w-24 rounded-full",
-          "disabled:opacity-0 disabled:cursor-not-allowed",
+          "disabled:opacity-300 disabled:cursor-not-allowed",
           "transition-opacity"
         )}
       >
