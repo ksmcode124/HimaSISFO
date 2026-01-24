@@ -25,19 +25,55 @@ function AccordionItem({
   )
 }
 
-type AccordionTriggerProps =
-  React.ComponentProps<typeof AccordionPrimitive.Trigger> & {
-    hasChevron?: boolean
-    writingMode?: "horizontal" | "vertical-btt"
-  }
+interface AccordionTriggerProps
+  extends React.ComponentProps<typeof AccordionPrimitive.Trigger> {
+  hasChevron?: boolean
+}
 
 function AccordionTrigger({
   className,
   children,
   hasChevron = true,
-  writingMode = "horizontal",
   ...props
 }: AccordionTriggerProps) {
+  return (
+    <AccordionPrimitive.Header className="w-full">
+      <AccordionPrimitive.Trigger
+        {...props}
+        className={cn(
+          `
+          flex w-full justify-between items-center gap-4
+          px-4 py-4 rounded-xl
+          text-sm font-medium
+          transition-colors duration-200 outline-none
+          disabled:pointer-events-none disabled:opacity-50
+          `,
+          className
+        )}
+      >
+        <span className="flex-1 w-full text-center break-words">{children}</span>
+
+        {hasChevron && (
+          <ChevronDownIcon className="w-6 h-6 shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+        )}
+      </AccordionPrimitive.Trigger>
+    </AccordionPrimitive.Header>
+  )
+}
+
+interface AccordionTriggerVerticalProps
+  extends React.ComponentProps<typeof AccordionPrimitive.Trigger> {
+  hasChevron?: boolean
+  writingMode: "horizontal" | "vertical-btt"
+}
+
+export function AccordionTriggerVertical({
+  className,
+  children,
+  hasChevron = true,
+  writingMode = "horizontal",
+  ...props
+}: AccordionTriggerVerticalProps) {
   const isVertical = writingMode === "vertical-btt"
 
   return (
@@ -52,6 +88,10 @@ function AccordionTrigger({
           group flex flex-1 gap-4
           rounded-md px-4 py-4
           text-sm font-medium
+          bg-linear-to-t
+          lg:data-[state=closed]:bg-linear-to-r
+          lg:data-[state=open]:bg-linear-to-t 
+          from-[#11283F] to-[#7697B7]
           transition-shadow duration-500 outline-none
           hover:underline
           disabled:pointer-events-none disabled:opacity-50
@@ -116,6 +156,7 @@ function AccordionTrigger({
     </AccordionPrimitive.Header>
   )
 }
+
 
 function AccordionContent({
   className,

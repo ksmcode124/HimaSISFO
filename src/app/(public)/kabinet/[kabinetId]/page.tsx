@@ -38,7 +38,7 @@ export default function Page() {
         logo_url={currentData.logo_url}
       />
       <IntiHimpunanSection data={currentData.inti_himpunan} />
-      <DepartemenListSection data={currentData.departemen} />
+      <DepartemenListSection />
     </main>
   );
 }

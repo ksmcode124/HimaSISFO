@@ -1,20 +1,34 @@
 // components/FlipCard.tsx
 "use client"
 import { useState } from "react";
+import { useDeviceType } from "./AlurKemahasiswaanCarousel";
 
 type FlipCardProps = {
   front: React.ReactNode;
   back: React.ReactNode;
   className?: string;
+  id?: string | null,
+  setSelectedId: (id: string | null) => void
 };
 
-export default function FlipCard({ front, back, className }: FlipCardProps) {
+export function FlipCard({ front, back, className, setSelectedId, id }: FlipCardProps) {
   const [flipped, setFlipped] = useState(false);
+  const device = useDeviceType()
+
+  const handleClick = () => {
+    if (device === 'mobile') {
+      if (setSelectedId && id !== undefined) {
+        setSelectedId(id); // buka modal dari parent
+      }
+    } else {
+      setFlipped(!flipped); // flip card desktop
+    }
+  };
 
   return (
     <div
       className={`perspective-midrange w-full rounded-xl ${className ?? ""}`}
-      onClick={() => setFlipped(!flipped)}
+      onClick={handleClick}
     >
       <div
         className={`relative h-full w-full transition-transform duration-500 transform-3d ${

@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { createPortal } from "react-dom";
 
 type LayerProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
 };
 export function BackgroundLayer({ children, className }: LayerProps) {
