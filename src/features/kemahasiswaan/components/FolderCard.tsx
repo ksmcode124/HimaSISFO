@@ -20,13 +20,13 @@ export function FolderCard({
   children,
   hasLayer = false,
 
-  widthClass = "w-[80%] max-w-3xl",
-  heightClass = "h-[30svh] lg:h-[40vh]", // ✅ height konsisten
+  widthClass = "w-[90%]",
+  heightClass = "h-[30svh] lg:h-[40vh]",
   maxHeightClass,
   layerOffsetClass = `
-    translate-y-13 -translate-x-6
-    sm:translate-y-15 sm:-translate-x-8
-    lg:translate-y-17 lg:-translate-x-10
+    translate-y-10 -translate-x-6
+    sm:translate-y-13 sm:-translate-x-8
+    lg:translate-y-15 lg:-translate-x-10
   `,
 
   headerBgClass = "bg-[#EDF3F6]",
@@ -58,9 +58,10 @@ export function FolderCard({
           className={`
             relative z-20
             ${headerBgClass}
-            w-[40%]
+            w-[70%]
             min-h-10 sm:min-h-11 md:min-h-12
             rounded-t-xl
+            translate-y-[1px]
             border-t-2 border-x-2 ${borderClass}
             px-4 md:px-5
             flex items-center

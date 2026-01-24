@@ -65,13 +65,15 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
         onSwiper={setSwiper}
         onSlideChange={(s) => setActiveIndex(s.realIndex)}
         loop={true}
-        centeredSlides={true}
+        // centeredSlides={true}
         centeredSlidesBounds={true}
-        slidesPerView={device === 'mobile' ? 1 : 'auto'} // important: auto width
-        spaceBetween={device === 'mobile' ? 16 : -90}
+        slidesPerView={device !== 'desktop' ? 1 : 'auto'} // important: auto width
+        spaceBetween={device !== 'desktop' ? 16 : -90}
         speed={900}
         grabCursor
         watchSlidesProgress
+        slidesOffsetBefore={device === 'mobile' || device === 'tablet' ? 0 : 255}
+        slidesOffsetAfter={device === 'mobile' || device === 'tablet' ? 0 : 255}
         className="!overflow-visible"
       >
         {data.map((item, index) => {

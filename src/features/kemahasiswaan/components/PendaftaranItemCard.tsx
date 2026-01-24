@@ -18,7 +18,7 @@ export function PendaftaranItemCard({ item }: Props) {
           bg-contain bg-no-repeat bg-center
         "
       />
-      <div className="absolute bottom-5 left-5 md:bottom-10 md:left-10 z-10 px-4 md:px-8 w-[80%] pt-6">
+      <div className="absolute bottom-5 left-5 md:bottom-10 md:left-10 z-10 px-6 md:px-12 w-[80%] pt-6">
         <span className="text-white text-[8px] sm:text-2xs md:text-sm lg:text-xl font-semibold line-clamp-1">
           {item.title}
         </span>
