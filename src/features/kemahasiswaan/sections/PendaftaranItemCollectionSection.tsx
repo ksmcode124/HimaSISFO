@@ -1,7 +1,6 @@
 import Image from "next/image"
 import { ItemDataJSON } from "@/features/kemahasiswaan"
 import { PendaftaranItemCard } from "../components/PendaftaranItemCard"
-import { LiquidGlass } from "@liquidglass/react"
 import { Glass } from "@/components/ui/Glass"
 
 interface Props {

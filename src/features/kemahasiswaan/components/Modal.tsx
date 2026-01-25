@@ -2,7 +2,7 @@
 'use client'
 import { useEffect } from "react";
 import { ContentRenderer } from "./ContentRenderer";
-import { ContentBlock, ItemDataJSON, KemahasiswaanDataFile, ProsesAkademik } from "..";
+import { ContentBlock, ItemDataJSON } from "..";
 
 type ModalProps = {
   open: boolean;

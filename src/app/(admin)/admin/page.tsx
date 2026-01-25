@@ -21,7 +21,7 @@ import { getDashboardChart, getDashboardSummary } from '@/features/admin/service
 
 import { Calendar, Handshake, Users } from 'lucide-react';
 
-export const dashboardSummaryConfig = {
+const dashboardSummaryConfig = {
   komunitas: {
     title: 'Komunitas',
     icon: Handshake,

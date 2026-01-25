@@ -8,7 +8,6 @@ import {
 import { ItemDataJSON } from "../types/data";
 import { ContentRenderer } from "./ContentRenderer";
 import { AnimatePresence, motion } from "framer-motion";
-import { LiquidGlass } from "@liquidglass/react";
 import { Glass } from "@/components/ui/Glass";
 
 interface VerticalAccordionProps {

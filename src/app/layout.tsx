@@ -9,13 +9,12 @@ const poppins = Poppins({
   variable: '--font-primary'
 });
 
-export const leagueSpartan = League_Spartan({
+const leagueSpartan = League_Spartan({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-heading", 
   display: "swap",
 });
-
 
 export const metadata: Metadata = {
   title: "Himpunan Mahasiswa Sistem Informasi UPNVYK",
