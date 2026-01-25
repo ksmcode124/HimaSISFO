@@ -12,7 +12,7 @@ import { useKomunitas, useKomunitasDetail } from '@/features/admin/hooks/useKomu
 import { DetailModal } from '@/features/admin/components/DetailModal';
 
 export default function KomunitasPage() {
-  const { data, isLoading, saveData, deleteData } = useKomunitas();
+  const { data, isLoading, saveData, deleteData, error } = useKomunitas();
   const modal = useModal();
   const { detail, isLoadingModal } = useKomunitasDetail(modal.id);
   const confirm = useConfirm();;
@@ -44,6 +44,8 @@ export default function KomunitasPage() {
 
       <AdminTable
         data={data}
+        loading={isLoading}
+        error={error}
         columns={komunitasColumns({
           onView: modal.openView,
           onEdit: modal.openEdit,

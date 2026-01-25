@@ -71,6 +71,13 @@ export default function LoginPage() {
                   />
                 </Field>
               </FieldGroup>
+
+              {error && (
+                <p className="text-sm text-[#FF5449] text-center">
+                  {error}
+                </p>
+              )}
+
               <Button type="submit" className="bg-[#3385FF] h-12 px-8 py-2 text-base font-medium w-full">
                 {loading ? '...' : 'Login'}
               </Button>

@@ -1,10 +1,10 @@
-import { Lock } from 'lucide-react'
+import { Lock, LockKeyholeIcon } from 'lucide-react'
 import React from 'react'
 
 export default function page() {
   return (
     <div className="flex items-center justify-center h-screen flex-col gap-4 px-6 text-center">
-        <Lock size={48} className="text-gray-500" />
+        <LockKeyholeIcon size={48} className="text-black" />
         <h1 className="text-2xl font-semibold">Dashboard Admin Dikunci</h1>
         <p className="text-gray-600">Akses halaman dashboard admin Web Behind The Web dengan menggunakan perangkat <strong>Desktop</strong></p>
     </div>

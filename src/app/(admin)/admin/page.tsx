@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import Link from 'next/link';
 import {
   Card,
   CardContent,
@@ -8,64 +9,81 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Calendar, ChevronRight, Handshake, Users } from 'lucide-react';
-import { DashboardChart } from '@/features/admin/components/DashboardChart';
-import Link from 'next/link';
+import { ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils/cn';
-import { HeaderSection } from '@/features/admin/components/HeaderSection';
 import { Spinner } from '@/components/ui/spinner';
+import { HeaderSection } from '@/features/admin/components/HeaderSection';
+import { DashboardChart } from '@/features/admin/components/DashboardChart';
 
-const fetchSummary = async () => {
-  // TODO: Replace with real API call
-  return [
-    { title: 'Komunitas', count: 5, link: '/admin/komunitas', icon: Handshake },
-    { title: 'Kabinet', count: 8, link: '/admin/kabinet', icon: Users },
-    { title: 'Event', count: 30, link: '/admin/event', icon: Calendar },
-  ];
+import type { DashboardChartResponse, DashboardSummaryResponse } from '@/features/admin/services/dashboard';
+import { getDashboardChart, getDashboardSummary } from '@/features/admin/services/dashboard';
+
+
+import { Calendar, Handshake, Users } from 'lucide-react';
+
+export const dashboardSummaryConfig = {
+  komunitas: {
+    title: 'Komunitas',
+    icon: Handshake,
+    link: '/admin/komunitas',
+  },
+  kabinet: {
+    title: 'Kabinet',
+    icon: Users,
+    link: '/admin/kabinet',
+  },
+  event: {
+    title: 'Event',
+    icon: Calendar,
+    link: '/admin/event',
+  },
 };
 
-const fetchChartData = async () => {
-  // TODO: Replace with real API call
-  return [
-    { kabinet: 'Aksayapatra', event: 12 },
-    { kabinet: 'Gelora Harmoni', event: 8 },
-  ];
-};
 
 
 export default function AdminPage() {
-  const [summary, setSummary] = React.useState<
-    { title: string; count: number; link: string; icon: React.ElementType }[]
-  >([]);
-  const [chartData, setChartData] = React.useState<{ kabinet: string; event: number }[]>([]);
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [summary, setSummary] = React.useState<DashboardSummaryResponse[]>([]);
+  const [chartData, setChartData] = React.useState<DashboardChartResponse[]>([]);
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState<string | null>(null);
 
   React.useEffect(() => {
-    const loadData = async () => {
-      setIsLoading(true);
+    const loadDashboard = async () => {
+      setLoading(true);
+      setError(null);
+
       try {
-        const [summaryData, chartDataData] = await Promise.all([
-          fetchSummary(),
-          fetchChartData(),
+        const [summaryRes, chartRes] = await Promise.all([
+          getDashboardSummary(),
+          getDashboardChart(),
         ]);
-        setSummary(summaryData);
-        setChartData(chartDataData);
-      } catch (err) {
-        console.error(err);
+
+        setSummary(summaryRes);
+        setChartData(chartRes);
+      } catch {
+        setError('Gagal memuat data dashboard.');
       } finally {
-        setIsLoading(false);
+        setLoading(false);
       }
     };
 
-    loadData();
+    loadDashboard();
   }, []);
 
-  if (isLoading) {
+  if (loading) {
     return (
-      <div className='w-full h-full flex items-center justify-center'>
-        <Spinner className="size-24" />;
+      <div className="flex h-full w-full items-center justify-center">
+        <Spinner className="size-24" />
       </div>
-    )
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex h-full w-full items-center justify-center">
+        <p className="text-[#FF5449]">{error}</p>
+      </div>
+    );
   }
 
   return (
@@ -76,31 +94,43 @@ export default function AdminPage() {
       />
 
       <div className="flex gap-5 rounded-xl border border-black px-6 py-4 shadow-lg">
-        {summary.map((item, index) => (
-          <Card
-            key={index}
-            className={cn(
-              'flex w-full flex-col justify-between p-0 pt-8 text-center shadow-md bg-linear-to-t from-columbia-blue to-[#3385FF]'
-            )}
-          >
-            <CardHeader>
-              <CardTitle className="flex items-center justify-center gap-2 text-lg font-semibold text-white">
-                <item.icon /> {item.title}
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="py-6">
-              <span className="text-5xl font-bold text-white">{item.count}</span>
-            </CardContent>
-            <CardFooter className="h-full bg-white rounded-b-xl">
-              <Link className="flex w-full items-center justify-center gap-2" href={item.link}>
-                More Info <ChevronRight />
-              </Link>
-            </CardFooter>
-          </Card>
-        ))}
+        {summary.map((item) => {
+          const config = dashboardSummaryConfig[item.key];
+          const Icon = config.icon;
+
+          return (
+            <Card
+              key={item.key}
+              className={cn(
+                'flex w-full flex-col justify-between p-0 pt-8 text-center shadow-md bg-linear-to-t from-columbia-blue to-[#3385FF]'
+              )}
+            >
+              <CardHeader>
+                <CardTitle className="flex items-center justify-center gap-2 text-lg font-semibold text-white">
+                  <Icon /> {config.title}
+                </CardTitle>
+              </CardHeader>
+
+              <CardContent className="py-6">
+                <span className="text-5xl font-bold text-white">
+                  {item.count}
+                </span>
+              </CardContent>
+
+              <CardFooter className="rounded-b-xl bg-white">
+                <Link
+                  href={config.link}
+                  className="flex w-full items-center justify-center gap-2"
+                >
+                  More Info <ChevronRight />
+                </Link>
+              </CardFooter>
+            </Card>
+          );
+        })}
       </div>
 
-      <div className="mx-auto mt-6 max-w-7xl w-full rounded-xl border p-4">
+      <div className="mx-auto mt-6 w-full max-w-7xl rounded-xl border p-4">
         <DashboardChart data={chartData} />
       </div>
     </>

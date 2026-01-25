@@ -12,7 +12,7 @@ import { anggotaColumns } from '@/features/admin/components/columns/anggota-colu
 import { DetailModal } from '@/features/admin/components/DetailModal';
 
 export default function AnggotaPage() {
-  const { data, isLoading, saveData, deleteData } = useAnggota();
+  const { data, isLoading, saveData, deleteData, error } = useAnggota();
   const modal = useModal();
   const { detail, isLoadingModal } = useAnggotaDetail(modal.id);
   const confirm = useConfirm();;
@@ -46,6 +46,8 @@ export default function AnggotaPage() {
 
       <AdminTable
         data={data}
+        loading={isLoading}
+        error={error}
         columns={anggotaColumns({
           onView: modal.openView,
           onEdit: modal.openEdit,

@@ -12,7 +12,7 @@ import { kegiatanColumns } from '@/features/admin/components/columns/kegiatan-co
 import { DetailModal } from '@/features/admin/components/DetailModal';
 
 export default function EventPage() {
-  const { data, isLoading, saveData, deleteData } = useEvent();
+  const { data, isLoading, saveData, deleteData, error } = useEvent();
   const modal = useModal();
   const {detail, isLoadingModal } = useEventDetail(modal.id)
   const confirm = useConfirm();;
@@ -43,6 +43,8 @@ export default function EventPage() {
 
       <AdminTable
         data={data}
+        loading={isLoading}
+        error={error}
         columns={kegiatanColumns({
           onView: modal.openView,
           onEdit: modal.openEdit,

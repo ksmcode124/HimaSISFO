@@ -5,26 +5,58 @@ import { TableToolbar } from './TableToolbar';
 import { DataTable } from './DataTable';
 import { TablePagination } from './TablePagination';
 import { ColumnDef } from '@tanstack/react-table';
+import { Spinner } from '@/components/ui/spinner';
 
-interface AdminTable<TData> {
+interface AdminTableProps<TData> {
   columns: ColumnDef<TData>[];
   data: TData[];
+  loading?: boolean;
+  error?: string | null;
+  emptyMessage?: string;
 }
 
 export function AdminTable<TData>({
   columns,
   data,
-}: AdminTable<TData>) {
+  loading = false,
+  error = null,
+  emptyMessage = 'Data tidak tersedia',
+}: AdminTableProps<TData>) {
   const state = useTable(data, columns);
 
   return (
     <div className="grid h-[80vh] grid-rows-[auto_1fr_auto] rounded-xl border border-[#939393]">
       <TableToolbar {...state} />
-      <DataTable
-        table={state.table}
-        rows={state.paginatedRows}
-        columnsLength={columns.length}
-      />
+
+      {/* CONTENT */}
+      <div className="relative">
+        {loading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-white/70 z-10">
+            <Spinner />
+          </div>
+        )}
+
+        {!loading && error && (
+          <div className="flex h-full items-center justify-center text-red-500 text-sm">
+            {error}
+          </div>
+        )}
+
+        {!loading && !error && data.length === 0 && (
+          <div className="flex h-full items-center justify-center text-sm text-gray-500">
+            {emptyMessage}
+          </div>
+        )}
+
+        {!loading && !error && data.length > 0 && (
+          <DataTable
+            table={state.table}
+            rows={state.paginatedRows}
+            columnsLength={columns.length}
+          />
+        )}
+      </div>
+
       <TablePagination
         pageSize={state.pageSize}
         setPageSize={state.setPageSize}

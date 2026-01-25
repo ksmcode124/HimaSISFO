@@ -1,67 +1,87 @@
 'use client';
 
-import { useEffect, useState } from "react";
-import { AdminAnggotaRow, AdminKomunitasDetail, AdminKomunitasRow } from "../types";
-import { Anggota } from "@/lib/types/interface";
+import { useCallback, useEffect, useState } from 'react';
+import {
+  AdminKomunitasRow,
+  AdminKomunitasDetail,
+} from '../types';
+import { Anggota } from '@/lib/types/interface';
 
 export function useKomunitas() {
   const [data, setData] = useState<AdminKomunitasRow[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    load();
-  }, []);
-
-  const load = async () => {
+  const load = useCallback(async () => {
     setIsLoading(true);
+    setError(null);
+
     try {
+      // TODO: replace with real API
       const res: AdminKomunitasRow[] = [
         {
           id: 1,
-          nama_komunitas: "Futsal",
-          foto_komunitas: "IMG_01.jpg",
-          foto_pencapaian: "IMG_02.jpg",
-          pencapaian: "LOREM IPSUM"
+          nama_komunitas: 'Futsal',
+          foto_komunitas: 'IMG_01.jpg',
+          foto_pencapaian: 'IMG_02.jpg',
+          pencapaian: 'LOREM IPSUM',
         },
         {
           id: 2,
-          nama_komunitas: "Voli",
-          foto_komunitas: "IMG_02.jpg",
-          foto_pencapaian: "IMG_03.jpg",
-          pencapaian: "LOREM IPSUM"
-        }
-      ]
+          nama_komunitas: 'Voli',
+          foto_komunitas: 'IMG_02.jpg',
+          foto_pencapaian: 'IMG_03.jpg',
+          pencapaian: 'LOREM IPSUM',
+        },
+      ];
+
       setData(res);
+    } catch {
+      setError('Failed to load komunitas');
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    load();
+  }, [load]);
+
+  // NOTE: payload type masih placeholder
+  const saveData = async (payload: Anggota) => {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      // TODO: await api.saveKomunitas(payload)
+      console.log('SAVE KOMUNITAS', payload);
+      await load();
+    } catch {
+      setError('Failed to save komunitas');
     } finally {
       setIsLoading(false);
     }
   };
 
-  // TODO: change to komunitas form data types 
-  const saveData = async(data: Anggota) => {
-    setIsLoading(true)
+  const deleteData = async (id: number) => {
+    setIsLoading(true);
+    setError(null);
 
     try {
-      alert(data)
+      // TODO: await api.deleteKomunitas(id)
+      console.log('DELETE KOMUNITAS', id);
+      await load();
+    } catch {
+      setError('Failed to delete komunitas');
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
-
-  const deleteData = async(id: number) => {
-    setIsLoading(true)
-    try {
-      alert(data)
-    } finally {
-      setIsLoading(false)
-    }
-  }
+  };
 
   return {
     data,
-    setData,
     isLoading,
-    setIsLoading,
+    error,
     saveData,
     deleteData,
     reload: load,
@@ -73,19 +93,23 @@ export function useKomunitasDetail(id: number | null) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // if (!id) return;
-
-    // setLoading(true);
-    // fetchKabinetById(id)
-    //   .then(setDetail)
-    //   .finally(() => setLoading(false));
-    const res: AdminKomunitasDetail = {
-      id: 1,
-      nama_komunitas: "Nama Komunitas",
-      foto_komunitas: "/IMG_01.jpg",
-      pencapaian: "list pencapaian?"
+    if (!id) {
+      setDetail(null);
+      return;
     }
+
+    setLoading(true);
+
+    // TODO: replace with real API
+    const res: AdminKomunitasDetail = {
+      id,
+      nama_komunitas: 'Nama Komunitas',
+      foto_komunitas: '/IMG_01.jpg',
+      pencapaian: 'list pencapaian?',
+    };
+
     setDetail(res);
+    setLoading(false);
   }, [id]);
 
   return { detail, isLoadingModal: loading };

@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { ArrowUpDown, ChevronDown, Filter } from 'lucide-react';
 import { Table } from '@tanstack/react-table';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export type FilterMeta = {
   filterable?: boolean;
@@ -33,32 +33,33 @@ export function TableToolbar<TData>({
   const sorting = table.getState().sorting;
   const activeSort = sorting[0];
 
+  /* ================= GLOBAL SEARCH (DEBOUNCE) ================= */
+  const [search, setSearch] = useState(globalFilter);
+
+  useEffect(() => {
+    const id = setTimeout(() => {
+      setGlobalFilter(search);
+    }, 300);
+
+    return () => clearTimeout(id);
+  }, [search, setGlobalFilter]);
+
+  /* ================= FILTERABLE COLUMNS ================= */
   const filterableColumns = table
     .getAllColumns()
     .filter((column) => {
       const meta = column.columnDef.meta as FilterMeta | undefined;
-      return meta?.filterable === true && meta.filterType === 'checkbox';
+      return meta?.filterable && meta.filterType === 'checkbox';
     });
-    
-    useEffect(() => {
-      if (table.getState().sorting.length === 0) {
-        const firstColumn = table.getAllColumns()[0];
-        if (firstColumn.getCanSort()) {
-          table.setSorting([{ id: firstColumn.id, desc: false }]);
-        }
-      }
-    }, [table]);
-
 
   return (
     <div className="flex flex-col gap-4 border-b border-[#939393] px-6 py-5">
-      {/* TOP ROW */}
       <div className="flex items-center justify-between gap-6">
         {/* GLOBAL SEARCH */}
         <Input
           placeholder="Search..."
-          value={globalFilter}
-          onChange={(e) => setGlobalFilter(e.target.value)}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
           className="bg-[#F2F2F2] border-2 border-[#BFBFBF] h-12 max-w-md text-base"
         />
 
@@ -85,8 +86,9 @@ export function TableToolbar<TData>({
                   column.getFacetedUniqueValues().keys()
                 );
 
-                const activeValues =
-                  (column.getFilterValue() as string[]) ?? [];
+                const activeValues = Array.isArray(column.getFilterValue())
+                  ? (column.getFilterValue() as string[])
+                  : [];
 
                 return (
                   <div key={column.id} className="px-2 py-2">
@@ -99,7 +101,7 @@ export function TableToolbar<TData>({
 
                       return (
                         <DropdownMenuCheckboxItem
-                          key={value}
+                          key={String(value)}
                           checked={checked}
                           onCheckedChange={(next) => {
                             const updated = next
@@ -111,7 +113,7 @@ export function TableToolbar<TData>({
                             );
                           }}
                         >
-                          {value}
+                          {String(value)}
                         </DropdownMenuCheckboxItem>
                       );
                     })}
@@ -121,12 +123,12 @@ export function TableToolbar<TData>({
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {/* SORT BY */}
+          {/* SORT COLUMN */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="h-11 px-5 gap-2">
                 <ArrowUpDown />
-                  Sort by
+                Sort by
                 <ChevronDown />
               </Button>
             </DropdownMenuTrigger>
@@ -139,7 +141,12 @@ export function TableToolbar<TData>({
                   <DropdownMenuItem
                     key={column.id}
                     onClick={() =>
-                      table.setSorting([{ id: column.id, desc: false }])
+                      table.setSorting([
+                        {
+                          id: column.id,
+                          desc: activeSort?.desc ?? false,
+                        },
+                      ])
                     }
                   >
                     {String(column.columnDef.header ?? column.id)}
@@ -153,7 +160,7 @@ export function TableToolbar<TData>({
             <DropdownMenuTrigger asChild>
               <Button
                 variant="ghost"
-                className="h-11 px-5 min-w-32 w-80 bg-none border-[#BFBFBF] border"
+                className="h-11 px-5 min-w-32 border border-[#BFBFBF]"
                 disabled={!activeSort}
               >
                 {activeSort?.desc ? 'Z–A' : 'A–Z'}

@@ -12,7 +12,7 @@ import { useDepartemen, useDepartemenDetail } from '@/features/admin/hooks/useDe
 import { DetailModal } from '@/features/admin/components/DetailModal';
 
 export default function DepartemenPage() {
-  const { data, isLoading, saveData, deleteData } = useDepartemen();
+  const { data, isLoading, saveData, deleteData, error } = useDepartemen();
   const modal = useModal();
   const { detail, isLoadingModal } = useDepartemenDetail(modal.id);
   const confirm = useConfirm();;
@@ -45,6 +45,8 @@ export default function DepartemenPage() {
 
       <AdminTable
         data={data}
+        loading={isLoading}
+        error={error}
         columns={departemenColumns({
           onView: modal.openView,
           onEdit: modal.openEdit,

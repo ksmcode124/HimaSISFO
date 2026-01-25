@@ -8,14 +8,14 @@ import {
 } from '@/components/ui/select';
 
 interface PaginationProps {
-  pageSize: number
-  currentPage: number
-  start: number
-  end: number
-  total: number
-  totalPages: number
-  setPageSize: (pageSize: number) => void
-  setCurrentPage: (currentPage: number) => void
+  pageSize: number;
+  currentPage: number;
+  start: number;
+  end: number;
+  total: number;
+  totalPages: number;
+  setPageSize: (pageSize: number) => void;
+  setCurrentPage: (currentPage: number) => void;
 }
 
 export function TablePagination({
@@ -28,16 +28,16 @@ export function TablePagination({
   total,
   totalPages,
 }: PaginationProps) {
+  const hasData = total > 0;
+
   return (
     <div className="flex items-center justify-between gap-4 p-4">
+      {/* PAGE SIZE */}
       <div className="flex items-center gap-2 text-xs">
         Show
         <Select
           value={String(pageSize)}
-          onValueChange={(v) => {
-            setPageSize(Number(v));
-            setCurrentPage(1);
-          }}
+          onValueChange={(v) => setPageSize(Number(v))}
         >
           <SelectTrigger className="h-8 w-17.5">
             <SelectValue />
@@ -52,16 +52,19 @@ export function TablePagination({
         </Select>
       </div>
 
+      {/* RANGE + PAGINATION */}
       <div className="flex items-center gap-6">
         <span className="text-xs">
-          {total === 0 ? 0 : `${start + 1}-${Math.min(end, total)}`} of {total}
+          {hasData ? `${start}-${end}` : '0'} of {total}
         </span>
 
-        <Pagination
-          totalPages={totalPages}
-          currentPage={currentPage}
-          onPageChange={setCurrentPage}
-        />
+        {hasData && totalPages > 1 && (
+          <Pagination
+            totalPages={totalPages}
+            currentPage={currentPage}
+            onPageChange={setCurrentPage}
+          />
+        )}
       </div>
     </div>
   );

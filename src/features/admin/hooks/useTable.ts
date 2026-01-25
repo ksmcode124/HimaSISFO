@@ -17,7 +17,6 @@ export function useTable<TData>(
   data: TData[],
   columns: ColumnDef<TData>[],
 ) {
-  /* ================= STATE ================= */
   const [globalFilter, setGlobalFilter] = React.useState('');
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] =
@@ -26,7 +25,6 @@ export function useTable<TData>(
   const [currentPage, setCurrentPage] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(10);
 
-  /* ================= TABLE ================= */
   const table = useReactTable({
     data,
     columns,
@@ -51,17 +49,34 @@ export function useTable<TData>(
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
 
-  /* ================= PAGINATION ================= */
-  const sortedRows = table.getSortedRowModel().rows;
-  const totalPages = Math.max(1, Math.ceil(sortedRows.length / pageSize));
+  /* Sort Update */
+  const processedRows = table.getRowModel().rows;
 
-  const start = (currentPage - 1) * pageSize;
-  const end = start + pageSize;
-  const paginatedRows = sortedRows.slice(start, end);
+  const totalPages = Math.max(1, Math.ceil(processedRows.length / pageSize));
 
+  const startIndex = (currentPage - 1) * pageSize;
+  const paginatedRows = processedRows.slice(
+    startIndex,
+    startIndex + pageSize,
+  );
+
+  // Untuk UI ("1–10 of 42")
+  const start =
+    processedRows.length === 0 ? 0 : startIndex + 1;
+  const end = Math.min(startIndex + pageSize, processedRows.length);
+
+  // Reset page kalau state table berubah
   React.useEffect(() => {
     setCurrentPage(1);
   }, [globalFilter, sorting, columnFilters, pageSize]);
+
+  // Guard: jangan sampai page overflow
+  React.useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages);
+    }
+  }, [currentPage, totalPages]);
+
 
   return {
     table,
@@ -81,7 +96,7 @@ export function useTable<TData>(
     setPageSize,
 
     paginatedRows,
-    sortedRows,
+    sortedRows: processedRows, 
     start,
     end,
     totalPages,

@@ -8,14 +8,13 @@ import { useModal } from '@/features/admin/hooks/useModal';
 import * as React from 'react';
 import { useConfirm } from '@/features/admin/hooks/useConfirm';
 import { Kabinet } from '@/lib/types/interface';
-import { kegiatanColumns } from '@/features/admin/components/columns/kegiatan-columns';
 import { kabinetColumns } from '@/features/admin/components/columns/kabinet-columns';
 import { DetailModal } from '@/features/admin/components/DetailModal';
 import { FormModal } from '@/features/admin/components/FormModal';
 import { cabinetEditFields } from '@/features/admin/components/forms/kabinet-form-config';
 
 export default function KabinetPage() {
-  const { data, isLoading, saveData, deleteData } = useKabinet();
+  const { data, isLoading, saveData, deleteData, error } = useKabinet();
   const modal = useModal();
   const { detail, isLoadingModal } = useKabinetDetail(modal.id);
   const confirm = useConfirm();;
@@ -45,6 +44,8 @@ export default function KabinetPage() {
 
       <AdminTable
         data={data}
+        loading={isLoading}
+        error={error}
         columns={kabinetColumns({
           onView: modal.openView,
           onEdit: modal.openEdit,
