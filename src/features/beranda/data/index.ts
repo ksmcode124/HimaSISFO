@@ -24,7 +24,7 @@ const data = {
     "history": {
         "title": "Sejarah HIMASISFO",
         "image_url": "image_sejarah.jpg",
-        "content": "HIMASISFO berdiri seiring dengan dibukanya Program Studi Sistem Informasi UPN \"Veteran\" Yogyakarta. Prodi resmi berdiri tahun 2016 dan menerima mahasiswa pada 2017. HIMASISFO diresmikan pada 16 November 2018."
+        "content": " Sejarah Himpunan Mahasiswa Sistem Informasi (HIMASISFO) tidak dapat dipisahkan dari riwayat berdirinya Program  Sistem Informasi itu sendiri di Universitas Pembangunan Nasional \"Veteran\" Yogyakarta. Prodi S1 Sistem Informasi  secara resmi didirikan berdasarkan Surat Keputusan Pendirian Program Studi nomor 82/KPT/I/2016. Berbekal  hal tersebut, UPN \"Veteran\" Yogyakarta membuka penerimaan mahasiswa baru untuk pertama kalin pada tahun 2017. Proses perumusan organisasi ini dimotori oleh tujuh mahasiswa dari angkatan 2017 yaitu: Azyumardi Azra, Lintang Hakimi, Fagil Arya Baskoro, Daffa Aulia Zakharia, Fairuz Akmal Lanang, Brilliant Hanif Almubarak, dan Naufal Fakhri. Setelah melalui serangkaian diskusi dan proses perumusan yang intensif, Himpunan Mahasiswa Program Studi Sistem Informasi, yang kemudian disingkat menjadi HIMASISFO, secara resmi diresmikan pada hari Jumat, tanggal 16 November 2018. Tanggal ini menjadi tonggak sejarah yang menandai lahirnya sebuah institusi kemahasiswaan yang dibangun dari nol oleh para perintisnya.  "
     },
 
     "statistics": [

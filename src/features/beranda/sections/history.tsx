@@ -3,7 +3,8 @@ import { HistorySection } from "../types";
 
 export default function History() {
     const { history, statistics } = berandaData;
-    return <div className="relative">
+    return <div className="relative h-fit">
+        <img src="/assets/beranda/awan/sejarah.svg" className="absolute bottom-0 w-1/3 lg:w-1/2 lg:right-0" alt="" />
         <div className="min-h-screen py-30 lg:py-60 mx-16">
             <div className="grid lg:grid-cols-2 gap-8">
                 <div className="relative">
