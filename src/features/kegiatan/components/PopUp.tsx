@@ -6,38 +6,39 @@ import { ModalLayer } from "@/components/layout/Layer";
 import { Button } from "@/components/ui/button";
 import { formatDate } from "../utils/FormatDate";
 import { X } from "lucide-react";
-import { div, span } from "framer-motion/client";
+import { SingleEventSpec, MultipleEventSpec } from "../types";
 
 type ModalProps = {
   open: boolean;
   onClose: () => void;
-  event: {
-    title: string;
-    start: Date;
-    end: Date;
-  };
-  type: string;
-};
+  type: "event" | "calendar";
+} & (SingleEventSpec | MultipleEventSpec);
 
-export function Modal({ open, onClose, event, type }: ModalProps) {
+export function Modal(props: ModalProps) {
+  const { open, onClose, type } = props;
   const [mounted, setMounted] = useState(false);
-  const today = new Date();
+
   useEffect(() => {
     setMounted(true);
     return () => setMounted(false);
   }, []);
 
   if (!mounted || !open) return null;
-  const start = new Date(event.start); // event mulai
-  const end = new Date(event.end);
+
+  const event = props.mode === "single" ? props.event : "";
+  const events = props.mode === "multiple" ? [props.events] : [];
+  console.log(events, event);
+  console.log(event)
+  const today = Date.now();
+  // const start = event.start.getTime();
+  // const end = event.end.getTime();
+  console.log(document.getElementById)
   return createPortal(
     <div className="fixed inset-0 z-50">
-      <div
-        className="absolute inset-0 bg-black/50"
-        onClick={onClose}
-      />
+      <div className="absolute inset-0 bg-black/50" onClick={onClose} />
+
       <ModalLayer>
-        {type === "event" ? (
+        {type === "event" && props.mode === "single" && (
           <div className="flex w-fit h-fit flex-col rounded-[20px] overflow-hidden">
             <header className="p-4 text-[13px] md:text-sm font-semibold text-white flex flex-row items-center gap-3 bg-gradient-to-b from-[#1B3C53] to-[#456882]">
               <svg
@@ -79,7 +80,7 @@ export function Modal({ open, onClose, event, type }: ModalProps) {
             </header>
 
             <main className="flex flex-col p-2 gap-3 px-5 bg-white ">
-              <h2 className="text-sm md:text-md font-medium text-[#323257]">{event.title}</h2>
+              <h2 className="text-sm md:text-md font-medium text-[#323257]">{props.event.title}</h2>
               <p className="max-w-[320px] break-words text-[10px] md:text-sm">Event ini belum dapat diakses karena belum berlangsung. Silakan tunggu hingga tanggal event dimulai untuk melihat detail selengkapnya.</p>
               <div className="flex items-stretch flex-row gap-3 bg-gradient-to-b from-[#F0F4F8] to-[#E6EEF5] rounded-[12px] px-5">
                 <div className="flex items-center justify-center ">
@@ -139,7 +140,7 @@ export function Modal({ open, onClose, event, type }: ModalProps) {
 
                 <div className="flex flex-col py-2 pr-3">
                   <p className="text-[10px] md:text-sm font-medium text-[#323257]">Tanggal Event</p>
-                  <p className="text-[10px] md:text-sm text-[#6B7280]">{formatDate(event.start, "name")}</p>
+                  <p className="text-[10px] md:text-sm text-[#6B7280]">{formatDate(props.event.start, "name")}</p>
                 </div>
               </div>
             </main>
@@ -154,29 +155,81 @@ export function Modal({ open, onClose, event, type }: ModalProps) {
               </Button>
             </footer>
           </div>
-        ) :
-          type === "calendar" ? (
-            <div className="flex w-fit h-fit flex-col rounded-[20px] overflow-hidden bg-white p-4">
-              <div className="flex flex-row justify-between gap-30 items-center mb-4">
-                <h2>{event.title}</h2>
-                <X onClick={(e) => {
+        )}
+        {type === "calendar" && props.mode === "single" && (
+          <div className="flex w-fit flex-col rounded-[20px] bg-[#EDF3F6CC] p-5 text-[var(--color-dark-blue)]">
+            <div className="flex justify-between items-center mb-3 z">
+              <h2 className="font-semibold text-[20px]">{props.event.title}</h2>
+              <X
+                className="cursor-pointer"
+                onClick={(e) => {
                   e.stopPropagation();
                   onClose();
-                }}>Close</X>
-              </div>
-              {start <= today && today <= end ? (
-                <span>Berlangsung</span>
-              ) : (
-                <span>Belum berlangsung</span>
-              )}
-              <span>Mulai   : {formatDate(event?.start, "fullDate")}</span>
-              <span>Selesai : {formatDate(event?.end, "fullDate")}</span>
-
+                }}
+              />
             </div>
-          ) :
-            null
-        }
 
+            <div className="text-sm flex flex-col gap-3">
+              <div className="font-medium">
+                {today < props.event.start.getTime() ? (
+                  <span className="px-4 py-2 bg-[#99B6D9] rounded">Belum</span>
+                ) : today > props.event.end.getTime() ? (
+                  <span className="px-4 py-2 bg-[#99B6D9] rounded">Selesai</span>
+                ) : (
+                  <span className="px-4 py-2 bg-[#99B6D9] rounded">Sekarang</span>
+                )}
+              </div>
+
+              <div className="grid grid-cols-[1fr_3fr] gap-2">
+                <span>Mulai</span>
+                <span>: {formatDate(props.event.start, "fullDate")}</span>
+
+                <span>Selesai</span>
+                <span>: {formatDate(props.event.end, "fullDate")}</span>
+              </div>
+            </div>
+          </div>
+        )}
+        {type === "calendar" && props.mode === "multiple" && (
+          <div className="flex w-fit flex-col rounded-[20px] bg-[#EDF3F6CC] p-5 text-[var(--color-dark-blue)] gap-5">
+
+            {Array.from(props.events).map((event, idx) => {
+              return (
+                <div key={event.id}>
+                  <div className="flex justify-between items-center mb-3 z">
+                    <h2 className="font-semibold text-[20px]">{event.title}</h2>
+                    {idx === 0 && (<X
+                      className="cursor-pointer"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onClose();
+                      }}
+                    />)}
+
+                  </div>
+                  <div className="text-sm flex flex-col gap-3">
+                    <div className="font-medium">
+                      {today < event.start.getTime() ? (
+                        <span className="px-4 py-2 bg-[#99B6D9] rounded">Belum</span>
+                      ) : today > event.end.getTime() ? (
+                        <span className="px-4 py-2 bg-[#99B6D9] rounded">Selesai</span>
+                      ) : (
+                        <span className="px-4 py-2 bg-[#99B6D9] rounded">Sekarang</span>
+                      )}
+                    </div>
+                    <div className="grid grid-cols-[1fr_3fr] gap-2">
+                      <span>Mulai</span>
+                      <span>: {formatDate(event.start, "fullDate")}</span>
+                      <span>Selesai</span>
+                      <span>: {formatDate(event.end, "fullDate")}</span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+
+          </div>
+        )}
       </ModalLayer>
     </div>,
     document.body
