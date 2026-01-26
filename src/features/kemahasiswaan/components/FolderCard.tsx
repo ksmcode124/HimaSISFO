@@ -60,7 +60,7 @@ export function FolderCard({
             ${headerBgClass}
             w-[70%]
             min-h-10 sm:min-h-11 md:min-h-12
-            rounded-t-xl
+            rounded-t-xl overflow-hidden
             translate-y-[1px]
             border-t-2 border-x-2 ${borderClass}
             px-4 md:px-5
