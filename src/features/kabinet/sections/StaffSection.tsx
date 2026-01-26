@@ -3,7 +3,7 @@
 import React from "react";
 import {
   Ornament1,
-  Ornament2,
+  Ornament9,
   Ornament4,
   Ornament5,
 } from "../components/KabinetOrnaments";
@@ -15,13 +15,8 @@ interface StaffSectionProps {
 }
 
 export default function StaffSection({ data }: StaffSectionProps) {
-  const kadep = data.find(
-    (a) =>
-      a.jabatan.toLowerCase().includes("kepala")
-  );
-  const wakadep = data.find((a) =>
-    a.jabatan.toLowerCase().includes("wakil"),
-  );
+  const kadep = data.find((a) => a.jabatan.toLowerCase().includes("kepala"));
+  const wakadep = data.find((a) => a.jabatan.toLowerCase().includes("wakil"));
   const sekben = data.find(
     (a) =>
       a.jabatan.toLowerCase().includes("sekben") ||
@@ -31,10 +26,7 @@ export default function StaffSection({ data }: StaffSectionProps) {
 
   // staff = semua yang bukan kadep, wakadep, atau sekben
   const staffDepartemen = data.filter(
-    (a) => 
-      a.id !== kadep?.id && 
-      a.id !== wakadep?.id && 
-      a.id !== sekben?.id
+    (a) => a.id !== kadep?.id && a.id !== wakadep?.id && a.id !== sekben?.id,
   );
 
   const hasSekben = !!sekben;
@@ -57,7 +49,7 @@ export default function StaffSection({ data }: StaffSectionProps) {
       <div className="relative z-10 flex flex-col items-center mb-10 md:mb-20 w-full">
         <div className="flex flex-row -mt-10 items-center justify-center">
           <div className="w-40 md:w-80 scale-90 md:scale-110 origin-right translate-y-6 -mr-18 md:-mr-44 transition-all">
-            <Ornament2 />
+            <Ornament9 />
           </div>
           <div className="flex flex-col items-center z-20">
             <div className="w-56 md:w-110 rotate-2 -translate-y-1 md:-translate-y-10 transition-all">
@@ -66,7 +58,7 @@ export default function StaffSection({ data }: StaffSectionProps) {
           </div>
           <div className="w-40 md:w-80 scale-90 md:scale-110 origin-left translate-y-6 -ml-18 md:-ml-44 transition-all">
             <div className="scale-x-[-1]">
-              <Ornament2 />
+              <Ornament9 />
             </div>
           </div>
         </div>
@@ -74,8 +66,8 @@ export default function StaffSection({ data }: StaffSectionProps) {
 
       {/* INTI DEPARTEMEN */}
       <div className="relative w-full max-w-7xl px-10 flex flex-col items-center mb-40">
-        <div className="relative flex flex-row items-center mb-20">
-          <h2 className="text-lg md:text-3xl font-bold tracking-tight text-black">
+        <div className="relative flex flex-row items-center mb-30">
+          <h2 className="text-lg md:text-3xl font-bold text-[#2D2D51]">
             Inti Departemen
           </h2>
         </div>
@@ -93,7 +85,7 @@ export default function StaffSection({ data }: StaffSectionProps) {
         {/* Kadep */}
         {kadep && (
           <div className="col-span-2 flex justify-center md:contents">
-            <div className="w-40 h-52 md:w-50 md:h-62 lg:w-60 lg:h-80 md:order-2 flex items-center justify-center">
+            <div className="-mt-6 w-40 h-52 md:w-50 md:h-62 lg:w-60 lg:h-80 md:order-2 flex items-center justify-center">
               <StaffCard data={kadep} index={0} customCard={5} />
             </div>
           </div>
@@ -128,8 +120,8 @@ export default function StaffSection({ data }: StaffSectionProps) {
 
       {/* STAFF DEPARTEMEN */}
       <div className="relative z-10 w-full max-w-7xl px-10 flex flex-col items-center">
-        <div className="relative flex flex-row items-center mt-20">
-          <h2 className="text-lg md:text-3xl font-bold tracking-tight text-black">
+        <div className="relative flex flex-row items-center mt-20 mb-20 md:mb-0">
+          <h2 className="text-lg md:text-3xl font-bold text-[#2D2D51]">
             Staff Departemen
           </h2>
         </div>
@@ -137,7 +129,7 @@ export default function StaffSection({ data }: StaffSectionProps) {
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-8 md:gap-x-32">
           {staffDepartemen.map((staff, i) => (
             <div key={staff.id} className="flex flex-col items-center">
-              <div className="w-36 md:w-52 -mt-20 md:mt-0 flex items-center justify-center relative">
+              <div className="w-36 md:w-52 -mt-40 md:mt-0 flex items-center justify-center relative">
                 <StaffCard key={staff.id} data={staff} index={i} />
               </div>
             </div>

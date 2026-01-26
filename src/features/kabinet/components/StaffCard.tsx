@@ -22,7 +22,36 @@ export default function StaffCard({ data, index, customCard }: StaffCardProps) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const imageStyle = "object-contain scale-[1.5] transition-all ease-out";
+  // LOGIC SKALA FOTO
+  const getStyleConfig = () => {
+    const jabatan = data.jabatan.toLowerCase();
+    if (jabatan === "kepala departemen") {
+      return {
+        scale: "scale-[1.2]",
+        margin: "-mt-6",
+        clip: "inset(0 0 40% 0)",
+      };
+    }
+    if (
+      jabatan.toLowerCase().includes("wakil") ||
+      jabatan.toLowerCase().includes("sekben")
+    ) {
+      return {
+        scale: "scale-[0.9]",
+        margin: "-mt-5",
+        clip: "inset(0 0 42% 0)",
+      };
+    }
+    return {
+      scale: "scale-[1.6]",
+      margin: "mt-8",
+      clip: "inset(0 0 40% 0)",
+    };
+  };
+
+  const config = getStyleConfig();
+
+  const imageStyle = `object-contain ${config.scale} ${config.margin} transition-all duration-300 ease-out`;
 
   // LOGIC PEMILIHAN CARD
   let activeBg;
@@ -89,7 +118,7 @@ export default function StaffCard({ data, index, customCard }: StaffCardProps) {
         {/* LAYER 3: Kepala Keluar Frame */}
         <div
           className={`absolute inset-0 z-30 transition-all duration-300 ease-out ${translateClass}`}
-          style={{ clipPath: "inset(0 0 40% 0)" }}
+          style={{ clipPath: config.clip }}
         >
           <Image
             src={data.foto_anggota || "/assets/kabinet/placeholder-person.webp"}
@@ -102,13 +131,15 @@ export default function StaffCard({ data, index, customCard }: StaffCardProps) {
         {/* Nametag */}
         <div className="absolute inset-0 z-40 flex justify-center items-center drop-shadow-[15px_10px_7px_rgba(0,0,0,0.3)] pointer-events-none">
           <div
-            className={`relative w-full h-full mt-64 transition-all duration-300 ease-out ${nameTagClass}`}
+            className={`relative w-full h-full mt-52 md:mt-64 transition-all duration-300 ease-out ${nameTagClass}`}
           >
             <div className="absolute inset-0 flex flex-col text-center justify-center">
-              <span className="text-black font-bold text-xs md:text-md drop-shadow-md">
-                {data.jabatan}
-              </span>
-              <span className="text-black text-xs md:text-md font-semibold">
+              {!data.jabatan.toLowerCase().includes("staff") && (
+                <span className="text-[#2D2D51] font-bold text-xs md:text-md drop-shadow-md">
+                  {data.jabatan}
+                </span>
+              )}
+              <span className="text-[#2D2D51] text-xs md:text-md font-bold">
                 {data.nama_anggota}
               </span>
             </div>
