@@ -152,7 +152,8 @@ function BehindTheWeb() {
       </div>
     </div>
     <Pita className="top-0 -mt-30 block" />
-    <Pita className="-bottom-30 block" />
+    <Pita className="-bottom-30 absolute z-3" />
+    <img src="/assets/beranda/spotify-wave.svg" className="absolute w-full top-120 md:top-100 lg:top-0 z-1" alt="" />
   </div>
 }
 

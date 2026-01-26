@@ -16,8 +16,7 @@ export default function Spotify() {
   const episodes = berandaData.media.spotify;
 
   return (
-    <div className="pr-20 pt-15 relative">
-
+    <div className="pr-20 pt-15 relative overflow-hidden">
       <section className="z-2 relative w-full rounded-br-[15rem] rounded-tr-2xl bg-linear-to-br from-green-500 to-green-800 p-10 text-white overflow-hidden">
         {/* Header */}
         <div className="flex items-center gap-3 mb-8">
