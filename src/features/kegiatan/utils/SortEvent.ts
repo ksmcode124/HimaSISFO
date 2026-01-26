@@ -1,6 +1,6 @@
 import { EventWithVariantProps, SortedSingleEventsProps } from "../types";
 import { EventCardProps } from "../types";
-
+import { toDateKey } from "./Calculate";
 
 function getDayRange(day: Date) {
   const start = new Date(day);
@@ -12,10 +12,7 @@ function getDayRange(day: Date) {
   return { start, end };
 }
 
-export function sortEventsByDay(
-  events: EventCardProps[],
-  day: Date
-) {
+export function sortEventsByDay(events: EventCardProps[], day: Date) {
   const { start: dayStart, end: dayEnd } = getDayRange(day);
 
   return [...events].sort((a, b) => {
@@ -38,7 +35,7 @@ export function sortEventsByDay(
 
 // untuk event pass, ongoing, future
 export function sortEvents(
-  events: EventWithVariantProps[]
+  events: EventWithVariantProps[],
 ): SortedSingleEventsProps {
   const now = new Date();
 
@@ -46,16 +43,22 @@ export function sortEvents(
     .filter((e) => e.start < now)
     .sort((a, b) => b.start.getTime() - a.start.getTime())[0];
 
-  const nextOnGoing = events
-    .filter((e) => e.start > now)
-    .sort((a, b) => a.start.getTime() - b.start.getTime())[0];
+  const nextOnGoing = (() => {
+    const next = events
+      .filter((e) => e.start > now)
+      .sort((a, b) => a.start.getTime() - b.start.getTime())[0];
+
+    return next
+      ? events.filter((e) => toDateKey(e.start) === toDateKey(next.start))
+      : [];
+  })();
 
   const futureNotGoing = nextOnGoing
     ? events
-        .filter((e) => e.start > nextOnGoing.start)
+        .filter((e) => e.start > nextOnGoing[0].start)
         .sort((a, b) => a.start.getTime() - b.start.getTime())[0]
     : undefined;
-
+  // console.log({ pastNotGoing, nextOnGoing, futureNotGoing });
   return { pastNotGoing, nextOnGoing, futureNotGoing };
 }
 

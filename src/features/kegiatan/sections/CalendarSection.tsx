@@ -56,7 +56,7 @@ export async function CalendarSection() {
       <DecorationLayer className="px-0">
         <CalendarDecoration />
       </DecorationLayer>
-      <ContentLayer className="px-1 md:px-20 xl:px-60 pb-30">
+      <ContentLayer className="md:px-20 xl:px-60 pb-30">
         <CalendarContent events={events} />
       </ContentLayer>
       <OverlayLayer className="px-5 justify-center">

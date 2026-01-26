@@ -6,11 +6,11 @@ export default async function Page({ params }: { params: Promise<{ detail: strin
     const { detail } = await params;
     return (
         <>
-            <BackgroundLayer>
-                <RoundedBg align="start" />
-                <RoundedBg align="end" />
-            </BackgroundLayer>
             <div className="relative flex-col items-start mt-10">
+                <BackgroundLayer>
+                    <RoundedBg align="start" />
+                    <RoundedBg align="end" />
+                </BackgroundLayer>
                 <EventDetailSection id={detail} />
             </div>
         </>

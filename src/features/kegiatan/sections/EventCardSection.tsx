@@ -1,8 +1,8 @@
-import { 
-    DecorationLayer, 
-    ContentLayer, 
-    OverlayLayer, 
- } from '@/components/layout/Layer'
+import {
+  DecorationLayer,
+  ContentLayer,
+  OverlayLayer,
+} from '@/components/layout/Layer'
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react"
 import { getEvents } from '../services/eventService';
@@ -10,11 +10,12 @@ import { EventCardProps } from '../types';
 import { sortEvents } from '../utils/SortEvent';
 import { EventCard } from '../components/EventCard';
 import { formatMonthName } from '../utils/FormatDate';
+import { ShowNextEvent } from '../components/ShowNextEvent';
 
 function EventCardDecoration() {
-    return (
-        <div className="h-full bg-gradient-to-b from-[#486EAB] to-[#EDF3F6] ">ini dekorasi</div>
-    );
+  return (
+    <div className="h-full bg-gradient-to-b from-[#486EAB] to-[#EDF3F6] ">ini dekorasi</div>
+  );
 }
 
 function EventCardContent({ events }: { events: EventCardProps[] }) {
@@ -30,8 +31,14 @@ function EventCardContent({ events }: { events: EventCardProps[] }) {
           {pastNotGoing && <EventCard variant="notGoing" {...pastNotGoing} />}
         </div>
         <div className="w-full min-w-0">
-          <h2 className="h-fit w-full text-center uppercase py-5 md:py-10 font-semibold text-[12px] md:text-2xl xl:text-3xl text-[var(--color-nile-blue)]">Berikutnya</h2>
-          {nextOnGoing && <EventCard variant="onGoing" {...nextOnGoing} />}
+          {nextOnGoing && (
+            <div className="flex justify-center items-center gap-3 md:gap-5">
+              <h2 className="h-fit w-fit text-center uppercase py-5 md:py-10 font-semibold text-[12px] md:text-2xl xl:text-3xl text-[var(--color-nile-blue)]">Berikutnya</h2>
+              <span className="bg-[var(--color-nile-blue)] rounded-full w-10 h-10 flex items-center justify-center font-normal text-[12px] md:text-xl xl:text-2xl text-white">{nextOnGoing.length}</span>
+            </div>
+          )}
+
+          {nextOnGoing && (<ShowNextEvent events={nextOnGoing} />)}
         </div>
         <div className="w-full min-w-0">
           <h2 className="h-fit w-full text-center uppercase py-5 md:py-10 font-semibold text-[12px] md:text-2xl xl:text-3xl text-[var(--color-nile-blue)]">Mendatang</h2>
@@ -53,18 +60,18 @@ function EventCardContent({ events }: { events: EventCardProps[] }) {
 }
 
 export async function EventCardSection() {
-    const events = await getEvents();
-    return (
-        <section className="relative p-0 m-0 top-0">
-            <DecorationLayer className=" top-1/4">
-                <EventCardDecoration />
-            </DecorationLayer>
-            <ContentLayer className="px-5 md:px-10 xl:px-40 pb-30">
-                <EventCardContent events={events} />
-            </ContentLayer>
-            <OverlayLayer>
-                <div></div>
-            </OverlayLayer>
-        </section>
-    )
+  const events = await getEvents();
+  return (
+    <section className="relative p-0 m-0 top-0">
+      <DecorationLayer className=" top-1/4">
+        <EventCardDecoration />
+      </DecorationLayer>
+      <ContentLayer className="px-5 md:px-10 xl:px-40 pb-30">
+        <EventCardContent events={events} />
+      </ContentLayer>
+      <OverlayLayer>
+        <div></div>
+      </OverlayLayer>
+    </section>
+  )
 }

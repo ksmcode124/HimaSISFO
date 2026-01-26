@@ -26,19 +26,21 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
       className={`fixed w-full top-5 z-50 lg:bg-[#101D2F]/50 rounded-full h-fit ${className}`}
       role="banner"
     >
-      <LiquidGlass className='border-l-white' borderRadius={200}>
+      <LiquidGlass className='border-1 border-white' borderRadius={50}>
         <nav
           className="py-3 px-20"
           aria-label="Main navigation"
         >
           <div className="flex h-14 justify-between items-center gap-6">
             {/* Logo & Back Button*/}
+            
             <Link href="/" className={`flex items-center ${pillStyle}`} aria-label="Home">
               <Image
                 width={42}
                 height={42}
                 src={'/assets/shared/logos/logo-himasisfo.webp'}
                 alt={'HIMASISFO'}
+                className="drop-shadow-2xl"
                 priority />
 
               {/* TODO: 
@@ -59,7 +61,7 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
                           `shadow-[0_4px_10px_var(--color-neutral-400)] w-full text-center
                         text-sm font-medium text-white border border-neutral-50/50 rounded-full px-3 py-1
                         ${pathname !== item.href ? "bg-white/30" :
-                            "bg-linear-to-r from-silver-chalice/50 to-cloud-burst/50"} `}>
+                            "bg-linear-to-r from-[#A6CFE1] to-[#265A8C]"} `}>
                         {item.label}
                       </Link>
                     </li>
