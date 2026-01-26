@@ -40,7 +40,7 @@ export function PendaftaranVerifikasiDetailSection({ item }: Props) {
           />
         </div>
         <FolderCard hasLayer title="Pendaftaran dan Verifikasi" heightClass="h-[70%] lg:h-[80%]">
-          <h1 className="sticky top-0 bg-[#EDF3F6] text-base sm:text-lg md:text-xl lg:text-3xl py-2 sm:py-4 md:py-6 lg:py-8 font-semibold text-center">
+          <h1 className="sticky top-0 bg-[#EDF3F6] text-sm sm:text-lg md:text-xl lg:text-3xl py-2 sm:py-4 md:py-6 lg:py-8 font-semibold text-center">
             {item.title}
           </h1>
 

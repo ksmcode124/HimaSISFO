@@ -69,7 +69,7 @@ export function FolderCard({
           `}
         >
           {title ? (
-            <h1 className="text-base sm:text-lg md:text-xl lg:text-3xl font-semibold truncate">
+            <h1 className="text-sm sm:text-lg md:text-xl lg:text-3xl font-semibold truncate">
               {title}
             </h1>
           ) : (

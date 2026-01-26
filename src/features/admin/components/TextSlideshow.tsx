@@ -48,7 +48,7 @@ export default function TextSlideshow() {
       >
         {textSlides.map((textSlide, idx) => (
           <SwiperSlide key={idx} className="text-center">
-            <div className="flex flex-col gap-5 text-base">
+            <div className="flex flex-col gap-5 text-sm">
               <h1 className="font-bold text-5xl md:text-7xl">{textSlide.title}</h1>
               <ReactMarkdown
                 components={{

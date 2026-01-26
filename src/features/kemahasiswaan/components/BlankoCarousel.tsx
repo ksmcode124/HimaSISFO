@@ -130,7 +130,7 @@ function BlankoCardItem({
               <Button variant={"hima"} asChild>
                 <Link
                   href={isGoogleDocs ? `${encodeURIComponent(card.filepath)}/export?format=docx` : "#"}
-                  className="flex gap-2 min-w-[70%] items-center text-xs lg:text-base px-3.5 py-1 sm:px-6 sm:py-1.5 md:px-8.5 md:py-2 lg:px-11 lg:py-4 2xl:px-11 2xl:py-5" 
+                  className="flex gap-2 min-w-[70%] items-center text-xs lg:text-sm px-3.5 py-1 sm:px-6 sm:py-1.5 md:px-8.5 md:py-2 lg:px-11 lg:py-4 2xl:px-11 2xl:py-5" 
                   >
                   Unduh <Download size={14} />
                 </Link>
