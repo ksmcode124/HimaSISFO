@@ -80,6 +80,7 @@ export default function LoginPage() {
 
               <Button type="submit" className="bg-[#3385FF] h-12 px-8 py-2 text-base font-medium w-full">
                 {loading ? '...' : 'Login'}
+                
               </Button>
             </FieldSet>
           </form>
