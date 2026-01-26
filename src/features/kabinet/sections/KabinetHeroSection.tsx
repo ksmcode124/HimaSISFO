@@ -1,15 +1,15 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import { LiquidGlass } from "@liquidglass/react";
 import { Button } from "@/components/ui/button";
 import { Pita, Ornament2 } from "../components/KabinetOrnaments";
 import PhotoSlideshowMobile from "../components/PhotoSlideshowMobile";
 import { Kabinet, KabinetListItem } from "../types";
-import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { LiquidGlass } from "@liquidglass/react";
-import Image from "next/image";
 
 interface KabinetHeroSectionProps {
   currentKabinet: Kabinet;
@@ -21,11 +21,29 @@ export default function KabinetHeroSection({
   kabinetList,
 }: KabinetHeroSectionProps) {
   const router = useRouter();
-
-  // SLIDESHOW LOGIC
   const images = currentKabinet?.foto_kabinet || [];
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
 
+  const navigation = useMemo(() => {
+    if (!currentKabinet || !kabinetList) return null;
+
+    const sorted = [...kabinetList].sort(
+      (a, b) =>
+        parseInt(a.tahun_kerja.split("/")[0]) -
+        parseInt(b.tahun_kerja.split("/")[0]),
+    );
+
+    const currentIndex = sorted.findIndex(
+      (k) => Number(k.id_kabinet) === Number(currentKabinet.id),
+    );
+
+    const prev = sorted[currentIndex - 1];
+    const next = sorted[currentIndex + 1];
+
+    return { prev, next };
+  }, [currentKabinet, kabinetList]);
+
+  // SLIDESHOW TIMER
   useEffect(() => {
     if (images.length <= 1) return;
     const timer = setInterval(() => {
@@ -36,29 +54,33 @@ export default function KabinetHeroSection({
 
   if (!currentKabinet) return null;
 
-  // YEAR BUTTON LOGIC
-  const currentIndex = kabinetList.findIndex(
-    (k) => Number(k.id_kabinet) === Number(currentKabinet.id),
-  );
-
-  const nextKabinet = kabinetList[currentIndex - 1];
-  const prevKabinet = kabinetList[currentIndex + 1];
+  // HELPER FOR LABELS
+  const getYearLabel = (
+    targetKabinet: KabinetListItem | undefined,
+    offset: number,
+  ) => {
+    return (
+      targetKabinet?.tahun_kerja ||
+      getOffsetYear(currentKabinet.tahun_kerja, offset)
+    );
+  };
 
   return (
     <div className="relative w-full">
-      <section className="relative w-full min-h-[60vh] md:min-h-screen lg:min-h-[130vh] xl:min-h-[110vh] 2xl:min-h-screen flex flex-col items-center justify-center bg-pink-100 text-white overflow-hidden">
+      <section className="relative w-full min-h-[60vh] md:min-h-screen lg:min-h-[130vh] xl:min-h-[110vh] 2xl:min-h-screen flex flex-col items-center justify-center text-white bg-[#F4E8FF] overflow-hidden">
         <DesktopBackground images={images} activeIndex={currentImgIndex} />
         <MobileBackground />
-        <div className="absolute top-10 sm:top-12 md:top-25 z-20 w-full flex justify-center items-start">
+
+        <div className="absolute top-30 sm:top-32 md:top-30 z-20 w-full flex justify-center items-start">
           <div className="relative flex items-start justify-center gap-4 sm:gap-10 md:gap-16 lg:gap-24">
             <div className="flex flex-col items-center relative">
               <YearButton
-                label={prevKabinet?.tahun_kerja || "___/___"}
+                label={getYearLabel(navigation?.prev, -1)}
                 onClick={() =>
-                  prevKabinet &&
-                  router.push(`/kabinet/${prevKabinet.id_kabinet}`)
+                  navigation?.prev &&
+                  router.push(`/kabinet/${navigation.prev.id_kabinet}`)
                 }
-                disabled={!prevKabinet}
+                disabled={!navigation?.prev}
               />
               <OrnamentWrapper position="left" />
             </div>
@@ -70,13 +92,14 @@ export default function KabinetHeroSection({
             />
             <div className="flex flex-col items-center relative">
               <YearButton
-                label={nextKabinet?.tahun_kerja || "___/___"}
-                onClick={() =>
-                  nextKabinet
-                    ? router.push(`/kabinet/${nextKabinet.id_kabinet}`)
-                    : router.push("/coming-soon")
-                }
-                disabled={false}
+                label={getYearLabel(navigation?.next, 1)}
+                onClick={() => {
+                  if (navigation?.next) {
+                    router.push(`/kabinet/${navigation.next.id_kabinet}`);
+                  } else {
+                    router.push("/kabinet/coming-soon");
+                  }
+                }}
               />
               <OrnamentWrapper position="right" />
             </div>
@@ -84,7 +107,7 @@ export default function KabinetHeroSection({
         </div>
 
         <div className="grow" />
-        <div className="relative z-10 flex flex-col items-center text-center mt-35 md:mt-80">
+        <div className="relative z-10 flex flex-col items-center text-center mt-55 md:mt-80">
           <div className="drop-shadow-[5px_5px_2px_rgba(0,0,0,0.3)] md:mb-10 lg:mb-44 xl:mb-10 2xl:mb-52 md:mt-4">
             <div className="text-xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-8xl font-bold leading-15 md:leading-relaxed">
               <h1>SELAMAT DATANG DI</h1>
@@ -118,25 +141,30 @@ const DesktopBackground = ({
   activeIndex: number;
 }) => (
   <div className="absolute inset-0 hidden md:block z-0">
-    {images.map((src, index) => (
-      <motion.div
-        key={src}
-        initial={false}
-        animate={{ opacity: index === activeIndex ? 1 : 0 }}
-        transition={{ duration: 1.2 }}
-        className="absolute inset-0"
-        style={{ zIndex: index === activeIndex ? 10 : 0 }}
-      >
-        <Image
-          src={src}
-          alt="Foto Kabinet"
-          fill
-          className="object-cover"
-          priority={index === 0}
-          sizes="100vw"
-        />
-      </motion.div>
-    ))}
+    <AnimatePresence initial={false}>
+      {images.map(
+        (src, index) =>
+          index === activeIndex && (
+            <motion.div
+              key={src}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.2 }}
+              className="absolute inset-0"
+            >
+              <Image
+                src={src}
+                alt="Foto Kabinet"
+                fill
+                className="object-cover"
+                priority={index === 0}
+                sizes="100vw"
+              />
+            </motion.div>
+          ),
+      )}
+    </AnimatePresence>
   </div>
 );
 
@@ -173,7 +201,10 @@ const OrnamentWrapper = ({ position }: { position: "left" | "right" }) => {
       : "-left-10 sm:-left-12 md:-left-32 lg:-left-48";
   return (
     <div
-      className={`absolute top-full mt-2 sm:mt-4 w-40 sm:w-56 md:w-100 lg:w-130 drop-shadow-[5px_5px_2px_rgba(0,0,0,0.3)] pointer-events-none ${styles}`}
+      className={cn(
+        "absolute top-full mt-2 sm:mt-4 w-40 sm:w-56 md:w-100 lg:w-130 drop-shadow-[5px_5px_2px_rgba(0,0,0,0.3)] pointer-events-none",
+        styles,
+      )}
     >
       <Ornament2 />
     </div>
@@ -190,12 +221,13 @@ const YearButton = ({
   disabled?: boolean;
 }) => (
   <div className="relative group">
-    <LiquidGlass className="rounded-full overflow-hidden">
+    <div className="absolute inset-0 backdrop-blur-xs bg-white/10 rounded-full" />
+    <LiquidGlass className="rounded-full">
       <Button
         onClick={onClick}
         disabled={disabled}
         className={cn(
-          "group relative overflow-hidden w-fit h-8 md:h-auto px-3 md:px-8 py-2 rounded-3xl border md:border-2 border-white/50 bg-white/20 text-white text-xs md:text-xl font-medium hover:bg-black/95 transition-all duration-400 bg-[linear-gradient(to_right,black_50%,transparent_50%)] bg-size-[210%_100%] bg-position-[99%_0] hover:bg-position-[0%_0]! hover:border-white/50! disabled:opacity-50",
+          "group relative w-fit h-8 md:h-auto px-3 md:px-8 py-2 rounded-3xl border md:border-2 border-white/50 bg-white/10 text-white text-xs md:text-xl font-medium hover:bg-black/95 transition-all duration-400 bg-[linear-gradient(to_right,black_50%,transparent_50%)] bg-size-[210%_100%] bg-position-[99%_0] hover:bg-position-[0%_0]! hover:border-white/50! disabled:opacity-50",
         )}
       >
         <motion.div
@@ -214,3 +246,9 @@ const YearButton = ({
     </LiquidGlass>
   </div>
 );
+
+const getOffsetYear = (currentYear: string, offset: number) => {
+  if (!currentYear || !currentYear.includes("/")) return "___/___";
+  const [start, end] = currentYear.split("/").map((y) => parseInt(y) + offset);
+  return `${start}/${end}`;
+};

@@ -50,7 +50,7 @@ export default function FilosofiSection({ data }: FilosofiProps) {
         <div className="relative z-40 mt-10 w-full max-w-360 2xl:max-w-450 mx-auto flex flex-col lg:grid lg:grid-cols-3 gap-10 items-center">
           {/* LOGO */}
           <div className="flex justify-center items-center lg:order-2 w-full">
-            <div className="relative w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80 xl:w-md xl:h-112 2xl:w-137 2xl:h-137">
+            <div className="relative w-50 h-50 sm:w-72 sm:h-72 lg:w-80 lg:h-80 xl:w-md xl:h-112 2xl:w-137 2xl:h-137">
               {data.nama_kabinet === "Gelora Harmoni" && <LogoGeloraHarmoni />}
               {data.nama_kabinet === "Aksayapatra" && <LogoAksayapatra />}
             </div>

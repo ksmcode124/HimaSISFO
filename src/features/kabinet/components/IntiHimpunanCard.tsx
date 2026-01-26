@@ -50,7 +50,7 @@ export default function IntiHimpunanCard({ data, index }: CardProps) {
               src={
                 data.foto_anggota || "/assets/kabinet/placeholder-person.webp"
               }
-              alt= ""
+              alt=""
               fill
               className={imageStyle}
             />
@@ -67,7 +67,7 @@ export default function IntiHimpunanCard({ data, index }: CardProps) {
               src={
                 data.foto_anggota || "/assets/kabinet/placeholder-person.webp"
               }
-              alt= ""
+              alt=""
               fill
               className={imageStyle}
             />
@@ -88,11 +88,11 @@ export default function IntiHimpunanCard({ data, index }: CardProps) {
               className={`absolute inset-0 flex flex-col items-center justify-center ${mirrorClass}`}
             >
               <div className="flex items-center justify-center mt-[53%] md:mt-[22%] h-16 md:h-10 w-[80%]">
-                <h3 className="text-black text-center font-bold text-2xs md:text-sm leading-tight">
+                <h3 className="text-[#2D2D51] text-center font-bold text-2xs md:text-sm leading-tight">
                   {data.nama_anggota}
                 </h3>
               </div>
-              <p className="text-black md:mt-2 text-2xs md:text-sm font-bold md:font-semibold">
+              <p className="text-[#2D2D51] md:mt-2 text-2xs md:text-sm font-bold md:font-semibold">
                 {data.jabatan}
               </p>
             </div>

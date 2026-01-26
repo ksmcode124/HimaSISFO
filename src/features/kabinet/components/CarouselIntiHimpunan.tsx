@@ -47,19 +47,26 @@ export default function CarouselIntiHimpunan({ anggota }: CarouselProps) {
     }),
   };
 
-  const navBtnClass = "hidden lg:flex absolute top-1/2 -translate-y-1/2 z-50 p-4 md:p-5 rounded-full bg-linear-to-r from-[#E63258] to-[#A43DA5] hover:bg-none hover:bg-white group transition-all";
-  const iconClass = "text-white group-hover:text-black w-8 h-8 md:w-10 md:h-10 transition-colors";
+  const navBtnClass =
+    "hidden lg:flex absolute top-1/2 -translate-y-1/2 z-50 p-4 md:p-5 rounded-full bg-linear-to-r from-[#E63258] to-[#A43DA5] hover:bg-none hover:bg-white group transition-all";
+  const iconClass =
+    "text-white group-hover:text-[#E63258] w-8 h-8 md:w-10 md:h-10 transition-colors";
 
   return (
     <div className="relative w-full flex flex-col items-center">
       <div className="relative w-full flex items-center justify-center min-h-62 md:min-h-150 2xl:min-h-186 overflow-visible px-4">
-        
         {/* Navigation Buttons */}
-        <button onClick={slidePrev} className={`${navBtnClass} -left-4 xl:left-12 2xl:-left-32`}>
+        <button
+          onClick={slidePrev}
+          className={`${navBtnClass} -left-4 xl:left-12 2xl:-left-32`}
+        >
           <ChevronLeft className={iconClass} />
         </button>
 
-        <button onClick={slideNext} className={`${navBtnClass} -right-4 xl:right-12 2xl:-right-32`}>
+        <button
+          onClick={slideNext}
+          className={`${navBtnClass} -right-4 xl:right-12 2xl:-right-32`}
+        >
           <ChevronRight className={iconClass} />
         </button>
 
@@ -90,7 +97,10 @@ export default function CarouselIntiHimpunan({ anggota }: CarouselProps) {
               {anggota
                 .slice(currentIndex * 2, currentIndex * 2 + 2)
                 .map((item, idx) => (
-                  <div key={item.id} className="w-40 sm:w-70 md:w-87 lg:w-100 2xl:w-125 shrink-0 transition-all duration-500">
+                  <div
+                    key={item.id}
+                    className="w-40 sm:w-70 md:w-87 lg:w-100 2xl:w-125 shrink-0 transition-all duration-500"
+                  >
                     <IntiHimpunanCard
                       data={item}
                       index={currentIndex * 2 + idx}
@@ -112,8 +122,12 @@ export default function CarouselIntiHimpunan({ anggota }: CarouselProps) {
               setCurrentIndex(idx);
             }}
             animate={{
-              width: currentIndex === idx ? 40 : 10,
-              backgroundColor: currentIndex === idx ? "#D6336C" : "#E9D5FF",
+              width:
+                currentIndex === idx
+                  ? isMobile? 30: 50
+                  : isMobile? 10: 20,
+              height: isMobile ? 10 : 20,
+              backgroundColor: currentIndex === idx ? "#A43DA5" : "#FFFFFF",
             }}
             className="h-2.5 rounded-full"
           />

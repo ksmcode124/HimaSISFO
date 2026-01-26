@@ -22,6 +22,17 @@ export default function VisiMisiMobile({
     if (onToggle) onToggle(nextState);
   };
 
+  const RenderList = ({ items }: { items: string[] }) => (
+    <ul>
+      {items.map((item, idx) => (
+        <li key={idx} className="flex items-start gap-3">
+          <span className="shrink-0 w-1 h-1 rounded-full mt-2 bg-[#2D2D51]" />
+          <span className="text-2xs">{item}</span>
+        </li>
+      ))}
+    </ul>
+  );
+
   return (
     <motion.div
       layout
@@ -34,24 +45,19 @@ export default function VisiMisiMobile({
           damping: 22,
         },
       }}
-      className={`
-          relative z-20 border-2 border-[#A43DA5] bg-linear-to-r from-[#B956BA] via-white to-[#B956BA] flex
-          ${
-            isOpen
-              ? "flex-col w-full p-4 rounded-4xl"
-              : "flex-row items-center w-full h-12 md:h-16 rounded-full gap-4"
-          }
-        `}
+      className={`relative z-20 border-2 border-[#E63258] bg-linear-to-r from-[#DE9FDC] via-white to-[#DE9FDC] flex ${
+        isOpen
+          ? "flex-col w-full p-4 rounded-4xl"
+          : "flex-row items-center w-full h-12 md:h-16 rounded-full gap-4"
+      }`}
     >
       {/* VISI */}
       <motion.div
         layout
-        className={`flex flex-col items-end w-full ${
-          isOpen ? "items-start" : ""
-        }`}
+        className={`flex flex-col w-full ${isOpen ? "items-start" : "items-end"}`}
       >
-        <motion.h2 layout="position" className="text-lg font-bold">
-          VISI
+        <motion.h2 layout="position" className="text-xl font-semibold">
+          Visi
         </motion.h2>
 
         <AnimatePresence>
@@ -67,14 +73,7 @@ export default function VisiMisiMobile({
               }}
               transition={{ duration: 0.4, delay: 0.1 }}
             >
-              <ul>
-                {visi.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3">
-                    <span className="shrink-0 w-1 h-1 rounded-full mt-2 bg-black" />
-                    <span className="text-2xs">{item}</span>
-                  </li>
-                ))}
-              </ul>
+              <RenderList items={visi} />
             </motion.div>
           )}
         </AnimatePresence>
@@ -100,8 +99,8 @@ export default function VisiMisiMobile({
         layout
         className={`flex flex-col w-full ${isOpen ? "mt-8 items-end" : ""}`}
       >
-        <motion.h2 layout="position" className="text-lg font-bold">
-          MISI
+        <motion.h2 layout="position" className="text-xl font-semibold">
+          Misi
         </motion.h2>
 
         <AnimatePresence>
@@ -117,14 +116,7 @@ export default function VisiMisiMobile({
               }}
               transition={{ duration: 0.4, delay: 0.2 }}
             >
-              <ul>
-                {misi.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3">
-                    <span className="shrink-0 w-1 h-1 rounded-full mt-2 bg-black" />
-                    <span className="text-2xs">{item}</span>
-                  </li>
-                ))}
-              </ul>
+              <RenderList items={misi} />
             </motion.div>
           )}
         </AnimatePresence>

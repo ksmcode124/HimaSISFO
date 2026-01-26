@@ -15,14 +15,14 @@ export default function IntiHimpunanSection({ data }: SectionProps) {
   return (
     <section className="relative w-full min-h-[60vh] bg-[#F4E8FF] flex flex-col items-center py-24 overflow-hidden">
       <div className="relative z-10 flex flex-row items-center gap-4 md:mt-20">
-        <div className="relative w-12 h-12 bg-pink-400 rounded-lg shadow-sm">
+        <div className="relative w-14 h-14">
           <Image
             src={
               data.logo_departemen || "/assets/shared/logos/logo-himasisfo.webp"
             }
             alt="Logo Inti"
             fill
-            className="object-contain"
+            className="object-contain drop-shadow-[5px_5px_2px_rgba(0,0,0,0.3)]"
             priority
           />
         </div>
