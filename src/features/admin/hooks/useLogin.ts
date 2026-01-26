@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-// import { login } from '../services/login';
+import { login } from '../services/login';
 
 export function useLogin() {
   const router = useRouter();
@@ -17,13 +17,13 @@ export function useLogin() {
     setLoading(true);
 
     try {
-      // const data = await login({ email, password });
+      const data = await login({ email, password });
 
-      // if (data.user.role === 'admin' || data.user.role === 'superadmin') {
-      //   router.push('/admin/');
-      // } else {
-      //   router.push('/');
-      // }
+      if (data.user.role === 'admin' || data.user.role === 'superadmin') {
+        router.push('/admin/');
+      } else {
+        router.push('/');
+      }
       router.push('/admin/')
     } catch (e: unknown) {
       if (e instanceof Error) {
