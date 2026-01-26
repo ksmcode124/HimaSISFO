@@ -72,7 +72,7 @@ export const EventCard = (props: WithVariantEventCardProps) => {
         )}
 
         <div className="w-full relative justify-center flex flex-row mt-3 md:mt-12 mb-3 md:mb-6">
-          {variant === "onGoing" ?
+          {variant === "onGoing" || variant === "notGoing" ?
             <>
             </> : variant === "detail" && new Date(start).getTime() < Date.now() ? (
               <Button
