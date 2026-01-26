@@ -1,0 +1,345 @@
+{
+  "schemaVersion": 1,
+  "slug": "wisuda-dan-yudisium",
+  "seo": {
+    "title": "Wisuda dan Yudisium",
+    "description": "Panduan untuk Membantu Kelulusan Anda"
+  },
+  "hero": {
+    "title": "Wisuda dan Yudisium",
+    "subtitle": "Panduan untuk Membantu Kelulusan Anda"
+  },
+  "breadcrumbItems": [
+    {
+      "display": "Kemahasiswaan",
+      "link": "/kemahasiswaan"
+    },
+    {
+      "display": "Wisuda & Yudisium",
+      "link": "/kemahasiswaan/wisuda-yudisium"
+    }
+  ],
+  "sections": [
+    {
+      "type": "accordion",
+      "items": [
+        {
+          "id": "berkas-yudisium",
+          "title": "Berkas Yudisium",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Form pendaftaran Sidang Tugas Akhir."
+                },
+                {
+                  "text": "Telah menempuh 144 SKS dengan nilai D maksimum 20% dari jumlah SKS dan tidak mempunyai nilai E dibuktikan dengan melampirkan KHS yang disahkan oleh dosen wali."
+                },
+                {
+                  "text": "Bukti Jurnal telah dinyatakan diterima oleh Reviewer [PTA.04](https://docs.google.com/document/d/1IF6gg-Tu3ocMHjYz-PK8K8MODAaA-wZq/)"
+                },
+                {
+                  "text": "Bukti unggah jurnal"
+                },
+                {
+                  "text": "Persetujuan bebas revisi dari penguji [SP.05](https://docs.google.com/document/d/1hVwGVOMy3y7XwCOzDbENd-iaqVgmX-RG/edit)"
+                },
+                {
+                  "text": "CD Dokumentasi Tugas Akhir berisi:",
+                  "ordered": false,
+                  "items": [
+                    {
+                      "text": "Naskah TA lengkap dengan format PDF dan DOCS (dilengkapi dengan Bookmark per Heading)"
+                    },
+                    {
+                      "text": "Scan lembar pengesahan pembimbing dan penguji"
+                    },
+                    {
+                      "text": "Source Code Program yang belum di compile dan kompilasi program"
+                    },
+                    {
+                      "text": "Dokumen penunjang Tugas Akhir"
+                    },
+                    {
+                      "text": "Naskah Publikasi Ilmiah/Jurnal format PDF dan DOCX"
+                    }
+                  ]
+                },
+                {
+                  "text": "Hasil TOEFL"
+                },
+                {
+                  "text": "Surat keterangan bebas tanggungan dari perpustakaan fakultas"
+                },
+                {
+                  "text": "FC Surat keterangan bebas tanggungan dari perpustakaan universitas"
+                },
+                {
+                  "text": "Bukti unggah pendaftaran yudisium"
+                },
+                {
+                  "text": "FC KTP (2 buah)"
+                },
+                {
+                  "text": "FC Ijazah SMA (2 buah)"
+                },
+                {
+                  "text": "Transkrip nilai terbaru (2 buah)"
+                },
+                {
+                  "text": "Foto Hitam Putih 4x6 (Kertas Doff) Hitam Putih 6 lembar. [(Kriteria Foto)](https://bit.ly/kriteria-foto)"
+                },
+                {
+                  "text": "Lembar Pengesahan Pembimbing dan Lembar Pengesahan Penguji 2 Lembar (Tanda Tangan Basah Asli)"
+                },
+                {
+                  "text": "Bukti unggah Yudisium secara  online ke [https://bit.ly/YudisiumOnline](https://bit.ly/YudisiumOnline)"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "item-collection",
+      "items": [
+        {
+          "id": "yudisium",
+          "title": "Yudisium",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Formulir pendaftaran yudisium"
+                },
+                {
+                  "text": "Melengkapi berkas-berkas dan membawa surat keterangan berhak mengikuti yudisium yang telah dicetak sebelumnya ke TU Jurusan Informatika untuk disahkan"
+                },
+                {
+                  "text": "Menyerahkan semua berkas ke TU Jurusan Informatika"
+                },
+                {
+                  "text": "Mendaftar yudisium melalui web [SADEWA](https://sadewa.upnyk.ac.id/)"
+                },
+                {
+                  "text": "Pilih menu akademik lalu klik sub menu pengajuan yudisium"
+                },
+                {
+                  "text": "Isi data dengan benar dan upload [Surat Keterangan Berhak Mengikuti Yudisium](https://bakpk.upnyk.ac.id/public/assets/upload/surat-keterangan-berhak-mengikuti-yudisium-fti.pdf) yang telah disahkan oleh Kaprodi/Kajur"
+                },
+                {
+                  "text": "Menunggu proses verifikasi data oleh fakultas"
+                },
+                {
+                  "text": "Menerima Informasi status pengajuan yudisium"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "daftar-wisuda",
+          "title": "Daftar Wisuda",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Pendaftaran wisuda dilakukan melalui aplikasi [SADEWA](https://sadewa.upnyk.ac.id)"
+                },
+                {
+                  "text": "Pilih menu administrasi dan submenu pendaftaran wisuda"
+                },
+                {
+                  "text": "Pilih periode wisuda."
+                },
+                {
+                  "text": "Pastikan data yang tercantum benar. Setelah itu, klik Simpan."
+                },
+                {
+                  "text": "Bagi calon wisudawan wajib melakukan verifikasi dan menyerahkan pas foto 1 (satu) lembar ke Bagian Akademik"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id" : "peminjaman-toga",
+          "title": "Peminjaman dan Pengembalian Toga",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Sudah melakukan yudisium dan mendaftar wisuda."
+                },
+                {
+                  "text": "Datang ke bagian akademik untuk memberikan foto ([Kriteria Foto](https://bit.ly/kriteria-foto)) dan melakukan verifikasi. Setelah melakukan verifikasi, akan mendapatkan formulir untuk pengambilan toga."
+                },
+                {
+                  "text": "Waktu pengambilan toga 1-2 minggu sebelum wisuda."
+                },
+                {
+                  "text": "Pengembalian toga dilakukan setelah melakukan wisuda di loket 10. Saat melakukan pengembalian toga, akan mendapatkan surat ynag digunakan untu mengambil ijazah."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id" : "legalisir-transkrip",
+          "title": "Legalisir Transkrip Akademik",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text" : "Melengkapi berkas-berkas, yaitu: ",
+                  "ordered": false,
+                  "items": [
+                    {
+                      "text" : "Fotocopy Transkrip Akademik 5 (lima) lembar"
+                    }
+                  ]
+                },
+                {
+                  "text" : "Mengisi [Blanko Legalisir Transkrip Akademik](/kemahasiswaan/blanko?item=legalisir-transkrip)"
+                },
+                {
+                  "text" : "Menyerahkan semua berkas ke loket TU fakultas"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id" : "pengambilan-ijazah",
+          "title": "Pengambilan Ijazah",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Membawa surat pengembalian toga."
+                },
+                {
+                  "text": "Jika diwakilkan, yang mewakilkan harus membawa surat kuasa bermaterai serta lampiran berupa fotocopy KTP kedua belah pihak. [Contoh Surat Kuasa](https://drive.google.com/file/d/1duL8ZfbwdPNLtL8IFfBl2M9k-PQLyzTl/view)"
+                },
+                {
+                  "text": "Menyerahkan persyaratan ke loket 5 gedung perpustakaan pusat."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id" : "legalisir-ijazah",
+          "title": "Legalisir Ijazah",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Melengkapi berkas-berkas, yaitu",
+                  "ordered": false,
+                  "items": [
+                    {
+                      "text": "Fotocopy ijazah sebanyak 5 (lima) lembar"
+                    }
+                  ]
+                },
+                {
+                  "text": "Mengisi blanko [Legalisir Ijazah](/kemahasiswaan/blanko?item=legalisir-ijazah)."
+                },
+                {
+                  "text": "Menyerahkan semua berkas ke loket TU fakultas"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id" : "pengambilan-transkrip",
+          "title": "Pengambilan Transkrip Akademik",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Melengkapi berkas-berkas, yaitu",
+                  "ordered": false,
+                  "items": [
+                    {
+                      "text": "Surat bebas perpustakaan universitas asli"
+                    },
+                    {
+                      "text": "Fotocopy ijazah"
+                    },
+                    {
+                      "text": "Fotocopy berita acara sidang"
+                    },
+                    {
+                      "text": "Fotocopy KTP"
+                    }
+                  ]
+                },
+                {
+                  "text": "Menyerahkan semua berkas ke TU fakultas."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id" : "cetak-transkrip",
+          "title": "Cetak Transkrip dalam bahasa Inggris",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Melengkapi berkas-berkas, yaitu",
+                  "ordered": false,
+                  "items": [
+                    {
+                      "text": "Formulir permohonan terjemahan transkrip dalam bahasa Inggris ([Blanko](/kemahasiswaan/blanko?item=cetak-transkrip))"
+                    },
+                    {
+                      "text": "Fotocopy transkrip akademik"
+                    }
+                  ]
+                },
+                {
+                  "text": "Menyerahkan semua berkas ke TU fakultas."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id" : "cetak-ijazah",
+          "title" : "Cetak Ijazah dalam bahasa Inggris",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Mengisi blanko [Cetak Ijazah dengan bahasa Inggris](/kemahasiswaan/blanko?item=cetak-ijazah)"
+                },
+                {
+                  "text": "Melampirkan fotocopy ijazah"
+                },
+                {
+                  "text": "Menyerahkan semua berkas ke TU fakultas"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

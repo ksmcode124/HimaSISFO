@@ -1,0 +1,337 @@
+{
+  "schemaVersion": 1,
+  "slug": "pendaftaran-dan-verifikasi",
+  "seo": {
+    "title": "Pendaftaran dan Verifikasi",
+    "description": "Panduan untuk Segala Administrasi Akademik Anda"
+  },
+  "hero": {
+    "title": "Pendaftaran dan Verifikasi",
+    "subtitle": "Panduan untuk Segala Administrasi Akademik Anda"
+  },
+  "breadcrumbItems": [
+    {
+      "display": "Kemahasiswaan",
+      "link": "/kemahasiswaan"
+    },
+    {
+      "display": "Pendaftaran & Verifikasi",
+      "link": "/kemahasiswaan/pendaftaran-dan-verifikasi"
+    }
+  ],
+  "sections": [
+    {
+      "type": "accordion",
+      "items": [
+        {
+          "id": "pembuatan-ktm",
+          "title": "Pembuatan KTM",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Mahasiswa mengunggah foto di laman [https://pmb.upnyk.ac.id/](https://pmb.upnyk.ac.id/) dengan persyaratan:",
+                  "items": [
+                    {
+                      "text": "Ukuran foto 4x6"
+                    },
+                    {
+                      "text": "Latar belakang berwarna merah"
+                    },
+                    {
+                      "text": "Memakai kemeja putih dan jas almameter"
+                    },
+                    {
+                      "text": "Menggunakan jilbab warna hitam bagi yang berhijab atau rambut dirapikan bagi yang tidak berhijab"
+                    }
+                  ]
+                },
+                {
+                  "text": "Proses Pencetakan KTM oleh petugas."
+                },
+                {
+                  "text": "Mahasiswa mengambil KTM di loket 5 Gedung Perpustakaan Pusat."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "validasi-ktm",
+          "title": "Validasi KTM",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Mahasiswa menyiapkan berkas berupa",
+                  "items": [
+                    {
+                      "text": "KTM"
+                    },
+                    {
+                      "text": "Slip Pembayaran"
+                    }
+                  ]
+                },
+                {
+                  "text": "Mahasiswa mengisi data yang ada di [SADEWA](https://sadewa.upnyk.ac.id)"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id" : "kehilangan-ktm",
+          "title": "Kehilangan KTM",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Membuka web [SADEWA](https://sadewa.upnyk.ac.id/"
+                },
+                {
+                  "text": "Pilih menu kemahasiswaan dan klik sub menu Surat Aktif Kuliah."
+                },
+                {
+                  "text": "Pilih Permohonan Surat Keterangan Aktif lalu pilih keperluan permohonan kehilangan Kartu Tanda Mahasiswa (KTM)"
+                },
+                {
+                  "text": "Isi data yang diperlukan dan unggah screenshot sejarah pembayaran UKT pada web [SI-UKT](https://siukt.upnyk.ac.id/)"
+                },
+                {
+                  "text": "Submit data lalu tunggu beberapa saat hingga status pengajuan berubah menjadi selesai dan download Surat Aktif Kuliah."
+                },
+                {
+                  "text": "Membawa Surat Aktif Kuliah dan surat kehilangan dari polisi ke loket 5 Kampus 1."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "item-collection",
+      "items": [
+        {
+          "id": "ubah-data-pddikti",
+          "title": "Ubah Data PDDIKTI",
+          "content": [
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                {
+                  "text": "Siapkan scan dokumen yang diperlukan dalam bentuk PDF.",
+                  "ordered": false,
+                  "items": [
+                    {
+                      "text": "Ijazah SMA"
+                    },
+                    {
+                      "text": "Kartu Tanda Mahasiswa (KTM)"
+                    },
+                    {
+                      "text": "Transkrip nilai sementara"
+                    },
+                    {
+                      "text": "Kartu Tanda Penduduk (KTP)"
+                    },
+                    {
+                      "text": "Akta kelahiran"
+                    },
+                    {
+                      "text": "Kartu Keluarga (KK)"
+                    }
+                  ]
+                },
+                {
+                  "text": "Isi data pada link [https://s.id/pdm_upnvy](https://s.id/pdm_upnvy)"
+                },
+                {
+                  "text": "Data yang salah pada PDDIKTI akan diproses oleh pihak universitas"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "pengunduran-diri",
+          "title": "Pengunduran Diri",
+          "content": [
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                {
+                  "text": "Mengunduh dan mengisi blanko [Pengunduran Diri](/kemahasiswaan/blanko/item=pengunduran-diri)."
+                },
+                {
+                  "text": "Menemui dosen wali dan ketua jurusan untuk memohon tanda tangan."
+                },
+                {
+                  "text": "Menyiapkan persyaratan yang diperlukan untuk pengajuan pengunduran diri."
+                },
+                {
+                  "text": "Melampirkan fotocopy Kartu Tanda Mahasiswa (KTM)"
+                },
+                {
+                  "text": "Setiap dokumen persyaratan diserahkan secara langsung ke bagian TU fakultas."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "pengajuan-cuti",
+          "title": "Pengajuan Cuti Akademik",
+          "content": [
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                {
+                  "text": "Mengunduh dan mengisi blanko [Pengajuan Cuti Akademik](/kemahasiswaan/blanko?item=cuti-akademik)."
+                },
+                {
+                  "text": "Menemui dosen wali, koorprodi, dan ketua jurusan untuk memohon tanda tangan."
+                },
+                {
+                  "text": "Menyiapkan persyaratan yang diperlukan untuk pengajuan cuti."
+                },
+                {
+                  "text": "Setiap dokumen persyaratan diserahkan secara langsung ke bagian TU fakultas."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "pengajuan-kkn",
+          "title": "Pengajuan KKN",
+          "content": [
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                {
+                  "text": "Sudah lulus 100 SKS."
+                },
+                {
+                  "text": "Input KRS mata kuliah KKN pada website [BIMA](https://bima.upnyk.ac.id)."
+                },
+                {
+                  "text": "Mengisi formulir pendaftaran KKN secara online."
+                },
+                {
+                  "text": "Melakuakn daftar ulang KKN dan unggah Surat Pernyataan Calon Peserta KKN pada website [SADEWA](https://sadewa.upnyk.ac.id)."
+                },
+                {
+                  "text": "Mengikuti pembekalan KKN."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "pemulihan-status",
+          "title": "Pemulihan Status Mahasiswa",
+          "content": [
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                {
+                  "text": "Mengunduh dan mengisi blanko Pemulihan Status Mahasiswa."
+                },
+                {
+                  "text": "Menemui dosen wali, koordinator prodi, dan ketua jurusan untuk memohon tanda tangan."
+                },
+                {
+                  "text": "Menyiapkan persyaratan yang diperlukan untuk pengajuan pemulihan status mahasiswa."
+                },
+                {
+                  "text": "Setiap dokumen persyaratan diserahkan secara langsung ke bagian TU fakultas."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "pengajuan-skripsi",
+          "title": "Pengajuan Judul Skripsi",
+          "content": [
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                {
+                  "text": "Login web sitasi [SITASI](https://siupnyk.online/sitasi/)"
+                },
+                {
+                  "text": "Pilih menu proposal TA."
+                },
+                {
+                  "text": "Klik sub menu form pendaftaran"
+                },
+                {
+                  "text": "Download dan isi form."
+                },
+                {
+                  "text": "Klik sub menu pendaftaran."
+                },
+                {
+                  "text": "Isi form pendaftaran dan upload file pendaftaran."
+                },
+                {
+                  "text": "Submit. Setelah melakukan submit, dapat melakuakn pengecekan status di sub menu status akhir."
+                },
+                {
+                  "text": "Setelah mendapat persetujuan, pada sub menu form persetujuan dicetak dan diminta tanda tangan dosen pembimbing."
+                },
+                {
+                  "text": "Setelah mendapat tanda tangan, ke TU Jurusan Informatika untuk mendapatkan buku bimbingan"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "pengajuan-jurnal-telematika",
+          "title": "Pengajuan Jurnal Telematika UPN",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text" : "Mendownload dan mengisi [Template Jurnal](https://docs.google.com/document/d/1HmklY9svmwZpUep8MLu-96Mfe_F1VPqU/)"
+                },
+                {
+                  "text" : "Membuat draft jurnal, lalu mengisi formulir [Penilaian Naskah Publikasi](https://docs.google.com/document/d/1g_nJEaa9vekFJehiTpUCUNMUf5jbUCBC/)"
+                },
+                {
+                  "text" : "Menemui dosen pembimbing dengan membawa formulir dan draft jurnal untuk dilakukan penilaian"
+                },
+                {
+                  "text" : "Membuat akun terlebih dahulu pada [http://jurnal.upnyk.ac.id/index.php/telematika/user/register](https://jurnal.upnyk.ac.id/index.php/telematika/user/register)"
+                },
+                {
+                  "text" : "Login pada [http://jurnal.upnyk.ac.id/index.php/telematika/index](http://jurnal.upnyk.ac.id/index.php/telematika/index)"
+                },
+                {
+                  "text" : "Unggah draft jurnal dan dokumen pendukung lainnya pada menu submission"
+                },
+                {
+                  "text" : "Setelah submit, jangan lupa di-screenshot untuk persyaratan yudisium"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
