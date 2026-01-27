@@ -1,24 +1,19 @@
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
+
 interface LoginPayload {
   email: string;
   password: string;
 }
 
 export async function login(payload: LoginPayload) {
-  // TODO: CALL LOGIN HERE
-  const response = await fetch('/api/admin/auth/sign-in/email', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
+
+  await auth.api.signInEmail({
+    body: {
+      ...payload
     },
-    body: JSON.stringify(payload),
   });
 
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.error || 'Login failed');
-  }
-
-  return data;
+  redirect('/admin')
 }
 

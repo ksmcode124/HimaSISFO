@@ -1,17 +1,10 @@
 'use client';
-import { useRouter } from 'next/navigation';
 
 import {
-  Building,
   Calendar,
-  GalleryHorizontal,
   Handshake,
   Home,
   LogOut,
-  Star,
-  UserCircle2,
-  UserIcon,
-  Users,
   Users2,
 } from 'lucide-react';
 import Image from 'next/image';
@@ -27,6 +20,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
+import { useTransition } from 'react';
+import { signOutAction } from '@/features/admin/services/auth';
 
 // Menu items.
 const items = [
@@ -53,20 +48,14 @@ const items = [
 ];
 
 export function AppSidebar() {
-  const router = useRouter();
-  const handleLogout = async () => {
-    try {
-      router.replace('/login');
-      // const res = await fetch('/api/auth/logout', { method: 'POST' });
+  const [pending, startTransition] = useTransition();
 
-      // if (!res.ok) {
-      //   console.error('[LOGOUT] Failed');
-      //   return;
-      // }
-    } catch (err) {
-      console.error('[LOGOUT] Error', err);
-    }
+  const handleLogout = () => {
+    startTransition(async () => {
+      await signOutAction();
+    });
   };
+
 
   return (
     <Sidebar className="flex h-screen flex-col bg-linear-to-t from-[#8DDDFF] to-[#3385FF] py-10 text-white">
@@ -101,6 +90,7 @@ export function AppSidebar() {
           <SidebarMenuItem>
             <SidebarMenuButton
               onClick={handleLogout}
+              disabled={pending}
               className="flex cursor-pointer items-center gap-3 text-lg text-[#FF5549] font-bold"
             >
               <LogOut className='size-24'/>
