@@ -10,6 +10,10 @@ export function ShowNextEvent({ events }: WithVariantEventCardPropsArray) {
     if (!events.length) return null;
     if (!event) return null;
 
+
+    const handleMouseEnter = (e: React.MouseEvent) => {
+        console.log("Mouse entered!", e.currentTarget);
+    };
     const prev = () => {
         setCurrentIndex((prev) => (prev - 1 + events.length) % events.length);
     };

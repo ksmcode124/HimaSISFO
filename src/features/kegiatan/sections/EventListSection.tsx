@@ -8,7 +8,7 @@ import { formatMonthName } from '../utils/FormatDate';
 import { createEventIndex } from '../utils/EventIndexer';
 import { findEventByMonthYear } from '../utils/FindEvent';
 import { FilterComp } from '../components/FilterComp';
-import  breadcrumbItems  from '../data/routedata.json';
+import breadcrumbItems from '../data/routedata.json';
 import BreadcrumbSection from './BreadcrumbSection';
 import { EventList } from '../components/EventList';
 import { CalendarLeftDecoration } from '../../../../public/assets/kegiatan/decoration/CalendarLeft';
@@ -16,18 +16,20 @@ import { CalendarRightDecoration } from '../../../../public/assets/kegiatan/deco
 
 function EventListContent({ events }: { events: EventCardProps[] }) {
   return (
-    <div className="relative justify-center items-center">
-      <BreadcrumbSection items={breadcrumbItems.breadcrumbItems} />
-      <div className="relative mx-4 md:mx-8 text-[var(--color-dark-blue)]">
+    <div className="relative justify-center items-center text-[var(--color-dark-blue)] w-full px-auto">
+      <div className="px-8 md:px-16 xl:px-32">
+        <BreadcrumbSection items={breadcrumbItems.breadcrumbItems} />
+      </div>
+      <div className="px-10 md:px-20 xl:px-40">
         <h1 className="text-xl md:text-4xl xl:text-7xl font-bold w-full h-fit text-center pb-5 md:pb-15 border-b-4 border-[var(--color-dark-blue)]">
           Agenda
         </h1>
-        <div className="flex flex-row justify-between items-center pt-3 md:pt-5">
-          <FilterComp className="text-[14px] md:text-xl" type="list" selected="none" />
-          <span className="text-[14px] md:text-xl px-2 md:px-3 py-1 md:py-2 bg-gradient-to-b from-[#F0F4F8] to-[#E6EEF5] rounded-full">{events.length} Acara ditemukan</span>
-        </div>
-        <EventList events={events} />
       </div>
+      <div className="flex flex-row justify-between items-center pt-3 md:pt-5 px-10 md:px-20 xl:px-40">
+        <FilterComp className="text-[14px] md:text-xl" type="list" selected="none" />
+        <span className="text-[14px] md:text-xl px-2 md:px-3 py-1 md:py-2 bg-gradient-to-b from-[#F0F4F8] to-[#E6EEF5] rounded-full">{events.length} Acara ditemukan</span>
+      </div>
+      <EventList events={events}/>
     </div>
   );
 }
@@ -52,7 +54,7 @@ export async function EventListSection({ filter }: { filter?: string }) {
         <CalendarLeftDecoration className="absolute md:hidden" />
         <CalendarRightDecoration className="absolute md:hidden" />
       </DecorationLayer>
-      <ContentLayer className="mx-5 md:mx-10 xl:mx-30">
+      <ContentLayer>
         <EventListContent events={FindEvent} />
       </ContentLayer>
     </section>

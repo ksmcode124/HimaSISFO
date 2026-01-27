@@ -16,6 +16,7 @@ export interface DynamicCalendarProps {
 export interface WithVariantEventCardProps extends EventCardProps {
   variant?: "detail" | "onGoing" | "notGoing";
   actions?: React.ReactNode;
+  onMouseOver?: () => void;
 }
 
 export interface WithVariantEventCardPropsArray {

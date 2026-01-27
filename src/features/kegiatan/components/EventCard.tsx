@@ -24,7 +24,7 @@ const eventCard = cva("overflow-hidden transition hover:shadow-md", {
 });
 
 export const EventCard = (props: WithVariantEventCardProps) => {
-  const { id, title, img, start, end, description, variant = "detail", actions } = props;
+  const { id, title, img, start, end, description, variant = "detail", actions, onMouseOver } = props;
   const countDown = useGetCountdown(start);
   const [open, setOpen] = useState(false);
   // console.log('title:', title, 'start:', start, 'end:', end);
