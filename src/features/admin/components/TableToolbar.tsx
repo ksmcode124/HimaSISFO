@@ -60,7 +60,7 @@ export function TableToolbar<TData>({
           placeholder="Search..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="bg-[#F2F2F2] border-2 border-[#BFBFBF] h-12 max-w-md text-base"
+          className="bg-[#F2F2F2] border-2 border-[#BFBFBF] h-12 max-w-md text-sm"
         />
 
         <div className="flex gap-3">

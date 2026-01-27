@@ -45,7 +45,7 @@ export default function LoginPage() {
               </FieldLegend>
               <FieldGroup>
                 <Field>
-                  <FieldLabel htmlFor="email" className="text-base font-semibold">
+                  <FieldLabel htmlFor="email" className="text-sm font-semibold">
                     Email
                   </FieldLabel>
                   <Input
@@ -58,7 +58,7 @@ export default function LoginPage() {
                   />
                 </Field>
                 <Field>
-                  <FieldLabel htmlFor="password" className="text-base font-semibold">
+                  <FieldLabel htmlFor="password" className="text-sm font-semibold">
                     Password
                   </FieldLabel>
                   <Input
@@ -78,7 +78,7 @@ export default function LoginPage() {
                 </p>
               )}
 
-              <Button type="submit" className="bg-[#3385FF] h-12 px-8 py-2 text-base font-medium w-full">
+              <Button type="submit" className="bg-[#3385FF] h-12 px-8 py-2 text-sm font-medium w-full">
                 {loading ? '...' : 'Login'}
               </Button>
             </FieldSet>

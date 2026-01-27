@@ -66,7 +66,7 @@ export const EventCard = (props: WithVariantEventCardProps) => {
             </p>
           )}
         </div>
-        <h1 className="text-base md:text-3xl font-bold truncate">{title}</h1>
+        <h1 className="text-sm md:text-3xl font-bold truncate">{title}</h1>
         {variant === "detail" && description && (
           <p className="text-[10px] md:text-sm line-clamp-2">{description}</p>
         )}

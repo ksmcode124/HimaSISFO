@@ -13,8 +13,8 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import { CardProps } from "../types/ui"
 
-const MOBILE_BREAKPOINT = 540
-const TABLET_BREAKPOINT = 768
+const MOBILE_BREAKPOINT = 541
+const TABLET_BREAKPOINT = 1025
 
 export function useDeviceType() {
   const [device, setDevice] = useState<'mobile' | 'tablet' | 'desktop'>('desktop')
@@ -44,7 +44,7 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
   const device = useDeviceType()
 
   return (
-    <div className="relative w-full max-w-7xl py-8 min-h-75 h-full">
+    <div className="relative w-full lg:max-w-3xl 2xl:max-w-7xl py-8 min-h-75 h-full">
       <style jsx global>{`
         .swiper {
           overflow: visible !important;
@@ -84,7 +84,7 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
           return (
             <SwiperSlide
               key={item.id}
-              className={cn("flex justify-center", isActive ? "z-20" : "z-0")}
+              className={cn("flex justify-center", isActive ? "z-30 w-[90%] sm:w-60 lg:w-80 xl:w-120" : "z-0")}
               style={{
                 width: device === 'mobile' ? '90%' : device === 'tablet' ? '350px' : '450px',
                 height: isActive

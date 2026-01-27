@@ -53,14 +53,14 @@ export function ConfirmationModal({
       title={content.title}
       footer={
         <>
-          <Button variant="outline" onClick={() => onOpenChange(false)} className='text-base font-semibold'>
+          <Button variant="outline" onClick={() => onOpenChange(false)} className='text-sm font-semibold'>
             Cancel
           </Button>
           <Button
             variant={confirmToButtonVariant[variant]}
             onClick={handleConfirm}
             disabled={loading}
-            className='text-base font-semibold'
+            className='text-sm font-semibold'
           >
             {loading ? content.loadingText : content.confirmText}
           </Button>
