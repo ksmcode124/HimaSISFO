@@ -24,14 +24,14 @@ export default function ProkerSection({ data }: ProkerSectionProps) {
 
         {/* Judul Section */}
         <div className="relative flex flex-row items-center gap-4 mb-4 md:mb-10 md:mt-10 z-10">
-          <h2 className="text-lg md:text-3xl -mt-10 md:mt-0 font-bold tracking-tight text-black">
+          <h2 className="text-lg md:text-3xl -mt-10 md:mt-0 font-bold text-[#2D2D51]">
             Program Kerja
           </h2>
         </div>
 
         {/* Carousel Proker */}
         <div className="relative w-full max-w-7xl h-62 md:h-138 flex items-center justify-center z-10">
-          <div className="flex flex-col items-center text-black font-bold">
+          <div className="flex flex-col items-center text-[#2D2D51] font-bold">
             <CarouselProker prokerList={data} />
           </div>
         </div>
