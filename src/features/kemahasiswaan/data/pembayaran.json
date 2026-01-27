@@ -57,7 +57,7 @@
               ]
             }
           ],
-          "image": "icon-pembayaran-mbanking.png"
+          "image": "icon-pembayaran-mbanking.webp"
         },
         {
           "id": "ukt-atm",
@@ -93,7 +93,7 @@
               ]
             }
           ],
-          "image": "icon-pembayaran-atm.png"
+          "image": "icon-pembayaran-atm.webp"
         },
         {
           "id" : "ukt-teller",
@@ -120,7 +120,7 @@
               ]
             }
           ],
-          "image": "icon-pembayaran-teller.png"
+          "image": "icon-pembayaran-teller.webp"
         },
         {
           "id" : "hilang-slip",

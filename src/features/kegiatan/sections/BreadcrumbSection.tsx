@@ -1,4 +1,4 @@
-import { BreadcrumbItemData } from "@/components/ui/Breadcrumb";
+import { BreadcrumbItemData } from "@/components/ui/breadcrumb";
 import { ListBreadcrumb } from "@/components/ui/ListBreadCrumb";
 
 export default function BreadcrumbSection({ items }: { items: BreadcrumbItemData[] }) {

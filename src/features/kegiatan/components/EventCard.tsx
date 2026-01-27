@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { WithVariantEventCardProps } from "../types";
 import { ArrowRight } from "lucide-react";
 import { cva } from "class-variance-authority";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/cn";
 import { formatDate } from "../utils/FormatDate";
 import { useState } from "react";
 import { useGetCountdown } from "../hooks/useCountDown";

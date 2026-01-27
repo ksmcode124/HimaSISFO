@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { NavItem } from '@/features/navigation/'
 import Image from 'next/image'
-import { LiquidGlass } from '@liquidglass/react'
+import { Glass } from '../ui/Glass'
 
 const pillStyle = "bg-neutral-100 rounded-2xl p-1 shadow-[0_4px_10px_var(--color-neutral-400)]"
 
@@ -26,7 +26,7 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
       className={`fixed w-full top-5 z-50 lg:bg-[#101D2F]/50 rounded-full h-fit ${className}`}
       role="banner"
     >
-      <LiquidGlass className='border-1 border-white' borderRadius={50}>
+      <Glass className='border-l-white' borderRadius={200}>
         <nav
           className="py-3 px-20"
           aria-label="Main navigation"
@@ -96,7 +96,7 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
             </button>
           </div>
         </nav>
-      </LiquidGlass>
+      </Glass>
       {/* Mobile Navigation */}
       {isOpen && (
         <aside className={`z-30 text-white rounded-l-[5em] h-screen fixed top-0 right-0 bg-neutral-200 backdrop-blur-md px-10 pt-20 transition-transform duration-500 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
