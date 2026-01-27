@@ -1,10 +1,9 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { Kabinet, KabinetResponse } from '@/lib/types/interface';
+import { Kabinet } from '@/lib/types/interface';
 import { AdminKabinetDetail, AdminKabinetRow, KabinetResponseAdmin } from '../types';
 import { api } from '@/lib/services/api';
-import { id } from 'zod/v4/locales';
 
 export function useKabinet() {
   const [data, setData] = useState<AdminKabinetRow[]>([]);

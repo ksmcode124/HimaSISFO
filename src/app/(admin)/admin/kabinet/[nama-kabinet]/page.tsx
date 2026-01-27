@@ -31,16 +31,15 @@ export default function DepartemenPage() {
     });
   };
 
-
   return (
     <>
       <HeaderSection
       // breadcrumbs seharusnya mengikut nama kabinet
         breadcrumbs={[
           {label: "Kabinet", href: '/admin/kabinet'},
-          {label: "Nama Kabinet", href:'/admin/nama-kabinet'}
+          {label: data[0].nama_kabinet, href:`/admin/${data[0].nama_kabinet}`}
         ]}
-        title="Nama Kabinet"
+        title={data[0].nama_kabinet}
       />
 
       <AdminTable
@@ -59,6 +58,7 @@ export default function DepartemenPage() {
         onOpenChange={(v) => !v && modal.close()}
         onEdit={modal.openEdit}
         onDelete={onDeleteRequest}
+        isLoadingModal={isLoadingModal}
         id={detail?.id}
         title={detail?.nama_departemen}
         subtitle={detail?.id.toString()}

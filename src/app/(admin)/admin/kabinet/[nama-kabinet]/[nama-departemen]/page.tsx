@@ -60,6 +60,7 @@ export default function AnggotaPage() {
         onOpenChange={(v) => !v && modal.close()}
         onEdit={modal.openEdit}
         onDelete={onDeleteRequest}
+        isLoadingModal={isLoadingModal}
         id={detail?.id}
         title={detail?.nama_anggota}
         subtitle={detail?.id.toString()}

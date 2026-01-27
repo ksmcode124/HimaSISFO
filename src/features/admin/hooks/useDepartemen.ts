@@ -1,8 +1,9 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { AdminDepartemenRow, AdminDepartemenDetail } from '../types';
+import { AdminDepartemenRow, AdminDepartemenDetail, DepartemenResponseAdmin } from '../types';
 import { Departemen } from '@/lib/types/interface';
+import { api } from '@/lib/services/api';
 
 export function useDepartemen() {
   const [data, setData] = useState<AdminDepartemenRow[]>([]);
@@ -14,32 +15,18 @@ export function useDepartemen() {
     setError(null);
 
     try {
-      // TODO: replace with real API
-      const res: AdminDepartemenRow[] = [
-        {
-          id: 1,
-          nama_departemen: 'Inti',
-          logo: 'IMG_03.jpg',
-          anggota_count: 50,
-          proker_count: 10,
-        },
-        {
-          id: 2,
-          nama_departemen: 'Akademik dan Keprofesian',
-          logo: 'IMG_03.jpg',
-          anggota_count: 50,
-          proker_count: 10,
-        },
-        {
-          id: 3,
-          nama_departemen: 'Sosial Masyarakat',
-          logo: 'IMG_03.jpg',
-          anggota_count: 50,
-          proker_count: 10,
-        },
-      ];
-
-      setData(res);
+      const response = await api.get<DepartemenResponseAdmin[]>('/api/admin/departemen')
+      const departemenData: AdminDepartemenRow[] = response.data.map((res) => {
+        return {
+          id: res.id_departemen,
+          nama_departemen: res.nama_departemen,
+          logo: res.logo_departemen ?? '',
+          anggota_count: 0, // TODO: gatau ngambil dari mana harusnya
+          proker_count: 0, // TODO: sama seperti sebelumnya
+          nama_kabinet: res.kabinet.nama_kabinet //TODO: harusnya ada slug untuk link href
+        }
+      })
+      setData(departemenData)
     } catch {
       setError('Failed to load departemen');
     } finally {

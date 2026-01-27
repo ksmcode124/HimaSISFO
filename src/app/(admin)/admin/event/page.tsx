@@ -55,6 +55,7 @@ export default function EventPage() {
       <DetailModal
         open={modal.isView}
         onOpenChange={(v) => !v && modal.close()}
+        isLoadingModal={isLoadingModal}
         onEdit={modal.openEdit}
         onDelete={onDeleteRequest}
         id={detail?.id}

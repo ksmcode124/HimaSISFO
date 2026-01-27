@@ -27,7 +27,8 @@ export interface AdminDepartemenRow{
   nama_departemen: string,
   logo: string,
   anggota_count: number,
-  proker_count: number
+  proker_count: number,
+  nama_kabinet: string
 }
 
 export interface AdminAnggotaRow{
@@ -119,4 +120,28 @@ export interface KabinetResponseAdmin {
   gambar_logo: string | null;
   departemen: DepartemenAdmin[];
   elemen_logo: ElemenLogoAdmin[];
+}
+
+
+// Interface untuk info kabinet
+interface KabinetInfo {
+  id_kabinet: number;
+  nama_kabinet: string;
+  tahun_kerja: string;
+  visi: string | null;
+  misi: string | null;
+  deskripsi: string | null;
+  foto_kabinet: string | null;
+  gambar_logo: string | null;
+}
+
+// Interface untuk setiap departemen yang include kabinet
+export interface DepartemenResponseAdmin {
+  id_departemen: number;
+  id_kabinet: number;
+  nama_departemen: string;
+  deskripsi_departemen: string | null;
+  logo_departemen: string | null;
+  foto_departemen: string | null;
+  kabinet: KabinetInfo;
 }
