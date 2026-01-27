@@ -24,7 +24,7 @@ export default function IntiHimpunanCard({ data, index }: CardProps) {
         {/* LAYER 1: Background Card */}
         <div className="absolute inset-0 z-10">
           <Image
-            src="/assets/kabinet/card-1.webp"
+            src="/assets/kabinet/card-6.webp"
             alt=""
             fill
             className={`object-contain ${shadowClass}`}
@@ -35,11 +35,11 @@ export default function IntiHimpunanCard({ data, index }: CardProps) {
         <div
           className="absolute inset-0 z-20"
           style={{
-            WebkitMaskImage: 'url("/assets/kabinet/card-1.webp")',
+            WebkitMaskImage: 'url("/assets/kabinet/card-6.webp")',
             WebkitMaskRepeat: "no-repeat",
             WebkitMaskSize: "contain",
             WebkitMaskPosition: "center",
-            maskImage: 'url("/assets/kabinet/card-1.webp")',
+            maskImage: 'url("/assets/kabinet/card-6.webp")',
             maskRepeat: "no-repeat",
             maskSize: "contain",
             maskPosition: "center",
