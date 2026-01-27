@@ -6,15 +6,22 @@ import { AdminTable } from '@/features/admin/components/AdminTable';
 import { useModal } from '@/features/admin/hooks/useModal';
 import * as React from 'react';
 import { useConfirm } from '@/features/admin/hooks/useConfirm';
-import { Departemen } from '@/lib/types/interface';
+import { Departemen } from '@/features/admin';
 import { departemenColumns } from '@/features/admin/components/columns/departemen-columns';
 import { useDepartemen, useDepartemenDetail } from '@/features/admin/hooks/useDepartemen';
 import { DetailModal } from '@/features/admin/components/DetailModal';
+import { useParams } from 'next/navigation';
 
 export default function DepartemenPage() {
-  const { data, isLoading, saveData, deleteData, error } = useDepartemen();
+  const params = useParams();
+  const slug = Array.isArray(params['nama-kabinet']) ? params['nama-kabinet'][0] : params['nama-kabinet'];
+  const id_kabinet = slug ? Number(slug.split('-')[0]) : -1; // cuma ambil ID
+  const nama_kabinet = slug ? slug.split('-').slice(1).join(' ') : 'NAMA KABINET';
+
+
+  const { data, isLoading, saveData, deleteData, error } = useDepartemen(id_kabinet);
   const modal = useModal();
-  const { detail, isLoadingModal } = useDepartemenDetail(modal.id);
+  const { detail, isLoadingModal } = useDepartemenDetail(modal.id, id_kabinet);
   const confirm = useConfirm();;
 
   const onSaveRequest = (data: Departemen) => {
@@ -37,9 +44,9 @@ export default function DepartemenPage() {
       // breadcrumbs seharusnya mengikut nama kabinet
         breadcrumbs={[
           {label: "Kabinet", href: '/admin/kabinet'},
-          {label: data[0].nama_kabinet, href:`/admin/${data[0].nama_kabinet}`}
+          {label: nama_kabinet, href:`/admin/kabinet/${slug}`}
         ]}
-        title={data[0].nama_kabinet}
+        title={nama_kabinet}
       />
 
       <AdminTable

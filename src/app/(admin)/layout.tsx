@@ -1,5 +1,4 @@
 import ClientGuard from "@/features/admin/components/ClientGuard";
-import { Providers } from "./providers";
 
 export default function RootAdminLayout({
   children,
@@ -7,12 +6,8 @@ export default function RootAdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
-      <ClientGuard>
-        <Providers>
-          {children}
-        </Providers>
-      </ClientGuard>
-    </>
+    <ClientGuard>
+      {children}
+    </ClientGuard>
   );
 }

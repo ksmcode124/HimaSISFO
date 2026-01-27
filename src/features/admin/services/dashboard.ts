@@ -1,4 +1,4 @@
-import { api } from "@/lib/services/api";
+import { api } from "@/features/admin/services/api";
 import { EventListResponse } from "@/lib/types/interface";
 
 export type DashboardSummaryResponse = {

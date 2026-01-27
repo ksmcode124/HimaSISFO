@@ -28,7 +28,7 @@ export interface AdminDepartemenRow{
   logo: string,
   anggota_count: number,
   proker_count: number,
-  nama_kabinet: string
+  slug_kabinet: string
 }
 
 export interface AdminAnggotaRow{
@@ -60,6 +60,7 @@ export interface AdminKabinetDetail {
 export interface AdminDepartemenDetail {
   id: number,
   nama_departemen: string,
+  logo: string
   anggota_count: number,
   proker_count: number,
   deskripsi: string
@@ -89,26 +90,7 @@ export interface AdminKomunitasDetail {
   pencapaian: string,
 }
 
-// Interface untuk Departemen
-export interface DepartemenAdmin {
-  id_departemen: number;
-  id_kabinet: number;
-  nama_departemen: string;
-  deskripsi_departemen: string | null;
-  logo_departemen: string | null;
-  foto_departemen: string | null;
-}
-
-// Interface untuk Elemen Logo
-export interface ElemenLogoAdmin {
-  id_elemen_logo: number;
-  id_kabinet: number;
-  nama_elemen: string;
-  deskripsi_elemen: string | null;
-  gambar_elemen: string | null;
-}
-
-// Interface Utama untuk Kabinet Admin
+// ================== Core Interfaces ==================
 export interface KabinetResponseAdmin {
   id_kabinet: number;
   nama_kabinet: string;
@@ -118,30 +100,68 @@ export interface KabinetResponseAdmin {
   deskripsi: string | null;
   foto_kabinet: string | null;
   gambar_logo: string | null;
-  departemen: DepartemenAdmin[];
-  elemen_logo: ElemenLogoAdmin[];
+  elemen_logo: ElemenLogo[];
+  departemen: Departemen[];
+  detailAnggota: DetailAnggota[];
+  event: Event[];
+  proker: ProgramKerja[];
 }
 
-
-// Interface untuk info kabinet
-interface KabinetInfo {
+export interface ElemenLogo {
+  id_elemen_logo: number;
   id_kabinet: number;
-  nama_kabinet: string;
-  tahun_kerja: string;
-  visi: string | null;
-  misi: string | null;
-  deskripsi: string | null;
-  foto_kabinet: string | null;
-  gambar_logo: string | null;
+  nama_elemen: string;
+  deskripsi_elemen: string;
+  gambar_elemen: string;
 }
 
-// Interface untuk setiap departemen yang include kabinet
-export interface DepartemenResponseAdmin {
+export interface Departemen {
   id_departemen: number;
   id_kabinet: number;
   nama_departemen: string;
-  deskripsi_departemen: string | null;
+  deskripsi_departemen: string;
   logo_departemen: string | null;
   foto_departemen: string | null;
-  kabinet: KabinetInfo;
+}
+
+export interface DetailAnggota {
+  id_detail: number;
+  id_anggota: number;
+  id_jabatan: number;
+  id_kabinet: number;
+  id_departemen: number;
+  foto_anggota: string | null;
+  anggota: Anggota;
+  jabatan: Jabatan;
+  departemen: Departemen;
+}
+
+export interface Anggota {
+  id_anggota: number;
+  nama_anggota: string;
+}
+
+export interface Jabatan {
+  id_jabatan: number;
+  nama_jabatan: string;
+}
+
+export interface Event {
+  id_event: number;
+  id_kabinet: number;
+  judul: string;
+  deskripsi: string;
+  tanggal_mulai: string; // ISO 8601 date string
+  tanggal_berakhir: string; // ISO 8601 date string
+  gambar_event: string;
+  kategori: string | null;
+}
+
+export interface ProgramKerja {
+  id_proker: number;
+  id_departemen: number;
+  id_kabinet: number;
+  nama_proker: string;
+  deskripsi: string;
+  foto_proker: string | null;
 }

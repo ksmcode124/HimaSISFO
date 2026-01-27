@@ -1,5 +1,4 @@
-'use client';
-
+'use client'
 import { ConfirmationModal } from '@/features/admin/components/ConfirmationModal';
 import { HeaderSection } from '@/features/admin/components/HeaderSection';
 import { AdminTable } from '@/features/admin/components/AdminTable';
@@ -88,7 +87,7 @@ export default function KabinetPage() {
             ? [
                 { label: 'Visi', value: detail.visi },
                 { label: 'Misi', value: detail.misi },
-                // { label: 'Departemen', value: detail. },
+                { label: 'Departemen', value: detail.departemen_count },
               ]
             : []
         }
