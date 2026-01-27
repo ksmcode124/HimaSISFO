@@ -1,4 +1,5 @@
 import ClientGuard from "@/features/admin/components/ClientGuard";
+import { Providers } from "./providers";
 
 export default function RootAdminLayout({
   children,
@@ -7,7 +8,11 @@ export default function RootAdminLayout({
 }) {
   return (
     <>
-      <ClientGuard>{children}</ClientGuard>
+      <ClientGuard>
+        <Providers>
+          {children}
+        </Providers>
+      </ClientGuard>
     </>
   );
 }

@@ -32,6 +32,9 @@ export function BaseModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogTitle hidden>
+        {title}
+      </DialogTitle>
       <DialogContent className={cn('rounded-lg bg-white', sizeClass)}>
         {title && (
           <DialogHeader className='hidden'>

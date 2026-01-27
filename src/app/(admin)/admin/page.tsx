@@ -40,7 +40,6 @@ const dashboardSummaryConfig = {
 };
 
 
-
 export default function AdminPage() {
   const [summary, setSummary] = React.useState<DashboardSummaryResponse[]>([]);
   const [chartData, setChartData] = React.useState<DashboardChartResponse[]>([]);

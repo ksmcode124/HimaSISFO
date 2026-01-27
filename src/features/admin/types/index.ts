@@ -87,3 +87,36 @@ export interface AdminKomunitasDetail {
   foto_komunitas: string,
   pencapaian: string,
 }
+
+// Interface untuk Departemen
+export interface DepartemenAdmin {
+  id_departemen: number;
+  id_kabinet: number;
+  nama_departemen: string;
+  deskripsi_departemen: string | null;
+  logo_departemen: string | null;
+  foto_departemen: string | null;
+}
+
+// Interface untuk Elemen Logo
+export interface ElemenLogoAdmin {
+  id_elemen_logo: number;
+  id_kabinet: number;
+  nama_elemen: string;
+  deskripsi_elemen: string | null;
+  gambar_elemen: string | null;
+}
+
+// Interface Utama untuk Kabinet Admin
+export interface KabinetResponseAdmin {
+  id_kabinet: number;
+  nama_kabinet: string;
+  tahun_kerja: string;
+  visi: string | null;
+  misi: string | null;
+  deskripsi: string | null;
+  foto_kabinet: string | null;
+  gambar_logo: string | null;
+  departemen: DepartemenAdmin[];
+  elemen_logo: ElemenLogoAdmin[];
+}

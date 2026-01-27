@@ -1,8 +1,10 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { Kabinet } from '@/lib/types/interface';
-import { AdminKabinetDetail, AdminKabinetRow } from '../types';
+import { Kabinet, KabinetResponse } from '@/lib/types/interface';
+import { AdminKabinetDetail, AdminKabinetRow, KabinetResponseAdmin } from '../types';
+import { api } from '@/lib/services/api';
+import { id } from 'zod/v4/locales';
 
 export function useKabinet() {
   const [data, setData] = useState<AdminKabinetRow[]>([]);
@@ -14,25 +16,18 @@ export function useKabinet() {
     setError(null);
 
     try {
-      // TODO: replace with real API
-      const res: AdminKabinetRow[] = [
-        {
-          id: 1,
-          nama_kabinet: 'Gelora Harmoni',
-          tahun_kerja: '2025/2026',
-          logo: 'IMG_01.svg',
-          departemen_count: 10,
-        },
-        {
-          id: 2,
-          nama_kabinet: 'Aksayapatra',
-          tahun_kerja: '2024/2025',
-          logo: 'IMG_02.svg',
-          departemen_count: 9,
-        },
-      ];
+      const response = await api.get<KabinetResponseAdmin[]>('/api/admin/kabinet')
+      const kabinetData: AdminKabinetRow[] = response.data.map((res) => {
+        return {
+          id: res.id_kabinet,
+          tahun_kerja: res.tahun_kerja ?? '-',
+          nama_kabinet: res.nama_kabinet ?? '-',
+          departemen_count: res.departemen.length,
+          logo: res.gambar_logo ?? ''
+        }
+      })
 
-      setData(res);
+      setData(kabinetData);
     } catch {
       setError('Failed to load kabinet');
     } finally {
@@ -95,22 +90,31 @@ export function useKabinetDetail(id: number | null) {
       return;
     }
 
-    setLoading(true);
-
-    // TODO: replace with real API
-    const res: AdminKabinetDetail = {
-      id,
-      tahun_kerja: '2025/2026',
-      nama_kabinet: 'Aksayapatra',
-      departemen_count: 10,
-      deskripsi: 'LOREM IPSUM',
-      logo: 'IMG.jpg',
-      misi: 'Foya',
-      visi: 'Foya',
+    const load = async () => {
+      setLoading(true);
+      try {
+        const response = await api.get<KabinetResponseAdmin>(`/api/admin/kabinet/${id}`);
+        const detailData: AdminKabinetDetail = {
+           id: response.data.id_kabinet,
+           nama_kabinet: response.data.nama_kabinet,
+           deskripsi: response.data.deskripsi ?? '',
+           visi: response.data.visi ?? '',
+           misi: response.data.misi ?? '',
+           tahun_kerja: response.data.tahun_kerja,
+           logo: response.data.gambar_logo ?? '',
+           departemen_count: response.data.departemen.length
+        }
+        console.log(detailData)
+        setDetail(detailData);
+      } catch (err: unknown) {
+        console.error(err);
+        setDetail(null);
+      } finally {
+        setLoading(false);
+      }
     };
 
-    setDetail(res);
-    setLoading(false);
+    load();
   }, [id]);
 
   return { detail, isLoadingModal: loading };

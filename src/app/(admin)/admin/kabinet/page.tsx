@@ -79,6 +79,7 @@ export default function KabinetPage() {
         onOpenChange={(v) => !v && modal.close()}
         onEdit={modal.openEdit}
         onDelete={onDeleteRequest}
+        isLoadingModal={isLoadingModal}
         id={detail?.id}
         title={detail?.nama_kabinet}
         subtitle={detail?.tahun_kerja}
