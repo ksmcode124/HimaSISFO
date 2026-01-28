@@ -1,7 +1,7 @@
 import React from "react"
 import { InlineRenderer } from "./InlineRenderer"
-import { ListItem } from "../types"
-import { cn } from "@/lib/utils"
+import { ListItem } from "../types/content"
+import { cn } from "@/lib/utils/cn"
 
 interface ListRendererProps {
   ordered?: boolean
