@@ -60,7 +60,7 @@ export function HeaderSection({
       <div className="flex justify-between items-center">
         <h1 className="text-lg font-bold italic">{title}</h1>
 
-        {!handleTambah && (
+        {handleTambah && (
           <Button variant={"ghost"} onClick={handleTambah} className='text-[#3385FF] text-sm font-semibold'>
             <PlusCircle />
             Tambah Baru

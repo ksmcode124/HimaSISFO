@@ -10,8 +10,11 @@ import { Anggota } from '@/lib/types/interface';
 import { komunitasColumns } from '@/features/admin/components/columns/komunitas-columns';
 import { useKomunitas, useKomunitasDetail } from '@/features/admin/hooks/useKomunitas';
 import { DetailModal } from '@/features/admin/components/DetailModal';
+import { notFound } from 'next/navigation';
 
 export default function KomunitasPage() {
+  notFound()
+  
   const { data, isLoading, saveData, deleteData, error } = useKomunitas();
   const modal = useModal();
   const { detail, isLoadingModal } = useKomunitasDetail(modal.id);

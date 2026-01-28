@@ -7,14 +7,23 @@ import { useModal } from '@/features/admin/hooks/useModal';
 import * as React from 'react';
 import { useConfirm } from '@/features/admin/hooks/useConfirm';
 import { useAnggota, useAnggotaDetail } from '@/features/admin/hooks/useAnggota';
-import { Anggota } from '@/lib/types/interface';
+import { Anggota } from '@/features/admin';
 import { anggotaColumns } from '@/features/admin/components/columns/anggota-columns';
 import { DetailModal } from '@/features/admin/components/DetailModal';
+import { useParams } from 'next/navigation';
 
 export default function AnggotaPage() {
-  const { data, isLoading, saveData, deleteData, error } = useAnggota();
+  const params = useParams();
+  const slug_kabinet = Array.isArray(params['nama-kabinet']) ? params['nama-kabinet'][0] : params['nama-kabinet']
+  const id_kabinet = slug_kabinet ? Number(slug_kabinet.split('-')[0]) : -1 // cuma ambil ID
+  const nama_kabinet = slug_kabinet ? slug_kabinet.split('-').slice(1).join(' ') : 'NAMA KABINET';
+  
+  const slug_departemen = Array.isArray(params['nama-departemen']) ? params['nama-departemen'][0] : params['nama-departemen'];
+  const nama_departemen = slug_departemen ? slug_departemen.split('-').slice(1).join(' ') : 'NAMA DEPARTEMEN';
+
+  const { data, isLoading, saveData, deleteData, error } = useAnggota(id_kabinet);
   const modal = useModal();
-  const { detail, isLoadingModal } = useAnggotaDetail(modal.id);
+  const { detail, isLoadingModal } = useAnggotaDetail(modal.id, id_kabinet);
   const confirm = useConfirm();;
 
   const onSaveRequest = (data: Anggota) => {
@@ -38,10 +47,10 @@ export default function AnggotaPage() {
       <HeaderSection
         breadcrumbs={[
           {label: "Kabinet", href: '/admin/kabinet'},
-          {label: "Nama Kabinet", href: '/admin/kabinet/nama-kabinet'},
-          {label: "Nama Departemen", href: '/admin/kabinet/nama-departemen'},
+          {label: nama_kabinet, href: `/admin/kabinet/${slug_kabinet}`},
+          {label: nama_departemen, href: `/admin/kabinet/${slug_kabinet}/${slug_departemen}`},
         ]}
-        title="Anggota"
+        title={nama_departemen}
       />
 
       <AdminTable
@@ -60,6 +69,7 @@ export default function AnggotaPage() {
         onOpenChange={(v) => !v && modal.close()}
         onEdit={modal.openEdit}
         onDelete={onDeleteRequest}
+        isLoadingModal={isLoadingModal}
         id={detail?.id}
         title={detail?.nama_anggota}
         subtitle={detail?.id.toString()}

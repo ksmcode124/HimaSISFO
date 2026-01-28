@@ -1,106 +1,102 @@
-'use client';
+import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
+import { api } from '@/features/admin/services/api';
+import { AdminAnggotaDetail, AdminAnggotaRow, Anggota, KabinetResponseAdmin } from '../types';
 
-import { useCallback, useEffect, useState } from 'react';
-import { AdminAnggotaRow } from '../types';
-import { Anggota } from '@/lib/types/interface';
-import { AdminAnggotaDetail } from '../types';
+export function mapToDepartemenRows(
+  response: KabinetResponseAdmin
+): AdminAnggotaRow[] {
+  const rows: AdminAnggotaRow[] = [];
+  if (!response.detailAnggota) return rows; // guard biar ngga error
 
-export function useAnggota() {
-  const [data, setData] = useState<AdminAnggotaRow[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  response.detailAnggota.forEach((anggota) => {
+    rows.push({
+      id: anggota.id_anggota,
+      nama_anggota: anggota.anggota.nama_anggota,
+      jabatan: anggota.jabatan.nama_jabatan,
+      kabinet: response.nama_kabinet
+    })
+  });
 
-  const load = useCallback(async () => {
-    setIsLoading(true);
-    setError(null);
+  return rows;
 
-    try {
-      // TODO: replace with real API
-      const res: AdminAnggotaRow[] = [
-        {
-          id: 1,
-          nama_anggota: 'Nobel',
-          jabatan: 'Staff',
-          kabinet: 'Gelora Harmoni',
-        },
-      ];
+}
 
-      setData(res);
-    } catch {
-      setError('Failed to load anggota');
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+export function mapToDepartemenDetail(
+  response: KabinetResponseAdmin,
+  id_anggota: number
+): AdminAnggotaDetail {
+  const anggota = response.detailAnggota.find((a) => a.id_anggota === id_anggota)
+  if (!anggota) {
+    throw new Error(`Anggota with id ${id_anggota} not found`);
+  }
 
-  useEffect(() => {
-    load();
-  }, [load]);
+  return {
+    id: anggota.id_anggota,
+    foto_anggota: anggota.foto_anggota ?? '',
+    nama_anggota: anggota.anggota.nama_anggota,
+    jabatan: anggota.jabatan.nama_jabatan,
+    kabinet: response.nama_kabinet
+  }
+}
 
-  const saveData = async (payload: Anggota) => {
-    setIsLoading(true);
-    setError(null);
+export function useAnggota(id_kabinet: number) {
+  const queryClient = useQueryClient();
 
-    try {
-      // TODO: await api.saveAnggota(payload)
-      console.log('SAVE ANGGOTA', payload);
-      await load();
-    } catch {
-      setError('Failed to save anggota');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const { data = [], isLoading, error, refetch } = useQuery<AdminAnggotaRow[], string>({
+    queryKey: ['departemen', id_kabinet],
+    queryFn: async () => {
+      if (!id_kabinet) return []
+      const response = await api.get<KabinetResponseAdmin[]>(`/api/admin/kabinet/`)
+      const data = response.data.find((d) => d.id_kabinet == id_kabinet)
+      if (data == null) return []
+      return mapToDepartemenRows(data)
+    },
+    enabled: id_kabinet !== null,
+  });
 
-  const deleteData = async (id: number) => {
-    setIsLoading(true);
-    setError(null);
+  // Mutation untuk save
+  const saveMutation = useMutation({
+    mutationFn: async (payload: Anggota) => {
+      // TODO: await api.saveKabinet(payload)
+      console.log('SAVE DEPARTEMEN', payload);
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['departemen', id_kabinet] })
+  });
 
-    try {
-      // TODO: await api.deleteAnggota(id)
-      console.log('DELETE ANGGOTA', id);
-      await load();
-    } catch {
-      setError('Failed to delete anggota');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  // Mutation untuk delete
+  const deleteMutation = useMutation({
+    mutationFn: async (id: number) => {
+      const response = await api.delete(`/api/admin/anggota/${id}`)
+      return response
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['departemen', id_kabinet] })
+  });
 
   return {
     data,
-    isLoading,
-    error,
-    saveData,
-    deleteData,
-    reload: load,
+    isLoading: isLoading || deleteMutation.isPending || saveMutation.isPending,
+    error: error || null,
+    reload: refetch,
+    saveData: saveMutation.mutateAsync,
+    deleteData: deleteMutation.mutateAsync,
+    saving: saveMutation.isPending,
+    deleting: deleteMutation.isPending,
   };
 }
 
-export function useAnggotaDetail(id: number | null) {
-  const [detail, setDetail] = useState<AdminAnggotaDetail | null>(null);
-  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (!id) {
-      setDetail(null);
-      return;
-    }
+export function useAnggotaDetail(id_departemen: number | null, id_kabinet: number) {
+  const { data: detail = null, isLoading } = useQuery<AdminAnggotaDetail | null, unknown>({
+    queryKey: ['departemen_detail', id_departemen],
+    queryFn: async () => {
+      if (!id_departemen) return null;
+      const response = await api.get<KabinetResponseAdmin[]>(`/api/admin/kabinet/`);
+      const data = response.data.find((d) => d.id_kabinet == id_kabinet)
+      if (data == null) return null
+      return mapToDepartemenDetail(data, id_departemen);
+    },
+    enabled: !!id_departemen, // hanya fetch kalau id ada
+  });
 
-    setLoading(true);
-
-    // TODO: replace with real API
-    const res: AdminAnggotaDetail = {
-      id,
-      nama_anggota: 'Nobel',
-      kabinet: 'Gelora Harmoni',
-      jabatan: 'Staff',
-      foto_anggota: '/IMG_01.jpg',
-    };
-
-    setDetail(res);
-    setLoading(false);
-  }, [id]);
-
-  return { detail, isLoadingModal: loading };
+  return { detail, isLoadingModal: isLoading };
 }
