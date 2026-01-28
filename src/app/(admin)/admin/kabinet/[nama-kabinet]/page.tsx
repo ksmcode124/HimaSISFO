@@ -5,6 +5,10 @@ import { HeaderSection } from '@/features/admin/components/HeaderSection';
 import { AdminTable } from '@/features/admin/components/AdminTable';
 import { useModal } from '@/features/admin/hooks/useModal';
 import * as React from 'react';
+// Note: don't wrap FormModal inside Sheet to avoid double overlay
+import { FormModal } from '@/features/admin/components/FormModal';
+import { departemenCreateFields } from '@/features/admin/components/forms/departemen-form-config';
+import { createDepartemenSchema } from '@/schemas/departemen.schema';
 import { useConfirm } from '@/features/admin/hooks/useConfirm';
 import { Departemen } from '@/features/admin';
 import { departemenColumns } from '@/features/admin/components/columns/departemen-columns';
@@ -23,6 +27,7 @@ export default function DepartemenPage() {
   const modal = useModal();
   const { detail, isLoadingModal } = useDepartemenDetail(modal.id, id_kabinet);
   const confirm = useConfirm();;
+  const [isOpen, setIsOpen] = React.useState(false);
 
   const onSaveRequest = (data: Departemen) => {
     confirm.confirm('save', async () => {
@@ -38,6 +43,32 @@ export default function DepartemenPage() {
     });
   };
 
+  async function handleCreateDepartemen(values: any) {
+    try {
+      const payload: any = { ...values, id_kabinet };
+
+      const extractUrl = (v: any) => {
+        if (!v) return undefined;
+        if (typeof v === 'string') return v;
+        return v.url || v.fileUrl || v.file?.url || (Array.isArray(v) ? v[0]?.url || v[0]?.fileUrl : undefined);
+      };
+
+      if (payload.logo_departemen) payload.logo_departemen = extractUrl(payload.logo_departemen);
+      if (payload.foto_departemen) payload.foto_departemen = extractUrl(payload.foto_departemen);
+
+      await fetch(`/api/admin/departemen`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      // refresh list — fallback to full reload until query invalidation is wired
+      window.location.reload();
+    } catch (err) {
+      console.error('create departemen error', err);
+    }
+  }
+
   return (
     <>
       <HeaderSection
@@ -47,6 +78,7 @@ export default function DepartemenPage() {
           {label: nama_kabinet, href:`/admin/kabinet/${slug}`}
         ]}
         title={nama_kabinet}
+        handleTambah={() => setIsOpen(true)}
       />
 
       <AdminTable
@@ -59,6 +91,8 @@ export default function DepartemenPage() {
           onDelete: onDeleteRequest,
         })}
       />
+
+      
 
       <DetailModal
         open={modal.isView}
@@ -78,6 +112,17 @@ export default function DepartemenPage() {
             : []
         }
         description={detail?.deskripsi}
+      />
+
+      <FormModal
+        open={isOpen}
+        title={`Tambah Departemen - ${nama_kabinet}`}
+        fields={departemenCreateFields}
+        schema={createDepartemenSchema}
+        onSubmit={handleCreateDepartemen}
+        onOpenChange={setIsOpen}
+        submitLabel="Buat Departemen"
+        initialData={{ id_kabinet }}
       />
 
       <ConfirmationModal {...confirm} />

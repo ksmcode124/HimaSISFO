@@ -3,12 +3,18 @@ import { api } from '@/features/admin/services/api';
 import { AdminAnggotaDetail, AdminAnggotaRow, Anggota, KabinetResponseAdmin } from '../types';
 
 export function mapToDepartemenRows(
-  response: KabinetResponseAdmin
+  response: KabinetResponseAdmin,
+  id_departemen?: number
 ): AdminAnggotaRow[] {
   const rows: AdminAnggotaRow[] = [];
   if (!response.detailAnggota) return rows; // guard biar ngga error
 
   response.detailAnggota.forEach((anggota) => {
+    // Filter berdasarkan departemen jika id_departemen diberikan
+    if (id_departemen && anggota.id_departemen !== id_departemen) {
+      return;
+    }
+    
     rows.push({
       id: anggota.id_anggota,
       nama_anggota: anggota.anggota.nama_anggota,
@@ -39,17 +45,17 @@ export function mapToDepartemenDetail(
   }
 }
 
-export function useAnggota(id_kabinet: number) {
+export function useAnggota(id_kabinet: number, id_departemen?: number) {
   const queryClient = useQueryClient();
 
   const { data = [], isLoading, error, refetch } = useQuery<AdminAnggotaRow[], string>({
-    queryKey: ['departemen', id_kabinet],
+    queryKey: ['departemen', id_kabinet, id_departemen],
     queryFn: async () => {
       if (!id_kabinet) return []
       const response = await api.get<KabinetResponseAdmin[]>(`/api/admin/kabinet/`)
       const data = response.data.find((d) => d.id_kabinet == id_kabinet)
       if (data == null) return []
-      return mapToDepartemenRows(data)
+      return mapToDepartemenRows(data, id_departemen)
     },
     enabled: id_kabinet !== null,
   });
@@ -60,7 +66,7 @@ export function useAnggota(id_kabinet: number) {
       // TODO: await api.saveKabinet(payload)
       console.log('SAVE DEPARTEMEN', payload);
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['departemen', id_kabinet] })
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['departemen', id_kabinet, id_departemen] })
   });
 
   // Mutation untuk delete
@@ -69,7 +75,7 @@ export function useAnggota(id_kabinet: number) {
       const response = await api.delete(`/api/admin/anggota/${id}`)
       return response
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['departemen', id_kabinet] })
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['departemen', id_kabinet, id_departemen] })
   });
 
   return {

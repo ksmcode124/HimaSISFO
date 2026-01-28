@@ -66,6 +66,7 @@ export function FormModal<TSchema extends z.ZodType<any, any, any>>({
   const [filePreviews, setFilePreviews] = useState<Record<string, string[]>>({});
   const [fileObjects, setFileObjects] = useState<Record<string, File[]>>({});
   const [fileProgresses, setFileProgresses] = useState<Record<string, number[]>>({});
+  const [uploadingFields, setUploadingFields] = useState<Set<string>>(new Set());
 
   // Reset form when modal opens or initialData changes
   useEffect(() => {
@@ -77,6 +78,7 @@ export function FormModal<TSchema extends z.ZodType<any, any, any>>({
       setFilePreviews({});
       setFileObjects({});
       setFileProgresses({});
+      setUploadingFields(new Set());
     }
   }, [open, initialData]);
 
@@ -89,12 +91,21 @@ export function FormModal<TSchema extends z.ZodType<any, any, any>>({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Prevent submit if still uploading
+    if (uploadingFields.size > 0) {
+      setServerError('Silakan tunggu sampai upload selesai sebelum submit');
+      return;
+    }
+    
     setErrors({});
     setServerError('');
     setSuccess(false);
 
     try {
+      console.log('Form data before submit:', formData);
       const parsedData = schema.parse(formData);
+      console.log('Parsed data:', parsedData);
       setLoading(true);
       await onSubmit(parsedData);
       setSuccess(true);
@@ -126,47 +137,97 @@ export function FormModal<TSchema extends z.ZodType<any, any, any>>({
   }: {
     field: FormField;
   }) => {
-    const previews = filePreviews[field.name] || [];
+    // previews can come from local object URLs (filePreviews) or hosted URLs stored in formData
+    const localPreviews = filePreviews[field.name] || [];
     const files = fileObjects[field.name] || [];
     const progresses = fileProgresses[field.name] || [];
+    const isUploading = uploadingFields.has(field.name);
 
-    const { startUpload, isUploading } = useUploadThing('imageUploader', {
+    const { startUpload } = useUploadThing('imageUploader', {
       onClientUploadComplete: (uploaded) => {
-        handleChange(field.name, uploaded); // store uploaded file info/URLs
+        console.log('Upload complete for field:', field.name, 'Result:', uploaded);
+        // store uploaded file info/URLs to formData
+        handleChange(field.name, uploaded);
+
+        // build hosted URL previews from upload result
+        const hostedPreviews = uploaded.map((u: any) => {
+          if (!u) return '';
+          if (typeof u === 'string') return u;
+          return u.url || u.fileUrl || u.fileUrlFull || u.file?.url || '';
+        }).filter(Boolean);
+
+        // set previews to hosted URLs so user can see them before submit
+        setFilePreviews(prev => ({ ...prev, [field.name]: hostedPreviews }));
+
+        // clear local file objects but keep hosted previews
         setFileObjects(prev => ({ ...prev, [field.name]: [] }));
-        setFilePreviews(prev => ({ ...prev, [field.name]: [] }));
         setFileProgresses(prev => ({ ...prev, [field.name]: [] }));
+
+        setUploadingFields(prev => {
+          const next = new Set(prev);
+          next.delete(field.name);
+          return next;
+        });
       },
     });
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
       accept: field.accept ? { [field.accept]: [] } : { "image/*": [], "video/*": [] },
       multiple: field.multiple,
+      disabled: isUploading,
       onDrop: (droppedFiles) => {
         setFileObjects(prev => ({ ...prev, [field.name]: droppedFiles }));
         setFilePreviews(prev => ({ ...prev, [field.name]: droppedFiles.map(f => URL.createObjectURL(f)) }));
         setFileProgresses(prev => ({ ...prev, [field.name]: droppedFiles.map(() => 0) }));
+        // Mark as uploading
+        setUploadingFields(prev => new Set([...prev, field.name]));
+
+        // Start upload immediately and await its completion to keep state predictable.
+        (async () => {
+          try {
+            await startUpload(droppedFiles);
+            // onClientUploadComplete will handle setting formData, previews and clearing uploadingFields
+          } catch (err) {
+            console.error('upload error for field', field.name, err);
+            setUploadingFields(prev => {
+              const next = new Set(prev);
+              next.delete(field.name);
+              return next;
+            });
+            setServerError('Gagal mengunggah file. Silakan coba lagi.');
+          }
+        })();
       },
     });
 
+    // If upload already completed, `formData[field.name]` might contain uploaded result
+    const uploadedData = (formData as any)[field.name];
+    const uploadedPreviews: string[] = Array.isArray(uploadedData)
+      ? uploadedData.map((u: any) => (typeof u === 'string' ? u : (u.url || u.fileUrl || u.fileUrlFull || u.file?.url || ''))).filter(Boolean)
+      : [];
+
+    // prefer local previews (object URLs) if present, otherwise show uploaded hosted previews
+    const previews = localPreviews.length > 0 ? localPreviews : uploadedPreviews;
+
     return (
       <div className="space-y-3">
-        <div {...getRootProps()} className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition ${isDragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300 bg-white'}`}>
+        <div {...getRootProps()} className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition ${isDragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300 bg-white'} ${isUploading ? 'opacity-50 cursor-not-allowed' : ''}`}>
           <input {...getInputProps()} disabled={field.disabled || isUploading} />
           {!previews.length ? (
             <p className="text-gray-600">
-              Drag & drop atau klik untuk memilih file{field.multiple ? ' (multiple)' : ''}
+              {isUploading ? 'Sedang upload...' : `Drag & drop atau klik untuk memilih file${field.multiple ? ' (multiple)' : ''}`}
             </p>
           ) : (
             <div className="space-y-4">
               {previews.map((p, i) => (
                 <div key={i} className="flex flex-col items-center">
-                  {files[i].type.startsWith('image/') ? (
-                    <Image src={p} alt={files[i].name} width={400} height={200} className="max-h-40 rounded" />
+                  {/* When rendering uploaded previews we may not have the original File object. */}
+                  {files[i]?.type?.startsWith('image/') || !files[i] ? (
+                    <Image src={p} alt={files[i]?.name || 'file'} width={400} height={200} className="max-h-40 rounded" />
                   ) : (
                     <video src={p} controls className="max-h-40 rounded" />
                   )}
-                  <p className="text-sm mt-1">{files[i].name}</p>
+                  <p className="text-sm mt-1">{files[i]?.name || ''}</p>
                   {isUploading && (
                     <div className="bg-gray-200 h-2 w-full rounded mt-1">
                       <div className="bg-blue-600 h-2 rounded" style={{ width: `${progresses[i]}%` }} />
@@ -177,17 +238,6 @@ export function FormModal<TSchema extends z.ZodType<any, any, any>>({
             </div>
           )}
         </div>
-
-        {/* Button to upload */}
-        {files.length > 0 && !isUploading && (
-          <button
-            type="button"
-            onClick={() => startUpload(files)}
-            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
-          >
-            Upload {files.length > 1 ? 'Files' : 'File'}
-          </button>
-        )}
       </div>
     );
   };
@@ -258,8 +308,8 @@ export function FormModal<TSchema extends z.ZodType<any, any, any>>({
           </div>
 
           <div className="flex justify-center pt-4">
-            <button type="submit" disabled={loading} className="px-8 py-2.5 bg-[#3385FF] text-white rounded-lg font-medium hover:bg-[#2670E8] transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed">
-              {loading ? 'Menyimpan...' : submitLabel}
+            <button type="submit" disabled={loading || uploadingFields.size > 0} className="px-8 py-2.5 bg-[#3385FF] text-white rounded-lg font-medium hover:bg-[#2670E8] transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed">
+              {loading ? 'Menyimpan...' : uploadingFields.size > 0 ? 'Tunggu upload selesai...' : submitLabel}
             </button>
           </div>
         </form>
