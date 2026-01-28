@@ -1,5 +1,4 @@
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
-import { Kabinet } from '@/lib/types/interface';
 import { api } from '@/features/admin/services/api';
 import { AdminEventRow, AdminEventDetail, EventResponseAdmin, Event } from '../types';
 
@@ -66,7 +65,7 @@ export function useEvent() {
 
 
 export function useEventDetail(id: number | null) {
-  const { data: detail = null, isLoading } = useQuery<AdminEventRow | null, unknown>({
+  const { data: detail = null, isLoading } = useQuery<AdminEventDetail | null, unknown>({
     queryKey: ['kabinet', id],
     queryFn: async () => {
       if (!id) return null;

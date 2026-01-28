@@ -65,7 +65,7 @@ export default function EventPage() {
           detail
             ? [
                 { label: 'Tanggal', value: detail.date },
-                { label: 'Kategori', value: detail.type },
+                // { label: 'Kategori', value: detail.type },
               ]
             : []
         }

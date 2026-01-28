@@ -57,17 +57,21 @@ export function FormModal<TSchema extends z.ZodType<any, any, any>>({
   const [success, setSuccess] = useState(false);
   const [serverError, setServerError] = useState('');
   const [fileNames, setFileNames] = useState<Record<string, string>>({});
+  const [prevOpen, setPrevOpen] = useState(open);
+
 
   // Reset form when modal opens/closes
   useEffect(() => {
-    if (open) {
+    if (open && !prevOpen) {
       setFormData(initialData);
       setErrors({});
       setServerError('');
       setSuccess(false);
       setFileNames({});
     }
-  }, [open, initialData]);
+    setPrevOpen(open);
+  }, [open, initialData, prevOpen]);
+
 
   const handleChange = (name: string, value: any) => {
     setFormData((prev) => ({
@@ -311,14 +315,6 @@ export function FormModal<TSchema extends z.ZodType<any, any, any>>({
   return (
     <BaseModal open={open} onOpenChange={onOpenChange} size="lg">
       <div className="relative">
-        <button
-          onClick={() => onOpenChange(false)}
-          className="absolute -top-2 -right-2 p-1 hover:bg-gray-100 rounded-full transition-colors"
-          disabled={loading}
-        >
-          <X className="w-5 h-5 text-gray-500" />
-        </button>
-
         {title && (
           <h2 className="text-xl font-semibold text-gray-900 mb-6">{title}</h2>
         )}

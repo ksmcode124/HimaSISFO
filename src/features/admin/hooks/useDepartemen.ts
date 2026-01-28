@@ -83,14 +83,15 @@ export function useDepartemen(id_kabinet: number) {
   const deleteMutation = useMutation({
     mutationFn: async (id: number) => {
       // TODO: await api.deleteKabinet(id)
-      console.log('DELETE DEPARTEMEN', id);
+      const response = await api.delete(`/api/admin/departemen/${id}`)
+      return response
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['departemen', id_kabinet] })
   });
 
   return {
     data,
-    isLoading,
+    isLoading: isLoading || deleteMutation.isPending || saveMutation.isPending,
     error: error || null,
     reload: refetch,
     saveData: saveMutation.mutateAsync,

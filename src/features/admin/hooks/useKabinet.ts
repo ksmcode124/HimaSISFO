@@ -2,6 +2,8 @@ import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
 import { Kabinet } from '@/lib/types/interface';
 import { api } from '@/features/admin/services/api';
 import { AdminKabinetDetail, AdminKabinetRow, KabinetResponseAdmin } from '../types';
+import z from 'zod';
+import { createKabinetSchema, updateKabinetSchema } from '@/schemas/kabinet.schema';
 
 // Mapping list response ke row
 export const mapToAdminKabinetRow = (res: KabinetResponseAdmin): AdminKabinetRow => ({
@@ -38,19 +40,29 @@ export function useKabinet() {
   });
 
   // Mutation untuk save
-  const saveMutation = useMutation({
-    mutationFn: async (payload: Kabinet) => {
-      // TODO: await api.saveKabinet(payload)
-      console.log('SAVE KABINET', payload);
+  const createMutation = useMutation({
+    mutationFn: async (payload: z.infer<typeof createKabinetSchema>) => {
+      const response = await api.post('/api/admin/kabinet', payload);
+      return response.data;
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['kabinet'] })
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['kabinet'] }),
+  });
+
+  // Mutation UPDATE
+  const updateMutation = useMutation({
+    mutationFn: async (payload: { id: number; data: z.infer<typeof updateKabinetSchema> }) => {
+      const { id, data } = payload;
+      const response = await api.put(`/api/admin/kabinet/${id}`, data);
+      return response.data;
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['kabinet'] }),
   });
 
   // Mutation untuk delete
   const deleteMutation = useMutation({
     mutationFn: async (id: number) => {
-      // TODO: await api.deleteKabinet(id)
-      console.log('DELETE KABINET', id);
+      const response = await api.delete(`/api/admin/kabinet/${id}`)
+      return response
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['kabinet'] })
   });
@@ -60,9 +72,11 @@ export function useKabinet() {
     isLoading,
     error: error || null,
     reload: refetch,
-    saveData: saveMutation.mutateAsync,
-    deleteData: deleteMutation.mutateAsync,
-    saving: saveMutation.isPending,
+    createKabinet: createMutation.mutateAsync,
+    updateKabinet: updateMutation.mutateAsync,
+    deleteKabinet: deleteMutation.mutateAsync,
+    creating: createMutation.isPending,
+    updating: updateMutation.isPending,
     deleting: deleteMutation.isPending,
   };
 }
