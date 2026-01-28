@@ -5,7 +5,7 @@ import { createAnggotaDetailSchema, updateAnggotaDetailSchema } from '@/schemas/
 import z from 'zod';
 import { createAnggotaSchema } from '@/schemas/anggota.schema';
 
-export function mapToDepartemenRows(
+export function mapToAnggotaRows(
   response: KabinetResponseAdmin
 ): AdminAnggotaRow[] {
   const rows: AdminAnggotaRow[] = [];
@@ -24,7 +24,7 @@ export function mapToDepartemenRows(
 
 }
 
-export function mapToDepartemenDetail(
+export function mapToAnggotaDetail(
   response: KabinetResponseAdmin,
   id_anggota: number
 ): AdminAnggotaDetail {
@@ -52,7 +52,8 @@ export function useAnggota(id_kabinet: number) {
       const response = await api.get<KabinetResponseAdmin[]>(`/api/admin/kabinet/`)
       const data = response.data.find((d) => d.id_kabinet == id_kabinet)
       if (data == null) return []
-      return mapToDepartemenRows(data)
+      return mapToAnggotaRows
+    (data)
     },
     enabled: id_kabinet !== null,
   });
@@ -100,17 +101,17 @@ export function useAnggota(id_kabinet: number) {
 }
 
 
-export function useAnggotaDetail(id_departemen: number | null, id_kabinet: number) {
+export function useAnggotaDetail(id_anggota: number | null, id_kabinet: number) {
   const { data: detail = null, isLoading } = useQuery<AdminAnggotaDetail | null, unknown>({
-    queryKey: ['anggota', id_departemen],
+    queryKey: ['anggota', id_anggota],
     queryFn: async () => {
-      if (!id_departemen) return null;
+      if (!id_anggota) return null;
       const response = await api.get<KabinetResponseAdmin[]>(`/api/admin/kabinet/`);
       const data = response.data.find((d) => d.id_kabinet == id_kabinet)
       if (data == null) return null
-      return mapToDepartemenDetail(data, id_departemen);
+      return mapToAnggotaDetail(data, id_anggota);
     },
-    enabled: !!id_departemen, // hanya fetch kalau id ada
+    enabled: !!id_anggota, // hanya fetch kalau id ada
   });
 
   return { detail, isLoadingModal: isLoading };

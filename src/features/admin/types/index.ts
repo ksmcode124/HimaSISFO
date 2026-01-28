@@ -87,6 +87,22 @@ export interface AdminEventDetail {
   foto_event: string,
 }
 
+export interface AdminProkerRow {
+  id_proker: number,
+  nama_proker: string,
+  deskripsi: string,
+  foto_proker: string
+}
+
+export interface AdminProkerDetail {
+  id_proker: number,
+  id_kabinet: number,
+  id_departmeen: number,
+  nama_proker: string,
+  deskripsi: string,
+  foto_proker: string
+}
+
 export interface AdminKomunitasDetail {
   id: number,
   nama_komunitas: string,

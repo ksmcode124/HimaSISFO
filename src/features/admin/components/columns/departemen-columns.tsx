@@ -33,7 +33,19 @@ export function departemenColumns({
         )
       }
     },
-    { accessorKey: 'proker_count', header: 'Program Kerja' },
+    { 
+      accessorKey: 'proker_count', 
+      header: 'Program Kerja',
+      cell: ({ row }) => {
+        const data = row.original
+
+        return (
+          <Link href={`/admin/kabinet/${data.slug_kabinet}/${data.id_departemen}-${translateToSlug(data.nama_departemen)}/proker`} className='text-accent underline'>
+            {data.proker_count}
+          </Link>
+        )
+      }
+    },
     {
       id: 'actions',
       header: 'Aksi',
