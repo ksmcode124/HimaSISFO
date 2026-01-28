@@ -2,6 +2,7 @@ import { ColumnDef } from '@tanstack/react-table';
 import { TableActionButtons } from '../TableActionButtons';
 import { AdminDepartemenRow, } from '../../types';
 import Link from 'next/link';
+import { translateToSlug } from '@/lib/utils/translate-slug';
 
 interface ColumnActions {
   onView?: (id: number) => void
@@ -25,7 +26,7 @@ export function departemenColumns({
         const data = row.original
 
         return (
-          <Link href={`/admin/kabinet/nama-kabinet/nama-departemen`} className='text-accent underline'>
+          <Link href={`/admin/kabinet/${data.slug_kabinet}/${data.id}-${translateToSlug(data.nama_departemen)}`} className='text-accent underline'>
             {data.anggota_count}
           </Link>
         )
