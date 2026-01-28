@@ -45,7 +45,7 @@ export default function LoginPage() {
               </FieldLegend>
               <FieldGroup>
                 <Field>
-                  <FieldLabel htmlFor="email" className="text-base font-semibold">
+                  <FieldLabel htmlFor="email" className="text-sm font-semibold">
                     Email
                   </FieldLabel>
                   <Input
@@ -59,7 +59,7 @@ export default function LoginPage() {
                   />
                 </Field>
                 <Field>
-                  <FieldLabel htmlFor="password" className="text-base font-semibold">
+                  <FieldLabel htmlFor="password" className="text-sm font-semibold">
                     Password
                   </FieldLabel>
                   <Input

@@ -34,7 +34,7 @@ export function BlankoCTA({ title, subtitle, iconUrl, href }: Props) {
         <Button asChild variant="hima">
           <Link
             href={href}
-            className="text-xs lg:text-base px-1.5 py-1 sm:px-2 sm:py-1.5 md:px-3 md:py-2 lg:px-5 lg:py-4 2xl:px-6 2xl:py-5"
+            className="text-xs lg:text-sm px-1.5 py-1 sm:px-2 sm:py-1.5 md:px-3 md:py-2 lg:px-5 lg:py-4 2xl:px-6 2xl:py-5"
           >
             Selengkapnya ➔
           </Link>

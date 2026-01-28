@@ -90,5 +90,52 @@ export const EVENTS: EventCardProps[] = [
     img: "contohtengah.png",
     description: "Learn the latest features of Remix in this hands-on workshop.",
     type: "Hima",
+  },
+  {
+    id: 11,
+    title: "Workshop Astro",
+    start: new Date("2026-01-25T10:30:00.000Z"),
+    end: new Date("2026-01-25T12:30:00.000Z"),
+    img: "contohtengah.png",
+    description: "Learn the latest features of Astro in this hands-on workshop.",
+    type: "Hima",
+  },
+  {
+    id:12,
+    title: "Workshop SolidJS",
+    start: new Date("2026-01-25T10:30:00.000Z"),
+    end: new Date("2026-01-25T12:30:00.000Z"),
+    img: "contohtengah.png",
+    description: "Learn the latest features of SolidJS in this hands-on workshop.",
+    type: "Hima",
+  },
+  {
+    id:13,
+    title: "Workshop Astro",
+    start: new Date("2026-01-26T10:30:00.000Z"),
+    end: new Date("2026-01-26T12:30:00.000Z"),
+    img: "contohtengah.png",
+    description: "Learn the latest features of Astro in this hands-on workshop.",
+    type: "Beasiswa",
+  },
+  {
+    id:14,
+    title: "Workshop MongoDb",
+    start: new Date("2026-01-26T10:30:00.000Z"),
+    end: new Date("2026-01-30T12:30:00.000Z"),
+    img: "contohtengah.png",
+    description: "Learn the latest features of Astro in this hands-on workshop.",
+    type: "Beasiswa",
+  },
+  {
+    id: 15,
+    title: "Workshop Data Science",
+    start: new Date("2026-01-26T10:30:00.000Z"),
+    end: new Date("2026-01-26T12:30:00.000Z"),
+    img: "contohtengah.png",
+    description: "Learn the latest features of Science in this hands-on workshop.",
+    type: "Beasiswa",
   }
+
+
 ];

@@ -10,7 +10,7 @@ export function HeroView({ title, subtitle }: HeroViewProps) {
         {title}
       </h2>
 
-      <h3 className="mt-2 sm:mt-4 font-body font-semibold text-base sm:text-lg md:text-xl lg:text-3xl 2xl:text-3xl leading-snug">
+      <h3 className="mt-2 sm:mt-4 font-body font-semibold text-sm sm:text-lg md:text-xl lg:text-3xl 2xl:text-3xl leading-snug">
         {subtitle}
       </h3>
     </section>

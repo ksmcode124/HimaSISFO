@@ -15,16 +15,18 @@ export interface DynamicCalendarProps {
 
 export interface WithVariantEventCardProps extends EventCardProps {
   variant?: "detail" | "onGoing" | "notGoing";
+  actions?: React.ReactNode;
+  onMouseOver?: () => void;
 }
 
-export interface EventWithVariantProps extends EventCardProps {
-  start: Date;
+export interface WithVariantEventCardPropsArray {
+  events: WithVariantEventCardProps[];
 }
 
 export interface SortedSingleEventsProps {
-  pastNotGoing?: EventWithVariantProps;
-  nextOnGoing?: EventWithVariantProps;
-  futureNotGoing?: EventWithVariantProps;
+  pastNotGoing?: EventCardProps;
+  nextOnGoing?: EventCardProps[];
+  futureNotGoing?: EventCardProps;
 }
 
 export interface FindEventByIdProps {
@@ -43,3 +45,21 @@ export interface BreadCrumbItems {
   display: string;
   link: string;
 }
+
+export type EventItem = {
+  id: number;
+  title: string;
+  start: Date;
+  end: Date;
+};
+
+export type SingleEventSpec = {
+  mode: "single";
+  event: EventItem;
+};
+
+export type MultipleEventSpec = {
+  mode: "multiple";
+  events: EventItem[];
+};
+

@@ -7,9 +7,9 @@ import Link from "next/link"
 import HandIcon from "../../../public/assets/shared/decoratives/twemoji_raised-hand"
 
 export default function SiteFooter() {
-  const footerRef = useRef<HTMLElement | null>(null)
+  const footerRef = useRef<HTMLElement>(null)
   const [hasTriggered, setHasTriggered] = useState(false)
-
+  const [year, setYear] = useState<number>(null);
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -29,6 +29,10 @@ export default function SiteFooter() {
     };
   }, []);
 
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
+
   return (
     <footer
       ref={footerRef}
@@ -38,19 +42,17 @@ export default function SiteFooter() {
     >
       {//tangan
       }
-      <div className={`absolute overflow-visible inset-0 z-0 lg:transition-transform lg:duration-700 ease-out ${hasTriggered ? "lg:-translate-y-0" : "lg:translate-y-full"}`}>
-        <HandIcon className="absolute h-auto -translate-x-20" />
+      <div className={`absolute overflow-hidden inset-0 z-0 lg:transition-transform lg:duration-700 ease-out ${hasTriggered ? "lg:-translate-y-0" : "lg:translate-y-full"}`}>
+        <HandIcon className="absolute h-auto -translate-x-20 " />
         <HandIcon mirrorX className="absolute h-auto translate-x-20" />
       </div>
       <div className={`
         relative
-        top-10
         grid
         z-20
         grid-cols-3
         lg:grid-cols-[3fr_3fr_2fr_1fr]
         gap-x-10 xl:gap-x-20
-        gap-y-5
         px-5 py-15 md:px-30 xl:px-45
         text-[#FFFCFC]
         text-shadow-[0_2px_2px_#000]
@@ -85,7 +87,7 @@ export default function SiteFooter() {
             Tautan Akademik
           </h4>
           <ul className="font-medium text-[14px] md:text-sm flex flex-col gap-4">
-            {footerNavItems.slice(0,4).map((item) => (
+            {footerNavItems.slice(0, 4).map((item) => (
               <li key={item.href}>
                 <Link href={item.href} target="_blank">{item.label}</Link>
               </li>
@@ -100,7 +102,7 @@ export default function SiteFooter() {
           ))}
         </div>
         <div className="relative z-20 col-span-3 lg:col-span-4 text-center text-sm font-bold">
-          &copy; COPYRIGHT {new Date().getFullYear()}. All Rights Reserved
+          &copy; COPYRIGHT {year}. All Rights Reserved
         </div>
       </div>
     </footer>

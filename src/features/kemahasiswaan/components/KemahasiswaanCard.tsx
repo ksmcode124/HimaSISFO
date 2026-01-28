@@ -28,7 +28,7 @@ export function KemahasiswaanCard({ data, active, device }: KemahasiswaanCardPro
       >
         <motion.p
           className={cn(
-            "font-semibold origin-left text-xs sm:text-sm md:text-base lg:text-xl wrap-break-word",
+            "font-semibold origin-left text-xs sm:text-sm md:text-sm lg:text-xl wrap-break-word",
             !active ? "text-center px-[20%]" : ""
           )}
           transition={{ duration: 0.45, ease: "easeOut" }}
@@ -48,7 +48,7 @@ export function KemahasiswaanCard({ data, active, device }: KemahasiswaanCardPro
                 ease: "easeOut",
               }}
               className={cn(
-                "line-clamp-5 text-justify text-3xs sm:text-2xs md:text-xs lg:text-base 2xl:text-base",
+                "line-clamp-5 text-justify text-3xs sm:text-2xs md:text-xs lg:text-sm",
                 device === 'tablet' && " line-clamp-2",
               )}
             >
@@ -72,7 +72,7 @@ export function KemahasiswaanCard({ data, active, device }: KemahasiswaanCardPro
             className="grid justify-items-center w-full pb-4"
           >
             <Button variant={"hima"} className={cn(
-              "text-xs lg:text-base px-1.5 py-1 sm:px-2 sm:py-1.5 md:px-3 md:py-2 lg:px-5 lg:py-4 2xl:px-6 2xl:py-5",
+              "text-xs lg:text-sm px-1.5 py-1 sm:px-2 sm:py-1.5 md:px-3 md:py-2 lg:px-5 lg:py-4 2xl:px-6 2xl:py-5",
             )} asChild>
               <Link href={`/kemahasiswaan/${data.id}`}>
                 Selengkapnya ➔
