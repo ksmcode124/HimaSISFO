@@ -1,5 +1,4 @@
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
-import { Kabinet } from '@/lib/types/interface';
 import { api } from '@/features/admin/services/api';
 import { AdminKabinetDetail, AdminKabinetRow, KabinetResponseAdmin } from '../types';
 import z from 'zod';
@@ -24,6 +23,7 @@ export const mapToAdminKabinetDetail = (res: KabinetResponseAdmin): AdminKabinet
   tahun_kerja: res.tahun_kerja,
   logo: res.gambar_logo ?? '',
   departemen_count: res.departemen.length,
+  foto_kabinet: res.foto_kabinet ?? ''
 });
 
 

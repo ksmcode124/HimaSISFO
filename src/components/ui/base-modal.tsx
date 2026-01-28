@@ -13,7 +13,7 @@ interface BaseModalProps {
   title?: string;
   children: ReactNode;
   footer?: ReactNode;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
 export function BaseModal({
@@ -28,6 +28,7 @@ export function BaseModal({
     sm: 'max-w-md',
     md: 'max-w-xl',
     lg: 'max-w-3xl',
+    xl: 'max-w-5xl'
   }[size];
 
   return (

@@ -6,7 +6,6 @@ import { useKabinet, useKabinetDetail } from '@/features/admin/hooks/useKabinet'
 import { useModal } from '@/features/admin/hooks/useModal';
 import * as React from 'react';
 import { useConfirm } from '@/features/admin/hooks/useConfirm';
-import { Kabinet } from '@/lib/types/interface';
 import { kabinetColumns } from '@/features/admin/components/columns/kabinet-columns';
 import { DetailModal } from '@/features/admin/components/DetailModal';
 import { FormModal } from '@/features/admin/components/FormModal';
@@ -19,8 +18,6 @@ export default function KabinetPage() {
   const modal = useModal();
   const { detail, isLoadingModal } = useKabinetDetail(modal.id);
   const confirm = useConfirm();
-
-  
 
   const onDeleteRequest = (id: number) => {
     confirm.confirm('delete', async () => {
@@ -50,33 +47,45 @@ export default function KabinetPage() {
         })}
       />
 
-      {/* Edit Modal */}
-      <FormModal
-        open={modal.isEdit}
-        onOpenChange={(v) => !v && modal.close()}
-        title="Edit Kabinet"
-        fields={cabinetEditFields}
-        onSubmit={async (data) => {
-          if (!detail?.id) return;
-          await updateKabinet({ id: detail.id, data });
-          modal.close();
-        }}
-        submitLabel="Update"
-        schema={updateKabinetSchema}
-      />
-      
+      {/* Create Modal */}
       <FormModal
         open={modal.isCreate}
-        onOpenChange={(v) => !v && modal.close()}
+        onOpenChange={v => !v && modal.close()}
         title="Buat Kabinet Baru"
         fields={cabinetCreateFields}
         schema={createKabinetSchema}
-        onSubmit={async (data) => {
-          await createKabinet(data);
+        initialData={{}}
+        submitLabel="Buat Kabinet"
+        onSubmit={async data => {
+          await createKabinet(createKabinetSchema.parse(data));
           modal.close();
         }}
-        submitLabel="Buat Kabinet"
       />
+
+      {modal.isEdit && !isLoadingModal && (
+        <FormModal
+          open={modal.isEdit}
+          onOpenChange={v => !v && modal.close()}
+          title="Edit Kabinet"
+          fields={cabinetEditFields}
+          schema={updateKabinetSchema.partial()}
+          initialData={{
+            nama_kabinet: detail?.nama_kabinet,
+            tahun_kerja: detail?.tahun_kerja,
+            visi: detail?.visi,
+            misi: detail?.misi,
+            deskripsi: detail?.deskripsi,
+            gambar_logo: detail?.logo,
+            foto_kabinet: detail?.foto_kabinet
+          }}
+          submitLabel="Update"
+          onSubmit={async data => {
+            if (!detail?.id) return;
+            await updateKabinet({ id: detail.id, data });
+            modal.close();
+          }}
+        />
+      )}
 
       <DetailModal
         open={modal.isView}

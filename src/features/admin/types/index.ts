@@ -54,7 +54,8 @@ export interface AdminKabinetDetail {
   visi: string,
   misi: string,
   departemen_count: number,
-  deskripsi: string
+  deskripsi: string,
+  foto_kabinet: string
 }
 
 export interface AdminDepartemenDetail {
