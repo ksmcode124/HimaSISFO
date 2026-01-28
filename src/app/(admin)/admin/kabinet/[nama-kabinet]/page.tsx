@@ -6,11 +6,13 @@ import { AdminTable } from '@/features/admin/components/AdminTable';
 import { useModal } from '@/features/admin/hooks/useModal';
 import * as React from 'react';
 import { useConfirm } from '@/features/admin/hooks/useConfirm';
-import { Departemen } from '@/features/admin';
 import { departemenColumns } from '@/features/admin/components/columns/departemen-columns';
 import { useDepartemen, useDepartemenDetail } from '@/features/admin/hooks/useDepartemen';
 import { DetailModal } from '@/features/admin/components/DetailModal';
 import { useParams } from 'next/navigation';
+import { FormModal } from '@/features/admin/components/FormModal';
+import { createDepartemenSchema, updateDepartemenSchema } from '@/schemas/departemen.schema';
+import { createDepartemenFields, updateDepartemenFields } from '@/features/admin/components/forms/departemen-form-config';
 
 export default function DepartemenPage() {
   const params = useParams();
@@ -19,21 +21,14 @@ export default function DepartemenPage() {
   const nama_kabinet = slug ? slug.split('-').slice(1).join(' ') : 'NAMA KABINET';
 
 
-  const { data, isLoading, saveData, deleteData, error } = useDepartemen(id_kabinet);
+  const { data, isLoading, createDepartemen, updateDepartemen, deleteDepartemen, error } = useDepartemen(id_kabinet);
   const modal = useModal();
   const { detail, isLoadingModal } = useDepartemenDetail(modal.id, id_kabinet);
   const confirm = useConfirm();;
 
-  const onSaveRequest = (data: Departemen) => {
-    confirm.confirm('save', async () => {
-      await saveData(data);
-      modal.close();
-    });
-  };
-
   const onDeleteRequest = (id: number) => {
     confirm.confirm('delete', async () => {
-      await deleteData(id);
+      await deleteDepartemen(id);
       modal.close();
     });
   };
@@ -47,6 +42,7 @@ export default function DepartemenPage() {
           {label: nama_kabinet, href:`/admin/kabinet/${slug}`}
         ]}
         title={nama_kabinet}
+        handleTambah={modal.openCreate}
       />
 
       <AdminTable
@@ -60,15 +56,47 @@ export default function DepartemenPage() {
         })}
       />
 
+      {/* Create Modal */}
+      <FormModal
+        open={modal.isCreate}
+        onOpenChange={v => !v && modal.close()}
+        title="Buat Kabinet Baru"
+        fields={createDepartemenFields}
+        schema={createDepartemenSchema}
+        initialData={{id_kabinet: id_kabinet}}
+        submitLabel="Buat Departemen"
+        onSubmit={async data => {
+          await createDepartemen(data);
+          modal.close();
+        }}
+      />
+
+      {modal.isEdit && !isLoadingModal && (
+        <FormModal
+          open={modal.isEdit}
+          onOpenChange={v => !v && modal.close()}
+          title="Edit Departemen"
+          fields={updateDepartemenFields}
+          schema={updateDepartemenSchema}
+          initialData={detail ?? {}}
+          submitLabel="Update"
+          onSubmit={async data => {
+            if (!detail?.id_departemen) return;
+            await updateDepartemen({ id: detail.id_departemen, data });
+            modal.close();
+          }}
+        />
+      )}
+
       <DetailModal
         open={modal.isView}
         onOpenChange={(v) => !v && modal.close()}
         onEdit={modal.openEdit}
         onDelete={onDeleteRequest}
         isLoadingModal={isLoadingModal}
-        id={detail?.id}
+        id={detail?.id_departemen}
         title={detail?.nama_departemen}
-        subtitle={detail?.id.toString()}
+        subtitle={detail?.id_departemen.toString()}
         meta={
           detail
             ? [
@@ -77,7 +105,7 @@ export default function DepartemenPage() {
               ]
             : []
         }
-        description={detail?.deskripsi}
+        description={detail?.deskripsi_departemen}
       />
 
       <ConfirmationModal {...confirm} />

@@ -23,16 +23,18 @@ export interface AdminEventRow {
 }
 
 export interface AdminDepartemenRow{
-  id: number,
+  id_departemen: number,
   nama_departemen: string,
-  logo: string,
+  logo_departemen: string,
+  foto_departemen: string,
+  deskripsi_departemen: string,
   anggota_count: number,
   proker_count: number,
   slug_kabinet: string
 }
 
 export interface AdminAnggotaRow{
-  id: number,
+  id_anggota: number,
   nama_anggota: string,
   kabinet: string,
   jabatan: string
@@ -59,16 +61,17 @@ export interface AdminKabinetDetail {
 }
 
 export interface AdminDepartemenDetail {
-  id: number,
+  id_departemen: number,
   nama_departemen: string,
-  logo: string
+  logo_departemen: string,
+  foto_departemen: string
   anggota_count: number,
   proker_count: number,
-  deskripsi: string
+  deskripsi_departemen: string
 }
 
 export interface AdminAnggotaDetail{
-  id: number,
+  id_anggota: number,
   foto_anggota: string,
   nama_anggota: string,
   kabinet: string,

@@ -16,9 +16,10 @@ export function departemenColumns({
   onDelete,
 }: ColumnActions): ColumnDef<AdminDepartemenRow>[] {
   return [
-    { accessorKey: 'id', header: 'ID' },
+    { accessorKey: 'id_departemen', header: 'ID' },
     { accessorKey: 'nama_departemen', header: 'Nama Departemen' },
-    { accessorKey: 'logo', header: 'Logo'},
+    { accessorKey: 'logo_departemen', header: 'Logo'},
+    { accessorKey: 'foto_departemen', header: 'Foto'},
     {
       accessorKey: 'anggota_count', 
       header: "Anggota",
@@ -26,7 +27,7 @@ export function departemenColumns({
         const data = row.original
 
         return (
-          <Link href={`/admin/kabinet/${data.slug_kabinet}/${data.id}-${translateToSlug(data.nama_departemen)}`} className='text-accent underline'>
+          <Link href={`/admin/kabinet/${data.slug_kabinet}/${data.id_departemen}-${translateToSlug(data.nama_departemen)}`} className='text-accent underline'>
             {data.anggota_count}
           </Link>
         )
@@ -42,9 +43,9 @@ export function departemenColumns({
 
         return (
           <TableActionButtons
-            onView={onView ? () => onView(data.id) : undefined}
-            onEdit={onEdit ? () => onEdit(data.id) : undefined}
-            onDelete={onDelete ? () => onDelete(data.id) : undefined}
+            onView={onView ? () => onView(data.id_departemen) : undefined}
+            onEdit={onEdit ? () => onEdit(data.id_departemen) : undefined}
+            onDelete={onDelete ? () => onDelete(data.id_departemen) : undefined}
           />
         );
       },

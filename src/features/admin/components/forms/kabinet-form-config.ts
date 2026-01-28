@@ -1,6 +1,6 @@
 import { FormField } from "../FormModal";
 
-export const cabinetCreateFields: FormField[] = [
+export const createKabinetFields: FormField[] = [
   { name: 'nama_kabinet', label: 'NAMA KABINET', type: 'text', required: true, side: 'left', placeholder: 'Nama Kabinet' },
   { name: 'tahun_kerja', label: 'TAHUN', type: 'text', required: true, side: 'left', placeholder: '2025/2026' },
   { name: 'visi', label: 'VISI', type: 'textarea', required: true, side: 'right', rows: 2 },
@@ -9,7 +9,7 @@ export const cabinetCreateFields: FormField[] = [
   { name: 'gambar_logo', label: 'UPLOAD LOGO', type: 'file', side: 'left', accept: 'image/*', maxSize: '10 MB' },
 ];
 
-export const cabinetEditFields: FormField[] = [
+export const updateKabinetFields: FormField[] = [
   { name: 'nama_kabinet', label: 'NAMA KABINET', type: 'text', required: true, side: 'left', placeholder: 'Nama Kabinet' },
   { name: 'tahun_kerja', label: 'TAHUN', type: 'text', required: true, side: 'left', placeholder: '2025/2026' },
   { name: 'visi', label: 'VISI', type: 'textarea', required: true, side: 'right', rows: 2 },

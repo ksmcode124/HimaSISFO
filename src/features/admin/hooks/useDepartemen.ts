@@ -1,7 +1,9 @@
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
-import { api } from '@/features/admin/services/api';
-import { AdminDepartemenDetail, AdminDepartemenRow, Departemen, KabinetResponseAdmin } from '../types';
+import { api } from '@/lib/services/api';
+import { AdminDepartemenDetail, AdminDepartemenRow, KabinetResponseAdmin } from '../types';
 import { translateToSlug } from '@/lib/utils/translate-slug';
+import { createDepartemenSchema, updateDepartemenSchema } from '@/schemas/departemen.schema';
+import z from 'zod';
 
 export function mapToDepartemenRows(
   response: KabinetResponseAdmin
@@ -19,9 +21,11 @@ export function mapToDepartemenRows(
       : 0;
 
     rows.push({
-      id: departemen.id_departemen,
+      id_departemen: departemen.id_departemen,
       nama_departemen: departemen.nama_departemen,
-      logo: departemen.logo_departemen ?? '',
+      logo_departemen: departemen.logo_departemen ?? '',
+      foto_departemen: departemen.foto_departemen ?? '',
+      deskripsi_departemen: departemen.deskripsi_departemen ?? '',
       anggota_count,
       proker_count,
       slug_kabinet: `${response.id_kabinet}-${translateToSlug(response.nama_kabinet)}`
@@ -45,10 +49,11 @@ export function mapToDepartemenDetail(
   const anggota_count = response.detailAnggota.filter(p => p.id_departemen === id_departemen).length;
 
   return {
-    id: departemen.id_departemen,
+    id_departemen: departemen.id_departemen,
     nama_departemen: departemen.nama_departemen,
-    deskripsi: departemen.deskripsi_departemen ?? '',
-    logo: departemen.logo_departemen ?? '',
+    deskripsi_departemen: departemen.deskripsi_departemen ?? '',
+    logo_departemen: departemen.logo_departemen ?? '',
+    foto_departemen: departemen.foto_departemen ?? '',
     anggota_count,
     proker_count,
   };
@@ -70,33 +75,43 @@ export function useDepartemen(id_kabinet: number) {
     enabled: id_kabinet !== null,
   });
 
-  // Mutation untuk save
-  const saveMutation = useMutation({
-    mutationFn: async (payload: Departemen) => {
-      // TODO: await api.saveKabinet(payload)
-      console.log('SAVE DEPARTEMEN', payload);
-    },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['departemen', id_kabinet] })
-  });
-
-  // Mutation untuk delete
-  const deleteMutation = useMutation({
-    mutationFn: async (id: number) => {
-      // TODO: await api.deleteKabinet(id)
-      const response = await api.delete(`/api/admin/departemen/${id}`)
-      return response
-    },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['departemen', id_kabinet] })
-  });
+ const createMutation = useMutation({
+     mutationFn: async (payload: z.infer<typeof createDepartemenSchema>) => {
+       const response = await api.post('/api/admin/departemen', payload);
+       return response.data;
+     },
+     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['departemen', id_kabinet] }),
+   });
+ 
+   // Mutation UPDATE
+   const updateMutation = useMutation({
+     mutationFn: async (payload: { id: number; data: z.infer<typeof updateDepartemenSchema> }) => {
+       const { id, data } = payload;
+       const response = await api.put(`/api/admin/departemen/${id}`, data);
+       return response.data;
+     },
+     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['departemen', id_kabinet] })
+   });
+ 
+   // Mutation untuk delete
+   const deleteMutation = useMutation({
+     mutationFn: async (id: number) => {
+       const response = await api.delete(`/api/admin/departemen/${id}`)
+       return response
+     },
+     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['departemen', id_kabinet] })
+   });
 
   return {
     data,
-    isLoading: isLoading || deleteMutation.isPending || saveMutation.isPending,
+    isLoading,
     error: error || null,
     reload: refetch,
-    saveData: saveMutation.mutateAsync,
-    deleteData: deleteMutation.mutateAsync,
-    saving: saveMutation.isPending,
+    createDepartemen: createMutation.mutateAsync,
+    updateDepartemen: updateMutation.mutateAsync,
+    deleteDepartemen: deleteMutation.mutateAsync,
+    creating: createMutation.isPending,
+    updating: updateMutation.isPending,
     deleting: deleteMutation.isPending,
   };
 }
