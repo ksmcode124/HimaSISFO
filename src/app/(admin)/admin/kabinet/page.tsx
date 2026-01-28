@@ -9,9 +9,8 @@ import { useConfirm } from '@/features/admin/hooks/useConfirm';
 import { kabinetColumns } from '@/features/admin/components/columns/kabinet-columns';
 import { DetailModal } from '@/features/admin/components/DetailModal';
 import { FormModal } from '@/features/admin/components/FormModal';
-import { cabinetCreateFields, cabinetEditFields } from '@/features/admin/components/forms/kabinet-form-config';
+import { createKabinetFields, updateKabinetFields } from '@/features/admin/components/forms/kabinet-form-config';
 import { createKabinetSchema, updateKabinetSchema } from '@/schemas/kabinet.schema';
-import z from 'zod';
 
 export default function KabinetPage() {
   const { data, isLoading, createKabinet, updateKabinet, deleteKabinet, error } = useKabinet();
@@ -52,12 +51,12 @@ export default function KabinetPage() {
         open={modal.isCreate}
         onOpenChange={v => !v && modal.close()}
         title="Buat Kabinet Baru"
-        fields={cabinetCreateFields}
+        fields={createKabinetFields}
         schema={createKabinetSchema}
         initialData={{}}
         submitLabel="Buat Kabinet"
         onSubmit={async data => {
-          await createKabinet(createKabinetSchema.parse(data));
+          await createKabinet(data);
           modal.close();
         }}
       />
@@ -67,7 +66,7 @@ export default function KabinetPage() {
           open={modal.isEdit}
           onOpenChange={v => !v && modal.close()}
           title="Edit Kabinet"
-          fields={cabinetEditFields}
+          fields={updateKabinetFields}
           schema={updateKabinetSchema.partial()}
           initialData={{
             nama_kabinet: detail?.nama_kabinet,

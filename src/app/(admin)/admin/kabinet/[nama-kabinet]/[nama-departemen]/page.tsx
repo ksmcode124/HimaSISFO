@@ -7,7 +7,6 @@ import { useModal } from '@/features/admin/hooks/useModal';
 import * as React from 'react';
 import { useConfirm } from '@/features/admin/hooks/useConfirm';
 import { useAnggota, useAnggotaDetail } from '@/features/admin/hooks/useAnggota';
-import { Anggota } from '@/features/admin';
 import { anggotaColumns } from '@/features/admin/components/columns/anggota-columns';
 import { DetailModal } from '@/features/admin/components/DetailModal';
 import { useParams } from 'next/navigation';
@@ -23,24 +22,17 @@ export default function AnggotaPage() {
   const nama_kabinet = slug_kabinet ? slug_kabinet.split('-').slice(1).join(' ') : 'NAMA KABINET';
   
   const slug_departemen = Array.isArray(params['nama-departemen']) ? params['nama-departemen'][0] : params['nama-departemen'];
-  const id_departemen = slug_departemen ? Number(slug_departemen.split('-')[0]) : -1 // Extract ID departemen
+  const id_departemen = slug_departemen ? Number(slug_departemen.split('-')[0]) : -1; // Extract ID departemen
   const nama_departemen = slug_departemen ? slug_departemen.split('-').slice(1).join(' ') : 'NAMA DEPARTEMEN';
 
-  const { data, isLoading, saveData, deleteData, error, reload } = useAnggota(id_kabinet, id_departemen);
+  const { data, isLoading, error, reload, deleteAnggota, updateAnggota } = useAnggota(id_kabinet, id_departemen);
   const modal = useModal();
   const { detail, isLoadingModal } = useAnggotaDetail(modal.id, id_kabinet);
   const confirm = useConfirm();;
 
-  const onSaveRequest = (data: Anggota) => {
-    confirm.confirm('save', async () => {
-      await saveData(data);
-      modal.close();
-    });
-  };
-
   const onDeleteRequest = (id: number) => {
     confirm.confirm('delete', async () => {
-      await deleteData(id);
+      await deleteAnggota(id);
       modal.close();
     });
   };
@@ -144,36 +136,17 @@ export default function AnggotaPage() {
         })}
       />
 
-      <DetailModal
-        open={modal.isView}
-        onOpenChange={(v) => !v && modal.close()}
-        onEdit={modal.openEdit}
-        onDelete={onDeleteRequest}
-        isLoadingModal={isLoadingModal}
-        id={detail?.id}
-        title={detail?.nama_anggota}
-        subtitle={detail?.id.toString()}
-        meta={
-          detail
-            ? [
-                { label: 'Kabinet', value: detail?.kabinet },
-                { label: 'Jabatan', value: detail?.jabatan },
-              ]
-            : []
-        }
-        imageUrl={detail?.foto_anggota}
-      />
-
+      {/* Create Modal */}
       {modal.isCreate && (
         <FormModal
           open={modal.isCreate}
-          onOpenChange={(v) => !v && modal.close()}
+          onOpenChange={v => !v && modal.close()}
           title="Buat Anggota Baru"
           fields={anggotaCreateFields}
           schema={createAnggotaSchema}
           initialData={{}}
           submitLabel="Buat Anggota"
-          onSubmit={async (data) => {
+          onSubmit={async data => {
             await onCreateAnggota(data);
           }}
         />
@@ -182,7 +155,7 @@ export default function AnggotaPage() {
       {modal.isEdit && !isLoadingModal && (
         <FormModal
           open={modal.isEdit}
-          onOpenChange={(v) => !v && modal.close()}
+          onOpenChange={v => !v && modal.close()}
           title="Edit Anggota"
           fields={anggotaEditFields}
           schema={updateAnggotaSchema.partial()}
@@ -190,9 +163,9 @@ export default function AnggotaPage() {
             nama_anggota: detail?.nama_anggota,
           }}
           submitLabel="Update Anggota"
-          onSubmit={async (data) => {
-            if (!detail?.id) return;
-            const response = await fetch(`/api/admin/anggota/${detail.id}`, {
+          onSubmit={async data => {
+            if (!detail?.id_anggota) return;
+            const response = await fetch(`/api/admin/anggota/${detail.id_anggota}`, {
               method: 'PATCH',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(data),
@@ -206,6 +179,26 @@ export default function AnggotaPage() {
           }}
         />
       )}
+
+      <DetailModal
+        open={modal.isView}
+        onOpenChange={(v) => !v && modal.close()}
+        onEdit={modal.openEdit}
+        onDelete={onDeleteRequest}
+        isLoadingModal={isLoadingModal}
+        id={detail?.id_anggota}
+        title={detail?.nama_anggota}
+        subtitle={detail?.id_anggota.toString()}
+        meta={
+          detail
+            ? [
+                { label: 'Kabinet', value: detail?.kabinet },
+                { label: 'Jabatan', value: detail?.jabatan },
+              ]
+            : []
+        }
+        imageUrl={detail?.foto_anggota}
+      />
 
       <ConfirmationModal {...confirm} />
 

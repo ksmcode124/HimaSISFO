@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Dispatch, SetStateAction } from 'react';
 import { z, ZodError } from 'zod';
 import { BaseModal } from '@/components/ui/base-modal';
-import { X, Upload, ChevronDown } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import Image from 'next/image';
 import { useUploadThing } from '@/lib/uploadthing';
 import { useDropzone } from 'react-dropzone';
@@ -144,7 +144,7 @@ export function FormModal<TSchema extends z.ZodType<any, any, any>>({
     const isUploading = uploadingFields.has(field.name);
 
     const { startUpload } = useUploadThing('imageUploader', {
-      onClientUploadComplete: (uploaded) => {
+      onClientUploadComplete: (uploaded: any[]) => {
         console.log('Upload complete for field:', field.name, 'Result:', uploaded);
         // store uploaded file info/URLs to formData
         handleChange(field.name, uploaded);
@@ -175,9 +175,9 @@ export function FormModal<TSchema extends z.ZodType<any, any, any>>({
       accept: field.accept ? { [field.accept]: [] } : { "image/*": [], "video/*": [] },
       multiple: field.multiple,
       disabled: isUploading,
-      onDrop: (droppedFiles) => {
+      onDrop: (droppedFiles: File[]) => {
         setFileObjects(prev => ({ ...prev, [field.name]: droppedFiles }));
-        setFilePreviews(prev => ({ ...prev, [field.name]: droppedFiles.map(f => URL.createObjectURL(f)) }));
+        setFilePreviews(prev => ({ ...prev, [field.name]: droppedFiles.map((f: File) => URL.createObjectURL(f)) }));
         setFileProgresses(prev => ({ ...prev, [field.name]: droppedFiles.map(() => 0) }));
         // Mark as uploading
         setUploadingFields(prev => new Set([...prev, field.name]));
@@ -245,33 +245,143 @@ export function FormModal<TSchema extends z.ZodType<any, any, any>>({
 
 
   const renderField = (field: FormField) => {
-    const base = 'w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-[#3385FF] transition-all placeholder:text-[#D9D9D9]';
+    const base =
+      'w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-[#3385FF] transition-all placeholder:text-[#D9D9D9]';
     const errorCls = getErrorMessage(field.name) ? 'border-red-500' : 'border-gray-200';
-    const disabledCls = field.disabled || loading ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : 'bg-white';
+    const disabledCls =
+      field.disabled || loading ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : 'bg-white';
+
     const classes = `${base} ${errorCls} ${disabledCls}`;
-    const value = formData[field.name as keyof FormData] || '';
+
+    const value = formData[field.name as keyof FormData] ?? '';
 
     switch (field.type) {
+      /* ================= TEXTAREA ================= */
       case 'textarea':
-        return <textarea className={`${classes} resize-none`} rows={field.rows || 3} placeholder={field.placeholder} value={value as string} onChange={e => handleChange(field.name, e.target.value)} disabled={field.disabled || loading} />;
+        return (
+          <textarea
+            className={`${classes} resize-none`}
+            rows={field.rows || 3}
+            placeholder={field.placeholder}
+            value={value as string}
+            onChange={e => handleChange(field.name, e.target.value)}
+            disabled={field.disabled || loading}
+          />
+        );
 
+      /* ================= SELECT ================= */
       case 'select':
         return (
           <div className="relative">
-            <select className={`${classes} appearance-none pr-10 cursor-pointer`} value={value as string} onChange={e => handleChange(field.name, e.target.value)} disabled={field.disabled || loading}>
-              <option value="">{field.placeholder || 'Pilih opsi'}</option>
-              {field.options?.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+            <select
+              className={`${classes} appearance-none pr-10 cursor-pointer`}
+              value={value as string}
+              onChange={e => handleChange(field.name, e.target.value)}
+              disabled={field.disabled || loading}
+              multiple={field.multiple}
+            >
+              {!field.multiple && (
+                <option value="">{field.placeholder || 'Pilih opsi'}</option>
+              )}
+              {field.options?.map(o => (
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
+              ))}
             </select>
             <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
           </div>
         );
 
-      case 'file': {
-        return <FileUploader field={field} />;
-      }
+      /* ================= FILE ================= */
+      case 'file':
+        return (
+          <FileUploader
+            field={field}
+          />
+        );
 
+      /* ================= NUMBER ================= */
+      case 'number':
+        return (
+          <input
+            type="number"
+            className={classes}
+            placeholder={field.placeholder}
+            value={value}
+            onChange={e =>
+              handleChange(
+                field.name,
+                e.target.value === '' ? undefined : Number(e.target.value)
+              )
+            }
+            disabled={field.disabled || loading}
+          />
+        );
+
+      /* ================= DATE ================= */
+      case 'date':
+        return (
+          <input
+            type="date"
+            className={classes}
+            value={value as string}
+            onChange={e => handleChange(field.name, e.target.value)}
+            disabled={field.disabled || loading}
+          />
+        );
+
+      /* ================= EMAIL ================= */
+      case 'email':
+        return (
+          <input
+            type="email"
+            className={classes}
+            placeholder={field.placeholder || 'email@example.com'}
+            value={value as string}
+            onChange={e => handleChange(field.name, e.target.value)}
+            disabled={field.disabled || loading}
+          />
+        );
+
+      /* ================= PASSWORD ================= */
+      case 'password':
+        return (
+          <input
+            type="password"
+            className={classes}
+            placeholder={field.placeholder || '••••••••'}
+            value={value as string}
+            onChange={e => handleChange(field.name, e.target.value)}
+            disabled={field.disabled || loading}
+          />
+        );
+
+      /* ================= URL ================= */
+      case 'url':
+        return (
+          <input
+            type="url"
+            className={classes}
+            placeholder={field.placeholder || 'https://'}
+            value={value as string}
+            onChange={e => handleChange(field.name, e.target.value)}
+            disabled={field.disabled || loading}
+          />
+        );
+
+      /* ================= DEFAULT (TEXT) ================= */
       default:
-        return <input type={field.type || 'text'} className={classes} placeholder={field.placeholder} value={value as string} onChange={e => handleChange(field.name, e.target.value)} disabled={field.disabled || loading} />;
+        return (
+          <input
+            type="text"
+            className={classes}
+            placeholder={field.placeholder}
+            value={value as string}
+            onChange={e => handleChange(field.name, e.target.value)}
+            disabled={field.disabled || loading}
+          />
+        );
     }
   };
 
@@ -304,6 +414,11 @@ export function FormModal<TSchema extends z.ZodType<any, any, any>>({
                   {getErrorMessage(f.name) && <p className="mt-1 text-sm text-red-500">{getErrorMessage(f.name)}</p>}
                 </div>
               ))}
+              <div className="flex justify-center pt-4">
+                <button type="submit" disabled={loading} className="w-full px-8 py-2.5 bg-[#3385FF] text-white rounded-lg font-medium hover:bg-[#2670E8] transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed">
+                  {loading ? 'Menyimpan...' : submitLabel}
+                </button>
+              </div>
             </div>
           </div>
 

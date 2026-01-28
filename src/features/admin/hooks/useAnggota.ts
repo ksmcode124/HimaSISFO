@@ -1,6 +1,9 @@
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
-import { api } from '@/features/admin/services/api';
-import { AdminAnggotaDetail, AdminAnggotaRow, Anggota, KabinetResponseAdmin } from '../types';
+import { api } from '@/lib/services/api';
+import { AdminAnggotaDetail, AdminAnggotaRow, KabinetResponseAdmin } from '../types';
+import { createAnggotaDetailSchema, updateAnggotaDetailSchema } from '@/schemas/anggota_detail.schema';
+import z from 'zod';
+import { createAnggotaSchema } from '@/schemas/anggota.schema';
 
 export function mapToDepartemenRows(
   response: KabinetResponseAdmin,
@@ -16,7 +19,7 @@ export function mapToDepartemenRows(
     }
     
     rows.push({
-      id: anggota.id_anggota,
+      id_anggota: anggota.id_anggota,
       nama_anggota: anggota.anggota.nama_anggota,
       jabatan: anggota.jabatan.nama_jabatan,
       kabinet: response.nama_kabinet
@@ -27,7 +30,7 @@ export function mapToDepartemenRows(
 
 }
 
-export function mapToDepartemenDetail(
+export function mapToAnggotaDetail(
   response: KabinetResponseAdmin,
   id_anggota: number
 ): AdminAnggotaDetail {
@@ -37,7 +40,7 @@ export function mapToDepartemenDetail(
   }
 
   return {
-    id: anggota.id_anggota,
+    id_anggota: anggota.id_anggota,
     foto_anggota: anggota.foto_anggota ?? '',
     nama_anggota: anggota.anggota.nama_anggota,
     jabatan: anggota.jabatan.nama_jabatan,
@@ -61,12 +64,22 @@ export function useAnggota(id_kabinet: number, id_departemen?: number) {
   });
 
   // Mutation untuk save
-  const saveMutation = useMutation({
-    mutationFn: async (payload: Anggota) => {
-      // TODO: await api.saveKabinet(payload)
-      console.log('SAVE DEPARTEMEN', payload);
+  const createMutation = useMutation({
+    mutationFn: async (payload: z.infer<typeof createAnggotaSchema>) => {
+      const response = await api.post('/api/admin/anggota', payload);
+      return response.data;
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['departemen', id_kabinet, id_departemen] })
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['anggota', id_kabinet, id_departemen] }),
+  });
+
+  // Mutation UPDATE
+  const updateMutation = useMutation({
+    mutationFn: async (payload: { id: number; data: z.infer<typeof updateAnggotaDetailSchema> }) => {
+      const { id, data } = payload;
+      const response = await api.put(`/api/admin/anggota/${id}`, data);
+      return response.data;
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['anggota', id_kabinet] })
   });
 
   // Mutation untuk delete
@@ -80,28 +93,30 @@ export function useAnggota(id_kabinet: number, id_departemen?: number) {
 
   return {
     data,
-    isLoading: isLoading || deleteMutation.isPending || saveMutation.isPending,
+    isLoading,
     error: error || null,
     reload: refetch,
-    saveData: saveMutation.mutateAsync,
-    deleteData: deleteMutation.mutateAsync,
-    saving: saveMutation.isPending,
+    createAnggota: createMutation.mutateAsync,
+    updateAnggota: updateMutation.mutateAsync,
+    deleteAnggota: deleteMutation.mutateAsync,
+    creating: createMutation.isPending,
+    updating: updateMutation.isPending,
     deleting: deleteMutation.isPending,
   };
 }
 
 
-export function useAnggotaDetail(id_departemen: number | null, id_kabinet: number) {
+export function useAnggotaDetail(id_anggota: number | null, id_kabinet: number) {
   const { data: detail = null, isLoading } = useQuery<AdminAnggotaDetail | null, unknown>({
-    queryKey: ['departemen_detail', id_departemen],
+    queryKey: ['anggota', id_anggota],
     queryFn: async () => {
-      if (!id_departemen) return null;
+      if (!id_anggota) return null;
       const response = await api.get<KabinetResponseAdmin[]>(`/api/admin/kabinet/`);
       const data = response.data.find((d) => d.id_kabinet == id_kabinet)
       if (data == null) return null
-      return mapToDepartemenDetail(data, id_departemen);
+      return mapToAnggotaDetail(data, id_anggota);
     },
-    enabled: !!id_departemen, // hanya fetch kalau id ada
+    enabled: !!id_anggota, // hanya fetch kalau id ada
   });
 
   return { detail, isLoadingModal: isLoading };

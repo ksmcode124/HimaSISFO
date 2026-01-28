@@ -7,14 +7,13 @@ import { useModal } from '@/features/admin/hooks/useModal';
 import * as React from 'react';
 // Note: don't wrap FormModal inside Sheet to avoid double overlay
 import { FormModal } from '@/features/admin/components/FormModal';
-import { departemenCreateFields } from '@/features/admin/components/forms/departemen-form-config';
-import { createDepartemenSchema } from '@/schemas/departemen.schema';
 import { useConfirm } from '@/features/admin/hooks/useConfirm';
-import { Departemen } from '@/features/admin';
 import { departemenColumns } from '@/features/admin/components/columns/departemen-columns';
 import { useDepartemen, useDepartemenDetail } from '@/features/admin/hooks/useDepartemen';
 import { DetailModal } from '@/features/admin/components/DetailModal';
 import { useParams } from 'next/navigation';
+import { createDepartemenSchema, updateDepartemenSchema } from '@/schemas/departemen.schema';
+import { createDepartemenFields, updateDepartemenFields } from '@/features/admin/components/forms/departemen-form-config';
 
 export default function DepartemenPage() {
   const params = useParams();
@@ -23,22 +22,15 @@ export default function DepartemenPage() {
   const nama_kabinet = slug ? slug.split('-').slice(1).join(' ') : 'NAMA KABINET';
 
 
-  const { data, isLoading, saveData, deleteData, error } = useDepartemen(id_kabinet);
+  const { data, isLoading, createDepartemen, updateDepartemen, deleteDepartemen, error } = useDepartemen(id_kabinet);
   const modal = useModal();
   const { detail, isLoadingModal } = useDepartemenDetail(modal.id, id_kabinet);
   const confirm = useConfirm();;
   const [isOpen, setIsOpen] = React.useState(false);
 
-  const onSaveRequest = (data: Departemen) => {
-    confirm.confirm('save', async () => {
-      await saveData(data);
-      modal.close();
-    });
-  };
-
   const onDeleteRequest = (id: number) => {
     confirm.confirm('delete', async () => {
-      await deleteData(id);
+      await deleteDepartemen(id);
       modal.close();
     });
   };
@@ -100,9 +92,9 @@ export default function DepartemenPage() {
         onEdit={modal.openEdit}
         onDelete={onDeleteRequest}
         isLoadingModal={isLoadingModal}
-        id={detail?.id}
+        id={detail?.id_departemen}
         title={detail?.nama_departemen}
-        subtitle={detail?.id.toString()}
+        subtitle={detail?.id_departemen.toString()}
         meta={
           detail
             ? [
@@ -111,13 +103,13 @@ export default function DepartemenPage() {
               ]
             : []
         }
-        description={detail?.deskripsi}
+        description={detail?.deskripsi_departemen}
       />
 
       <FormModal
         open={isOpen}
         title={`Tambah Departemen - ${nama_kabinet}`}
-        fields={departemenCreateFields}
+        fields={createDepartemenFields}
         schema={createDepartemenSchema}
         onSubmit={handleCreateDepartemen}
         onOpenChange={setIsOpen}

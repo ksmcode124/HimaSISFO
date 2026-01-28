@@ -15,7 +15,7 @@ export function anggotaColumns({
   onDelete,
 }: ColumnActions): ColumnDef<AdminAnggotaRow>[] {
   return [
-    { accessorKey: 'id', header: 'ID' },
+    { accessorKey: 'id_anggota', header: 'ID' },
     { accessorKey: 'nama_anggota', header: 'Nama Anggota' },
     { accessorKey: 'kabinet', header: 'Kabinet'},
     { accessorKey: 'jabatan', header: 'Jabatan'},
@@ -28,9 +28,9 @@ export function anggotaColumns({
 
         return (
           <TableActionButtons
-            onView={onView ? () => onView(data.id) : undefined}
-            onEdit={onEdit ? () => onEdit(data.id) : undefined}
-            onDelete={onDelete ? () => onDelete(data.id) : undefined}
+            onView={onView ? () => onView(data.id_anggota) : undefined}
+            onEdit={onEdit ? () => onEdit(data.id_anggota) : undefined}
+            onDelete={onDelete ? () => onDelete(data.id_anggota) : undefined}
           />
         );
       },

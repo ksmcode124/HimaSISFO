@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
-import { api } from '@/features/admin/services/api';
+import { api } from '@/lib/services/api';
 import { AdminKabinetDetail, AdminKabinetRow, KabinetResponseAdmin } from '../types';
 import z from 'zod';
 import { createKabinetSchema, updateKabinetSchema } from '@/schemas/kabinet.schema';
