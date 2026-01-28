@@ -48,7 +48,6 @@ export function useAnggota(id_kabinet: number) {
       if (!id_kabinet) return []
       const response = await api.get<KabinetResponseAdmin[]>(`/api/admin/kabinet/`)
       const data = response.data.find((d) => d.id_kabinet == id_kabinet)
-      console.log(data?.detailAnggota)
       if (data == null) return []
       return mapToDepartemenRows(data)
     },

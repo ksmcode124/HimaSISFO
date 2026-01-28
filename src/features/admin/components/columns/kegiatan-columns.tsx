@@ -17,19 +17,19 @@ export function kegiatanColumns({
     { accessorKey: 'id', header: 'ID' },
     { accessorKey: 'title', header: 'Judul' },
     { accessorKey: 'description', header: 'Deskripsi' },
-    {
-      accessorKey: 'type',
-      header: 'Kategori',
-      meta: {
-        filterable: true,
-        label: 'Kategori',
-        filterType: 'checkbox',
-      },
-      filterFn: (row, columnId, filterValue: string[]) => {
-        if (!filterValue?.length) return true;
-        return filterValue.includes(row.getValue(columnId));
-      },
-    },
+    // {
+    //   accessorKey: 'type',
+    //   header: 'Kategori',
+    //   meta: {
+    //     filterable: true,
+    //     label: 'Kategori',
+    //     filterType: 'checkbox',
+    //   },
+    //   filterFn: (row, columnId, filterValue: string[]) => {
+    //     if (!filterValue?.length) return true;
+    //     return filterValue.includes(row.getValue(columnId));
+    //   },
+    // },
     { accessorKey: 'start', header: 'Tanggal Mulai' },
     { accessorKey: 'end', header: 'Tanggal Selesai' },
     {

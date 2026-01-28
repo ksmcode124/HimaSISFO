@@ -17,7 +17,7 @@ export interface AdminEventRow {
   id: number,
   title: string,
   description: string,
-  type: string,
+  // type: string,
   end: Date,
   start: Date,
 }
@@ -78,7 +78,7 @@ export interface AdminEventDetail {
   id: number,
   title: string,
   description: string,
-  type: string,
+  // type: string,
   date: string,
   foto_event: string,
 }
@@ -164,4 +164,20 @@ export interface ProgramKerja {
   nama_proker: string;
   deskripsi: string;
   foto_proker: string | null;
+}
+
+export interface EventResponseAdmin {
+  id_event: number;
+  judul: string;
+  deskripsi: string;
+  tanggal_mulai: string; // bisa juga Date kalau mau langsung parsing
+  tanggal_berakhir: string; // bisa juga Date
+  gambar_event: string;
+  kabinet: EventKabinet;
+}
+
+export interface EventKabinet {
+  id_kabinet: number;
+  nama_kabinet: string;
+  tahun_kerja: string;
 }

@@ -6,10 +6,10 @@ import { AdminTable } from '@/features/admin/components/AdminTable';
 import { useModal } from '@/features/admin/hooks/useModal';
 import * as React from 'react';
 import { useConfirm } from '@/features/admin/hooks/useConfirm';
-import { EventDetailResponse } from '@/lib/types/interface';
-import { useEvent, useEventDetail } from '@/features/admin/hooks/useKegiatan';
+import { useEvent, useEventDetail } from '@/features/admin/hooks/useEvent';
 import { kegiatanColumns } from '@/features/admin/components/columns/kegiatan-columns';
 import { DetailModal } from '@/features/admin/components/DetailModal';
+import { Event } from '@/features/admin';
 
 export default function EventPage() {
   const { data, isLoading, saveData, deleteData, error } = useEvent();
@@ -17,7 +17,7 @@ export default function EventPage() {
   const {detail, isLoadingModal } = useEventDetail(modal.id)
   const confirm = useConfirm();;
 
-  const onSaveRequest = (data: EventDetailResponse) => {
+  const onSaveRequest = (data: Event) => {
     confirm.confirm('save', async () => {
       await saveData(data);
       modal.close();
