@@ -5,7 +5,7 @@ interface LoginPayload {
 
 export async function login(payload: LoginPayload) {
   // TODO: CALL LOGIN HERE
-  const response = await fetch('/api/auth/login', {
+  const response = await fetch('/api/admin/auth/sign-in/email', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -21,3 +21,4 @@ export async function login(payload: LoginPayload) {
 
   return data;
 }
+
