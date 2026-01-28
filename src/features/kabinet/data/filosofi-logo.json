@@ -21,9 +21,9 @@
   ],
   "aksayapatra": [
     {
-      "id": "cincin",
-      "elemen": "Cincin",
-      "makna": "Gelora mewakili semangat yang membara, dorongan kuat untuk bergerak maju.",
+      "id": "infinity",
+      "elemen": "Infinity",
+      "makna": "Infinity melambangkan hal yang tidak terbatas.",
       "path": "M 150 -30 H 30",
       "cx": 30,
       "cy": -30,
@@ -32,7 +32,7 @@
     {
       "id": "api",
       "elemen": "Api",
-      "makna": "Harmoni berarti keselarasan dan kekeluargaan dalam perbedaan, kerja sama yang seimbang dan damai antar individu",
+      "makna": "Api melambangkan semangat yang membara.",
       "path": "M -120 -40 H 50",
       "cx": 50,
       "cy": -40,
@@ -41,7 +41,7 @@
     {
       "id": "tangan",
       "elemen": "Tangan",
-      "makna": "Harmoni berarti keselarasan dan kekeluargaan dalam perbedaan, kerja sama yang seimbang dan damai antar individu",
+      "makna": "Tangan menengadah melambangkan sebuah wadah.",
       "path": "M -95 -40 H 50",
       "cx": 50,
       "cy": -40,

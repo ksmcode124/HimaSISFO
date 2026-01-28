@@ -88,12 +88,12 @@ export default function LogoAksayapatra() {
             </linearGradient>
           </defs>
 
-          {/* ELEMEN CINCIN */}
+          {/* ELEMEN INFINITY */}
           <motion.g
-            onMouseEnter={() => handleMouseEnter("cincin")}
-            onMouseLeave={() => handleClick("cincin")}
+            onMouseEnter={() => handleMouseEnter("infinity")}
+            onMouseLeave={() => handleClick("infinity")}
             animate={{
-              opacity: active && active !== "cincin" ? 0.3 : 1,
+              opacity: active && active !== "infinity" ? 0.3 : 1,
               filter: active ? "none" : "url(#shadow)",
             }}
             className="cursor-pointer"
