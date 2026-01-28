@@ -4,10 +4,8 @@
 import { useEffect, useState } from 'react';
 import { z, ZodError } from 'zod';
 import { BaseModal } from '@/components/ui/base-modal';
-import { X, Upload, ChevronDown } from 'lucide-react';
-import Image from 'next/image';
-import { useUploadThing } from '@/lib/uploadthing';
-import { useDropzone } from 'react-dropzone';
+import { ChevronDown } from 'lucide-react';
+import { FileUploader } from './FileUploadField';
 
 export interface SelectOption {
   value: string;
@@ -121,79 +119,6 @@ export function FormModal<TSchema extends z.ZodType<any, any, any>>({
     }
   };
 
-  const FileUploader = ({
-    field,
-  }: {
-    field: FormField;
-  }) => {
-    const previews = filePreviews[field.name] || [];
-    const files = fileObjects[field.name] || [];
-    const progresses = fileProgresses[field.name] || [];
-
-    const { startUpload, isUploading } = useUploadThing('imageUploader', {
-      onClientUploadComplete: (uploaded) => {
-        handleChange(field.name, uploaded); // store uploaded file info/URLs
-        setFileObjects(prev => ({ ...prev, [field.name]: [] }));
-        setFilePreviews(prev => ({ ...prev, [field.name]: [] }));
-        setFileProgresses(prev => ({ ...prev, [field.name]: [] }));
-      },
-    });
-
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({
-      accept: field.accept ? { [field.accept]: [] } : { "image/*": [], "video/*": [] },
-      multiple: field.multiple,
-      onDrop: (droppedFiles) => {
-        setFileObjects(prev => ({ ...prev, [field.name]: droppedFiles }));
-        setFilePreviews(prev => ({ ...prev, [field.name]: droppedFiles.map(f => URL.createObjectURL(f)) }));
-        setFileProgresses(prev => ({ ...prev, [field.name]: droppedFiles.map(() => 0) }));
-      },
-    });
-
-    return (
-      <div className="space-y-3">
-        <div {...getRootProps()} className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition ${isDragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300 bg-white'}`}>
-          <input {...getInputProps()} disabled={field.disabled || isUploading} />
-          {!previews.length ? (
-            <p className="text-gray-600">
-              Drag & drop atau klik untuk memilih file{field.multiple ? ' (multiple)' : ''}
-            </p>
-          ) : (
-            <div className="space-y-4">
-              {previews.map((p, i) => (
-                <div key={i} className="flex flex-col items-center">
-                  {files[i].type.startsWith('image/') ? (
-                    <Image src={p} alt={files[i].name} width={400} height={200} className="max-h-40 rounded" />
-                  ) : (
-                    <video src={p} controls className="max-h-40 rounded" />
-                  )}
-                  <p className="text-sm mt-1">{files[i].name}</p>
-                  {isUploading && (
-                    <div className="bg-gray-200 h-2 w-full rounded mt-1">
-                      <div className="bg-blue-600 h-2 rounded" style={{ width: `${progresses[i]}%` }} />
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* Button to upload */}
-        {files.length > 0 && !isUploading && (
-          <button
-            type="button"
-            onClick={() => startUpload(files)}
-            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
-          >
-            Upload {files.length > 1 ? 'Files' : 'File'}
-          </button>
-        )}
-      </div>
-    );
-  };
-
-
-
   const renderField = (field: FormField) => {
     const base = 'w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-[#3385FF] transition-all placeholder:text-[#D9D9D9]';
     const errorCls = getErrorMessage(field.name) ? 'border-red-500' : 'border-gray-200';
@@ -217,7 +142,20 @@ export function FormModal<TSchema extends z.ZodType<any, any, any>>({
         );
 
       case 'file': {
-        return <FileUploader field={field} />;
+        return (
+          <FileUploader 
+            field={field}
+            value={value as string}
+            onChange={(val) => handleChange(field.name, val)}
+            disabled={field.disabled || loading}
+            filePreviews={filePreviews}
+            fileObjects={fileObjects}
+            fileProgresses={fileProgresses}
+            setFilePreviews={setFilePreviews}
+            setFileObjects={setFileObjects}
+            setFileProgresses={setFileProgresses}
+          />
+        );
       }
 
       default:

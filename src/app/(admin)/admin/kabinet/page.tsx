@@ -11,7 +11,6 @@ import { DetailModal } from '@/features/admin/components/DetailModal';
 import { FormModal } from '@/features/admin/components/FormModal';
 import { cabinetCreateFields, cabinetEditFields } from '@/features/admin/components/forms/kabinet-form-config';
 import { createKabinetSchema, updateKabinetSchema } from '@/schemas/kabinet.schema';
-import z from 'zod';
 
 export default function KabinetPage() {
   const { data, isLoading, createKabinet, updateKabinet, deleteKabinet, error } = useKabinet();
@@ -57,7 +56,7 @@ export default function KabinetPage() {
         initialData={{}}
         submitLabel="Buat Kabinet"
         onSubmit={async data => {
-          await createKabinet(createKabinetSchema.parse(data));
+          await createKabinet(data);
           modal.close();
         }}
       />
