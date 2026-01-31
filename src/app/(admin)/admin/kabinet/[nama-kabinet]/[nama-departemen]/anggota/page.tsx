@@ -195,9 +195,9 @@ export default function AnggotaPage() {
         submitLabel="Update Anggota"
         onSubmit={async (data) => {
           confirm.confirm('save', async () => {
-          if (!detail?.id) return
-          await update({ id: detail.id, data })
-          modal.close()
+            if (!detail?.id) return
+            await update({ id: detail.id, data })
+            modal.close()
           })
         }}
       />
