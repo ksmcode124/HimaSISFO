@@ -11,8 +11,7 @@ export function PendaftaranItemCollectionSection({ items }: Props) {
   return (
     <section className="relative flex items-center justify-center w-[90%] mb-5 mx-auto">
       <Glass
-        borderRadius={24}
-        className="w-[90%] max-w-7xl p-6 relative flex justify-center border border-neutral-400"
+        className="w-[90%] max-w-7xl p-6 relative flex justify-center border border-neutral-400 rounded-6xl"
       >
 
         {/* Item Grid */}
