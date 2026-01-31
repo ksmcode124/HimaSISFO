@@ -1,10 +1,12 @@
+import React from "react";
+
 export interface EventCardProps {
     id: number;
     title: string;
     img: string;
     start: Date;
     end: Date;
-    description: string;
+    description?: string | null;
     type : string;
 }
 
@@ -16,7 +18,8 @@ export interface DynamicCalendarProps {
 export interface WithVariantEventCardProps extends EventCardProps {
   variant?: "detail" | "onGoing" | "notGoing";
   actions?: React.ReactNode;
-  onMouseOver?: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 }
 
 export interface WithVariantEventCardPropsArray {

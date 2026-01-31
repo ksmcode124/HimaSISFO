@@ -1,7 +1,6 @@
 import {
   DecorationLayer,
   ContentLayer,
-  OverlayLayer,
 } from '@/components/layout/Layer'
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react"
@@ -14,33 +13,33 @@ import { ShowNextEvent } from '../components/ShowNextEvent';
 
 function EventCardDecoration() {
   return (
-    <div className="h-full bg-gradient-to-b from-[#486EAB] to-[#EDF3F6] ">ini dekorasi</div>
+    <div className="h-full bg-gradient-to-b from-[#486EAB] to-[#EDF3F6]"/>
   );
 }
 
 function EventCardContent({ events }: { events: EventCardProps[] }) {
   const { pastNotGoing, nextOnGoing, futureNotGoing } = sortEvents(events);
   return (
-    <div className="relative flex flex-col gap-3 md:gap-5 justify-center w-full mx-auto">
-      <h1 className="w-full h-fit text-center font-semibold text-xl md:text-4xl xl:text-7xl text-[var(--color-dark-blue)]">
+    <div className="relative flex flex-col gap-3 md:gap-5 justify-center w-full max-w-[1120px]">
+      <h1 className="w-full h-fit text-center font-bold text-xl md:text-4xl xl:text-6xl text-[var(--color-nile-blue)]">
         Agenda
       </h1>
-      <div className="grid grid-cols-3 md:grid-cols-[2fr_3fr_2fr] gap-1 sm:gap-4 xl:gap-8 ">
-        <div className="w-full min-w-0">
+      <div className="grid grid-cols-3 md:grid-cols-[2fr_3fr_2fr] gap-1 sm:gap-4 xl:gap-8 items-stretch">
+        <div className="grid grid-rows-[auto_1fr] min-h-full">
           <h2 className="h-fit w-full text-center uppercase py-5 md:py-10 font-semibold text-[12px] md:text-2xl xl:text-3xl text-[var(--color-nile-blue)]">Sebelum</h2>
           {pastNotGoing && <EventCard variant="notGoing" {...pastNotGoing} />}
         </div>
-        <div className="w-full min-w-0">
+        <div className="grid grid-rows-[auto_1fr] min-h-full">
           {nextOnGoing && (
             <div className="flex justify-center items-center gap-3 md:gap-5">
               <h2 className="h-fit w-fit text-center uppercase py-5 md:py-10 font-semibold text-[12px] md:text-2xl xl:text-3xl text-[var(--color-nile-blue)]">Berikutnya</h2>
-              <span className="bg-[var(--color-nile-blue)] rounded-full w-10 h-10 flex items-center justify-center font-normal text-[12px] md:text-xl xl:text-2xl text-white">{nextOnGoing.length}</span>
+              {nextOnGoing.length > 1 ? <span className="bg-[var(--color-nile-blue)] rounded-full w-10 h-10 flex items-center justify-center font-normal text-[12px] md:text-xl xl:text-2xl text-white">{nextOnGoing.length}</span> : null}
             </div>
           )}
 
           {nextOnGoing && (<ShowNextEvent events={nextOnGoing} />)}
         </div>
-        <div className="w-full min-w-0">
+        <div className="grid grid-rows-[auto_1fr] min-h-full">
           <h2 className="h-fit w-full text-center uppercase py-5 md:py-10 font-semibold text-[12px] md:text-2xl xl:text-3xl text-[var(--color-nile-blue)]">Mendatang</h2>
           {futureNotGoing && <EventCard variant="notGoing" {...futureNotGoing} />}
         </div>
@@ -63,15 +62,12 @@ export async function EventCardSection() {
   const events = await getEvents();
   return (
     <section className="relative p-0 m-0 top-0">
-      <DecorationLayer className=" top-1/4">
+      <DecorationLayer className="top-1/4 pointer-events-none">
         <EventCardDecoration />
       </DecorationLayer>
-      <ContentLayer className="px-5 md:px-10 xl:px-40 pb-30">
+      <ContentLayer className="px-3 pb-30 flex justify-center">
         <EventCardContent events={events} />
       </ContentLayer>
-      <OverlayLayer>
-        <div></div>
-      </OverlayLayer>
     </section>
   )
 }

@@ -30,8 +30,8 @@ export function EventList({ events }: { events: EventCardProps[] }) {
     const goNext = () => setCurrentPage((p) => Math.min(p + 1, totalPages))
 
     return (
-        <div className="mb-5 border-2 border-amber-300 px-10 md:px-20 xl:px-40">
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-10 my-5 md:my-10 ">
+        <div className="py-5 md:py-10">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-10 mb-5 md:mb-10 ">
                 {visibleEvents.map((event) => (
                     <EventCard
                         key={event.id}
@@ -72,7 +72,7 @@ export function EventList({ events }: { events: EventCardProps[] }) {
 
             {/* Pagination buttons */}
             {totalPages > 1 && (
-                <div className="flex justify-center items-center gap-3 md:gap-5 mt-6 w-full">
+                <div className="flex justify-center items-center gap-3 md:gap-5  w-full">
                     <button
                         onClick={goPrev}
                         disabled={currentPage === 1}
