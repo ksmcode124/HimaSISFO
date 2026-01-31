@@ -64,17 +64,33 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
         modules={[Navigation]}
         onSwiper={setSwiper}
         onSlideChange={(s) => setActiveIndex(s.realIndex)}
-        loop={true}
-        // centeredSlides={true}
-        centeredSlidesBounds={true}
-        slidesPerView={device !== 'desktop' ? 1 : 'auto'} // important: auto width
-        spaceBetween={device !== 'desktop' ? 16 : -90}
-        speed={900}
+        loop
+        centeredSlides
+        speed={800}
         grabCursor
-        watchSlidesProgress
-        slidesOffsetBefore={device === 'mobile' || device === 'tablet' ? 0 : 255}
-        slidesOffsetAfter={device === 'mobile' || device === 'tablet' ? 0 : 255}
-        className="!overflow-visible"
+        breakpoints={{
+          0: {
+            slidesPerView: 1,
+            spaceBetween: 16,
+          },
+          640: { // sm
+            slidesPerView: 1.5,
+            spaceBetween: 24,
+          },
+          768: { // md
+            slidesPerView: 1.75,
+            spaceBetween: 32,
+          },
+          1024: { // lg (1024x768)
+            slidesPerView: 1.75,
+            spaceBetween: -60,
+          },
+          1280: { // xl
+            slidesPerView: 2.5,
+            spaceBetween: -80,
+          },
+        }}
+        className="!overflow-visible w-[90%] sm:w-[65%] lg:w-full h-[299px] xl:h-[299px]"
       >
         {data.map((item, index) => {
           const isActive = index === activeIndex
@@ -84,13 +100,12 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
           return (
             <SwiperSlide
               key={item.id}
-              className={cn("flex justify-center", isActive ? "z-30 w-[90%] sm:w-60 lg:w-80 xl:w-120" : "z-0")}
-              style={{
-                width: device === 'mobile' ? '90%' : device === 'tablet' ? '350px' : '450px',
-                height: isActive
-                  ? device === 'mobile' ? '300px' : device === 'tablet' ? '300px' : '300px' // tengah tinggi
-                  : device === 'mobile' ? '300px' : device === 'tablet' ? '300px' : '300px', // neighbor square
-              }}
+              className={cn(
+                "flex justify-center transition-all",
+                "w-[300px] h-[300px]",
+                "xl:w-[450px] xl:h-[300px]",
+                isActive ? "z-30" : "z-10"
+              )}
             >
               {({ isActive: swiperActive }) => (
                 <motion.div

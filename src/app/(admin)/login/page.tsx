@@ -52,6 +52,7 @@ export default function LoginPage() {
                     placeholder='admin123@upnyk.ac.id'
                     className="bg-[#F2F2F2] border border-[#DFDFDF] h-15 px-4 py-3 rounded-lg placeholder-[#B9B9B9]"
                     id="email"
+                    name="email"
                     type="text"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -65,6 +66,7 @@ export default function LoginPage() {
                     placeholder='●●●●●●●●'
                     className="bg-[#F2F2F2] border border-[#DFDFDF] h-15 px-4 py-3 rounded-lg placeholder-[#B9B9B9]"
                     id="password"
+                    name="password"
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -78,8 +80,8 @@ export default function LoginPage() {
                 </p>
               )}
 
-              <Button type="submit" className="bg-[#3385FF] h-12 px-8 py-2 text-sm font-medium w-full">
-                {loading ? '...' : 'Login'}
+              <Button type="submit" disabled={loading} className="bg-[#3385FF] h-12 px-8 py-2 text-base font-medium w-full">
+                Login
               </Button>
             </FieldSet>
           </form>

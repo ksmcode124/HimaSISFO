@@ -6,8 +6,8 @@ export default function RootAdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
-      <ClientGuard>{children}</ClientGuard>
-    </>
+    <ClientGuard>
+      {children}
+    </ClientGuard>
   );
 }

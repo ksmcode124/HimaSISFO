@@ -1,7 +1,8 @@
 'use client'
-import { useState } from 'react';
+import { FormEvent, startTransition, useState } from 'react';
 import { useRouter } from 'next/navigation';
-// import { login } from '../services/login';
+import { signInAction } from '@/features/admin/services/auth';
+import { auth } from '@/lib/auth';
 
 export function useLogin() {
   const router = useRouter();
@@ -11,26 +12,22 @@ export function useLogin() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError('');
-    setLoading(true);
+    
+    const formData = new FormData(e.currentTarget);
 
-    try {
-      // const data = await login({ email, password });
+    startTransition(async () => {
+      const result = await signInAction(formData);
 
-      // if (data.user.role === 'admin' || data.user.role === 'superadmin') {
-      //   router.push('/admin/');
-      // } else {
-      //   router.push('/');
-      // }
-      router.push('/admin/')
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        setError(e.message || 'An error occurred');
+      if (!result.success) {
+        setError(result.message);
+        return;
       }
-      setLoading(false);
-    }
+
+      router.push('/admin');
+    });
   };
 
   return {
@@ -39,7 +36,7 @@ export function useLogin() {
     error,
     loading,
     setEmail,
-    setPassword,
     handleSubmit,
+    setPassword,
   };
 }

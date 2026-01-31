@@ -1,5 +1,4 @@
-'use client';
-
+'use client'
 import { ConfirmationModal } from '@/features/admin/components/ConfirmationModal';
 import { HeaderSection } from '@/features/admin/components/HeaderSection';
 import { AdminTable } from '@/features/admin/components/AdminTable';
@@ -7,28 +6,21 @@ import { useKabinet, useKabinetDetail } from '@/features/admin/hooks/useKabinet'
 import { useModal } from '@/features/admin/hooks/useModal';
 import * as React from 'react';
 import { useConfirm } from '@/features/admin/hooks/useConfirm';
-import { Kabinet } from '@/lib/types/interface';
 import { kabinetColumns } from '@/features/admin/components/columns/kabinet-columns';
 import { DetailModal } from '@/features/admin/components/DetailModal';
 import { FormModal } from '@/features/admin/components/FormModal';
-import { cabinetEditFields } from '@/features/admin/components/forms/kabinet-form-config';
+import { cabinetCreateFields, cabinetEditFields } from '@/features/admin/components/forms/kabinet-form-config';
+import { createKabinetSchema, updateKabinetSchema } from '@/schemas/kabinet.schema';
 
 export default function KabinetPage() {
-  const { data, isLoading, saveData, deleteData, error } = useKabinet();
+  const { data, isLoading, createKabinet, updateKabinet, deleteKabinet, error } = useKabinet();
   const modal = useModal();
   const { detail, isLoadingModal } = useKabinetDetail(modal.id);
-  const confirm = useConfirm();;
-
-  const onSaveRequest = (data: Kabinet) => {
-    confirm.confirm('save', async () => {
-      await saveData(data);
-      modal.close();
-    });
-  };
+  const confirm = useConfirm();
 
   const onDeleteRequest = (id: number) => {
     confirm.confirm('delete', async () => {
-      await deleteData(id);
+      await deleteKabinet(id);
       modal.close();
     });
   };
@@ -40,6 +32,7 @@ export default function KabinetPage() {
           {label: "Kabinet", href: '/admin/kabinet'},
         ]}
         title="Kabinet"
+        handleTambah={modal.openCreate}
       />
 
       <AdminTable
@@ -53,32 +46,52 @@ export default function KabinetPage() {
         })}
       />
 
-      {/* Edit Modal */}
-      {/* <FormModal
-        open={modal.isEdit}
-        onOpenChange={(v: boolean) => !v && modal.close()}
-        title="Edit Kabinet"
-        fields={cabinetEditFields}
-        onSubmit={saveData}
-        submitLabel="Update"
-        schema={}
-      /> */}
-      
-      {/* <FormModal
-        open={isCreateOpen}
-        onOpenChange={setIsCreateOpen}
+      {/* Create Modal */}
+      <FormModal
+        open={modal.isCreate}
+        onOpenChange={v => !v && modal.close()}
         title="Buat Kabinet Baru"
-        fields={kabinetCreateFields}
+        fields={cabinetCreateFields}
         schema={createKabinetSchema}
-        onSubmit={handleCreate}
+        initialData={{}}
         submitLabel="Buat Kabinet"
-      /> */}
+        onSubmit={async data => {
+          await createKabinet(data);
+          modal.close();
+        }}
+      />
+
+      {modal.isEdit && !isLoadingModal && (
+        <FormModal
+          open={modal.isEdit}
+          onOpenChange={v => !v && modal.close()}
+          title="Edit Kabinet"
+          fields={cabinetEditFields}
+          schema={updateKabinetSchema.partial()}
+          initialData={{
+            nama_kabinet: detail?.nama_kabinet,
+            tahun_kerja: detail?.tahun_kerja,
+            visi: detail?.visi,
+            misi: detail?.misi,
+            deskripsi: detail?.deskripsi,
+            gambar_logo: detail?.logo,
+            foto_kabinet: detail?.foto_kabinet
+          }}
+          submitLabel="Update"
+          onSubmit={async data => {
+            if (!detail?.id) return;
+            await updateKabinet({ id: detail.id, data });
+            modal.close();
+          }}
+        />
+      )}
 
       <DetailModal
         open={modal.isView}
         onOpenChange={(v) => !v && modal.close()}
         onEdit={modal.openEdit}
         onDelete={onDeleteRequest}
+        isLoadingModal={isLoadingModal}
         id={detail?.id}
         title={detail?.nama_kabinet}
         subtitle={detail?.tahun_kerja}
@@ -87,14 +100,14 @@ export default function KabinetPage() {
             ? [
                 { label: 'Visi', value: detail.visi },
                 { label: 'Misi', value: detail.misi },
-                // { label: 'Departemen', value: detail. },
+                { label: 'Departemen', value: detail.departemen_count },
               ]
             : []
         }
         description={detail?.deskripsi}
       />
 
-      <ConfirmationModal {...confirm} />
+      <ConfirmationModal loading={isLoading} {...confirm} />
 
     </>
   );

@@ -11,7 +11,7 @@ interface ContentRendererProps {
 
 export function ContentRenderer({ content, className }: ContentRendererProps) {
   return (
-    <div className={cn("w-full", className)}>
+    <div className={cn("w-full h-[95%]", className)}>
       {content.map((block, index) => {
         switch (block.type) {
           case "list":
