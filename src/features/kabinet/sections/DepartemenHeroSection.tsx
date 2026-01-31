@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Pita } from "../components/KabinetOrnaments";
 import BreadcrumbSection from "./BreadcrumbSection";
-import { BreadcrumbItemData } from "@/components/ui/Breadcrumb";
+import { BreadcrumbItemData } from "@/components/ui/breadcrumb";
 
 interface DepartemenHeroProps {
   nama_dept: string;

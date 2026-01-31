@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
-import { Card, CardContent, CardFooter } from "@/components/ui/Card";
+// import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";

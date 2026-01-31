@@ -19,7 +19,7 @@ export function PendaftaranMainSection({accordionItems, itemCollectionItems}: Pr
 
       <ContentLayer>
         <PendaftaranAccordionSection items={accordionItems} />
-        <CloudDecoration className="rotate-z-180" />
+        <CloudDecoration className="rotate-z-180 lg:mt-20" />
         <PendaftaranItemCollectionSection items={itemCollectionItems} />
       </ContentLayer>
     </ShellLayer>
