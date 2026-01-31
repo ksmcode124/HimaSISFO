@@ -1,0 +1,12 @@
+{
+    "breadcrumbItems": [
+    {
+      "display": "Kegiatan",
+      "link": "/kegiatan"
+    },
+    {
+      "display": "Agenda",
+      "link": "/kegiatan/agenda"
+    }
+  ]
+}
