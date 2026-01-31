@@ -14,7 +14,8 @@ export default function DepartemenListSection({
   data: DepartemenListItem[];
 }) {
   return (
-    <section className="relative w-full min-h-screen bg-[#F4E8FF] flex flex-col items-center py-20 pb-185 lg:pb-135 -mb-175 lg:-mb-125 overflow-hidden">      <div className="absolute right-30 md:right-20 bottom-[5%] md:top-[12%] lg:top-[-15%] w-[700vw] md:w-[400vw] z-0">
+    <section className="relative w-full min-h-screen bg-[#F4E8FF] flex flex-col items-center py-20 pb-185 lg:pb-135 -mb-175 lg:-mb-125 overflow-hidden">      
+      <div className="absolute right-30 md:right-20 bottom-[5%] md:top-[12%] lg:top-[-15%] w-[700vw] md:w-[400vw] z-0">
         <div className="w-full translate-x-[43%] -rotate-235 md:rotate-0">
           <Ornament5 />
         </div>

@@ -32,7 +32,7 @@ export default function StaffSection({ data }: StaffSectionProps) {
   const hasSekben = !!sekben;
 
   return (
-    <section className="relative w-full py-32 flex flex-col items-center overflow-hidden bg-[#F4E8FF]">
+    <section className="relative w-full min-h-screen py-32 flex flex-col items-center overflow-hidden bg-[#F4E8FF] pb-185 lg:pb-135 -mb-175 lg:-mb-125">
       {/* ORNAMENTS */}
       <div className="absolute right-30 md:right-20 bottom-[10%] md:top-[12%] lg:top-[0%] w-[700vw] md:w-[400vw] z-0">
         <div className="w-full translate-x-[43%] -rotate-235 md:rotate-0">
