@@ -66,8 +66,9 @@ export default function NotFound() {
             className="
               px-6 py-3 w-40 h-14 
               rounded-full 
-              bg-linear-to-t from-columbia-blue to-[#3385FF] 
+              bg-linear-to-t from-columbia-blue to-[#3385FF]
               shadow-[5px_5px_8px_#000]/50
+              hover:shadow-[7px_7px_7px_#000]/50 hover:scale-105
             "
             onClick={() => {
               if (window.history.length > 1) router.back();

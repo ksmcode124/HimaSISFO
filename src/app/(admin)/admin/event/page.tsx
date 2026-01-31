@@ -3,7 +3,7 @@
 import { ConfirmationModal } from '@/features/admin/components/ConfirmationModal';
 import { HeaderSection } from '@/features/admin/components/HeaderSection';
 import { AdminTable } from '@/features/admin/components/AdminTable';
-import { useModal } from '@/features/admin/hooks/useModal';
+import { useModal } from '@/features/admin/hooks/useAdminModal';
 import * as React from 'react';
 import { useConfirm } from '@/features/admin/hooks/useConfirm';
 import { useEvent, useEventDetail } from '@/features/admin/hooks/useEvent';

@@ -1,14 +1,8 @@
 import { ColumnDef } from '@tanstack/react-table';
 import { TableActionButtons } from '../TableActionButtons';
-import { AdminKabinetRow } from '../../types';
+import { AdminKabinetRow, ColumnActions } from '../../types';
 import Link from 'next/link';
 import { translateToSlug } from '@/lib/utils/translate-slug';
-
-interface ColumnActions {
-  onView?: (id: number) => void
-  onEdit?: (id: number) => void
-  onDelete?: (id: number) => void
-}
 
 export function kabinetColumns({
   onView,
@@ -16,22 +10,41 @@ export function kabinetColumns({
   onDelete,
 }: ColumnActions): ColumnDef<AdminKabinetRow>[] {
   return [
-    { accessorKey: 'id', header: 'ID' },
-    { accessorKey: 'tahun_kerja', header: 'Tahun' },
-    { accessorKey: 'nama_kabinet', header: 'Nama Kabinet' },
-    { accessorKey: 'logo', header: 'Logo'},
     {
-      accessorKey: 'departemen_count', 
-      header: "Departemen",
+      accessorKey: 'id',
+      header: 'ID',
+      meta: { sortable: true },
+    },
+    {
+      accessorKey: 'tahun_kerja',
+      header: 'Tahun',
+      meta: { sortable: true },
+    },
+    {
+      accessorKey: 'nama_kabinet',
+      header: 'Nama Kabinet',
+      meta: { sortable: true },
+    },
+    {
+      accessorKey: 'logo',
+      header: 'Logo',
+      meta: { sortable: false },
+    },
+    {
+      accessorKey: 'departemen_count',
+      header: 'Departemen',
       cell: ({ row }) => {
-        const data = row.original
-
+        const data = row.original;
         return (
-          <Link href={`/admin/kabinet/${data.id}-${translateToSlug(data.nama_kabinet)}`} className='text-accent underline'>
-            {data.departemen_count}
+          <Link
+            href={`/admin/kabinet/${data.id}-${translateToSlug(data.nama_kabinet)}`}
+            className="text-accent underline"
+          >
+            {data.departemen_count ?? 0}
           </Link>
-        )
-      }
+        );
+      },
+      meta: { sortable: true },
     },
     {
       id: 'actions',
@@ -39,7 +52,6 @@ export function kabinetColumns({
       enableSorting: false,
       cell: ({ row }) => {
         const data = row.original;
-
         return (
           <TableActionButtons
             onView={onView ? () => onView(data.id) : undefined}
@@ -48,6 +60,7 @@ export function kabinetColumns({
           />
         );
       },
+      meta: { sortable: false },
     },
   ];
 }

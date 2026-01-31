@@ -3,7 +3,7 @@
 import { ConfirmationModal } from '@/features/admin/components/ConfirmationModal';
 import { HeaderSection } from '@/features/admin/components/HeaderSection';
 import { AdminTable } from '@/features/admin/components/AdminTable';
-import { useModal } from '@/features/admin/hooks/useModal';
+import { useAdminModal } from '@/features/admin/hooks/useAdminModal';
 import * as React from 'react';
 import { useConfirm } from '@/features/admin/hooks/useConfirm';
 import { Anggota } from '@/lib/types/interface';
@@ -56,7 +56,7 @@ export default function KomunitasPage() {
         })}
       />
 
-      <DetailModal
+      {/* <DetailModal
         open={modal.isView}
         onOpenChange={(v) => !v && modal.close()}
         onEdit={modal.openEdit}
@@ -71,7 +71,7 @@ export default function KomunitasPage() {
               ]
             : []
         }
-      />
+      /> */}
 
       <ConfirmationModal {...confirm} />
 

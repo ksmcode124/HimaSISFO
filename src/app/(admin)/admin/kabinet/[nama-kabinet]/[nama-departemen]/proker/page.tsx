@@ -1,92 +1,103 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use client';
+'use client'
 
-import { ConfirmationModal } from '@/features/admin/components/ConfirmationModal';
-import { HeaderSection } from '@/features/admin/components/HeaderSection';
-import { AdminTable } from '@/features/admin/components/AdminTable';
-import { useModal } from '@/features/admin/hooks/useModal';
-import * as React from 'react';
-import { useConfirm } from '@/features/admin/hooks/useConfirm';
-import { DetailModal } from '@/features/admin/components/DetailModal';
-import { useParams } from 'next/navigation';
-import { FormModal } from '@/features/admin/components/FormModal';
-import { useProker, useProkerDetail } from '@/features/admin/hooks/useProker';
-import { prokerColumns } from '@/features/admin/components/columns/proker-columns';
-import { createProkerSchema, updateProkerSchema } from '@/schemas/proker.schema';
-import { createProkerFields, updateProkerFields } from '@/features/admin/components/forms/proker-form-config';
+import { HeaderSection } from '@/features/admin/components/HeaderSection'
+import { AdminTable } from '@/features/admin/components/AdminTable'
+import { FormModal } from '@/features/admin/components/FormModal'
+import { DetailModal } from '@/features/admin/components/DetailModal'
+import { ConfirmationModal } from '@/features/admin/components/ConfirmationModal'
+import { useAdminModal } from '@/features/admin/hooks/useAdminModal'
+import { useConfirm } from '@/features/admin/hooks/useConfirm'
+import { prokerColumns } from '@/features/admin/components/columns/proker-columns'
+import { createProkerFields, updateProkerFields } from '@/features/admin/components/forms/proker-form-config'
+import { createProkerSchema, updateProkerSchema } from '@/schemas/proker.schema'
+import { useAdminEntity, useAdminEntityDetail } from '@/features/admin/hooks/useAdminEntity'
+import { AdminProkerRow, AdminProkerDetail } from '@/features/admin/types'
+import { api } from '@/lib/services/api'
+import { useParams } from 'next/navigation'
 
 export default function ProkerPage() {
-  const params = useParams();
+  const params = useParams()
   const slug_kabinet = Array.isArray(params['nama-kabinet']) ? params['nama-kabinet'][0] : params['nama-kabinet']
-  const id_kabinet = slug_kabinet ? Number(slug_kabinet.split('-')[0]) : -1 // cuma ambil ID
-  const nama_kabinet = slug_kabinet ? slug_kabinet.split('-').slice(1).join(' ') : 'NAMA KABINET';
-  
-  const slug_departemen = Array.isArray(params['nama-departemen']) ? params['nama-departemen'][0] : params['nama-departemen'];
-  const nama_departemen = slug_departemen ? slug_departemen.split('-').slice(1).join(' ') : 'NAMA DEPARTEMEN';
-  const id_departemen = slug_departemen ? slug_departemen.split('-')[0] : -1;
+  const id_kabinet = slug_kabinet ? Number(slug_kabinet.split('-')[0]) : -1
+  const nama_kabinet = slug_kabinet ? slug_kabinet.split('-').slice(1).join(' ') : 'NAMA KABINET'
 
-  const { data, isLoading, createProker, updateProker, deleteProker, error } = useProker(id_kabinet);
-  const modal = useModal();
-  const { detail, isLoadingModal } = useProkerDetail(modal.id, id_kabinet);
-  const confirm = useConfirm();;
+  const slug_departemen = Array.isArray(params['nama-departemen']) ? params['nama-departemen'][0] : params['nama-departemen']
+  const id_departemen = slug_departemen ? Number(slug_departemen.split('-')[0]) : -1
+  const nama_departemen = slug_departemen ? slug_departemen.split('-').slice(1).join(' ') : 'NAMA DEPARTEMEN'
 
-  const onDeleteRequest = (id: number) => {
+  const modal = useAdminModal()
+  const confirm = useConfirm()
+
+  // Gunakan useAdminEntity supaya CRUD lebih konsisten
+  const {
+    data,
+    isLoading,
+    error,
+    create,
+    update,
+    delete: remove
+  } = useAdminEntity<
+    typeof createProkerSchema._input,
+    typeof updateProkerSchema._input,
+    AdminProkerRow,
+    AdminProkerDetail,
+    any,
+    any
+  >({
+    entity: 'proker',
+    mapToRow: (rows) =>
+      rows
+        .filter(r => r.id_departemen === id_departemen && r.id_kabinet === id_kabinet)
+        .map(r => ({
+          id: r.id,
+          nama_proker: r.nama_proker,
+          deskripsi: r.deskripsi ?? '',
+          foto_proker: r.foto_proker ?? ''
+        })),
+    mapToDetail: (r: AdminProkerDetail) => ({
+      id: r.id,
+      id_kabinet: r.id_kabinet,
+      id_departemen: r.id_departemen,
+      nama_proker: r.nama_proker,
+      deskripsi: r.deskripsi ?? '',
+      foto_proker: r.foto_proker ?? ''
+    }),
+    createSchema: createProkerSchema,
+    updateSchema: updateProkerSchema
+  })
+
+  const { data: detail } = useAdminEntityDetail<AdminProkerDetail, any>(
+    'proker',
+    modal.id,
+    r => ({
+      id: r.id,
+      id_kabinet: r.id_kabinet,
+      id_departemen: r.id_departemen,
+      nama_proker: r.nama_proker,
+      deskripsi: r.deskripsi ?? '',
+      foto_proker: r.foto_proker ?? ''
+    })
+  )
+
+  const handleDelete = (id: number) => {
     confirm.confirm('delete', async () => {
-      await deleteProker(id);
-      modal.close();
-    });
-  };
-
-  async function handleCreateProker(values: any) {
-    try {
-      // Add id_departemen and id_kabinet from URL slug (not from form)
-      const payload: any = {
-        id_departemen,
-        id_kabinet,
-        ...values,
-      };
-
-      // Extract URL from upload result (tolerant for various UploadThing response shapes)
-      const extractUrl = (v: any) => {
-        if (!v) return undefined;
-        if (typeof v === 'string') return v;
-        return v.url || v.fileUrl || v.file?.url || (Array.isArray(v) ? v[0]?.url || v[0]?.fileUrl : undefined);
-      };
-
-      if (payload.foto_proker) payload.foto_proker = extractUrl(payload.foto_proker);
-
-      console.log('Creating proker with payload:', payload);
-
-      const response = await fetch(`/api/admin/proker`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-
-      if (!response.ok) {
-        throw new Error(`Failed to create proker: ${response.status}`);
-      }
-
-      // Refresh the page to reload proker list
-      window.location.reload();
-    } catch (err) {
-      console.error('create proker error', err);
-      throw err; // Re-throw so FormModal shows error
-    }
+      await remove(id)
+      modal.close()
+    })
   }
 
   return (
     <>
-      {/** TODO: breadcrumbs should be dynamic follows the current active kabinet and departemen */}
       <HeaderSection
         breadcrumbs={[
-          {label: "Kabinet", href: '/admin/kabinet'},
-          {label: nama_kabinet, href: `/admin/kabinet/${slug_kabinet}`},
-          {label: nama_departemen, href: `/admin/kabinet/${slug_kabinet}/${slug_departemen}`},
-          {label: "Proker", href: `/admin/kabinet/${slug_kabinet}/${slug_departemen}/proker`},
+          { label: 'Kabinet', href: '/admin/kabinet' },
+          { label: nama_kabinet, href: `/admin/kabinet/${slug_kabinet}` },
+          { label: nama_departemen, href: `/admin/kabinet/${slug_kabinet}/${slug_departemen}` },
+          { label: 'Proker', href: `/admin/kabinet/${slug_kabinet}/${slug_departemen}/proker` }
         ]}
-        title={nama_departemen}
-        handleTambah={modal.openCreate}
+        title="Proker"
+        handleAddRequest={() => modal.open('create')}
       />
 
       <AdminTable
@@ -94,62 +105,72 @@ export default function ProkerPage() {
         loading={isLoading}
         error={error}
         columns={prokerColumns({
-          onView: modal.openView,
-          onEdit: modal.openEdit,
-          onDelete: onDeleteRequest,
+          onView: (row) => modal.open('view', row),
+          onEdit: (row) => modal.open('edit', row),
+          onDelete: handleDelete
         })}
       />
 
-      {/* Create Modal */}
+      {/* CREATE */}
       <FormModal
         open={modal.isCreate}
-        onOpenChange={v => !v && modal.close()}
-        title="Buat Program Kerja Baru"
+        onOpenChange={(v) => !v && modal.close()}
+        title="Buat Program Kerja"
         fields={createProkerFields}
         schema={createProkerSchema}
         initialData={{}}
-        submitLabel="Buat Program Kerja"
-        onSubmit={handleCreateProker}
+        submitLabel="Buat Proker"
+        onSubmit={async (data) => {
+          confirm.confirm('save', async () => {
+            await create({ ...data, id_kabinet, id_departemen})
+            modal.close()
+          })
+        }}
       />
 
-      {modal.isEdit && !isLoadingModal && (
-        <FormModal
-          open={modal.isEdit}
-          onOpenChange={v => !v && modal.close()}
-          title="Edit Proker"
-          fields={updateProkerFields}
-          schema={updateProkerSchema}
-          initialData={detail ?? {}}
-          submitLabel="Update"
-          onSubmit={async data => {
-            if (!detail?.id_proker) return;
-            await updateProker({ id: detail.id_proker, data });
-            modal.close();
-          }}
-        />
-      )}
+      {/* EDIT */}
+      <FormModal
+        open={modal.isEdit}
+        onOpenChange={(v) => !v && modal.close()}
+        title="Edit Proker"
+        fields={updateProkerFields}
+        schema={updateProkerSchema}
+        initialData={detail ?? {}}
+        submitLabel="Update"
+        onSubmit={async (data) => {
+          confirm.confirm('save', async () => {  
+            if (!detail?.id) return
+            await update({ id: detail.id, data })
+            modal.close()
+          })
+        }}
+      />
 
+      {/* DETAIL */}
       <DetailModal
         open={modal.isView}
         onOpenChange={(v) => !v && modal.close()}
-        onEdit={modal.openEdit}
-        onDelete={onDeleteRequest}
-        isLoadingModal={isLoadingModal}
-        id={detail?.id_proker}
-        title={detail?.nama_proker}
-        subtitle={detail?.id_departmeen.toString()}
-        meta={
-          detail
-            ? [
-                { label: 'Kabinet', value: detail?.id_kabinet },
-              ]
-            : []
-        }
-        imageUrl={detail?.foto_proker}
+        id={modal.id ?? undefined}
+        fetchDetail={async (id) => {
+          const res = await api.get<AdminProkerDetail>(`/api/admin/proker/${id}`)
+          return res.data
+        }}
+        mapDetailToUI={(d: AdminProkerDetail) => ({
+          title: d.nama_proker,
+          subtitle: `Departemen ID: ${d.id_departemen}`,
+          logo: '', // optional, kalau ada logo/foto proker bisa diisi
+          meta: [
+            { label: 'Kabinet', value: d.id_kabinet },
+          ],
+          deskripsi: d.deskripsi,
+          imageUrl: d.foto_proker ?? '',
+        })}
+        onEdit={() => modal.open('edit')}
+        onDelete={handleDelete}
       />
 
-      <ConfirmationModal {...confirm} />
 
+      <ConfirmationModal {...confirm} />
     </>
-  );
+  )
 }

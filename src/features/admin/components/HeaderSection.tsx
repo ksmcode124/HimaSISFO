@@ -17,13 +17,13 @@ type BreadcrumbItemConfig = {
 interface HeaderSectionProps {
   breadcrumbs: BreadcrumbItemConfig[];
   title: string;
-  handleTambah?: () => void;
+  handleAddRequest?: () => void;
 }
 
 export function HeaderSection({
   breadcrumbs,
   title,
-  handleTambah,
+  handleAddRequest,
 }: HeaderSectionProps) {
   return (
     <div className="mb-10 flex w-full flex-col gap-5 uppercase text-2xs font-semibold px-8">
@@ -60,8 +60,8 @@ export function HeaderSection({
       <div className="flex justify-between items-center">
         <h1 className="text-lg font-bold italic">{title}</h1>
 
-        {handleTambah && (
-          <Button variant={"ghost"} onClick={handleTambah} className='text-[#3385FF] text-sm font-semibold'>
+        {handleAddRequest && (
+          <Button variant={"ghost"} onClick={handleAddRequest} className='text-[#3385FF] text-sm font-semibold'>
             <PlusCircle />
             Tambah Baru
           </Button>

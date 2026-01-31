@@ -1,16 +1,14 @@
+export interface ColumnActions {
+  onView?: (id: number) => void;
+  onEdit?: (id: number) => void;
+  onDelete?: (id: number) => void;
+}
 export interface AdminKabinetRow{
   id: number,
   tahun_kerja: string,
   nama_kabinet: string,
   logo: string,
   departemen_count: number
-}
-
-export interface AdminKabinetForm{
-  id: number,
-  tahun_kerja: string,
-  nama_kabinet: string,
-  logo: string,
 }
 
 export interface AdminEventRow {
@@ -23,9 +21,9 @@ export interface AdminEventRow {
 }
 
 export interface AdminDepartemenRow{
-  id_departemen: number,
+  id: number,
   nama_departemen: string,
-  logo_departemen: string,
+  logo_departemen: string | null,
   foto_departemen: string,
   deskripsi_departemen: string,
   anggota_count: number,
@@ -34,10 +32,11 @@ export interface AdminDepartemenRow{
 }
 
 export interface AdminAnggotaRow{
-  id_anggota: number,
+  id: number,
   nama_anggota: string,
   kabinet: string,
-  jabatan: string
+  // id_kabinet: number,
+  id_jabatan: number
 }
 
 export interface AdminKomunitasRow {
@@ -61,7 +60,7 @@ export interface AdminKabinetDetail {
 }
 
 export interface AdminDepartemenDetail {
-  id_departemen: number,
+  id: number,
   nama_departemen: string,
   logo_departemen: string,
   foto_departemen: string
@@ -71,11 +70,13 @@ export interface AdminDepartemenDetail {
 }
 
 export interface AdminAnggotaDetail{
-  id_anggota: number,
+  id: number,
   foto_anggota: string,
   nama_anggota: string,
   kabinet: string,
-  jabatan: string
+  departemen: string,
+  // id_kabinet: number,
+  id_jabatan: number
 }
 
 export interface AdminEventDetail {
@@ -88,16 +89,16 @@ export interface AdminEventDetail {
 }
 
 export interface AdminProkerRow {
-  id_proker: number,
+  id: number,
   nama_proker: string,
   deskripsi: string,
   foto_proker: string
 }
 
 export interface AdminProkerDetail {
-  id_proker: number,
+  id: number,
   id_kabinet: number,
-  id_departmeen: number,
+  id_departemen: number,
   nama_proker: string,
   deskripsi: string,
   foto_proker: string
@@ -144,6 +145,28 @@ export interface Departemen {
   foto_departemen: string | null;
 }
 
+export interface DepartemenResponse {
+  id_departemen: number;
+  id_kabinet: number;
+  nama_departemen: string;
+  deskripsi_departemen: string;
+  logo_departemen: string | null;
+  foto_departemen: string | null;
+  kabinet: DepartemenKabinet
+  proker: ProgramKerja[]
+}
+
+export interface DepartemenKabinet {
+  id_kabinet: number;
+  nama_kabinet: string;
+  tahun_kerja: string;
+  visi: string | null;
+  misi: string | null;
+  deskripsi: string | null;
+  foto_kabinet: string | null;
+  gambar_logo: string | null;
+}
+
 export interface DetailAnggota {
   id_detail: number;
   id_anggota: number;
@@ -159,6 +182,42 @@ export interface DetailAnggota {
 export interface Anggota {
   id_anggota: number;
   nama_anggota: string;
+}
+
+export interface AnggotaResponse {
+  id_anggota: number;
+  nama_anggota: string;
+  detailAnggota: DetailAnggotaRes[]
+}
+
+export interface DetailAnggotaRes {
+  id_detail: number;
+  id_anggota: number;
+  id_jabatan: number;
+  id_kabinet: number;
+  id_departemen: number;
+  foto_anggota: string | null;
+}
+
+export interface AnggotaResponse2 {
+  id_anggota: number;
+  nama_anggota: string;
+  detailAnggota: DetailAnggotaRes2[]
+}
+
+export interface DetailAnggotaRes2 {
+  id_detail?: number;
+  id_anggota?: number;
+  id_jabatan?: number;
+  id_kabinet?: number;
+  id_departemen?: number;
+  foto_anggota?: string | null;
+  kabinet?: DepartemenKabinet,
+  departemen?: Departemen,
+  jabatan?: {
+    id_jabatan?: number,
+    nama_jabatan?: string,
+  }
 }
 
 export interface Jabatan {

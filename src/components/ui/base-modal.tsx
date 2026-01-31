@@ -1,9 +1,4 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { cn } from '@/lib/utils/cn';
 import { ReactNode } from 'react';
 
@@ -14,39 +9,38 @@ interface BaseModalProps {
   children: ReactNode;
   footer?: ReactNode;
   size?: 'sm' | 'md' | 'lg' | 'xl';
+  className?: string;
 }
 
 export function BaseModal({
   open,
   onOpenChange,
-  title,
+  title = '',
   children,
   footer,
   size = 'md',
+  className,
 }: BaseModalProps) {
   const sizeClass = {
-    sm: 'max-w-md',
+    sm: 'max-w-sm',
     md: 'max-w-xl',
     lg: 'max-w-3xl',
-    xl: 'max-w-5xl'
+    xl: 'max-w-5xl',
   }[size];
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogTitle hidden>
-        {title}
-      </DialogTitle>
-      <DialogContent className={cn('rounded-lg bg-white', sizeClass)}>
-        {title && (
-          <DialogHeader className='hidden'>
-            <DialogTitle>{title}</DialogTitle>
+      <DialogContent className={cn('bg-white rounded-lg shadow-lg w-full mx-2 sm:mx-auto', sizeClass, className)}>
+          <DialogHeader hidden>
+            <DialogTitle className="text-lg font-semibold" hidden>{title}</DialogTitle>
           </DialogHeader>
-        )}
 
-        <div className="py-2">{children}</div>
+        <div className={cn('py-4', footer ? 'mb-4' : '')}>{children}</div>
 
         {footer && (
-          <div className="mt-6 flex justify-center gap-3">{footer}</div>
+          <div className="pt-4 border-t border-gray-200 flex justify-end gap-3">
+            {footer}
+          </div>
         )}
       </DialogContent>
     </Dialog>

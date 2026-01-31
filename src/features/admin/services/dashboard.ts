@@ -19,9 +19,9 @@ export async function getDashboardSummary(): Promise<DashboardSummaryResponse[]>
   ]);
 
   return [
-    { key: 'komunitas', count: komunitas.data.length },
     { key: 'kabinet', count: kabinet.data.length },
     { key: 'event', count: event.data.length },
+    { key: 'komunitas', count: komunitas.data.length },
   ];
 
 }
