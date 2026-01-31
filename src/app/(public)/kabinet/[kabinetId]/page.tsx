@@ -45,7 +45,7 @@ export default function Page() {
   }
 
   return (
-    <main className="bg-white antialiased">
+    <>
       <KabinetHeroSection
         currentKabinet={currentKabinet}
         kabinetList={kabinetList}
@@ -53,6 +53,6 @@ export default function Page() {
       <FilosofiSection data={currentKabinet} />
       <IntiHimpunanSection data={currentKabinet.departemenInti} />
       <DepartemenListSection data={currentKabinet.departemen_list} />
-    </main>
+    </>
   );
 }

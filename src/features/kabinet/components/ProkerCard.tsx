@@ -8,7 +8,7 @@ import {
   CardContent,
   CardTitle,
   CardDescription,
-} from "@/components/ui/card";
+} from "@/components/ui/Card";
 import { cn } from "@/lib/utils";
 
 interface ProkerCardProps {
