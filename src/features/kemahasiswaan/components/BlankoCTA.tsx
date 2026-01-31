@@ -11,7 +11,7 @@ interface Props {
 
 export function BlankoCTA({ title, subtitle, iconUrl, href }: Props) {
   return (
-    <section className="w-full min-h-[55vh] grid grid-cols-2 items-center justify-items-center px-2">
+    <section className="w-full min-h-[55vh] grid grid-cols-2 items-center justify-items-center px-2 lg:mb-15">
       <div className="relative -translate-x-5 lg:-translate-x-15 h-32 w-32 sm:h-64 sm:w-64 lg:h-96 lg:w-96 z-20">
         <Image
           src={iconUrl}

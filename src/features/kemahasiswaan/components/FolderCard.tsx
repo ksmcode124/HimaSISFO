@@ -26,7 +26,8 @@ export function FolderCard({
   layerOffsetClass = `
     translate-y-10 -translate-x-6
     sm:translate-y-13 sm:-translate-x-8
-    lg:translate-y-15 lg:-translate-x-10
+    lg:translate-y-20 lg:-translate-x-5
+    xl:translate-y-15 xl:-translate-x-10
   `,
 
   headerBgClass = "bg-[#EDF3F6]",
@@ -86,7 +87,6 @@ export function FolderCard({
             rounded-b-xl rounded-tr-xl
             -mt-0.5
             flex-1
-            overflow-y-auto
             px-4 sm:px-6 md:px-8 lg:px-10
           `}
         >
