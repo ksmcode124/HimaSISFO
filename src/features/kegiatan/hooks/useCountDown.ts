@@ -2,8 +2,7 @@
 import { useEffect, useState } from "react";
 
 export function useGetCountdown(targetDate: Date) {
-
-  const [countdown, setCountdown] = useState("23:09:33");
+  const [countdown, setCountdown] = useState("00:00:00");
 
   useEffect(() => {
     const update = () => {

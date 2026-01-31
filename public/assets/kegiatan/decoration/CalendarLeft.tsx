@@ -7,7 +7,8 @@ export function CalendarLeftDecoration ({ className }: { className?: string }) {
       xmlns="http://www.w3.org/2000/svg"
       preserveAspectRatio="xMidYMid meet"
       className={clsx(
-        `absolute
+        `
+        absolute
         left-0
         top-1/3
         -translate-y-1/2

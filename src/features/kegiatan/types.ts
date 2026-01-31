@@ -1,12 +1,10 @@
-import React from "react";
-
 export interface EventCardProps {
     id: number;
     title: string;
     img: string;
     start: Date;
     end: Date;
-    description?: string | null;
+    description: string;
     type : string;
 }
 
@@ -17,19 +15,16 @@ export interface DynamicCalendarProps {
 
 export interface WithVariantEventCardProps extends EventCardProps {
   variant?: "detail" | "onGoing" | "notGoing";
-  actions?: React.ReactNode;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
 }
 
-export interface WithVariantEventCardPropsArray {
-  events: WithVariantEventCardProps[];
+export interface EventWithVariantProps extends EventCardProps {
+  start: Date;
 }
 
 export interface SortedSingleEventsProps {
-  pastNotGoing?: EventCardProps;
-  nextOnGoing?: EventCardProps[];
-  futureNotGoing?: EventCardProps;
+  pastNotGoing?: EventWithVariantProps;
+  nextOnGoing?: EventWithVariantProps;
+  futureNotGoing?: EventWithVariantProps;
 }
 
 export interface FindEventByIdProps {
@@ -48,21 +43,3 @@ export interface BreadCrumbItems {
   display: string;
   link: string;
 }
-
-export type EventItem = {
-  id: number;
-  title: string;
-  start: Date;
-  end: Date;
-};
-
-export type SingleEventSpec = {
-  mode: "single";
-  event: EventItem;
-};
-
-export type MultipleEventSpec = {
-  mode: "multiple";
-  events: EventItem[];
-};
-

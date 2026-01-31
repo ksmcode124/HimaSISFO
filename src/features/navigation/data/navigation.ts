@@ -13,10 +13,6 @@ export const navItems: NavItem[] = [
 export const footerNavItems: NavItem[] = [
   { label: 'Spada', href: 'https://spada.upnyk.ac.id' },
   { label: 'Bima', href: 'https://bima.upnyk.ac.id' },
-  { label: 'AR-SI-P', href: 'https://drive.google.com/drive/u/0/folders/1x2vYFJ4Qe5PF5X8BxADb3zF94AdJImuX' },
-  { label: 'Sadewa', href: 'https://sadewa.upnyk.ac.id' },
-  { label: 'Instagram', href: 'https://www.instagram.com/himasisfoupnvyk' },
-  { label: 'YouTube', href: 'https://youtube.com/@himasisfoupnyk' },
-  { label: 'Spotify', href: 'https://open.spotify.com/show/4ne6bsylYJdVmMrfG3mLCG?si=jXJK3WAnQT2l-FyOpVpUnQ' },
-  { label: 'Email', href: 'mailto:himasisfo@example.com' },
+  { label: 'AR-SI-P', href: '/' },
+  { label: 'Sadewa', href: 'https://sadewa.upnyk.ac.id' }
 ]

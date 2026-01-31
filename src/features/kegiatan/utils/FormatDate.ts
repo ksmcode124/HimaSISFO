@@ -1,40 +1,44 @@
 import { LOCALE } from "../data/constant";
 
-export function formatDate(date?: string | Date, option?: string) {
-  if (!date) return "-"; // fallback kalau date kosong
-  if (!option) return "-"; // fallback kalau option kosong
+export function formatDate(date?: string | Date) {
+  if (!date) return '-'; // fallback kalau date kosong
   const dateObj = new Date(date);
-  if (isNaN(dateObj.getTime())) return "-"; // fallback kalau date invalid
-  if (option === "numeric")
-    return new Intl.DateTimeFormat("id-ID", {
-      day: "numeric",
-      month: "numeric",
-      year: "numeric",
-    }).format(dateObj);
-  if (option === "name")
-    return new Intl.DateTimeFormat("id-ID", {
+  if (isNaN(dateObj.getTime())) return '-'; // fallback kalau date invalid
+  return new Intl.DateTimeFormat('id-ID', {
+    day: 'numeric',
+    month: 'numeric',
+    year: 'numeric',
+  }).format(dateObj);
+}
+
+export function formatDateID(
+  date?: string | Date,
+  options?: Intl.DateTimeFormatOptions
+): string {
+  if (!date) return "-";
+
+  const dateObj = new Date(date);
+  if (isNaN(dateObj.getTime())) return "-";
+
+  return new Intl.DateTimeFormat(
+    "id-ID",
+    options ?? {
       day: "numeric",
       month: "long",
       year: "numeric",
-    }).format(dateObj);
-  if (option === "fullDate")
-    return new Intl.DateTimeFormat("id-ID", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    }).format(dateObj);
+    }
+  ).format(dateObj);
 }
 
 export function formatMonthName(month: number) {
-  const validMonth = Math.min(11, Math.max(0, month)); // clamp 0–11
-  return new Intl.DateTimeFormat(LOCALE, { month: "long" }).format(new Date(2000, validMonth, 1));
+  return new Intl.DateTimeFormat(LOCALE, {
+    month: "long",
+  }).format(new Date(2000, month, 1));
 }
-
 
 export function formatYear(year: number) {
   return new Intl.DateTimeFormat(LOCALE, {
     year: "numeric",
   }).format(new Date(year, 0, 1));
 }
+  

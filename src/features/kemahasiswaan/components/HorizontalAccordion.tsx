@@ -1,17 +1,13 @@
-'use client'
 import { 
   Accordion, 
   AccordionContent, 
   AccordionItem, 
   AccordionTrigger 
 } from "@/components/ui/accordion";
-import { ItemDataJSON } from "../types/data";
-import { ContentRenderer } from "./ContentRenderer";
-import { AnimatePresence, motion } from "framer-motion";
-import { ChevronsUpDown } from "lucide-react";
-import { Glass } from "@/components/ui/Glass";
+import { ItemDataJSON } from "../types";
+import ContentRenderer from "./ContentRenderer";
 
-export function HorizontalAccordion({ items }: { items: ItemDataJSON[] }) {
+export default function HorizontalAccordion({ items }: { items: ItemDataJSON[] }) {
   return (
     <Accordion
       type="single"
@@ -37,7 +33,7 @@ export function FeaturedHorizontalAccordion({ items, activeIndex, onChange }:  P
     <Accordion
       type="single"
       collapsible
-      className="w-full flex flex-col justify-around gap-4"
+      className="w-full flex flex-col gap-4"
       value={activeIndex >= 0 ? items[activeIndex]?.id : ""}
       onValueChange={(id) => {
         if (!id) {
@@ -64,40 +60,14 @@ function HorizontalAccordionItem( {item} : {item: ItemDataJSON}) {
       className="
         space-y-5
         overflow-hidden
-        w-full
       "
     >
-      <Glass
-        className="border border-[#25253B] rounded-2xl w-full"
-      >
-        <AccordionTrigger className="justify-between w-full rounded-xl text-3xs sm:text-xs md:text-sm lg:text-xl font-semibold">
-          <span className="line-clamp-1">
-            {item.title}
-          </span>
-        </AccordionTrigger>
-      </Glass>  
+      <AccordionTrigger className="justify-between items-center rounded-xl border-black border">
+        {item.title}
+      </AccordionTrigger>
 
-      
-      <AccordionContent className="flex flex-col text-balance w-full">
-        <AnimatePresence initial={false}>
-          <motion.div
-            key={item.id}
-            initial={{ opacity: 0, height: 0, scale: 0.98 }}
-            animate={{ opacity: 1, height: "auto", scale: 1 }}
-            exit={{ opacity: 0, height: 0, scale: 0.98 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-          >
-            <Glass
-              className="border border-black flex flex-col text-3xs sm:text-2xs md:text-xs lg:text-sm rounded-2xl px-6 py-4 mt-2"
-            >
-              <div className="flex w-full justify-between">
-                <h3 className="flex-1 text-3xs sm:text-2xs md:text-xs lg:text-sm">Panduan: </h3>
-                <ChevronsUpDown />
-              </div>
-              <ContentRenderer content={item.content} />
-            </Glass>
-          </motion.div>
-        </AnimatePresence>
+      <AccordionContent className="flex flex-col gap-4 py-4 px-6 text-balance border border-black rounded-xl">
+        <ContentRenderer content={item.content} />
       </AccordionContent>
     </AccordionItem>
   )

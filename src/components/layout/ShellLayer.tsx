@@ -1,10 +1,9 @@
 // components/layout/ShellLayer.tsx
-import { cn } from "@/lib/utils/cn";
 import React from "react";
 
-export function ShellLayer({ children, className }: { children: React.ReactNode, className?: string }) {
+export function ShellLayer({ children }: { children: React.ReactNode }) {
   return (
-    <div className={cn("relative isolate w-full overflow-x-clip", className)}>
+    <div className="relative isolate w-full">
       {children}
     </div>
   );

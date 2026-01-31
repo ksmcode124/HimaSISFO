@@ -1,38 +1,33 @@
 "use client";
 
 import { Pita } from "../components/KabinetOrnaments";
-import CarouselProker from "../components/CarouselProker";
-import { DepartemenResponse } from "../types";
+import ProkerList from "../components/CarouselProker";
 
-interface ProkerSectionProps {
-  data: DepartemenResponse["proker"];
-}
-
-export default function ProkerSection({ data }: ProkerSectionProps) {
+export default function ProkerSection() {
   return (
     <div className="relative w-full">
-      <section className="relative w-full md:min-h-250 flex flex-col items-center py-24 overflow-hidden bg-[#F4E8FF]">
+      <section className="relative w-full md:min-h-[1000px] flex flex-col items-center py-24 overflow-hidden bg-[#F4E8FF]">
         {/* ornamen kiri */}
-        <div className="absolute -left-110 md:-left-100 top-1/2 -translate-y-1/2 w-150 h-125 md:w-200 md:h-150 z-0 opacity-40">
+        <div className="absolute -left-110 md:-left-100 top-1/2 -translate-y-1/2 w-[600px] h-[500px] md:w-[800px] md:h-[600px] z-0 opacity-40">
           <div className="w-full h-full bg-pink-600 rounded-full blur-[60px] md:blur-[120px] absolute" />
         </div>
 
         {/* ornamen kanan */}
-        <div className="absolute -right-110 md:-right-100 top-1/2 -translate-y-1/2 w-150 h-125 md:w-200 md:h-150 z-0 opacity-40">
+        <div className="absolute -right-110 md:-right-100 top-1/2 -translate-y-1/2 w-[600px] h-[500px] md:w-[800px] md:h-[600px] z-0 opacity-40">
           <div className="w-full h-full bg-pink-600 rounded-full blur-[60px] md:blur-[120px] absolute" />
         </div>
 
         {/* Judul Section */}
         <div className="relative flex flex-row items-center gap-4 mb-4 md:mb-10 md:mt-10 z-10">
-          <h2 className="text-lg md:text-3xl -mt-10 md:mt-0 font-bold text-[#2D2D51]">
+          <h2 className="text-lg md:text-3xl -mt-10 md:mt-0 font-bold tracking-tight text-black">
             Program Kerja
           </h2>
         </div>
 
         {/* Carousel Proker */}
-        <div className="relative w-full max-w-7xl h-62 md:h-138 flex items-center justify-center z-10">
-          <div className="flex flex-col items-center text-[#2D2D51] font-bold">
-            <CarouselProker prokerList={data} />
+        <div className="relative w-full max-w-7xl h-[250px] md:h-[550px] flex items-center justify-center z-10">
+          <div className="flex flex-col items-center text-black font-bold">
+            <ProkerList />
           </div>
         </div>
       </section>

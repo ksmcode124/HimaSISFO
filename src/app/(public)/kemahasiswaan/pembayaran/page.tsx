@@ -1,19 +1,28 @@
-import { 
+import {
+  Pembayaran,
   HeroSection,
-  usePembayaranPage,
-  PembayaranMainSection
- } from "@/features/kemahasiswaan"
- 
+  PembayaranSection,
+  ItemDataJSON,
+  getSectionData,
+  KemahasiswaanDataFile
+} from "@/features/kemahasiswaan"
+
 export default function Page() {
-  const { hero, featuredItems, otherItems } = usePembayaranPage()
+  const pembayaranItems = getSectionData<ItemDataJSON[]>(
+    Pembayaran as KemahasiswaanDataFile,
+    "accordion"
+  )
 
   return (
     <>
-      <HeroSection data={hero} />
-      <PembayaranMainSection
-        featuredItems={featuredItems}
-        otherItems={otherItems}
-      />
+      <HeroSection {...Pembayaran.hero} breadcrumbItems={Pembayaran.breadcrumbItems} />
+
+      <section className="max-w-7xl min-h-[55vh] mx-auto space-y-5">
+        <PembayaranSection
+          featuredItems={pembayaranItems.slice(0, 3)}
+          otherItems={pembayaranItems.slice(3)}
+        />
+      </section>
     </>
   )
 }

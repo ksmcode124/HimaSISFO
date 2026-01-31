@@ -1,302 +1,165 @@
 "use client"
-import { useState, useEffect, useRef } from "react"
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation } from 'swiper/modules'
-import type { Swiper as SwiperType } from 'swiper'
-import { motion } from "framer-motion"
-import { cn } from "@/lib/utils/cn"
-import { Glass } from "@/components/ui/Glass"
-import { KemahasiswaanCard } from "./KemahasiswaanCard"
-import { Triangle } from "lucide-react"
 
-import 'swiper/css'
-import 'swiper/css/navigation'
-import { CardProps } from "../types/ui"
-import { useRouter, useSearchParams } from "next/navigation"
+import * as React from "react"
+import { Card, CardAction, CardContent } from "@/components/ui/card"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  type CarouselApi,
+  CarouselIndicators,
+  useCarousel,
+} from "@/components/ui/carousel"
+import Link from "next/link"
+import { cn } from "@/lib/utils"
+import { CardProps } from "../types"
 
-
-const MOBILE_BREAKPOINT = 541
-const TABLET_BREAKPOINT = 1025
-
-export function useDeviceType() {
-  const [device, setDevice] = useState<'mobile' | 'tablet' | 'desktop'>('desktop')
-  
-
-  useEffect(() => {
-    const updateDevice = () => {
-      const w = window.innerWidth
-      if (w < MOBILE_BREAKPOINT) setDevice('mobile')
-      else if (w < TABLET_BREAKPOINT) setDevice('tablet')
-      else setDevice('desktop')
-    }
-    window.addEventListener('resize', updateDevice)
-    updateDevice()
-    return () => window.removeEventListener('resize', updateDevice)
-  }, [])
-
-  return device
-}
-
-interface Props {
+interface AlurKemahasiswaanCarouselProps {
   data: CardProps[]
 }
 
-export function AlurKemahasiswaanCarousel({ data }: Props) {
-  const [swiper, setSwiper] = useState<SwiperType | null>(null)
-  const [activeIndex, setActiveIndex] = useState(0)
+export default function AlurKemahasiswaanCarousel({
+  data,
+}: AlurKemahasiswaanCarouselProps) {
+  const [api, setApi] = React.useState<CarouselApi | null>(null)
+  const [selectedIndex, setSelectedIndex] = React.useState(0)
 
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const device = useDeviceType()
+  React.useEffect(() => {
+    if (!api) return
 
-  const idToIndexRef = useRef<Map<string, number>>(new Map())
-  const hasHydratedRef = useRef(false)
+    const onSelect = () => {
+      setSelectedIndex(api.selectedScrollSnap())
+    }
 
-  // build index map once
-  useEffect(() => {
-    const map = new Map<string, number>()
-    data.forEach((d, i) => map.set(String(d.id), i))
-    idToIndexRef.current = map
-  }, [data])
+    onSelect()
+    api.on("select", onSelect)
+    return () => { api.off("select", onSelect) }
+  }, [api])
 
-  /**
-   * URL → state (browser back/forward ONLY)
-   */
-  useEffect(() => {
-    if (!swiper || hasHydratedRef.current) return
-
-    const itemId = searchParams.get("item")
-    if (!itemId) return
-
-    const index = idToIndexRef.current.get(itemId)
-    if (index === undefined) return
-
-    hasHydratedRef.current = true
-    setActiveIndex(index)
-  }, [swiper, searchParams])
-
-
-  /**
-   * state → Swiper (visual sync ONLY)
-   */
-  useEffect(() => {
-    if (!swiper) return
-    swiper.slideToLoop(activeIndex, 400)
-  }, [activeIndex, swiper])
-
-  /**
-   * state → URL (idempotent)
-   */
-  useEffect(() => {
-    const item = data[activeIndex]
-    if (!item) return
-
-    const current = searchParams.get("item")
-    if (current === String(item.id)) return
-
-    router.replace(
-      `/kemahasiswaan?item=${encodeURIComponent(item.id)}`,
-      { scroll: false }
-    )
-  }, [activeIndex, data, router, searchParams])
-
-  
   return (
-    <div className="relative w-full lg:max-w-3xl 2xl:max-w-7xl py-8 min-h-75 h-full">
-      <style jsx global>{`
-        .swiper {
-          overflow: visible !important;
-        }
-        .swiper-wrapper {
-          align-items: center;
-        }
-        .swiper-slide {
-          transition: opacity 0.5s ease;
-        }
-        .swiper-slide:not(.swiper-slide-active):not(.swiper-slide-prev):not(.swiper-slide-next) {
-          pointer-events: none;
-        }
-      `}</style>
-
-      <Swiper
-        modules={[Navigation]}
-        onSwiper={setSwiper}
-        loop
-        centeredSlides
-        speed={800}
-        grabCursor
-        breakpoints={{
-          0: {
-            slidesPerView: 1,
-            spaceBetween: 16,
-          },
-          640: { // sm
-            slidesPerView: 1.5,
-            spaceBetween: 24,
-          },
-          768: { // md
-            slidesPerView: 1.75,
-            spaceBetween: 32,
-          },
-          1024: { // lg (1024x768)
-            slidesPerView: 1.75,
-            spaceBetween: -60,
-          },
-          1280: { // xl
-            slidesPerView: 2.5,
-            spaceBetween: -80,
-          },
-        }}
-        className="!overflow-visible w-[90%] sm:w-[65%] lg:w-full h-[299px] xl:h-[299px]"
+    <div className="relative w-full">
+      <Carousel
+        setApi={setApi}
+        opts={{ align: "center" }}
+        className="w-full"
       >
-        {data.map((item, index) => {
-          const isActive = index === activeIndex
-          const diff = Math.abs(index - activeIndex)
-          const isNeighbor = diff === 1
+        <CarouselPrevious className="absolute h-15 w-15 left-0 sm:-left-12 lg:-left-16 top-1/2 -translate-y-1/2 z-30 rounded-full" />
 
-          return (
-            <SwiperSlide
-              key={item.id}
-              className={cn(
-                "flex justify-center transition-all",
-                "w-[300px] h-[300px]",
-                "xl:w-[450px] xl:h-[300px]",
-                isActive ? "z-30" : "z-10"
-              )}
-            >
-              {({ isActive: swiperActive }) => (
-                <motion.div
-                  className="w-full h-full cursor-pointer"
-                  onClick={() => {
-                    if (!swiperActive && swiper) setActiveIndex(index)
-                  }}
-                  animate={{
-                    scale: isActive ? 1 : 0.75,
-                    opacity: isActive ? 1 : isNeighbor ? 0.85 : 0,
-                    zIndex: isActive ? 30 : 20,
-                  }}
-                  transition={{ type: "spring", stiffness: 220, damping: 26, mass: 0.9 }}
-                >
-                  {isActive ? (
-                    <Glass className={cn("w-full h-full flex items-center justify-center rounded-3xl")}>
-                      <KemahasiswaanCard data={item} active={isActive} device={device} />
-                    </Glass>
-                  ): (
-                    <KemahasiswaanCard data={item} active={isActive} device={device} />
-                  )}
-                </motion.div>
-              )}
-            </SwiperSlide>
-          )
-        })}
-      </Swiper>
+        <CarouselContent>
+          <KemahasiswaanCarouselSpacer />
 
+          {data.map((card, index) => {
+            const diff = index - selectedIndex
+            const isActive = diff === 0
+            const isNeighbor = Math.abs(diff) === 1
 
-      {/* Custom Navigation Buttons */}
-      <button
-         onClick={() => {
-          setActiveIndex(i => Math.max(i - 1, 0))
-        }}
-        disabled={activeIndex === 0}
-        className={cn(
-          "absolute -left-12 top-1/2 translate-x-[50%] lg:-translate-x-full -translate-y-full z-50",
-          "h-20 w-20 sm:h-24 sm:w-24 rounded-full",
-          "disabled:opacity-30 disabled:cursor-not-allowed",
-          "transition-opacity"
-        )}
-      >
-        <Glass
-          className="flex items-center justify-center w-full h-full rounded-full"
-        >
-          <svg width="0" height="0" style={{ position: 'absolute' }}>
-            <defs>
-              <linearGradient id="triangleGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="50%" stopColor="#456882" />
-                <stop offset="100%" stopColor="#1B3C53" />
-              </linearGradient>
-            </defs>
-          </svg>
-          <Triangle className="-rotate-90 size-12" fill="url(#triangleGradient2)" strokeWidth={0} />
-        </Glass>
-        <span className="sr-only">Previous slide</span>
-      </button>
+            return (
+              <CarouselItem
+                key={card.id}
+                onClick={() => api?.scrollTo(index, false)}
+                className={cn(
+                  "h-90 z-20 ease-in",
+                  isActive && "transition-[flex] basis-full sm:basis-1/2 z-30 duration-900",
+                  isNeighbor && "transition-[margin] basis-full sm:basis-1/3 sm:-mx-30 z-20 duration-500",
+                  !isActive && !isNeighbor && "transition-[flex,margin] basis-full sm:basis-1/3 sm:mx-30 z-10 duration-700"
+                )}
+              >
+                <div className="h-full px-2 sm:px-0">
+                  <Card
+                    className={cn(
+                      "h-full flex flex-col will-change-transform",
+                      "transition-[transform,opacity] duration-2000 ease-[cubic-bezier(0.16,1,0.3,1)]",
+                      isActive
+                        ? "scale-100 opacity-100"
+                        : "scale-80 sm:scale-65 bg-linear-to-r from-[#456882] to-50%-[#1F445F] to-[#1B3C53] text-white text-center"
+                    )}
+                  >
+                    <CardContent
+                      className={cn(
+                        "flex flex-col flex-1 gap-2 sm:gap-3 p-4 lg:p-6",
+                        isActive ? "justify-start" : "justify-center"
+                      )}
+                    >
+                      {/* TITLE */}
+                      <p
+                        className={cn(
+                          "font-semibold",
+                          isActive
+                            ? "text-base sm:text-sm lg:text-md"
+                            : "mx-15 text-sm sm:text-lg lg:text-xl"
+                        )}
+                      >
+                        {card.title}
+                      </p>
 
-      <button
-         onClick={() => {
-          setActiveIndex(i => Math.min(i + 1, data.length - 1))
-        }}
-        disabled={activeIndex === data.length - 1}
-        className={cn(
-          "absolute -right-12 top-1/2 -translate-x-[50%] lg:translate-x-full -translate-y-full z-50",
-          "h-20 w-20 sm:h-24 sm:w-24 rounded-full",
-          "disabled:opacity-300 disabled:cursor-not-allowed",
-          "transition-opacity"
-        )}
-      >
-        <Glass
-          className="flex items-center justify-center w-full h-full rounded-full"
-        >
-          <svg width="0" height="0" style={{ position: 'absolute' }}>
-            <defs>
-              <linearGradient id="triangleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="50%" stopColor="#456882" />
-                <stop offset="100%" stopColor="#1B3C53" />
-              </linearGradient>
-            </defs>
-          </svg>
-          <Triangle className="rotate-90 size-12" fill="url(#triangleGradient)" strokeWidth={0}/>
-        </Glass>
-        <span className="sr-only">Next slide</span>
-      </button>
+                      {/* DESCRIPTION */}
+                      <p
+                        className={cn(
+                          "text-xs sm:text-[10px] lg:text-md text-justify",
+                          "transition-[opacity,transform,max-height] duration-0 ease-in",
+                          isActive
+                            ? "opacity-100 translate-y-0 max-h-96 delay-1000"
+                            : "opacity-0 translate-y-2 max-h-0 overflow-hidden delay-0"
+                        )}
+                      >
+                        {card.description}
+                      </p>
+                    </CardContent>
 
-      {/* Custom Indicators */}
-      <div className="mt-8 flex justify-center items-center gap-2">
-        {Array.from({ length: data.length }).map((_, index) => {
-          const isActive = index === activeIndex
+                    {/* ACTION */}
+                    <CardAction
+                      className={cn(
+                        "pb-4 w-full grid justify-items-center text-center",
+                        isActive
+                          ? "opacity-100 translate-y-0 max-h-20 delay-1000 duration-500 transition-[opacity,transform] ease-in"
+                          : "opacity-0 translate-y-2 max-h-0 overflow-hidden pointer-events-none"
+                      )}
+                    >
+                      <Link
+                        href={`kemahasiswaan/${card.id}`}
+                        className="text-xs rounded-full border px-4 py-2 bg-linear-to-t from-[#456882] to-[#1B3C53] text-white"
+                      >
+                        Selengkapnya ➔
+                      </Link>
+                    </CardAction>
+                  </Card>
+                </div>
+              </CarouselItem>
+            )
+          })}
 
-          return (
-            <button
-              key={index}
-              aria-label={`Go to slide ${index + 1}`}
-              onClick={() => setActiveIndex(index)}
-              className={cn(
-                "rounded-full transition-all duration-300",
-                "focus:outline-none",
-                isActive
-                  ? "bg-gradient-to-r from-[#456882] via-[#1F445F] to-[#1B3C53] h-4 w-4"
-                  : "bg-neutral-300 hover:bg-[#456882] h-3 w-3"
-              )}
-            />
-          )
-        })}
-      </div>
+          <KemahasiswaanCarouselSpacer />
+        </CarouselContent>
+
+        <CarouselNext className="absolute h-15 w-15 right-0 sm:-right-12 lg:-right-16 top-1/2 -translate-y-1/2 z-30 rounded-full" />
+      </Carousel>
+
+      {api && (
+        <CarouselIndicators
+          count={data.length}
+          selectedIndex={selectedIndex}
+          onSelect={(index) => api.scrollTo(index)}
+        />
+      )}
     </div>
   )
 }
 
-// Utility functions (keep for compatibility)
-interface Params {
-  isActive: boolean
-  isNeighbor: boolean
-}
-
-export function getCarouselItemClass({ isActive, isNeighbor }: Params) {
-  return cn(
-    "h-90 ease-in transition-all",
-    isActive && "z-30",
-    isNeighbor && "z-20",
-    !isActive && !isNeighbor && "z-10"
+/* Spacer digunakan untuk memberi ruang visual di sisi kiri & kanan
+    agar item pertama/terakhir bisa benar-benar berada di tengah */
+function KemahasiswaanCarouselSpacer() {
+  const { orientation } = useCarousel()
+  
+  return (
+     <div
+      aria-hidden
+      data-embla-ignore
+      className={cn(
+        "block min-w-0 shrink-0 grow-0 sm:basis-1/3 sm:-mx-15 z-10 transition-[margin] duration-500",
+        orientation === "horizontal" ? "pl-0 sm:pl-4" : "pt-4",
+      )}
+    />
   )
-}
-
-export function getCarouselItemState(
-  index: number,
-  selectedIndex: number
-) {
-  const diff = index - selectedIndex
-
-  return {
-    isActive: diff === 0,
-    isNeighbor: Math.abs(diff) === 1,
-  }
 }

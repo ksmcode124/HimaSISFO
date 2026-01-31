@@ -1,65 +1,127 @@
 {
-  "kabinet": [
+  "kabinet_list": [
     {
-      "id": 1,
+      "id": "gelora-harmoni",
       "nama_kabinet": "Gelora Harmoni",
-      "tahun_kerja": "2025/2026",
-      "visi": "1. Mewujudkan himpunan yang harmonis dan berdaya saing dengan menjunjung tinggi nilai kekeluargaan dan keseimbangan antara kerja dan istirahat. 2. Harmonis merujuk pada kebersamaan dan kolaborasi di dalam himpunan dan berdaya saing merujk pada kemampuan himpunan untuk bersaing secara eksternal. Keduanya bisa berjalan beriringan karena keharmonisan internal menjadi fondasi untuk mencapai daya saing secara eksternal.",
-      "misi": "1. Mengimprovisasi pelaksanaan beberapa program agar lebih relevan dan optimal. 2. Menyediakan pelayanan yang responsif terhadap kebutuhan akademik, non- akademik, dan aspirasi mahasiswa. 3. Membuka ruang partisipasi yang lebih luas bagi seluruh mahasiswa untuk terlibat aktif dalam kegiatan himpunan. 4. Membangun kolaborasi aktif dengan program studi untuk menyelaraskan kegiatan himpunan dengan visi akademik yang mendukung pengembangan mahasiswa. 5. Mengembangkan soft skill dan hard skill mahasiswa Sistem Informasi untuk mendukung kinerja organisasi dan pengembangan diri yang berkelanjutan.",
-      "foto_kabinet": [
+      "tahun_akademik": "2025/2026",
+      "logo_url": "/assets/kabinet/logo-gelora-harmoni.webp",
+      "image_url": [
         "/assets/kabinet/gelora-harmoni-1.webp",
         "/assets/kabinet/gelora-harmoni-2.webp",
         "/assets/kabinet/gelora-harmoni-3.webp"
       ],
-      "deskripsi": "Gelora mewakili semangat yang membara, dororngan kuat untuk bergerak maju. Harmoni berarti keselarasan dan kekeluargaan dalam perbedaan, kerja sama yang seimbang dan damai antar individu.",
-      "logo": "/assets/shared/logos/logo-himasisfo.webp",
-      "elemen_logo": [
-        {
-          "id": 1,
-          "nama_elemen": "Api",
-          "gambar_elemen": "/assets/kabinet/api.webp",
-          "deskripsi_elemen": "Gelora mewakili semangat yang membara, dorongan kuat untuk bergerak maju"
-        },
-        {
-          "id": 2,
-          "nama_elemen": "Lingkaran",
-          "gambar_elemen": "/assets/kabinet/lingkaran.webp",
-          "deskripsi_elemen": "Harmoni berarti keselarasan dan kekeluargaan dalam perbedaan"
-        }
-      ],
-      "departemenInti": {
-        "id": 0,
-        "nama_departemen": "Pengurus Inti",
-        "logo_departemen": "/assets/shared/logos/logo-himasisfo.webp",
-        "anggota": [
-          {
-            "id": 1,
-            "nama_anggota": "Mohammed Fadhillah R.M.N.A",
-            "jabatan": "Ketua",
-            "foto_anggota": "/assets/kabinet/alka.webp"
+      "colors": {
+        "primary": "#E63258",
+        "secondary": "#A43DA5",
+        "text": "#2D2D51",
+        "background": "#F4E8FF"
+      },
+      "filosofi": {
+        "arti_nama": [
+          { 
+            "kata": "Gelora", 
+            "makna": "mewakili semangat yang membara, dororngan kuat untuk bergerak maju." 
           },
-          {
-            "id": 2,
-            "nama_anggota": "Nabil Daffariq",
-            "jabatan": "Wakil Ketua",
-            "foto_anggota": "/assets/kabinet/nabil.webp"
+          { 
+            "kata": "Harmoni", 
+            "makna": "berarti keselarasan dan kekeluargaan dalam perbedaan, kerja sama yang seimbang dan damai antar individu." 
+          }
+        ],
+        "logo_hover_details": [
+          { 
+            "simbol": "Api", 
+            "makna": "Gelora mewakili semangat yang membara, dorongan kuat untuk bergerak maju" 
+          },
+          { 
+            "simbol": "Lingkaran", 
+            "makna": "Harmoni berarti keselarasan dan kekeluargaan dalam perbedaan kerja sama yang seimbang dan damai antar individu" 
+          }
+        ],
+        "visi": [
+          { 
+            "text": "Mewujudkan himpunan yang harmonis dan berdaya saing dengan menjunjung tinggi nilai kekeluargaan dan keseimbangan antara kerja dan istirahat." 
+          },
+          { 
+            "text": "Harmonis merujuk pada kebersamaan dan kolaborasi di dalam himpunan dan berdaya saing merujk pada kemampuan himpunan untuk bersaing secara eksternal. Keduanya bisa berjalan beriringan karena keharmonisan internal menjadi fondasi untuk mencapai daya saing secara eksternal." 
+          }
+        ],
+        "misi": [
+          { 
+            "text": "Mengimprovisasi pelaksanaan beberapa program agar lebih relevan dan optimal." 
+          },
+          { 
+            "text": "Menyediakan pelayanan yang responsif terhadap kebutuhan akademik, non- akademik, dan aspirasi mahasiswa." 
+          },
+          { 
+            "text": "Membuka ruang partisipasi yang lebih luas bagi seluruh mahasiswa untuk terlibat aktif dalam kegiatan himpunan." 
+          },
+          { 
+            "text": "Membangun kolaborasi aktif dengan program studi untuk menyelaraskan kegiatan himpunan dengan visi akademik yang mendukung pengembangan mahasiswa." 
+          },
+          { 
+            "text": "Mengembangkan soft skill dan hard skill mahasiswa Sistem Informasi untuk mendukung kinerja organisasi dan pengembangan diri yang berkelanjutan." 
           }
         ]
       },
-      "departemen_list": [
+      "inti_himpunan": {
+        "logo_url": "/assets/kabinet/logo-inti.webp",
+        "anggota": [
+          {
+            "nama": "Mohammed Fadhillah R.M.N.A",
+            "jabatan": "Ketua",
+            "image_url": "/assets/kabinet/kahim.webp"
+          },
+          {
+            "nama": "Nabil Daffariq",
+            "jabatan": "Wakil",
+            "image_url": "/assets/kabinet/wakahim.webp"
+          }
+        ]
+      },
+      "departemen": [
         {
-          "id_departemen": 1,
-          "nama_departemen": "Akademik dan Keprofesian",
-          "logo_departemen": "/assets/shared/logos/logo-himasisfo.webp"
+          "id": "akpro",
+          "nama": "Akademik dan Keprofesian",
+          "deskripsi": "Departemen yang bertanggung jawab dalam melayani mahasiswa sistem informasi seputar akademik dan keprofesian mulai dari pembelajaran hingga perlombaan",
+          "logo_url": "/assets/kabinet/akpro.webp",
+          "image_url": "/assets/kabinet/hero-akpro.webp",
+          "program_kerja": [
+            {
+              "nama": "ARSIP",
+              "deskripsi": "Mengarsipkan soal dan materi mata kuliah serta kelola folder Google Drive AR-SI-P.",
+              "image_url": "/assets/kabinet/proker-arsip.webp"
+            }
+          ],
+          "staff": {
+            "inti": [
+              { 
+                "nama": "Umar Andhika F.", 
+                "jabatan": "Kepala Departemen", 
+                "image_url": "/assets/kabinet/umar-andhika.webp" 
+              },
+              { 
+                "nama": "Ferawati Ginting", 
+                "jabatan": "Wakil Kepala Departemen", 
+                "image_url": "/assets/kabinet/ferawati-ginting.webp" 
+              },
+              { 
+                "nama": "Ghielbrant Ahnaf", 
+                "jabatan": "Sekbend Departemen", 
+                "image_url": "/assets/kabinet/ghielbrant-ahnaf.webp" 
+              }
+            ],
+            "anggota": [
+              { 
+                "nama": "Galang Ivandry", 
+                "image_url": "/assets/kabinet/galang-ivandry.webp" 
+              },
+              { 
+                "nama": "Andhika Guntur R.", 
+                "image_url": "/assets/kabinet/andhika-guntur.webp" }
+            ]
+          }
         }
       ]
-    }
-  ],
-  "kabinetList": [
-    {
-      "id_kabinet": 1,
-      "nama_kabinet": "Gelora Harmoni",
-      "tahun_kerja": "2025/2026"
     }
   ]
 }

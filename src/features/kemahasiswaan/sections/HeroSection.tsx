@@ -1,62 +1,49 @@
-import Image from "next/image"
-import { BreadcrumbSection } from "./BreadcrumbSection"
-import { ShellLayer } from "@/components/layout/ShellLayer"
-import {
-  BackgroundLayer,
-  ContentLayer,
-} from "@/components/layout/Layer"
-import { HeroData } from "../types/hero"
-import { useHeroSection } from "../hooks/useHeroSection"
-import { HeroView } from "../components/HeroView"
-import { cn } from "@/lib/utils/cn"
+import Image from "next/image";
+import { cn } from "@/lib/utils";
+import BreadcrumbSection from "./BreadcrumbSection";
+import { BreadcrumbItemData } from "@/components/ui/breadcrumb";
 
 interface HeroSectionProps {
-  data: HeroData
+  title: string;
+  subtitle: string;
+  breadcrumbItems?: BreadcrumbItemData[];
 }
 
-export function HeroSection({ data }: HeroSectionProps) {
-  const { hasBreadcrumb, minHeightClass } = useHeroSection(data)
+export default function HeroSection({ title, subtitle, breadcrumbItems }: HeroSectionProps) {
+  const hasBreadcrumb = breadcrumbItems && breadcrumbItems.length > 0;
 
   return (
-    <ShellLayer className="z-10 mb-[3svh] md:mb-[2svh] lg:mb-[15vh]">
-      <BackgroundLayer
-        className="
-          bg-[url('/assets/kemahasiswaan/bg-hero.webp')]
-          bg-cover
-          bg-center
-        "
-      >
-      </BackgroundLayer>
+    <>
+      {hasBreadcrumb && <BreadcrumbSection items={breadcrumbItems!} />}
+      <HeroContent title={title} subtitle={subtitle} hasBreadcrumb={!!hasBreadcrumb} />
+      <PitaDecoration />
+    </>
+  );
+}
 
-      <ContentLayer className={cn(minHeightClass, "relative flex flex-col")}>
-        {hasBreadcrumb && (
-          <BreadcrumbSection items={data.breadcrumbItems!} />
-        )}
+/** --- Internal Components --- */
 
-        <div className={cn("flex-1 flex justify-center items-center", hasBreadcrumb ? "" : "pt-[72px] lg:pt-[96px]")}> {/* Ubah setinggi Navbar & BreadCrumbs*/}
-          <HeroView
-            title={data.title}
-            subtitle={data.subtitle}
-          />
-        </div>
-
-        <PitaDecoration />
-      </ContentLayer>
-    </ShellLayer>
-  )
+function HeroContent({ title, subtitle, hasBreadcrumb }: { title: string; subtitle: string; hasBreadcrumb: boolean }) {
+  /** Gunakan 30vh agar hero tetap seimbang dengan breadcrumb; 55vh untuk hero tanpa breadcrumb supaya tidak terlalu pendek */
+  const minHeightClass = hasBreadcrumb ? "min-h-[30vh]" : "min-h-[55vh]";
+  return (
+    <section className={cn("flex flex-col items-center justify-center px-4 sm:px-6 lg:px-20", minHeightClass)}>
+      <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl text-center">{title}</h1>
+      <h2 className="font-semibold text-base sm:text-lg md:text-xl text-center mt-2 sm:mt-4">{subtitle}</h2>
+    </section>
+  );
 }
 
 function PitaDecoration() {
   return (
-    <div className="absolute bottom-[5%] max-sm:bottom-0 lg:-bottom-[20%] left-0 z-5 w-full aspect-5/1 pointer-events-none">
+    <div className="relative w-full aspect-4/1">
       <Image
         src="/assets/kemahasiswaan/decoration-pita.webp"
         alt=""
         fill
-        className="object-contain"
+        className="object-contain pointer-events-none"
         priority
       />
     </div>
-  )
+  );
 }
-

@@ -1,41 +1,20 @@
 "use client";
 
+import Image from "next/image";
 import { Pita } from "../components/KabinetOrnaments";
 import TentangCard from "../components/TentangCard";
 import VisiMisiAccordion from "../components/VisiMisiAccordion";
-import VisiMisiMobile from "../components/VisiMisiMobile";
-import LogoGeloraHarmoni from "../components/LogoGeloraHarmoni";
-import LogoAksayapatra from "../components/LogoAksayapatra";
-import React, { useState } from "react";
-import { Kabinet } from "../types";
 
 interface FilosofiProps {
-  data: Kabinet;
+  data: {
+    arti_nama: { kata: string; makna: string }[];
+    visi: { text: string }[];
+    misi: { text: string }[];
+  };
+  logo_url: string;
 }
 
-export default function FilosofiSection({ data }: FilosofiProps) {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const deskripsiArray = (data.deskripsi || "")
-    .split(". ")
-    .filter((sentence) => sentence.trim() !== "")
-    .map((sentence) => {
-      const words = sentence.split(" ");
-      return {
-        kata: words[0],
-        makna: words.slice(1).join(" "),
-      };
-    });
-
-  const visiArray = (data.visi || "")
-    .split(/ \d\. /)
-    .map((item) => item.replace(/^\d\. /, "").trim())
-    .filter(Boolean);
-  const misiArray = (data.misi || "")
-    .split(/ \d\. /)
-    .map((item) => item.replace(/^\d\. /, "").trim())
-    .filter(Boolean);
-
+export default function FilosofiSection({ logo_url, data }: FilosofiProps) {
   return (
     <div className="relative w-full">
       <section className="w-full bg-[#F4E8FF] min-h-screen flex items-center justify-center py-20 px-10">
@@ -47,37 +26,35 @@ export default function FilosofiSection({ data }: FilosofiProps) {
           }}
         />
 
-        <div className="relative z-40 mt-10 w-full max-w-360 2xl:max-w-450 mx-auto flex flex-col lg:grid lg:grid-cols-3 gap-10 items-center">
+        <div className="relative z-10 w-full max-w-7xl mt-14 mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10 items-center">
           {/* LOGO */}
-          <div className="flex justify-center items-center lg:order-2 w-full">
-            <div className="relative w-50 h-50 sm:w-72 sm:h-72 lg:w-80 lg:h-80 xl:w-md xl:h-112 2xl:w-137 2xl:h-137">
-              {data.nama_kabinet === "Gelora Harmoni" && <LogoGeloraHarmoni />}
-              {data.nama_kabinet === "Aksayapatra" && <LogoAksayapatra />}
+          <div className="flex justify-center items-center lg:order-2">
+            <div className="relative w-60 h-60 lg:w-[380px] lg:h-[380px] lg:-ml-10 border flex items-center justify-center">
+              <Image
+                src={logo_url}
+                alt="Logo Kabinet"
+                fill
+                className="object-contain drop-shadow-2xl"
+              />
             </div>
           </div>
 
           {/* TENTANG */}
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-4">
             <div className="flex justify-center lg:justify-start order-2 lg:order-1 h-full">
-              <TentangCard data={deskripsiArray} />
+              <TentangCard data={data.arti_nama} />
             </div>
           </div>
 
-          {/* Visi Misi Desktop */}
           <div className="md:flex-col md:-ml-10 md:gap-10 md:order-3 hidden lg:block">
-            <VisiMisiAccordion visi={visiArray} misi={misiArray} />
+            {/* Visi Misi Desktop */}
+            <VisiMisiAccordion data={data} />
           </div>
 
-          {/*  Visi Misi Mobile Ver. */}
-          <div
-            className={`relative w-full lg:hidden h-14 ${isMobileMenuOpen ? "z-50" : "z-0"}`}
-          >
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full sm:max-w-md">
-              <VisiMisiMobile
-                visi={visiArray}
-                misi={misiArray}
-                onToggle={(open) => setIsMobileMenuOpen(open)}
-              />
+          <div className="flex-col gap-10 block md:order-3 lg:hidden">
+            {/* Visi Misi Mobile */}
+            <div className="border flex items-center w-full h-16">
+              Visi & Misi
             </div>
           </div>
         </div>

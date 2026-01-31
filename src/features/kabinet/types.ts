@@ -1,79 +1,64 @@
-// Elemen logo kabinet
-export interface ElemenLogo {
-  id: number;
-  nama_elemen: string;
-  gambar_elemen: string | null;
-  deskripsi_elemen: string | null;
+export interface KabinetDataJSON {
+  kabinet_list: Kabinet[];
 }
 
-// Nested interface untuk reuse
+export interface Kabinet {
+  id: string;
+  nama_kabinet: string;
+  tahun_akademik: string;
+  logo_url: string;
+  image_url: string[];
+  colors: {
+    primary: string;
+    secondary: string;
+    text: string;
+    background: string;
+  };
+  filosofi: {
+    arti_nama: { kata: string; makna: string }[];
+    logo_hover_details: { simbol: string; makna: string }[];
+    visi: { text: string }[];
+    misi: { text: string }[];
+  };
+  inti_himpunan: {
+    logo_url: string;
+    anggota: IntiHimpunan[];
+  };
+  departemen: Departemen[];
+}
+
+export interface IntiHimpunan {
+  nama: string;
+  jabatan: string;
+  image_url: string;
+}
+
 export interface Departemen {
-  nama_departemen: string;
-  deskripsi_departemen: string | null;
-  foto_departemen: string | null;
-  logo_departemen: string | null;
+  id: string;
+  nama: string;
+  deskripsi: string;
+  logo_url: string;
+  image_url: string;
+  program_kerja: Proker[];
+  staff: {
+    inti: StaffInti[];
+    anggota: StaffAnggota[];
+  };
 }
 
 export interface Proker {
-  id: number;
-  nama_proker: string;
-  foto_proker: string | null;
-  deskripsi_proker: string | null;
+  nama: string;
+  deskripsi: string;
+  image_url: string;
 }
 
-export interface Anggota {
-  id: number;
-  nama_anggota: string;
+export interface StaffInti {
+  nama: string;
   jabatan: string;
-  foto_anggota: string | null;
+  image_url: string;
 }
 
-// Departemen inti
-export interface DepartemenInti {
-  id: number;
-  nama_departemen: string;
-  logo_departemen: string | null;
-  anggota: Anggota[];
-}
-
-// Departemen biasa
-export interface DepartemenListItem {
-  id_departemen: number;
-  nama_departemen: string;
-  logo_departemen: string | null;
-}
-
-// Untuk daftar kabinet singkat
-export interface KabinetListItem {
-  id_kabinet: number;
-  nama_kabinet: string;
-  tahun_kerja: string;
-}
-
-// Kabinet utama
-export interface Kabinet {
-  id: number;
-  nama_kabinet: string;
-  tahun_kerja: string;
-  visi: string | null;
-  misi: string | null;
-  foto_kabinet: string[];
-  deskripsi: string | null;
-  logo: string | null;
-  elemen_logo: ElemenLogo[];
-  departemenInti: DepartemenInti;
-}
-
-// Response akhir
-export interface KabinetResponse {
-  kabinet: Kabinet;
-  departemen: DepartemenListItem[];
-  kabinetList: KabinetListItem[];
-}
-
-// Response API
-export interface DepartemenResponse {
-  departemen: Departemen;
-  proker: Proker[];
-  anggota: Anggota[];
+export interface StaffAnggota {
+  nama: string;
+  image_url: string;
 }

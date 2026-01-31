@@ -1,5 +1,6 @@
 import { NavigationBar, SiteFooter } from "@/components/layout";
 import { navItems } from "@/features/navigation";
+import { LiquidGlass } from "@liquidglass/react";
 import React from "react";
 
 interface PublicLayoutProps {
@@ -9,13 +10,11 @@ interface PublicLayoutProps {
 export default function PublicLayout({ children }: PublicLayoutProps) {
   return (
     <>
-    
-    <main className="overflow-hidden">
-      <NavigationBar items={navItems} />
+    <NavigationBar items={navItems} />
+    <main className="pb-5 pt-18">
       {children}
-      <SiteFooter />
     </main>
-    
+    <SiteFooter />
     </>
   )
 }

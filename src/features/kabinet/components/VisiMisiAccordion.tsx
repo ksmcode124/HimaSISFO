@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import {
   Accordion,
   AccordionContent,
@@ -9,43 +8,39 @@ import {
 } from "@/components/ui/accordion";
 
 interface VisiMisiProps {
-  visi: string[];
-  misi: string[];
+  data: {
+    visi: { text: string }[];
+    misi: { text: string }[];
+  };
 }
 
-export default function VisiMisiAccordion({ visi, misi }: VisiMisiProps) {
+export default function VisiMisiAccordion({ data }: VisiMisiProps) {
   const sections = [
-    { id: "visi", label: "Visi", items: visi },
-    { id: "misi", label: "Misi", items: misi },
+    { id: "visi", label: "Visi", items: data.visi },
+    { id: "misi", label: "Misi", items: data.misi },
   ];
 
   return (
     <div className="hidden lg:block">
       <Accordion type="single" collapsible className="space-y-6">
-        {sections.map(({ id, label, items }) => (
+        {sections.map((section) => (
           <AccordionItem
-            key={id}
-            value={id}
-            className="border-3 border-[#E63258] rounded-2xl bg-[#F4E8FF]/80 relative group border-b-3" // Menjaga konsistensi border shadcn
+            key={section.id}
+            value={section.id}
+            className="border-2 border-[#D14D72] rounded-2xl bg-white/70 relative group"
           >
-            <AccordionTrigger
-              hasChevron={false}
-              className="h-12 2xl:h-16 relative z-20 hover:no-underline"
-            >
+            <AccordionTrigger hasChevron={false} className="h-12 relative z-20">
               <div className="w-full h-full" />
 
               {/* CHEVRON CUSTOM */}
-              <div className="absolute -right-5 top-0 h-12 2xl:h-16 flex items-center z-30 pointer-events-none">
-                <div className="bg-white w-15 h-13 2xl:h-17 rounded-2xl flex items-center justify-center shadow-sm">
+              <div className="absolute -right-5 top-0 h-12 flex items-center z-30 pointer-events-none">
+                <div className="bg-white w-15 h-13 rounded-2xl flex items-center justify-center">
                   <svg
                     width="32"
                     height="32"
                     viewBox="0 0 24 24"
                     fill="none"
-                    stroke="#E63258"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+                    stroke="#D14D72"
                     className="transition-transform duration-300 group-data-[state=open]:rotate-180"
                   >
                     <path d="m6 9 6 6 6-6" />
@@ -54,22 +49,17 @@ export default function VisiMisiAccordion({ visi, misi }: VisiMisiProps) {
               </div>
             </AccordionTrigger>
 
-            <div className="absolute top-0 left-0 right-0 h-12 2xl:h-16 z-10 overflow-hidden rounded-xl pointer-events-none">
-              <div className="w-full h-full bg-linear-to-r from-[#B956BA]/75 via-white to-[#B956BA] flex items-center justify-center">
-                <span className="font-semibold text-xl 2xl:text-3xl text-[#2D2D51]">
-                  {label}
-                </span>
+            <div className="absolute top-0 left-0 right-0 h-12 z-10 overflow-hidden rounded-xl">
+              <div className="w-full h-full bg-linear-to-r from-[#B956BA] via-[#FFFFFF] to-[#B956BA] flex items-center justify-center">
+                <span className="font-semibold text-xl">{section.label}</span>
               </div>
             </div>
 
             <AccordionContent className="pt-2 pb-4">
               <ul className="list-disc ml-4">
-                {items.map((text, index) => (
-                  <li
-                    key={index}
-                    className="text-xs 2xl:text-lg text-[#2D2D51]"
-                  >
-                    {text}
+                {section.items.map((item, index) => (
+                  <li key={index} className="text-xs">
+                    {item.text}
                   </li>
                 ))}
               </ul>

@@ -26,49 +26,49 @@
         {
           "id" : "cuti-akademik",
           "title": "Blanko Pengajuan Cuti Akademik",
-          "image": "/assets/kemahasiswaan/blanko-pengajuan-cuti.webp",
+          "image": "/assets/kemahasiswaan/bg-blanko.webp",
           "filepath": "https://docs.google.com/document/d/1rjP7tLK3HeWjX6_cTEYqaa3rf_pQOnRN"
         },
         {
           "id" : "pemulihan-status",
           "title": "Blanko Pemulihan Status Mahasiswa",
-          "image": "/assets/kemahasiswaan/blanko-pemulihan-status.webp",
+          "image": "",
           "filepath": "https://docs.google.com/document/d/1J6gCnvpoYB9g4SGz-Q62xsXIbZ4_jpoK"
         },
         {
           "id" : "pengunduran-diri",
           "title": "Blanko Pengunduran Diri",
-          "image": "/assets/kemahasiswaan/blanko-pengunduran-diri.webp",
+          "image": "",
           "filepath": "https://docs.google.com/document/d/1XEmOhtjAnkO2MlGmpcgnKqrrnh9ttlDT"
         },
         {
           "id" : "cetak-ijazah",
           "title": "Blanko Cetak Ijazah dengan Bahasa Inggris",
-          "image": "/assets/kemahasiswaan/blanko-cetak-ijazah-inggris.webp",
+          "image": "",
           "filepath": "https://docs.google.com/document/d/17YKOt1PJbGy-JRoXwon_JWBBAqUBobyJ"
         },
         {
           "id" : "cetak-transkrip",
           "title": "Blanko Cetak Transkrip dengan Bahasa Inggris",
-          "image": "/assets/kemahasiswaan/blanko-cetak-transkrip-inggris.webp",
+          "image": "",
           "filepath": "https://docs.google.com/document/d/1A9fmuVXR4li-Oh_Ln1TnGNBMGipxlido"
         },
         {
           "id" : "legalisir-ijazah",
           "title": "Blanko Legalisir Ijazah",
-          "image": "/assets/kemahasiswaan/blanko-legalisir-ijazah.webp",
+          "image": "",
           "filepath": "https://docs.google.com/document/d/1hq2y-qNCDjR8E_XKD2jULHP2WDPOJgX5"
         },
         {
           "id" : "legalisir-transkrip",
           "title": "Blanko Legalisir Transkrip Akademik",
-          "image": "/assets/kemahasiswaan/blanko-legalisir-transkrip.webp",
+          "image": "",
           "filepath": "https://docs.google.com/document/d/1B8_dx2odLHDDuamsoFgE10NkF16NE9DW"
         },
         {
           "id" : "legalisir-skl",
           "title": "Blanko Legalisir Surat Keterangan Lulus",
-          "image": "/assets/kemahasiswaan/blanko-legalisir-skl.webp",
+          "image": "",
           "filepath": "https://docs.google.com/document/d/1yLQdd_6VMxaLkbt_qk04gHb_yOsbjisw"
         }
       ]
