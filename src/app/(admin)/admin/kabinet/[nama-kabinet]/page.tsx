@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import { ConfirmationModal } from '@/features/admin/components/ConfirmationModal';
@@ -22,11 +23,10 @@ export default function DepartemenPage() {
   const nama_kabinet = slug ? slug.split('-').slice(1).join(' ') : 'NAMA KABINET';
 
 
-  const { data, isLoading, createDepartemen, updateDepartemen, deleteDepartemen, error } = useDepartemen(id_kabinet);
+  const { data, isLoading, createDepartemen, updateDepartemen, deleteDepartemen, error, reload } = useDepartemen(id_kabinet);
   const modal = useModal();
   const { detail, isLoadingModal } = useDepartemenDetail(modal.id, id_kabinet);
   const confirm = useConfirm();;
-  const [isOpen, setIsOpen] = React.useState(false);
 
   const onDeleteRequest = (id: number) => {
     confirm.confirm('delete', async () => {
@@ -48,18 +48,53 @@ export default function DepartemenPage() {
       if (payload.logo_departemen) payload.logo_departemen = extractUrl(payload.logo_departemen);
       if (payload.foto_departemen) payload.foto_departemen = extractUrl(payload.foto_departemen);
 
-      await fetch(`/api/admin/departemen`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-
-      // refresh list — fallback to full reload until query invalidation is wired
-      window.location.reload();
+      createDepartemen(payload);
+      reload()
     } catch (err) {
       console.error('create departemen error', err);
     }
   }
+
+  async function handleEditDepartemen(values: any) {
+    try {
+      if (!detail?.id_departemen) {
+        throw new Error("id_departemen tidak tersedia untuk edit");
+      }
+
+      const extractUrl = (input: unknown): string | undefined => {
+        if (!input) return undefined;
+
+        if (typeof input === "string") return input;
+
+        if (Array.isArray(input)) {
+          const first = input[0];
+          if (!first) return undefined;
+          return first.url || first.fileUrl || first.file?.url;
+        }
+
+        if (typeof input === "object") {
+          const v = input as any;
+          return v.url || v.fileUrl || v.file?.url;
+        }
+
+        return undefined;
+      };
+
+      const payload = {
+        ...values,
+        id_kabinet,
+        id_departemen: detail.id_departemen,
+        logo_departemen: extractUrl(values.logo_departemen),
+        foto_departemen: extractUrl(values.foto_departemen),
+      };
+
+      await updateDepartemen(payload);
+      await reload();
+    } catch (err) {
+      console.error("edit departemen error", err);
+    }
+  }
+
 
   return (
     <>
@@ -70,7 +105,7 @@ export default function DepartemenPage() {
           {label: nama_kabinet, href:`/admin/kabinet/${slug}`}
         ]}
         title={nama_kabinet}
-        handleTambah={() => setIsOpen(true)}
+        handleTambah={modal.openCreate}
       />
 
       <AdminTable
@@ -84,7 +119,16 @@ export default function DepartemenPage() {
         })}
       />
 
-      
+      <FormModal
+        open={modal.isEdit}
+        title={`Edit Departemen - ${nama_kabinet}`}
+        fields={updateDepartemenFields}
+        schema={updateDepartemenSchema}
+        onSubmit={handleEditDepartemen}
+        onOpenChange={v => !v && modal.close()}
+        submitLabel="Simpan"
+        initialData={detail ?? {}}
+      />
 
       <DetailModal
         open={modal.isView}
@@ -104,15 +148,16 @@ export default function DepartemenPage() {
             : []
         }
         description={detail?.deskripsi_departemen}
+        imageUrl={detail?.logo_departemen}
       />
 
       <FormModal
-        open={isOpen}
+        open={modal.isCreate}
         title={`Tambah Departemen - ${nama_kabinet}`}
         fields={createDepartemenFields}
         schema={createDepartemenSchema}
         onSubmit={handleCreateDepartemen}
-        onOpenChange={setIsOpen}
+        onOpenChange={v => !v && modal.close()}
         submitLabel="Buat Departemen"
         initialData={{ id_kabinet }}
       />

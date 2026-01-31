@@ -76,7 +76,7 @@ export function useAnggota(id_kabinet: number, id_departemen?: number) {
   const updateMutation = useMutation({
     mutationFn: async (payload: { id: number; data: z.infer<typeof updateAnggotaDetailSchema> }) => {
       const { id, data } = payload;
-      const response = await api.put(`/api/admin/anggota/${id}`, data);
+      const response = await api.patch(`/api/admin/anggota/${id}`, data);
       return response.data;
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['anggota', id_kabinet] })

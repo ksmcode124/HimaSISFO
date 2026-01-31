@@ -105,6 +105,7 @@ export default function KabinetPage() {
             : []
         }
         description={detail?.deskripsi}
+        imageUrl={detail?.logo}
       />
 
       <ConfirmationModal loading={isLoading} {...confirm} />

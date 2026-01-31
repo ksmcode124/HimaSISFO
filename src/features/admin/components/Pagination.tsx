@@ -56,7 +56,7 @@ export function Pagination({
             className={`rounded-md px-6 py-2 transition ${
               page === currentPage
                 ? 'border-[#3385FF] border-2 text-[#3385FF] shadow'
-                : 'hover:bg-[#3385FF] text-white'
+                : 'hover:bg-[#3385FF] text-black'
             }`}
           >
             {page}

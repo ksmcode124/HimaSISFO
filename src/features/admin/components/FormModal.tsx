@@ -415,17 +415,11 @@ export function FormModal<TSchema extends z.ZodType<any, any, any>>({
                 </div>
               ))}
               <div className="flex justify-center pt-4">
-                <button type="submit" disabled={loading} className="w-full px-8 py-2.5 bg-[#3385FF] text-white rounded-lg font-medium hover:bg-[#2670E8] transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed">
-                  {loading ? 'Menyimpan...' : submitLabel}
+                <button type="submit" disabled={loading || uploadingFields.size > 0} className="px-8 py-2.5 bg-[#3385FF] w-full text-white rounded-lg font-medium hover:bg-[#2670E8] transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed">
+                  {loading ? 'Menyimpan...' : uploadingFields.size > 0 ? 'Tunggu upload selesai...' : submitLabel}
                 </button>
               </div>
             </div>
-          </div>
-
-          <div className="flex justify-center pt-4">
-            <button type="submit" disabled={loading || uploadingFields.size > 0} className="px-8 py-2.5 bg-[#3385FF] text-white rounded-lg font-medium hover:bg-[#2670E8] transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed">
-              {loading ? 'Menyimpan...' : uploadingFields.size > 0 ? 'Tunggu upload selesai...' : submitLabel}
-            </button>
           </div>
         </form>
       </div>

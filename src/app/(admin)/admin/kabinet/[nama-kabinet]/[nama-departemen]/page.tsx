@@ -14,7 +14,6 @@ import { useParams } from 'next/navigation';
 import { FormModal } from '@/features/admin/components/FormModal';
 import { anggotaCreateFields, anggotaEditFields } from '@/features/admin/components/forms/anggota-form-config';
 import { createAnggotaSchema, updateAnggotaSchema } from '@/schemas/anggota.schema';
-import { createAnggotaDetailSchema, updateAnggotaDetailSchema } from '@/schemas/anggota_detail.schema';
 
 export default function AnggotaPage() {
   const params = useParams();
@@ -115,7 +114,6 @@ export default function AnggotaPage() {
 
   return (
     <>
-      {/** TODO: breadcrumbs should be dynamic follows the current active kabinet and departemen */}
       <HeaderSection
         breadcrumbs={[
           {label: "Kabinet", href: '/admin/kabinet'},
@@ -159,22 +157,18 @@ export default function AnggotaPage() {
           onOpenChange={v => !v && modal.close()}
           title="Edit Anggota"
           fields={anggotaEditFields}
-          schema={updateAnggotaSchema.partial()}
+          schema={updateAnggotaSchema}
           initialData={{
             nama_anggota: detail?.nama_anggota,
           }}
           submitLabel="Update Anggota"
           onSubmit={async data => {
             if (!detail?.id_anggota) return;
-            const response = await fetch(`/api/admin/anggota/${detail.id_anggota}`, {
-              method: 'PATCH',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(data),
-            });
-            if (!response.ok) {
-              const error = await response.json();
-              throw new Error(error.message || 'Gagal update anggota');
+            const payload = {
+              id: detail?.id_anggota,
+              data: data
             }
+            updateAnggota(payload)
             await reload();
             modal.close();
           }}
