@@ -105,7 +105,7 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
                   }}
                   transition={{ type: "spring", stiffness: 220, damping: 26, mass: 0.9 }}
                 >
-                  <Glass className={cn("w-full h-full flex items-center justify-center")}>
+                  <Glass blur={50} className={cn("w-full h-full flex items-center justify-center")}>
                     <KemahasiswaanCard data={item} active={isActive} device={device} />
                   </Glass>
                 </motion.div>

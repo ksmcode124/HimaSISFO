@@ -14,7 +14,7 @@ export function PendaftaranVerifikasiDetailSection({ item }: Props) {
 
       <div className="relative col-span-12 lg:col-start-4 lg:col-span-6 w-full h-full flex items-center justify-center">
         <div className="
-          absolute z-30 top-0 right-0 w-22.5 sm:w-36 md:w-52 lg:w-75 aspect-4/3
+          absolute z-30 top-0 right-0 w-22.5 sm:w-36 md:w-52 lg:w-45 aspect-4/3
           -translate-x-[40%] translate-y-[80%]
           md:translate-0
         ">

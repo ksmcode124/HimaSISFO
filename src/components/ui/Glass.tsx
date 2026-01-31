@@ -20,8 +20,9 @@ export function Glass({ className, ...props }: GlassProps) {
   return (
     <LiquidGlass
       {...DEFAULT_GLASS}
+      blur={20}
       {...props}
-      className={cn('glass', className)}
+      className={cn('glass bg-accent-foreground/10', className)}
     />
   )
 }
