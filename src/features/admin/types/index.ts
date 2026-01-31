@@ -16,8 +16,8 @@ export interface AdminEventRow {
   title: string,
   description: string,
   // type: string,
-  end: Date,
-  start: Date,
+  end: string,
+  start: string,
 }
 
 export interface AdminDepartemenRow{
@@ -80,12 +80,12 @@ export interface AdminAnggotaDetail{
 }
 
 export interface AdminEventDetail {
-  id: number,
-  title: string,
-  description: string,
-  // type: string,
-  date: string,
-  foto_event: string,
+  id: number;
+  judul: string;
+  deskripsi: string;
+  tanggal_mulai: string; // bisa juga Date kalau mau langsung parsing
+  tanggal_berakhir: string; // bisa juga Date
+  gambar_event: string;
 }
 
 export interface AdminProkerRow {

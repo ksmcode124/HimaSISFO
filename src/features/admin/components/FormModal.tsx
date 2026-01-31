@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
-import { useEffect, useState } from 'react';
+import { Editor } from "@tinymce/tinymce-react";
+import { useEffect, useRef, useState } from 'react';
 import { z, ZodError } from 'zod';
 import { BaseModal } from '@/components/ui/base-modal';
 import { ChevronDown } from 'lucide-react';
@@ -17,7 +18,7 @@ export interface SelectOption {
 export interface FormField {
   name: string;
   label: string;
-  type?: 'text' | 'textarea' | 'file' | 'select' | 'number' | 'email' | 'password' | 'date' | 'url';
+  type?: 'text' | 'textarea' | 'editor' | 'file' | 'select' | 'number' | 'email' | 'password' | 'date' | 'url';
   placeholder?: string;
   required?: boolean;
   disabled?: boolean;
@@ -48,6 +49,7 @@ type FileState = {
   uploading: boolean;
 };
 
+
 export function FormModal<TSchema extends z.ZodType<any, any, any>>({
   open,
   onOpenChange,
@@ -65,6 +67,7 @@ export function FormModal<TSchema extends z.ZodType<any, any, any>>({
   const [serverError, setServerError] = useState('');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const editorRefs = useRef<Record<string, any>>({}); // key = field.name
 
   const [fileState, setFileState] = useState<Record<string, FileState>>({});
 
@@ -117,6 +120,13 @@ export function FormModal<TSchema extends z.ZodType<any, any, any>>({
           dataToSubmit[key] = fileState[key].uploaded;
         }
       });
+
+      // TinyMCE
+      fields.filter(f => f.type === 'editor').forEach(f => {
+        const content = editorRefs.current[f.name]?.getContent() || '';
+        formData[f.name as keyof FormData] = content;
+      });
+
 
       const parsed = schema.parse(dataToSubmit);
       setLoading(true);
@@ -226,6 +236,25 @@ export function FormModal<TSchema extends z.ZodType<any, any, any>>({
         return <input type="password" className={classes} placeholder={field.placeholder || '••••••••'} value={value as string} onChange={e => handleChange(field.name, e.target.value)} disabled={field.disabled || loading} />;
       case 'url':
         return <input type="url" className={classes} placeholder={field.placeholder || 'https://'} value={value as string} onChange={e => handleChange(field.name, e.target.value)} disabled={field.disabled || loading} />;
+      case 'editor':
+        return (
+          <Editor
+            apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY || 'default-dev-key'}
+            onInit={(evt, editor) => (editorRefs.current[field.name] = editor)}
+            initialValue={formData[field.name as keyof FormData] as string || ''}
+            init={{
+              height: field.rows ? field.rows * 100 : 300,
+              menubar: false,
+              // plugins: [
+              //   'lists link image charmap anchor searchreplace visualblocks fullscreen insertdatetime media table help',
+              // ],
+              toolbar:
+                'undo redo | bold italic underline | alignleft aligncenter alignright | bullist numlist | link image | fullscreen help',
+              placeholder: field.placeholder || '',
+            }}
+          />
+        );
+
       default:
         return <input type="text" className={classes} placeholder={field.placeholder} value={value as string} onChange={e => handleChange(field.name, e.target.value)} disabled={field.disabled || loading} />;
     }
@@ -256,7 +285,7 @@ export function FormModal<TSchema extends z.ZodType<any, any, any>>({
                   {getErrorMessage(f.name) && <p className="mt-1 text-sm text-red-500">{getErrorMessage(f.name)}</p>}
                 </div>
               ))}
-              <div className="sticky bottom-0 bg-white pt-4">
+              <div className="bg-white pt-4">
                 <button type="submit" disabled={loading || Object.values(fileState).some(f => f.uploading)} className="px-8 py-2.5 bg-[#3385FF] w-full text-white rounded-lg font-medium hover:bg-[#2670E8] transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed">
                   {loading ? 'Menyimpan...' : Object.values(fileState).some(f => f.uploading) ? 'Tunggu upload selesai...' : submitLabel}
                 </button>
