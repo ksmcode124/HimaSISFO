@@ -15,6 +15,7 @@ import { AdminEventRow, AdminEventDetail, EventResponseAdmin } from '@/features/
 import { api } from '@/lib/services/api';
 import z from 'zod';
 import { eventFormFields } from '@/features/admin/components/forms/event-form-config';
+import { useMemo } from 'react';
 
 export default function EventPage() {
   const modal = useAdminModal();
@@ -71,6 +72,16 @@ export default function EventPage() {
     })
   );
 
+  const memoInitialData = useMemo(() => {
+    console.log(detail)
+    if (!detail) return {};
+    return {
+      ...detail,
+      tanggal_mulai: detail.tanggal_mulai ? new Date(detail.tanggal_mulai) : undefined,
+      tanggal_berakhir: detail.tanggal_berakhir ? new Date(detail.tanggal_berakhir) : undefined,
+    };
+  }, [detail]);
+
   // Delete
   const handleDelete = (id: number) => {
     confirm.confirm('delete', async () => {
@@ -120,7 +131,7 @@ export default function EventPage() {
         title="Edit Event"
         fields={eventFormFields}
         schema={updateEventSchema}
-        // initialData={detail ?? {}}
+        initialData={memoInitialData ?? {}}
         submitLabel="Update"
         onSubmit={async (data) => {
           if (!detail?.id) return;
