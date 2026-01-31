@@ -129,7 +129,6 @@ export default function Page() {
     <Graphics />
     <BehindTheWeb />
     <Spotify />
-    <Footer />
   </div>
 }
 
