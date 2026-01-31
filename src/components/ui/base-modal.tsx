@@ -1,5 +1,6 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { cn } from '@/lib/utils/cn';
+import { DialogDescription } from '@radix-ui/react-dialog';
 import { ReactNode } from 'react';
 
 interface BaseModalProps {
@@ -33,6 +34,9 @@ export function BaseModal({
       <DialogContent className={cn('bg-white rounded-lg shadow-lg w-full mx-2 sm:mx-auto', sizeClass, className)}>
           <DialogHeader hidden>
             <DialogTitle className="text-lg font-semibold" hidden>{title}</DialogTitle>
+            <DialogDescription>
+              Base Modal for Admin
+            </DialogDescription>
           </DialogHeader>
 
         <div className={cn('py-4', footer ? 'mb-4' : '')}>{children}</div>
