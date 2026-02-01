@@ -62,10 +62,10 @@ export async function EventCardSection() {
   const events = await getEvents();
   return (
     <section className="relative p-0 m-0 top-0">
-      <DecorationLayer className="top-1/4 pointer-events-none">
+      <DecorationLayer className="top-1/3 md:top-1/4 pointer-events-none">
         <EventCardDecoration />
       </DecorationLayer>
-      <ContentLayer className="px-3 pb-30 flex justify-center">
+      <ContentLayer className="px-3 pb-0 md:pb-30 flex justify-center">
         <EventCardContent events={events} />
       </ContentLayer>
     </section>

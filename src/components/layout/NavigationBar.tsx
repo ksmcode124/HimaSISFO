@@ -23,7 +23,7 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth <= 768)
+    const check = () => setIsMobile(window.innerWidth < 768)
     check()
     window.addEventListener('resize', check)
     return () => window.removeEventListener('resize', check)
@@ -32,18 +32,18 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
   return (
     <div className="flex w-full justify-center" aria-label="wrapper">
       <header
-        className={`fixed rounded-full justify-center items-center top-5 ${isMobile ? 'bg-transparent' : 'bg-[#101D2F]/50'} z-50 h-fit overflow-hidden ${className}`}
+        className={`fixed w-full mx-5 md:w-auto md:mx-0 lg:mx-50 rounded-full justify-center items-center top-5 ${isMobile ? 'bg-transparent' : 'bg-[#101D2F]/50'} z-50 h-fit overflow-hidden ${className}`}
         role="banner"
       >
 
         <Glass className="none md:block" preset='soft' disabled={isMobile}>
           <nav
-            className="py-2 px-5 md:px-20 max-w-[1120px] md:gap-50 flex w-full "
+            className="py-2 px-5 md:px-10 lg:px-20 flex w-full "
             aria-label="Main navigation"
           >
-            <div className="flex h-14 justify-center md:justify-between items-center  w-full gap-30 md:gap-40">
+            <div className="flex h-14 justify-center md:justify-between items-center w-full gap-30 md:gap-20 lg:gap-30">
               {/* Logo & Back Button*/}
-              <Link href="/" className={`flex items-center px-0 md:px-7 py-1 ${isMobile ? 'bg-transparent' : 'bg-[#AFAFAF]'} rounded-full gap-0 md:gap-5`} aria-label="Home">
+              <Link href="/" className={`flex items-center px-0 md:px-7 py-1 ${isMobile ? 'bg-transparent' : 'bg-[#AFAFAF]'} rounded-full gap-0 md:gap-3 lg:gap-5`} aria-label="Home">
                 <Glass className="p-1">
                   <Image
                     width={50}
@@ -84,8 +84,8 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
                 </ul>
               </div>
               {/* Mobile Menu Toggle */}
-              <button
-                type="button"
+              <Glass
+                // type="button"
                 onClick={handleToggle}
                 className={`w-fit lg:hidden ml-auto rounded-lg p-1 py-2 md:p-2 z-50 text-white ${pillStyle}`}
                 aria-label="Toggle menu"
@@ -106,24 +106,26 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
                   )}
                 </svg>
-              </button>
+              </Glass>
             </div>
           </nav>
         </Glass>
         {/* Mobile Navigation */}
         {isOpen && (
-          <aside className={`z-30 text-white rounded-l-[5em] h-screen fixed top-0 right-0 bg-neutral-200 backdrop-blur-md px-10 pt-20 transition-transform duration-500 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+          <aside className={`z-30 text-white h-screen fixed top-0 right-0 px-8 md:px-35 pt-20 transition-transform duration-500 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
             {/* TODO: add asset image here */}
-            <ul className='flex flex-col items-center border-b py-10 gap-y-8'>
+            <ul className='flex flex-col items-end py-10 gap-y-4'>
               {items.map((item) => {
                 return (
-                  <li key={item.href} className='shadow-[0_4px_10px_var(--color-neutral-400)] w-full text-center bg-neutral-200/50 text-sm border border-neutral-50/50 rounded-full p-2'>
-                    <Link
-                      onClick={handleClose}
-                      href={item.href} >
-                      {item.label}
-                    </Link>
-                  </li>
+                  <Glass key={item.href}>
+                    <li className='shadow-[0_4px_10px_var(--color-neutral-400)] w-full text-center rounded-full px-2 py-1'>
+                      <Link
+                        onClick={handleClose}
+                        href={item.href} >
+                        {item.label}
+                      </Link>
+                    </li>
+                  </Glass>
                 )
               })}
             </ul>

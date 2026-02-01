@@ -151,16 +151,14 @@ const eventsByDate = useMemo(() => {
 
                 {(() => {
                   if (dayEvents.length === 0) return null;
-
+                    console.log("dayEvents", dayEvents);
                   // EFEK TUMPUK (Buku) jika event > 3
                   if (dayEvents.length > 3) {
                     return (
                       <div className="relative w-full h-full mt-2">
                         {dayEvents.map((ev, i) => {
                           const isTopCard = i === dayEvents.length - 1;
-                          if (Number(toDateKey(ev.start).split("-").pop()) === day) {
-                            
-                            return (
+                          return (
                               <div
                                 key={`${ev.id}-${key}`}
                                 style={{ top: `${i * 4}px`, zIndex: i }}
@@ -168,9 +166,9 @@ const eventsByDate = useMemo(() => {
                                   "absolute left-0 right-0 h-[15px] md:h-[35px] rounded-[5px]",
                                   "flex items-center justify-center shadow-lg border border-white/20",
                                   "-translate-y-[2px] transition-all cursor-pointer hover:z-[99] hover:-translate-y-2",
-                                  ev.type === "Hima" && "bg-gradient-to-r from-[#1B3C53] to-[#456882]",
-                                  ev.type === "Beasiswa" && "bg-gradient-to-r from-[#7F1D1D] to-[#DC2626]",
-                                  ev.type === "Lomba" && "bg-gradient-to-r from-[#CA8A04] to-[#EAB308]"
+                                  ev.type === "Hima" ? "bg-gradient-to-r from-[#1B3C53] to-[#456882]" :
+                                  ev.type === "Beasiswa" ? "bg-gradient-to-r from-[#7F1D1D] to-[#DC2626]" :
+                                  ev.type === "Lomba" ? "bg-gradient-to-r from-[#CA8A04] to-[#EAB308]" : ""
                                 )}
                                 onClick={() => { setModalState({ mode: "multiple", events: dayEvents });; setOpen(true); }}
                               >
@@ -179,8 +177,6 @@ const eventsByDate = useMemo(() => {
                                 )}
                               </div>
                             );
-                          }
-
                         })}
                       </div>
                     );

@@ -35,7 +35,7 @@ function CalendarDecoration() {
 
 function CalendarContent({ events }: { events: EventCardProps[] }) {
   return (
-    <div className="relative flex flex-col gap-5 max-w-[870px]">
+    <div className="relative flex flex-col gap-5 md:w-[600px] lg:w-[870px]">
       <h1 className="py-5 md:py-4 md:py-10 text-center font-bold text-xl md:text-4xl xl:text-6xl text-[var(--color-nile-blue)]">
         Kegiatan
       </h1>

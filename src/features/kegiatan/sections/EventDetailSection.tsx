@@ -19,12 +19,12 @@ const newBreadcrumbItems = [
 
 function AwanOverlay() {
   return (
-    <div className="relative w-full flex flex-col justify-between mt-20 border-2 border-accent pointer-events-none">
-      <div className="mx-auto w-[1100px] h-6/10flex w-full justify-end ">
-        <div className="translate-x-1/2  w-[120px] md:w-[347.93px] h-[100px] md:h-[282.38px] bg-[url('/assets/kegiatan/Awan-2.webp')] bg-contain bg-center bg-no-repeat" />
+    <div className="relative w-[850px] lg:w-[1120px] flex flex-col justify-between pointer-events-none">
+      <div className="mx-auto flex w-full justify-end ">
+        <div className="translate-x-1/2 w-[120px] md:w-[347.93px] aspect-[3/2] bg-[url('/assets/kegiatan/Awan-2.webp')] bg-contain bg-center bg-no-repeat" />
       </div>
-      <div className="flex w-full justify-start ">
-        <div className="-translate-x-1/2  w-[120px] md:w-[500px] h-[100px] md:h-[300px] bg-[url('/assets/kegiatan/Awan.webp')] bg-contain bg-center bg-no-repeat" />
+      <div className="flex w-full justify-start">
+        <div className="-translate-x-1/2 w-[120px] md:w-[500px] aspect-[3/2] bg-[url('/assets/kegiatan/Awan.webp')] bg-contain bg-center bg-no-repeat" />
       </div>
     </div>
   )
@@ -32,9 +32,12 @@ function AwanOverlay() {
 
 function EventDetailContent({ events }: { events: EventCardProps }) {
   return (
-    <div className="relative justify-center items-center w-[1120px]">
+    <div className="relative justify-center items-center w-[850px] lg:w-[1120px]">
       <BreadcrumbSection items={newBreadcrumbItems} />
       <div className="relative mx-4 md:mx-0 mt-5 flex flex-col gap-10 md:gap-20 xl:gap-30 text-[var(--color-dark-blue)]">
+        <OverlayLayer className="inset-0 w-full -translate-y-1/7 aspect-[3/2] flex justify-center pointer-events-none">
+          <AwanOverlay />
+        </OverlayLayer>
         <Image
           src={`/assets/kegiatan/${events.img}`}
           alt="detail event"
@@ -42,6 +45,7 @@ function EventDetailContent({ events }: { events: EventCardProps }) {
           width={1600}
           height={1200}
         />
+
         <div className="flex flex-col gap-6 md:gap-8 xl:gap-12">
           <h1 className="text-xl md:text-3xl xl:text-6xl font-bold">
             {events.title}
@@ -69,12 +73,9 @@ export async function EventDetailSection({ id }: { id: string }) {
         <CalendarLeftDecoration className="absolute" />
         <CalendarRightDecoration className="absolute  " />
       </DecorationLayer>
-      <ContentLayer className="px-5 flex justify-center">
+      <ContentLayer className="px-5 md:px-20 flex justify-center">
         <EventDetailContent events={FindEventDetail} />
       </ContentLayer>
-      <OverlayLayer className="inset-0 h-full flex justify-center translate-y-5">
-        <AwanOverlay></AwanOverlay>
-      </OverlayLayer>
     </section>
   )
 }

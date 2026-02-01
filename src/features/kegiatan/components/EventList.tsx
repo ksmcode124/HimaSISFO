@@ -30,8 +30,8 @@ export function EventList({ events }: { events: EventCardProps[] }) {
     const goNext = () => setCurrentPage((p) => Math.min(p + 1, totalPages))
 
     return (
-        <div className="py-5 md:py-10">
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-10 mb-5 md:mb-10 ">
+        <div className="py-5 md:py-10 px-5">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-10 mb-5 md:mb-10">
                 {visibleEvents.map((event) => (
                     <EventCard
                         key={event.id}
