@@ -83,7 +83,7 @@ export default function ProkerPage() {
         breadcrumbs={[
           { label: 'Kabinet', href: '/admin/kabinet' },
           { label: nama_kabinet, href: `/admin/kabinet/${slug_kabinet}` },
-          { label: nama_departemen, href: `/admin/kabinet/${slug_kabinet}/${slug_departemen}` },
+          { label: nama_departemen, href: `/admin/kabinet/${slug_kabinet}/` },
           { label: 'Proker', href: `/admin/kabinet/${slug_kabinet}/${slug_departemen}/proker` }
         ]}
         title="Proker"
