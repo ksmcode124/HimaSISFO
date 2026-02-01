@@ -23,12 +23,13 @@ function EventListContent({ events }: { events: EventCardProps[] }) {
             Agenda
           </h1>
         </div>
-        <div className="flex flex-row justify-between items-center pt-3 md:pt-5">
+        <div className="flex w-full px-5 flex-row justify-between items-center pt-3 md:pt-5">
           <FilterComp className="text-[14px] md:text-xl" type="list" selected="none" />
           <span className="text-[12px] md:text-xl px-2 md:px-3 py-1 md:py-2 bg-gradient-to-b from-[#F0F4F8] to-[#E6EEF5] rounded-full">{events.length} Acara</span>
         </div>
+        <EventList events={events} />
       </div>
-      <EventList events={events} />
+      
     </div>
   );
 }
@@ -41,7 +42,7 @@ export async function EventListSection({ filter }: { filter?: string }) {
 
   return (
     <section className="relative p-0 m-0 top-0 h-fit overflow-hidden">
-      <DecorationLayer className="w-full mt-70 md:mt-140 h-full">
+      <DecorationLayer>
         <DecorationRepeater />
       </DecorationLayer>
       <ContentLayer className="flex justify-center">

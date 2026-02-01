@@ -230,7 +230,7 @@ export const EVENTS: EventCardProps[] = [
     id: 26,
     title: "Workshop 4",
     start: new Date("2026-02-03T10:30:00.000Z"),
-    end: new Date("2026-02-02T12:30:00.000Z"),
+    end: new Date("2026-02-09T12:30:00.000Z"),
     img: "contohtengah.png",
     description: "Learn the latest features of Science in this hands-on workshop.",
     type: "Hima",
@@ -239,10 +239,28 @@ export const EVENTS: EventCardProps[] = [
     id: 27,
     title: "Workshop 6",
     start: new Date("2026-02-03T10:30:00.000Z"),
-    end: new Date("2026-02-02T12:30:00.000Z"),
+    end: new Date("2026-02-09T12:30:00.000Z"),
     img: "contohtengah.png",
     description: "Learn the latest features of Science in this hands-on workshop.",
     type: "Hima",
+  },
+  {
+    id: 28,
+    title: "Workshop 6",
+    start: new Date("2026-02-03T10:30:00.000Z"),
+    end: new Date("2026-02-07T12:30:00.000Z"),
+    img: "contohtengah.png",
+    description: "Learn the latest features of Science in this hands-on workshop.",
+    type: "Beasiswa",
+  },
+  {
+    id: 29,
+    title: "Workshop 6",
+    start: new Date("2026-02-03T10:30:00.000Z"),
+    end: new Date("2026-02-08T12:30:00.000Z"),
+    img: "contohtengah.png",
+    description: "Learn the latest features of Science in this hands-on workshop.",
+    type: "Beasiswa",
   }
 
 ];

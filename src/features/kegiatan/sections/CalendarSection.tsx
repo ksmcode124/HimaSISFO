@@ -35,12 +35,12 @@ function CalendarDecoration() {
 
 function CalendarContent({ events }: { events: EventCardProps[] }) {
   return (
-    <div className="relative flex flex-col gap-5 md:w-[600px] lg:w-[870px]">
+    <div className="relative flex flex-col gap-5 w-full md:w-[600px] lg:w-[870px]">
       <h1 className="py-5 md:py-4 md:py-10 text-center font-bold text-xl md:text-4xl xl:text-6xl text-[var(--color-nile-blue)]">
         Kegiatan
       </h1>
-      <DynamicCalendar className="border-[#456882] border-6" events={events} />
-      <div className="mx-2 md:mx-0 flex flex-col gap-[16px] px-3 md:px-5 py-3 border-2 border-[var(--color-dark-blue)] rounded-[10px] bg-white">
+      <DynamicCalendar className="border-[#456882] border-6 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]" events={events} />
+      <div className="mx-2 md:mx-0 flex flex-col gap-[16px] px-3 md:px-5 py-3 border-2 border-[var(--color-dark-blue)] rounded-[10px] bg-white shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]">
         <h2 className="font-bold text-[18px] text-[var(--color-dark-blue)]">Keterangan</h2>
         <div className="flex flex-row gap-3 md:gap-6 items-center md:items-start justify-center md:justify-start">
           <div className="flex flex-row gap-2 md:gap-4 items-center">

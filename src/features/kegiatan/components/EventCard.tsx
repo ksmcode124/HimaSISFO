@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useGetCountdown } from "../hooks/useCountDown";
 import { Modal } from "../components/PopUp";
 import Image from "next/image";
+import { set } from "zod";
 
 const eventCard = cva("overflow-hidden transition hover:shadow-md", {
   variants: {
@@ -27,12 +28,14 @@ export const EventCard = (props: WithVariantEventCardProps) => {
   const { id, title, img, start, end, description, variant = "detail", actions, onMouseEnter, onMouseLeave } = props;
   const countDown = useGetCountdown(start);
   const [open, setOpen] = useState(false);
+  const [isNews, setIsNews] = useState(false);
+  description === null ? setIsNews(true) : setIsNews(false);
   // console.log('title:', title, 'start:', start, 'end:', end);
   return (
     <div
       key={id}
       className={cn(
-        "relative rounded-md md:rounded-3xl h-full overflow-hidden mask-clip-content text-[var(--color-dark-blue)] transition-all ease-in-out",
+        "relative rounded-md md:rounded-3xl h-full overflow-hidden mask-clip-content text-[var(--color-dark-blue)] transition-all ease-in-out shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]",
         variant === "detail" ? "border-gradient-x" : "border-gradient-y"
       )}
       onMouseEnter={onMouseEnter}
@@ -94,6 +97,9 @@ export const EventCard = (props: WithVariantEventCardProps) => {
                 Detail <ArrowRight />
               </Button>
 
+            )}
+            {isNews && (
+              <Button onClick={() => setOpen(true)}>Tutup Berita</Button>
             )}
           <Modal open={open} onClose={() => setOpen(false)} event={props} type="event" mode="single" />
         </div>

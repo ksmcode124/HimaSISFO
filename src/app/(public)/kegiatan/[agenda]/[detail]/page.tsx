@@ -8,17 +8,18 @@ export default async function Page({ params }: { params: Promise<{ detail: strin
     const { detail } = await params;
     return (
         <>
-            <div className="relative flex-col items-start mt-28">
+            <BackgroundLayer className="w-full h-screen">
                 <div className="w-full overflow-hidden">
-                    <CalendarLeftDecoration className="absolute h-fit top-15 opacity-25" />
-                    <CalendarRightDecoration className="absolute h-fit top-15 opacity-25" />
+                    <CalendarLeftDecoration className="absolute h-fit top-1/100 opacity-25" />
+                    <CalendarRightDecoration className="absolute h-fit top-1/100 opacity-25" />
                 </div>
-                <BackgroundLayer>
-                    <RoundedBg align="start" />
-                    <RoundedBg align="end" />
-                </BackgroundLayer>
+                <RoundedBg align="start" />
+                <RoundedBg align="end" />
+            </BackgroundLayer>
+            <div className="relative flex-col items-start mt-28">
                 <EventDetailSection id={detail} />
             </div>
         </>
+
     )
 }

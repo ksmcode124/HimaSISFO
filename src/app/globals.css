@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@plugin "tailwindcss-animate";
+/* @plugin "tailwindcss-animate"; */
 @import "tw-animate-css";
 
 @theme {
@@ -168,7 +168,7 @@
     position: relative;
     border-radius: 1rem;
     overflow: hidden;
-    border: solid transparent;
+    border: 0px solid transparent;
     background-clip: padding-box, border-box;
   }
 

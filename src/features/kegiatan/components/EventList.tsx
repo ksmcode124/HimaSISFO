@@ -46,7 +46,7 @@ export function EventList({ events }: { events: EventCardProps[] }) {
                     />
                 ))}
                 {visibleEvents.length === 0 && (
-                    <div className="col-span-2 md:col-span-3 flex flex-col items-center justify-center gap-10 text-center h-[400px] md:h-[600px] ">
+                    <div className="bg-[#FFFFFF] col-span-2 md:col-span-3 flex flex-col items-center justify-center gap-10 px-10 rounded-xl md:rounded-4xl text-center h-[400px] md:h-[600px] ">
                         <div className="w-full flex justify-center items-center">
                             <svg
                                 width="162"
