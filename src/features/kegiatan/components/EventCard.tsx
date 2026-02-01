@@ -29,7 +29,7 @@ export const EventCard = (props: WithVariantEventCardProps) => {
   const countDown = useGetCountdown(start);
   const [open, setOpen] = useState(false);
   const [isNews, setIsNews] = useState(false);
-  description === null ? setIsNews(true) : setIsNews(false);
+  // description === null ? setIsNews(true) : setIsNews(false);
   // console.log('title:', title, 'start:', start, 'end:', end);
   return (
     <div
@@ -98,9 +98,9 @@ export const EventCard = (props: WithVariantEventCardProps) => {
               </Button>
 
             )}
-            {isNews && (
+            {/* {isNews && (
               <Button onClick={() => setOpen(true)}>Tutup Berita</Button>
-            )}
+            )} */}
           <Modal open={open} onClose={() => setOpen(false)} event={props} type="event" mode="single" />
         </div>
       </div>
