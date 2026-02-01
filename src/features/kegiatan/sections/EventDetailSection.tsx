@@ -1,19 +1,21 @@
 
 import { getEvents } from "../services/eventService";
-import { ContentLayer } from "@/components/layout/Layer";
+import { ContentLayer, DecorationLayer } from "@/components/layout/Layer";
 import { createEventIndexByNameDate } from "../utils/EventIndexer";
 import { findEventById } from "../utils/FindEvent";
 import { EventCardProps } from "../types"
 import Image from "next/image";
-import { breadcrumbItems } from "../data/routedata.json";
+import  breadcrumbItems  from "../data/routedata.json";
 import BreadcrumbSection from "./BreadcrumbSection";
- const newBreadcrumbItems = [
-    ...breadcrumbItems,
-    {
-      display: "Berita",
-      link: `/kegiatan/agenda/detail`
-    }
-  ]
+import { CalendarRightDecoration } from "../../../../public/assets/kegiatan/decoration/CalendarRight";
+import { CalendarLeftDecoration } from "../../../../public/assets/kegiatan/decoration/CalendarLeft";
+const newBreadcrumbItems = [
+  ...breadcrumbItems.breadcrumbItems,
+  {
+    display: "Berita",
+    link: `/kegiatan/agenda/detail`
+  }
+]
 
 function EventDetailContent({ events }: { events: EventCardProps }) {
 
@@ -51,6 +53,10 @@ export async function EventDetailSection({ id }: { id: string }) {
 
   return (
     <section className="relative p-0 m-0 top-0">
+      <DecorationLayer className="w-full overflow-hidden">
+        <CalendarLeftDecoration className="absolute" />
+        <CalendarRightDecoration className="absolute  " />
+      </DecorationLayer>
       <ContentLayer className="mx-5 md:mx-10 xl:mx-30">
         <EventDetailContent events={FindEventDetail} />
       </ContentLayer>

@@ -11,7 +11,6 @@ export function getEventSegment(
   const start = stripTime(eventStart);
   const end = stripTime(eventEnd);
   const current = stripTime(currentDay);
-
   if (current < start || current > end) return null;
 
   if (start.getTime() === end.getTime()) return "single";

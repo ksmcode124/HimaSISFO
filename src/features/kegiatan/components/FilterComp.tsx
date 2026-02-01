@@ -77,9 +77,9 @@ export function FilterComp({ className, type, selected, onChange }: { className?
           <span className={clsx(className, "truncate")}>{selectedBulan ? selectedBulan : "Filter"}</span>
         </div>
       ) : type === "calendar" ? (
-        <div className="flex items-center justify-center gap-2 md:gap-4 w-full cursor-pointer"
+        <div className="flex items-center justify-center gap-2 md:gap-4 w-full cursor-pointer h-full"
           onClick={() => setActive(!active)}>
-          <span className={clsx(className, "text-center")}>{selected ? selected : "Filter"}</span>
+          <span className={clsx(className, "text-center text-sm md:text-[24px]")}>{selected ? selected : "Filter"}</span>
         </div>
       ) : null}
 
@@ -99,8 +99,7 @@ export function FilterComp({ className, type, selected, onChange }: { className?
                   Tahun
                 </div>
                 <div className="flex flex-row w-full justify-between border-2 border-[var(--color-dark-blue)] bg-[var(--color-porcelain)] rounded-[4px] items-center py-2 px-4" onClick={() => {
-                  setOpen(true);
-                  open ? setOpen(false) : setOpen(true);
+                  setOpen(!open);
                 }}>
                   {selectedYear}
                   {open ? <ChevronUp /> : <ChevronDown />}

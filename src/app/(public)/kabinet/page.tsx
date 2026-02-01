@@ -1,24 +1,29 @@
 import { redirect } from "next/navigation";
 import kabinetDataRaw from "@/features/kabinet/data/kabinet.json";
-import { KabinetDataJSON } from "@/features/kabinet/types";
+import { KabinetResponse } from "@/features/kabinet/types";
 
-const data = kabinetDataRaw as unknown as KabinetDataJSON;
+const data = kabinetDataRaw as unknown as KabinetResponse;
 
 export default function KabinetPage() {
   /**
-   * Page ini secara otomatis mengarahkan user ke kabinet dengan kepengurusan terbaru.
-   * ASUMSI: Kabinet terbaru selalu berada pada indeks pertama ([0]) di kabinet_list.
+   * Page ini secara otomatis mengarahkan user ke kabinet dengan tahun kepengurusan terbaru.
    */
 
-  const terbaru = data.kabinet_list[0];
+  const list = data.kabinetList || [];
+
+  const terbaru = [...list].sort((a, b) => {
+    const tahunA = parseInt(a.tahun_kerja.split("/")[0]);
+    const tahunB = parseInt(b.tahun_kerja.split("/")[0]);
+    return tahunB - tahunA;
+  })[0];
 
   if (terbaru) {
-    redirect(`/kabinet/${terbaru.id}`);
+    redirect(`/kabinet/${terbaru.id_kabinet}`);
   }
 
   return (
-    <div className="p-20 text-center">
-      <h1 className="text-xl font-bold">Kabinet Tidak Ditemukan</h1>
+    <div className="flex min-h-[60vh] items-center justify-center">
+      <h1>Kabinet Tidak Ditemukan.</h1>
     </div>
   );
 }
