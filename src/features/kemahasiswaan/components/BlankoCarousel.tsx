@@ -5,69 +5,60 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
   CarouselIndicators,
   type CarouselApi,
   useCarousel,
+  CarouselPrevious,
+  CarouselNext,
 } from "@/components/ui/carousel"
 
-import { BlankoItem } from "../types"
+import { BlankoItem } from "../types/ui"
 import Link from "next/link"
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils/cn"
 import { Download } from "lucide-react"
 import { useCarouselSync } from "../hooks/useCarouselSync"
+import { motion } from "framer-motion"
+import { Button } from "@/components/ui/button"
 
 interface BlankoCarouselProps {
   blankoItems: BlankoItem[]
 }
 
-export default function BlankoCarousel({ blankoItems }: BlankoCarouselProps) {
+export function BlankoCarousel({ blankoItems }: BlankoCarouselProps) {
   const [api, setApi] = useState<CarouselApi | null>(null)
   const selectedIndex = useCarouselSync(api, blankoItems)
-
-  // function untuk menentukan styling carousel item berdasarkan posisi
-  const getItemStyle = (index: number) => {
-    const diff = index - selectedIndex
-    const isActive = diff === 0
-    const isNeighbor = Math.abs(diff) === 1
-
-    return cn(
-      "basis-full h-100 z-20 transition-all duration-300",
-      isActive && "sm:basis-1/3 z-30",
-      isNeighbor && "scale-[0.8] sm:basis-1/3 z-20",
-      !isActive && !isNeighbor && "scale-[0.6] sm:basis-1/3 z-10"
-    )
-  }
+  const scrollTo = (index: number) => api?.scrollTo(index)
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full max-w-7xl mx-auto py-8">
       <Carousel
         setApi={setApi}
         opts={{ align: "center", containScroll: "trimSnaps" }}
-        className="w-full"
+        className="w-full flex items-center overflow-visible"
       >
-        {/* Navigation arrows */}
-        <CarouselPrevious className="absolute h-15 w-15 left-0 sm:-left-12 lg:-left-16 top-1/2 -translate-y-1/2 z-30 rounded-full" />
-        <CarouselNext className="absolute h-15 w-15 right-0 sm:-right-12 lg:-right-16 top-1/2 -translate-y-1/2 z-30 rounded-full" />
-
-        <CarouselContent>
+        <CarouselPrevious className="z-20 opacity-60 flex items-center justify-center" />
+        <CarouselContent className="flex-1">
           <CarouselSpacer />
 
           {blankoItems.map((card, index) => (
-            <BlankoCardItem key={card.id} card={card} className={getItemStyle(index)} />
+            <BlankoCardItem
+              key={card.id}
+              card={card}
+              index={index}
+              selectedIndex={selectedIndex}
+            />
           ))}
 
           <CarouselSpacer />
         </CarouselContent>
+        <CarouselNext className="z-20 opacity-60 flex items-center justify-center" />
       </Carousel>
 
-      {/* Indicators */}
       {api && (
         <CarouselIndicators
           count={blankoItems.length}
           selectedIndex={selectedIndex}
-          onSelect={(index) => api.scrollTo(index)}
+          onSelect={scrollTo}
         />
       )}
     </div>
@@ -75,28 +66,79 @@ export default function BlankoCarousel({ blankoItems }: BlankoCarouselProps) {
 }
 
 /** --- Internal Components --- */
-function BlankoCardItem({ card, className }: { card: BlankoItem; className: string }) {
+function BlankoCardItem({
+  card,
+  index,
+  selectedIndex,
+}: {
+  card: BlankoItem
+  index: number
+  selectedIndex: number
+}) {
+  const isGoogleDocs = card.filepath.startsWith(
+    "https://docs.google.com/"
+  )
+
+  const diff = index - selectedIndex
+  const isActive = diff === 0
+  const isNeighbor = Math.abs(diff) === 1
+
+  const scale = isActive ? 1 : isNeighbor ? 0.85 : 0.7
+  const opacity = isActive ? 1 : isNeighbor ? 0.9 : 0.6
+  const zIndex = isActive ? 30 : isNeighbor ? 20 : 10
+
   return (
-    <CarouselItem className={className}>
-      <div className="h-full px-3 sm:px-1">
+    <CarouselItem className="h-110 basis-full sm:basis-full lg:basis-1/3">
+      <motion.div
+        layout
+        animate={{ scale, opacity, zIndex }}
+        transition={{ type: "spring", stiffness: 200, damping: 24, mass: 0.8 }}
+        className="h-full px-2"
+      >
         <Card
           style={{ backgroundImage: `url(${card.image})` }}
-          className="h-full flex flex-col bg-cover bg-center bg-no-repeat transition-transform duration-300 will-change-transform"
+          className="relative h-full flex flex-col bg-cover bg-center bg-no-repeat rounded-xl"
         >
-          <CardContent className="flex flex-col flex-1 p-4 lg:p-6 justify-end text-center">
-            <p className="font-semibold text-sm lg:text-md">{card.title}</p>
+          {/* Gradient overlay */}
+          <div
+            className="absolute inset-0 rounded-xl pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 80%",
+            }}
+          />
+          <CardContent className="flex flex-col flex-1 p-4 z-10 justify-end text-center">
+            <motion.p
+              key={card.id + "-title"}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="font-semibold text-3xs sm:text-xs md:text-sm lg:text-xl 2xl:text-xl text-white"
+            >
+              {card.title}
+            </motion.p>
           </CardContent>
 
-          <CardAction className="pb-4 w-full grid justify-items-center">
-            <Link
-              href={`${card.filepath}/export?format=docx`}
-              className="text-xs flex gap-2 items-center rounded-full border px-4 py-2 bg-linear-to-t from-[#456882] to-[#1B3C53] text-white"
+          <CardAction className="pb-4 w-full grid z-10 justify-items-center">
+            <motion.div
+              key={card.id + "-action"}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
+              className="w-full flex items-center justify-center"
             >
-              Unduh <Download size={14} />
-            </Link>
+              <Button variant={"hima"} asChild>
+                <Link
+                  href={isGoogleDocs ? `${card.filepath}/export?format=docx` : "#"}
+                  className="flex gap-2 min-w-[70%] items-center text-xs lg:text-sm px-3.5 py-1 sm:px-6 sm:py-1.5 md:px-8.5 md:py-2 lg:px-11 lg:py-4 2xl:px-11 2xl:py-5" 
+                  >
+                  Unduh <Download size={14} />
+                </Link>
+              </Button>
+            </motion.div>
           </CardAction>
         </Card>
-      </div>
+      </motion.div>
     </CarouselItem>
   )
 }
@@ -109,8 +151,8 @@ function CarouselSpacer() {
       aria-hidden
       data-embla-ignore
       className={cn(
-        "block min-w-0 shrink-0 grow-0 sm:basis-1/3 z-10",
-        orientation === "horizontal" ? "pl-0 sm:pl-4" : "pt-4",
+        "block min-w-0 shrink-0 grow-0 sm:basis-full md:basis-1/3 z-10",
+        orientation === "horizontal" ? "pl-0 sm:pl-2 md:pl-4" : "pt-4"
       )}
     />
   )

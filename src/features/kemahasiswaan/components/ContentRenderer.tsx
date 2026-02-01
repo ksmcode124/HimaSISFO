@@ -1,15 +1,17 @@
 // ContentRenderer.tsx
 import React from "react"
 import { ListRenderer } from "./ListRenderer"
-import { ContentBlock } from "../types"
+import { ContentBlock } from "../types/content"
+import { cn } from "@/lib/utils/cn"
 
 interface ContentRendererProps {
   content: ContentBlock[]
+  className?: string
 }
 
-export default function ContentRenderer({ content }: ContentRendererProps) {
+export function ContentRenderer({ content, className }: ContentRendererProps) {
   return (
-    <div className="space-y-4">
+    <div className={cn("w-full h-[95%]", className)}>
       {content.map((block, index) => {
         switch (block.type) {
           case "list":

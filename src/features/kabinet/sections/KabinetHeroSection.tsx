@@ -1,29 +1,49 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import kabinetDataRaw from "../data/kabinet.json";
+import React, { useState, useEffect, useMemo } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import { Glass } from "@/components/ui/Glass";
 import { Button } from "@/components/ui/button";
 import { Pita, Ornament2 } from "../components/KabinetOrnaments";
 import PhotoSlideshowMobile from "../components/PhotoSlideshowMobile";
-import { KabinetDataJSON, Kabinet } from "../types";
-import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
-import Image from "next/image";
+import { Kabinet, KabinetListItem } from "../types";
+import { cn } from "@/lib/utils";
 
-const data = kabinetDataRaw as unknown as KabinetDataJSON;
+interface KabinetHeroSectionProps {
+  currentKabinet: Kabinet;
+  kabinetList: KabinetListItem[];
+}
 
 export default function KabinetHeroSection({
   currentKabinet,
-}: {
-  currentKabinet: Kabinet;
-}) {
+  kabinetList,
+}: KabinetHeroSectionProps) {
   const router = useRouter();
-  const allKabinet = data.kabinet_list;
-
-  // Slideshow
+  const images = currentKabinet?.foto_kabinet || [];
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
-  const images = currentKabinet?.image_url || [];
 
+  const navigation = useMemo(() => {
+    if (!currentKabinet || !kabinetList) return null;
+
+    const sorted = [...kabinetList].sort(
+      (a, b) =>
+        parseInt(a.tahun_kerja.split("/")[0]) -
+        parseInt(b.tahun_kerja.split("/")[0]),
+    );
+
+    const currentIndex = sorted.findIndex(
+      (k) => Number(k.id_kabinet) === Number(currentKabinet.id),
+    );
+
+    const prev = sorted[currentIndex - 1];
+    const next = sorted[currentIndex + 1];
+
+    return { prev, next };
+  }, [currentKabinet, kabinetList]);
+
+  // SLIDESHOW TIMER
   useEffect(() => {
     if (images.length <= 1) return;
     const timer = setInterval(() => {
@@ -31,132 +51,78 @@ export default function KabinetHeroSection({
     }, 5000);
     return () => clearInterval(timer);
   }, [images.length]);
-  //
 
   if (!currentKabinet) return null;
 
-  // YearButton (tahun kepengurusan)
-  const getRelativeYear = (currentYear: string, offset: number) => {
-    const years = currentYear.split("/");
-    return `${parseInt(years[0]) + offset}/${parseInt(years[1]) + offset}`;
+  // HELPER FOR LABELS
+  const getYearLabel = (
+    targetKabinet: KabinetListItem | undefined,
+    offset: number,
+  ) => {
+    return (
+      targetKabinet?.tahun_kerja ||
+      getOffsetYear(currentKabinet.tahun_kerja, offset)
+    );
   };
 
-  const prevYearLabel = getRelativeYear(currentKabinet.tahun_akademik, -1);
-  const nextYearLabel = getRelativeYear(currentKabinet.tahun_akademik, 1);
-
-  const prevKabinet = allKabinet.find(
-    (k) => k.tahun_akademik === prevYearLabel
-  );
-  const nextKabinet = allKabinet.find(
-    (k) => k.tahun_akademik === nextYearLabel
-  );
-
   return (
-    <div
-      className="relative w-full"
-      style={
-        {
-          ["--primary-color" as string]: currentKabinet.colors.primary,
-          ["--secondary-color" as string]: currentKabinet.colors.secondary,
-          ["--bg-kabinet" as string]: currentKabinet.colors.background,
-        } as React.CSSProperties
-      }
-    >
-      <section className="relative w-full h-[700px] flex flex-col items-center justify-center bg-pink-100 text-white overflow-hidden">
-        {/* Background Desktop */}
-        <div className="absolute inset-0 hidden md:block z-0">
-          {images.map((src: string, index: number) => (
-            <motion.div
-              key={`${src}-${index}`}
-              initial={false}
-              animate={{ opacity: index === currentImgIndex ? 1 : 0 }}
-              transition={{ duration: 1.2 }}
-              className="absolute inset-0"
-              style={{ zIndex: index === currentImgIndex ? 10 : 0 }}
-            >
-              <Image
-                src={src}
-                alt="Foto Kabinet"
-                fill
-                className="object-cover"
-                priority={index === 0}
-                sizes="100vw"
+    <div className="relative w-full">
+      <section className="relative w-full min-h-[60vh] md:min-h-screen lg:min-h-[130vh] xl:min-h-[110vh] 2xl:min-h-screen flex flex-col items-center justify-center text-white bg-[#F4E8FF] overflow-hidden">
+        <DesktopBackground images={images} activeIndex={currentImgIndex} />
+        <MobileBackground />
+
+        <div className="absolute top-30 sm:top-32 md:top-30 z-20 w-full flex justify-center items-start">
+          <div className="relative flex items-start justify-center gap-4 sm:gap-10 md:gap-16 lg:gap-24">
+            <div className="flex flex-col items-center relative">
+              <YearButton
+                label={getYearLabel(navigation?.prev, -1)}
+                onClick={() =>
+                  navigation?.prev &&
+                  router.push(`/kabinet/${navigation.prev.id_kabinet}`)
+                }
+                disabled={!navigation?.prev}
               />
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Background Mobile */}
-        <div className="absolute inset-0 md:hidden">
-          <Image
-            src="/assets/kabinet/hero-bg.webp"
-            alt="Background"
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
-
-        <div className="absolute top-15 md:top-20 md:left-0 z-10  md:w-full flex justify-between items-center lg:px-60">
-          <YearButton
-            label={prevYearLabel}
-            onClick={() => {
-              if (prevKabinet) router.push(`/kabinet/${prevKabinet.id}`);
-              else router.push("/kabinet/aksayapatra"); // Fallback ke kabinet lalu
-            }}
-            className="mt-5 md:mt-0 mr-6"
-          />
-
-          {/* Logo Kabinet */}
-          <div className=" relative w-15 h-15 mt-15 md:mt-0 md:w-40 md:h-40 flex items-center justify-center ">
-            <Image
-              src={currentKabinet.logo_url}
-              alt="Logo Kabinet"
-              fill
-              className="object-contain -mt-2 md:mt-6 rounded-full border md:border-2 border-white/50 bg-white/20 backdrop-blur-xs drop-shadow-[5px_5px_2px_rgba(0,0,0,0.4)]"
+              <OrnamentWrapper position="left" />
+            </div>
+            <KabinetLogo
+              src={
+                currentKabinet.logo ||
+                "/assets/shared/logos/logo-himasisfo.webp"
+              }
             />
-          </div>
-          <YearButton
-            label={nextYearLabel}
-            onClick={() => {
-              if (nextKabinet) router.push(`/kabinet/${nextKabinet.id}`);
-              else router.push("/kabinet/coming-soon");
-            }}
-            className="mt-5 md:mt-0 ml-6"
-          />
-        </div>
-
-        <div className="absolute inset-0 flex justify-center items-center mb-[360px] md:mb-50">
-          <div className="grid grid-cols-2 w-full max-w-[1200px] drop-shadow-[5px_5px_2px_rgba(0,0,0,0.3)]">
-            <div className="flex justify-start -scale-x-100">
-              <Ornament2 />
-            </div>
-            <div className="flex justify-start">
-              <Ornament2 />
+            <div className="flex flex-col items-center relative">
+              <YearButton
+                label={getYearLabel(navigation?.next, 1)}
+                onClick={() => {
+                  if (navigation?.next) {
+                    router.push(`/kabinet/${navigation.next.id_kabinet}`);
+                  } else {
+                    router.push("/kabinet/coming-soon");
+                  }
+                }}
+              />
+              <OrnamentWrapper position="right" />
             </div>
           </div>
         </div>
 
-        <div className="relative z-10 flex flex-col items-center text-center mt-35 md:mt-80">
-          <div className="drop-shadow-[5px_5px_2px_rgba(0,0,0,0.3)] md:mb-0 md:mt-4">
-            <div className="text-2xl md:text-7xl font-bold leading-15 md:leading-relaxed">
+        <div className="grow" />
+        <div className="relative z-10 flex flex-col items-center text-center mt-55 md:mt-80">
+          <div className="drop-shadow-[5px_5px_2px_rgba(0,0,0,0.3)] md:mb-10 lg:mb-44 xl:mb-10 2xl:mb-52 md:mt-4">
+            <div className="text-xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-8xl font-bold leading-15 md:leading-relaxed">
               <h1>SELAMAT DATANG DI</h1>
-              <h2>HIMASISFO {currentKabinet.tahun_akademik}</h2>
+              <h2>HIMASISFO {currentKabinet.tahun_kerja}</h2>
             </div>
-            <h3
-              className="text-2xl mt-4 md:text-5xl font-bold bg-clip-text text-transparent"
-              style={{
-                backgroundImage: `linear-gradient(to right, var(--primary-color), var(--secondary-color))`,
-              }}
-            >
+            <h3 className="text-xl mt-4 sm:text-3xl md:text-4xl lg:text-5xl lg:mb-[-20%] xl:mb-[8%] 2xl:mb-[-15%] font-bold bg-clip-text text-transparent bg-linear-to-r from-[#E63258] to-[#A43DA5]">
               Kabinet {currentKabinet.nama_kabinet}
             </h3>
           </div>
         </div>
-        <PhotoSlideshowMobile
-          imageSrc={images[currentImgIndex] || "/assets/kabinet/fallback.webp"}
-        />
 
+        {/* Mobile Elements */}
+        {images.length > 0 && (
+          <PhotoSlideshowMobile imageSrc={images[currentImgIndex]} />
+        )}
         <div className="hidden md:block absolute bottom-0 left-0 w-full h-48 lg:h-64 bg-linear-to-t from-white via-white/20 to-transparent z-0" />
       </section>
 
@@ -167,33 +133,125 @@ export default function KabinetHeroSection({
   );
 }
 
+const DesktopBackground = ({
+  images,
+  activeIndex,
+}: {
+  images: string[];
+  activeIndex: number;
+}) => (
+  <div className="absolute inset-0 hidden md:block z-0">
+    <AnimatePresence initial={false}>
+      {images.map(
+        (src, index) =>
+          index === activeIndex && (
+            <motion.div
+              key={src}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.2 }}
+              className="absolute inset-0"
+            >
+              <Image
+                src={src}
+                alt="Foto Kabinet"
+                fill
+                className="object-cover"
+                priority={index === 0}
+                sizes="100vw"
+              />
+            </motion.div>
+          ),
+      )}
+    </AnimatePresence>
+  </div>
+);
+
+const MobileBackground = () => (
+  <div className="absolute inset-0 md:hidden">
+    <Image
+      src="/assets/kabinet/hero-bg.webp"
+      alt="Background"
+      fill
+      className="object-cover"
+      priority
+    />
+  </div>
+);
+
+const KabinetLogo = ({ src }: { src: string }) => (
+  <div className="shrink-0 z-30 flex flex-col items-center">
+    <div className="relative w-16 h-16 sm:w-28 sm:h-28 lg:w-40 lg:h-40 aspect-square">
+      <Image
+        src={src}
+        alt="Logo Kabinet"
+        fill
+        className="object-contain rounded-full border-2 border-white/50 bg-white/20 backdrop-blur-xs drop-shadow-[5px_5px_2px_rgba(0,0,0,0.3)]"
+        priority
+      />
+    </div>
+  </div>
+);
+
+const OrnamentWrapper = ({ position }: { position: "left" | "right" }) => {
+  const styles =
+    position === "left"
+      ? "-scale-x-100 -right-10 sm:-right-12 md:-right-32 lg:-right-48"
+      : "-left-10 sm:-left-12 md:-left-32 lg:-left-48";
+  return (
+    <div
+      className={cn(
+        "absolute top-full mt-2 sm:mt-4 w-40 sm:w-56 md:w-100 lg:w-130 drop-shadow-[5px_5px_2px_rgba(0,0,0,0.3)] pointer-events-none",
+        styles,
+      )}
+    >
+      <Ornament2 />
+    </div>
+  );
+};
+
 const YearButton = ({
   label,
   onClick,
-  className = "",
+  disabled = false,
 }: {
   label: string;
   onClick: () => void;
-  className?: string;
+  disabled?: boolean;
 }) => (
-  <Button
-    onClick={onClick}
-    className={`group relative overflow-hidden w-fit h-8 md:h-auto px-3 md:px-8 py-2 rounded-full border md:border-2 border-white/50 bg-white/20 text-white text-xs md:text-xl font-medium backdrop-blur-3xl drop-shadow-[5px_5px_2px_rgba(0,0,0,0.4)] hover:bg-black/95 transition-all cubic-bezier duration-400
-            bg-[linear-gradient(to_right,black_50%,transparent_50%)] bg-size-[210%_100%] bg-position-[99%_0] 
-            hover:bg-position-[0%_0]! hover:border-white/50! ${className}`}
-  >
-    {/* Shine Effect */}
-    <motion.div
-      initial={{ x: "-250%", skewX: 45 }}
-      animate={{ x: "350%", skewX: 45 }}
-      transition={{
-        repeat: Infinity,
-        duration: 0.5,
-        repeatDelay: 2,
-        ease: "linear",
-      }}
-      className="absolute inset-y-0 w-12 bg-linear-to-r from-transparent via-white/40 to-transparent z-10"
-    />
-    <span className="relative z-20">{label}</span>
-  </Button>
+  <div className="relative group">
+    <Glass 
+      preset="medium" 
+      className="rounded-full" 
+      depth={100}
+    >
+      <Button
+        onClick={onClick}
+        disabled={disabled}
+        className={cn(
+          "group relative w-fit h-8 md:h-auto px-3 md:px-8 py-2 rounded-3xl border md:border-2 border-white/50 bg-transparent text-white text-xs md:text-xl font-medium hover:bg-black/90 transition-all duration-400 bg-[linear-gradient(to_right,black_50%,transparent_50%)] bg-size-[210%_100%] bg-position-[99%_0] hover:bg-position-[0%_0]! hover:border-white/50! disabled:opacity-50",
+        )}
+      >
+        <motion.div
+          initial={{ x: "-250%", skewX: 45 }}
+          animate={{ x: "350%", skewX: 45 }}
+          transition={{
+            repeat: Infinity,
+            duration: 0.5,
+            repeatDelay: 2,
+            ease: "linear",
+          }}
+          className="absolute inset-y-0 w-12 bg-linear-to-r from-transparent via-white/40 to-transparent z-10"
+        />
+        <span className="relative z-20">{label}</span>
+      </Button>
+    </Glass>
+  </div>
 );
+
+const getOffsetYear = (currentYear: string, offset: number) => {
+  if (!currentYear || !currentYear.includes("/")) return "___/___";
+  const [start, end] = currentYear.split("/").map((y) => parseInt(y) + offset);
+  return `${start}/${end}`;
+};
