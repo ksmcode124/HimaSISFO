@@ -48,9 +48,9 @@ export async function GET(req: Request, { params }: RouteParams) {
 }
 
 // ==========================
-// PUT /api/departemen/:id
+// PATCH /api/departemen/:id
 // ==========================
-export async function PUT(req: Request, { params }: RouteParams) {
+export async function PATCH(req: Request, { params }: RouteParams) {
   try {
     const raw = await params;
     const { id } = departemenIdParamSchema.parse(raw);

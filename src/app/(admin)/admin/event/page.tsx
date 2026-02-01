@@ -8,7 +8,6 @@ import { ConfirmationModal } from '@/features/admin/components/ConfirmationModal
 import { useAdminModal } from '@/features/admin/hooks/useAdminModal';
 import { useConfirm } from '@/features/admin/hooks/useConfirm';
 import { kegiatanColumns } from '@/features/admin/components/columns/kegiatan-columns';
-// import { createEventFields, updateEventFields } from '@/features/admin/components/forms/event-form-config';
 import { eventSchema, updateEventSchema } from '@/schemas/event.schema';
 import { useAdminEntity, useAdminEntityDetail } from '@/features/admin/hooks/useAdminEntity';
 import { AdminEventRow, AdminEventDetail, EventResponseAdmin } from '@/features/admin/types';
@@ -63,14 +62,21 @@ export default function EventPage() {
   );
 
   const memoInitialData = useMemo(() => {
-    console.log(detail)
     if (!detail) return {};
+
     return {
-      ...detail,
-      tanggal_mulai: detail.tanggal_mulai ? new Date(detail.tanggal_mulai) : undefined,
-      tanggal_berakhir: detail.tanggal_berakhir ? new Date(detail.tanggal_berakhir) : undefined,
+      judul: detail.judul,
+      deskripsi: detail.deskripsi,
+      gambar_event: detail.gambar_event ?? '',
+      tanggal_mulai: detail.tanggal_mulai
+        ? new Date(detail.tanggal_mulai)
+        : undefined,
+      tanggal_berakhir: detail.tanggal_berakhir
+        ? new Date(detail.tanggal_berakhir)
+        : undefined,
     };
   }, [detail]);
+
 
   // Delete
   const handleDelete = async (id: number) => {
@@ -93,8 +99,8 @@ export default function EventPage() {
         loading={isLoading}
         error={error}
         columns={kegiatanColumns({
-          onView: () => modal.open('view'),
-          onEdit: () => modal.open('edit'),
+          onView: (row) => modal.open('view', row),
+          onEdit: (row) => modal.open('edit', row),
           onDelete: handleDelete,
         })}
       />
@@ -130,28 +136,26 @@ export default function EventPage() {
         }}
       />
 
-      {/* DETAIL */}
       <DetailModal
         open={modal.isView}
         onOpenChange={(v) => !v && modal.close()}
         id={modal.id ?? undefined}
         fetchDetail={async (id) => {
-          const res = await api.get<AdminEventDetail>(`/api/admin/event/${id}`);
+          const res = await api.get<EventResponseAdmin>(`/api/admin/event/${id}`);
+          console.log(res.data)
           return res.data;
         }}
         mapDetailToUI={(d) => ({
           title: d.judul,
           subtitle: d.tanggal_mulai,
-          logo: '',
-          meta: [
-            // { label: 'Lokasi', value: d.lokasi },
-          ],
-          // deskripsi: d.deskripsi,
           imageUrl: d.gambar_event ?? '',
+          meta: [],
+          deskripsi: d.deskripsi,
         })}
-        onEdit={() => modal.open('edit')}
+        onEdit={(id) => modal.open('edit', id)}
         onDelete={handleDelete}
       />
+
 
       <ConfirmationModal
         open={confirm.open}
