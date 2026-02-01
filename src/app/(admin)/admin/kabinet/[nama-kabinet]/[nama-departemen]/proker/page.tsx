@@ -41,8 +41,6 @@ export default function ProkerPage() {
     typeof createProkerSchema._input,
     typeof updateProkerSchema._input,
     AdminProkerRow,
-    AdminProkerDetail,
-    any,
     any
   >({
     entity: 'proker',
@@ -55,14 +53,6 @@ export default function ProkerPage() {
           deskripsi: r.deskripsi ?? '',
           foto_proker: r.foto_proker ?? ''
         })),
-    mapToDetail: (r: AdminProkerDetail) => ({
-      id: r.id,
-      id_kabinet: r.id_kabinet,
-      id_departemen: r.id_departemen,
-      nama_proker: r.nama_proker,
-      deskripsi: r.deskripsi ?? '',
-      foto_proker: r.foto_proker ?? ''
-    }),
     createSchema: createProkerSchema,
     updateSchema: updateProkerSchema
   })
@@ -80,11 +70,11 @@ export default function ProkerPage() {
     })
   )
 
-  const handleDelete = (id: number) => {
-    confirm.confirm('delete', async () => {
-      await remove(id)
-      modal.close()
-    })
+  const handleDelete = async (id: number) => {
+    const ok =  await confirm.confirm('delete')
+    if (!ok) return
+    await remove(id)
+    modal.close()
   }
 
   return (
@@ -121,10 +111,10 @@ export default function ProkerPage() {
         initialData={{}}
         submitLabel="Buat Proker"
         onSubmit={async (data) => {
-          confirm.confirm('save', async () => {
-            await create({ ...data, id_kabinet, id_departemen})
-            modal.close()
-          })
+          const ok =  await confirm.confirm('save')
+          if (!ok) return
+          await create({ ...data, id_kabinet, id_departemen})
+          modal.close()
         }}
       />
 
@@ -138,11 +128,11 @@ export default function ProkerPage() {
         initialData={detail ?? {}}
         submitLabel="Update"
         onSubmit={async (data) => {
-          confirm.confirm('save', async () => {  
-            if (!detail?.id) return
-            await update({ id: detail.id, data })
-            modal.close()
-          })
+          const ok =  await confirm.confirm('save')
+          if (!ok) return
+          if (!detail?.id) return
+          await update({ id: detail.id, data })
+          modal.close()
         }}
       />
 
@@ -170,7 +160,12 @@ export default function ProkerPage() {
       />
 
 
-      <ConfirmationModal {...confirm} />
+      <ConfirmationModal
+        open={confirm.open}
+        variant={confirm.variant}
+        handleConfirm={confirm.handleConfirm}
+        handleCancel={confirm.handleCancel}
+      />;
     </>
   )
 }

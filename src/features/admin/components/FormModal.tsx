@@ -115,16 +115,25 @@ export function FormModal<TSchema extends z.ZodType<any, any, any>>({
     try {
       // convert file fields to uploaded URLs
       const dataToSubmit: Record<string, any> = { ...formData };
+      Object.keys(dataToSubmit).forEach((key) => {
+        if (dataToSubmit[key] === '') {
+          delete dataToSubmit[key]; // or = undefined
+        }
+      });
       Object.keys(fileState).forEach(key => {
         if (fileState[key]?.uploaded) {
-          dataToSubmit[key] = fileState[key].uploaded;
+          // dataToSubmit[key] = fileState[key].uploaded;
+          dataToSubmit[key] = Array.isArray(dataToSubmit[key])
+            ? fileState[key].uploaded
+            : fileState[key].uploaded[0];
+
         }
       });
 
       // TinyMCE
       fields.filter(f => f.type === 'editor').forEach(f => {
         const content = editorRefs.current[f.name]?.getContent() || '';
-        formData[f.name as keyof FormData] = content;
+        dataToSubmit[f.name] = content || undefined;
       });
 
 
@@ -209,7 +218,13 @@ export function FormModal<TSchema extends z.ZodType<any, any, any>>({
     const errorCls = getErrorMessage(field.name) ? 'border-red-500' : 'border-gray-200';
     const disabledCls = field.disabled || loading ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : 'bg-white';
     const classes = `${baseCls} ${errorCls} ${disabledCls}`;
-    const value = formData[field.name as keyof FormData] ?? '';
+    const rawValue = formData[field.name as keyof FormData];
+
+    const value =
+      rawValue === undefined || rawValue === null
+        ? ''
+        : String(rawValue);
+
 
     switch (field.type) {
       case 'textarea':
@@ -227,7 +242,7 @@ export function FormModal<TSchema extends z.ZodType<any, any, any>>({
       case 'file':
         return <FileUploader field={field} />;
       case 'number':
-        return <input type="number" className={classes} placeholder={field.placeholder} value={value} onChange={e => handleChange(field.name, e.target.value === '' ? undefined : Number(e.target.value))} disabled={field.disabled || loading} />;
+        return <input type="number" className={classes} placeholder={field.placeholder} value={value} onChange={e => handleChange(field.name, e.target.value === '' ? undefined : Number(e.target.value))} />;
       case 'date':
         return <input type="date" className={classes} value={value as string} onChange={e => handleChange(field.name, e.target.value)} disabled={field.disabled || loading} />;
       case 'email':
@@ -256,7 +271,7 @@ export function FormModal<TSchema extends z.ZodType<any, any, any>>({
         );
 
       default:
-        return <input type="text" className={classes} placeholder={field.placeholder} value={value as string} onChange={e => handleChange(field.name, e.target.value)} disabled={field.disabled || loading} />;
+        return <input type="text" className={classes} placeholder={field.placeholder} value={value} onChange={e => handleChange(field.name, e.target.value)} disabled={field.disabled || loading} />;
     }
   };
 
@@ -286,7 +301,7 @@ export function FormModal<TSchema extends z.ZodType<any, any, any>>({
                 </div>
               ))}
               <div className="bg-white pt-4">
-                <button type="submit" disabled={loading || Object.values(fileState).some(f => f.uploading)} className="px-8 py-2.5 bg-[#3385FF] w-full text-white rounded-lg font-medium hover:bg-[#2670E8] transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed">
+                <button type="submit" disabled={loading || Object.values(fileState).some(f => f.uploading)} className="px-8 py-2.5 bg-[#3385FF]  w-full text-white rounded-lg font-medium hover:bg-columbia-blue hover:text-neutral-400 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed">
                   {loading ? 'Menyimpan...' : Object.values(fileState).some(f => f.uploading) ? 'Tunggu upload selesai...' : submitLabel}
                 </button>
               </div>

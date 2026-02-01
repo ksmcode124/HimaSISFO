@@ -14,7 +14,6 @@ import { createKabinetSchema, updateKabinetSchema } from '@/schemas/kabinet.sche
 import { useAdminEntity, useAdminEntityDetail } from '@/features/admin/hooks/useAdminEntity'
 import { AdminKabinetRow, AdminKabinetDetail, KabinetResponseAdmin } from '@/features/admin/types'
 import { api } from '@/lib/services/api'
-import { Rows } from 'lucide-react'
 
 export default function KabinetPage() {
   const modal = useAdminModal()
@@ -32,8 +31,6 @@ export default function KabinetPage() {
     z.infer<typeof createKabinetSchema>,
     z.infer<typeof updateKabinetSchema>,
     AdminKabinetRow,
-    AdminKabinetDetail,
-    KabinetResponseAdmin,
     KabinetResponseAdmin
   >({
     entity: 'kabinet',
@@ -44,17 +41,6 @@ export default function KabinetPage() {
       logo: row.gambar_logo ?? '',
       departemen_count: row.departemen.length,
     })),
-    mapToDetail: (res) => ({
-      id: res.id_kabinet,
-      nama_kabinet: res.nama_kabinet,
-      tahun_kerja: res.tahun_kerja,
-      deskripsi: res.deskripsi ?? '',
-      visi: res.visi ?? '',
-      misi: res.misi ?? '',
-      departemen_count: res.departemen.length,
-      logo: res.gambar_logo ?? '',
-      foto_kabinet: res.foto_kabinet ?? '',
-    }),
     createSchema: createKabinetSchema,
     updateSchema: updateKabinetSchema,
   })
@@ -76,11 +62,11 @@ export default function KabinetPage() {
   }))
 
   // Delete handler
-  const handleDelete = (id: number) => {
-    confirm.confirm('delete', async () => {
-      await remove(id)
-      modal.close()
-    })
+  const handleDelete = async (id: number) => {
+    const ok = await confirm.confirm('delete')
+    if (!ok) return
+    await remove(id)
+    modal.close()
   }
 
   return (
@@ -112,10 +98,10 @@ export default function KabinetPage() {
         initialData={{}}
         submitLabel="Buat Kabinet"
         onSubmit={async (data) => {
-          confirm.confirm('save', async () => {
-            await create(data)
-            modal.close()
-          })
+          const ok = await confirm.confirm('save')
+          if (!ok) return
+          await create(data)
+          modal.close()
         }}
       />
 
@@ -129,11 +115,11 @@ export default function KabinetPage() {
         initialData={detail ?? {}}
         submitLabel="Simpan"
         onSubmit={async (data) => {
-          confirm.confirm('save', async() => {
-            if (!detail?.id) return
-            await update({ id: detail.id, data })
-            modal.close()
-          })
+          const ok = await confirm.confirm('save')
+          if (!ok) return
+          if (!detail?.id) return
+          await update({ id: detail.id, data })
+          modal.close()
         }}
       />
 
@@ -155,14 +141,19 @@ export default function KabinetPage() {
             { label: 'Misi', value: detail.misi },
             { label: 'Departemen', value: detail.departemen.length },
           ],
-          deskripsi: detail.deskripsi,
+          deskripsi: detail.deskripsi ?? '',
         })}
         onEdit={(id) => modal.open('edit', id)}
         onDelete={handleDelete}
       />
 
 
-      <ConfirmationModal loading={isLoading} {...confirm} />
+      <ConfirmationModal
+        open={confirm.open}
+        variant={confirm.variant}
+        handleConfirm={confirm.handleConfirm}
+        handleCancel={confirm.handleCancel}
+      />;
     </>
   )
 }

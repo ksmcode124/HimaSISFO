@@ -23,7 +23,7 @@ interface DetailModalProps<TDetail> {
     subtitle?: string;
     imageUrl?: string;
     meta?: MetaItem[];
-    description?: string;
+    deskripsi?: string;
   };
 
   onEdit?: (id: number) => void;
@@ -115,11 +115,11 @@ export function DetailModal<TDetail>({
             </div>
           </div>
 
-          {ui.description && (
+          {ui.deskripsi && (
             <div className="mt-6">
               <p className="text-2xs font-semibold uppercase mb-1">Deskripsi</p>
               <p className="text-2xs leading-relaxed font-light block overflow-y-auto max-h-35">
-                {ui.description}
+                {ui.deskripsi}
               </p>
             </div>
           )}

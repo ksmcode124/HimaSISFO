@@ -33,8 +33,6 @@ export default function EventPage() {
     z.infer<typeof eventSchema>,
     z.infer<typeof updateEventSchema>,
     AdminEventRow,
-    AdminEventDetail,
-    EventResponseAdmin,
     EventResponseAdmin
   >({
     entity: 'event',
@@ -46,14 +44,6 @@ export default function EventPage() {
         end: e.tanggal_berakhir,
         start: e.tanggal_mulai
       })),
-    mapToDetail: (res) => ({
-      id: res.id_event,
-      judul: res.judul,
-      deskripsi: res.deskripsi,
-      gambar_event: res.gambar_event ?? '',
-      tanggal_mulai: res.tanggal_mulai,
-      tanggal_berakhir: res.tanggal_berakhir
-    }),
     createSchema: eventSchema,
     updateSchema: updateEventSchema,
   });
@@ -83,11 +73,11 @@ export default function EventPage() {
   }, [detail]);
 
   // Delete
-  const handleDelete = (id: number) => {
-    confirm.confirm('delete', async () => {
-      await remove(id);
-      modal.close();
-    });
+  const handleDelete = async (id: number) => {
+    const ok =  await confirm.confirm('delete')
+    if (!ok) return
+    await remove(id);
+    modal.close();
   };
 
   return (
@@ -163,7 +153,12 @@ export default function EventPage() {
         onDelete={handleDelete}
       />
 
-      <ConfirmationModal {...confirm} />
+      <ConfirmationModal
+        open={confirm.open}
+        variant={confirm.variant}
+        handleConfirm={confirm.handleConfirm}
+        handleCancel={confirm.handleCancel}
+      />;
     </>
   );
 }

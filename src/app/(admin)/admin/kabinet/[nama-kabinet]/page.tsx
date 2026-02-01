@@ -37,8 +37,6 @@ export default function DepartemenPage() {
     z.infer<typeof createDepartemenSchema>,
     z.infer<typeof updateDepartemenSchema>,
     AdminDepartemenRow,
-    AdminDepartemenDetail,
-    DepartemenResponse,
     DepartemenResponse
   >({
     entity: 'departemen',
@@ -54,15 +52,6 @@ export default function DepartemenPage() {
         foto_departemen: row.foto_departemen ?? '',
         slug_kabinet: slug_kabinet ?? '1-gelora-harmoni'
     })),
-    mapToDetail: (res) => ({
-      id: res.id_departemen,
-      nama_departemen: res.nama_departemen,
-      deskripsi_departemen: res.deskripsi_departemen ?? '',
-      logo_departemen: res.logo_departemen ?? '',
-      foto_departemen: res.foto_departemen ?? '',
-      anggota_count: -1,
-      proker_count: res.proker?.length ?? 0,
-    }),
     createSchema: createDepartemenSchema,
     updateSchema: updateDepartemenSchema,
   })
@@ -82,11 +71,11 @@ export default function DepartemenPage() {
     }),
   )
 
-  const handleDelete = (id: number) => {
-    confirm.confirm('delete', async () => {
-      await remove(id)
-      modal.close()
-    })
+  const handleDelete = async (id: number) => {
+    const ok =  await confirm.confirm('delete')
+    if (!ok) return
+    await remove(id)
+    modal.close()
   }
 
   return (
@@ -121,10 +110,10 @@ export default function DepartemenPage() {
         initialData={{ id_kabinet }}
         submitLabel="Buat Departemen"
         onSubmit={async (data) => {
-          confirm.confirm('save', async () => {
-            await create({ ...data, id_kabinet })
-            modal.close()
-          })
+          const ok = await confirm.confirm('save')
+          if (!ok) return
+          await create({ ...data, id_kabinet })
+          modal.close()
         }}
       />
 
@@ -138,11 +127,11 @@ export default function DepartemenPage() {
         initialData={detail ?? {}}
         submitLabel="Simpan"
         onSubmit={async (data) => {
-          confirm.confirm('save', async () => {
-            if (!detail?.id) return
-            await update({ id: detail.id, data: { ...data } })
-            modal.close()
-          })
+          const ok =  await confirm.confirm('save')
+          if (!ok) return
+          if (!detail?.id) return
+          await update({ id: detail.id, data: { ...data } })
+          modal.close()
         }}
       />
 
@@ -170,7 +159,12 @@ export default function DepartemenPage() {
         onDelete={handleDelete}
       />
 
-      <ConfirmationModal {...confirm} loading={isLoading} />
+      <ConfirmationModal
+        open={confirm.open}
+        variant={confirm.variant}
+        handleConfirm={confirm.handleConfirm}
+        handleCancel={confirm.handleCancel}
+      />;
     </>
   )
 }

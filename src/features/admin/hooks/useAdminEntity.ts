@@ -10,13 +10,10 @@ interface UseAdminEntityOptions<
   TCreate,
   TUpdate,
   TRow extends EntityRow,
-  TDetail extends EntityDetail,
   TApiRow,
-  TApiDetail
 > {
   entity: string; // 'kabinet', 'departemen', dll
   mapToRow: (data: TApiRow[]) => TRow[];
-  mapToDetail: (data: TApiDetail) => TDetail;
   createSchema?: ZodType<TCreate>;
   updateSchema?: ZodType<TUpdate>;
   queryParams?: Record<string, any>; 
@@ -26,17 +23,14 @@ export function useAdminEntity<
   TCreate,
   TUpdate,
   TRow extends EntityRow,
-  TDetail extends EntityDetail,
   TApiRow,
-  TApiDetail
 >({
   entity,
   mapToRow,
-  mapToDetail,
   createSchema,
   updateSchema,
   queryParams = {},
-}: UseAdminEntityOptions<TCreate, TUpdate, TRow, TDetail, TApiRow, TApiDetail>) {
+}: UseAdminEntityOptions<TCreate, TUpdate, TRow, TApiRow>) {
   const queryClient = useQueryClient();
 
   // LIST
@@ -69,7 +63,7 @@ export function useAdminEntity<
   const updateMutation = useMutation({
     mutationFn: async (payload: { id: string | number; data: TUpdate }) => {
       if (updateSchema) updateSchema.parse(payload.data);
-      const response = await api.put<TApiRow>(`/api/admin/${entity}/${payload.id}`, payload.data);
+      const response = await api.patch<TApiRow>(`/api/admin/${entity}/${payload.id}`, payload.data);
       return response.data;
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: [entity, queryParams] }),

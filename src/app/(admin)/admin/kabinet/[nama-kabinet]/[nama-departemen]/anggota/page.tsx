@@ -14,7 +14,7 @@ import { useParams } from 'next/navigation'
 import { api } from '@/lib/services/api'
 import { useAdminEntity, useAdminEntityDetail } from '@/features/admin/hooks/useAdminEntity'
 import { z } from 'zod'
-import { AdminAnggotaDetail, AdminAnggotaRow, AnggotaResponse, AnggotaResponse2, DetailAnggotaRes, DetailAnggotaRes2 } from '@/features/admin'
+import { AdminAnggotaDetail, AdminAnggotaRow, AnggotaResponse, AnggotaResponse2 } from '@/features/admin'
 
 export default function AnggotaPage() {
   const params = useParams()
@@ -41,8 +41,6 @@ export default function AnggotaPage() {
     z.infer<typeof createAnggotaSchema>,
     z.infer<typeof updateAnggotaSchema>,
     AdminAnggotaRow,
-    AdminAnggotaDetail,
-    AnggotaResponse,
     AnggotaResponse
   >({
     entity: 'anggota',
@@ -57,18 +55,8 @@ export default function AnggotaPage() {
             kabinet: nama_kabinet,
             id_jabatan: da?.id_jabatan ?? -1
           })}),
-    mapToDetail: (r) => {
-      const da = r.detailAnggota.find((d) => d.id_departemen === id_departemen && d.id_kabinet == d.id_kabinet)
-      return ({
-        id: r.id_anggota,
-        nama_anggota: r.nama_anggota,
-        foto_anggota: da?.foto_anggota ?? '',
-        id_jabatan: da?.id_jabatan ?? -1,
-        kabinet: nama_kabinet,
-        departemen: nama_departemen
-      })},
     createSchema: createAnggotaSchema,
-    updateSchema: updateAnggotaSchema,
+    updateSchema: updateAnggotaSchema
   })
 
   const { data: detail } = useAdminEntityDetail<AdminAnggotaDetail, AnggotaResponse2>(
@@ -87,16 +75,18 @@ export default function AnggotaPage() {
   )
 
   // Handle delete
-  const handleDelete = (id: number) => {
-    confirm.confirm('delete', async () => {
-      await remove(id)
-      modal.close()
-    })
+  const handleDelete = async (id: number) => {
+    const ok =  await confirm.confirm('delete')
+    if (!ok) return
+    await remove(id)
+    modal.close()
   }
 
   // Handle create khusus karena 2-step
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleCreateAnggota = async (data: any) => {
+    const ok =  await confirm.confirm('save')
+    if (!ok) return
     // 1. Fetch semua anggota
     const allAnggotaRes = await fetch('/api/admin/anggota')
     if (!allAnggotaRes.ok) throw new Error('Gagal mengambil daftar anggota')
@@ -194,11 +184,11 @@ export default function AnggotaPage() {
         initialData={detail ?? {}}
         submitLabel="Update Anggota"
         onSubmit={async (data) => {
-          confirm.confirm('save', async () => {
-            if (!detail?.id) return
-            await update({ id: detail.id, data })
-            modal.close()
-          })
+          const ok =  await confirm.confirm('save')
+          if (!ok) return
+          if (!detail?.id) return
+          await update({ id: detail.id, data })
+          modal.close()
         }}
       />
 
@@ -231,7 +221,12 @@ export default function AnggotaPage() {
         onDelete={handleDelete}
       />
 
-      <ConfirmationModal {...confirm} />
+      <ConfirmationModal
+        open={confirm.open}
+        variant={confirm.variant}
+        handleConfirm={confirm.handleConfirm}
+        handleCancel={confirm.handleCancel}
+      />;
     </>
   )
 }

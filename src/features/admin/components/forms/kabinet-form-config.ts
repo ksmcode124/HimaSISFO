@@ -6,7 +6,7 @@ export const createKabinetFields: FormField[] = [
   { name: 'visi', label: 'VISI', type: 'textarea', required: true, side: 'right', rows: 2 },
   { name: 'misi', label: 'MISI', type: 'textarea', required: true, side: 'right', rows: 2 },
   { name: 'deskripsi', label: 'DESKRIPSI', type: 'textarea', rows: 3, side: 'right' },
-  // { name: 'gambar_logo', label: 'UPLOAD LOGO', type: 'file', side: 'left' },
+  { name: 'gambar_logo', label: 'UPLOAD LOGO', type: 'file', side: 'left' },
 ];
 
 export const updateKabinetFields: FormField[] = [
@@ -15,6 +15,6 @@ export const updateKabinetFields: FormField[] = [
   { name: 'visi', label: 'VISI', type: 'textarea', required: true, side: 'right', rows: 2 },
   { name: 'misi', label: 'MISI', type: 'textarea', required: true, side: 'right', rows: 2 },
   { name: 'deskripsi', label: 'DESKRIPSI', type: 'textarea', rows: 3, side: 'right' },
-  // { name: 'gambar_logo', label: 'UPLOAD LOGO', type: 'file', side: 'left', },
-  // { name: 'foto_kabinet', label: 'UPLOAD FOTO', type: 'file', multiple: true, side: 'left', },
+  { name: 'gambar_logo', label: 'UPLOAD LOGO', type: 'file', side: 'left', required: false },
+  { name: 'foto_kabinet', label: 'UPLOAD FOTO', type: 'file', side: 'left', required: false },
 ];
