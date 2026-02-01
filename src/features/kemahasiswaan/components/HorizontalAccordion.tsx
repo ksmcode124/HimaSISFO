@@ -71,7 +71,7 @@ function HorizontalAccordionItem( {item} : {item: ItemDataJSON}) {
         borderRadius={16}
         className="border-2 border-[#25253B] rounded-xl w-full"
       >
-        <AccordionTrigger className="justify-between w-full rounded-xl text-3xs sm:text-xs md:text-base lg:text-xl font-semibold">
+        <AccordionTrigger className="justify-between w-full rounded-xl text-3xs sm:text-xs md:text-sm lg:text-xl font-semibold">
           <span className="line-clamp-1">
             {item.title}
           </span>

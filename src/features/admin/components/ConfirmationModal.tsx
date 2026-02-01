@@ -56,6 +56,7 @@ export function ConfirmationModal({
             variant={variant === 'delete' ? 'destructive' : 'default'}
             onClick={handleConfirm}
             disabled={loading}
+            className='text-sm font-semibold'
           >
             {loading ? content.loadingText : content.confirmText}
           </Button>
