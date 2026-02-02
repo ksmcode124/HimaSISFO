@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
-/* @plugin "tailwindcss-animate"; */
+@plugin "tailwindcss-animate";
+@plugin 'tailwind-scrollbar';
 @import "tw-animate-css";
 
 @theme {
@@ -145,7 +146,12 @@
       black 100%);
 }
 
-
+.scrollbar-lg::-webkit-scrollbar {
+  width: 12px;
+}
+.scrollbar-sm::-webkit-scrollbar {
+  width: 4px;   
+}
 
 @layer base {
   * {

@@ -197,7 +197,7 @@ export function Modal(props: ModalProps) {
                 onClick={onClose}
                 size={40}
               />
-            <div className="relative overflow-visible max-h-[50vh] overflow-y-auto">
+            <div className="relative overflow-visible max-h-[50vh] overflow-y-auto scrollbar scrollbar-sm scrollbar-thumb-[#AFAFAF] scrollbar-track-scrollbar-track">
               {Array.from(props.events).map((event, idx) => {
                 return (
                   <div key={event.id} className="relative flex flex-col pb-5">

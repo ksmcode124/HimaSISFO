@@ -1,0 +1,18 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        // warna custom untuk track transparan
+        'scrollbar-track': 'transparent',
+      },
+    },
+  },
+  plugins: [
+    require('tailwind-scrollbar'),
+  ],
+}

@@ -32,7 +32,7 @@ function AwanOverlay() {
 
 function EventDetailContent({ events }: { events: EventCardProps }) {
   return (
-    <div className="relative justify-center items-center w-[850px] lg:w-[1120px]">
+    <div className="relative justify-center items-center w-[850px] lg:w-[1120px] px-5">
       <BreadcrumbSection items={newBreadcrumbItems} />
       <div className="relative mx-4 md:mx-0 mt-5 flex flex-col gap-10 md:gap-20 xl:gap-30 text-[var(--color-dark-blue)]">
         <OverlayLayer className="inset-0 w-full -translate-y-1/7 aspect-[3/2] flex justify-center pointer-events-none">
