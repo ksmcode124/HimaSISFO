@@ -261,6 +261,15 @@ export const EVENTS: EventCardProps[] = [
     img: "contohtengah.png",
     description: null,
     type: "Beasiswa",
+  },
+  {
+    id: 30,
+    title: "Workshop 10",
+    start: new Date("2026-02-10T10:30:00.000Z"),
+    end: new Date("2026-02-11T12:30:00.000Z"),
+    img: "contohtengah.png",
+    description: null,
+    type: "Beasiswa",
   }
 
 ];

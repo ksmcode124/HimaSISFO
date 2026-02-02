@@ -162,7 +162,7 @@ export function Modal(props: ModalProps) {
           </div>
         )}
         {type === "calendar" && props.mode === "single" && (
-          <div className="flex w-fit flex-col rounded-[20px] bg-[#EDF3F6CC] p-5 text-[var(--color-dark-blue)]">
+          <div className="flex w-fit flex-col w-[300px] md:w-[400px] rounded-[20px] bg-[#EDF3F6CC] p-5 text-[var(--color-dark-blue)]">
             <div className="flex justify-between items-center mb-3 z">
               <h2 className="font-semibold text-[20px]">{props.event.title}</h2>
               <X
@@ -177,9 +177,9 @@ export function Modal(props: ModalProps) {
             <div className="text-sm flex flex-col gap-3">
               <div className="font-medium">
                 {today < props.event.start.getTime() ? (
-                  <span className="px-4 py-1 bg-[#99B6D9] rounded-xl">Belum</span>
+                  <span className="px-4 py-1 bg-[#99B6D9] rounded">Belum</span>
                 ) : today > props.event.end.getTime() ? (
-                  <span className="px-4 py-1 bg-[#99B6D9] rounded-xl">Selesai</span>
+                  <span className="px-4 py-1 bg-[#99B6D9] rounded">Selesai</span>
                 ) : (
                   <span className="px-4 py-1 bg-[#99B6D9] rounded">Berlangsung!</span>
                 )}
@@ -196,7 +196,7 @@ export function Modal(props: ModalProps) {
           </div>
         )}
         {type === "calendar" && props.mode === "multiple" && (
-          <div className="relative flex w-fit flex-col rounded-[20px] bg-[#EDF3F6CC] p-5 text-[var(--color-dark-blue)] gap-5">
+          <div className="relative flex w-[300px] md:w-[400px] flex-col rounded-[20px] bg-[#EDF3F6CC] p-5 text-[var(--color-dark-blue)] gap-5">
             <X
               className="absolute top-4 right-4 cursor-pointer z-99"
               onClick={onClose}

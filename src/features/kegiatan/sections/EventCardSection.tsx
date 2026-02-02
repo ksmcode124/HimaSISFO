@@ -21,7 +21,7 @@ function EventCardDecoration() {
 function EventCardContent({ events }: { events: EventCardProps[] }) {
   const { pastNotGoing, nextOnGoing, futureNotGoing } = sortEvents(events);
   return (
-    <div className="relative flex flex-col gap-3 md:gap-5 justify-center w-full max-w-[1120px]">
+    <div className="relative flex flex-col gap-2 md:gap-5 justify-center w-full max-w-[1120px]">
       <h1 className="w-full h-fit text-center font-bold text-xl md:text-4xl xl:text-6xl text-[var(--color-nile-blue)]">
         Agenda
       </h1>
@@ -32,7 +32,7 @@ function EventCardContent({ events }: { events: EventCardProps[] }) {
         </div>
         <div className="grid grid-rows-[auto_1fr] min-h-full">
           {nextOnGoing && (
-            <div className="flex justify-center items-center gap-2 md:gap-5">
+            <div className="flex justify-center items-center gap-1 md:gap-5">
               <h2 className="h-fit w-fit text-center uppercase py-5 md:py-10 font-semibold text-[12px] md:text-2xl xl:text-3xl text-[var(--color-nile-blue)]">Berikutnya</h2>
               {nextOnGoing.length > 1 ? <span className="bg-[var(--color-nile-blue)] rounded-full w-5 md:w-10 h-5 md:h-10 flex items-center justify-center font-normal text-[12px] md:text-xl xl:text-2xl text-white">{nextOnGoing.length}</span> : null}
             </div>
