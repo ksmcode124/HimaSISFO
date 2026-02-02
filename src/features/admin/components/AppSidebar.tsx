@@ -62,7 +62,7 @@ export function AppSidebar() {
       <SidebarHeader className="">
         <div className="flex items-center justify-center gap-x-3">
           <div className="relative aspect-square h-10">
-            <Image priority fill src={'/assets/shared/logos/logo-himasisfo.webp'} alt={''} />
+            <Image priority fill src={'/assets/shared/logos/logo-himasisfo.webp'} alt={''} sizes='8' />
           </div>
           <p className="text-xl font-bold">DASHBOARD</p>
         </div>

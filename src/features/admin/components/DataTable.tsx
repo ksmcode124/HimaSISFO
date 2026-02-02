@@ -1,3 +1,4 @@
+'use client'
 import {
   Table as UiTable,
   TableBody,
@@ -21,22 +22,24 @@ export function DataTable<TData>({
   columnsLength,
 }: DataTableProps<TData>) {
   return (
-    <div className="overflow-auto">
-      <UiTable>
+    <div className="overflow-x-auto">
+      <UiTable className="min-w-full">
         <TableHeader className="bg-[#EAEAEA]">
           {table.getHeaderGroups().map((hg) => (
             <TableRow key={hg.id} className="[&>*:last-child]:text-center border-[#939393]">
-              {hg.headers.map((header) => (
-                <TableHead
-                  key={header.id}
-                  className="px-5 py-4 text-sm font-regular uppercase text-black"
-                >
-                  {flexRender(
-                    header.column.columnDef.header,
-                    header.getContext(),
-                  )}
-                </TableHead>
-              ))}
+              {hg.headers.map((header, i) => {
+                const isLast = i === hg.headers.length - 1
+                return (
+                  <TableHead
+                    key={header.id}
+                    className={`px-5 py-4 text-sm font-regular uppercase text-black ${
+                      isLast ? 'sticky right-0 bg-[#EAEAEA] z-20' : ''
+                    }`}
+                  >
+                    {flexRender(header.column.columnDef.header, header.getContext())}
+                  </TableHead>
+                )
+              })}
             </TableRow>
           ))}
         </TableHeader>
@@ -44,16 +47,22 @@ export function DataTable<TData>({
         <TableBody>
           {rows.length ? (
             rows.map((row) => (
-              <TableRow key={row.id} className='border-[#939393]'>
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id} className="px-5 py-4">
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                ))}
+              <TableRow key={row.id} className="border-[#939393]">
+                {row.getVisibleCells().map((cell, i) => {
+                  const isLast = i === row.getVisibleCells().length - 1
+                  return (
+                    <TableCell
+                      key={cell.id}
+                      className={`px-5 py-4 ${isLast ? 'sticky right-0 bg-white z-10 text-center' : ''}`}
+                    >
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </TableCell>
+                  )
+                })}
               </TableRow>
             ))
           ) : (
-            <TableRow className='border-[#939393]'>
+            <TableRow className="border-[#939393]">
               <TableCell colSpan={columnsLength} className="h-24 text-center">
                 Tidak ada data
               </TableCell>
@@ -62,5 +71,5 @@ export function DataTable<TData>({
         </TableBody>
       </UiTable>
     </div>
-  );
+  )
 }

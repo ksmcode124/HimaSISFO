@@ -14,7 +14,7 @@ export const createProkerSchema = z.object({
   id_kabinet: z.number().int().positive("id_kabinet wajib diisi dan berupa angka positif"),
   nama_proker: z.string().min(3, "Nama proker minimal 3 karakter"),
   deskripsi: z.string().optional(),
-  foto_proker: z.string().url("Foto proker harus berupa URL").optional(),
+  foto_proker: z.any().optional(), // Allow upload result or URL string
 })
 
 export const updateProkerSchema = z.object({

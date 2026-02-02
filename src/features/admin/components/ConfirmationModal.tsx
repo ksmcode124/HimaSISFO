@@ -3,61 +3,57 @@
 import { BaseModal } from '@/components/ui/base-modal';
 import { Button } from '@/components/ui/button';
 import { Info, Trash2 } from 'lucide-react';
-import { cva } from 'class-variance-authority';
 
 const confirmationContent = {
   save: {
     title: 'Konfirmasi Penyimpanan Data?',
-    description: 'Pastikan tidak ada kesalahan pada data yang diinput. Periksa kembali data-data yang ada!',
+    description:
+      'Pastikan tidak ada kesalahan pada data yang diinput. Periksa kembali data-data yang ada!',
     confirmText: 'Simpan',
     loadingText: 'Menyimpan...',
   },
   delete: {
     title: 'Hapus Item ini?',
-    description: 'Item ini akan dihapus secara permanen. Aksi ini tidak bisa dibatalkan',
+    description:
+      'Item ini akan dihapus secara permanen. Aksi ini tidak bisa dibatalkan',
     confirmText: 'Hapus',
     loadingText: 'Menghapus...',
   },
 };
 
-type ConfirmVariant = 'save' | 'delete'
-
-const confirmToButtonVariant: Record<ConfirmVariant, 
-  React.ComponentProps<typeof Button>["variant"]
-> = {
-  save: "default",
-  delete: "destructive",
-};
+type ConfirmVariant = 'save' | 'delete';
 
 interface ConfirmModalProps {
   open: boolean;
-  onOpenChange: (open: boolean) => void;
-  handleConfirm: () => void;
+  variant: ConfirmVariant;
   loading?: boolean;
-  variant?: 'save' | 'delete';
+  handleConfirm: () => void;
+  handleCancel: () => void;
 }
 
 export function ConfirmationModal({
   open,
-  onOpenChange,
-  handleConfirm,
+  variant,
   loading,
-  variant = 'delete',
+  handleConfirm,
+  handleCancel,
 }: ConfirmModalProps) {
   const content = confirmationContent[variant];
 
   return (
     <BaseModal
       open={open}
-      onOpenChange={onOpenChange}
+      onOpenChange={(v) => {
+        if (!v) handleCancel(); // ESC / overlay → cancel
+      }}
       title={content.title}
       footer={
         <>
-          <Button variant="outline" onClick={() => onOpenChange(false)} className='text-sm font-semibold'>
+          <Button variant="outline" onClick={handleCancel}>
             Cancel
           </Button>
           <Button
-            variant={confirmToButtonVariant[variant]}
+            variant={variant === 'delete' ? 'destructive' : 'default'}
             onClick={handleConfirm}
             disabled={loading}
             className='text-sm font-semibold'
@@ -68,8 +64,7 @@ export function ConfirmationModal({
       }
     >
       <div className="flex flex-col items-center gap-4 text-center">
-        {/* ICON */}
-        <div className="text-black">
+        <div>
           {variant === 'delete' ? (
             <Trash2 className="size-10" />
           ) : (
@@ -77,13 +72,8 @@ export function ConfirmationModal({
           )}
         </div>
 
-        {/* TITLE */}
         <h2 className="text-sm font-bold">{content.title}</h2>
-
-        {/* DESCRIPTION */}
-        <p className="text-xs max-w-sm">
-          {content.description}
-        </p>
+        <p className="text-xs max-w-sm">{content.description}</p>
       </div>
     </BaseModal>
   );
