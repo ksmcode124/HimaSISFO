@@ -34,6 +34,7 @@ export default function StaffCard({ data, index, customCard }: StaffCardProps) {
     }
     if (
       jabatan.toLowerCase().includes("wakil") ||
+      jabatan.toLowerCase().includes("sekretaris") ||
       jabatan.toLowerCase().includes("sekben")
     ) {
       return {
@@ -43,8 +44,8 @@ export default function StaffCard({ data, index, customCard }: StaffCardProps) {
       };
     }
     return {
-      scale: "scale-[1.6]",
-      margin: "mt-8",
+      scale: "scale-[0.9]",
+      margin: "-mt-3",
       clip: "inset(0 0 40% 0)",
     };
   };
@@ -131,16 +132,16 @@ export default function StaffCard({ data, index, customCard }: StaffCardProps) {
         {/* Nametag */}
         <div className="absolute inset-0 z-40 flex justify-center items-center drop-shadow-[15px_10px_7px_rgba(0,0,0,0.3)] pointer-events-none">
           <div
-            className={`relative w-full h-full mt-52 md:mt-64 transition-all duration-300 ease-out ${nameTagClass}`}
+            className={`relative w-full h-full mt-60 md:mt-64 transition-all duration-300 ease-out ${nameTagClass}`}
           >
-            <div className="absolute inset-0 flex flex-col text-center justify-center">
+            <div className="absolute inset-0 flex flex-col text-center justify-center -mt-5 md:mt-10 lg:mt-10">
               {!data.jabatan.toLowerCase().includes("staff") && (
-                <span className="text-[#2D2D51] font-bold text-xs md:text-md drop-shadow-md">
+                <span className="text-[#2D2D51] font-bold text-xs md:text-md drop-shadow-md mt-[32%] md:mt-[12%]">
                   {data.jabatan}
                 </span>
               )}
-              <span className="text-[#2D2D51] text-xs md:text-md font-bold">
-                {data.nama_anggota}
+              <span className="text-[#2D2D51] text-xs md:text-md font-semibold capitalize">
+                {data.nama_anggota.toLowerCase()}
               </span>
             </div>
           </div>

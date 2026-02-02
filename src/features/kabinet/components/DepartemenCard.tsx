@@ -67,7 +67,7 @@ export default function DepartemenCard({
       <Card
         className={`overflow-hidden relative flex flex-col items-center text-center border-3 border-[#E63258] bg-white/50 backdrop-blur-xl p-1 md:p-6 ${className}`}
       >
-        <CardContent className="flex flex-col items-center w-full p-0">
+        <CardContent className="flex flex-col items-center w-full p-0 flex-1">
           <motion.div
             variants={variants.logo}
             transition={{ type: "tween" }}
@@ -84,13 +84,13 @@ export default function DepartemenCard({
           <motion.div
             variants={variants.content}
             transition={{ duration: 0.3 }}
-            className="font-bold text-[0.65rem] md:text-[0.85rem] px-2 flex items-center justify-center"
+            className="font-bold text-[0.65rem] md:text-[0.85rem] px-2 flex items-center justify-center h-8 md:h-16"
           >
-            <p className="line-clamp-3 md:line-clamp-4 mt-2">{nama}</p>
+            <p className="line-clamp-3 md:line-clamp-4 mt-5">{nama}</p>
           </motion.div>
         </CardContent>
 
-        <CardFooter className="w-full p-0 -mt-2 md:mt-auto">
+        <CardFooter className="w-full p-0 mt-auto -pt-12">
           <motion.div
             variants={variants.content}
             transition={{ duration: 0.3 }}
