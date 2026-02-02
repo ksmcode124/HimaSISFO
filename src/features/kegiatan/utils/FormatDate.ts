@@ -24,7 +24,7 @@ export function formatDate(date?: string | Date, option?: string) {
       year: "numeric",
       hour: "2-digit",
       minute: "2-digit",
-    }).format(dateObj);
+    }).format(dateObj).replace(" pukul ", ", ");;
 }
 
 export function formatMonthName(month: number) {

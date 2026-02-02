@@ -15,11 +15,11 @@ import { DecorationRepeater } from '../components/DecorationRepeater';
 
 function EventListContent({ events }: { events: EventCardProps[] }) {
   return (
-    <div className="relative justify-center items-center text-[var(--color-dark-blue)] w-[850px] lg:w-[1120px]">
+    <div className="relative justify-center items-center text-[#323257] w-[850px] lg:w-[1120px]">
       <div className="px-5">
         <BreadcrumbSection items={breadcrumbItems.breadcrumbItems} />
         <div className="px-5">
-          <h1 className="text-xl md:text-4xl xl:text-7xl font-bold w-full h-fit text-center pb-5 md:pb-15 border-b-4 border-[var(--color-dark-blue)]">
+          <h1 className="text-xl md:text-4xl xl:text-7xl font-bold w-full h-fit text-center pb-5 md:pb-15 border-b-4 border-[#323257]">
             Agenda
           </h1>
         </div>

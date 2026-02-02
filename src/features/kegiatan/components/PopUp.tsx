@@ -76,12 +76,17 @@ export function Modal(props: ModalProps) {
                   strokeLinejoin="round"
                 />
               </svg>
-              <h1 className="text-xl md:text-2xlfont-bold">Agenda Belum Tersedia</h1>
+              <h1 className="text-xl md:text-2xlfont-bold">{props.event.description ? "Agenda Belum Tersedia" : "Berita Belum Ada"}</h1>
             </header>
 
-            <main className="flex flex-col gap-3 px-5 py-3 bg-white ">
-              <h2 className="text-[18px] md:text-[20px] font-semibold text-[#323257]">{props.event.title}</h2>
-              <p className="max-w-[320px] break-words text-[14px] text-sm md:text-[18px]">Event ini belum dapat diakses karena belum berlangsung. Silakan tunggu hingga tanggal event dimulai untuk melihat detail selengkapnya.</p>
+            <main className="flex flex-col gap-3 px-5 bg-white ">
+              <div className="flex flex-col py-4 gap-2">
+                <h2 className="text-[18px] md:text-[20px] font-semibold text-[#323257]">{props.event.title}</h2>
+                <p className="max-w-[320px] break-words text-[14px] text-sm md:text-[18px]">{props.event.description ?
+                  "Event ini belum dapat diakses karena belum berlangsung. Silakan tunggu hingga tanggal event dimulai untuk melihat detail selengkapnya." :
+                  "Konten berita tidak ditemukan atau belum tersedia di dalam sistem untuk saat ini."
+                }</p>
+              </div>
               <div className="flex items-stretch flex-row gap-3 bg-gradient-to-b from-[#F0F4F8] to-[#E6EEF5] rounded-[12px] px-5">
                 <div className="flex items-center justify-center ">
                   <svg
@@ -138,14 +143,14 @@ export function Modal(props: ModalProps) {
                   </svg>
                 </div>
 
-                <div className="flex flex-col py-2 pr-3">
+                <div className="flex flex-col py-3 pr-3">
                   <p className="text-sm md:text-[18px] font-medium text-[#323257]">Tanggal Event</p>
                   <p className="text-sm md:text-[18px] text-[#6B7280]">{formatDate(props.event.start, "name")}</p>
                 </div>
               </div>
             </main>
 
-            <footer className="flex p-4 justify-center items-center bg-white ">
+            <footer className="flex py-6 justify-center items-center bg-white">
               <Button
                 onClick={onClose}
                 className="text-sm md:text-lg flex flex-row gap-1 md:gap-2 px-4 md:px-8 py-2 md:py-4 rounded-full items-center shadow-[4.38px_4.38px_3.5px_0px_rgba(0,0,0,0.25)]"
@@ -172,11 +177,11 @@ export function Modal(props: ModalProps) {
             <div className="text-sm flex flex-col gap-3">
               <div className="font-medium">
                 {today < props.event.start.getTime() ? (
-                  <span className="px-4 py-2 bg-[#99B6D9] rounded">Belum</span>
+                  <span className="px-4 py-1 bg-[#99B6D9] rounded-xl">Belum</span>
                 ) : today > props.event.end.getTime() ? (
-                  <span className="px-4 py-2 bg-[#99B6D9] rounded">Selesai</span>
+                  <span className="px-4 py-1 bg-[#99B6D9] rounded-xl">Selesai</span>
                 ) : (
-                  <span className="px-4 py-2 bg-[#99B6D9] rounded">Berlangsung!</span>
+                  <span className="px-4 py-1 bg-[#99B6D9] rounded">Berlangsung!</span>
                 )}
               </div>
 
@@ -193,37 +198,39 @@ export function Modal(props: ModalProps) {
         {type === "calendar" && props.mode === "multiple" && (
           <div className="relative flex w-fit flex-col rounded-[20px] bg-[#EDF3F6CC] p-5 text-[var(--color-dark-blue)] gap-5">
             <X
-                className="absolute top-4 right-4 cursor-pointer z-99"
-                onClick={onClose}
-                size={40}
-              />
+              className="absolute top-4 right-4 cursor-pointer z-99"
+              onClick={onClose}
+              size={40}
+            />
             <div className="relative overflow-visible max-h-[50vh] overflow-y-auto scrollbar scrollbar-sm scrollbar-thumb-[#AFAFAF] scrollbar-track-scrollbar-track">
-              {Array.from(props.events).map((event, idx) => {
-                return (
-                  <div key={event.id} className="relative flex flex-col pb-5">
-                    <div className="flex flex-col gap-3">
-                      <h1 className="w-full font-bold text-xl">{event.title}</h1>
-                      <div className="text-sm flex flex-col gap-3">
-                        <div className="font-medium">
-                          {today < event.start.getTime() ? (
-                            <span className="px-4 py-2 bg-[#99B6D9] rounded">Belum</span>
-                          ) : today > event.end.getTime() ? (
-                            <span className="px-4 py-2 bg-[#99B6D9] rounded">Selesai</span>
-                          ) : (
-                            <span className="px-4 py-2 bg-[#99B6D9] rounded">Berlangsung</span>
-                          )}
-                        </div>
-                        <div className="grid grid-cols-[1fr_3fr] gap-2">
-                          <span>Mulai</span>
-                          <span>: {formatDate(event.start, "fullDate")}</span>
-                          <span>Selesai</span>
-                          <span>: {formatDate(event.end, "fullDate")}</span>
+              {Array.from(props.events)
+                .sort((a, b) => a.start.getTime() - b.start.getTime()) // urut dari tanggal terkecil
+                .map((event, idx) => {
+                  return (
+                    <div key={event.id} className="relative flex flex-col pb-5">
+                      <div className="flex flex-col gap-3">
+                        <h1 className="w-full font-bold text-xl">{event.title}</h1>
+                        <div className="text-sm flex flex-col gap-3">
+                          <div className="font-medium">
+                            {today < event.start.getTime() ? (
+                              <span className="px-4 py-2 bg-[#99B6D9] rounded">Belum</span>
+                            ) : today > event.end.getTime() ? (
+                              <span className="px-4 py-2 bg-[#99B6D9] rounded">Selesai</span>
+                            ) : (
+                              <span className="px-4 py-2 bg-[#99B6D9] rounded">Berlangsung</span>
+                            )}
+                          </div>
+                          <div className="grid grid-cols-[1fr_3fr] gap-2">
+                            <span>Mulai</span>
+                            <span>: {formatDate(event.start, "fullDate")}</span>
+                            <span>Selesai</span>
+                            <span>: {formatDate(event.end, "fullDate")}</span>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
             </div>
 
           </div>

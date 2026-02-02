@@ -10,6 +10,7 @@ import { sortEvents } from '../utils/SortEvent';
 import { EventCard } from '../components/EventCard';
 import { formatMonthName } from '../utils/FormatDate';
 import { ShowNextEvent } from '../components/ShowNextEvent';
+import { EventCardEmpty } from '../components/EventCardEmpty';
 
 function EventCardDecoration() {
   return (
@@ -27,7 +28,7 @@ function EventCardContent({ events }: { events: EventCardProps[] }) {
       <div className="grid grid-cols-3 md:grid-cols-[2fr_3fr_2fr] gap-1 sm:gap-4 xl:gap-8 items-stretch">
         <div className="grid grid-rows-[auto_1fr] min-h-full">
           <h2 className="h-fit w-full text-center uppercase py-5 md:py-10 font-semibold text-[12px] md:text-2xl xl:text-3xl text-[var(--color-nile-blue)]">Sebelum</h2>
-          {pastNotGoing && <EventCard variant="notGoing" {...pastNotGoing} />}
+          {pastNotGoing ? <EventCard variant="notGoing" {...pastNotGoing} /> : <EventCardEmpty />}
         </div>
         <div className="grid grid-rows-[auto_1fr] min-h-full">
           {nextOnGoing && (
@@ -37,11 +38,11 @@ function EventCardContent({ events }: { events: EventCardProps[] }) {
             </div>
           )}
 
-          {nextOnGoing && (<ShowNextEvent events={nextOnGoing} />)}
+          {nextOnGoing ? (<ShowNextEvent events={nextOnGoing} />) : <EventCardEmpty />}
         </div>
         <div className="grid grid-rows-[auto_1fr] min-h-full">
           <h2 className="h-fit w-full text-center uppercase py-5 md:py-10 font-semibold text-[12px] md:text-2xl xl:text-3xl text-[var(--color-nile-blue)]">Mendatang</h2>
-          {futureNotGoing && <EventCard variant="notGoing" {...futureNotGoing} />}
+          {futureNotGoing ? <EventCard variant="notGoing" {...futureNotGoing} /> : <EventCardEmpty />}
         </div>
       </div>
       <div className="w-full justify-center flex flex-row py-5 md:py-10">
