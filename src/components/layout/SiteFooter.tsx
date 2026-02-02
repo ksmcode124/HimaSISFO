@@ -38,6 +38,7 @@ export default function SiteFooter() {
       ref={footerRef}
       className="
         relative
+        bg-blue-500
         overflow-hidden pt-15"
     >
       {//tangan

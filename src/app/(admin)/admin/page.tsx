@@ -22,11 +22,6 @@ import { Calendar, Handshake, Users } from 'lucide-react';
 
 
 const dashboardSummaryConfig = {
-  komunitas: {
-    title: 'Komunitas',
-    icon: Handshake,
-    link: '/admin/komunitas',
-  },
   kabinet: {
     title: 'Kabinet',
     icon: Users,
@@ -36,6 +31,11 @@ const dashboardSummaryConfig = {
     title: 'Event',
     icon: Calendar,
     link: '/admin/event',
+  },
+  komunitas: {
+    title: 'Komunitas',
+    icon: Handshake,
+    link: '/admin/komunitas',
   },
 };
 
