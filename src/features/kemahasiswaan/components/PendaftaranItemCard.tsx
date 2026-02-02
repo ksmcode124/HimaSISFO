@@ -9,7 +9,7 @@ export function PendaftaranItemCard({ item }: Props) {
   return (
     <Link
       href={`pendaftaran-dan-verifikasi/${item.id}`}
-      className="relative w-full aspect-4/3 rounded-xl overflow-hidden"
+      className="relative w-full aspect-4/3 rounded-xl overflow-hidden hover:scale-105"
     >
       <div
         className="

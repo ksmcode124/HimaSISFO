@@ -218,20 +218,15 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       {...props}
     >
-      <Glass
-        borderRadius={9999}
-        className="flex items-center justify-center"
-      >
-        <svg width="0" height="0" style={{ position: 'absolute' }}>
-          <defs>
-            <linearGradient id="triangleGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="50%" stopColor="#456882" />
-              <stop offset="100%" stopColor="#1B3C53" />
-            </linearGradient>
-          </defs>
-        </svg>
-        <Triangle className="-rotate-90 size-12 m-8" fill="url(#triangleGradient2)" strokeWidth={0} />
-      </Glass>
+      <svg width="0" height="0" style={{ position: 'absolute' }}>
+        <defs>
+          <linearGradient id="triangleGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="50%" stopColor="#456882" />
+            <stop offset="100%" stopColor="#1B3C53" />
+          </linearGradient>
+        </defs>
+      </svg>
+      <Triangle className="-rotate-90 size-12" fill="url(#triangleGradient2)" strokeWidth={0} />
       <span className="sr-only">Previous slide</span>
     </Button>
   )
@@ -261,20 +256,15 @@ const CarouselNext = React.forwardRef<
       onClick={scrollNext}
       {...props}
     >
-      <Glass
-        borderRadius={9999}
-        className="flex items-center justify-center"
-      >
-        <svg width="0" height="0" style={{ position: 'absolute' }}>
-          <defs>
-            <linearGradient id="triangleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="50%" stopColor="#456882" />
-              <stop offset="100%" stopColor="#1B3C53" />
-            </linearGradient>
-          </defs>
-        </svg>
-         <Triangle className="rotate-90 size-12" fill="url(#triangleGradient)" strokeWidth={0}/>
-      </Glass>
+      <svg width="0" height="0" style={{ position: 'absolute' }}>
+        <defs>
+          <linearGradient id="triangleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="50%" stopColor="#456882" />
+            <stop offset="100%" stopColor="#1B3C53" />
+          </linearGradient>
+        </defs>
+      </svg>
+      <Triangle className="rotate-90 size-12" fill="url(#triangleGradient)" strokeWidth={0}/>
       <span className="sr-only">Next slide</span>
     </Button>
   )

@@ -50,7 +50,7 @@ export default function DepartemenPage() {
   }
 
   return (
-    <main className="bg-white antialiased">
+    <>
       <DepartemenHeroSection
         nama_dept={selectedDeptDetail.departemen.nama_departemen}
         deskripsi={selectedDeptDetail.departemen.deskripsi_departemen}
@@ -61,6 +61,6 @@ export default function DepartemenPage() {
       />
       <ProkerSection data={selectedDeptDetail.proker} />
       <StaffSection data={selectedDeptDetail.anggota} />
-    </main>
+    </>
   );
 }

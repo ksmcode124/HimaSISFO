@@ -47,7 +47,6 @@ function VerticalAccordionItem({ item }: { item: ItemDataJSON }) {
             className="w-full"
           >
             <Glass
-              borderRadius={16}
               className="flex w-full min-h-90 px-10 pt-1.5 pb-2.5 lg:min-h-150 border border-neutral-400 rounded-2xl"
             >
               <div className="h-[70%] p-5">

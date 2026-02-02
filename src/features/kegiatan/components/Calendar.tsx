@@ -17,9 +17,9 @@ export function DynamicCalendar({ className, events }: DynamicCalendarProps) {
   const [month, setMonth] = useState(today.getMonth());
   const [open, setOpen] = useState(false);
   type ModalState =
-  | { mode: "single"; event: EventCardProps }
-  | { mode: "multiple"; events: EventCardProps[] }
-  | null;
+    | { mode: "single"; event: EventCardProps }
+    | { mode: "multiple"; events: EventCardProps[] }
+    | null;
   const [modalState, setModalState] = useState<ModalState>(null);
 
   const daysGrid = useMemo(() => {
@@ -27,29 +27,40 @@ export function DynamicCalendar({ className, events }: DynamicCalendarProps) {
     return days.length > 35 ? days.slice(0, 35) : days;
   }, [year, month]);
 
-  const eventsByDate = useMemo(() => {
-    const map: Record<string, typeof events> = {};
+const eventsByDate = useMemo(() => {
+  const map: Record<string, typeof events> = {};
 
-    (events || []).forEach(event => {
-      const start = parseEventDate(event.start);
-      const end = event.end ? parseEventDate(event.end) : start;
+  (events || []).forEach(event => {
+    const start = parseEventDate(event.start); // Date
+    // console.log("start", start);
+    const end = event.end ? parseEventDate(event.end) : start; // Date
 
-      const d = new Date(start);
-      d.setHours(0, 0, 0, 0);
+    // Pastikan kita tidak mutasi start
+    let current = new Date(start);
 
-      const endDay = new Date(end);
-      endDay.setHours(0, 0, 0, 0);
+    const endDay = new Date(end);
 
-      for (; d <= endDay; d.setDate(d.getDate() + 1)) {
-        if (d.getFullYear() !== year || d.getMonth() !== month) continue;
-        const key = toDateKey(d);
+    while (current <= endDay) {
+      // Hanya index untuk bulan yang sedang ditampilkan
+      if (current.getFullYear() === year && current.getMonth() === month) {
+        const key = toDateKey(current);
         if (!map[key]) map[key] = [];
-        map[key].push(event);
+        // Push salinan event agar tidak conflict di day loop
+        map[key].push({
+          ...event,
+          start: new Date(event.start),
+          end: event.end ? new Date(event.end) : new Date(event.start),
+        });
       }
-    });
+      // increment current sebagai date baru
+      current = new Date(current);
+      current.setDate(current.getDate() + 1);
+      current.setHours(0, 0, 0, 0);
+    }
+  });
 
-    return map;
-  }, [events, year, month]);
+  return map;
+}, [events, year, month]);
 
   const goPrevMonth = () => {
     if (month === 0) {
@@ -70,15 +81,15 @@ export function DynamicCalendar({ className, events }: DynamicCalendarProps) {
   };
 
   return (
-    <div className={clsx(className, "w-full py-4 px-2 md:px-4 bg-white rounded-lg shadow")}>
-      {/* Header Navigasi */}
+    <div className={clsx(className, "w-full py-4 px-2 md:px-4 bg-white rounded-lg")}>
+
       <div className="flex items-center justify-between my-5">
-        <h2 className="text-[16px] md:text-[24px] font-bold text-[var(--color-dark-blue)]">
+        <h2 className="text-[20px] md:text-[24px] font-semibold md:font-bold text-[var(--color-nile-blue)]">
           {formatMonthName(month)}, {formatYear(year)}
         </h2>
-        <div className="flex border-3 border-[var(--color-dark-blue)] rounded">
-          <button onClick={goPrevMonth} className="p-1 border-r-3">
-            <ChevronLeft />
+        <div className="flex border-3 border-[var(--color-nile-blue)] rounded">
+          <button onClick={goPrevMonth} className="p-1 border-r-3 border-[var(--color-nile-blue)]">
+            <ChevronLeft className="text-[var(--color-nile-blue)]" />
           </button>
           <FilterComp
             type="calendar"
@@ -89,18 +100,17 @@ export function DynamicCalendar({ className, events }: DynamicCalendarProps) {
               setYear(y as number);
             }}
           />
-          <button onClick={goNextMonth} className="p-1 border-l-3">
-            <ChevronRight />
+          <button onClick={goNextMonth} className="p-1 border-l-3 border-[var(--color-nile-blue)]">
+            <ChevronRight className="text-[var(--color-nile-blue)]" />
           </button>
         </div>
       </div>
 
-      {/* Header Hari */}
-      <div className="grid grid-cols-14 text-white text-sm font-medium border border-white">
+      <div className="grid grid-cols-14 text-[var(--color-nile-blue)] border border-white">
         {WEEK_DAYS.map((day, i) => (
           <div
             key={day}
-            className="bg-[#6482A6] pl-1 md:pl-2 py-1 uppercase col-span-2 text-xs md:text-sm"
+            className="bg-[#6482A6] pl-1 md:pl-2 py-1 uppercase col-span-2 text-xs md:text-sm font-medium text-white"
             style={{ gridColumnStart: i * 2 + 1 }}
           >
             {day}
@@ -108,15 +118,16 @@ export function DynamicCalendar({ className, events }: DynamicCalendarProps) {
         ))}
       </div>
 
-      {/* Grid Kalender */}
       <div className="grid grid-cols-14 grid-rows-20">
         {daysGrid.map(({ day, isCurrentMonth, dateObj }) => {
 
           const key = toDateKey(dateObj);
           const isToday = key === toDateKey(today);
           // Ambil event khusus hari ini
-          const dayEvents = sortEventsByDay(eventsByDate[key] ?? [], dateObj);
-          // console.log({ key, dayEvents });
+          const dayEvents = eventsByDate[key] ?? [];
+          const visibleEvents = dayEvents.slice(0, 5);
+          // console.log("event ", eventsByDate);
+          // console.log({ day, dayEvents });
           return (
             <div
               key={key}
@@ -125,11 +136,10 @@ export function DynamicCalendar({ className, events }: DynamicCalendarProps) {
                 isCurrentMonth ? "bg-[#99B6D9]" : "bg-[#B3C9E4]"
               )}
             >
-              {/* Angka Tanggal */}
               <div className="h-fit pl-1 md:pl-2 pt-1 md:pt-2 row-span-1">
                 <div
                   className={clsx(
-                    "font-medium text-[var(--color-dark-blue)] text-xs md:text-sm",
+                    "font-medium text-[var(--color-nile-blue)] text-xs md:text-sm",
                     !isCurrentMonth && "opacity-50",
                     isToday && "bg-[#3978FF] text-white rounded-full w-6 md:w-8 h-6 md:h-8 flex items-center justify-center"
                   )}
@@ -138,37 +148,37 @@ export function DynamicCalendar({ className, events }: DynamicCalendarProps) {
                 </div>
               </div>
 
-              {/* Area Event */}
               <div className="w-full relative row-span-3 col-span-2 overflow-hidden px-1">
 
                 {(() => {
-                  if (dayEvents.length === 0) return null;
-
+                  if (visibleEvents.length === 0) return null;
+                    // console.log("visibleEvents", visibleEvents);
                   // EFEK TUMPUK (Buku) jika event > 3
-                  if (dayEvents.length > 3) {
+                  if (visibleEvents.length > 3) {
                     return (
                       <div className="relative w-full h-full mt-2">
-                        {dayEvents.map((ev, i) => {
-                          const isTopCard = i === dayEvents.length - 1;
+                        {visibleEvents.slice(0, 5).map((ev, i) => {
+                          const isTopCard = i === visibleEvents.length - 1;
+
                           return (
-                            <div
-                              key={`${ev.id}-${key}`}
-                              style={{ top: `${i * 4}px`, zIndex: i }}
-                              className={clsx(
-                                "absolute left-0 right-0 h-[25px] md:h-[35px] rounded-[5px]",
-                                "flex items-center justify-center shadow-lg border border-white/20",
-                                "-translate-y-[2px] transition-all cursor-pointer hover:z-[99] hover:-translate-y-2",
-                                ev.type === "Hima" && "bg-gradient-to-r from-[#1B3C53] to-[#456882]",
-                                ev.type === "Beasiswa" && "bg-gradient-to-r from-[#7F1D1D] to-[#DC2626]",
-                                ev.type === "Lomba" && "bg-gradient-to-r from-[#CA8A04] to-[#EAB308]"
-                              )}
-                              onClick={() => { setModalState({ mode: "multiple", events: dayEvents });; setOpen(true); }}
-                            >
-                              {isTopCard && (
-                                <span className="text-white font-bold text-xs md:text-sm">+{dayEvents.length}</span>
-                              )}
-                            </div>
-                          );
+                              <div
+                                key={`${ev.id}-${key}`}
+                                style={{ top: `${i * 4}px`, zIndex: i }}
+                                className={clsx(
+                                  "absolute left-0 right-0 h-[15px] md:h-[35px] rounded-[5px]",
+                                  "flex items-center justify-center shadow-lg border border-white/20",
+                                  "-translate-y-[2px] transition-all cursor-pointer hover:z-[99] hover:-translate-y-2",
+                                  ev.type === "Hima" ? "bg-gradient-to-r from-[#1B3C53] to-[#456882]" :
+                                  ev.type === "Beasiswa" ? "bg-gradient-to-r from-[#7F1D1D] to-[#DC2626]" :
+                                  ev.type === "Lomba" ? "bg-gradient-to-r from-[#CA8A04] to-[#EAB308]" : ""
+                                )}
+                                onClick={() => { setModalState({ mode: "multiple", events: visibleEvents });; setOpen(true); }}
+                              >
+                                {isTopCard && (
+                                  <span className="text-white font-bold text-[8px] md:text-sm">+{dayEvents.length}</span>
+                                )}
+                              </div>
+                            );
                         })}
                       </div>
                     );
@@ -181,19 +191,20 @@ export function DynamicCalendar({ className, events }: DynamicCalendarProps) {
                             <div
                               key={`${ev.id}-${key}`}
                               className={clsx(
-                              "relative flex items-center px-2 h-[15px] md:h-[28px] rounded-[4px]",
-                              "text-xs md:text-sm font-bold text-white cursor-pointer shadow-sm",
-                              "truncate whitespace-nowrap overflow-hidden -translate-y-[2px]",
-                              ev.type === "Hima" && "bg-gradient-to-r from-[#1B3C53] to-[#456882]",
-                              ev.type === "Beasiswa" && "bg-gradient-to-r from-[#7F1D1D] to-[#DC2626]",
-                              ev.type === "Lomba" && "bg-gradient-to-r from-[#CA8A04] to-[#EAB308]"
-                            )}
-                            onClick={() => { setModalState({ mode: "single", event: ev });; setOpen(true); }}
-                          >
-                            <span className="truncate w-full">{ev.title}</span>
-                          </div>
-                        )
-                      }})}
+                                "relative flex items-center px-1 md:px-2 h-[15px] md:h-[35px] rounded-[4px]",
+                                "cursor-pointer shadow-sm",
+                                "whitespace-nowrap overflow-hidden transition-all -translate-y-[2px] hover:-translate-y-2",
+                                ev.type === "Hima" && "bg-gradient-to-r from-[#1B3C53] to-[#456882]",
+                                ev.type === "Beasiswa" && "bg-gradient-to-r from-[#7F1D1D] to-[#DC2626]",
+                                ev.type === "Lomba" && "bg-gradient-to-r from-[#CA8A04] to-[#EAB308]"
+                              )}
+                              onClick={() => { setModalState({ mode: "single", event: ev });; setOpen(true); }}
+                            >
+                              <span className="truncate w-full text-[8px] md:text-sm font-bold text-white">{ev.title}</span>
+                            </div>
+                          )
+                        }
+                      })}
                     </div>
                   );
                 })()}
@@ -203,18 +214,17 @@ export function DynamicCalendar({ className, events }: DynamicCalendarProps) {
         })}
       </div>
 
-      {/* Modal Detail */}
       {modalState && (
-  <Modal
-    open={open}
-    onClose={() => {
-      setOpen(false);
-      setModalState(null);
-    }}
-    type="calendar"
-    {...modalState}
-  />
-)}
+        <Modal
+          open={open}
+          onClose={() => {
+            setOpen(false);
+            setModalState(null);
+          }}
+          type="calendar"
+          {...modalState}
+        />
+      )}
     </div>
   );
 }
