@@ -8,17 +8,21 @@ import {
   type CarouselApi,
 } from '@/components/ui/carousel'
 import type { EmblaCarouselType, EmblaEventType } from 'embla-carousel'
+import useEmblaCarousel from 'embla-carousel-react'
 
 const TWEEN_FACTOR = 0.52
 
 const clamp = (v: number, min = 0.75, max = 1) => Math.min(Math.max(v, min), max)
+type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
+type CarouselOptions = UseCarouselParameters[0]
 
 type ScaleCarouselProps = {
   children: React.ReactNode[]
   className?: string
+  opts?: CarouselOptions
 }
 
-export function ScaleCarousel({ children, className }: ScaleCarouselProps) {
+export function ScaleCarousel({ children, className, opts }: ScaleCarouselProps) {
   const emblaApiRef = React.useRef<EmblaCarouselType | undefined | null>(null)
   const itemsRef = React.useRef<HTMLElement[]>([])
 
@@ -51,12 +55,12 @@ export function ScaleCarousel({ children, className }: ScaleCarouselProps) {
   return (
     <Carousel
       className={className}
-      opts={{ loop: true, align: 'start' }}
+      opts={opts}
       setApi={onInitApi}
     >
       <CarouselContent>
         {children.map((child, i) => (
-          <CarouselItem key={i} className='basis-1/3'>
+          <CarouselItem key={i} className='sm:basis-1/3'>
             <div data-scale className="transition-transform duration-50">
               {child}
             </div>
