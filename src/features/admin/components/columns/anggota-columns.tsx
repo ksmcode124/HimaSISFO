@@ -18,7 +18,7 @@ export function anggotaColumns({
     { accessorKey: 'id', header: 'ID' },
     { accessorKey: 'nama_anggota', header: 'Nama Anggota' },
     { accessorKey: 'kabinet', header: 'Kabinet'},
-    { accessorKey: 'jabatan', header: 'Jabatan'},
+    { accessorKey: 'id_jabatan', header: 'ID Jabatan'},
     {
       id: 'actions',
       header: 'Aksi',

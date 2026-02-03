@@ -16,7 +16,7 @@ export function KemahasiswaanCard({ data, active, device }: KemahasiswaanCardPro
       className={cn(
         "h-full w-full flex flex-col rounded-lg overflow-hidden",
         active
-          ? "bg-transparent px-2.5 pt-1.5 pb-2.5"
+          ? "bg-transparent px-5 pt-1.5 pb-2.5"
           : "bg-gradient-to-r from-[#456882] to-[#1B3C53] text-white px-5 py-15"
       )}
     >

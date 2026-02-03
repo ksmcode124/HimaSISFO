@@ -34,7 +34,9 @@ export function useTable<TData>(
       sorting,
       columnFilters,
     },
-
+      initialState: {
+      sorting: [{ id: columns[0].id ?? '', desc: false }],
+    },
     enableColumnFilters: true,
 
     onGlobalFilterChange: setGlobalFilter,

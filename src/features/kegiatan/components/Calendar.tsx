@@ -32,7 +32,7 @@ const eventsByDate = useMemo(() => {
 
   (events || []).forEach(event => {
     const start = parseEventDate(event.start); // Date
-    console.log("start", start);
+    // console.log("start", start);
     const end = event.end ? parseEventDate(event.end) : start; // Date
 
     // Pastikan kita tidak mutasi start
@@ -81,7 +81,7 @@ const eventsByDate = useMemo(() => {
   };
 
   return (
-    <div className={clsx(className, "w-full py-4 px-2 md:px-4 bg-white rounded-lg shadow")}>
+    <div className={clsx(className, "w-full py-4 px-2 md:px-4 bg-white rounded-lg")}>
 
       <div className="flex items-center justify-between my-5">
         <h2 className="text-[20px] md:text-[24px] font-semibold md:font-bold text-[var(--color-nile-blue)]">
@@ -125,8 +125,9 @@ const eventsByDate = useMemo(() => {
           const isToday = key === toDateKey(today);
           // Ambil event khusus hari ini
           const dayEvents = eventsByDate[key] ?? [];
-          console.log("event ", eventsByDate);
-          console.log({ day, dayEvents });
+          const visibleEvents = dayEvents.slice(0, 5);
+          // console.log("event ", eventsByDate);
+          // console.log({ day, dayEvents });
           return (
             <div
               key={key}
@@ -150,17 +151,16 @@ const eventsByDate = useMemo(() => {
               <div className="w-full relative row-span-3 col-span-2 overflow-hidden px-1">
 
                 {(() => {
-                  if (dayEvents.length === 0) return null;
-
+                  if (visibleEvents.length === 0) return null;
+                    // console.log("visibleEvents", visibleEvents);
                   // EFEK TUMPUK (Buku) jika event > 3
-                  if (dayEvents.length > 3) {
+                  if (visibleEvents.length > 3) {
                     return (
                       <div className="relative w-full h-full mt-2">
-                        {dayEvents.map((ev, i) => {
-                          const isTopCard = i === dayEvents.length - 1;
-                          if (Number(toDateKey(ev.start).split("-").pop()) === day) {
-                            
-                            return (
+                        {visibleEvents.slice(0, 5).map((ev, i) => {
+                          const isTopCard = i === visibleEvents.length - 1;
+
+                          return (
                               <div
                                 key={`${ev.id}-${key}`}
                                 style={{ top: `${i * 4}px`, zIndex: i }}
@@ -168,19 +168,17 @@ const eventsByDate = useMemo(() => {
                                   "absolute left-0 right-0 h-[15px] md:h-[35px] rounded-[5px]",
                                   "flex items-center justify-center shadow-lg border border-white/20",
                                   "-translate-y-[2px] transition-all cursor-pointer hover:z-[99] hover:-translate-y-2",
-                                  ev.type === "Hima" && "bg-gradient-to-r from-[#1B3C53] to-[#456882]",
-                                  ev.type === "Beasiswa" && "bg-gradient-to-r from-[#7F1D1D] to-[#DC2626]",
-                                  ev.type === "Lomba" && "bg-gradient-to-r from-[#CA8A04] to-[#EAB308]"
+                                  ev.type === "Hima" ? "bg-gradient-to-r from-[#1B3C53] to-[#456882]" :
+                                  ev.type === "Beasiswa" ? "bg-gradient-to-r from-[#7F1D1D] to-[#DC2626]" :
+                                  ev.type === "Lomba" ? "bg-gradient-to-r from-[#CA8A04] to-[#EAB308]" : ""
                                 )}
-                                onClick={() => { setModalState({ mode: "multiple", events: dayEvents });; setOpen(true); }}
+                                onClick={() => { setModalState({ mode: "multiple", events: visibleEvents });; setOpen(true); }}
                               >
                                 {isTopCard && (
                                   <span className="text-white font-bold text-[8px] md:text-sm">+{dayEvents.length}</span>
                                 )}
                               </div>
                             );
-                          }
-
                         })}
                       </div>
                     );

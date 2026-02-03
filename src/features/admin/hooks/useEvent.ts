@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
-import { api } from '@/features/admin/services/api';
+import { api } from '@/lib/services/api';
 import { AdminEventRow, AdminEventDetail, EventResponseAdmin, Event } from '../types';
 
 // Mapping list response ke row

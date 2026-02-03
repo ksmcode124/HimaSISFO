@@ -26,8 +26,8 @@ export default function Page() {
     <>
       <BackgroundLayer>
         <div className="w-full overflow-hidden">
-          <CalendarLeftDecoration className="absolute h-fit top-25 opacity-25" />
-          <CalendarRightDecoration className="absolute h-fit top-25 opacity-25" />
+          <CalendarLeftDecoration className="absolute h-fit top-1/100 opacity-25" />
+          <CalendarRightDecoration className="absolute h-fit top-1/100 opacity-25" />
         </div>
         <RoundedBg align="start" />
         <RoundedBg align="end" />
@@ -37,7 +37,6 @@ export default function Page() {
         <PitaDecoration />
         <EventCardSection />
       </div>
-      <div></div>
     </>
   );
 }

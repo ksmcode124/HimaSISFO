@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules'
 import type { Swiper as SwiperType } from 'swiper'
@@ -12,12 +12,15 @@ import { Triangle } from "lucide-react"
 import 'swiper/css'
 import 'swiper/css/navigation'
 import { CardProps } from "../types/ui"
+import { useRouter, useSearchParams } from "next/navigation"
+
 
 const MOBILE_BREAKPOINT = 541
 const TABLET_BREAKPOINT = 1025
 
 export function useDeviceType() {
   const [device, setDevice] = useState<'mobile' | 'tablet' | 'desktop'>('desktop')
+  
 
   useEffect(() => {
     const updateDevice = () => {
@@ -41,8 +44,63 @@ interface Props {
 export function AlurKemahasiswaanCarousel({ data }: Props) {
   const [swiper, setSwiper] = useState<SwiperType | null>(null)
   const [activeIndex, setActiveIndex] = useState(0)
+
+  const router = useRouter()
+  const searchParams = useSearchParams()
   const device = useDeviceType()
 
+  const idToIndexRef = useRef<Map<string, number>>(new Map())
+  const hasHydratedRef = useRef(false)
+
+  // build index map once
+  useEffect(() => {
+    const map = new Map<string, number>()
+    data.forEach((d, i) => map.set(String(d.id), i))
+    idToIndexRef.current = map
+  }, [data])
+
+  /**
+   * URL → state (browser back/forward ONLY)
+   */
+  useEffect(() => {
+    if (!swiper || hasHydratedRef.current) return
+
+    const itemId = searchParams.get("item")
+    if (!itemId) return
+
+    const index = idToIndexRef.current.get(itemId)
+    if (index === undefined) return
+
+    hasHydratedRef.current = true
+    setActiveIndex(index)
+  }, [swiper, searchParams])
+
+
+  /**
+   * state → Swiper (visual sync ONLY)
+   */
+  useEffect(() => {
+    if (!swiper) return
+    swiper.slideToLoop(activeIndex, 400)
+  }, [activeIndex, swiper])
+
+  /**
+   * state → URL (idempotent)
+   */
+  useEffect(() => {
+    const item = data[activeIndex]
+    if (!item) return
+
+    const current = searchParams.get("item")
+    if (current === String(item.id)) return
+
+    router.replace(
+      `/kemahasiswaan?item=${encodeURIComponent(item.id)}`,
+      { scroll: false }
+    )
+  }, [activeIndex, data, router, searchParams])
+
+  
   return (
     <div className="relative w-full lg:max-w-3xl 2xl:max-w-7xl py-8 min-h-75 h-full">
       <style jsx global>{`
@@ -63,7 +121,6 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
       <Swiper
         modules={[Navigation]}
         onSwiper={setSwiper}
-        onSlideChange={(s) => setActiveIndex(s.realIndex)}
         loop
         centeredSlides
         speed={800}
@@ -111,7 +168,7 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
                 <motion.div
                   className="w-full h-full cursor-pointer"
                   onClick={() => {
-                    if (!swiperActive && swiper) swiper.slideToLoop(index)
+                    if (!swiperActive && swiper) setActiveIndex(index)
                   }}
                   animate={{
                     scale: isActive ? 1 : 0.75,
@@ -120,9 +177,13 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
                   }}
                   transition={{ type: "spring", stiffness: 220, damping: 26, mass: 0.9 }}
                 >
-                  <Glass className={cn("w-full h-full flex items-center justify-center")}>
+                  {isActive ? (
+                    <Glass className={cn("w-full h-full flex items-center justify-center rounded-3xl")}>
+                      <KemahasiswaanCard data={item} active={isActive} device={device} />
+                    </Glass>
+                  ): (
                     <KemahasiswaanCard data={item} active={isActive} device={device} />
-                  </Glass>
+                  )}
                 </motion.div>
               )}
             </SwiperSlide>
@@ -133,7 +194,9 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
 
       {/* Custom Navigation Buttons */}
       <button
-        onClick={() => swiper?.slidePrev()}
+         onClick={() => {
+          setActiveIndex(i => Math.max(i - 1, 0))
+        }}
         disabled={activeIndex === 0}
         className={cn(
           "absolute -left-12 top-1/2 translate-x-[50%] lg:-translate-x-full -translate-y-full z-50",
@@ -143,8 +206,7 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
         )}
       >
         <Glass
-          borderRadius={9999}
-          className="flex items-center justify-center w-full h-full"
+          className="flex items-center justify-center w-full h-full rounded-full"
         >
           <svg width="0" height="0" style={{ position: 'absolute' }}>
             <defs>
@@ -160,7 +222,9 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
       </button>
 
       <button
-        onClick={() => swiper?.slideNext()}
+         onClick={() => {
+          setActiveIndex(i => Math.min(i + 1, data.length - 1))
+        }}
         disabled={activeIndex === data.length - 1}
         className={cn(
           "absolute -right-12 top-1/2 -translate-x-[50%] lg:translate-x-full -translate-y-full z-50",
@@ -170,8 +234,7 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
         )}
       >
         <Glass
-          borderRadius={9999}
-          className="flex items-center justify-center w-full h-full"
+          className="flex items-center justify-center w-full h-full rounded-full"
         >
           <svg width="0" height="0" style={{ position: 'absolute' }}>
             <defs>
@@ -195,7 +258,7 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
             <button
               key={index}
               aria-label={`Go to slide ${index + 1}`}
-              onClick={() => swiper?.slideTo(index)}
+              onClick={() => setActiveIndex(index)}
               className={cn(
                 "rounded-full transition-all duration-300",
                 "focus:outline-none",

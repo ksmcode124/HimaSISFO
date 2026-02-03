@@ -6,6 +6,7 @@ import { createPortal } from "react-dom";
 type LayerProps = {
   children?: React.ReactNode;
   className?: string;
+  ref?: React.Ref<HTMLDivElement>;
 };
 export function BackgroundLayer({ children, className }: LayerProps) {
   return (
@@ -15,10 +16,12 @@ export function BackgroundLayer({ children, className }: LayerProps) {
   );
 }
 
-export function DecorationLayer({ children, className }: LayerProps) {
+export function DecorationLayer({ children, className, ref }: LayerProps) {
   return (
     <div
-      className={clsx("absolute inset-0 z-5 pointer-events-none", className)}>
+      className={clsx("absolute inset-0 z-5 pointer-events-none", className)}
+      ref={ref}
+    >
       {children}
     </div>
   );

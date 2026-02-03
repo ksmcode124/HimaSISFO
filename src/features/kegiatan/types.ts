@@ -52,6 +52,7 @@ export interface BreadCrumbItems {
 export type EventItem = {
   id: number;
   title: string;
+  description?: string | null;
   start: Date;
   end: Date;
 };

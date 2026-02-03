@@ -1,25 +1,37 @@
-import React from "react";
+import * as React from "react";
 
-type ConfirmVariant = 'save' | 'delete';
+type ConfirmVariant = "save" | "delete";
 
 export function useConfirm() {
   const [open, setOpen] = React.useState(false);
-  const [variant, setVariant] = React.useState<ConfirmVariant>('delete');
-  const [onConfirm, setOnConfirm] = React.useState<(() => Promise<void> | void) | null>(null);
+  const [variant, setVariant] = React.useState<ConfirmVariant>("delete");
 
-  const confirm = (
-    variant: ConfirmVariant,
-    action: () => Promise<void> | void
-  ) => {
-    setVariant(variant);
-    setOnConfirm(() => action);
-    setOpen(true);
+  const resolverRef = React.useRef<((value: boolean) => void) | null>(null);
+
+  const cleanup = () => {
+    resolverRef.current = null;
+    setOpen(false);
   };
 
-  const handleConfirm = async () => {
-    if (!onConfirm) return;
-    await onConfirm();
-    setOpen(false);
+  const confirm = (variant: ConfirmVariant): Promise<boolean> => {
+    setVariant(variant);
+    setOpen(true);
+
+    return new Promise<boolean>((resolve) => {
+      resolverRef.current = resolve;
+    });
+  };
+
+  const handleConfirm = () => {
+    if (!resolverRef.current) return;
+    resolverRef.current(true);
+    cleanup();
+  };
+
+  const handleCancel = () => {
+    if (!resolverRef.current) return;
+    resolverRef.current(false);
+    cleanup();
   };
 
   return {
@@ -27,6 +39,6 @@ export function useConfirm() {
     variant,
     confirm,
     handleConfirm,
-    onOpenChange: setOpen,
+    handleCancel,
   };
 }

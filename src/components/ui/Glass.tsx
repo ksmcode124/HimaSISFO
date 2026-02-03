@@ -156,3 +156,5 @@ export const Glass: React.FC<GlassBetaProps & React.HTMLAttributes<HTMLDivElemen
     </div>
   )
 })
+
+Glass.displayName = "Glass"

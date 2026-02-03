@@ -2,7 +2,7 @@
 'use client';
 
 import { SWRConfig } from 'swr';
-import { api } from '@/features/admin/services/api';
+import { api } from '@/lib/services/api';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
