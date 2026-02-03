@@ -21,7 +21,10 @@ export default function KabinetHeroSection({
   kabinetList,
 }: KabinetHeroSectionProps) {
   const router = useRouter();
-  const images = currentKabinet?.foto_kabinet || [];
+  const images = useMemo(() => {
+    const raw = currentKabinet?.foto_kabinet || [];
+    return Array.isArray(raw) ? raw : [raw];
+  }, [currentKabinet]);
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
 
   const navigation = useMemo(() => {
@@ -139,34 +142,52 @@ const DesktopBackground = ({
 }: {
   images: string[];
   activeIndex: number;
-}) => (
-  <div className="absolute inset-0 hidden md:block z-0">
-    <AnimatePresence initial={false}>
-      {images.map(
-        (src, index) =>
-          index === activeIndex && (
-            <motion.div
-              key={src}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1.2 }}
-              className="absolute inset-0"
-            >
-              <Image
-                src={src}
-                alt="Foto Kabinet"
-                fill
-                className="object-cover"
-                priority={index === 0}
-                sizes="100vw"
-              />
-            </motion.div>
-          ),
-      )}
-    </AnimatePresence>
-  </div>
-);
+}) => {
+  if (!images || images.length === 0) return null;
+
+  // Kalo bukan array (cuma 1 image), render image itu aja
+  if (images.length === 1) {
+    return (
+      <div className="absolute inset-0 hidden md:block z-0">
+        <Image
+          src={images[0]}
+          alt="Foto Kabinet"
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
+    );
+  }
+
+  // Kalo array (image > 1), render slideshow
+  return (
+    <div className="absolute inset-0 hidden md:block z-0">
+      <AnimatePresence initial={false}>
+        {images.map(
+          (src, index) =>
+            index === activeIndex && (
+              <motion.div
+                key={src}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1.2 }}
+                className="absolute inset-0"
+              >
+                <Image
+                  src={src}
+                  alt="Slideshow"
+                  fill
+                  className="object-cover"
+                />
+              </motion.div>
+            ),
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
 
 const MobileBackground = () => (
   <div className="absolute inset-0 md:hidden">
@@ -221,11 +242,7 @@ const YearButton = ({
   disabled?: boolean;
 }) => (
   <div className="relative group">
-    <Glass 
-      preset="medium" 
-      className="rounded-full" 
-      depth={100}
-    >
+    <Glass preset="medium" className="rounded-full" depth={100}>
       <Button
         onClick={onClick}
         disabled={disabled}
