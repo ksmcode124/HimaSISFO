@@ -27,16 +27,16 @@ export default function HeroBeranda() {
             <div className="absolute top-0 left-0 w-full max-h-full min-h-screen">
                 <div className="flex flex-col justify-center items-center min-h-screen max-h-full max-w-200 mx-auto text-center px-4">
                     <h1 className="text-lg md:text-lg font-bold text-white drop-shadow-lg">{data.title}</h1>
-                    <div className="overflow-hidden h-14 md:h-32">
+                    <div className="overflow-hidden h-14 sm:h-20 md:h-32">
                         <motion.div
                             initial={{ y: 100 }}
                             animate={{ y: 0 }}
                             transition={{ duration: 1.2, ease: "easeOut" }}
                         >
-                            <h1 className="mt-2 text-7xl md:text-9xl font-extrabold text-white drop-shadow-lg">HIMASISFO</h1>
+                            <h1 className="mt-2 text-7xl sm:text-8xl md:text-9xl font-extrabold text-white drop-shadow-lg">HIMASISFO</h1>
                         </motion.div>
                     </div>
-                    <p className="mt-4 text-sm text-white drop-shadow-lg">{data.description}</p>
+                    <p className="mt-4 text-xs md:text-sm text-white drop-shadow-lg">{data.description}</p>
                 </div>
             </div>
             <Pita />

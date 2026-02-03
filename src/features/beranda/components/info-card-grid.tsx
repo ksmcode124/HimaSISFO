@@ -16,7 +16,7 @@ export default function InfoCardGrid() {
     return (
         <>
             {/* MOBILE / TABLET — stacked center carousel */}
-            <div className="relative h-100 w-full lg:hidden" >
+            <div className="relative h-100 w-full mx-12 lg:hidden" >
                 {
                     data.items.map((info, i) => {
                         const centerIndex = Math.floor(data.items.length / 2);
@@ -27,7 +27,7 @@ export default function InfoCardGrid() {
                         return (
                             <div
                                 key={i}
-                                className=" absolute top-1/2 left-1/2 w-[300px] bg-linear-to-tl from-[#000000] via-[#23445B] to-[#060400] rounded-2xl shadow-xl p-4 text-background transition-all duration-300"
+                                className=" absolute top-1/2 left-1/2 w-50 sm:w-75 bg-linear-to-tl from-[#000000] via-[#23445B] to-[#060400] rounded-2xl shadow-xl p-4 text-background transition-all duration-300"
                                 style={{
                                     transform: `translate(-50%, -50%) translateX(${offset * translateXValue}px) scale(${offset === 0 ? 1 : 0.9})`,
                                     zIndex: 50 - Math.abs(offset),
@@ -41,8 +41,8 @@ export default function InfoCardGrid() {
                                 />
 
                                 <div className="mt-4">
-                                    <h3 className="font-semibold text-xl">{info.title}</h3>
-                                    <p className="text-sm mt-1 line-clamp-2">{info.excerpt}</p>
+                                    <h3 className="font-semibold text-lg sm:text-xl">{info.title}</h3>
+                                    <p className="text-xs sm:text-sm mt-1 line-clamp-2">{info.excerpt}</p>
                                 </div>
                             </div>
                         );

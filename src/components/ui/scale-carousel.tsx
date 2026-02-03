@@ -60,7 +60,7 @@ export function ScaleCarousel({ children, className, opts }: ScaleCarouselProps)
     >
       <CarouselContent>
         {children.map((child, i) => (
-          <CarouselItem key={i} className='basis-1/3'>
+          <CarouselItem key={i} className='sm:basis-1/3'>
             <div data-scale className="transition-transform duration-50">
               {child}
             </div>
