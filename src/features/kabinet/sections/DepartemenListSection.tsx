@@ -53,7 +53,7 @@ export default function DepartemenListSection({
         <div className="grid grid-cols-2 lg:grid-cols-4 justify-items-center gap-6 md:gap-14 w-full">
           {data &&
             data
-              .filter((dept) => dept.nama_departemen.toLowerCase().includes("inti"))
+              .filter((dept) => !dept.nama_departemen.toLowerCase().includes("inti"))
               .map((dept: DepartemenListItem) => (
                 <DepartemenCard
                   key={dept.id_departemen}
