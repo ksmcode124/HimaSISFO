@@ -6,7 +6,7 @@ import VisionAccordion from '../components/vision-accordion';
 export default function Vision() {
     const data = berandaData.vision_mission;
     return <div className="relative">
-        <div className="min-h-screen flex items-center justify-center lg:my-30 mx-16 bg-radial from-blue-200 to-transparent to-80%">
+        <div className="min-h-screen flex items-center justify-center lg:my-30 sm:mx-16 bg-radial from-blue-200 to-transparent to-80%">
             <div className="grid md:grid-cols-2 h-full w-full">
                 <div className="flex items-center justify-center">
                     <Logo />

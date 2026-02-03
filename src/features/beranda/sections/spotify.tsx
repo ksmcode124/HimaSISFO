@@ -10,28 +10,29 @@ import { berandaData } from "..";
 import EpisodeCard from "../components/episodeCard";
 import { Card } from "@/components/ui/card";
 import SpotifyCarousel from "../components/spotify-carousel";
+import { Glass } from "@/components/ui/Glass";
 
 export default function Spotify() {
   const [activeIndex, setActiveIndex] = useState(0);
   const episodes = berandaData.media.spotify;
 
   return (
-    <div className="pr-20 pt-15 relative overflow-hidden">
-      <section className="z-2 relative w-full rounded-br-[15rem] rounded-tr-2xl bg-linear-to-br from-green-500 to-green-800 p-10 text-white overflow-hidden">
+    <div className="pr-8 mb-30 md:pr-20 md:pt-15 relative">
+      <section className="z-2 relative w-full md:rounded-br-[125px] rounded-br-4xl rounded-tr-lg bg-linear-to-br from-green-500 to-green-800 p-4 sm:p-8 text-white overflow-hidden">
         {/* Header */}
-        <div className="flex items-center gap-3 mb-8">
+        <div className="flex items-center gap-3 mb-2 sm:mb-8">
           <img src="/spotify.svg" alt="Spotify" className="h-8" />
         </div>
 
         <SpotifyCarousel />
 
         {/* Info */}
-        <div className="text-center mb-6">
-          <h2 className="text-2xl font-bold">
+        <div className="md:mb-6">
+          <h2 className="md:text-2xl text-sm font-bold">
             {episodes[activeIndex].season} {episodes[activeIndex].episode}:{" "}
             {episodes[activeIndex].title}
           </h2>
-          <p className="mt-1 text-sm opacity-80">
+          <p className="mt-1 text-xs md:text-sm opacity-80">
             {episodes[activeIndex].date}
           </p>
         </div>
@@ -54,7 +55,7 @@ export default function Spotify() {
               ⏮
             </button>
 
-            <button className="h-14 w-14 rounded-full bg-white text-green-600 flex items-center justify-center text-xl">
+            <button className="size-8 text-xs sm:size-10 rounded-full bg-white text-green-600 flex items-center justify-center sm:text-lg">
               ▶
             </button>
 
@@ -70,7 +71,9 @@ export default function Spotify() {
           </div>
         </div>
       </section>
-      <div className="rounded-br-[15rem] h-[calc(100%-4rem)] rounded-tr-2xl absolute right-15 w-full border top-30 z-1"></div>
+      <div className="md:rounded-br-[125px] rounded-br-4xl h-[calc(100%-4rem)] rounded-tr-lg absolute right-15 w-full overflow-hidden shadow-lg top-30 z-1">
+        <Glass className="w-full h-full" />
+      </div>
     </div>
   );
 }

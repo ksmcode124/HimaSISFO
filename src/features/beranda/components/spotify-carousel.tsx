@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {
   StackedCarousel,
   ResponsiveContainer,
@@ -51,6 +51,7 @@ const Slide = React.memo(function Slide(
  * ====================== */
 export default function SpotifyCarousel() {
   const ref = useRef<any>(null)
+  const { w, h } = useResponsiveCarousel()
 
   const data = [
     { title: 'One', color: '#6366f1' },
@@ -72,8 +73,8 @@ export default function SpotifyCarousel() {
               <StackedCarousel
                 ref={carouselRef}
                 slideComponent={Slide}
-                slideWidth={320}
-                height={420}
+                slideWidth={w}
+                height={h}
                 carouselWidth={width}
                 data={data}
                 maxVisibleSlide={5}
@@ -87,3 +88,26 @@ export default function SpotifyCarousel() {
     </div>
   )
 }
+
+function useResponsiveCarousel() {
+  const [size, setSize] = useState({ w: 96, h: 360 })
+
+  useEffect(() => {
+    const calc = () => {
+      const vw = window.innerWidth
+
+      const w = Math.min(vw * 0.3, 360)
+      const h = Math.min(w * 1.3, 360)
+
+      setSize({ w, h })
+    }
+
+    calc()
+    window.addEventListener('resize', calc)
+    return () => window.removeEventListener('resize', calc)
+  }, [])
+
+  return size
+}
+
+

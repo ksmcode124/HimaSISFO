@@ -4,19 +4,18 @@ import { Button } from "@/components/ui/button";
 import InfoCardGrid from "../components/info-card-grid";
 
 export default function Information() {
-    const data = berandaData.latest_information;
     return (
-        <div className="relative z-0 min-h-screen overflow-hidden">
+        <div className="relative z-0 md:min-h-screen overflow-hidden">
             {/* decorative background */}
             <img
                 src="/assets/beranda/informasi-decorative.png"
-                className="absolute inset-x-0 top-0 md:mt-80 mt-90 w-full -z-10 pointer-events-none"
+                className="absolute inset-x-0 top-0 md:mt-50 mt-70 w-full -z-10 pointer-events-none"
                 alt=""
             />
 
             {/* main content */}
-            <div className="relative z-10 flex min-h-screen flex-col items-center justify-center">
-                <h2 className="text-4xl font-bold">INFORMASI TERBARU</h2>
+            <div className="relative z-10 flex flex-col items-center justify-center">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">INFORMASI TERBARU</h2>
 
                 <InfoCardGrid />
 
