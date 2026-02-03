@@ -1,48 +1,66 @@
 "use client";
 
 import { useParams } from "next/navigation";
+import { useMemo } from "react";
 import kabinetDataRaw from "@/features/kabinet/data/kabinet.json";
-import { KabinetDataJSON } from "@/features/kabinet/types";
+import deptDataRaw from "@/features/kabinet/data/departemen.json";
+import { DepartemenResponse, Kabinet } from "@/features/kabinet/types";
 import {
   DepartemenHeroSection,
   StaffSection,
   ProkerSection,
 } from "@/features/kabinet";
 
-/**
- * Page ini melakukan pemfilteran data bertingkat (Nested Filtering) berdasarkan URL:
- * Mencari kabinet via 'kabinetId', lalu mencari departemen spesifik via 'deptId'
- */
+interface KabinetDataSchema {
+  kabinet: Kabinet[];
+}
 
-const data = kabinetDataRaw as unknown as KabinetDataJSON;
+interface DeptDetailRecord extends DepartemenResponse {
+  id_departemen: number;
+  kabinet_id: number;
+}
 
 export default function DepartemenPage() {
   const params = useParams();
+  const kabinetIdFromUrl = Number(params.kabinetId);
+  const deptIdFromUrl = Number(params.deptId);
 
-  const kabinetId = params.kabinetId as string;
-  const deptId = params.deptId as string;
+  const { currentKabinet, selectedDeptDetail } = useMemo(() => {
+    const kabinetData = kabinetDataRaw as unknown as KabinetDataSchema;
+    const kabinetArray = kabinetData.kabinet;
 
-  const currentKabinet = data.kabinet_list.find((k) => k.id === kabinetId);
-  const dept = currentKabinet?.departemen.find((d) => d.id === deptId);
+    const deptArray = deptDataRaw as unknown as DeptDetailRecord[];
 
-  if (!currentKabinet || !dept) {
+    return {
+      currentKabinet: kabinetArray.find((k) => k.id === kabinetIdFromUrl),
+      selectedDeptDetail: deptArray.find(
+        (d) =>
+          d.id_departemen === deptIdFromUrl &&
+          d.kabinet_id === kabinetIdFromUrl,
+      ),
+    };
+  }, [kabinetIdFromUrl, deptIdFromUrl]);
+
+  if (!currentKabinet || !selectedDeptDetail) {
     return (
-      <div className="p-20 text-center">
-        <h1 className="text-xl font-bold">Departemen Tidak Ditemukan</h1>
+      <div className="flex min-h-[60vh] items-center justify-center">
+        <h1>Departemen Tidak Ditemukan.</h1>
       </div>
     );
   }
 
   return (
-    <main>
+    <>
       <DepartemenHeroSection
-        nama={dept.nama}
-        deskripsi={dept.deskripsi}
-        logo={dept.logo_url}
-        image_url={dept.image_url}
+        nama_dept={selectedDeptDetail.departemen.nama_departemen}
+        deskripsi={selectedDeptDetail.departemen.deskripsi_departemen}
+        logo_dept={selectedDeptDetail.departemen.logo_departemen}
+        bg_image={selectedDeptDetail.departemen.foto_departemen}
+        kabinet_id={currentKabinet.id}
+        kabinet_nama={currentKabinet.nama_kabinet}
       />
-      <ProkerSection />
-      <StaffSection data={dept} />
-    </main>
+      <ProkerSection data={selectedDeptDetail.proker} />
+      <StaffSection data={selectedDeptDetail.anggota} />
+    </>
   );
 }

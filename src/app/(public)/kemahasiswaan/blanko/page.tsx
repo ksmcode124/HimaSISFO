@@ -1,24 +1,13 @@
-import {
-  Blanko,
-  BlankoCarousel,
-  HeroSection,
-  BlankoItem,
-  KemahasiswaanDataFile,
-  getSectionData
-} from "@/features/kemahasiswaan"
-import { Suspense } from "react";
+import { BlankoMainSection, HeroSection, useBlankoPage } from "@/features/kemahasiswaan"
+
 
 export default function Page() {
-  const blankoItems = getSectionData<BlankoItem[]>(Blanko as KemahasiswaanDataFile, "item-collection");
+  const { hero, items } = useBlankoPage()
 
   return (
     <>
-      <HeroSection {...Blanko.hero} breadcrumbItems={Blanko.breadcrumbItems} />
-      <section className="px-6 lg:px-12 max-w-7xl mx-auto min-h-170 pt-10">
-        <Suspense fallback={null}>
-          <BlankoCarousel blankoItems={blankoItems} />
-        </Suspense>
-      </section>
+      <HeroSection data={hero} />
+      <BlankoMainSection items={items} />
     </>
   )
 }

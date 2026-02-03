@@ -1,57 +1,65 @@
 "use client";
 
-import { Ornament1, Ornament2 } from "../components/KabinetOrnaments";
+import {
+  Ornament1,
+  Ornament9,
+  Ornament5,
+} from "../components/KabinetOrnaments";
 import DepartemenCard from "@/features/kabinet/components/DepartemenCard";
-import { useParams } from "next/navigation";
-import kabinetDataRaw from "../data/kabinet.json";
+import { DepartemenListItem } from "../types";
 
-export default function DepartmentListPage() {
-  const params = useParams();
-  const kabinetId = params.kabinetId as string;
-
-  const currentKabinet = kabinetDataRaw.kabinet_list.find(
-    (k) => k.id === kabinetId
-  );
-
-  if (!currentKabinet) return null;
-
+export default function DepartemenListSection({
+  data,
+}: {
+  data: DepartemenListItem[];
+}) {
   return (
-    <section className="relative w-full min-h-screen bg-[#F4E8FF] flex flex-col items-center py-20 overflow-hidden">
-      <div className="relative z-10 flex flex-col items-center mb-20 w-full">
-        <div className="flex flex-row -mt-20 md:mt-0 gap-4 md:gap-6 items-center">
-          <div className="w-16 md:w-64 mt-1 md:mt-20 mr-6 md:mr-0 scale-60 md:scale-95 origin-right">
-            <Ornament2 />
+    <section className="relative w-full min-h-screen bg-[#F4E8FF] flex flex-col items-center py-20 pb-185 lg:pb-135 -mb-175 lg:-mb-125 overflow-hidden">      
+      <div className="absolute right-30 md:right-20 bottom-[5%] md:top-[12%] lg:top-[-15%] w-[700vw] md:w-[400vw] z-0">
+        <div className="w-full translate-x-[43%] -rotate-235 md:rotate-0">
+          <Ornament5 />
+        </div>
+      </div>
+
+      <div className="absolute -right-60 md:-right-10 top-[20%] lg:top-[15%] w-[700vw] md:w-[400vw] z-0">
+        <div className="w-full translate-x-[40%] md:translate-x-[30%] -scale-x-100 -rotate-250 md:rotate-[-15deg]">
+          <Ornament5 />
+        </div>
+      </div>
+
+      <div className="relative z-10 flex flex-col items-center mb-10 md:mb-20 w-full">
+        <div className="flex flex-row -mt-10 items-center justify-center">
+          <div className="w-40 md:w-80 scale-90 md:scale-110 origin-right translate-y-6 -mr-18 md:-mr-44 transition-all">
+            <Ornament9 />
           </div>
-          <div className="flex flex-col items-center">
-            <div className="w-60 md:w-[600px] mb-18 md:mb-24">
+          <div className="flex flex-col items-center z-20">
+            <div className="w-56 md:w-110 rotate-2 -translate-y-1 md:-translate-y-10 transition-all">
               <Ornament1 />
             </div>
           </div>
-          <div className="mt-1 md:mt-20 ml-6 md:ml-0 w-16 md:w-64">
-            <div className="scale-60 md:scale-95 origin-left">
-              <div className="scale-x-[-1]">
-                <Ornament2 />
-              </div>
+          <div className="w-40 md:w-80 scale-90 md:scale-110 origin-left translate-y-6 -ml-18 md:-ml-44 transition-all">
+            <div className="scale-x-[-1]">
+              <Ornament9 />
             </div>
           </div>
         </div>
       </div>
 
-      <h2 className="text-2xl -mt-30 mb-10 md:mb-30 md:text-3xl font-bold">
+      <h2 className="text-2xl mb-10 md:mb-22 md:-mt-18 md:text-3xl font-bold z-30">
         Departemen
       </h2>
 
       <div className="relative z-10 w-full max-w-6xl flex flex-col items-center justify-center gap-10 px-10">
         <div className="grid grid-cols-2 lg:grid-cols-4 justify-items-center gap-6 md:gap-14 w-full">
-          {currentKabinet.departemen.map((dept) => (
-            <DepartemenCard
-              key={dept.id}
-              id={dept.id}
-              nama={dept.nama}
-              logo_url={dept.logo_url}
-              className="w-[130px] h-[195px] md:w-[230px] md:h-[295px]"
-            />
-          ))}
+          {data &&
+            data.map((dept: DepartemenListItem) => (
+              <DepartemenCard
+                key={dept.id_departemen}
+                id={dept.id_departemen.toString()}
+                nama={dept.nama_departemen}
+                logo={dept.logo_departemen}
+              />
+            ))}
         </div>
       </div>
     </section>

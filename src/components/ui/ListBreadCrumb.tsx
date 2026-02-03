@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { SlashIcon } from "lucide-react"
 
 import {
   Breadcrumb,
@@ -9,7 +8,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 import { Fragment } from "react"
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils/cn"
 
 export type BreadcrumbItem = {
   display: string,
@@ -20,7 +19,7 @@ export function ListBreadcrumb({items} : {items?: BreadcrumbItem[]}) {
   if (!items) return
 
   return (
-    <Breadcrumb className="border-b">
+    <Breadcrumb className="border-b-2 border-b-[#265A8C]">
       <BreadcrumbList>
       {items?.map((item, index) => {
         const isLast = index === items.length - 1
@@ -36,9 +35,8 @@ export function ListBreadcrumb({items} : {items?: BreadcrumbItem[]}) {
             </BreadcrumbLink>
           </BreadcrumbItem>
           { !isLast &&
-            <BreadcrumbSeparator className=" text-md md:text-2xl">
+            <BreadcrumbSeparator color="#747474">
               /
-              {/* <SlashIcon />   ini sebelum dihapus*/}
             </BreadcrumbSeparator>
           }
           </Fragment>

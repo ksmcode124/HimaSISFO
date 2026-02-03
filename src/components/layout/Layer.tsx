@@ -1,10 +1,12 @@
 // components/layout/Layer.tsx
 import React from "react";
 import clsx from "clsx";
+import { createPortal } from "react-dom";
 
 type LayerProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
+  ref?: React.Ref<HTMLDivElement>;
 };
 export function BackgroundLayer({ children, className }: LayerProps) {
   return (
@@ -14,10 +16,12 @@ export function BackgroundLayer({ children, className }: LayerProps) {
   );
 }
 
-export function DecorationLayer({ children, className }: LayerProps) {
+export function DecorationLayer({ children, className, ref }: LayerProps) {
   return (
     <div
-      className={clsx("absolute inset-0 z-5 pointer-events-none", className)}>
+      className={clsx("absolute inset-0 z-5 pointer-events-none", className)}
+      ref={ref}
+    >
       {children}
     </div>
   );
@@ -40,9 +44,17 @@ export function OverlayLayer({ children, className }: LayerProps) {
 }
 
 export function ModalLayer({ children, className }: LayerProps) {
-  return (
-    <div className={clsx("absolute inset-0 z-30 grid place-items-center h-screen", className)}>
+  if (typeof window === "undefined") return null;
+
+  return createPortal(
+    <div
+      className={clsx(
+        "fixed inset-0 z-[9999] grid place-items-center bg-black/40",
+        className
+      )}
+    >
       {children}
-    </div>
+    </div>,
+    document.body
   );
 }
