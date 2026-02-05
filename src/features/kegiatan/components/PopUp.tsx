@@ -39,8 +39,8 @@ export function Modal(props: ModalProps) {
 
       <ModalLayer>
         {type === "event" && props.mode === "single" && (
-          <div className="flex w-fit h-fit flex-col rounded-[20px] overflow-hidden">
-            <header className="px-8 py-6 text-[13px] md:text-sm font-semibold text-white flex flex-row items-center gap-3 bg-gradient-to-b from-[#1B3C53] to-[#456882]">
+          <div className="flex w-[280px] md:w-fit h-fit flex-col rounded-[20px] overflow-hidden">
+            <header className="px-4 md:px-8 py-3 md:py-6 text-[13px] md:text-sm font-semibold text-white flex flex-row items-center gap-3 bg-gradient-to-b from-[#1B3C53] to-[#456882]">
               <svg
                 viewBox="0 0 34 34"
                 className="h-[34px] w-[34px]"
@@ -76,11 +76,11 @@ export function Modal(props: ModalProps) {
                   strokeLinejoin="round"
                 />
               </svg>
-              <h1 className="text-xl md:text-2xlfont-bold">{props.event.description ? "Agenda Belum Tersedia" : "Berita Belum Ada"}</h1>
+              <h1 className="text-xl md:text-2xl font-bold">{props.event.description ? "Agenda Belum Tersedia" : "Berita Belum Ada"}</h1>
             </header>
 
-            <main className="flex flex-col gap-3 px-5 bg-white ">
-              <div className="flex flex-col py-4 gap-2">
+            <main className="flex flex-col gap-3 px-3 md:px-5 bg-white ">
+              <div className="flex flex-col md:py-2 py-4 gap-2">
                 <h2 className="text-[18px] md:text-[20px] font-semibold text-[#323257]">{props.event.title}</h2>
                 <p className="max-w-[320px] break-words text-[14px] text-sm md:text-[18px]">{props.event.description ?
                   "Event ini belum dapat diakses karena belum berlangsung. Silakan tunggu hingga tanggal event dimulai untuk melihat detail selengkapnya." :

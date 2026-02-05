@@ -9,6 +9,7 @@ import { CalendarRightDecoration } from "../../../../public/assets/kegiatan/deco
 import { getEvents } from "../services/eventService";
 import { DynamicCalendar } from "../components/Calendar";
 import { EventCardProps } from "../types";
+import { get } from "http";
 
 function CalendarOverlay() {
   return (
@@ -63,8 +64,8 @@ function CalendarContent({ events }: { events: EventCardProps[] }) {
 
 
 
-export async function CalendarSection() {
-  const events = await getEvents();
+export async function CalendarSection({tahun}: {tahun: string}) {
+  const events = await getEvents(tahun);
   return (
     <section className="relative p-0 m-0 top-0">
       <DecorationLayer >

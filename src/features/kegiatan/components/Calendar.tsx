@@ -1,19 +1,24 @@
 "use client";
 import clsx from "clsx";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { toDateKey, getMonthDays } from "../utils/Calculate";
 import { formatMonthName, formatYear } from "../utils/FormatDate";
 import { WEEK_DAYS } from "../data/constant";
 import { DynamicCalendarProps, EventCardProps } from "../types";
 import { Modal } from "./PopUp";
 import { parseEventDate } from "../utils/ParseDate";
-import { sortEventsByDay } from "../utils/SortEvent";
 import { FilterComp } from "./FilterComp";
 
 export function DynamicCalendar({ className, events }: DynamicCalendarProps) {
   const today = new Date();
   const [year, setYear] = useState(today.getFullYear());
+
+   useEffect(() => {
+    const newUrl = `${window.location.pathname}?tahun=${year}`;
+    window.history.replaceState({}, "", newUrl);
+  }, [year]);
+  
   const [month, setMonth] = useState(today.getMonth());
   const [open, setOpen] = useState(false);
   type ModalState =
@@ -153,8 +158,8 @@ const eventsByDate = useMemo(() => {
                 {(() => {
                   if (visibleEvents.length === 0) return null;
                     // console.log("visibleEvents", visibleEvents);
-                  // EFEK TUMPUK (Buku) jika event > 3
-                  if (visibleEvents.length > 3) {
+                  // EFEK TUMPUK (Buku) jika event >= 3
+                  if (visibleEvents.length >= 3) {
                     return (
                       <div className="relative w-full h-full mt-2">
                         {visibleEvents.slice(0, 5).map((ev, i) => {
@@ -184,7 +189,7 @@ const eventsByDate = useMemo(() => {
                     );
                   }
                   return (
-                    <div className="gap-1 mt-2 flex w-full max-h-full justify-center items-center">
+                    <div className="gap-1 mt-2 flex flex-col w-full max-h-full justify-start items-start">
                       {dayEvents.map((ev) => {
                         if (Number(toDateKey(ev.start).split("-").pop()) === day) {
                           return (

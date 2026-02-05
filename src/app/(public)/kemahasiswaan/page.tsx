@@ -1,4 +1,5 @@
 import { KemahasiswaanMainSection, BlankoSection, HeroSection, useKemahasiswaanPage } from "@/features/kemahasiswaan"
+import { Suspense } from "react"
 
 export default function Page() {
   const { hero, alurItems, blankoSection } = useKemahasiswaanPage()
@@ -6,7 +7,9 @@ export default function Page() {
   return (
     <>
       <HeroSection data={hero} />
-      <KemahasiswaanMainSection items={alurItems} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <KemahasiswaanMainSection items={alurItems} />
+      </Suspense>
       {blankoSection && <BlankoSection {...blankoSection} />}
     </>
   )
