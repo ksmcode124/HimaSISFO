@@ -261,7 +261,7 @@ const EventForm = () => {
         <div style={{ marginBottom: "10px" }}>
           <label>Deskripsi:</label>
           <Editor
-            apiKey="z14g1fyeux6z9luyg731oowgfv6r1eo843fyzdatthryv6qh"
+            apiKey={process.env.NEXT_PUBLIC_TINYMCE_KEY}
             onInit={(evt, editor) => (editorRef.current = editor)}
             initialValue="<p>Deskripsi event...</p>"
             init={{
