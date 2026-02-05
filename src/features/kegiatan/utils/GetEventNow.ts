@@ -1,11 +1,11 @@
 
-import { EventCardProps, EventWithVariantProps } from "../types";
+import { EventCardProps, WithVariantEventCardProps } from "../types";
 import { SortedSingleEventsProps } from "../types";
 import { FindEventByIdProps  } from "../types";
 import { FindEventByMonthYearProps } from "../types";
 
 // untuk event pass, ongoing, future
-export function sortEvents(events: EventWithVariantProps[]): SortedSingleEventsProps {
+export function sortEvents(events: WithVariantEventCardProps[]): SortedSingleEventsProps {
   const now = new Date();
 
   const pastNotGoing = events

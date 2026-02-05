@@ -6,6 +6,7 @@ import { RoundedBg } from "@/features/kegiatan/components/RoundedBg";
 import Image from "next/image";
 import { CalendarLeftDecoration } from "../../../../public/assets/kegiatan/decoration/CalendarLeft";
 import { CalendarRightDecoration } from "../../../../public/assets/kegiatan/decoration/CalendarRight";
+import { Suspense} from "react";
 
 function PitaDecoration() {
   return (
@@ -36,9 +37,13 @@ export default function Page({ searchParams }: PageProps) {
         <RoundedBg align="end" />
       </BackgroundLayer>
       <div className="relative flex-col items-start mt-28">
-        <CalendarSection tahun={tahun} />
+        <Suspense fallback={<div>Loading...</div>}>
+          <CalendarSection tahun={tahun} />
+        </Suspense>
         <PitaDecoration />
-        <EventCardSection tahun={tahun} />
+        <Suspense fallback={<div>Loading...</div>}>
+          <EventCardSection tahun={tahun} />
+        </Suspense>
       </div>
     </>
   );

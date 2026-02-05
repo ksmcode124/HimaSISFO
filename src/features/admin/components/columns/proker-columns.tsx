@@ -28,9 +28,9 @@ export function prokerColumns({
 
         return (
           <TableActionButtons
-            onView={onView ? () => onView(data.id_proker) : undefined}
-            onEdit={onEdit ? () => onEdit(data.id_proker) : undefined}
-            onDelete={onDelete ? () => onDelete(data.id_proker) : undefined}
+            onView={onView ? () => onView(data.id) : undefined}
+            onEdit={onEdit ? () => onEdit(data.id) : undefined}
+            onDelete={onDelete ? () => onDelete(data.id) : undefined}
           />
         );
       },

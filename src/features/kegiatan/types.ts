@@ -1,3 +1,4 @@
+import { event } from "@prisma/client";
 import React from "react";
 
 export interface EventCardProps {
@@ -28,7 +29,7 @@ export interface WithVariantEventCardPropsArray {
 
 export interface SortedSingleEventsProps {
   pastNotGoing?: EventCardProps;
-  nextOnGoing?: EventCardProps[];
+  nextOnGoing?: EventCardProps[] | EventCardProps;
   futureNotGoing?: EventCardProps;
 }
 

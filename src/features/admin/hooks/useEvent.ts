@@ -5,10 +5,11 @@ import { AdminEventRow, AdminEventDetail, EventResponseAdmin, Event } from '../t
 // Mapping list response ke row
 export const mapToEventDetail = (res: EventResponseAdmin): AdminEventDetail => ({
   id: res.id_event,
-  title: res.judul,
-  description: res.deskripsi,
-  date: res.tanggal_mulai.concat(res.tanggal_berakhir),
-  foto_event: res.gambar_event
+  judul: res.judul,
+  deskripsi: res.deskripsi,
+  tanggal_mulai: res.tanggal_mulai,
+  tanggal_berakhir: res.tanggal_berakhir,
+  gambar_event: res.gambar_event
 });
 
 // Mapping single response ke detail
@@ -16,8 +17,8 @@ export const mapToEventRow = (res: EventResponseAdmin): AdminEventRow => ({
   id: res.id_event,
   title: res.judul,
   description: res.deskripsi,
-  start: new Date(res.tanggal_mulai),
-  end: new Date(res.tanggal_berakhir)
+  start: res.tanggal_mulai,
+  end: res.tanggal_berakhir
 });
 
 

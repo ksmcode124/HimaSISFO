@@ -8,7 +8,7 @@ import { normalizeEvent } from "../utils/ParseStrToDateEvent";
 async function fetchFromApi(tahun : string): Promise<EventCardProps[]> {
 
   const baseUrl =
-    process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
+    process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3001";
 
 
   const res = await fetch(
