@@ -1,27 +1,22 @@
 // services/eventService.ts
 import { EventCardProps } from "../types";
 import { EVENTS } from "../data/events";
-import { normalize } from "path";
+
 import { normalizeEvent } from "../utils/ParseStrToDateEvent";
+import { api } from "@/lib/services/api";
+
 
 //atur fetch woi BE
 async function fetchFromApi(tahun : string): Promise<EventCardProps[]> {
 
-  const baseUrl =
-    process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3001";
-
-
-  const res = await fetch(
-    `${baseUrl}/api/display/event?from=${tahun}-01-01&to=${tahun}-12-31`,
-    { cache: "no-store" }
+  const res  = await api.get(
+    `/api/display/event?from=${tahun}-01-01&to=${tahun}-12-31`,
   );
 
-  if (!res.ok) {
+  if (!res) {
     throw new Error("API error");
   }
-
-  const data = await res.json();
-  return data.map(normalizeEvent);
+  return res.data.map(normalizeEvent);
 }
 
 export async function getEvents(tahun: string): Promise<EventCardProps[]> {

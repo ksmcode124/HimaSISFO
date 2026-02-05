@@ -28,7 +28,6 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
     window.addEventListener('resize', check)
     return () => window.removeEventListener('resize', check)
   }, [])
-
   return (
     <div className="flex w-full justify-center" aria-label="wrapper">
       <header
@@ -65,6 +64,8 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
               <div className='hidden lg:grid'>
                 <ul className='flex items-center py-10 gap-x-8'>
                   {items.map((item) => {
+                    const isActive = item.href === '/' ? pathname === '/' : (pathname === item.href || pathname.startsWith(item.href))
+                    
                     return (
                       <li key={item.href}>
                         <Glass>
@@ -73,7 +74,7 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
                             className={ 
                               `shadow-[0_4px_10px_var(--color-neutral-400)] w-full text-center
                             text-sm font-medium text-white border border-neutral-50/50 rounded-full px-3 py-1
-                            ${pathname !== item.href ? "bg-white/30" :
+                            ${!isActive ? "bg-white/30" :
                           "bg-linear-to-r from-[#A6CFE1] to-[#265A8C]"}
                              `}>
                             {item.label}

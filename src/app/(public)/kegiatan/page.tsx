@@ -1,4 +1,4 @@
-
+export const dynamic = 'force-dynamic'
 import { CalendarSection } from "@/features/kegiatan/sections/CalendarSection";
 import { EventCardSection } from "@/features/kegiatan/sections/EventCardSection";
 import { BackgroundLayer } from "@/components/layout/Layer";
@@ -21,11 +21,12 @@ function PitaDecoration() {
     </div>
   )
 }
+
 interface PageProps {
   searchParams: { tahun?: string };
 }
 export default function Page({ searchParams }: PageProps) {
-   const tahun = searchParams.tahun || new Date().getFullYear().toString();
+  const tahun = searchParams.tahun || new Date().getFullYear().toString();
   return (
     <>
       <BackgroundLayer>
