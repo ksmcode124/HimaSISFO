@@ -11,12 +11,11 @@ export function PendaftaranItemCollectionSection({ items }: Props) {
   return (
     <section className="relative flex items-center justify-center w-[90%] mb-5 mx-auto">
       <Glass
-        borderRadius={24}
-        className="w-[90%] max-w-7xl p-6 relative flex justify-center border border-neutral-400"
+        className="w-[90%] max-w-7xl relative border border-neutral-400 rounded-6xl"
       >
 
         {/* Item Grid */}
-        <div className="relative w-full grid grid-cols-12 *:col-span-6 *:last:col-start-4 md:grid-cols-12 md:col-span-4 md:*:last:col-start-4 gap-6 px-6 lg:px-12 py-5 rounded-2xl">
+        <div className="w-full grid grid-cols-12 *:col-span-6 *:last:col-start-4 md:grid-cols-12 md:col-span-4 md:*:last:col-start-4 gap-6 px-6 lg:px-12 py-5 rounded-2xl">
           {items.map((item) => (
             <PendaftaranItemCard key={item.id} item={item} />
           ))}

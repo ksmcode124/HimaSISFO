@@ -79,7 +79,7 @@ export function FilterComp({ className, type, selected, onChange }: { className?
       ) : type === "calendar" ? (
         <div className="flex items-center justify-center gap-2 md:gap-4 w-full cursor-pointer h-full"
           onClick={() => setActive(!active)}>
-          <span className={clsx(className, "text-center text-sm md:text-[24px]")}>{selected ? selected : "Filter"}</span>
+          <span className={clsx(className, "text-center text-sm md:text-[24px] text-[var(--color-nile-blue)]")}>{selected ? selected : "Filter"}</span>
         </div>
       ) : null}
 

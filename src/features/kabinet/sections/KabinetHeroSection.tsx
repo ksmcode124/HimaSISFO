@@ -4,7 +4,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { LiquidGlass } from "@liquidglass/react";
+import { Glass } from "@/components/ui/Glass";
 import { Button } from "@/components/ui/button";
 import { Pita, Ornament2 } from "../components/KabinetOrnaments";
 import PhotoSlideshowMobile from "../components/PhotoSlideshowMobile";
@@ -21,7 +21,10 @@ export default function KabinetHeroSection({
   kabinetList,
 }: KabinetHeroSectionProps) {
   const router = useRouter();
-  const images = currentKabinet?.foto_kabinet || [];
+  const images = useMemo(() => {
+    const raw = currentKabinet?.foto_kabinet || [];
+    return Array.isArray(raw) ? raw : [raw];
+  }, [currentKabinet]);
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
 
   const navigation = useMemo(() => {
@@ -139,34 +142,52 @@ const DesktopBackground = ({
 }: {
   images: string[];
   activeIndex: number;
-}) => (
-  <div className="absolute inset-0 hidden md:block z-0">
-    <AnimatePresence initial={false}>
-      {images.map(
-        (src, index) =>
-          index === activeIndex && (
-            <motion.div
-              key={src}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1.2 }}
-              className="absolute inset-0"
-            >
-              <Image
-                src={src}
-                alt="Foto Kabinet"
-                fill
-                className="object-cover"
-                priority={index === 0}
-                sizes="100vw"
-              />
-            </motion.div>
-          ),
-      )}
-    </AnimatePresence>
-  </div>
-);
+}) => {
+  if (!images || images.length === 0) return null;
+
+  // Kalo bukan array (cuma 1 image), render image itu aja
+  if (images.length === 1) {
+    return (
+      <div className="absolute inset-0 hidden md:block z-0">
+        <Image
+          src={images[0]}
+          alt="Foto Kabinet"
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
+    );
+  }
+
+  // Kalo array (image > 1), render slideshow
+  return (
+    <div className="absolute inset-0 hidden md:block z-0">
+      <AnimatePresence initial={false}>
+        {images.map(
+          (src, index) =>
+            index === activeIndex && (
+              <motion.div
+                key={src}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1.2 }}
+                className="absolute inset-0"
+              >
+                <Image
+                  src={src}
+                  alt="Slideshow"
+                  fill
+                  className="object-cover"
+                />
+              </motion.div>
+            ),
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
 
 const MobileBackground = () => (
   <div className="absolute inset-0 md:hidden">
@@ -221,13 +242,12 @@ const YearButton = ({
   disabled?: boolean;
 }) => (
   <div className="relative group">
-    <div className="absolute inset-0 backdrop-blur-xs bg-white/10 rounded-full" />
-    <LiquidGlass className="rounded-full">
+    <Glass preset="medium" className="rounded-full" depth={100}>
       <Button
         onClick={onClick}
         disabled={disabled}
         className={cn(
-          "group relative w-fit h-8 md:h-auto px-3 md:px-8 py-2 rounded-3xl border md:border-2 border-white/50 bg-white/10 text-white text-xs md:text-xl font-medium hover:bg-black/95 transition-all duration-400 bg-[linear-gradient(to_right,black_50%,transparent_50%)] bg-size-[210%_100%] bg-position-[99%_0] hover:bg-position-[0%_0]! hover:border-white/50! disabled:opacity-50",
+          "group relative w-fit h-8 md:h-auto px-3 md:px-8 py-2 rounded-3xl border md:border-2 border-white/50 bg-transparent text-white text-xs md:text-xl font-medium hover:bg-black/90 transition-all duration-400 bg-[linear-gradient(to_right,black_50%,transparent_50%)] bg-size-[210%_100%] bg-position-[99%_0] hover:bg-position-[0%_0]! hover:border-white/50! disabled:opacity-50",
         )}
       >
         <motion.div
@@ -243,7 +263,7 @@ const YearButton = ({
         />
         <span className="relative z-20">{label}</span>
       </Button>
-    </LiquidGlass>
+    </Glass>
   </div>
 );
 

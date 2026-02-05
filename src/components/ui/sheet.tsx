@@ -126,6 +126,17 @@ const SheetDescription = React.forwardRef<
 ))
 SheetDescription.displayName = SheetPrimitive.Description.displayName
 
+// Backwards-compatible SlideOver wrapper (some pages import SlideOver)
+export function SlideOver({ open, onOpenChange, children }: { open: boolean; onOpenChange: (v: boolean) => void; children: React.ReactNode }) {
+  return (
+    <Sheet open={open} onOpenChange={onOpenChange}>
+      <SheetContent side="right">
+        {children}
+      </SheetContent>
+    </Sheet>
+  );
+}
+
 export {
   Sheet,
   SheetPortal,

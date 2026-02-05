@@ -68,8 +68,7 @@ function HorizontalAccordionItem( {item} : {item: ItemDataJSON}) {
       "
     >
       <Glass
-        borderRadius={16}
-        className="border-2 border-[#25253B] rounded-xl w-full"
+        className="border border-[#25253B] rounded-2xl w-full"
       >
         <AccordionTrigger className="justify-between w-full rounded-xl text-3xs sm:text-xs md:text-sm lg:text-xl font-semibold">
           <span className="line-clamp-1">
@@ -89,8 +88,7 @@ function HorizontalAccordionItem( {item} : {item: ItemDataJSON}) {
             transition={{ duration: 0.5, ease: "easeOut" }}
           >
             <Glass
-              borderRadius={16}
-              className="border border-black flex flex-col text-3xs sm:text-2xs md:text-xs lg:text-sm rounded-xl px-6 py-4 mt-2"
+              className="border border-black flex flex-col text-3xs sm:text-2xs md:text-xs lg:text-sm rounded-2xl px-6 py-4 mt-2"
             >
               <div className="flex w-full justify-between">
                 <h3 className="flex-1 text-3xs sm:text-2xs md:text-xs lg:text-sm">Panduan: </h3>

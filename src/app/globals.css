@@ -1,10 +1,11 @@
 @import "tailwindcss";
 
 @plugin "tailwindcss-animate";
+@plugin 'tailwind-scrollbar';
 @import "tw-animate-css";
 
 @theme {
-   /* Warna Descriptive */
+  /* Warna Descriptive */
   --color-dodger-blue: #3385FF;
   --color-columbia-blue: #8DDDFF;
 
@@ -96,14 +97,14 @@
 }
 
 .flip-card {
-   background: linear-gradient(to right, #A6CFE1, #265A8C 50%, #456882, #1F445F,#1B3C53);
-   background-size: 400% 100%;
-   background-position: right;
+  background: linear-gradient(to right, #A6CFE1, #265A8C 50%, #456882, #1F445F, #1B3C53);
+  background-size: 400% 100%;
+  background-position: right;
 }
 
 .flip-card:hover {
-   background-position: left;
-   transition-duration: 900ms;
+  background-position: left;
+  transition-duration: 900ms;
 }
 
 .list-upper-roman {
@@ -129,73 +130,83 @@
   pointer-events: none;
 
   background:
-    linear-gradient(
-      120deg,
+    linear-gradient(120deg,
       rgba(255, 0, 0, 0.06),
-      transparent 40%
-    ),
-    linear-gradient(
-      300deg,
+      transparent 40%),
+    linear-gradient(300deg,
       rgba(0, 255, 255, 0.06),
-      transparent 40%
-    );
+      transparent 40%);
 
   mix-blend-mode: screen;
   opacity: 0.7;
   filter: blur(2px);
 
-  mask-image: radial-gradient(
-    circle at center,
-    transparent 55%,
-    black 100%
-  );
+  mask-image: radial-gradient(circle at center,
+      transparent 55%,
+      black 100%);
 }
 
-
+.scrollbar-lg::-webkit-scrollbar {
+  width: 12px;
+}
+.scrollbar-sm::-webkit-scrollbar {
+  width: 4px;   
+}
 
 @layer base {
-   * {
-      @apply m-0 p-0 box-border;
-   }
+  * {
+    @apply m-0 p-0 box-border;
+  }
 
-   html,
-   body {
-      @apply antialiased;
-      font-family: var(--font-primary);
-      color: var(--color-black);
-      background-color: var(--color-porcelain);
-      scroll-behavior: smooth;
-   }
+  html,
+  body {
+    @apply antialiased;
+    font-family: var(--font-primary);
+    color: var(--color-black);
+    background-color: var(--color-porcelain);
+    scroll-behavior: smooth;
+  }
 }
 
-.border-gradient-y {
-  border: solid transparent;
+@layer utilities {
+  .border-gradient-x,
+  .border-gradient-y {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 0px solid transparent;
+    background-clip: padding-box, border-box;
+  }
 
-  background:
-    linear-gradient(transparent, transparent),
-    linear-gradient(to bottom, #1B3C53, #456882);
+  .border-gradient-x::before,
+  .border-gradient-y::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 10;
+    padding: 2px; 
+  }
 
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
+  .border-gradient-x::before {
+    background: linear-gradient(to right, #1B3C53, #456882);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  .border-gradient-y::before {
+    background: linear-gradient(to bottom, #1B3C53, #456882);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  @media (min-width: 768px) {
+    .border-gradient-x::before,
+    .border-gradient-y::before {
+      padding: 4px;
+    }
+  }
 }
-
-.border-gradient-x {
-  position: relative;
-  border-radius: 1rem; /* radius border */
-  overflow: hidden;
-}
-
-.border-gradient-x::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  padding: 4px; /* tebal border */
-  background: linear-gradient(to right, #1B3C53, #456882);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  border-radius: inherit;
-  pointer-events: none;
-  z-index: 10; /* pastikan di atas */
-}
-

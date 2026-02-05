@@ -1,4 +1,4 @@
-import { api } from "@/features/admin/services/api";
+import { api } from "@/lib/services/api";
 import { EventListResponse } from "@/lib/types/interface";
 
 export type DashboardSummaryResponse = {
@@ -19,9 +19,9 @@ export async function getDashboardSummary(): Promise<DashboardSummaryResponse[]>
   ]);
 
   return [
-    { key: 'komunitas', count: komunitas.data.length },
     { key: 'kabinet', count: kabinet.data.length },
     { key: 'event', count: event.data.length },
+    { key: 'komunitas', count: komunitas.data.length },
   ];
 
 }

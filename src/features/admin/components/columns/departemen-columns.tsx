@@ -18,7 +18,8 @@ export function departemenColumns({
   return [
     { accessorKey: 'id', header: 'ID' },
     { accessorKey: 'nama_departemen', header: 'Nama Departemen' },
-    { accessorKey: 'logo', header: 'Logo'},
+    { accessorKey: 'logo_departemen', header: 'Logo'},
+    { accessorKey: 'foto_departemen', header: 'Foto'},
     {
       accessorKey: 'anggota_count', 
       header: "Anggota",
@@ -26,13 +27,25 @@ export function departemenColumns({
         const data = row.original
 
         return (
-          <Link href={`/admin/kabinet/${data.slug_kabinet}/${data.id}-${translateToSlug(data.nama_departemen)}`} className='text-accent underline'>
+          <Link href={`/admin/kabinet/${data.slug_kabinet}/${data.id}-${translateToSlug(data.nama_departemen)}/anggota`} className='text-accent underline'>
             {data.anggota_count}
           </Link>
         )
       }
     },
-    { accessorKey: 'proker_count', header: 'Program Kerja' },
+    { 
+      accessorKey: 'proker_count', 
+      header: 'Program Kerja',
+      cell: ({ row }) => {
+        const data = row.original
+
+        return (
+          <Link href={`/admin/kabinet/${data.slug_kabinet}/${data.id}-${translateToSlug(data.nama_departemen)}/proker`} className='text-accent underline'>
+            {data.proker_count}
+          </Link>
+        )
+      }
+    },
     {
       id: 'actions',
       header: 'Aksi',

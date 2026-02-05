@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import IntiHimpunanCard from "./IntiHimpunanCard";
@@ -15,7 +15,12 @@ export default function CarouselIntiHimpunan({ anggota }: CarouselProps) {
   const [direction, setDirection] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
-  const totalPages = Math.ceil(anggota.length / 2);
+  // sorting menurut id
+  const sortedAnggota = useMemo(() => {
+    return [...anggota].sort((a, b) => Number(a.id) - Number(b.id));
+  }, [anggota]);
+
+  const totalPages = Math.ceil(sortedAnggota.length / 2);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 1024);
@@ -94,7 +99,7 @@ export default function CarouselIntiHimpunan({ anggota }: CarouselProps) {
               className={`absolute inset-0 flex flex-row items-center justify-center gap-4 sm:gap-8 md:gap-12 
                 ${isMobile ? "cursor-grab active:cursor-grabbing" : "cursor-default"}`}
             >
-              {anggota
+              {sortedAnggota
                 .slice(currentIndex * 2, currentIndex * 2 + 2)
                 .map((item, idx) => (
                   <div

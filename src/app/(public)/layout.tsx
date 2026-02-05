@@ -10,7 +10,7 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
   return (
     <>
     
-    <main className="pt-18 overflow-hidden">
+    <main className="overflow-hidden">
       <NavigationBar items={navItems} />
       {children}
       <SiteFooter />

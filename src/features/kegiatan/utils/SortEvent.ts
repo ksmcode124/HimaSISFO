@@ -1,4 +1,4 @@
-import { EventWithVariantProps, SortedSingleEventsProps } from "../types";
+import { SortedSingleEventsProps } from "../types";
 import { EventCardProps } from "../types";
 import { toDateKey } from "./Calculate";
 
@@ -35,7 +35,7 @@ export function sortEventsByDay(events: EventCardProps[], day: Date) {
 
 // untuk event pass, ongoing, future
 export function sortEvents(
-  events: EventWithVariantProps[],
+  events: EventCardProps[],
 ): SortedSingleEventsProps {
   const now = new Date();
 
@@ -55,7 +55,7 @@ export function sortEvents(
 
   const futureNotGoing = nextOnGoing
     ? events
-        .filter((e) => e.start > nextOnGoing[0].start)
+        .filter((e) => e.start > nextOnGoing[0]?.start)
         .sort((a, b) => a.start.getTime() - b.start.getTime())[0]
     : undefined;
   // console.log({ pastNotGoing, nextOnGoing, futureNotGoing });
