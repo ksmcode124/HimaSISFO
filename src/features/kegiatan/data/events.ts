@@ -240,7 +240,7 @@ export const EVENTS: EventCardProps[] = [
     title: "Workshop 6",
     start: new Date("2026-02-01T10:30:00.000Z"),
     end: new Date("2026-02-09T12:30:00.000Z"),
-    img: "contohtengah.png",
+    img: "SampleGambar.svg",
     description: "Learn the latest features of Science in this hands-on workshop.",
     type: "Hima",
   },

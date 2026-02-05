@@ -1,4 +1,4 @@
-import { BackgroundLayer, ContentLayer } from "@/components/layout/Layer"
+import { BackgroundLayer, ContentLayer, DecorationLayer } from "@/components/layout/Layer"
 import { ShellLayer } from "@/components/layout/ShellLayer"
 import Image from "next/image"
 import { 
@@ -19,15 +19,17 @@ export default async function DetailPage({ params }: PageProps) {
   return (
     <>
     <ShellLayer>
-      <BackgroundLayer>
-        <Image
-          src="/assets/kemahasiswaan/bg-hero.webp"
-          alt=""
-          fill
-          className="object-cover"
-          priority
-        />
-      </BackgroundLayer>
+      <DecorationLayer className="min-h-screen">
+        <div className="relative w-full aspect-[3/2]">
+          <Image
+            src="/assets/kemahasiswaan/bg-hero.webp"
+            alt=""
+            fill
+            className="object-cover h-full"
+            priority
+          />
+        </div>
+      </DecorationLayer>
       <ContentLayer className="flex flex-col justify-center items-center w-full">
         <BreadcrumbSection items={breadcrumbItems} />
         <PendaftaranVerifikasiDetailSection item={item} />

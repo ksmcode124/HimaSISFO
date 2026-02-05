@@ -9,7 +9,6 @@ import { useState } from "react";
 import { useGetCountdown } from "../hooks/useCountDown";
 import { Modal } from "../components/PopUp";
 import Image from "next/image";
-import { set } from "zod";
 
 const eventCard = cva("overflow-hidden transition hover:shadow-md", {
   variants: {
@@ -41,8 +40,8 @@ export const EventCard = (props: WithVariantEventCardProps) => {
     >
 
       <Image
-        src={`/assets/kegiatan/${img}`}
-        alt={img}
+        src={img}
+        alt={title}
         width={1600}
         height={1000}
         className={cn("object-cover w-full h-full", eventCard({ variant }))}

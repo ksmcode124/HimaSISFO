@@ -39,7 +39,7 @@ export interface FindEventByIdProps {
 
 export interface FindEventByMonthYearProps {
   month: string;
-  year: number;
+  year: string;
   indexedEvents: Record<string, EventCardProps[]>;
 }
 

@@ -14,11 +14,11 @@ import { EventCardEmpty } from '../components/EventCardEmpty';
 
 function EventCardDecoration() {
   return (
-    <div className="h-full bg-gradient-to-b from-[#486EAB] to-[#EDF3F6]"/>
+    <div className="h-full bg-gradient-to-b from-[#486EAB] to-[#EDF3F6]" />
   );
 }
 
-function EventCardContent({ events }: { events: EventCardProps[] }) {
+function EventCardContent({ events,tahun }: { events: EventCardProps[], tahun: string }) {
   const { pastNotGoing, nextOnGoing, futureNotGoing } = sortEvents(events);
   return (
     <div className="relative flex flex-col gap-2 md:gap-5 justify-center w-full max-w-[1120px]">
@@ -38,7 +38,11 @@ function EventCardContent({ events }: { events: EventCardProps[] }) {
             </div>
           )}
 
-          {nextOnGoing ? (<ShowNextEvent events={nextOnGoing} />) : <EventCardEmpty />}
+          {Array.isArray(nextOnGoing) && nextOnGoing.length > 0 ? (
+            <ShowNextEvent events={nextOnGoing} />
+          ) : (
+            <EventCardEmpty />
+          )}
         </div>
         <div className="grid grid-rows-[auto_1fr] min-h-full">
           <h2 className="h-fit w-full text-center uppercase py-5 md:py-10 font-semibold text-[12px] md:text-2xl xl:text-3xl text-[var(--color-nile-blue)]">Mendatang</h2>
@@ -59,15 +63,15 @@ function EventCardContent({ events }: { events: EventCardProps[] }) {
   )
 }
 
-export async function EventCardSection() {
-  const events = await getEvents();
+export async function EventCardSection({tahun}: {tahun: string}) {
+  const events = await getEvents(tahun);
   return (
     <section className="relative p-0 m-0 top-0">
       <DecorationLayer className="top-1/3 md:top-1/4 pointer-events-none">
         <EventCardDecoration />
       </DecorationLayer>
       <ContentLayer className="px-3 pb-0 md:pb-30 flex justify-center">
-        <EventCardContent events={events} />
+        <EventCardContent events={events} tahun={tahun} />
       </ContentLayer>
     </section>
   )

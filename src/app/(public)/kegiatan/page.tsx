@@ -20,8 +20,11 @@ function PitaDecoration() {
     </div>
   )
 }
-
-export default function Page() {
+interface PageProps {
+  searchParams: { tahun?: string };
+}
+export default function Page({ searchParams }: PageProps) {
+   const tahun = searchParams.tahun || new Date().getFullYear().toString();
   return (
     <>
       <BackgroundLayer>
@@ -33,9 +36,9 @@ export default function Page() {
         <RoundedBg align="end" />
       </BackgroundLayer>
       <div className="relative flex-col items-start mt-28">
-        <CalendarSection />
+        <CalendarSection tahun={tahun} />
         <PitaDecoration />
-        <EventCardSection />
+        <EventCardSection tahun={tahun} />
       </div>
     </>
   );

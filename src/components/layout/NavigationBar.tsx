@@ -67,13 +67,14 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
                   {items.map((item) => {
                     return (
                       <li key={item.href}>
-                        <Glass className={`${pathname !== item.href ? "bg-white/30" :
-                          "bg-linear-to-r from-[#A6CFE1] to-[#265A8C]"}`}>
+                        <Glass>
                           <Link
                             href={item.href}
-                            className={
+                            className={ 
                               `shadow-[0_4px_10px_var(--color-neutral-400)] w-full text-center
                             text-sm font-medium text-white border border-neutral-50/50 rounded-full px-3 py-1
+                            ${pathname !== item.href ? "bg-white/30" :
+                          "bg-linear-to-r from-[#A6CFE1] to-[#265A8C]"}
                              `}>
                             {item.label}
                           </Link>

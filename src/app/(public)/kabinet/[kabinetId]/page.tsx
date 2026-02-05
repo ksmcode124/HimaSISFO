@@ -9,6 +9,7 @@ import {
   IntiHimpunanSection,
   DepartemenListSection,
 } from "@/features/kabinet";
+import { ShellLayer } from "@/components/layout/ShellLayer";
 
 export default function Page() {
   const params = useParams();
@@ -37,7 +38,7 @@ export default function Page() {
   const { currentKabinet, kabinetList, departemenList, raw } = displayData;
 
   return (
-    <>
+    <ShellLayer>
       <KabinetHeroSection
         currentKabinet={currentKabinet}
         kabinetList={kabinetList}
@@ -45,6 +46,6 @@ export default function Page() {
       <FilosofiSection data={currentKabinet} />
       <IntiHimpunanSection data={raw.kabinet.departemenInti} />
       <DepartemenListSection data={departemenList} />
-    </>
+    </ShellLayer>
   );
 }

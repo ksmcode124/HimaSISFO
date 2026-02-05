@@ -7,9 +7,9 @@ import { CalendarRightDecoration } from "../../../../../public/assets/kegiatan/d
 export default async function Page({
   searchParams
 }: {
-  searchParams: Promise<{ bulan?: string }>
+  searchParams: Promise<{ bulan?: string; tahun?: string }>
 }) {
-  const { bulan } = await searchParams;
+  const { bulan} = await searchParams;
   return (
     <>
       <BackgroundLayer className="w-full h-screen">

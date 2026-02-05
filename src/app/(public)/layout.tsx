@@ -8,14 +8,14 @@ interface PublicLayoutProps {
 
 export default function PublicLayout({ children }: PublicLayoutProps) {
   return (
-    <>
-    
-    <main className="overflow-hidden">
+    <div className="overflow-hidden">
       <NavigationBar items={navItems} />
-      {children}
+      <main className="flex flex-col min-h-screen overflow-visible">
+        <div className="relative flex-1">
+          {children}
+        </div>
+      </main>
       <SiteFooter />
-    </main>
-    
-    </>
+    </div>
   )
 }

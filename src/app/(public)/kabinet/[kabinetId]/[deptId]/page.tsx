@@ -8,6 +8,7 @@ import {
   StaffSection,
   ProkerSection,
 } from "@/features/kabinet";
+import { ShellLayer } from "@/components/layout/ShellLayer";
 
 export default function DepartemenPage() {
   const params = useParams();
@@ -37,7 +38,7 @@ export default function DepartemenPage() {
   const { info, proker, anggota } = detailData;
 
   return (
-    <>
+    <ShellLayer>
       <DepartemenHeroSection
         nama_dept={info.nama_departemen}
         deskripsi={info.deskripsi_departemen}
@@ -48,6 +49,6 @@ export default function DepartemenPage() {
       />
       <ProkerSection data={proker} />
       <StaffSection data={anggota} />
-    </>
+    </ShellLayer>
   );
 }

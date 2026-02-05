@@ -29,17 +29,18 @@ function EventListContent({ events }: { events: EventCardProps[] }) {
         </div>
         <EventList events={events} />
       </div>
-      
+
     </div>
   );
 }
-export async function EventListSection({ filter }: { filter?: string }) {
-  const tahunIni = new Date().getFullYear();
+export async function EventListSection({ filter, tahun }: { filter?: string, tahun?: string }) {
+  const tahunIni = tahun ? new Date().getFullYear().toString() : new Date().getFullYear().toString();
   const bulan = filter || formatMonthName(new Date().getMonth());
-  const events = await getEvents();
+  const events = await getEvents(tahunIni);
   const HelperEvent = createEventIndex(events);
-  const FindEvent = findEventByMonthYear({ month: bulan, year: tahunIni, indexedEvents: HelperEvent });
 
+  console.log("HelperEvent:", HelperEvent);
+  const FindEvent = findEventByMonthYear({ month: bulan, year: tahunIni, indexedEvents: HelperEvent });
   return (
     <section className="relative p-0 m-0 top-0 h-fit overflow-hidden">
       <DecorationLayer>
