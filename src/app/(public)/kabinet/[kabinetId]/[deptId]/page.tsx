@@ -10,6 +10,8 @@ import {
 } from "@/features/kabinet";
 import { ShellLayer } from "@/components/layout/ShellLayer";
 import { ThemeProvider } from "@/features/kabinet/components/ThemeProvider";
+import { translateToSlug } from "@/lib/utils/translate-slug";
+import { KabinetColorType } from "@/features/kabinet/styles/KabinetColorConfig";
 
 export default function DepartemenPage() {
   const params = useParams();
@@ -37,8 +39,8 @@ export default function DepartemenPage() {
   }
 
   const { info, proker, anggota } = detailData;
-  // const kabinet = translateToSlug(currentKabinet.nama_kabinet) as KabinetColorType
-  const kabinet = 'aksayapatra'
+  // const kabinet = translateToSlug(nama_kabinet) as KabinetColorType
+  const kabinet = 'aksayapatra' // need to change or get the nama_kabinet
   return (
     <ThemeProvider kabinet={kabinet}>
       <ShellLayer>

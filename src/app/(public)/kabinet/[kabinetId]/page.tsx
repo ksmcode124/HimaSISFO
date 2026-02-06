@@ -39,8 +39,7 @@ export default function Page() {
   }
 
   const { currentKabinet, kabinetList, departemenList, raw } = displayData;
-  // const kabinet = translateToSlug(currentKabinet.nama_kabinet) as KabinetColorType
-  const kabinet = 'aksayapatra'
+  const kabinet = translateToSlug(currentKabinet.nama_kabinet) as KabinetColorType
   return ( 
     <ThemeProvider kabinet={kabinet}>
       <ShellLayer>
