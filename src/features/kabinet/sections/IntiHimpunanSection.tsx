@@ -3,13 +3,14 @@
 import Image from "next/image";
 import { Ornament1, Ornament4 } from "../components/KabinetOrnaments";
 import CarouselIntiHimpunan from "../components/CarouselIntiHimpunan";
-import { DepartemenInti } from "../types";
+import { ColorMap, DepartemenInti } from "../types";
 
 interface SectionProps {
   data: DepartemenInti;
+  colorMap: ColorMap
 }
 
-export default function IntiHimpunanSection({ data }: SectionProps) {
+export default function IntiHimpunanSection({ data, colorMap }: SectionProps) {
   if (!data) return null;
 
   return (
@@ -31,18 +32,29 @@ export default function IntiHimpunanSection({ data }: SectionProps) {
       </div>
 
       <div className="absolute z-0 top-36 md:top-40 -right-28 md:-right-72 w-100 md:w-250">
-        <Ornament1 />
+        <Ornament1 gradient={colorMap.ornament1 ?? ''} />
       </div>
       <div className="absolute z-0 bottom-5 -left-44 md:-left-90 w-md md:w-300">
-        <Ornament4 />
+        <Ornament4 gradient={colorMap.ornament4 ?? ''} />
       </div>
 
       {/* Carousel */}
       <div className="relative z-30 w-full max-w-7xl">
-        <CarouselIntiHimpunan anggota={data.anggota} />
+        <CarouselIntiHimpunan 
+          anggota={data.anggota} 
+          colorMap={{
+            carouselButton: "var(--kabinet-gradient-carousel-button)",
+            gradientIntiBackground: "var(--kabinet-gradient-inti-background)",
+            pagination: "var(--kabinet-color-pagination)"
+          }} />
       </div>
 
-      <div className="absolute bottom-6 md:bottom-10 w-[90%] md:w-[80%] h-1 bg-linear-to-r from-[#E63258] to-[#A43DA5]" />
+      <div 
+        className="absolute bottom-6 md:bottom-10 w-[90%] md:w-[80%] h-1"
+        style={{
+          backgroundImage: colorMap.borderBottom ?? ''
+        }}
+       />
     </section>
   );
 }

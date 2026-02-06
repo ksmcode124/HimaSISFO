@@ -4,13 +4,14 @@ import React, { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import IntiHimpunanCard from "./IntiHimpunanCard";
-import { Anggota } from "../types";
+import { Anggota, ColorMap } from "../types";
 
 interface CarouselProps {
   anggota: Anggota[];
+  colorMap: ColorMap
 }
 
-export default function CarouselIntiHimpunan({ anggota }: CarouselProps) {
+export default function CarouselIntiHimpunan({ anggota, colorMap }: CarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
@@ -53,7 +54,7 @@ export default function CarouselIntiHimpunan({ anggota }: CarouselProps) {
   };
 
   const navBtnClass =
-    "hidden lg:flex absolute top-1/2 -translate-y-1/2 z-50 p-4 md:p-5 rounded-full bg-linear-to-r from-[#E63258] to-[#A43DA5] hover:bg-none hover:bg-white group transition-all";
+    "hidden lg:flex absolute top-1/2 -translate-y-1/2 z-50 p-4 md:p-5 rounded-full hover:bg-none hover:bg-white group transition-all";
   const iconClass =
     "text-white group-hover:text-[#E63258] w-8 h-8 md:w-10 md:h-10 transition-colors";
 
@@ -64,6 +65,9 @@ export default function CarouselIntiHimpunan({ anggota }: CarouselProps) {
         <button
           onClick={slidePrev}
           className={`${navBtnClass} -left-4 xl:left-12 2xl:-left-32`}
+          style={{
+            backgroundImage: colorMap.carouselButton ?? ''
+          }}
         >
           <ChevronLeft className={iconClass} />
         </button>
@@ -71,6 +75,9 @@ export default function CarouselIntiHimpunan({ anggota }: CarouselProps) {
         <button
           onClick={slideNext}
           className={`${navBtnClass} -right-4 xl:right-12 2xl:-right-32`}
+          style={{
+            backgroundImage: colorMap.carouselButton ?? ''
+          }}
         >
           <ChevronRight className={iconClass} />
         </button>
@@ -107,6 +114,7 @@ export default function CarouselIntiHimpunan({ anggota }: CarouselProps) {
                     className="w-40 sm:w-70 md:w-87 lg:w-100 2xl:w-125 shrink-0 transition-all duration-500"
                   >
                     <IntiHimpunanCard
+                      gradient={colorMap.gradientIntiBackground ?? ''}
                       data={item}
                       index={currentIndex * 2 + idx}
                     />
@@ -132,7 +140,7 @@ export default function CarouselIntiHimpunan({ anggota }: CarouselProps) {
                   ? isMobile? 30: 50
                   : isMobile? 10: 20,
               height: isMobile ? 10 : 20,
-              backgroundColor: currentIndex === idx ? "#A43DA5" : "#FFFFFF",
+              backgroundColor: currentIndex === idx ? colorMap.pagination : "#FFFFFF",
             }}
             className="h-2.5 rounded-full"
           />

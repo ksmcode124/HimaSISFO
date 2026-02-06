@@ -8,17 +8,19 @@ import { Glass } from "@/components/ui/Glass";
 import { Button } from "@/components/ui/button";
 import { Pita, Ornament2 } from "../components/KabinetOrnaments";
 import PhotoSlideshowMobile from "../components/PhotoSlideshowMobile";
-import { Kabinet, KabinetListItem } from "../types";
+import { ColorMap, Kabinet, KabinetListItem } from "../types";
 import { cn } from "@/lib/utils";
 
 interface KabinetHeroSectionProps {
   currentKabinet: Kabinet;
   kabinetList: KabinetListItem[];
+  colorMap: ColorMap;
 }
 
 export default function KabinetHeroSection({
   currentKabinet,
   kabinetList,
+  colorMap,
 }: KabinetHeroSectionProps) {
   const router = useRouter();
   const images = useMemo(() => {
@@ -85,7 +87,7 @@ export default function KabinetHeroSection({
                 }
                 disabled={!navigation?.prev}
               />
-              <OrnamentWrapper position="left" />
+              <OrnamentWrapper position="left" gradient={colorMap.ornament2 ?? ''} />
             </div>
             <KabinetLogo
               src={
@@ -104,7 +106,7 @@ export default function KabinetHeroSection({
                   }
                 }}
               />
-              <OrnamentWrapper position="right" />
+              <OrnamentWrapper position="right" gradient={colorMap.ornament2 ?? ''} />
             </div>
           </div>
         </div>
@@ -129,8 +131,8 @@ export default function KabinetHeroSection({
         <div className="hidden md:block absolute bottom-0 left-0 w-full h-48 lg:h-64 bg-linear-to-t from-white via-white/20 to-transparent z-0" />
       </section>
 
-      <div className="absolute -bottom-4 md:-bottom-10 w-full z-10 translate-y-1/2">
-        <Pita />
+      <div className="absolute -bottom-4 md:-bottom-10 w-full z-10 translate-y-1/2 h-100">
+        <Pita pitaGradient={colorMap.pita ?? ''} />
       </div>
     </div>
   );
@@ -215,7 +217,7 @@ const KabinetLogo = ({ src }: { src: string }) => (
   </div>
 );
 
-const OrnamentWrapper = ({ position }: { position: "left" | "right" }) => {
+const OrnamentWrapper = ({ position, gradient }: { position: "left" | "right", gradient: string }) => {
   const styles =
     position === "left"
       ? "-scale-x-100 -right-10 sm:-right-12 md:-right-32 lg:-right-48"
@@ -227,7 +229,7 @@ const OrnamentWrapper = ({ position }: { position: "left" | "right" }) => {
         styles,
       )}
     >
-      <Ornament2 />
+      <Ornament2 gradient={gradient} />
     </div>
   );
 };

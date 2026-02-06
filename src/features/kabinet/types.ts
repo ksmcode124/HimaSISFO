@@ -1,3 +1,5 @@
+export type ColorMap = Partial<Record<string, string>>
+
 // Elemen logo kabinet
 export interface ElemenLogo {
   id: number;

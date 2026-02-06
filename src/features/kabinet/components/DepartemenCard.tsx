@@ -14,6 +14,7 @@ interface DepartemenCardProps {
   nama: string;
   logo: string | null;
   className?: string;
+  buttonGradient: string
 }
 
 export default function DepartemenCard({
@@ -21,6 +22,7 @@ export default function DepartemenCard({
   nama,
   logo,
   className = "w-30 h-42 md:w-56 md:h-72",
+  buttonGradient
 }: DepartemenCardProps) {
   const { kabinetId } = useParams();
   const [isMobile, setIsMobile] = useState(false);
@@ -100,6 +102,9 @@ export default function DepartemenCard({
             <Button
               asChild
               className="w-full h-8 md:h-11 rounded-full font-light text-2xs md:text-sm bg-linear-to-br from-[#E63258] to-[#A43DA5] hover:shadow-[inset_0_4px_8px_rgba(0,0,0,0.4)] active:shadow-[inset_0_4px_8px_rgba(0,0,0,0.4)]"
+              style={{
+                background: buttonGradient
+              }}
             >
               <Link href={`/kabinet/${kabinetId}/${id}`}>Selengkapnya</Link>
             </Button>
