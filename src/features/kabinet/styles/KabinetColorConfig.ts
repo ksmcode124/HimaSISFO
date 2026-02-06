@@ -15,6 +15,7 @@ export const KABINET_COLOR_CONFIG = {
     gradient_inti_background: "linear-gradient(90deg, #A43DA5 0%, #E63258 100%)",
     color_pagination: "#E63258",
     gradient_dept_card_button: "linear-gradient(90deg, #A43DA5 0%, #E63258 100%)",
+    color_ornament: '#f6639a'
   },
   "aksayapatra": {
     gradient_pita: "linear-gradient(180deg, #F0E068 0%, #1A4D4D 100%)",
@@ -32,6 +33,7 @@ export const KABINET_COLOR_CONFIG = {
     gradient_inti_background: "linear-gradient(90deg, #F0E068 0%, #1A4D4D 100%)",
     color_pagination: "#F0E068",
     gradient_dept_card_button: "linear-gradient(90deg, #F0E068 0%, #1A4D4D 100%)",
+    color_ornament: '#F0E068'
   }
 }
 

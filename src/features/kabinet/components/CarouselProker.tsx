@@ -8,10 +8,12 @@ import { DepartemenResponse } from "../types";
 
 interface CarouselProkerProps {
   prokerList: DepartemenResponse["proker"];
+  gradientOrnament2: string
 }
 
 export default function CarouselProker({
   prokerList = [],
+  gradientOrnament2
 }: CarouselProkerProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
@@ -74,6 +76,7 @@ export default function CarouselProker({
         )}
       >
         <ProkerCard
+          gradientOrnament2={gradientOrnament2}
           nama={proker.nama_proker}
           deskripsi={proker.deskripsi_proker}
           image={proker.foto_proker}

@@ -6,9 +6,10 @@ import { motion } from "framer-motion";
 
 interface Props {
   imageSrc: string;
+  gradientOrnament2: string,
 }
 
-export default function PhotoSlideshowMobile({ imageSrc }: Props) {
+export default function PhotoSlideshowMobile({ imageSrc, gradientOrnament2 }: Props) {
   return (
     <div className="relative z-10 mt-10 w-[90%] max-w-100 mx-auto -left-[10%] mb-10 md:hidden">
       <div className="absolute -top-6 -left-[30%] w-[90%] aspect-square z-30 [&_svg]:w-full [&_svg]:h-auto">
@@ -35,7 +36,7 @@ export default function PhotoSlideshowMobile({ imageSrc }: Props) {
         </motion.div>
 
         <div className="absolute right-[-30%] -bottom-[123%] w-[90%] aspect-square [&_svg]:w-full [&_svg]:h-auto">
-          <Ornament2 />
+          <Ornament2 gradient={gradientOrnament2} />
         </div>
       </div>
 

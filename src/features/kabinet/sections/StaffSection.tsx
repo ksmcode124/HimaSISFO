@@ -8,13 +8,14 @@ import {
   Ornament5,
 } from "../components/KabinetOrnaments";
 import StaffCard from "../components/StaffCard";
-import { DepartemenResponse } from "../types";
+import { ColorMap, DepartemenResponse } from "../types";
 
 interface StaffSectionProps {
   data: DepartemenResponse["anggota"];
+  colorMap: ColorMap
 }
 
-export default function StaffSection({ data }: StaffSectionProps) {
+export default function StaffSection({ data, colorMap }: StaffSectionProps) {
   const kadep = data.find((a) => a.jabatan.toLowerCase().includes("kepala"));
   const wakadep = data.find((a) => a.jabatan.toLowerCase().includes("wakil"));
   const sekben = data.find(
@@ -35,29 +36,29 @@ export default function StaffSection({ data }: StaffSectionProps) {
       {/* ORNAMENTS */}
       <div className="absolute right-30 md:right-20 bottom-[30%] md:top-[12%] lg:top-[0%] w-[700vw] md:w-[400vw] z-0">
         <div className="w-full translate-x-[43%] -rotate-235 md:rotate-0">
-          <Ornament5 />
+          <Ornament5 gradient={colorMap.ornament5 ?? ''} />
         </div>
       </div>
 
       <div className="absolute -right-60 md:-right-10 top-[30%] lg:top-[22%] w-[700vw] md:w-[400vw] z-0">
         <div className="w-full translate-x-[40%] md:translate-x-[30%] -scale-x-100 -rotate-255 md:rotate-[-15deg]">
-          <Ornament5 />
+          <Ornament5 gradient={colorMap.ornament5 ?? ''} />
         </div>
       </div>
 
       <div className="relative z-10 flex flex-col items-center mb-10 md:mb-20 w-full">
         <div className="flex flex-row -mt-10 items-center justify-center">
           <div className="w-40 md:w-80 scale-90 md:scale-110 origin-right translate-y-6 -mr-18 md:-mr-44 transition-all">
-            <Ornament9 />
+            <Ornament9 gradient={colorMap.ornament9 ?? ''} />
           </div>
           <div className="flex flex-col items-center z-20">
             <div className="w-56 md:w-110 rotate-2 -translate-y-1 md:-translate-y-10 transition-all">
-              <Ornament1 />
+              <Ornament1 gradient={colorMap.ornament1 ?? ''} />
             </div>
           </div>
           <div className="w-40 md:w-80 scale-90 md:scale-110 origin-left translate-y-6 -ml-18 md:-ml-44 transition-all">
             <div className="scale-x-[-1]">
-              <Ornament9 />
+              <Ornament9 gradient={colorMap.ornament9 ?? ''} />
             </div>
           </div>
         </div>
@@ -73,10 +74,10 @@ export default function StaffSection({ data }: StaffSectionProps) {
       </div>
 
       <div className="absolute w-120 top-64 right-22 z-0 rotate-45 md:hidden">
-        <Ornament4 />
+        <Ornament4 gradient={colorMap.ornament4 ?? ''} />
       </div>
       <div className="absolute w-120 top-64 left-22 z-0 rotate-135 -scale-y-100 md:hidden">
-        <Ornament4 />
+        <Ornament4 gradient={colorMap.ornament4 ?? ''} />
       </div>
 
       {/* CONTAINER INTI */}

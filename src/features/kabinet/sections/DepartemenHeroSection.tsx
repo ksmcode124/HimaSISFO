@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Pita } from "../components/KabinetOrnaments";
 import BreadcrumbSection from "./BreadcrumbSection";
 import { BreadcrumbItemData } from "@/components/ui/breadcrumb";
+import { ColorMap } from "../types";
 
 interface DepartemenHeroProps {
   nama_dept: string;
@@ -10,6 +11,7 @@ interface DepartemenHeroProps {
   bg_image: string | null;
   kabinet_id: number | string;
   kabinet_nama: string;
+  colorMap: ColorMap
 }
 
 export default function DepartemenHeroSection({
@@ -19,6 +21,7 @@ export default function DepartemenHeroSection({
   bg_image,
   kabinet_id,
   kabinet_nama,
+  colorMap
 }: DepartemenHeroProps) {
   const breadcrumbItems: BreadcrumbItemData[] = [
     {
@@ -84,7 +87,7 @@ export default function DepartemenHeroSection({
       </section>
 
       <div className="absolute -bottom-4 md:-bottom-4 w-full z-10 translate-y-1/2">
-        <Pita />
+        <Pita pitaGradient={colorMap.pita ?? ''} />
       </div>
     </div>
   );

@@ -126,7 +126,7 @@ export default function KabinetHeroSection({
 
         {/* Mobile Elements */}
         {images.length > 0 && (
-          <PhotoSlideshowMobile imageSrc={images[currentImgIndex]} />
+          <PhotoSlideshowMobile imageSrc={images[currentImgIndex]} gradientOrnament2={colorMap.ornament2 ?? ''} />
         )}
         <div className="hidden md:block absolute bottom-0 left-0 w-full h-48 lg:h-64 bg-linear-to-t from-white via-white/20 to-transparent z-0" />
       </section>

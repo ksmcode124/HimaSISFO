@@ -9,6 +9,7 @@ import {
   ProkerSection,
 } from "@/features/kabinet";
 import { ShellLayer } from "@/components/layout/ShellLayer";
+import { ThemeProvider } from "@/features/kabinet/components/ThemeProvider";
 
 export default function DepartemenPage() {
   const params = useParams();
@@ -36,19 +37,39 @@ export default function DepartemenPage() {
   }
 
   const { info, proker, anggota } = detailData;
-
+  // const kabinet = translateToSlug(currentKabinet.nama_kabinet) as KabinetColorType
+  const kabinet = 'aksayapatra'
   return (
-    <ShellLayer>
-      <DepartemenHeroSection
-        nama_dept={info.nama_departemen}
-        deskripsi={info.deskripsi_departemen}
-        logo_dept={info.logo_departemen}
-        bg_image={info.foto_departemen}
-        kabinet_id={kabinetId}
-        kabinet_nama="Tentang"
-      />
-      <ProkerSection data={proker} />
-      <StaffSection data={anggota} />
-    </ShellLayer>
+    <ThemeProvider kabinet={kabinet}>
+      <ShellLayer>
+        <DepartemenHeroSection
+          nama_dept={info.nama_departemen}
+          deskripsi={info.deskripsi_departemen}
+          logo_dept={info.logo_departemen}
+          bg_image={info.foto_departemen}
+          kabinet_id={kabinetId}
+          kabinet_nama="Tentang"
+          colorMap={{
+            pita: "var(--kabinet-gradient-pita)",
+          }}
+        />
+        <ProkerSection 
+          data={proker} 
+          colorMap={{
+            pita: "var(--kabinet-gradient-pita)",
+            ornament2: "var(--kabinet-gradient-ornament-2)",
+            ornament: "var(--kabinet-color-ornament)"
+          }} />
+        <StaffSection 
+          data={anggota} 
+          colorMap={{
+            ornament1: "var(--kabinet-gradient-ornament-1)",
+            ornament4: "var(--kabinet-gradient-ornament-4)",
+            ornament5: "var(--kabinet-gradient-ornament-5)",
+            ornament9: "var(--kabinet-gradient-ornament-9)"
+          }}
+        />
+      </ShellLayer>
+    </ThemeProvider>
   );
 }
