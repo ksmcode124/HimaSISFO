@@ -8,6 +8,7 @@ import Kabinet from "@/features/beranda/sections/kabinet";
 import Spotify from "@/features/beranda/sections/spotify";
 import Awan from "@/features/beranda/components/awan";
 import Pita from "@/components/beranda/pita";
+import useBeranda from "@/features/beranda/hooks/useBeranda";
 
 
 export default function Page() {

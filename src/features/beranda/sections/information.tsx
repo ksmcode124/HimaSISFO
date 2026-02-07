@@ -1,9 +1,13 @@
+"use client"
 import { ArrowRight, Bookmark, Calendar } from "lucide-react";
 import { berandaData } from "..";
 import { Button } from "@/components/ui/button";
 import InfoCardGrid from "../components/info-card-grid";
+import useBeranda from "../hooks/useBeranda";
 
 export default function Information() {
+    const { data, isLoading, error } = useBeranda();
+    console.log(data);
     return (
         <div className="relative z-0 md:min-h-screen overflow-hidden">
             {/* decorative background */}
@@ -17,7 +21,7 @@ export default function Information() {
             <div className="relative z-10 flex flex-col items-center justify-center">
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">INFORMASI TERBARU</h2>
 
-                <InfoCardGrid />
+                <InfoCardGrid events={data?.events} isLoading={isLoading} />
 
                 <Button
                     className="rounded-full py-4 px-5 mt-8 text-lg"
