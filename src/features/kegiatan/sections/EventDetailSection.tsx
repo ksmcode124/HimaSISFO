@@ -62,7 +62,7 @@ export async function EventDetailSection({ id, tahun }: { id: string; tahun?: st
   const tahunIni = tahun ? new Date().getFullYear().toString() : new Date().getFullYear().toString();
   const events = await getEvents(tahunIni);
   const HelperEvent = createEventIndexByNameDate(events);
-  console.log("HelperEvent in Detail:", HelperEvent);
+  // console.log("HelperEvent in Detail:", HelperEvent);
   const key = decodeURIComponent(id).split("-").pop();
   const FindEventDetail = findEventById({ id: Number(key), indexedEvents: HelperEvent });
   if (!FindEventDetail) {

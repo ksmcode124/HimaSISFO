@@ -31,16 +31,14 @@ function EventCardContent({ events, tahun }: { events: EventCardProps[], tahun: 
           {pastNotGoing ? <EventCard variant="notGoing" {...pastNotGoing} /> : <EventCardEmpty />}
         </div>
         <div className="grid grid-rows-[auto_1fr] min-h-full">
-
-
           {Array.isArray(nextOnGoing) && nextOnGoing.length > 0 ? (
-            <div>
+            <>
               <div className="flex justify-center items-center gap-1 md:gap-5">
                 <h2 className="h-fit w-fit text-center uppercase py-5 md:py-10 font-semibold text-[12px] md:text-2xl xl:text-3xl text-[var(--color-nile-blue)]">Berikutnya</h2>
                 {nextOnGoing.length > 1 ? <span className="bg-[var(--color-nile-blue)] rounded-full w-5 md:w-10 h-5 md:h-10 flex items-center justify-center font-normal text-[12px] md:text-xl xl:text-2xl text-white">{nextOnGoing.length}</span> : null}
               </div>
               <ShowNextEvent events={nextOnGoing} />
-            </div>
+            </>
           ) : (
             <EventCardEmpty />
           )}

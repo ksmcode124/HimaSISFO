@@ -39,7 +39,7 @@ export async function EventListSection({ filter, tahun }: { filter?: string, tah
   const events = await getEvents(tahunIni);
   const HelperEvent = createEventIndex(events);
 
-  console.log("HelperEvent:", HelperEvent);
+  // console.log("HelperEvent:", HelperEvent);
   const FindEvent = findEventByMonthYear({ month: bulan, year: tahunIni, indexedEvents: HelperEvent });
   return (
     <section className="relative p-0 m-0 top-0 h-fit overflow-hidden">
