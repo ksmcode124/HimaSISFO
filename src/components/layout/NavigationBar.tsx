@@ -31,11 +31,11 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
   return (
     <div className="flex w-full justify-center" aria-label="wrapper">
       <header
-        className={`fixed w-full mx-5 md:w-auto md:mx-0 lg:mx-50 rounded-full justify-center items-center top-5 ${isMobile ? 'bg-transparent' : 'bg-[#101D2F]/50'} z-50 h-fit overflow-hidden ${className}`}
+        className={`fixed w-full mx-5 md:w-auto md:mx-0 lg:mx-50 rounded-full justify-center items-center top-5 ${isMobile ? 'bg-transparent' : ''} z-999 h-fit overflow-hidden ${className}`}
         role="banner"
       >
 
-        <Glass className="none md:block" preset='soft' disabled={isMobile}>
+        <Glass preset='cloudy' disabled={isMobile}>
           <nav
             className="py-2 px-5 md:px-10 lg:px-20 flex w-full "
             aria-label="Main navigation"
@@ -43,7 +43,7 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
             <div className="flex h-14 justify-center md:justify-between items-center w-full gap-30 md:gap-20 lg:gap-30">
               {/* Logo & Back Button*/}
               <Link href="/" className={`flex items-center px-0 md:px-7 py-1 ${isMobile ? 'bg-transparent' : 'bg-[#AFAFAF]'} rounded-full gap-0 md:gap-3 lg:gap-5`} aria-label="Home">
-                <Glass className="p-1">
+                <Glass className="p-1 rounded-sm" preset='clear'>
                   <Image
                     width={50}
                     height={50}
@@ -68,18 +68,16 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
                     
                     return (
                       <li key={item.href}>
-                        <Glass>
-                          <Link
+                        <Link
                             href={item.href}
                             className={ 
                               `shadow-[0_4px_10px_var(--color-neutral-400)] w-full text-center
-                            text-sm font-medium text-white border border-neutral-50/50 rounded-full px-3 py-1
+                            text-sm font-medium text-white border-2 border-neutral-50/50 rounded-full px-3 py-1 hover:border-white
                             ${!isActive ? "bg-white/30" :
-                          "bg-linear-to-r from-[#A6CFE1] to-[#265A8C]"}
+                          "bg-linear-to-r from-[#A6CFE1] to-[#265A8C] "}
                              `}>
                             {item.label}
                           </Link>
-                        </Glass>
                       </li>
                     )
                   })}

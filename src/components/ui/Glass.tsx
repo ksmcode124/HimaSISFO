@@ -1,160 +1,356 @@
-'use client'
+'use client';
 
-import React, { useId, memo, ReactNode } from 'react'
+import { cn } from '@/lib/utils';
+import { motion, MotionValue, useMotionValue, useSpring, type HTMLMotionProps } from 'motion/react';
+import React, { useCallback, useEffect, useId, useLayoutEffect, useRef } from 'react';
+import { LiquidFilter, LiquidFilterProps } from './Filter';
+import { getValueOrMotion } from '@/lib/utils/ui/liquid-glass';
 
-type GlassPreset = 'soft' | 'medium' | 'strong'
+/**
+ * Safely parse border radius from computed styles, handling edge cases like
+ * scientific notation (from rounded-full), percentages, and invalid values.
+ * For very large values or scientific notation, returns half of the smallest dimension.
+ */
+const getBorderRadius = (element: HTMLElement, rect: DOMRect): number => {
+  const computedStyle = getComputedStyle(element);
+  const rawRadius = computedStyle.borderRadius;
 
-interface Light {
-  angle?: number       // derajat 0-360
-  intensity?: number   // 0–100
+  if (!rawRadius || rawRadius === '0px') {
+    return 0;
+  }
+
+  const parsedRadius = parseFloat(rawRadius);
+
+  if (isNaN(parsedRadius)) {
+    return 0;
+  }
+
+  // Handle scientific notation (e.g., '1.67772e+07px' from rounded-full) or very large values
+  if (parsedRadius > 9999 || rawRadius.includes('e+') || rawRadius.includes('E+')) {
+    // For very large values (like rounded-full), return half of smallest dimension
+    return Math.min(rect.width, rect.height) / 2;
+  }
+
+  return parsedRadius;
+};
+
+export const useMotionSizeObservers = <T extends HTMLElement = HTMLDivElement>(
+  containerRef: React.RefObject<T | null>,
+  disabled: boolean = false
+) => {
+  // Spring motion values → initial null untuk menunggu measurement
+  const width = useSpring(100, { stiffness: 200, damping: 40 });
+  const height = useSpring(100, { stiffness: 200, damping: 40 });
+  const borderRadius = useSpring(100, { stiffness: 200, damping: 40 });
+
+  const measured = useRef(false);
+  const isUpdating = useRef(false);
+
+  const updateDimensions = () => {
+    const el = containerRef.current;
+    if (!el || disabled || isUpdating.current) return;
+
+    isUpdating.current = true;
+
+    const rect = el.getBoundingClientRect();
+    const newWidth = Math.max(rect.width, 1);
+    const newHeight = Math.max(rect.height, 1);
+    const newRadius = Math.max(getBorderRadius(el, rect), 0);
+
+    // Set spring → jika belum diukur langsung ke ukuran child
+    if (!measured.current) {
+      width.set(newWidth);
+      height.set(newHeight);
+      borderRadius.set(newRadius);
+      measured.current = true;
+    } else {
+      if (Math.abs(width.get() - newWidth) > 0.5) width.set(newWidth);
+      if (Math.abs(height.get() - newHeight) > 0.5) height.set(newHeight);
+      if (Math.abs(borderRadius.get() - newRadius) > 0.5) borderRadius.set(newRadius);
+    }
+
+    requestAnimationFrame(() => {
+      isUpdating.current = false;
+    });
+  };
+
+  // Layout effect → ukur sebelum paint
+  useLayoutEffect(() => {
+    const el = containerRef.current;
+    if (!el || disabled) return;
+
+    // Initial measurement
+    updateDimensions();
+
+    // Observe resize
+    const resizeObserver = new ResizeObserver(updateDimensions);
+    resizeObserver.observe(el);
+
+    return () => resizeObserver.disconnect();
+  }, [disabled]);
+
+  // MutationObserver → untuk update borderRadius ketika style/class berubah
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el || disabled) return;
+
+    let timeoutId: NodeJS.Timeout;
+    const mutationObserver = new MutationObserver(() => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(updateDimensions, 100);
+    });
+
+    mutationObserver.observe(el, {
+      attributes: true,
+      attributeFilter: ['style', 'class'],
+    });
+
+    return () => {
+      clearTimeout(timeoutId);
+      mutationObserver.disconnect();
+    };
+  }, [disabled]);
+
+  return {
+    width,
+    height,
+    borderRadius,
+    measured: measured.current, // bisa dipakai di component untuk render glass
+  };
+};
+
+
+export interface Light {
+  intensity: number,
+  angle: number,
 }
 
-interface GlassBetaProps {
-  children?: ReactNode
-  className?: string
-  depth?: number        // 0–100
-  refraction?: number   // 0–100
-  dispersion?: number   // 0–100
-  frost?: number        // 0–100
-  splay?: number        // 0–100
-  light?: Light
-  hover?: boolean
-  preset?: GlassPreset
-  dewiness?: number     // 0–100, seberapa kuat efek embun di pinggir
-  style?: React.CSSProperties
-  disabled?: boolean
+type GlassPreset = 'clear' | 'hazy' | 'cloudy'
+export interface LiquidGlassProps<T extends HTMLElement = HTMLDivElement>
+  extends Pick<
+    LiquidFilterProps,
+    | 'glassThickness'
+    | 'bezelWidth'
+    | 'blur'
+    | 'bezelHeightFn'
+    | 'refractiveIndex'
+    | 'specularOpacity'
+    | 'specularSaturation'
+    | 'dpr'
+  > {
+  preset?: GlassPreset;
+  className?: string;
+  targetRef?: React.RefObject<T | null>;
+  frost?: MotionValue<number>;
+  splay?: MotionValue<number>;
+  depth?: MotionValue<number>;
+  light?: Light;
+  refraction?: MotionValue<number>;
+  dispersion?: MotionValue<number>;
+  width?: MotionValue<number>;
+  height?: MotionValue<number>;
+  borderRadius?: MotionValue<number>;
+  disabled?: boolean;
 }
 
-const PRESET_DEFAULTS: Record<GlassPreset, Partial<GlassBetaProps>> = {
-  soft: { depth: 100, frost: 20, splay: 10, refraction: 100, dispersion: 100, light: { angle: 45, intensity: 80 }, dewiness: 100 },
-  medium: { depth: 35, frost: 25, splay: 20, refraction: 20, dispersion: 3, light: { angle: 60, intensity: 70 }, dewiness: 20 },
-  strong: { depth: 50, frost: 35, splay: 35, refraction: 35, dispersion: 5, light: { angle: 120, intensity: 90 }, dewiness: 30 },
-}
+export const useLiquidSurface = <T extends HTMLElement = HTMLDivElement>({
+  targetRef,
+  borderRadius: borderRadiusProp,
+  ...props
+}: LiquidGlassProps<T>) => {
+  const filterId = `glass-${useId()}`;
+  const rawRef = useRef<T>(null);
+  const ref = targetRef ?? rawRef;
 
-export const Glass: React.FC<GlassBetaProps & React.HTMLAttributes<HTMLDivElement>> = memo(({
+  // Motion observer membaca size elemen
+  const { width: observedWidth, height: observedHeight, borderRadius: observedRadius } =
+    useMotionSizeObservers(ref);
+
+  // Gunakan borderRadiusProp kalau ada, tapi width/height dari observer
+  const finalWidth = observedWidth ? getValueOrMotion(observedWidth) : 100;
+  const finalHeight = observedHeight ? getValueOrMotion(observedHeight) : 100;
+  const finalRadius = borderRadiusProp ?? observedRadius;
+
+  const Filter = () => (
+    <LiquidFilter
+      id={filterId}
+      width={Math.max(finalWidth ?? 0, 1)}   // jangan 0
+      height={Math.max(finalHeight ?? 0, 1)} // jangan 0
+      radius={finalRadius}
+      {...props}
+    />
+  );
+
+  const filterStyles: React.CSSProperties = {
+    backdropFilter: `url(#${filterId})`,
+    WebkitBackdropFilter: `url(#${filterId})`,
+  };
+
+  return { filterId, filterStyles, ref, Filter };
+};
+
+
+const THEME: Record<string, LiquidGlassProps> = {
+  soft: {
+    className: 'bg-transparent/20 hover:bg-accent/40 rounded-2xl'
+  },
+  hazy: {
+    className: 'bg-white/10 hover:bg-accent/30 p-1 md:p-3'
+  },
+  cloudy: {
+    className: 'bg-[#101D2F]/50 rounded-2xl'
+  }
+}
+export const Glass: React.FC<LiquidGlassProps & HTMLMotionProps<'div'>> = ({
+  preset = 'soft',
   children,
-  className = '',
-  preset = 'medium',
-  hover = true,
-  depth,
-  refraction,
-  dispersion,
-  frost,
-  splay,
-  light,
-  dewiness,
-  style,
-  disabled,
+  depth: glassThickness,
+  splay: bezelWidth,
+  frost: blur,
+  bezelHeightFn,
+  refraction: refractiveIndex,
+  light: specularOpacity,
+  dispersion: specularSaturation,
+  dpr = 1,
+  targetRef,
+  disabled = false,
   ...props
 }) => {
-  const baseId = useId()
-  const filterId = `glass-distort-${baseId}`
-  const dewFilterId = `glass-filter-${baseId}`
 
-  // Merge preset
-  const presetValues = PRESET_DEFAULTS[preset]
-  const finalDepth = (depth ?? presetValues.depth ?? 35) * 0.03
-  const finalRefraction = (refraction ?? presetValues.refraction ?? 20) / 100
-  const finalDispersion = (dispersion ?? presetValues.dispersion ?? 3) / 100
-  const finalFrost = (frost ?? presetValues.frost ?? 25) / 100
-  const finalSplay = (splay ?? presetValues.splay ?? 20) / 100
-  const finalDew = (dewiness ?? presetValues.dewiness ?? 20) / 100
-  const finalLight = {
-    angle: light?.angle ?? presetValues.light?.angle ?? 45,
-    intensity: ((light?.intensity ?? presetValues.light?.intensity ?? 50) / 100),
-  }
+  const defaults = {
+    glassThickness: 110,
+    bezelWidth: 20,
+    blur: 0.5,
+    refractiveIndex: 2,
+    specularOpacity: 10,
+    specularSaturation: 200,
+    dpr,
+  };
 
-  const rad = (finalLight.angle ?? 45) * Math.PI / 180
-  const lightPosX = 50 + Math.cos(rad) * 50
-  const lightPosY = 50 + Math.sin(rad) * 50
+  const widthChild = useSpring(100, { stiffness: 300, damping: 50 })
+  const heightChild = useSpring(100, { stiffness: 300, damping: 50 })
+  const borderRadiusChild = useSpring(100, { stiffness: 300, damping: 50 })
+
+  useLayoutEffect(() => {
+    if (!ref.current) return
+
+    const update = () => {
+      const rect = ref.current!.getBoundingClientRect()
+      widthChild.set(rect.width)
+      heightChild.set(rect.height)
+      const style = getComputedStyle(ref.current!)
+      borderRadiusChild.set(parseFloat(style.borderRadius) || 0)
+    }
+
+    const observer = new ResizeObserver(update)
+    observer.observe(ref.current)
+    update() // initial
+
+    return () => observer.disconnect()
+  }, [widthChild, heightChild, borderRadiusChild])
+
+  const { filterStyles, filterId, Filter, ref } = useLiquidSurface({
+    ...defaults,
+    bezelHeightFn: bezelHeightFn,
+    width: widthChild,
+    height: heightChild,
+    borderRadius: borderRadiusChild,
+    dpr: dpr,
+    targetRef,
+  });
+
+  useEffect(() => {
+    if (targetRef?.current) {
+      targetRef.current.style.backdropFilter = `url(#${filterId})`;
+    }
+  }, [targetRef]);
 
 
-  if (disabled) {
-    return (
-      <div className={className} style={style}>
-        {children}
-      </div>
-    )
-  }
-
-  
-  return (
-    <div
-      className={`relative overflow-hidden transition-all duration-300 rounded-2xl ${className}`}
-      style={{
-        ...style,
-        backdropFilter: `blur(${finalDepth}px) saturate(${100 + finalLight.intensity * 100}%)`,
-        WebkitBackdropFilter: `blur(${finalDepth}px) saturate(${100 + finalLight.intensity * 100}%)`,
-        background: `rgba(255,255,255,${finalFrost})`,
-        boxShadow: `
-          inset 0 0 ${finalFrost * 30}px rgba(255,255,255,0.25),
-          0 4px 20px rgba(0,0,0,0.1)
-        `,
-        filter: `url(#${dewFilterId})`,
-      }}
-      {...props}
-    >
-      {/* Children */}
-      <div className="relative z-10">{children}</div>
-
-      {/* Splay / highlight */}
-      {finalSplay > 0 && (
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: `radial-gradient(circle at ${lightPosX}% ${lightPosY}%, rgba(255,255,255,${finalLight.intensity * finalSplay}) 0%, transparent 60%)`,
-          }}
-        />
-      )}
-
-      {/* Refraction + dispersion SVG filter */}
-      {(finalRefraction > 0 || finalDispersion > 0) && (
-        <svg style={{ position: 'absolute', width: 0, height: 0 }}>
-          <defs>
-            <filter id={filterId} x="0%" y="0%" width="100%" height="100%">
-              <feTurbulence 
-                type="fractalNoise" 
-                baseFrequency={`${finalDispersion} ${finalDispersion}`} 
-                numOctaves="2" 
-                result="noise" 
-              />
-              <feGaussianBlur in="noise" stdDeviation={finalRefraction * 50} result="blurred" />
-              <feDisplacementMap 
-                in="SourceGraphic" 
-                in2="blurred" 
-                scale={finalRefraction * 100} 
-                xChannelSelector="R" 
-                yChannelSelector="G" 
-              />
-            </filter>
-          </defs>
-        </svg>
-      )}
-
-      {/* Dew / embun effect */}
-      {finalDew > 0 && (
-        <svg style={{ position: 'absolute', width: 0, height: 0 }}>
-          <defs>
-            <filter id={dewFilterId}>
-              <feTurbulence type="fractalNoise" baseFrequency={0.3} numOctaves={2} result="dewNoise" />
-              <feGaussianBlur in="dewNoise" stdDeviation={20 * finalDew} result="blurredDew" />
-              <feDisplacementMap in="SourceGraphic" in2="blurredDew" scale={30 * finalDew} xChannelSelector="R" yChannelSelector="G" />
-            </filter>
-          </defs>
-        </svg>
-      )}
-
-      {/* Optional hover highlight */}
-      {hover && (
-        <div
-          className="absolute inset-0 pointer-events-none transition-all duration-300"
-          style={{
-            background: `radial-gradient(circle at ${lightPosX}% ${lightPosY}%, rgba(255,255,255,${finalLight.intensity * finalSplay * 0.6}) 0%, transparent 60%)`,
-          }}
-        />
-      )}
+  if (disabled === true) return (
+    <div className="bg-transparent flex w-full h-full">
+      {children as React.ReactNode}
     </div>
-  )
-})
+  );
 
-Glass.displayName = "Glass"
+  return (
+    <>
+      <Filter />
+      {!targetRef && (
+        <LiquidDiv
+          {...props}
+          style={{
+            ...props.style,
+            ...filterStyles,
+          }}
+          filterId={filterId}
+          preset={preset}
+          ref={ref}
+        >
+          {children}
+        </LiquidDiv>
+      )}
+    </>
+  );
+};
+
+const LiquidDiv = React.forwardRef<HTMLDivElement, { filterId: string, preset: string } & HTMLMotionProps<'div'>>(
+  ({ children, filterId, preset, className, ...props }, ref) => {
+    const isLiquidSupported = useMotionValue(false);
+
+    useEffect(() => {
+      // Paksa browser nge-check filter untuk render dari awal
+      const div = document.createElement('div');
+      div.style.backdropFilter = `url(#${filterId})`;
+      if (div.style.backdropFilter !== '') isLiquidSupported.set(true);
+    }, [filterId]);
+
+    // Motion value dummy supaya trigger repaint
+    const dummy = useMotionValue(4);
+    useEffect(() => {
+      const interval = setInterval(() => {
+        dummy.set(dummy.get() + 0.01);
+      }, 1000 / 60); // 60fps
+      return () => clearInterval(interval);
+    }, []);
+
+    const supportsSVGFilters = useCallback(() => {
+      const isWebkit = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+      const isFirefox = /Firefox/.test(navigator.userAgent);
+
+      if (isWebkit || isFirefox) {
+        return false;
+      }
+
+      const div = document.createElement('div');
+      div.style.backdropFilter = `url(#${filterId})`;
+      return div.style.backdropFilter !== '';
+    }, [filterId]);
+
+    useEffect(() => {
+      const svgSupported = supportsSVGFilters();
+      if (svgSupported && typeof document !== 'undefined') {
+        isLiquidSupported.set(true);
+      }
+    }, []);
+
+    return (
+      <motion.div
+        ref={ref}
+        className={cn(THEME[preset as keyof typeof THEME]?.className, isLiquidSupported ? '' : 'border', className)}
+        style={{
+          boxShadow: '0 3px 14px rgba(0,0,0,0.1)',
+          zIndex: 99,
+          ...props.style,
+          ...(isLiquidSupported
+            ? {}
+            : {
+              backdropFilter: 'blur(6px)',
+              WebkitBackdropFilter: 'blur(6px)',
+            }),
+        }}
+      >
+        {children}
+      </motion.div>
+    );
+  }
+);
