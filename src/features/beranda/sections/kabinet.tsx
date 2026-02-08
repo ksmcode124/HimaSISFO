@@ -27,7 +27,7 @@ export default function Kabinet() {
     ];
     return <div className="">
         <div
-            className=" grid lg:grid-cols-2 pb-30 md:min-h-screen px-4 md:px-16 items-center bg-cover bg-center  mask-[linear-gradient(to_bottom,transparent_0%,black_20%,black_90%,transparent_100%)] md:mask-[linear-gradient(to_bottom,transparent_0%,black_30%,black_70%,transparent_100%)] lg:mask-[linear-gradient(to_bottom,transparent_0%,black_40%,black_60%,transparent_100%)] mask-size-[100%_100%] mask-no-repeat  "
+            className=" grid lg:grid-cols-2 pb-30 md:min-h-screen px-4 md:px-16 items-center bg-cover bg-black bg-center  mask-[linear-gradient(to_bottom,transparent_0%,black_20%,black_90%,transparent_100%)] md:mask-[linear-gradient(to_bottom,transparent_0%,black_30%,black_70%,transparent_100%)] lg:mask-[linear-gradient(to_bottom,transparent_0%,black_40%,black_60%,transparent_100%)] mask-size-[100%_100%] mask-no-repeat  "
             style={{ backgroundImage: `url('/assets/beranda/kabinet/${kabinetSelected + 1}.png')` }}
         >
             <div className="lg:order-1 order-2 flex items-center text-white w-full lg:justify-center">

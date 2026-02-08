@@ -22,7 +22,7 @@ export default function InfoCardGrid({ events, isLoading }: { events?: EventList
                     events?.map((info, i) => {
                         const centerIndex = Math.floor(events.length / 2);
                         const offset = i - centerIndex;
-                        const translateXValue = isMobile ? 95 : 200;
+                        const translateXValue = isMobile ? 150 : 200;
 
                         return (
                             <EventCard
@@ -71,13 +71,7 @@ export function EventCard({
 
     return (
         <div
-            className={`
-        bg-linear-to-tl from-[#000000] via-[#23445B] to-[#060400]
-        rounded-2xl
-        ${isCarousel ? "shadow-xl absolute" : "shadow-lg"}
-        p-4 text-background
-        ${className ?? ""}
-      `}
+            className={` bg-linear-to-tl from-[#000000] via-[#23445B] to-[#060400] rounded-2xl ${isCarousel ? "shadow-xl absolute" : "shadow-lg"} p-4 text-background ${className ?? ""}`}
             style={style}
         >
             {isLoading ? (
@@ -113,24 +107,30 @@ export function EventCard({
                     )}
                 </div>
 
-                {isLoading ? (
-                    <Skeleton className={`mt-4 ${isCarousel ? "h-6 w-3/4" : "h-10 w-3/4"}`} />
-                ) : (
-                    <h3 className={`font-semibold mt-4 ${isCarousel ? "text-lg sm:text-xl" : "text-4xl"}`}>
-                        {info.title}
-                    </h3>
-                )}
-
-                {isLoading ? (
-                    <div className="space-y-2 mt-2">
-                        <Skeleton className="h-4 w-full" />
-                        <Skeleton className="h-4 w-5/6" />
-                    </div>
-                ) : (
-                    <p className={`line-clamp-2 ${isCarousel ? "text-xs sm:text-sm mt-1" : "text-sm mt-2"}`}>
-                        {info.description}
-                    </p>
-                )}
+                <div
+                    className={`mt-4 flex flex-row items-end ${isCarousel ? "min-h-14" : "min-h-20"}`}>
+                    {isLoading ? (
+                        <Skeleton className="h-full w-3/4" />
+                    ) : (
+                        <h3
+                            className={`font-semibold line-clamp-2 ${isCarousel ? "text-lg sm:text-xl leading-7" : "text-4xl leading-10"}`}>
+                            {info.title}
+                        </h3>
+                    )}
+                </div>
+                <div className="mt-2 min-h-12">
+                    {isLoading ? (
+                        <div className="space-y-2">
+                            <Skeleton className="h-4 w-full" />
+                            <Skeleton className="h-4 w-5/6" />
+                        </div>
+                    ) : (
+                        <p
+                            className={`line-clamp-2 leading-6 ${isCarousel ? "text-xs sm:text-sm" : "text-sm"}`}>
+                            {info.description}
+                        </p>
+                    )}
+                </div>
             </div>
         </div>
     )

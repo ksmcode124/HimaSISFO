@@ -9,10 +9,11 @@ import Spotify from "@/features/beranda/sections/spotify";
 import Awan from "@/features/beranda/components/awan";
 import Pita from "@/components/beranda/pita";
 import useBeranda from "@/features/beranda/hooks/useBeranda";
+import { ShellLayer } from "@/components/layout/ShellLayer";
 
 
 export default function Page() {
-  return <div className="max-w-screen text-sm">
+  return <ShellLayer>
     <HeroBeranda />
     {/* <Pita /> */}
     <Vision />
@@ -24,7 +25,7 @@ export default function Page() {
     <Graphics />
     <BehindTheWeb />
     <Spotify />
-  </div>
+  </ShellLayer>
 }
 
 function Graphics() {

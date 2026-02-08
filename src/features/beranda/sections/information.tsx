@@ -1,7 +1,5 @@
 "use client"
 import { ArrowRight, Bookmark, Calendar } from "lucide-react";
-import { berandaData } from "..";
-import { Button } from "@/components/ui/button";
 import InfoCardGrid from "../components/info-card-grid";
 import useBeranda from "../hooks/useBeranda";
 import Link from "next/link";
