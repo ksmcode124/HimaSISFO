@@ -11,7 +11,7 @@ export function BlankoSection(data: CTASection) {
   return (
     <ShellLayer>
       <BackgroundLayer>
-        <div className="absolute w-full min-h-[60vh] z-10">
+        <div className="absolute w-full h-full z-10">
           <Image
             src="/assets/kemahasiswaan/bg-blanko.webp"
             alt=""
