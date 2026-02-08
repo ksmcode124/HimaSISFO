@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export default function Information() {
     const { data, isLoading, error } = useBeranda();
-    console.log(data);
+    // console.log(data);
     return (
         <div className="relative z-0 md:min-h-screen overflow-hidden">
             {/* decorative background */}
