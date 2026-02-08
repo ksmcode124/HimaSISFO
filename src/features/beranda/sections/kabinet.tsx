@@ -4,6 +4,7 @@ import { ScaleCarousel } from "@/components/ui/scale-carousel";
 import { ArrowRight } from "lucide-react";
 import Awan from "../components/awan";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function Kabinet() {
     const [kabinetSelected, setKabinetSelected] = useState(0);
@@ -33,7 +34,9 @@ export default function Kabinet() {
                 <div className="lg:w-sm text-justify">
                     <h2 className="text-2xl font-bold">{kabinetData[kabinetSelected].title}</h2>
                     <p className="w-full text-xs sm:text-base line-clamp-4 min-h-22 sm:min-h-24">{kabinetData[kabinetSelected].desc}</p>
-                    <a href={`/kabinet/${kabinetSelected + 1}`} className={buttonVariants({ size: "lg", className: "mt-4 rounded-full" })}>Selengkapnya <ArrowRight /></a>
+                    <Link href={`/kabinet/${kabinetSelected + 1}`}
+                        className="rounded-full w-fit flex bg-primary text-white items-center gap-2 hover:bg-primary/90 cursor-pointer py-4 px-5 mt-8 text-lg"
+                    >Selengkapnya <ArrowRight /></Link>
                 </div>
             </div>
             <ScaleCarousel className="lg:order-2 mt-20" opts={{

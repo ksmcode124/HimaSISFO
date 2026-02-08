@@ -4,6 +4,7 @@ import { berandaData } from "..";
 import { Button } from "@/components/ui/button";
 import InfoCardGrid from "../components/info-card-grid";
 import useBeranda from "../hooks/useBeranda";
+import Link from "next/link";
 
 export default function Information() {
     const { data, isLoading, error } = useBeranda();
@@ -23,12 +24,12 @@ export default function Information() {
 
                 <InfoCardGrid events={data?.events} isLoading={isLoading} />
 
-                <Button
-                    className="rounded-full py-4 px-5 mt-8 text-lg"
-                    size="lg"
+                <Link
+                    href="/kegiatan"
+                    className="rounded-full flex bg-primary text-white items-center gap-2 hover:bg-primary/90 cursor-pointer py-4 px-5 mt-8 text-lg"
                 >
                     Selengkapnya <ArrowRight />
-                </Button>
+                </Link>
             </div>
 
             {/* cloud decoration */}

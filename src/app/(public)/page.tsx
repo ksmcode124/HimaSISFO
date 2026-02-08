@@ -33,7 +33,7 @@ function Graphics() {
       <img src="/assets/beranda/web-prodi.png" className="w-full" alt="" />
     </div>
     <Awan variant={'tail'} className="-mt-5 sm:-mt-8 md:-mt-10 -z-1" />
-    <Pita className="mt-20 sm:mt-15 md:mt-20" />
+    <Pita className="mt-20 sm:mt-15 md:mt-20 lg:mt-10" />
   </div>
 }
 
@@ -42,7 +42,7 @@ function BehindTheWeb() {
     <div className="md:min-h-screen relative grid w-screen aspect-16/10 text-white bg-center items-end mb-30 bg-[url(/assets/beranda/code124-bg.png)] bg-cover z-0">
 
       {/* CONTENT */}
-      <div className="absolute bottom-15 sm:bottom-25 md:bottom-30 w-screen z-20 flex flex-col h-full justify-end items-start px-4 lg:px-16">
+      <div className="absolute bottom-15 sm:bottom-25 md:bottom-30 lg:bottom-60 w-screen z-20 flex flex-col h-full justify-end items-start px-4 lg:px-16">
         <p>Behind The Web</p>
         <div className="flex justify-between w-full items-center">
           <span className="sm:text-7xl text-4xl md:text-[128px]">CODE124</span>
@@ -57,7 +57,7 @@ function BehindTheWeb() {
         alt=""
       />
 
-      <Pita className="relative z-30 -mb-10" />
+      <Pita className="relative z-30 -mb-10 lg:-mb-40" />
     </div>
   )
 
