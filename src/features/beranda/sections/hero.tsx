@@ -7,28 +7,24 @@ import * as motion from "motion/react-client"
 import { type HeroSection } from '@/features/beranda/types'
 import { berandaData } from '..'
 import Pita from '@/components/beranda/pita'
-import { BackgroundLayer } from '@/components/layout/Layer'
 
 export default function HeroBeranda() {
     const data = berandaData.hero as HeroSection;
     return (
         <div className='relative'>
-            <BackgroundLayer>
-
-                <Carousel plugins={[
-                    Autoplay({
-                        delay: 3500
-                    }),
-                    Fade()
-                ]}>
-                    <CarouselContent className='w-screen aspect-4/3 min-h-screen m-0 bg-black'>
-                        {data.images.map((image, index) => (
-                            <CarouselItem key={index} className="w-full h-full bg-cover" style={{ backgroundImage: `url('/assets/beranda/hero/${image}')` }}></CarouselItem>
-                        ))}
-                    </CarouselContent>
-                </Carousel>
-            </BackgroundLayer>
-            <div className="top-0 left-0 w-full max-h-full min-h-screen">
+            <Carousel plugins={[
+                Autoplay({
+                    delay: 3500
+                }),
+                Fade()
+            ]}>
+                <CarouselContent className='w-screen aspect-4/3 min-h-screen m-0 bg-black'>
+                {data.images.map((image, index) => (
+                    <CarouselItem key={index} className="w-full h-full bg-cover" style={{ backgroundImage: `url('/assets/beranda/hero/${image}')` }}></CarouselItem>
+                ))}
+                </CarouselContent>
+            </Carousel>
+            <div className="absolute top-0 left-0 w-full max-h-full min-h-screen">
                 <div className="flex flex-col justify-center items-center min-h-screen max-h-full max-w-200 mx-auto text-center px-4">
                     <h1 className="text-lg md:text-lg font-bold text-white drop-shadow-lg">{data.title}</h1>
                     <div className="overflow-hidden h-14 sm:h-20 md:h-32">
