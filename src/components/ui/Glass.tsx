@@ -151,6 +151,7 @@ export interface LiquidGlassProps<T extends HTMLElement = HTMLDivElement>
   height?: MotionValue<number>;
   borderRadius?: MotionValue<number>;
   disabled?: boolean;
+  onClick?: () => void;
 }
 
 export const useLiquidSurface = <T extends HTMLElement = HTMLDivElement>({
@@ -232,22 +233,23 @@ export const Glass: React.FC<LiquidGlassProps & HTMLMotionProps<'div'>> = ({
   const borderRadiusChild = useSpring(100, { stiffness: 300, damping: 50 })
 
   useLayoutEffect(() => {
-    if (!ref.current) return
-
     const update = () => {
-      const rect = ref.current!.getBoundingClientRect()
+      if (!ref.current) return; // ✅ check here!
+      const rect = ref.current.getBoundingClientRect()
       widthChild.set(rect.width)
       heightChild.set(rect.height)
-      const style = getComputedStyle(ref.current!)
+      const style = getComputedStyle(ref.current)
       borderRadiusChild.set(parseFloat(style.borderRadius) || 0)
     }
 
+    if (!ref.current) return; // optional initial guard
     const observer = new ResizeObserver(update)
     observer.observe(ref.current)
     update() // initial
 
     return () => observer.disconnect()
   }, [widthChild, heightChild, borderRadiusChild])
+
 
   const { filterStyles, filterId, Filter, ref } = useLiquidSurface({
     ...defaults,
