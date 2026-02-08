@@ -40,8 +40,9 @@ function Graphics() {
 
 function BehindTheWeb() {
   return (
-    <div className="md:min-h-screen relative grid w-screen aspect-16/10 text-white bg-center items-end mb-30 bg-[url(/assets/beranda/code124-bg.png)] bg-cover z-0">
+    <div className="md:min-h-screen relative grid w-screen aspect-16/10 text-white bg-center items-end mb-30 bg-cover z-0">
 
+      <img src="/assets/beranda/code124-bg.png" className="w-full h-full inset-0 absolute object-cover z-15" alt="" />
       {/* CONTENT */}
       <div className="absolute bottom-15 sm:bottom-25 md:bottom-30 lg:bottom-60 w-screen z-20 flex flex-col h-full justify-end items-start px-4 lg:px-16">
         <p>Behind The Web</p>
