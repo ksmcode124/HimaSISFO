@@ -70,7 +70,7 @@ export default function KabinetHeroSection({
 
   return (
     <div className="relative w-full">
-      <section className="relative w-full min-h-[60vh] md:min-h-screen lg:min-h-[130vh] xl:min-h-[110vh] 2xl:min-h-screen flex flex-col items-center justify-center text-white bg-[#F4E8FF] overflow-hidden">
+      <section className="relative w-full min-h-[60vh] aspect-4/3 md:min-h-screen lg:min-h-[130vh] xl:min-h-[110vh] 2xl:min-h-screen flex flex-col items-center justify-center text-white bg-[#F4E8FF] overflow-hidden">
         <DesktopBackground images={images} activeIndex={currentImgIndex} />
         <MobileBackground />
 
@@ -109,7 +109,7 @@ export default function KabinetHeroSection({
           </div>
         </div>
 
-        <div className="grow" />
+        {/* <div className="grow" /> */}
         <div className="relative z-10 flex flex-col items-center text-center mt-55 md:mt-80">
           <div className="drop-shadow-[5px_5px_2px_rgba(0,0,0,0.3)] md:mb-10 lg:mb-44 xl:mb-10 2xl:mb-52 md:mt-4">
             <div className="text-xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-8xl font-bold leading-15 md:leading-relaxed">
