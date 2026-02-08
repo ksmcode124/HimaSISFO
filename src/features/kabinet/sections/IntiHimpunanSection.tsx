@@ -13,8 +13,8 @@ export default function IntiHimpunanSection({ data }: SectionProps) {
   if (!data) return null;
 
   return (
-    <section className="relative w-full min-h-[60vh] bg-[#F4E8FF] flex flex-col items-center py-24 overflow-hidden">
-      <div className="relative z-10 flex flex-row items-center gap-4 md:mt-20">
+    <section className="relative w-full aspect-square md:aspect-auto bg-[#F4E8FF] flex flex-col items-center py-24 overflow-hidden">
+      <div className="relative z-10 flex flex-row items-center gap-4 sm:mb-20 md:mb-0 md:mt-20">
         <div className="relative w-14 h-14">
           <Image
             src={

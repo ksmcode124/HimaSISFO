@@ -16,10 +16,10 @@ export default function Vision() {
                 </div>
             </div>
         </div>
-        <img src="/assets/beranda/awan/visitop.svg" className='w-1/4 absolute top-0 right-0 -scale-x-100' alt="" />
-        <img src="/assets/beranda/awan/visitop.svg" className='w-1/4 absolute top-0 left-0' alt="" />
-        <img src="/assets/beranda/awan/visibottom.svg" className='w-1/8 absolute bottom-0 right-0' alt="" />
-        <img src="/assets/beranda/awan/visibottom.svg" className='w-1/8 absolute bottom-0 left-0 -scale-x-100' alt="" />
+        <img src="/assets/beranda/awan/visitop.svg" className='w-1/3 md:w-1/4 absolute top-15 md:top-0 right-0 -scale-x-100' alt="" />
+        <img src="/assets/beranda/awan/visitop.svg" className='w-1/3 md:w-1/4 absolute top-15 md:top-0 left-0' alt="" />
+        <img src="/assets/beranda/awan/visibottom.svg" className='w-1/6 md:w-1/8 absolute bottom-10 lg:bottom-0 right-0' alt="" />
+        <img src="/assets/beranda/awan/visibottom.svg" className='w-1/6 md:w-1/8 absolute bottom-10 lg:bottom-0 left-0 -scale-x-100' alt="" />
         <Pita />
     </div>
 

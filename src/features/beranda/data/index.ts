@@ -3,9 +3,9 @@ const data = {
         "title": "Selamat Datang di",
         "description": "Organisasi kemahasiswaan yang bergerak di bidang eksekutif pada Program Studi Sistem Informasi Universitas Pembangunan Nasional \"Veteran\" Yogyakarta",
         "images": [
-            "image_hero_1.jpg",
-            "image_hero_2.jpg",
-            "image_hero_3.jpg"
+            "hero_1.png",
+            "hero_2.png",
+            "hero_3.png"
         ]
     },
 

@@ -19,7 +19,7 @@ export function VerticalAccordion({ items }: VerticalAccordionProps) {
     <Accordion
       type="single"
       defaultValue={items[0]?.id}
-      className="w-full flex flex-col justify-center lg:flex-row gap-4 py-10"
+      className="w-fit flex flex-col justify-center lg:flex-row gap-4 py-10"
     >
       {items.map((item) => (
         <VerticalAccordionItem key={item.id} item={item} />

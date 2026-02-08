@@ -14,14 +14,14 @@ export default function HeroBeranda() {
         <div className='relative'>
             <Carousel plugins={[
                 Autoplay({
-                    delay: 2000
+                    delay: 3500
                 }),
                 Fade()
             ]}>
-                <CarouselContent className='w-screen aspect-4/3 min-h-screen m-0'>
-                    <CarouselItem className="w-full h-full bg-accent"></CarouselItem>
-                    <CarouselItem className="w-full h-full bg-red-400"></CarouselItem>
-                    <CarouselItem className="w-full h-full bg-green-400"></CarouselItem>
+                <CarouselContent className='w-screen aspect-4/3 min-h-screen m-0 bg-black'>
+                {data.images.map((image, index) => (
+                    <CarouselItem key={index} className="w-full h-full bg-cover" style={{ backgroundImage: `url('/assets/beranda/hero/${image}')` }}></CarouselItem>
+                ))}
                 </CarouselContent>
             </Carousel>
             <div className="absolute top-0 left-0 w-full max-h-full min-h-screen">
