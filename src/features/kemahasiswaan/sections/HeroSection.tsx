@@ -48,7 +48,13 @@ export function HeroSection({ data }: HeroSectionProps) {
 
 function PitaDecoration() {
   return (
-    <div className="absolute bottom-[5%] max-sm:bottom-0 lg:-bottom-[20%] left-0 z-5 w-full aspect-5/1 pointer-events-none">
+    <div 
+      className={cn(
+        "absolute left-0 w-full aspect-[5/1] pointer-events-none z-20",
+        "top-full", 
+        "-translate-y-1/2 md:-translate-y-[40%]" 
+      )}
+    >
       <Image
         src="/assets/kemahasiswaan/decoration-pita.webp"
         alt=""
@@ -59,4 +65,3 @@ function PitaDecoration() {
     </div>
   )
 }
-
