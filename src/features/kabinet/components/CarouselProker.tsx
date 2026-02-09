@@ -4,16 +4,16 @@ import React, { useState, useEffect } from "react";
 import { motion, PanInfo, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import ProkerCard from "@/features/kabinet/components/ProkerCard";
-import { DepartemenResponse } from "../types";
+import { DepartemenResponse, ColorMap } from "../types";
 
 interface CarouselProkerProps {
   prokerList: DepartemenResponse["proker"];
-  gradientOrnament2: string
+  colorMap: ColorMap;
 }
 
 export default function CarouselProker({
   prokerList = [],
-  gradientOrnament2
+  colorMap
 }: CarouselProkerProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
@@ -76,7 +76,7 @@ export default function CarouselProker({
         )}
       >
         <ProkerCard
-          gradientOrnament2={gradientOrnament2}
+          colorMap={colorMap}
           nama={proker.nama_proker}
           deskripsi={proker.deskripsi_proker}
           image={proker.foto_proker}

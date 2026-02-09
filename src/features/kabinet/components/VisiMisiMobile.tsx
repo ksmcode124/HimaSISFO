@@ -2,17 +2,20 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ColorMap } from "../types";
 
 interface VisiMisiMobileProps {
   visi: string[];
   misi: string[];
   onToggle?: (isOpen: boolean) => void;
+  colorMap: ColorMap;
 }
 
 export default function VisiMisiMobile({
   visi,
   misi,
   onToggle,
+  colorMap,
 }: VisiMisiMobileProps) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -26,8 +29,13 @@ export default function VisiMisiMobile({
     <ul>
       {items.map((item, idx) => (
         <li key={idx} className="flex items-start gap-3">
-          <span className="shrink-0 w-1 h-1 rounded-full mt-2 bg-[#2D2D51]" />
-          <span className="text-2xs">{item}</span>
+          <span
+            className="shrink-0 w-1 h-1 rounded-full mt-2"
+            style={{ backgroundColor: colorMap.text }}
+          />
+          <span className="text-2xs" style={{ color: colorMap.text }}>
+            {item}
+          </span>
         </li>
       ))}
     </ul>
@@ -45,11 +53,16 @@ export default function VisiMisiMobile({
           damping: 22,
         },
       }}
-      className={`relative z-20 border-2 border-[#E63258] bg-linear-to-r from-[#DE9FDC] via-white to-[#DE9FDC] flex ${
+      className={`relative z-20 flex ${
         isOpen
           ? "flex-col w-full p-4 rounded-4xl"
           : "flex-row items-center w-full h-12 md:h-16 rounded-full gap-4"
       }`}
+      style={{
+        borderWidth: "2px",
+        borderColor: colorMap.visiMisiBorder,
+        background: colorMap.visiMisi,
+      }}
     >
       {/* VISI */}
       <motion.div

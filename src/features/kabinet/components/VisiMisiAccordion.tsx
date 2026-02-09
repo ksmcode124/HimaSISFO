@@ -6,16 +6,16 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { ColorMap } from "../types";
 import { cn } from "@/lib/utils";
 
 interface VisiMisiProps {
   visi: string[];
   misi: string[];
-  visiMisiGradient: string;
-  visiMisiBorder: string
+  colorMap: ColorMap;
 }
 
-export default function VisiMisiAccordion({ visi, misi, visiMisiGradient, visiMisiBorder }: VisiMisiProps) {
+export default function VisiMisiAccordion({ visi, misi, colorMap }: VisiMisiProps) {
   const sections = [
     { id: "visi", label: "Visi", items: visi },
     { id: "misi", label: "Misi", items: misi },
@@ -28,7 +28,12 @@ export default function VisiMisiAccordion({ visi, misi, visiMisiGradient, visiMi
           <AccordionItem
             key={id}
             value={id}
-            className={cn("border-3 rounded-2xl /80 relative group border-b-3", visiMisiBorder)} // Menjaga konsistensi border shadcn
+            className={cn("border-3 rounded-2xl relative group border-b-3")}
+            style={{
+              borderColor: colorMap.cardBorder,
+              color: colorMap.text,
+              backgroundColor: `color-mix(in srgb, ${colorMap.background}, transparent 15%)`,
+            }}
           >
             <AccordionTrigger
               hasChevron={false}
@@ -44,7 +49,7 @@ export default function VisiMisiAccordion({ visi, misi, visiMisiGradient, visiMi
                     height="32"
                     viewBox="0 0 24 24"
                     fill="none"
-                    stroke="#E63258"
+                    style={{ stroke: colorMap.chevronIcon }}
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -57,8 +62,11 @@ export default function VisiMisiAccordion({ visi, misi, visiMisiGradient, visiMi
             </AccordionTrigger>
 
             <div className="absolute top-0 left-0 right-0 h-12 2xl:h-16 z-10 overflow-hidden rounded-xl pointer-events-none">
-              <div className="w-full h-full flex items-center justify-center" style={{background: visiMisiGradient}}>
-                <span className="font-semibold text-xl 2xl:text-3xl text-[#2D2D51]">
+              <div
+                className="w-full h-full flex items-center justify-center"
+                style={{ background: colorMap.visiMisi }}
+              >
+                <span className="font-semibold text-xl 2xl:text-3xl">
                   {label}
                 </span>
               </div>
@@ -69,7 +77,7 @@ export default function VisiMisiAccordion({ visi, misi, visiMisiGradient, visiMi
                 {items.map((text, index) => (
                   <li
                     key={index}
-                    className="text-xs 2xl:text-lg text-[#2D2D51]"
+                    className="text-xs 2xl:text-lg"
                   >
                     {text}
                   </li>

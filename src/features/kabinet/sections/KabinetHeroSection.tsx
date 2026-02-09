@@ -6,7 +6,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Glass } from "@/components/ui/Glass";
 import { Button } from "@/components/ui/button";
-import { Pita, Ornament2 } from "../components/KabinetOrnaments";
+import { Pita, Ornament2, Ornament5 } from "../components/KabinetOrnaments";
 import PhotoSlideshowMobile from "../components/PhotoSlideshowMobile";
 import { ColorMap, Kabinet, KabinetListItem } from "../types";
 import { cn } from "@/lib/utils";
@@ -50,7 +50,10 @@ export default function KabinetHeroSection({
 
   // SLIDESHOW TIMER
   useEffect(() => {
-    if (images.length <= 1) return;
+    if (images.length <= 1) {
+      setCurrentImgIndex(0);
+      return;
+    }
     const timer = setInterval(() => {
       setCurrentImgIndex((prev) => (prev + 1) % images.length);
     }, 5000);
@@ -72,9 +75,14 @@ export default function KabinetHeroSection({
 
   return (
     <div className="relative w-full">
-      <section className="relative w-full min-h-[60vh] aspect-4/3 md:min-h-screen lg:min-h-[130vh] xl:min-h-[110vh] 2xl:min-h-screen flex flex-col items-center justify-center text-white  overflow-hidden">
+      <section
+        className="relative w-full min-h-[60vh] md:min-h-screen lg:min-h-[130vh] xl:min-h-[110vh] 2xl:min-h-screen flex flex-col items-center justify-center text-white overflow-hidden"
+        style={{
+          background: colorMap.heroBackground,
+        }}
+      >
         <DesktopBackground images={images} activeIndex={currentImgIndex} />
-        <MobileBackground />
+        <MobileBackground colorMap={colorMap} />
 
         <div className="absolute top-30 sm:top-32 md:top-30 z-20 w-full flex justify-center items-start">
           <div className="relative flex items-start justify-center gap-4 sm:gap-10 md:gap-16 lg:gap-24">
@@ -87,7 +95,7 @@ export default function KabinetHeroSection({
                 }
                 disabled={!navigation?.prev}
               />
-              <OrnamentWrapper position="left" gradient={colorMap.ornament2 ?? ''} />
+              <OrnamentWrapper position="left" colorMap={colorMap} />
             </div>
             <KabinetLogo
               src={
@@ -106,21 +114,23 @@ export default function KabinetHeroSection({
                   }
                 }}
               />
-              <OrnamentWrapper position="right" gradient={colorMap.ornament2 ?? ''} />
+              <OrnamentWrapper position="right" colorMap={colorMap} />
             </div>
           </div>
         </div>
 
-        {/* <div className="grow" /> */}
+        <div className="grow" />
         <div className="relative z-10 flex flex-col items-center text-center mt-55 md:mt-80">
           <div className="drop-shadow-[5px_5px_2px_rgba(0,0,0,0.3)] md:mb-10 lg:mb-44 xl:mb-10 2xl:mb-52 md:mt-4">
             <div className="text-xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-8xl font-bold leading-15 md:leading-relaxed">
               <h1>SELAMAT DATANG DI</h1>
               <h2>HIMASISFO {currentKabinet.tahun_kerja}</h2>
             </div>
-            <h3 
-              className="text-xl mt-4 sm:text-3xl md:text-4xl lg:text-5xl lg:mb-[-20%] xl:mb-[8%] 2xl:mb-[-15%] font-bold bg-clip-text text-transparent bg-linear-to-r from-[#E63258] to-[#A43DA5] text-transparent bg-clip-text"
-              style={{backgroundImage: colorMap.titleText ?? ''}}
+            <h3
+              className="text-xl mt-4 sm:text-3xl md:text-4xl lg:text-5xl lg:mb-[-20%] xl:mb-[8%] 2xl:mb-[-15%] font-bold bg-clip-text text-transparent"
+              style={{
+                backgroundImage: colorMap.titleText,
+              }}
             >
               Kabinet {currentKabinet.nama_kabinet}
             </h3>
@@ -128,14 +138,15 @@ export default function KabinetHeroSection({
         </div>
 
         {/* Mobile Elements */}
-        {images.length > 0 && (
-          <PhotoSlideshowMobile imageSrc={images[currentImgIndex]} gradientOrnament2={colorMap.ornament2 ?? ''} />
-        )}
+        <PhotoSlideshowMobile
+          imageSrc={images.length > 0 ? images[currentImgIndex] : ""}
+          colorMap={colorMap}
+        />
         <div className="hidden md:block absolute bottom-0 left-0 w-full h-48 lg:h-64 bg-linear-to-t from-white via-white/20 to-transparent z-0" />
       </section>
 
-      <div className="absolute top-full -translate-y-20 md:-translate-y-10 lg:-translate-y-6 w-full z-10 h-100">
-        <Pita pitaGradient={colorMap.pita ?? ''} />
+      <div className="absolute -bottom-4 md:-bottom-10 w-[105%] z-10 left-1/2 -translate-x-1/2 translate-y-1/2 h-100">
+        <Pita pitaGradient={colorMap.pita ?? ""} />
       </div>
     </div>
   );
@@ -194,15 +205,19 @@ const DesktopBackground = ({
   );
 };
 
-const MobileBackground = () => (
+const MobileBackground = ({ colorMap }: { colorMap: ColorMap }) => (
   <div className="absolute inset-0 md:hidden">
-    <Image
-      src="/assets/kabinet/hero-bg.webp"
-      alt="Background"
-      fill
-      className="object-cover"
-      priority
-    />
+    <div className="absolute -right-[15%] top-[28%] w-[500vw] z-0">
+      <div className="w-full translate-x-[43%]">
+        <Ornament5 gradient={colorMap.ornament5 ?? ""} />
+      </div>
+    </div>
+
+    <div className="absolute right-[15%] top-[28%] w-[700%] z-0">
+      <div className="w-full translate-x-[40%] -scale-x-100">
+        <Ornament5 gradient={colorMap.ornament5 ?? ""} />
+      </div>
+    </div>
   </div>
 );
 
@@ -220,7 +235,13 @@ const KabinetLogo = ({ src }: { src: string }) => (
   </div>
 );
 
-const OrnamentWrapper = ({ position, gradient }: { position: "left" | "right", gradient: string }) => {
+const OrnamentWrapper = ({
+  position,
+  colorMap,
+}: {
+  position: "left" | "right";
+  colorMap: ColorMap;
+}) => {
   const styles =
     position === "left"
       ? "-scale-x-100 -right-10 sm:-right-12 md:-right-32 lg:-right-48"
@@ -232,7 +253,7 @@ const OrnamentWrapper = ({ position, gradient }: { position: "left" | "right", g
         styles,
       )}
     >
-      <Ornament2 gradient={gradient} />
+      <Ornament2 gradient={colorMap.ornament2 ?? ""} />
     </div>
   );
 };
@@ -252,7 +273,7 @@ const YearButton = ({
         onClick={onClick}
         disabled={disabled}
         className={cn(
-          "group relative w-fit h-8 md:h-auto px-3 md:px-8 py-2 rounded-3xl border md:border-2 border-white/50 bg-transparent text-white text-xs md:text-xl font-medium hover:bg-black/90 transition-all duration-400 bg-[linear-gradient(to_right,black_50%,transparent_50%)] bg-size-[210%_100%] bg-position-[99%_0] hover:bg-position-[0%_0]! hover:border-white/50! disabled:opacity-50",
+          "overflow-hidden group relative w-fit h-8 md:h-auto px-3 md:px-8 py-2 rounded-3xl border md:border-2 border-white/50 bg-transparent text-white text-xs md:text-xl font-medium hover:bg-black/90 transition-all duration-400 bg-[linear-gradient(to_right,black_50%,transparent_50%)] bg-size-[210%_100%] bg-position-[99%_0] hover:bg-position-[0%_0]! hover:border-white/50! disabled:opacity-50",
         )}
       >
         <motion.div

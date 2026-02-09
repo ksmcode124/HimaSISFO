@@ -10,13 +10,14 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { ColorMap } from "../types";
 
 interface ProkerCardProps {
   image: string | null;
   nama: string;
   deskripsi: string | null;
   isActive: boolean;
-  gradientOrnament2: string
+  colorMap: ColorMap;
 }
 
 export default function ProkerCard({
@@ -24,7 +25,7 @@ export default function ProkerCard({
   nama,
   deskripsi,
   isActive,
-  gradientOrnament2
+  colorMap,
 }: ProkerCardProps) {
   return (
     <Card
@@ -57,7 +58,7 @@ export default function ProkerCard({
         <CardContent className="relative w-full h-auto rounded-b-[2rem] text-center bg-white/60 p-6 pt-10 z-20">
           <div className="absolute top-0 left-0 w-full overflow-hidden -translate-y-[60%] pointer-events-none">
             <div className="scale-130 translate-x-2">
-              <Ornament2 gradient={gradientOrnament2} />
+              <Ornament2 gradient={colorMap.ornament2 ?? ""} />
             </div>
           </div>
 
@@ -72,7 +73,7 @@ export default function ProkerCard({
       {isActive && (
         <div className="absolute top-2 -right-34 z-10 pointer-events-none">
           <div className="relative w-80 scale-130 rotate-90">
-            <Ornament3 />
+            <Ornament3 gradient={colorMap.ornament3 ?? ""} />
           </div>
         </div>
       )}

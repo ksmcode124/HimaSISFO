@@ -1,18 +1,18 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+// import { cn } from "@/lib/utils";
 import React from "react";
+import { ColorMap } from "../types";
 
 interface TentangCardProps {
   data: {
     kata: string;
     makna: string;
   }[];
-  tentangGradient: string,
-  tentangBorder: string
+  colorMap: ColorMap;
 }
 
-export default function TentangCard({ data, tentangGradient, tentangBorder }: TentangCardProps) {
+export default function TentangCard({ data, colorMap }: TentangCardProps) {
   const hasData = data && data.length > 0;
 
   return (
@@ -20,7 +20,7 @@ export default function TentangCard({ data, tentangGradient, tentangBorder }: Te
       <div className="bg-white/90 p-6 flex flex-col gap-1">
         <h3 className="text-lg 2xl:text-4xl mb-1.5 md:text-xl font-semibold bg-clip-text text-transparent"
           style={{
-            backgroundImage: tentangGradient
+            backgroundImage: colorMap.tentangText,
           }}
         >
           Tentang
@@ -30,8 +30,14 @@ export default function TentangCard({ data, tentangGradient, tentangBorder }: Te
           {hasData ? (
             data.map((item, index) => (
               <li key={index} className="flex items-start md:pl-3 gap-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#2D2D51] mt-3 shrink-0" />
-                <p className="text-xs 2xl:text-lg mb-3 md:text-sm text-[#2D2D51]">
+                <span
+                  className="w-1.5 h-1.5 rounded-full mt-2 shrink-0"
+                  style={{ backgroundColor: colorMap.text }}
+                />
+                <p
+                  className="text-xs 2xl:text-lg mb-3 md:text-sm"
+                  style={{ color: colorMap.text }}
+                >
                   <span className="font-semibold">{item.kata}</span>{" "}
                   {item.makna}
                 </p>
@@ -45,9 +51,11 @@ export default function TentangCard({ data, tentangGradient, tentangBorder }: Te
         </ul>
       </div>
 
-      <div className="absolute bottom-0 w-full h-3" style={{
-          background: tentangBorder
-        }} 
+      <div
+        className="absolute bottom-0 w-full h-3"
+        style={{
+          background: colorMap.tentangBorder,
+        }}
       />
     </div>
   );

@@ -33,7 +33,7 @@ export default function ProkerSection({ data, colorMap }: ProkerSectionProps) {
         {/* Carousel Proker */}
         <div className="relative w-full max-w-7xl h-62 md:h-138 flex items-center justify-center z-10">
           <div className="flex flex-col items-center text-[#2D2D51] font-bold">
-            <CarouselProker gradientOrnament2={colorMap.ornament2 ?? ''} prokerList={data} />
+            <CarouselProker colorMap={colorMap} prokerList={data} />
           </div>
         </div>
       </section>
