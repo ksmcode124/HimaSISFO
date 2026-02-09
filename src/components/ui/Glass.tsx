@@ -125,7 +125,7 @@ export interface Light {
   angle: number,
 }
 
-type GlassPreset = 'clear' | 'hazy' | 'cloudy'
+type GlassPreset = 'soft' | 'medium' | 'hard'
 export interface LiquidGlassProps<T extends HTMLElement = HTMLDivElement>
   extends Pick<
     LiquidFilterProps,
@@ -141,12 +141,12 @@ export interface LiquidGlassProps<T extends HTMLElement = HTMLDivElement>
   preset?: GlassPreset;
   className?: string;
   targetRef?: React.RefObject<T | null>;
-  frost?: MotionValue<number>;
-  splay?: MotionValue<number>;
-  depth?: MotionValue<number>;
+  frost?: number;
+  splay?: number;
+  depth?: number;
   light?: Light;
-  refraction?: MotionValue<number>;
-  dispersion?: MotionValue<number>;
+  refraction?: number;
+  dispersion?: number;
   width?: MotionValue<number>;
   height?: MotionValue<number>;
   borderRadius?: MotionValue<number>;
@@ -195,11 +195,11 @@ const THEME: Record<string, LiquidGlassProps> = {
   soft: {
     className: 'bg-transparent hover:bg-accent/40 rounded-2xl'
   },
-  hazy: {
-    className: 'bg-white/10 hover:bg-accent/30 p-1 md:p-3'
+  medium: {
+    className: 'bg-white/50 hover:bg-accent/30 p-1 md:p-3 rounded-2xl'
   },
-  cloudy: {
-    className: 'bg-[#101D2F]/50 rounded-2xl'
+  hard: {
+    className: 'bg-white/50 md:bg-[#101D2F]/50 rounded-2xl'
   }
 }
 export const Glass: React.FC<LiquidGlassProps & HTMLMotionProps<'div'>> = ({
