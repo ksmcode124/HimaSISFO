@@ -53,7 +53,7 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
             <div className="flex h-14 justify-center md:justify-between items-center w-full gap-30 md:gap-20 lg:gap-30">
               {/* Logo & Back Button*/}
               <Link href="/" className={`flex items-center px-0 md:px-7 py-1 ${isMobile ? '' : 'bg-[#525252] lg:bg-transparent xl:bg-[#525252]'} rounded-full gap-0 md:gap-3 lg:gap-5`} aria-label="Home">
-                <Glass className="p-1 rounded-sm shadow-4xl bg-[#AFAFAF]/80 md:bg-white/30 hover:bg-[#AFAFAF]/90" preset="custom">
+                <Glass className="p-1 rounded-sm shadow-4xl size-10 md:size-12 bg-[#AFAFAF]/80 md:bg-white/30 hover:bg-[#AFAFAF]/90" preset="custom">
                   <Image
                     src={'/assets/shared/logos/logo-himasisfo.webp'}
                     alt={'HIMASISFO'}

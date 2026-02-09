@@ -10,6 +10,7 @@ import Awan from "@/features/beranda/components/awan";
 import Pita from "@/components/beranda/pita";
 import useBeranda from "@/features/beranda/hooks/useBeranda";
 import { ShellLayer } from "@/components/layout/ShellLayer";
+import { SiteFooter } from "@/components/layout";
 
 
 export default function Page() {
@@ -25,6 +26,7 @@ export default function Page() {
     <Graphics />
     <BehindTheWeb />
     <Spotify />
+    <SiteFooter />
   </ShellLayer>
 }
 
@@ -48,7 +50,7 @@ function BehindTheWeb() {
         <p>Behind The Web</p>
         <div className="flex justify-between w-full items-center">
           <span className="sm:text-7xl text-4xl md:text-[128px]">CODE124</span>
-          <Button>Selengkapnya <ArrowRight /></Button>
+          <Button className="bg-transparent border-white border-2">Selengkapnya <ArrowRight /></Button>
         </div>
       </div>
 

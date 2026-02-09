@@ -12,14 +12,13 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="overflow-hidden">
+      <div className="overflow-hidden" suppressHydrationWarning>
         <NavigationBar items={navItems} />
         <main className="flex flex-col min-h-screen overflow-visible">
           <div className="relative flex-1">
             {children}
           </div>
         </main>
-        <SiteFooter />
       </div>
     </QueryClientProvider>
   )
