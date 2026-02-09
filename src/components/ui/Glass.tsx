@@ -199,7 +199,7 @@ const THEME: Record<string, LiquidGlassProps> = {
     className: 'bg-white/50 hover:bg-accent/30 p-1 md:p-3 rounded-2xl'
   },
   hard: {
-    className: 'bg-white/50 md:bg-[#101D2F]/50 rounded-2xl'
+    className: 'bg-[#AFAFAF]/80 md:bg-[#101D2F]/50 rounded-2xl'
   }
 }
 export const Glass: React.FC<LiquidGlassProps & HTMLMotionProps<'div'>> = ({

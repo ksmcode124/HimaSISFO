@@ -53,7 +53,7 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
             <div className="flex h-14 justify-center md:justify-between items-center w-full gap-30 md:gap-20 lg:gap-30">
               {/* Logo & Back Button*/}
               <Link href="/" className={`flex items-center px-0 md:px-7 py-1 ${isMobile ? '' : 'bg-[#525252]'} rounded-full gap-0 md:gap-3 lg:gap-5`} aria-label="Home">
-                <Glass className="p-1 rounded-sm shadow-2xl" preset='hard'>
+                <Glass className="p-1 rounded-sm shadow-2xl hover:bg-[#AFAFAF]/90" preset='hard'>
                   <Image
                     width={50}
                     height={50}
@@ -97,7 +97,7 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
               <Glass preset='hard'
                 // type="button"
 
-                className={`w-fit lg:hidden ml-auto rounded-lg p-3 md:p-5 z-50 text-white`}
+                className={`hover:bg-[#AFAFAF]/90 w-fit lg:hidden ml-auto rounded-lg p-3 md:p-5 z-50 text-white`}
                 aria-label="Toggle menu"
                 aria-expanded={isOpen}
                 aria-controls="mobile-menu"
