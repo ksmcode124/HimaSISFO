@@ -72,7 +72,7 @@ export default function KabinetHeroSection({
 
   return (
     <div className="relative w-full">
-      <section className="relative w-full min-h-[60vh] aspect-4/3 md:min-h-screen lg:min-h-[130vh] xl:min-h-[110vh] 2xl:min-h-screen flex flex-col items-center justify-center text-white bg-[#F4E8FF] overflow-hidden">
+      <section className="relative w-full min-h-[60vh] aspect-4/3 md:min-h-screen lg:min-h-[130vh] xl:min-h-[110vh] 2xl:min-h-screen flex flex-col items-center justify-center text-white  overflow-hidden">
         <DesktopBackground images={images} activeIndex={currentImgIndex} />
         <MobileBackground />
 
@@ -131,7 +131,7 @@ export default function KabinetHeroSection({
         <div className="hidden md:block absolute bottom-0 left-0 w-full h-48 lg:h-64 bg-linear-to-t from-white via-white/20 to-transparent z-0" />
       </section>
 
-      <div className="absolute -bottom-4 md:-bottom-10 w-full z-10 translate-y-1/2 h-100">
+      <div className="absolute top-full  w-full z-10 h-100">
         <Pita pitaGradient={colorMap.pita ?? ''} />
       </div>
     </div>

@@ -27,7 +27,7 @@ export function DynamicAsset({
           src={imageSrc}
           alt=""
           fill
-          className={cn("object-fit", imageScale)}
+          className={cn("object-contain", imageScale)}
         /> }
         <div
           className="absolute inset-0 z-10"

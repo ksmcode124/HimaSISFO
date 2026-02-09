@@ -86,7 +86,7 @@ export default function DepartemenHeroSection({
         </div>
       </section>
 
-      <div className="absolute -bottom-4 md:-bottom-4 w-full z-10 translate-y-1/2">
+      <div className="absolute top-full w-full z-10">
         <Pita pitaGradient={colorMap.pita ?? ''} />
       </div>
     </div>

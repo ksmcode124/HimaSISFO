@@ -12,7 +12,7 @@ interface ProkerSectionProps {
 export default function ProkerSection({ data, colorMap }: ProkerSectionProps) {
   return (
     <div className="relative w-full">
-      <section className="relative w-full md:min-h-250 flex flex-col items-center py-24 overflow-hidden bg-[#F4E8FF]">
+      <section className="relative w-full md:min-h-250 flex flex-col items-center py-24 overflow-hidden ">
         {/* ornamen kiri */}
         <div className="absolute -left-110 md:-left-100 top-1/2 -translate-y-1/2 w-150 h-125 md:w-200 md:h-150 z-0 opacity-40">
           <div className="w-full h-full rounded-full blur-[60px] md:blur-[120px] absolute" style={{backgroundColor: colorMap.ornament}} />
@@ -38,7 +38,7 @@ export default function ProkerSection({ data, colorMap }: ProkerSectionProps) {
         </div>
       </section>
 
-      <div className="absolute bottom-4 md:bottom-14 w-full z-10 translate-y-1/2 -scale-x-100">
+      <div className="absolute top-full w-full z-10 -scale-x-100">
         <Pita pitaGradient={colorMap.pita ?? ''} />
       </div>
     </div>
