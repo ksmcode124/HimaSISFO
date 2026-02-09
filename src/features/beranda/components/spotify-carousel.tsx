@@ -1,11 +1,15 @@
 'use client'
 
+import { Episode } from '@/lib/types/interface'
 import React, { useEffect, useRef, useState } from 'react'
 import {
   StackedCarousel,
   ResponsiveContainer,
   StackedCarouselSlideProps,
 } from 'react-stacked-center-carousel'
+import AudioPlayer from './audio-player'
+import { formatTanggalIndonesia } from '../utils/parseDate'
+import { Skeleton } from '@/components/ui/skeleton'
 
 /* ======================
  * SLIDE COMPONENT
@@ -20,8 +24,8 @@ const Slide = React.memo(function Slide(
   const rotateY = isCenterSlide
     ? 0
     : slideIndex < 0
-      ? 18    // kiri
-      : -18   // kanan
+      ? 40    // kiri
+      : -40   // kanan
   return (
     <div
       draggable={false}
@@ -32,7 +36,8 @@ const Slide = React.memo(function Slide(
         ${isCenterSlide ? 'scale-100' : 'scale-90 cursor-pointer'}
       `}
       style={{
-        backgroundColor: item.color,
+        backgroundImage: `url(${item.coverImage})`,
+        backgroundSize: 'cover',
         transform: `
           perspective(1200px)
           rotateY(${rotateY}deg)
@@ -41,7 +46,6 @@ const Slide = React.memo(function Slide(
       }}
       onClick={() => !isCenterSlide && swipeTo(slideIndex)}
     >
-      {item.title}
     </div>
   )
 })
@@ -49,43 +53,81 @@ const Slide = React.memo(function Slide(
 /* ======================
  * MAIN CAROUSEL
  * ====================== */
-export default function SpotifyCarousel() {
+export default function SpotifyCarousel({ episodes, error, isLoading }: { episodes?: Episode[], error?: any, isLoading?: boolean }) {
+  const [activeIndex, setActiveIndex] = useState(0)
+  const activeEpisode = episodes?.[activeIndex]
+
   const ref = useRef<any>(null)
   const { w, h } = useResponsiveCarousel()
 
-  const data = [
-    { title: 'One', color: '#6366f1' },
-    { title: 'Two', color: '#22c55e' },
-    { title: 'Three', color: '#f97316' },
-    { title: 'Four', color: '#ec4899' },
-    { title: 'Five', color: '#06b6d4' },
-    { title: 'Five', color: '#06b6d4' },
-    { title: 'Five', color: '#06b6d4' },
-  ]
+  // if (isLoading) {
+  //   return <div className='space-y-2'>
+  //     <Skeleton className='w-full h-96' />
+  //     <Skeleton className='w-full h-10' />
+  //     <Skeleton className='w-full h-4' />
+  //     <Skeleton className='w-full h-4' />
+  //   </div>
+  // }
+
+  if (error) {
+    return <div>Error loading data</div>
+  }
+
+  const data = episodes?.map((ep, i) => {
+    return { title: ep.name, coverImage: ep.images[0].url }
+  }) || []
 
   return (
-    <div className="w-full flex justify-center">
-      <div className="relative w-full max-w-7xl">
-        <ResponsiveContainer
-          carouselRef={ref}
-          render={(width, carouselRef) => (
+    <>
+      <div className="w-full flex justify-center">
+        <div className="relative w-full max-w-7xl">
+          <ResponsiveContainer
+            carouselRef={ref}
+            render={function (width, carouselRef) {
+              if (isLoading) {
+                return <div>
+                  <Skeleton className='w-full h-96 mb-4' />
+                </div>
+              }
+              return <>
+                <StackedCarousel
+                  ref={carouselRef}
+                  slideComponent={Slide}
+                  slideWidth={w}
+                  height={h}
+                  carouselWidth={width}
+                  data={data}
+                  maxVisibleSlide={5}
+                  customScales={[1, 0.85, 0.7, 0.7]}
+                  transitionTime={400}
+                  useGrabCursor
+                  onActiveSlideChange={(index) => setActiveIndex(index)}
+                />
+              </>
+            }}
+          />
+        </div>
+      </div>
+
+      {activeEpisode && (
+        <div className="">
+          {isLoading ? (
             <>
-              <StackedCarousel
-                ref={carouselRef}
-                slideComponent={Slide}
-                slideWidth={w}
-                height={h}
-                carouselWidth={width}
-                data={data}
-                maxVisibleSlide={5}
-                customScales={[1, 0.85, 0.7, 0.7]}
-                transitionTime={400}
-              />
+              <Skeleton className='w-full h-10 mb-2' />
+              <Skeleton className='w-full h-4 mb-4' />
+            </>
+          ) : (
+            <>
+              <a href={activeEpisode.external_urls.spotify} className='hover:underline'>
+                <h2 className="md:text-2xl text-sm font-bold mb-2">{activeEpisode.name}</h2>
+              </a>
+              <p className="text-sm mb-4">{formatTanggalIndonesia(activeEpisode.release_date)}</p>
             </>
           )}
-        />
-      </div>
-    </div>
+        </div >
+      )}
+      <AudioPlayer onNextClick={() => ref.current?.goNext()} onPrevClick={() => ref.current?.goBack()} src={activeEpisode?.audio_preview_url || ''} />
+    </>
   )
 }
 

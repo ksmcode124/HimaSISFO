@@ -126,7 +126,7 @@ export default function CarouselIntiHimpunan({ anggota, colorMap }: CarouselProp
       </div>
 
       {/* Pagination */}
-      <div className="flex items-center gap-3 mt-8">
+      <div className="hidden items-center gap-3 mt-8 md:flex">
         {Array.from({ length: totalPages }).map((_, idx) => (
           <motion.div
             key={idx}

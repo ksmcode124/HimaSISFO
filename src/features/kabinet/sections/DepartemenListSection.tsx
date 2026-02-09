@@ -52,7 +52,10 @@ export default function DepartemenListSection({
       </h2>
 
       <div className="relative z-10 w-full max-w-6xl flex flex-col items-center justify-center gap-10 px-10">
-        <div className="grid grid-cols-2 lg:grid-cols-4 justify-items-center gap-6 md:gap-14 w-full">
+        <div className="grid grid-cols-4 lg:grid-cols-8 justify-items-center gap-6 md:gap-14 w-full
+          *:last:col-start-2
+          lg:*:last:col-start-4
+        ">
           {data &&
             data
               .filter((dept) => !dept.nama_departemen.toLowerCase().includes("inti"))

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { Episode } from "@/lib/types/interface"; // pastiin ini sama antara response dan interfacemya
+import { audio } from "framer-motion/client";
 
 const prisma = new PrismaClient();
 
@@ -43,6 +44,8 @@ export async function GET(req: Request) {
     const episodes = (spotifyData.items || []).map((ep: Episode) => ({
       id: ep.id,
       name: ep.name,
+      audio_preview_url: ep.audio_preview_url,
+      release_date: ep.release_date,
       description: ep.description,
       images: ep.images || [],
       external_urls: ep.external_urls || { spotify: "" },

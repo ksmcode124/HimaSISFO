@@ -13,14 +13,14 @@ export default function History() {
                         {statistics.map((statistic, index) => (
                             <div key={index} className="rounded-4xl w-sm border-gray-400 p-4 sm:p-10 border bg-white">
                                 <span className="text-md md:text-xl font-semibold">{statistic.label}</span>
-                                <p className="text-xs md:text-sm">{statistic.description}</p>
+                                <p className="text-xs md:text-sm text-[#3C3C3C]">{statistic.description}</p>
                             </div>
                         ))}
                     </div>
                 </div>
                 <div className="flex flex-col gap-10 lg:mt-0 mt-8">
                     <h2 className="text-4xl font-bold">SEJARAH <br className="hidden lg:block" /> HIMASISFO</h2>
-                    <p className="text-sm text-justify">{history.content}</p>
+                    <p className="text-sm text-justify text-[#3C3C3C]">{history.content}</p>
                 </div>
             </div>
         </div>

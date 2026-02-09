@@ -11,8 +11,8 @@ interface Props {
 
 export function BlankoCTA({ title, subtitle, iconUrl, href }: Props) {
   return (
-    <section className="w-full min-h-[55vh] grid grid-cols-2 items-center justify-items-center px-2 lg:mb-15">
-      <div className="relative -translate-x-5 lg:-translate-x-15 h-32 w-32 sm:h-64 sm:w-64 lg:h-96 lg:w-96 z-20">
+    <section className="w-full py-20 xl:py-60 grid grid-cols-2 items-center justify-items-center px-2 lg:mb-15">
+      <div className="relative -translate-x-5 lg:-translate-x-15 size-32 sm:size-64 lg:size-80 xl:size-96 z-20">
         <Image
           src={iconUrl}
           alt="Blanko Icon"
@@ -23,11 +23,11 @@ export function BlankoCTA({ title, subtitle, iconUrl, href }: Props) {
       </div>
 
       <div className="flex flex-col gap-3 sm:gap-4 text-center items-center max-w-xl z-20">
-        <h1 className="font-semibold font-heading text-xl sm:text-2xl md:text-4xl lg:text-6xl leading-tight">
+        <h1 className="font-semibold font-heading text-xl sm:text-2xl md:text-4xl lg:text-6xl leading-tight text-[#323257]">
           {title}
         </h1>
 
-        <p className="text-2xs sm:text-xs md:text-sm lg:text-xl leading-relaxed">
+        <p className="text-2xs sm:text-xs md:text-sm lg:text-xl leading-relaxed text-[#323257]">
           {subtitle}
         </p>
 

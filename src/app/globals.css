@@ -5,6 +5,7 @@
 @import "tw-animate-css";
 
 @theme {
+  --breakpoint-xs: 30rem;
   /* Warna Descriptive */
   --color-dodger-blue: #3385FF;
   --color-columbia-blue: #8DDDFF;
@@ -149,8 +150,9 @@
 .scrollbar-lg::-webkit-scrollbar {
   width: 12px;
 }
+
 .scrollbar-sm::-webkit-scrollbar {
-  width: 4px;   
+  width: 4px;
 }
 
 @layer base {
@@ -169,6 +171,7 @@
 }
 
 @layer utilities {
+
   .border-gradient-x,
   .border-gradient-y {
     position: relative;
@@ -186,7 +189,7 @@
     border-radius: inherit;
     pointer-events: none;
     z-index: 10;
-    padding: 2px; 
+    padding: 2px;
   }
 
   .border-gradient-x::before {
@@ -204,6 +207,7 @@
   }
 
   @media (min-width: 768px) {
+
     .border-gradient-x::before,
     .border-gradient-y::before {
       padding: 4px;

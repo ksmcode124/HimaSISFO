@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="id">
       <body
-        className={`${poppins.variable} min-h-screen antialiased scrollbar scrollbar-lg scrollbar-thumb-[#AFAFAF] scrollbar-track-scrollbar-track`}
+        className={`${poppins.variable} min-h-screen antialiased text-[#323257] scrollbar scrollbar-lg scrollbar-thumb-[#AFAFAF] scrollbar-track-scrollbar-track`}
       >
         {children}
       </body>
