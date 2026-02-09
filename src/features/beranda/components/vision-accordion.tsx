@@ -42,13 +42,13 @@ export default function VisionAccordion() {
         <Accordion type="single" collapsible className="w-full space-y-8">
             {accordionItems.map((item) => (
                 <AccordionItem key={item.value} value={item.value}>
-                    <Glass className='*:w-full'>
+                    <Glass className='*:w-full' preset='soft'>
                         <AccordionTrigger hasChevron={false} className={accordionTriggerClass}>
                             <span>{item.title}</span>
                         </AccordionTrigger>
                     </Glass>
 
-                    <Glass  className='mt-4'>
+                    <Glass  className='mt-4' preset='soft'>
                         <AccordionContent
                             className={`${accordionContentClass} ${item.contentClass ?? ""}`}
                         >

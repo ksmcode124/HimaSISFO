@@ -5,6 +5,7 @@ import { motion, MotionValue, useMotionValue, useSpring, type HTMLMotionProps } 
 import React, { useCallback, useEffect, useId, useLayoutEffect, useRef } from 'react';
 import { LiquidFilter, LiquidFilterProps } from './Filter';
 import { getValueOrMotion } from '@/lib/utils/ui/liquid-glass';
+import { custom } from 'zod';
 
 /**
  * Safely parse border radius from computed styles, handling edge cases like
@@ -125,7 +126,7 @@ export interface Light {
   angle: number,
 }
 
-type GlassPreset = 'soft' | 'medium' | 'hard'
+type GlassPreset = 'soft' | 'medium' | 'hard' | 'custom'
 export interface LiquidGlassProps<T extends HTMLElement = HTMLDivElement>
   extends Pick<
     LiquidFilterProps,
@@ -196,10 +197,13 @@ const THEME: Record<string, LiquidGlassProps> = {
     className: 'bg-transparent rounded-2xl'
   },
   medium: {
-    className: 'bg-white/50 rounded-2xl'
+    className: 'bg-[#ADADAD]/25 rounded-2xl'
   },
   hard: {
     className: 'bg-[#AFAFAF]/80 md:bg-[#101D2F]/50 rounded-2xl shadow-2xl'
+  },
+  custom: {
+    className: ''
   }
 }
 export const Glass: React.FC<LiquidGlassProps & HTMLMotionProps<'div'>> = ({
@@ -219,13 +223,42 @@ export const Glass: React.FC<LiquidGlassProps & HTMLMotionProps<'div'>> = ({
 }) => {
 
   const defaults = {
-    glassThickness: 110,
-    bezelWidth: 20,
-    blur: 0.5,
-    refractiveIndex: 2,
-    specularOpacity: 10,
-    specularSaturation: 200,
-    dpr,
+    soft: {
+      glassThickness: 110,
+      bezelWidth: 20,
+      blur: 4,
+      refractiveIndex: 2,
+      specularOpacity: 10,
+      specularSaturation: 200,
+      dpr,
+    },
+    medium: {
+      glassThickness: 100,
+      bezelWidth: 18,
+      blur: 2,
+      refractiveIndex: 1.8,
+      specularOpacity: 8,
+      specularSaturation: 180,
+      dpr,
+    },
+    hard: {
+      glassThickness: 90,
+      bezelWidth: 16,
+      blur: 0.5,
+      refractiveIndex: 3,
+      specularOpacity: 6,
+      specularSaturation: 160,
+      dpr,
+    },
+    custom :{
+      glassThickness: 100,
+      bezelWidth: 20,
+      blur: 4,
+      refractiveIndex: 2,
+      specularOpacity: 10,
+      specularSaturation: 200,
+      dpr,
+    }
   };
 
   const widthChild = useSpring(100, { stiffness: 300, damping: 50 })
@@ -252,7 +285,7 @@ export const Glass: React.FC<LiquidGlassProps & HTMLMotionProps<'div'>> = ({
 
 
   const { filterStyles, filterId, Filter, ref } = useLiquidSurface({
-    ...defaults,
+    ...defaults[preset],
     bezelHeightFn: bezelHeightFn,
     width: widthChild,
     height: heightChild,
