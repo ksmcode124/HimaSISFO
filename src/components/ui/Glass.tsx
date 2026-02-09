@@ -193,7 +193,7 @@ export const useLiquidSurface = <T extends HTMLElement = HTMLDivElement>({
 
 const THEME: Record<string, LiquidGlassProps> = {
   soft: {
-    className: 'bg-transparent/20 hover:bg-accent/40 rounded-2xl'
+    className: 'bg-transparent hover:bg-accent/40 rounded-2xl'
   },
   hazy: {
     className: 'bg-white/10 hover:bg-accent/30 p-1 md:p-3'
