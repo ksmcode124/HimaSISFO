@@ -39,7 +39,7 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
     window.scrollTo({ top: 0, behavior: 'auto' })
   }, [pathname])
   return (
-    <div className={`fixed z-99999 border-2 border-accent w-full justify-center h-fit transition-all duration-500 ease-in pt-5 ${scrolled ? 'md:pt-0' : 'md:pt-5'}`} aria-label="wrapper">
+    <div className={`fixed z-99999 w-full justify-center h-fit transition-all duration-500 ease-in pt-5 ${scrolled ? 'md:pt-0' : 'md:pt-5'}`} aria-label="wrapper">
       <header
         className={`w-full md:w-auto lg:mx-10 xl:mx-50 rounded-full justify-center items-center top-5 ${isMobile ? 'bg-transparent' : ''} z-99999 h-fit overflow-hidden ${className}`}
         role="banner"
