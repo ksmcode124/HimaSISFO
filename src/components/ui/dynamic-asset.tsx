@@ -30,7 +30,7 @@ export function DynamicAsset({
           className={cn("object-fit", imageScale)}
         />
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 z-10"
           style={{
             background: gradientVar,
             maskImage: `url(${maskSrc})`,
