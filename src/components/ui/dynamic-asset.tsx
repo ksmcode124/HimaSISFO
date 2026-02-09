@@ -23,12 +23,12 @@ export function DynamicAsset({
   return (
     <div className={className} style={style}>
       <div className={cn("relative w-full h-full", innerHeight)}>
-        <Image
-          src={imageSrc ?? '/x'}
+        {imageSrc && <Image
+          src={imageSrc}
           alt=""
           fill
           className={cn("object-fit", imageScale)}
-        />
+        /> }
         <div
           className="absolute inset-0 z-10"
           style={{
