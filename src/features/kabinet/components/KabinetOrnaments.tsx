@@ -171,7 +171,7 @@ export function Pita({pitaGradient}:{pitaGradient: string}) {
         maskSrc="/assets/kabinet/mask-pita.png"
         gradientVar={pitaGradient}
         innerHeight="h-40"
-        imageScale="w-screen aspect-4/3 absolute scale-112 h-40"
+        imageScale="w-screen aspect-4/3 absolute md:scale-112 h-40"
         className="w-screen aspect-4/3 absolute scale-105 h-40 -rotate-7"
       />
       <DynamicAsset
@@ -179,7 +179,7 @@ export function Pita({pitaGradient}:{pitaGradient: string}) {
         maskSrc="/assets/kabinet/mask-pita.png"
         gradientVar={pitaGradient}
         innerHeight="h-40"
-        imageScale="w-screen aspect-4/3 absolute translate-x-4 scale-112 h-40"
+        imageScale="w-screen aspect-4/3 absolute md:scale-112 h-40"
         className="w-screen aspect-4/3 absolute scale-105 h-40 rotate-7 rotate-y-180"
       />
     </>

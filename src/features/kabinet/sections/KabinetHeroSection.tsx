@@ -131,7 +131,7 @@ export default function KabinetHeroSection({
         <div className="hidden md:block absolute bottom-0 left-0 w-full h-48 lg:h-64 bg-linear-to-t from-white via-white/20 to-transparent z-0" />
       </section>
 
-      <div className="absolute top-full  w-full z-10 h-100">
+      <div className="absolute top-full -translate-y-20 md:-translate-y-10 lg:-translate-y-6 w-full z-10 h-100">
         <Pita pitaGradient={colorMap.pita ?? ''} />
       </div>
     </div>

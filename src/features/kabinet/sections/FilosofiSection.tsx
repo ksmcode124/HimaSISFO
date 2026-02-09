@@ -40,12 +40,12 @@ export default function FilosofiSection({ data, ColorMap: colorMap, kabinet }: F
 
   return (
     <div className="relative w-full">
-      <section className="w-full  min-h-screen flex items-center justify-center py-20 px-10">
+      <section className="w-full min-h-screen flex items-center justify-center py-20 px-10">
         <DynamicAsset 
           maskSrc="/assets/kabinet/filosofi-bg.webp" 
           gradientVar={colorMap.filosofiBackground ?? ''} 
           innerHeight={"h-full"}
-          className="absolute inset-0 z-0 bg-size-[150%_40%] md:bg-size-[100%_auto] bg-repeat-y bg-top"
+          className="absolute inset-0 z-0 scale-350 md:scale-300 lg:scale-100 bg-repeat-y bg-top"
         />
 
         <div className="relative z-40 mt-10 w-full max-w-360 2xl:max-w-450 mx-auto flex flex-col lg:grid lg:grid-cols-3 gap-10 items-center">

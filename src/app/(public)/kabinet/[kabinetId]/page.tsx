@@ -42,7 +42,7 @@ export default function Page() {
   const kabinet = translateToSlug(currentKabinet.nama_kabinet) as KabinetColorType
   return ( 
     <ThemeProvider kabinet={kabinet}>
-      <ShellLayer>
+      <ShellLayer backgroundColor={"var(--kabinet-background)"}>
         <KabinetHeroSection
           currentKabinet={currentKabinet}
           kabinetList={kabinetList}

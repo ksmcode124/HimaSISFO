@@ -1,5 +1,6 @@
 export const KABINET_COLOR_CONFIG = {
   "gelora-harmoni": {
+    background: "#F4E8FF",
     gradient_pita: "linear-gradient(0deg, #E63258 0%, #A43DA5 100%)",
     gradient_ornament_1: "linear-gradient(90deg, #E63258 0%, #A43DA5 50%, #FFFFFF 100%)",
     gradient_ornament_2: "linear-gradient(90deg, #E63258 0%, #A43DA5 50%, #FFFFFF 100%)",
@@ -18,6 +19,7 @@ export const KABINET_COLOR_CONFIG = {
     color_ornament: '#f6639a'
   },
   "aksayapatra": {
+    background: "#EFFFE5",
     gradient_pita: "linear-gradient(180deg, #F0E068 0%, #1A4D4D 100%)",
     gradient_ornament_1: "linear-gradient(90deg, #F0E068 0%, #1A4D4D 50%, #FFFFFF 100%)",
     gradient_ornament_2: "linear-gradient(90deg, #F0E068 0%, #1A4D4D 50%, #FFFFFF 100%)",
