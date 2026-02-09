@@ -42,8 +42,8 @@ export const EventCard = (props: WithVariantEventCardProps) => {
       <Image
         src={img}
         alt={title}
-        width={1600}
-        height={1000}
+        width={160}
+        height={100}
         className={cn("object-cover w-full h-full", eventCard({ variant }))}
       />
       {actions && (
