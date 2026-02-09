@@ -57,7 +57,7 @@ export default function SiteFooter() {
           grid-cols-3
           lg:grid-cols-[3fr_3fr_2fr_1fr]
           gap-x-10 xl:gap-x-15 gap-y-10 py-10
-          text-[#FFFCFC]
+          text-white
           text-shadow-[0_2px_2px_#000]
           lg:text-shadow-none
           lg:transition-ease-in">

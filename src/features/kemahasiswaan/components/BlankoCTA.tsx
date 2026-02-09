@@ -23,11 +23,11 @@ export function BlankoCTA({ title, subtitle, iconUrl, href }: Props) {
       </div>
 
       <div className="flex flex-col gap-3 sm:gap-4 text-center items-center max-w-xl z-20">
-        <h1 className="font-semibold font-heading text-xl sm:text-2xl md:text-4xl lg:text-6xl leading-tight">
+        <h1 className="font-semibold font-heading text-xl sm:text-2xl md:text-4xl lg:text-6xl leading-tight text-[#323257]">
           {title}
         </h1>
 
-        <p className="text-2xs sm:text-xs md:text-sm lg:text-xl leading-relaxed">
+        <p className="text-2xs sm:text-xs md:text-sm lg:text-xl leading-relaxed text-[#323257]">
           {subtitle}
         </p>
 
