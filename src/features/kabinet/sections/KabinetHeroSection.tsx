@@ -8,17 +8,19 @@ import { Glass } from "@/components/ui/Glass";
 import { Button } from "@/components/ui/button";
 import { Pita, Ornament2 } from "../components/KabinetOrnaments";
 import PhotoSlideshowMobile from "../components/PhotoSlideshowMobile";
-import { Kabinet, KabinetListItem } from "../types";
+import { ColorMap, Kabinet, KabinetListItem } from "../types";
 import { cn } from "@/lib/utils";
 
 interface KabinetHeroSectionProps {
   currentKabinet: Kabinet;
   kabinetList: KabinetListItem[];
+  colorMap: ColorMap;
 }
 
 export default function KabinetHeroSection({
   currentKabinet,
   kabinetList,
+  colorMap,
 }: KabinetHeroSectionProps) {
   const router = useRouter();
   const images = useMemo(() => {
@@ -70,7 +72,7 @@ export default function KabinetHeroSection({
 
   return (
     <div className="relative w-full">
-      <section className="relative w-full min-h-[60vh] aspect-4/3 md:min-h-screen lg:min-h-[130vh] xl:min-h-[110vh] 2xl:min-h-screen flex flex-col items-center justify-center text-white bg-[#F4E8FF] overflow-hidden">
+      <section className="relative w-full min-h-[60vh] aspect-4/3 md:min-h-screen lg:min-h-[130vh] xl:min-h-[110vh] 2xl:min-h-screen flex flex-col items-center justify-center text-white  overflow-hidden">
         <DesktopBackground images={images} activeIndex={currentImgIndex} />
         <MobileBackground />
 
@@ -85,7 +87,7 @@ export default function KabinetHeroSection({
                 }
                 disabled={!navigation?.prev}
               />
-              <OrnamentWrapper position="left" />
+              <OrnamentWrapper position="left" gradient={colorMap.ornament2 ?? ''} />
             </div>
             <KabinetLogo
               src={
@@ -104,7 +106,7 @@ export default function KabinetHeroSection({
                   }
                 }}
               />
-              <OrnamentWrapper position="right" />
+              <OrnamentWrapper position="right" gradient={colorMap.ornament2 ?? ''} />
             </div>
           </div>
         </div>
@@ -116,7 +118,10 @@ export default function KabinetHeroSection({
               <h1>SELAMAT DATANG DI</h1>
               <h2>HIMASISFO {currentKabinet.tahun_kerja}</h2>
             </div>
-            <h3 className="text-xl mt-4 sm:text-3xl md:text-4xl lg:text-5xl lg:mb-[-20%] xl:mb-[8%] 2xl:mb-[-15%] font-bold bg-clip-text text-transparent bg-linear-to-r from-[#E63258] to-[#A43DA5]">
+            <h3 
+              className="text-xl mt-4 sm:text-3xl md:text-4xl lg:text-5xl lg:mb-[-20%] xl:mb-[8%] 2xl:mb-[-15%] font-bold bg-clip-text text-transparent bg-linear-to-r from-[#E63258] to-[#A43DA5] text-transparent bg-clip-text"
+              style={{backgroundImage: colorMap.titleText ?? ''}}
+            >
               Kabinet {currentKabinet.nama_kabinet}
             </h3>
           </div>
@@ -124,13 +129,13 @@ export default function KabinetHeroSection({
 
         {/* Mobile Elements */}
         {images.length > 0 && (
-          <PhotoSlideshowMobile imageSrc={images[currentImgIndex]} />
+          <PhotoSlideshowMobile imageSrc={images[currentImgIndex]} gradientOrnament2={colorMap.ornament2 ?? ''} />
         )}
         <div className="hidden md:block absolute bottom-0 left-0 w-full h-48 lg:h-64 bg-linear-to-t from-white via-white/20 to-transparent z-0" />
       </section>
 
-      <div className="absolute -bottom-4 md:-bottom-10 w-full z-10 translate-y-1/2">
-        <Pita />
+      <div className="absolute top-full -translate-y-20 md:-translate-y-10 lg:-translate-y-6 w-full z-10 h-100">
+        <Pita pitaGradient={colorMap.pita ?? ''} />
       </div>
     </div>
   );
@@ -215,7 +220,7 @@ const KabinetLogo = ({ src }: { src: string }) => (
   </div>
 );
 
-const OrnamentWrapper = ({ position }: { position: "left" | "right" }) => {
+const OrnamentWrapper = ({ position, gradient }: { position: "left" | "right", gradient: string }) => {
   const styles =
     position === "left"
       ? "-scale-x-100 -right-10 sm:-right-12 md:-right-32 lg:-right-48"
@@ -227,7 +232,7 @@ const OrnamentWrapper = ({ position }: { position: "left" | "right" }) => {
         styles,
       )}
     >
-      <Ornament2 />
+      <Ornament2 gradient={gradient} />
     </div>
   );
 };

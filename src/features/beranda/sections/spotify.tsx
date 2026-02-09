@@ -32,7 +32,7 @@ export default function Spotify() {
 
       </section>
       <div className="md:rounded-br-[125px] rounded-br-4xl h-[calc(100%-4rem)] rounded-tr-lg absolute right-15 w-full overflow-hidden shadow-lg top-30 z-1">
-        <Glass className="w-full h-full" />
+        {/* <Glass className="w-full h-full" /> */}
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import React from "react";
 
 interface TentangCardProps {
@@ -7,15 +8,21 @@ interface TentangCardProps {
     kata: string;
     makna: string;
   }[];
+  tentangGradient: string,
+  tentangBorder: string
 }
 
-export default function TentangCard({ data }: TentangCardProps) {
+export default function TentangCard({ data, tentangGradient, tentangBorder }: TentangCardProps) {
   const hasData = data && data.length > 0;
 
   return (
     <div className="relative w-full max-w-96 lg:max-w-120 2xl:max-w-138 rounded-t-[40px] drop-shadow-[10px_8px_2px_rgba(0,0,0,0.2)] overflow-hidden">
       <div className="bg-white/90 p-6 flex flex-col gap-1">
-        <h3 className="text-lg 2xl:text-4xl mb-1.5 md:text-xl font-semibold bg-linear-to-r from-[#A43DA5] to-[#E63258] bg-clip-text text-transparent">
+        <h3 className="text-lg 2xl:text-4xl mb-1.5 md:text-xl font-semibold bg-clip-text text-transparent"
+          style={{
+            backgroundImage: tentangGradient
+          }}
+        >
           Tentang
         </h3>
 
@@ -38,7 +45,10 @@ export default function TentangCard({ data }: TentangCardProps) {
         </ul>
       </div>
 
-      <div className="absolute bottom-0 w-full h-3 bg-linear-to-r from-[#E63258] via-[#A43DA5] to-white" />
+      <div className="absolute bottom-0 w-full h-3" style={{
+          background: tentangBorder
+        }} 
+      />
     </div>
   );
 }

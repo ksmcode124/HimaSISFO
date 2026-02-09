@@ -6,40 +6,42 @@ import {
   Ornament5,
 } from "../components/KabinetOrnaments";
 import DepartemenCard from "@/features/kabinet/components/DepartemenCard";
-import { DepartemenListItem } from "../types";
+import { ColorMap, DepartemenListItem } from "../types";
 
 export default function DepartemenListSection({
   data,
+  colorMap
 }: {
   data: DepartemenListItem[];
+  colorMap: ColorMap
 }) {
   return (
-    <section className="relative w-full min-h-screen bg-[#F4E8FF] flex flex-col items-center py-20 pb-185 lg:pb-135 -mb-175 lg:-mb-125 overflow-hidden">
+    <section className="relative w-full min-h-screen  flex flex-col items-center py-20 pb-185 lg:pb-135 -mb-175 lg:-mb-125 overflow-hidden">
       <div className="absolute right-30 md:right-20 bottom-[40%] md:top-[22%] lg:top-[-15%] w-[700vw] md:w-[400vw] z-0">
         <div className="w-full translate-x-[43%] -rotate-240 md:rotate-0">
-          <Ornament5 />
+          <Ornament5 gradient={colorMap.ornament5 ?? ''} />
         </div>
       </div>
 
       <div className="absolute -right-60 md:-right-10 top-[10%] md:top-[5%] lg:top-[15%] w-[700vw] md:w-[400vw] z-0">
         <div className="w-full translate-x-[40%] md:translate-x-[30%] -scale-x-100 -rotate-258 md:rotate-[-15deg]">
-          <Ornament5 />
+          <Ornament5 gradient={colorMap.ornament5 ?? ''} />
         </div>
       </div>
 
       <div className="relative z-10 flex flex-col items-center mb-10 md:mb-20 w-full">
         <div className="flex flex-row -mt-10 items-center justify-center">
           <div className="w-40 md:w-80 scale-90 md:scale-110 origin-right translate-y-6 -mr-18 md:-mr-44 transition-all">
-            <Ornament9 />
+            <Ornament9 gradient={colorMap.ornament9 ?? ''}/>
           </div>
           <div className="flex flex-col items-center z-20">
             <div className="w-56 md:w-110 rotate-2 -translate-y-1 md:-translate-y-10 transition-all">
-              <Ornament1 />
+              <Ornament1 gradient={colorMap.ornament1 ?? ''} />
             </div>
           </div>
           <div className="w-40 md:w-80 scale-90 md:scale-110 origin-left translate-y-6 -ml-18 md:-ml-44 transition-all">
             <div className="scale-x-[-1]">
-              <Ornament9 />
+              <Ornament9 gradient={colorMap.ornament9 ?? ''} />
             </div>
           </div>
         </div>
@@ -63,6 +65,7 @@ export default function DepartemenListSection({
                   id={dept.id_departemen.toString()}
                   nama={dept.nama_departemen}
                   logo={dept.logo_departemen}
+                  buttonGradient={colorMap.buttonGradient ?? ''}
                 />
               ))}
         </div>

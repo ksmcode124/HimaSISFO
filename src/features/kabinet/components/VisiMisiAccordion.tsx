@@ -1,19 +1,21 @@
 "use client";
 
-import React from "react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { cn } from "@/lib/utils";
 
 interface VisiMisiProps {
   visi: string[];
   misi: string[];
+  visiMisiGradient: string;
+  visiMisiBorder: string
 }
 
-export default function VisiMisiAccordion({ visi, misi }: VisiMisiProps) {
+export default function VisiMisiAccordion({ visi, misi, visiMisiGradient, visiMisiBorder }: VisiMisiProps) {
   const sections = [
     { id: "visi", label: "Visi", items: visi },
     { id: "misi", label: "Misi", items: misi },
@@ -26,7 +28,7 @@ export default function VisiMisiAccordion({ visi, misi }: VisiMisiProps) {
           <AccordionItem
             key={id}
             value={id}
-            className="border-3 border-[#E63258] rounded-2xl bg-[#F4E8FF]/80 relative group border-b-3" // Menjaga konsistensi border shadcn
+            className={cn("border-3 rounded-2xl /80 relative group border-b-3", visiMisiBorder)} // Menjaga konsistensi border shadcn
           >
             <AccordionTrigger
               hasChevron={false}
@@ -55,7 +57,7 @@ export default function VisiMisiAccordion({ visi, misi }: VisiMisiProps) {
             </AccordionTrigger>
 
             <div className="absolute top-0 left-0 right-0 h-12 2xl:h-16 z-10 overflow-hidden rounded-xl pointer-events-none">
-              <div className="w-full h-full bg-linear-to-r from-[#B956BA]/75 via-white to-[#B956BA] flex items-center justify-center">
+              <div className="w-full h-full flex items-center justify-center" style={{background: visiMisiGradient}}>
                 <span className="font-semibold text-xl 2xl:text-3xl text-[#2D2D51]">
                   {label}
                 </span>

@@ -3,13 +3,15 @@
 import React from "react";
 import Image from "next/image";
 import { Anggota } from "../types";
+import { DynamicAsset } from "@/components/ui/dynamic-asset";
 
 interface CardProps {
   data: Anggota;
   index: number;
+  gradient: string
 }
 
-export default function IntiHimpunanCard({ data, index }: CardProps) {
+export default function IntiHimpunanCard({ data, index, gradient }: CardProps) {
   const isMirrored = index % 2 !== 0;
 
   const imageStyle = "object-contain scale-[1.3] md:scale-[1.5] translate-y-6";
@@ -22,14 +24,19 @@ export default function IntiHimpunanCard({ data, index }: CardProps) {
     <div className="relative w-full aspect-3/4 sm:aspect-auto sm:h-112 md:h-125 2xl:h-162 flex items-center justify-center mx-auto transition-transform duration-500">
       <div className={`relative w-full h-full ${mirrorClass}`}>
         {/* LAYER 1: Background Card */}
-        <div className="absolute inset-0 z-10">
+        {/* <div className="absolute inset-0 z-10">
           <Image
             src="/assets/kabinet/card-6.webp"
             alt=""
             fill
             className={`object-contain ${shadowClass}`}
           />
-        </div>
+        </div> */}
+        <DynamicAsset 
+          maskSrc={"/assets/kabinet/card-6.webp"} 
+          gradientVar={gradient}
+          innerHeight={"h-full"}
+          className="absolute inset-0 z-10"/>
 
         {/* LAYER 2: Badan (Terpotong Masking Bawah) */}
         <div

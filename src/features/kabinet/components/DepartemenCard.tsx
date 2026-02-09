@@ -14,6 +14,7 @@ interface DepartemenCardProps {
   nama: string;
   logo: string | null;
   className?: string;
+  buttonGradient: string
 }
 
 export default function DepartemenCard({

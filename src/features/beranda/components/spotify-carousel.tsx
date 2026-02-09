@@ -53,10 +53,12 @@ const Slide = React.memo(function Slide(
 /* ======================
  * MAIN CAROUSEL
  * ====================== */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function SpotifyCarousel({ episodes, error, isLoading }: { episodes?: Episode[], error?: any, isLoading?: boolean }) {
   const [activeIndex, setActiveIndex] = useState(0)
   const activeEpisode = episodes?.[activeIndex]
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ref = useRef<any>(null)
   const { w, h } = useResponsiveCarousel()
 
@@ -118,7 +120,7 @@ export default function SpotifyCarousel({ episodes, error, isLoading }: { episod
             </>
           ) : (
             <>
-              <a href={activeEpisode.external_urls.spotify}>
+              <a href={activeEpisode.external_urls.spotify} className='hover:underline'>
                 <h2 className="md:text-2xl text-sm font-bold mb-2">{activeEpisode.name}</h2>
               </a>
               <p className="text-sm mb-4">{formatTanggalIndonesia(activeEpisode.release_date)}</p>

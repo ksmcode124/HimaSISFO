@@ -55,20 +55,15 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
               <Link href="/" className={`flex items-center px-0 md:px-7 py-1 ${isMobile ? '' : 'bg-[#525252] lg:bg-transparent xl:bg-[#525252]'} rounded-full gap-0 md:gap-3 lg:gap-5`} aria-label="Home">
                 <Glass className="p-1 rounded-sm shadow-4xl bg-[#AFAFAF]/80 md:bg-white/30 hover:bg-[#AFAFAF]/90" preset="custom">
                   <Image
-                    width={50}
-                    height={50}
                     src={'/assets/shared/logos/logo-himasisfo.webp'}
                     alt={'HIMASISFO'}
+                    fill
                     priority />
                 </Glass>
                 <div className="flex flex-row gap-1 lg:hidden xl:flex">
                   <h1 className="text-xl font-regular text-white hidden md:block">HIMA</h1>
                   <h1 className="text-xl font-bold text-white hidden md:block">SISFO</h1>
                 </div>
-                {/* TODO:
-                      - ganti Back Button kalo bukan di base url untuk mobile
-                      - add opsi logo dan tulisan "HIMASISFO" untuk desktop
-                */}
               </Link>
               {/* Desktop Navigation */}
               <div className='hidden lg:grid'>

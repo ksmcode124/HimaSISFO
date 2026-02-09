@@ -10,6 +10,9 @@ import {
   DepartemenListSection,
 } from "@/features/kabinet";
 import { ShellLayer } from "@/components/layout/ShellLayer";
+import { ThemeProvider } from "@/features/kabinet/components/ThemeProvider";
+import { translateToSlug } from "@/lib/utils/translate-slug";
+import { KabinetColorType } from "@/features/kabinet/styles/KabinetColorConfig";
 
 export default function Page() {
   const params = useParams();
@@ -36,16 +39,48 @@ export default function Page() {
   }
 
   const { currentKabinet, kabinetList, departemenList, raw } = displayData;
-
-  return (
-    <ShellLayer>
-      <KabinetHeroSection
-        currentKabinet={currentKabinet}
-        kabinetList={kabinetList}
-      />
-      <FilosofiSection data={currentKabinet} />
-      <IntiHimpunanSection data={raw.kabinet.departemenInti} />
-      <DepartemenListSection data={departemenList} />
-    </ShellLayer>
+  const kabinet = translateToSlug(currentKabinet.nama_kabinet) as KabinetColorType
+  return ( 
+    <ThemeProvider kabinet={kabinet}>
+      <ShellLayer backgroundColor={"var(--kabinet-background)"}>
+        <KabinetHeroSection
+          currentKabinet={currentKabinet}
+          kabinetList={kabinetList}
+          colorMap={{
+            pita: "var(--kabinet-gradient-pita)",
+            ornament2: "var(--kabinet-gradient-ornament-2)",
+            titleText: "var(--kabinet-gradient-name)"
+          }}
+        />
+        <FilosofiSection 
+          data={currentKabinet} 
+          kabinet={kabinet}
+          ColorMap={{
+            pita: "var(--kabinet-gradient-pita)",
+            filosofiBackground: "var(--kabinet-gradient-filosofi-background)",
+            tentangText: "var(--kabinet-gradient-tentang-text)",
+            tentangBorder: "var(--kabinet-gradient-tentang-border)",
+            visiMisi: "var(--kabinet-gradient-visi-misi)",
+            visiMisiBorder: "var(--kabinet-color-visi-misi-border)",
+          }}
+        />
+        <IntiHimpunanSection 
+          data={raw.kabinet.departemenInti} 
+          colorMap={{
+            ornament1: "var(--kabinet-gradient-ornament-1",
+            ornament4: "var(--kabinet-gradient-ornament-4)",
+            gradientIntiBackground: "var(--kabinet-gradient-inti-background)",
+            borderBottom: "var(--kabinet-gradient-tentang-border)"
+          }} />
+        <DepartemenListSection 
+          data={departemenList} 
+          colorMap={{
+            ornament5: "var(--kabinet-gradient-ornament-5)",
+            ornament9: "var(--kabinet-gradient-ornament-9)",
+            ornament1: "var(--kabinet-gradient-ornament-1)",
+            buttonGradient: "var(--kabinet-gradient-button-dept-card)"
+          }} />
+      </ShellLayer>
+    </ThemeProvider>
   );
 }

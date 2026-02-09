@@ -9,7 +9,6 @@ import { useRouter } from "next/navigation";
 import { Spinner } from "@/components/ui/spinner";
 import kabinetDataRaw from "@/features/kabinet/data/kabinet.json";
 import { KabinetResponse } from "@/features/kabinet/types";
-import { ShellLayer } from "@/components/layout/ShellLayer";
 
 const data = kabinetDataRaw as unknown as KabinetResponse;
 
