@@ -39,9 +39,9 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
     window.scrollTo({ top: 0, behavior: 'auto' })
   }, [pathname])
   return (
-    <div className={`fixed z-1929 w-full justify-center h-fit transition-all duration-500 ease-in pt-5 ${scrolled ? 'md:pt-0' : 'md:pt-5'}`} aria-label="wrapper">
+    <div className={`fixed z-99999 w-full justify-center h-fit transition-all duration-500 ease-in pt-5 ${scrolled ? 'md:pt-0' : 'md:pt-5'}`} aria-label="wrapper">
       <header
-        className={`w-full md:w-auto md:mx-0 lg:mx-50 rounded-full justify-center items-center top-5 ${isMobile ? 'bg-transparent' : ''} z-99999 h-fit overflow-hidden ${className}`}
+        className={`w-full md:w-auto lg:mx-10 xl:mx-50 rounded-full justify-center items-center top-5 ${isMobile ? 'bg-transparent' : ''} z-99999 h-fit overflow-hidden ${className}`}
         role="banner"
       >
 
@@ -51,16 +51,16 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
             aria-label="Main navigation"
           >
             <div className="flex h-14 justify-center md:justify-between items-center w-full gap-30 md:gap-20 lg:gap-30">
-              {/* Logo */}
-              <Link href="/" className={`flex items-center px-0 md:px-7 py-1 ${isMobile ? '' : 'bg-[#525252]'} rounded-full gap-0 md:gap-3 lg:gap-5`} aria-label="Home">
-                <Glass className="p-1 rounded-sm size-10 md:size-12 lg:size-14 shadow-4xl hover:bg-[#AFAFAF]/90" preset='hard'>
+              {/* Logo & Back Button*/}
+              <Link href="/" className={`flex items-center px-0 md:px-7 py-1 ${isMobile ? '' : 'bg-[#525252] lg:bg-transparent xl:bg-[#525252]'} rounded-full gap-0 md:gap-3 lg:gap-5`} aria-label="Home">
+                <Glass className="p-1 rounded-sm shadow-4xl bg-[#AFAFAF]/80 md:bg-white/30 hover:bg-[#AFAFAF]/90" preset="custom">
                   <Image
                     src={'/assets/shared/logos/logo-himasisfo.webp'}
                     alt={'HIMASISFO'}
                     fill
                     priority />
                 </Glass>
-                <div className="flex flex-row gap-1">
+                <div className="flex flex-row gap-1 lg:hidden xl:flex">
                   <h1 className="text-xl font-regular text-white hidden md:block">HIMA</h1>
                   <h1 className="text-xl font-bold text-white hidden md:block">SISFO</h1>
                 </div>

@@ -1,9 +1,9 @@
 'use client'
-import { 
-  Accordion, 
-  AccordionContent, 
-  AccordionItem, 
-  AccordionTrigger 
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger
 } from "@/components/ui/accordion";
 import { ItemDataJSON } from "../types/data";
 import { ContentRenderer } from "./ContentRenderer";
@@ -32,7 +32,7 @@ interface Props {
 }
 
 // komponen ini digunakan bersamaan dengan AccordionVisualImage untuk mendapatkan visual gambar secara looping
-export function FeaturedHorizontalAccordion({ items, activeIndex, onChange }:  Props ) {
+export function FeaturedHorizontalAccordion({ items, activeIndex, onChange }: Props) {
   return (
     <Accordion
       type="single"
@@ -56,7 +56,7 @@ export function FeaturedHorizontalAccordion({ items, activeIndex, onChange }:  P
 }
 
 /** --- Internal Components --- */
-function HorizontalAccordionItem( {item} : {item: ItemDataJSON}) {
+function HorizontalAccordionItem({ item }: { item: ItemDataJSON }) {
   return (
     <AccordionItem
       key={item.id}
@@ -68,6 +68,7 @@ function HorizontalAccordionItem( {item} : {item: ItemDataJSON}) {
       "
     >
       <Glass
+        preset="soft"
         className="border border-[#25253B] rounded-2xl w-full"
       >
         <AccordionTrigger className="justify-between w-full rounded-xl text-3xs sm:text-xs md:text-sm lg:text-xl font-semibold">
@@ -75,9 +76,9 @@ function HorizontalAccordionItem( {item} : {item: ItemDataJSON}) {
             {item.title}
           </span>
         </AccordionTrigger>
-      </Glass>  
+      </Glass>
 
-      
+
       <AccordionContent className="flex flex-col text-balance w-full">
         <AnimatePresence initial={false}>
           <motion.div
@@ -88,6 +89,7 @@ function HorizontalAccordionItem( {item} : {item: ItemDataJSON}) {
             transition={{ duration: 0.5, ease: "easeOut" }}
           >
             <Glass
+              preset="soft"
               className="border border-black flex flex-col text-3xs sm:text-2xs md:text-xs lg:text-sm rounded-2xl px-6 py-4 mt-2"
             >
               <div className="flex w-full justify-between">
