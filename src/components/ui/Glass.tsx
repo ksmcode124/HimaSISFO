@@ -196,14 +196,14 @@ const THEME: Record<string, LiquidGlassProps> = {
     className: 'bg-transparent rounded-2xl'
   },
   medium: {
-    className: 'bg-white/50 p-1 md:p-3 rounded-2xl'
+    className: 'bg-white/50 rounded-2xl'
   },
   hard: {
-    className: 'bg-white/50 md:bg-[#101D2F]/50 rounded-2xl'
+    className: 'bg-[#AFAFAF]/80 md:bg-[#101D2F]/50 rounded-2xl shadow-2xl'
   }
 }
 export const Glass: React.FC<LiquidGlassProps & HTMLMotionProps<'div'>> = ({
-  preset = 'soft',
+  preset = 'medium',
   children,
   depth: glassThickness,
   splay: bezelWidth,
@@ -346,8 +346,8 @@ const LiquidDiv = React.forwardRef<HTMLDivElement, { filterId: string, preset: s
           ...(isLiquidSupported
             ? {}
             : {
-              backdropFilter: 'blur(6px)',
-              WebkitBackdropFilter: 'blur(6px)',
+              backdropFilter: 'blur(8px)',
+              WebkitBackdropFilter: 'blur(8px)',
             }),
         }}
       >

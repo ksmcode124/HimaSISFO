@@ -118,7 +118,10 @@ export default function KabinetHeroSection({
               <h1>SELAMAT DATANG DI</h1>
               <h2>HIMASISFO {currentKabinet.tahun_kerja}</h2>
             </div>
-            <h3 className="text-xl mt-4 sm:text-3xl md:text-4xl lg:text-5xl lg:mb-[-20%] xl:mb-[8%] 2xl:mb-[-15%] font-bold bg-clip-text text-transparent bg-linear-to-r from-[#E63258] to-[#A43DA5]">
+            <h3 
+              className="text-xl mt-4 sm:text-3xl md:text-4xl lg:text-5xl lg:mb-[-20%] xl:mb-[8%] 2xl:mb-[-15%] font-bold bg-clip-text text-transparent bg-linear-to-r from-[#E63258] to-[#A43DA5] text-transparent bg-clip-text"
+              style={{backgroundImage: colorMap.titleText ?? ''}}
+            >
               Kabinet {currentKabinet.nama_kabinet}
             </h3>
           </div>

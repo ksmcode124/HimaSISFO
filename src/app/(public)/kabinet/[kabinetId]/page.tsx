@@ -48,7 +48,8 @@ export default function Page() {
           kabinetList={kabinetList}
           colorMap={{
             pita: "var(--kabinet-gradient-pita)",
-            ornament2: "var(--kabinet-gradient-ornament-2)"
+            ornament2: "var(--kabinet-gradient-ornament-2)",
+            titleText: "var(--kabinet-gradient-name)"
           }}
         />
         <FilosofiSection 

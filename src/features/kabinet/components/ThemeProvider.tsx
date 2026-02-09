@@ -11,6 +11,7 @@ export function ThemeProvider({children, kabinet}: ThemeProviderProp) {
 
   const themeVariables = {
     '--kabinet-background': colorConfig.background,
+    '--kabinet-gradient-name': colorConfig.gradient_kabinet_name_text,
     '--kabinet-gradient-pita': colorConfig.gradient_pita,
     '--kabinet-color-ornament': colorConfig.color_ornament,
     '--kabinet-gradient-ornament-1': colorConfig.gradient_ornament_1,
