@@ -46,9 +46,9 @@ export default function AnggotaPage() {
     entity: 'anggota',
     mapToRow: (rows) =>
       rows
-        .filter((r) => r.detailAnggota.some((d) => d.id_departemen === id_departemen && d.id_kabinet == id_kabinet) ?? false)
+        .filter((r) => r.detailAnggota.some((d) => d.id_departemen === id_departemen && d.id_kabinet === id_kabinet) ?? false)
         .map((r) => {
-          const da = r.detailAnggota.find((d) => d.id_departemen === id_departemen && d.id_kabinet == d.id_kabinet)
+          const da = r.detailAnggota.find((d) => d.id_departemen === id_departemen && d.id_kabinet === id_kabinet)
           return ({
             id: r.id_anggota,
             nama_anggota: r.nama_anggota,
@@ -112,16 +112,22 @@ export default function AnggotaPage() {
 
     // 4. Create detail anggota
     let fotoUrl: string | undefined
-    if (data.foto_anggota && Array.isArray(data.foto_anggota) && data.foto_anggota.length > 0) {
-      const first = data.foto_anggota[0]
-      fotoUrl = first.url || first.fileUrl || first
-    }
+
+if (data.foto_anggota !== undefined) {
+  if (Array.isArray(data.foto_anggota) && data.foto_anggota.length > 0) {
+    const first = data.foto_anggota[0] as any   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    fotoUrl = first?.url || first?.fileUrl || (typeof first === "string" ? first : undefined)
+  } else if (typeof data.foto_anggota === "string") {
+    fotoUrl = data.foto_anggota
+  }
+}
+
 
     const detailPayload = {
       id_anggota,
       id_kabinet,
       id_departemen,
-      id_jabatan: data.id_jabatan ?? 1,
+      id_jabatan: data.id_jabatan ?? 8,
       foto_anggota: fotoUrl,
     }
 
@@ -186,7 +192,15 @@ export default function AnggotaPage() {
           const ok =  await confirm.confirm('save')
           if (!ok) return
           if (!detail?.id) return
-          await update({ id: detail.id, data })
+
+          // Tambahkan id_kabinet dan id_departemen ke payload
+    const payload = {
+      ...data,
+      id_kabinet,
+      id_departemen,
+    }
+
+          await update({ id: detail.id, data: payload })
           modal.close()
         }}
       />
