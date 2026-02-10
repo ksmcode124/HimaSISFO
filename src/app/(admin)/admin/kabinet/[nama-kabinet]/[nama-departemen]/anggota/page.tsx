@@ -97,7 +97,6 @@ export default function AnggotaPage() {
     let id_anggota: number
     if (existing) {
       id_anggota = existing.id_anggota
-      console.log('Nama anggota sudah ada, pakai id_existing:', id_anggota)
     } else {
       // 3. Create anggota baru
       const anggotaPayload = { nama_anggota: data.nama_anggota }
@@ -109,7 +108,6 @@ export default function AnggotaPage() {
       if (!anggotaRes.ok) throw new Error('Gagal membuat anggota')
       const anggotaData = await anggotaRes.json()
       id_anggota = anggotaData.id_anggota
-      console.log('Created anggota baru dengan id:', id_anggota)
     }
 
     // 4. Create detail anggota
