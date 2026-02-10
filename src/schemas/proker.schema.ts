@@ -20,7 +20,7 @@ export const createProkerSchema = z.object({
 export const updateProkerSchema = z.object({
   nama_proker: z.string().min(3).optional(),
   deskripsi: z.string().optional(),
-  foto_proker: z.string().url("Foto proker harus berupa URL").optional(),
+  foto_proker: z.any().optional(),
 }).refine((data) => Object.keys(data).length > 0, {
   message: "Minimal isi 1 field untuk update",
 })

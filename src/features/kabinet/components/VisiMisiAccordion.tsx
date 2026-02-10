@@ -28,7 +28,8 @@ export default function VisiMisiAccordion({ visi, misi, visiMisiGradient, visiMi
           <AccordionItem
             key={id}
             value={id}
-            className={cn("border-3 rounded-2xl /80 relative group border-b-3", visiMisiBorder)} // Menjaga konsistensi border shadcn
+            className={cn("border-3 rounded-2xl /80 relative group border-gradient-kabinet", visiMisiBorder)}
+            style={{ "--gradient" : visiMisiGradient } as React.CSSProperties} // Menjaga konsistensi border shadcn
           >
             <AccordionTrigger
               hasChevron={false}
