@@ -211,6 +211,45 @@
     mask-composite: exclude;
   }
 
+  .border-gradient-kabinet {
+    position: relative;
+    border-radius: 0rem solid transparent;
+    border: 0px solid transparent;
+    overflow: hidden;
+    background: transparent;
+    /* isi tengah tetap kosong */
+    z-index: 0;
+    background-clip: padding-box, border-box;
+  }
+
+  .border-gradient-kabinet::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    /* tebal border */
+    padding: 4px;
+
+    /* gradient border */
+    background: var(--gradient, transparent);
+    border-radius: inherit;
+    z-index: -1;
+
+    /* bikin lubang di tengah sesuai padding */
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    /* Safari */
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+  }
+
+  .bg-gradient-kabinet {
+    background: var(--gradient, transparent);
+  }
 
   @media (min-width: 768px) {
 

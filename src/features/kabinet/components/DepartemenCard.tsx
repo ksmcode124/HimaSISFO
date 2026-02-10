@@ -22,11 +22,12 @@ export default function DepartemenCard({
   nama,
   logo,
   className = "",
+  buttonGradient,
 }: DepartemenCardProps) {
   const { kabinetId } = useParams();
   const [isMobile, setIsMobile] = useState(false);
   const [mounted, setMounted] = useState(false);
-
+ 
   useEffect(() => {
     setMounted(true);
     const checkMobile = () => setIsMobile(window.innerWidth <= 768);
@@ -67,7 +68,10 @@ export default function DepartemenCard({
       className="flex justify-center col-span-2 items-center w-full"
     >
       <Card
-        className={`overflow-hidden aspect-3/4 w-full relative flex flex-col items-center text-center border-3 border-[#E63258] bg-white/50 backdrop-blur-xl p-1 md:p-6 ${className}`}
+        className={`overflow-hidden aspect-3/4 w-full relative flex flex-col items-center text-center border-gradient-kabinet bg-white/50 backdrop-blur-xl p-1 md:p-6 ${className}`}
+        style={{
+          "--gradient": buttonGradient,
+        } as React.CSSProperties}
       >
         <CardContent className="flex flex-col items-center w-full p-0 flex-1">
           <motion.div
@@ -100,7 +104,10 @@ export default function DepartemenCard({
           >
             <Button
               asChild
-              className="w-full h-11 rounded-full font-light text-2xs md:text-sm bg-linear-to-br from-[#E63258] to-[#A43DA5] hover:shadow-[inset_0_4px_8px_rgba(0,0,0,0.4)] active:shadow-[inset_0_4px_8px_rgba(0,0,0,0.4)]"
+              className="w-full h-11 rounded-full font-light text-2xs md:text-sm bg-gradient-kabinet hover:shadow-[inset_0_4px_8px_rgba(0,0,0,0.4)] active:shadow-[inset_0_4px_8px_rgba(0,0,0,0.4)]"
+              style={{
+                "--gradient": buttonGradient,
+              } as React.CSSProperties}
             >
               <Link href={`/kabinet/${kabinetId}/${id}`}>Selengkapnya</Link>
             </Button>
