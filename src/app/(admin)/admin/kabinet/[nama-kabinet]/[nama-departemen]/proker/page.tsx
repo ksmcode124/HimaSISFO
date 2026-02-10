@@ -108,7 +108,7 @@ export default function ProkerPage() {
         title="Buat Program Kerja"
         fields={createProkerFields}
         schema={createProkerSchema}
-        initialData={{}}
+        initialData={{ id_kabinet, id_departemen }}
         submitLabel="Buat Proker"
         onSubmit={async (data) => {
           const ok =  await confirm.confirm('save')
