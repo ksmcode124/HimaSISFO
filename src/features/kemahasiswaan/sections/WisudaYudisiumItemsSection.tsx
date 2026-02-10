@@ -15,7 +15,7 @@ export function WisudaYudisiumItemsSection({ items, setSelectedId }: Props) {
             key={item.id}
             className={"col-span-6"}
           >
-            <WisudaFlipCard setSelectedId={setSelectedId} item={item} />
+            <WisudaFlipCard setSelectedIdAction={setSelectedId} item={item} />
           </div>
         )
       })}

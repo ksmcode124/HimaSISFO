@@ -1,5 +1,5 @@
 "use client";
-import { NavigationBar, SiteFooter } from "@/components/layout";
+import { NavigationBar } from "@/components/layout";
 import { navItems } from "@/features/navigation";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React from "react";

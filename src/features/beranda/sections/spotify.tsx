@@ -1,22 +1,12 @@
 // components/SpotifyEpisodePlayer.tsx
 "use client";
 
-import { useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import { berandaData } from "..";
-import EpisodeCard from "../components/episodeCard";
-import { Card } from "@/components/ui/card";
 import SpotifyCarousel from "../components/spotify-carousel";
-import { Glass } from "@/components/ui/Glass";
 import useBeranda from "../hooks/useBeranda";
 
 export default function Spotify() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const episodes = berandaData.media.spotify;
-
   const { data, isLoading, error } = useBeranda();
 
 

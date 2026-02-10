@@ -3,7 +3,6 @@ import { Glass } from '@/components/ui/Glass'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import React from 'react'
 import { berandaData } from '..'
-import { Button } from '@/components/ui/button'
 
 export default function VisionAccordion() {
     const data = berandaData.vision_mission;

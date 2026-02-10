@@ -5,14 +5,14 @@ import { ContentRenderer } from "./ContentRenderer"
 
 interface Props {
   item: ItemDataJSON
-  setSelectedId: (id: string | null) => void
+  setSelectedIdAction: (id: string | null) => void
 }
 
-export function WisudaFlipCard({ item, setSelectedId }: Props) {
+export function WisudaFlipCard({ item, setSelectedIdAction }: Props) {
   return (
     <FlipCard
       id={item.id}
-      setSelectedId={setSelectedId}
+      setSelectedIdAction={setSelectedIdAction}
       className="w-full aspect-square lg:aspect-4/3 rounded-xl shadow-md overflow-hidden relative"
       front={
         <>

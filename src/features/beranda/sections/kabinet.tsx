@@ -1,5 +1,4 @@
 "use client";
-import { Button, buttonVariants } from "@/components/ui/button";
 import { ScaleCarousel } from "@/components/ui/scale-carousel";
 import { ArrowRight } from "lucide-react";
 import Awan from "../components/awan";

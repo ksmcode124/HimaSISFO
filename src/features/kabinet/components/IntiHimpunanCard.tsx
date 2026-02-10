@@ -16,9 +16,9 @@ export default function IntiHimpunanCard({ data, index, gradient }: CardProps) {
 
   const imageStyle = "object-contain scale-[1.3] md:scale-[1.5] translate-y-6";
   const mirrorClass = isMirrored ? "-scale-x-100" : "";
-  const shadowClass = isMirrored
-    ? "drop-shadow-[-15px_10px_7px_rgba(0,0,0,0.3)]"
-    : "drop-shadow-[15px_10px_7px_rgba(0,0,0,0.3)]";
+  // const shadowClass = isMirrored
+  //   ? "drop-shadow-[-15px_10px_7px_rgba(0,0,0,0.3)]"
+  //   : "drop-shadow-[15px_10px_7px_rgba(0,0,0,0.3)]";
 
   return (
     <div className="relative w-full aspect-3/4 sm:aspect-auto sm:h-112 md:h-125 2xl:h-162 flex items-center justify-center mx-auto transition-transform duration-500">

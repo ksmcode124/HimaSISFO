@@ -5,7 +5,6 @@ import { motion, MotionValue, useMotionValue, useSpring, type HTMLMotionProps } 
 import React, { useCallback, useEffect, useId, useLayoutEffect, useRef } from 'react';
 import { LiquidFilter, LiquidFilterProps } from './Filter';
 import { getValueOrMotion } from '@/lib/utils/ui/liquid-glass';
-import { custom } from 'zod';
 
 /**
  * Safely parse border radius from computed styles, handling edge cases like
@@ -88,7 +87,7 @@ export const useMotionSizeObservers = <T extends HTMLElement = HTMLDivElement>(
     resizeObserver.observe(el);
 
     return () => resizeObserver.disconnect();
-  }, [disabled]);
+  }, [disabled, containerRef, updateDimensions]);
 
   // MutationObserver → untuk update borderRadius ketika style/class berubah
   useEffect(() => {
@@ -389,3 +388,5 @@ const LiquidDiv = React.forwardRef<HTMLDivElement, { filterId: string, preset: s
     );
   }
 );
+
+LiquidDiv.displayName='LiquidDiv'

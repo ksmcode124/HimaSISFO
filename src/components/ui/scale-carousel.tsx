@@ -51,7 +51,7 @@ export function ScaleCarousel({ children, className, opts, onSelect }: ScaleCaro
     emitSelect()
   }
 
-  const applyScale = (embla: EmblaCarouselType, event?: EmblaEventType) => {
+  const applyScale = (embla: EmblaCarouselType) => {
     const progress = embla.scrollProgress()
     embla.scrollSnapList().forEach((snap, idx) => {
       const diff = snap - progress

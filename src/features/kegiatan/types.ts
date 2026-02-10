@@ -1,4 +1,3 @@
-import { event } from "@prisma/client";
 import React from "react";
 
 export interface EventCardProps {

@@ -18,7 +18,7 @@ function EventCardDecoration() {
   );
 }
 
-function EventCardContent({ events, tahun }: { events: EventCardProps[], tahun: string }) {
+function EventCardContent({ events }: { events: EventCardProps[]}) {
   const { pastNotGoing, nextOnGoing, futureNotGoing } = sortEvents(events);
   return (
     <div className="relative flex flex-col gap-2 md:gap-5 justify-center w-full max-w-[1120px]">
@@ -70,7 +70,7 @@ export async function EventCardSection({ tahun }: { tahun: string }) {
         <EventCardDecoration />
       </DecorationLayer>
       <ContentLayer className="px-3 pb-0 md:pb-30 flex justify-center">
-        <EventCardContent events={events} tahun={tahun} />
+        <EventCardContent events={events} />
       </ContentLayer>
     </section>
   )

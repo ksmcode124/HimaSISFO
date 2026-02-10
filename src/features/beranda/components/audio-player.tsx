@@ -30,7 +30,7 @@ export default function AudioPlayer({
     if (wasPlaying) {
       audioRef.current.play().catch(() => { })
     }
-  }, [src])
+  }, [src, isPlaying])
 
   const togglePlay = async () => {
     if (!audioRef.current) return

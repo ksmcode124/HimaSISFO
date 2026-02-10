@@ -2,7 +2,6 @@
 import { FormEvent, startTransition, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { signInAction } from '@/features/admin/services/auth';
-import { auth } from '@/lib/auth';
 
 export function useLogin() {
   const router = useRouter();
@@ -15,7 +14,7 @@ export function useLogin() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError('');
-    
+    setLoading(true);
     const formData = new FormData(e.currentTarget);
 
     startTransition(async () => {
@@ -25,7 +24,7 @@ export function useLogin() {
         setError(result.message);
         return;
       }
-
+      setLoading(false);
       router.push('/admin');
     });
   };

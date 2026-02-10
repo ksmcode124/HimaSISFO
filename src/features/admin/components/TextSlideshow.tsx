@@ -52,7 +52,7 @@ export default function TextSlideshow() {
               <h1 className="font-bold text-5xl md:text-7xl">{textSlide.title}</h1>
               <ReactMarkdown
                 components={{
-                  strong: ({ node, ...props }) => (
+                  strong: ({ ...props }) => (
                     <span className="text-[#3385FF] font-bold" {...props} />
                   )
                 }}

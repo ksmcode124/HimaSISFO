@@ -8,17 +8,17 @@ type FlipCardProps = {
   back: React.ReactNode;
   className?: string;
   id?: string | null,
-  setSelectedId: (id: string | null) => void
+  setSelectedIdAction: (id: string | null) => void
 };
 
-export function FlipCard({ front, back, className, setSelectedId, id }: FlipCardProps) {
+export function FlipCard({ front, back, className, setSelectedIdAction, id }: FlipCardProps) {
   const [flipped, setFlipped] = useState(false);
   const device = useDeviceType()
 
   const handleClick = () => {
     if (device === 'mobile') {
-      if (setSelectedId && id !== undefined) {
-        setSelectedId(id); // buka modal dari parent
+      if (setSelectedIdAction && id !== undefined) {
+        setSelectedIdAction(id); // buka modal dari parent
       }
     } else {
       setFlipped(!flipped); // flip card desktop

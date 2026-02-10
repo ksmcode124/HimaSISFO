@@ -25,14 +25,7 @@ export function Modal(props: ModalProps) {
 
   if (!mounted || !open) return null;
 
-  const event = props.mode === "single" ? props.event : "";
-  const events = props.mode === "multiple" ? [props.events] : [];
-  // console.log(events, event);
-  // console.log(event)
   const today = Date.now();
-  // const start = event.start.getTime();
-  // const end = event.end.getTime();
-  // console.log(document.getElementById)
   return createPortal(
     <div className="fixed inset-0 z-50">
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
@@ -205,7 +198,7 @@ export function Modal(props: ModalProps) {
             <div className="relative overflow-visible max-h-[50vh] overflow-y-auto scrollbar scrollbar-sm scrollbar-thumb-[#AFAFAF] scrollbar-track-scrollbar-track">
               {Array.from(props.events)
                 .sort((a, b) => a.start.getTime() - b.start.getTime()) // urut dari tanggal terkecil
-                .map((event, idx) => {
+                .map((event) => {
                   return (
                     <div key={event.id} className="relative flex flex-col pb-5">
                       <div className="flex flex-col gap-3">
