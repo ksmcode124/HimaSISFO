@@ -52,13 +52,20 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
           >
             <div className="flex h-14 justify-center md:justify-between items-center w-full gap-30 md:gap-20 lg:gap-30">
               {/* Logo & Back Button*/}
-              <Link href="/" className={`flex items-center px-0 md:px-7 py-1 ${isMobile ? '' : 'bg-[#525252] lg:bg-transparent xl:bg-[#525252]'} rounded-full gap-0 md:gap-3 lg:gap-5`} aria-label="Home">
-                <Glass className="p-1 rounded-sm shadow-4xl size-10 md:size-12 bg-[#AFAFAF]/80 md:bg-white/30 hover:bg-[#AFAFAF]/90" preset="custom">
-                  <Image
-                    src={'/assets/shared/logos/logo-himasisfo.webp'}
-                    alt={'HIMASISFO'}
-                    fill
-                    priority />
+              <Link href="/"
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+                className={`flex items-center px-0 md:px-7 py-1 ${isMobile ? '' : 'bg-[#525252] lg:bg-transparent xl:bg-[#525252]'} rounded-full gap-0 md:gap-3 lg:gap-5`} aria-label="Home">
+                <Glass className="p-2 md:p-1 rounded-sm shadow-4xl size-14 md:size-12 bg-[#AFAFAF]/80 md:bg-white/30 hover:bg-[#AFAFAF]/90" preset="custom">
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={'/assets/shared/logos/logo-himasisfo.webp'}
+                      alt={'HIMASISFO'}
+                      fill
+                      className='object-contain md:fill'
+                      priority />
+                  </div>
                 </Glass>
                 <div className="flex flex-row gap-1 lg:hidden xl:flex">
                   <h1 className="text-xl font-regular text-white hidden md:block">HIMA</h1>

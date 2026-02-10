@@ -252,11 +252,11 @@ export const Glass: React.FC<LiquidGlassProps & HTMLMotionProps<'div'>> = ({
     },
     custom :{
       glassThickness: 100,
-      bezelWidth: 20,
-      blur: 4,
+      bezelWidth: 16,
+      blur: 0.5,
       refractiveIndex: 2,
-      specularOpacity: 10,
-      specularSaturation: 200,
+      specularOpacity: 6,
+      specularSaturation: 160,
       dpr,
     }
   };
