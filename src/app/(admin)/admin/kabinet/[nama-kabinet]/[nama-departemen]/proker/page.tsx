@@ -48,7 +48,7 @@ export default function ProkerPage() {
       rows
         .filter(r => r.id_departemen === id_departemen && r.id_kabinet === id_kabinet)
         .map(r => ({
-          id: r.id,
+          id: r.id_proker,
           nama_proker: r.nama_proker,
           deskripsi: r.deskripsi ?? '',
           foto_proker: r.foto_proker ?? ''
@@ -61,7 +61,7 @@ export default function ProkerPage() {
     'proker',
     modal.id,
     r => ({
-      id: r.id,
+      id: r.id_proker,
       id_kabinet: r.id_kabinet,
       id_departemen: r.id_departemen,
       nama_proker: r.nama_proker,
@@ -70,10 +70,10 @@ export default function ProkerPage() {
     })
   )
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id_proker: number) => {
     const ok =  await confirm.confirm('delete')
     if (!ok) return
-    await remove(id)
+    await remove(id_proker)
     modal.close()
   }
 
