@@ -67,10 +67,10 @@ export default function Page() {
             tentangText: "var(--kabinet-gradient-tentang-text)",
             tentangBorder: "var(--kabinet-gradient-tentang-border)",
             visiMisi: "var(--kabinet-gradient-visi-misi)",
-            visiMisiBorder: "var(--kabinet-color-visi-misi-border)",
             visiMisiInnerBg: "var(--kabinet-color-background)",
             cardBorder: "var(--kabinet-color-dept-card-border)",
             chevronIcon: "var(--kabinet-color-chevron-icon)",
+            borderGradient: "var(--kabinet-gradient-dept-card-button)",
           }}
         />
         <IntiHimpunanSection 
@@ -92,8 +92,7 @@ export default function Page() {
             ornament2: "var(--kabinet-gradient-ornament-2)",
             ornament5: "var(--kabinet-gradient-ornament-5)",
             ornament9: "var(--kabinet-gradient-ornament-9)",
-            buttonGradient: "var(--kabinet-gradient-dept-card-button)",
-            cardBorder: "var(--kabinet-color-dept-card-border)",
+            gradient: "var(--kabinet-gradient-dept-card-button)",
           }} />
       </ShellLayer>
     </ThemeProvider>

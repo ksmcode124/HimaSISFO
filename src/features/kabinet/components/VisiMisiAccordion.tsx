@@ -15,7 +15,11 @@ interface VisiMisiProps {
   colorMap: ColorMap;
 }
 
-export default function VisiMisiAccordion({ visi, misi, colorMap }: VisiMisiProps) {
+export default function VisiMisiAccordion({
+  visi,
+  misi,
+  colorMap,
+}: VisiMisiProps) {
   const sections = [
     { id: "visi", label: "Visi", items: visi },
     { id: "misi", label: "Misi", items: misi },
@@ -28,22 +32,37 @@ export default function VisiMisiAccordion({ visi, misi, colorMap }: VisiMisiProp
           <AccordionItem
             key={id}
             value={id}
-            className={cn("border-3 rounded-2xl relative group border-b-3")}
-            style={{
-              borderColor: colorMap.cardBorder,
-              color: colorMap.text,
-              backgroundColor: `color-mix(in srgb, ${colorMap.background}, transparent 15%)`,
-            }}
+            className={cn(
+              "rounded-2xl relative group border-transparent border-gradient-kabinet overflow-hidden p-1",
+            )}
+            style={
+              {
+                color: colorMap.text,
+                backgroundColor: `color-mix(in srgb, ${colorMap.background}, transparent 15%)`,
+                backgroundClip: "padding-box",
+                "--gradient": colorMap.borderGradient,
+              } as React.CSSProperties
+            }
           >
             <AccordionTrigger
               hasChevron={false}
               className="h-12 2xl:h-16 relative z-20 hover:no-underline"
             >
-              <div className="w-full h-full" />
+              <div className="absolute top-0 left-0 right-0 h-12 2xl:h-16 z-10 overflow-hidden rounded-xl pointer-events-none">
+                <div
+                  className="w-full h-full flex items-center justify-center"
+                  style={{ background: colorMap.visiMisi }}
+                >
+                  <span className="font-semibold text-xl 2xl:text-3xl">
+                    {label}
+                  </span>
+                </div>
+              </div>
 
               {/* CHEVRON CUSTOM */}
-              <div className="absolute -right-5 top-0 h-12 2xl:h-16 flex items-center z-30 pointer-events-none">
-                <div className="bg-white w-15 h-13 2xl:h-17 rounded-2xl flex items-center justify-center shadow-sm">
+              <div className="absolute -right-1 top-1/2 -translate-y-1/2 z-30 pointer-events-none">
+                <div className="bg-white w-16 h-14 rounded-xl flex items-center justify-center shadow-sm">
+                  {" "}
                   <svg
                     width="32"
                     height="32"
@@ -61,24 +80,10 @@ export default function VisiMisiAccordion({ visi, misi, colorMap }: VisiMisiProp
               </div>
             </AccordionTrigger>
 
-            <div className="absolute top-0 left-0 right-0 h-12 2xl:h-16 z-10 overflow-hidden rounded-xl pointer-events-none">
-              <div
-                className="w-full h-full flex items-center justify-center"
-                style={{ background: colorMap.visiMisi }}
-              >
-                <span className="font-semibold text-xl 2xl:text-3xl">
-                  {label}
-                </span>
-              </div>
-            </div>
-
             <AccordionContent className="pt-2 pb-4">
-              <ul className="list-disc ml-4">
+              <ul className="list-disc ml-6 mr-2">
                 {items.map((text, index) => (
-                  <li
-                    key={index}
-                    className="text-xs 2xl:text-lg"
-                  >
+                  <li key={index} className="text-xs 2xl:text-lg">
                     {text}
                   </li>
                 ))}

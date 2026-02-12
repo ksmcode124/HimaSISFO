@@ -53,16 +53,17 @@ export default function VisiMisiMobile({
           damping: 22,
         },
       }}
-      className={`relative z-20 flex ${
+      className={`relative z-20 flex border-2 border-transparent border-gradient-kabinet ${
         isOpen
           ? "flex-col w-full p-4 rounded-4xl"
           : "flex-row items-center w-full h-12 md:h-16 rounded-full gap-4"
       }`}
       style={{
-        borderWidth: "2px",
-        borderColor: colorMap.visiMisiBorder,
+        borderWidth: "1px",
         background: colorMap.visiMisi,
-      }}
+        backgroundClip: "padding-box",
+        "--gradient": colorMap.borderGradient,
+      } as React.CSSProperties}
     >
       {/* VISI */}
       <motion.div

@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
-// import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -69,10 +68,10 @@ export default function DepartemenCard({
       className="flex justify-center items-center w-fit"
     >
       <Card
-        className={`overflow-hidden relative flex flex-col items-center text-center border-3 bg-white/50 backdrop-blur-xl p-1 md:p-6 ${className}`}
+        className={`overflow-hidden aspect-3/4 w-full relative flex flex-col items-center text-center border-gradient-kabinet bg-white/50 backdrop-blur-xl p-1 md:p-6 ${className}`}
         style={{
-          borderColor: colorMap.cardBorder,
-        }}
+          "--gradient": colorMap.gradient,
+        } as React.CSSProperties}
       >
         <CardContent className="flex flex-col items-center w-full p-0 flex-1">
           <motion.div
@@ -110,10 +109,10 @@ export default function DepartemenCard({
           >
             <Button
               asChild
-              className="w-full h-8 md:h-11 rounded-full font-light text-2xs md:text-sm hover:shadow-[inset_0_4px_8px_rgba(0,0,0,0.4)] active:shadow-[inset_0_4px_8px_rgba(0,0,0,0.4)]"
+              className="w-full mb-1 h-8 md:h-12 rounded-full font-light text-2xs md:text-sm bg-gradient-kabinet hover:shadow-[inset_0_4px_8px_rgba(0,0,0,0.4)] active:shadow-[inset_0_4px_8px_rgba(0,0,0,0.4)]"
               style={{
-                background: colorMap.buttonGradient,
-              }}
+                "--gradient": colorMap.gradient,
+              } as React.CSSProperties}
             >
               <Link href={`/kabinet/${kabinetId}/${id}`}>Selengkapnya</Link>
             </Button>
