@@ -10,10 +10,9 @@ import { motion } from 'framer-motion'
 
 interface NavigationBarProps {
   items: NavItem[]
-  className?: string
 }
 
-export default function NavigationBar({ items, className = '' }: NavigationBarProps) {
+export default function NavigationBar({ items}: NavigationBarProps) {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -39,13 +38,12 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
     window.scrollTo({ top: 0, behavior: 'auto' })
   }, [pathname])
   return (
-    <div className={`fixed z-99999 w-full justify-center h-fit transition-all duration-500 ease-in pt-5 ${scrolled ? 'md:pt-0' : 'md:pt-5'}`} aria-label="wrapper">
+    <div className={`fixed z-99999 w-full justify-center h-fit transition-all ease-in-out pt-5 ${scrolled ? 'duration-500 md:pt-0' : 'md:pt-5 duration-500'}`} aria-label="wrapper">
       <header
-        className={`w-full md:w-auto lg:mx-10 xl:mx-50 rounded-full justify-center items-center top-5 ${isMobile ? 'bg-transparent' : ''} z-99999 h-fit overflow-hidden ${className}`}
+        className={`w-full md:w-auto lg:mx-10 xl:mx-50 justify-center bg-transparent center top-5 h-fit overflow-hidden`}
         role="banner"
       >
-
-        <Glass preset='hard' disabled={isMobile}>
+        <Glass preset='custom' className={`bg-[#AFAFAF]/80 md:bg-[#101D2F]/50 ${scrolled ? 'duration-700 rounded-t-0 rounded-b-[40px]' : 'rounded-t-[40px] rounded-b-[40px] duration-700'}`} disabled={isMobile}>
           <nav
             className="py-2 px-5 md:px-10 lg:px-20 flex w-full "
             aria-label="Main navigation"
