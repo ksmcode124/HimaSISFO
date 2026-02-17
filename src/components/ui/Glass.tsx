@@ -156,8 +156,6 @@ export interface LiquidGlassProps<T extends HTMLElement = HTMLDivElement>
 
 export const useLiquidSurface = <T extends HTMLElement = HTMLDivElement>({
   targetRef,
-  borderRadius: borderRadiusProp,
-  preset,
   ...props
 }: LiquidGlassProps<T>) => {
   const filterId = `glass-${useId()}`;
