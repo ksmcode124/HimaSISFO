@@ -43,7 +43,7 @@ export default function NavigationBar({ items}: NavigationBarProps) {
         className={`w-full md:w-auto lg:mx-10 xl:mx-50 justify-center bg-transparent center top-5 h-fit overflow-hidden`}
         role="banner"
       >
-        <Glass preset='custom' className={`bg-[#AFAFAF]/80 md:bg-[#101D2F]/50 ${scrolled ? 'duration-700 rounded-t-0 rounded-b-[40px]' : 'rounded-t-[40px] rounded-b-[40px] duration-700'}`} disabled={isMobile}>
+        <Glass preset='custom' className={`bg-[#AFAFAF]/80 md:bg-[#101D2F]/50 ${scrolled ? 'duration-700 rounded-t-0 rounded-b-[20px]' : 'rounded-t-[40px] rounded-b-[40px] duration-700'}`} disabled={isMobile}>
           <nav
             className="py-2 px-5 md:px-10 lg:px-20 flex w-full "
             aria-label="Main navigation"
