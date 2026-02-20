@@ -33,7 +33,7 @@ export function HeroSection({ data }: HeroSectionProps) {
           <BreadcrumbSection items={data.breadcrumbItems!} />
         )}
 
-        <div className={cn("flex-1 flex justify-center items-center", hasBreadcrumb ? "" : "pt-[72px] lg:pt-[96px]")}> {/* Ubah setinggi Navbar & BreadCrumbs*/}
+        <div className={cn("flex-1 flex justify-center items-center", hasBreadcrumb ? "" : "pt-18 lg:pt-24")}> {/* Ubah setinggi Navbar & BreadCrumbs*/}
           <HeroView
             title={data.title}
             subtitle={data.subtitle}
