@@ -71,9 +71,10 @@ export function EventCard({
 
     return (
         <div
-            className={`text-white bg-linear-to-tl from-[#000000] via-[#23445B] to-[#060400] rounded-2xl ${isCarousel ? "shadow-xl absolute" : "shadow-lg"} p-4 text-background ${className ?? ""}`}
+            className={`relative text-white bg-linear-to-tl from-[#000000] via-[#23445B] to-[#060400] rounded-2xl ${isCarousel ? "shadow-xl absolute" : "shadow-lg"} p-4 text-background ${className ?? ""}`}
             style={style}
         >
+            <a href={`https://example.com/${info?.id ?? undefined}`} className="absolute inset-0 z-10"></a>
             {isLoading ? (
                 <Skeleton className="w-full aspect-3/2 rounded-xl" />
             ) : (
