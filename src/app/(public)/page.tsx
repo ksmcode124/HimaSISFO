@@ -31,6 +31,11 @@ function Graphics() {
   return <div className="-mt-10 pb-30">
     <div className="relative flex items-center justify-center w-full h-full">
       <img src="/assets/beranda/web-prodi.png" className="w-full" alt="" />
+      <div className="absolute bottom-10 md:bottom-20 p-[3px] rounded-full bg-linear-to-b from-columbia-blue to-[#3385FF]">
+        <a className="md:text-2xl font-bold text-white bg-linear-to-b from-primary to-[#456882] rounded-full px-4 py-2 block">
+          WEB PRODI SISTEM INFORMASI
+        </a>
+      </div>
     </div>
     <Awan variant={'tail'} className="-mt-5 sm:-mt-8 md:-mt-10 -z-1" />
     <Pita className="mt-20 sm:mt-15 md:mt-20 lg:mt-10" />
