@@ -44,10 +44,10 @@ function BehindTheWeb() {
       <img src="/assets/beranda/code124-bg.png" className="w-full h-full inset-0 absolute object-cover z-15" alt="" />
       {/* CONTENT */}
       <div className="absolute bottom-15 sm:bottom-25 md:bottom-30 lg:bottom-60 w-screen z-20 flex flex-col h-full justify-end items-start px-4 lg:px-16">
-        <p>Behind The Web</p>
+        <p className="text-lg">Behind The Web</p>
         <div className="flex justify-between w-full items-center">
           <span className="sm:text-7xl text-4xl md:text-[128px]">CODE124</span>
-          <Button className="bg-transparent border-white border-2">Selengkapnya <ArrowRight /></Button>
+          <a href="#" className="bg-primary-foreground/5 text-lg lg:text-2xl flex flex-items-center rounded-full px-4 py-2 gap-2 items-center border-white border-2">Selengkapnya <ArrowRight className="size-8" /></a>
         </div>
       </div>
 
