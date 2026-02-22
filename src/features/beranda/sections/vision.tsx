@@ -1,4 +1,4 @@
-import Pita from '@/components/beranda/pita';
+import Pita from '@/features/beranda/components/pita';
 import Logo from '../components/logo';
 import VisionAccordion from '../components/vision-accordion';
 export default function Vision() {

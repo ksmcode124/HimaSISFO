@@ -74,62 +74,66 @@ export function EventCard({
             className={`text-white bg-linear-to-tl from-[#000000] via-[#23445B] to-[#060400] rounded-2xl ${isCarousel ? "shadow-xl absolute" : "shadow-lg"} p-4 text-background ${className ?? ""}`}
             style={style}
         >
-            {isLoading ? (
-                <Skeleton className="w-full aspect-3/2 rounded-xl" />
-            ) : (
-                <img
-                    src={info?.img ?? undefined}
-                    alt={info?.title}
-                    className="w-full aspect-3/2 rounded-xl object-cover"
-                />
-            )}
+            <div className="relative">
+            <a href={`/kegiatan/agenda/${info?.title ?? undefined}-${info?.id ?? undefined}`} className="absolute inset-0 z-10"></a>
 
-            <div className="mt-4">
-                <div className="flex gap-4 text-sm">
+                {isLoading ? (
+                    <Skeleton className="w-full aspect-3/2 rounded-xl" />
+                ) : (
+                    <img
+                        src={info?.img ?? undefined}
+                        alt={info?.title}
+                        className="w-full aspect-3/2 rounded-xl object-cover"
+                    />
+                )}
 
-                    {isLoading ? (
-                        <>
-                            <Skeleton className="h-4 w-24" />
-                            <Skeleton className="h-4 w-20" />
-                        </>
-                    ) : (
-                        <>
-                            <span className="flex items-center gap-2">
-                                <Calendar /> {parseDate(info.start)}
-                            </span>
+                <div className="mt-4">
+                    <div className="flex gap-4 text-sm">
 
-                            {info.type && (
+                        {isLoading ? (
+                            <>
+                                <Skeleton className="h-4 w-24" />
+                                <Skeleton className="h-4 w-20" />
+                            </>
+                        ) : (
+                            <>
                                 <span className="flex items-center gap-2">
-                                    <Bookmark /> {info.type}
+                                    <Calendar /> {parseDate(info.start)}
                                 </span>
-                            )}
-                        </>
-                    )}
-                </div>
 
-                <div
-                    className={`mt-4 flex flex-row items-end ${isCarousel ? "min-h-14" : "min-h-20"}`}>
-                    {isLoading ? (
-                        <Skeleton className="h-full w-3/4" />
-                    ) : (
-                        <h3
-                            className={`font-semibold line-clamp-2 ${isCarousel ? "text-lg sm:text-xl leading-7" : "text-4xl leading-10"}`}>
-                            {info.title}
-                        </h3>
-                    )}
-                </div>
-                <div className="mt-2 min-h-12">
-                    {isLoading ? (
-                        <div className="space-y-2">
-                            <Skeleton className="h-4 w-full" />
-                            <Skeleton className="h-4 w-5/6" />
-                        </div>
-                    ) : (
-                        <p
-                            className={`line-clamp-2 leading-6 ${isCarousel ? "text-xs sm:text-sm" : "text-sm"}`}>
-                            {info.description}
-                        </p>
-                    )}
+                                {info.type && (
+                                    <span className="flex items-center gap-2">
+                                        <Bookmark /> {info.type}
+                                    </span>
+                                )}
+                            </>
+                        )}
+                    </div>
+
+                    <div
+                        className={`mt-4 flex flex-row items-end ${isCarousel ? "min-h-14" : "min-h-20"}`}>
+                        {isLoading ? (
+                            <Skeleton className="h-full w-3/4" />
+                        ) : (
+                            <h3
+                                className={`font-semibold line-clamp-2 ${isCarousel ? "text-lg sm:text-xl leading-7" : "text-4xl leading-10"}`}>
+                                {info.title}
+                            </h3>
+                        )}
+                    </div>
+                    <div className="mt-2 min-h-12">
+                        {isLoading ? (
+                            <div className="space-y-2">
+                                <Skeleton className="h-4 w-full" />
+                                <Skeleton className="h-4 w-5/6" />
+                            </div>
+                        ) : (
+                            <p
+                                className={`line-clamp-2 leading-6 ${isCarousel ? "text-xs sm:text-sm" : "text-sm"}`}>
+                                {info.description}
+                            </p>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
