@@ -84,7 +84,7 @@ export default function KabinetHeroSection({
         <DesktopBackground images={images} activeIndex={currentImgIndex} />
         <MobileBackground colorMap={colorMap} />
 
-        <div className="absolute top-30 sm:top-32 md:top-30 z-20 w-full flex justify-center items-start">
+        <div className="absolute top-32 sm:top-34 md:top-40 z-20 w-full flex justify-center items-start">
           <div className="relative flex items-start justify-center gap-4 sm:gap-10 md:gap-16 lg:gap-24">
             <div className="flex flex-col items-center relative">
               <YearButton
