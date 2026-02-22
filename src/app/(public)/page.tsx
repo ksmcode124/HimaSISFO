@@ -7,8 +7,7 @@ import Information from "@/features/beranda/sections/information";
 import Kabinet from "@/features/beranda/sections/kabinet";
 import Spotify from "@/features/beranda/sections/spotify";
 import Awan from "@/features/beranda/components/awan";
-import Pita from "@/components/beranda/pita";
-import useBeranda from "@/features/beranda/hooks/useBeranda";
+import Pita from "@/features/beranda/components/pita";
 import { ShellLayer } from "@/components/layout/ShellLayer";
 import { SiteFooter } from "@/components/layout";
 
@@ -16,9 +15,7 @@ import { SiteFooter } from "@/components/layout";
 export default function Page() {
   return <ShellLayer>
     <HeroBeranda />
-    {/* <Pita /> */}
     <Vision />
-    {/* <Pita /> */}
     <History />
     <Information />
     <Awan className="" variant={'head'} />
