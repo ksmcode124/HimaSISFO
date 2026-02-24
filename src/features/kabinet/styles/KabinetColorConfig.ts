@@ -34,9 +34,11 @@ export const KABINET_COLOR_CONFIG = Object.fromEntries(
       gradient_layer_background: `linear-gradient(180deg, ${p.primary} 0%, ${p.secondary} 100%)`,
       gradient_kabinet_name_text: `linear-gradient(135deg, ${p.primary} 0%, ${p.secondary} 100%)`,
       gradient_breadcrumb_text: `linear-gradient(87deg, ${p.secondary} 0%, ${p.primary} 100%)`,
+      gradient_breadcrumb_underline: `linear-gradient(87deg, ${p.secondary} 0%, #FFFFFF 50%, ${p.primary} 100%)`,
       
       // --- Ornament ---
       gradient_pita: `linear-gradient(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)), linear-gradient(0deg, ${p.secondary} 30%, ${p.primary} 65%)`,
+      color_ornament: p.secondary,
       gradient_ornament_1: `linear-gradient(90deg, ${p.primary} 30%, ${p.secondary} 50%, #FFFFFF 110%)`,
       gradient_ornament_2: `linear-gradient(90deg, ${p.primary} 25%, ${p.secondary} 50%, #FFFFFF 75%)`,
       gradient_ornament_3: `linear-gradient(90deg, ${p.primary} 25%, ${p.secondary} 50%, #FFFFFF 75%)`,

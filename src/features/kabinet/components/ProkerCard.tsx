@@ -64,7 +64,10 @@ export default function ProkerCard({
 
           <CardTitle className="text-xl font-black -mt-5">{nama}</CardTitle>
 
-          <CardDescription className="text-xs font-light text-[#2D2D51] overflow-hidden">
+          <CardDescription 
+            className="text-xs font-light overflow-hidden"
+            style={{ color: colorMap.text }}
+          >
             {deskripsi || "Deskripsi program kerja belum tersedia."}
           </CardDescription>
         </CardContent>

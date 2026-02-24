@@ -19,8 +19,10 @@ export function ThemeProvider({children, kabinet}: ThemeProviderProp) {
     '--kabinet-gradient-layer-background': colorConfig.gradient_layer_background,
     '--kabinet-gradient-name-text': colorConfig.gradient_kabinet_name_text,
     '--kabinet-breadcrumb-text': colorConfig.gradient_breadcrumb_text,
+    '--kabinet-breadcrumb-underline': colorConfig.gradient_breadcrumb_underline,
 
     '--kabinet-gradient-pita': colorConfig.gradient_pita,
+    '--kabinet-color-ornament': colorConfig.color_ornament,
     '--kabinet-gradient-ornament-1': colorConfig.gradient_ornament_1,
     '--kabinet-gradient-ornament-2': colorConfig.gradient_ornament_2,
     '--kabinet-gradient-ornament-3': colorConfig.gradient_ornament_3,

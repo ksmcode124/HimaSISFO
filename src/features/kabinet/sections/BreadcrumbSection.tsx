@@ -7,17 +7,25 @@ import {
 } from "@/components/ui/breadcrumb";
 import Link from "next/link";
 import { SlashIcon } from "lucide-react";
+import { ColorMap } from "../types";
+import { useState } from "react";
 
 interface BreadcrumbItemType {
   display: string;
   link: string;
 }
 
+interface BreadcrumbSectionProps {
+  items: BreadcrumbItemType[];
+  colorMap: ColorMap;
+}
+
 export default function BreadcrumbSection({
   items,
-}: {
-  items: BreadcrumbItemType[];
-}) {
+  colorMap
+}: BreadcrumbSectionProps) {
+  const [isHovered, setIsHovered] = useState(false);
+
   if (!items || items.length < 2) return null;
 
   const kabinet = items[0];
@@ -29,18 +37,30 @@ export default function BreadcrumbSection({
         <Breadcrumb className="mt-10">
           <BreadcrumbList className="flex items-center flex-nowrap gap-2.5 font-medium overflow-x-auto no-scrollbar whitespace-nowrap">
             <BreadcrumbItem className="shrink-0">
-              <BreadcrumbLink
-                asChild
-                className="text-white text-md sm:text-lg lg:text-xl font-medium hover:text-[#2D2D51] active:text-[#2D2D51] z-90"
-              >
-                <Link href={kabinet.link}>{kabinet.display}</Link>
+              <BreadcrumbLink asChild>
+                <Link 
+                  href={kabinet.link}
+                  className="text-white text-md sm:text-lg lg:text-xl font-medium z-90"
+                  onMouseEnter={() => setIsHovered(true)}
+                  onMouseLeave={() => setIsHovered(false)}
+                  style={{
+                    color: isHovered ? (colorMap.hoverText || "white") : "white",
+                  }}
+                >
+                  {kabinet.display}
+                </Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator className="text-white">
               <SlashIcon className="font-bold" />
             </BreadcrumbSeparator>
             <BreadcrumbItem className="shrink-0">
-              <span className="bg-clip-text text-transparent bg-linear-to-r from-[#E63258] to-[#A43DA5] text-md sm:text-lg lg:text-xl font-medium">
+              <span 
+                className="bg-clip-text text-transparent text-md sm:text-lg lg:text-xl font-medium"
+                style={{ 
+                  backgroundImage: colorMap?.breadcrumbText
+                }}
+              >
                 {departemen.display}
               </span>
             </BreadcrumbItem>
@@ -48,8 +68,8 @@ export default function BreadcrumbSection({
         </Breadcrumb>
         <div
           className="h-0.5 max-w-full"
-          style={{
-            backgroundImage: `linear-gradient(to right, #E63258, #FFFFFF, #A43DA5)`,
+          style={{ 
+            backgroundImage: colorMap?.breadcrumbUnderline
           }}
         />
       </div>
