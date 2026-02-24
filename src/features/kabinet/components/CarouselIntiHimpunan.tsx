@@ -54,9 +54,9 @@ export default function CarouselIntiHimpunan({ anggota, colorMap }: CarouselProp
   };
 
   const navBtnClass =
-    "hidden lg:flex absolute top-1/2 -translate-y-1/2 z-50 p-4 md:p-5 rounded-full hover:bg-none hover:bg-white group transition-all";
+    "hidden lg:flex absolute top-1/2 -translate-y-1/2 z-50 p-4 md:p-5 rounded-full hover:bg-none! hover:bg-white! group transition-all";
   const iconClass =
-    "text-white group-hover:text-[#E63258] w-8 h-8 md:w-10 md:h-10 transition-colors";
+    "text-white group-hover:text-black! w-8 h-8 md:w-10 md:h-10 transition-colors";
 
   return (
     <div className="relative w-full flex flex-col items-center">
@@ -66,7 +66,7 @@ export default function CarouselIntiHimpunan({ anggota, colorMap }: CarouselProp
           onClick={slidePrev}
           className={`${navBtnClass} -left-4 xl:left-12 2xl:-left-32`}
           style={{
-            backgroundImage: colorMap.carouselButton ?? ''
+            backgroundImage: colorMap.carouselButton ?? "",
           }}
         >
           <ChevronLeft className={iconClass} />
@@ -76,7 +76,7 @@ export default function CarouselIntiHimpunan({ anggota, colorMap }: CarouselProp
           onClick={slideNext}
           className={`${navBtnClass} -right-4 xl:right-12 2xl:-right-32`}
           style={{
-            backgroundImage: colorMap.carouselButton ?? ''
+            backgroundImage: colorMap.carouselButton ?? "",
           }}
         >
           <ChevronRight className={iconClass} />
@@ -114,9 +114,9 @@ export default function CarouselIntiHimpunan({ anggota, colorMap }: CarouselProp
                     className="w-40 sm:w-70 md:w-87 lg:w-100 2xl:w-125 shrink-0 transition-all duration-500"
                   >
                     <IntiHimpunanCard
-                      gradient={colorMap.gradientIntiBackground ?? ''}
                       data={item}
                       index={currentIndex * 2 + idx}
+                      colorMap={colorMap}
                     />
                   </div>
                 ))}
@@ -126,7 +126,7 @@ export default function CarouselIntiHimpunan({ anggota, colorMap }: CarouselProp
       </div>
 
       {/* Pagination */}
-      <div className="hidden items-center gap-3 mt-8 md:flex">
+      <div className="flex items-center gap-3 mt-8">
         {Array.from({ length: totalPages }).map((_, idx) => (
           <motion.div
             key={idx}

@@ -8,6 +8,7 @@ type DynamicAssetProps = {
   gradientVar: string
   innerHeight: string
   imageScale?: string
+  maskRepeat?: string;
   style?: React.CSSProperties
 }
 
@@ -18,7 +19,8 @@ export function DynamicAsset({
   style,
   imageSrc = null,
   innerHeight = 'h-full',
-  imageScale
+  imageScale,
+  maskRepeat = "no-repeat",
 }: DynamicAssetProps) {
   return (
     <div className={className} style={style}>
@@ -34,11 +36,11 @@ export function DynamicAsset({
           style={{
             background: gradientVar,
             maskImage: `url(${maskSrc})`,
-            maskRepeat: 'no-repeat',
+            maskRepeat: maskRepeat,
             maskPosition: 'center',
             maskSize: 'contain',
             WebkitMaskImage: `url(${maskSrc})`,
-            WebkitMaskRepeat: 'no-repeat',
+            WebkitMaskRepeat: maskRepeat,
             WebkitMaskPosition: 'center',
             WebkitMaskSize: 'contain',
           }}
@@ -47,4 +49,3 @@ export function DynamicAsset({
     </div>
   )
 }
-

@@ -3,15 +3,6 @@ import Image from "next/image";
 
 export function Ornament1({gradient}: {gradient: string}) {
   return (
-    // <div className="relative w-full aspect-4/1">
-    //   <Image
-    //     src="/assets/kabinet/ornament-1.webp"
-    //     alt=""
-    //     fill
-    //     className="object-contain"
-    //     priority
-    //   />
-    // </div>
     <DynamicAsset
       maskSrc="/assets/kabinet/ornament-1.webp"
       gradientVar={gradient}
@@ -23,15 +14,6 @@ export function Ornament1({gradient}: {gradient: string}) {
 
 export function Ornament2({gradient}: {gradient: string}) {
   return (
-    // <div className="relative w-full aspect-4/1">
-    //   <Image
-    //     src="/assets/kabinet/ornament-2.webp"
-    //     alt=""
-    //     fill
-    //     className="object-contain"
-    //     priority
-    //   />
-    // </div>
     <DynamicAsset
       maskSrc="/assets/kabinet/ornament-2.webp"
       gradientVar={gradient}
@@ -41,31 +23,19 @@ export function Ornament2({gradient}: {gradient: string}) {
   );
 }
 
-export function Ornament3() {
+export function Ornament3({gradient}: {gradient: string}) {
   return (
-    <div className="relative w-full aspect-4/1">
-      <Image
-        src="/assets/kabinet/ornament-3.webp"
-        alt=""
-        fill
-        className="object-contain"
-        priority
-      />
-    </div>
+    <DynamicAsset
+      maskSrc="/assets/kabinet/ornament-3.webp"
+      gradientVar={gradient}
+      innerHeight="h-full"
+      className="w-full aspect-4/1"
+    />
   );
 }
 
 export function Ornament4({gradient}: {gradient: string}) {
   return (
-    // <div className="relative w-full aspect-4/1">
-    //   <Image
-    //     src="/assets/kabinet/ornament-4.webp"
-    //     alt=""
-    //     fill
-    //     className="object-contain"
-    //     priority
-    //   />
-    // </div>
     <DynamicAsset
       maskSrc="/assets/kabinet/ornament-4.webp"
       gradientVar={gradient}
@@ -77,15 +47,6 @@ export function Ornament4({gradient}: {gradient: string}) {
 
 export function Ornament5({gradient}: {gradient: string}) {
   return (
-    // <div className="relative w-full aspect-4/1">
-    //   <Image
-    //     src="/assets/kabinet/ornament-5.webp"
-    //     alt=""
-    //     fill
-    //     className="object-contain"
-    //     priority
-    //   />
-    // </div>
     <DynamicAsset
       maskSrc="/assets/kabinet/ornament-5.webp"
       gradientVar={gradient}
@@ -139,21 +100,6 @@ export function Ornament8() {
 
 export function Ornament9({gradient}: {gradient: string}) {
   return (
-    // <div className="relative w-full aspect-4/1">
-    //   <div 
-    //     className="absolute inset-0 bg-linear-to-r from-[#FFFFFF] via-[#A43DA5] to-[#E63258]"
-    //     style={{
-    //       WebkitMaskImage: 'url("/assets/kabinet/ornament-2.webp")',
-    //       maskImage: 'url("/assets/kabinet/ornament-2.webp")',
-    //       WebkitMaskRepeat: 'no-repeat',
-    //       maskRepeat: 'no-repeat',
-    //       WebkitMaskSize: 'contain',
-    //       maskSize: 'contain',
-    //       WebkitMaskPosition: 'center',
-    //       maskPosition: 'center',
-    //     }}
-    //   />
-    // </div>
     <DynamicAsset
       maskSrc="/assets/kabinet/ornament-2.webp"
       gradientVar={gradient}
@@ -163,25 +109,29 @@ export function Ornament9({gradient}: {gradient: string}) {
   );
 }
 
-export function Pita({pitaGradient}:{pitaGradient: string}) {
+export function Pita({ pitaGradient }: { pitaGradient: string }) {
   return (
-    <>
-      <DynamicAsset
-        imageSrc="/assets/kabinet/pita.png"
-        maskSrc="/assets/kabinet/mask-pita.png"
-        gradientVar={pitaGradient}
-        innerHeight="h-40"
-        imageScale="w-screen aspect-4/3 absolute md:scale-113 rotate-z-180 h-40"
-        className="w-screen aspect-4/3 absolute scale-105 h-40 -rotate-7"
-      />
-      <DynamicAsset
-        imageSrc="/assets/kabinet/pita.png"
-        maskSrc="/assets/kabinet/mask-pita.png"
-        gradientVar={pitaGradient}
-        innerHeight="h-40"
-        imageScale="w-screen aspect-4/3 absolute md:scale-113 rotate-z-180 h-40"
-        className="w-screen aspect-4/3 absolute scale-105 h-40 rotate-7 rotate-y-180"
-      />
-    </>
+    <div className="relative w-full h-full flex items-center justify-center">
+      <div className="absolute inset-0 -rotate-6">
+        <DynamicAsset
+          imageSrc="/assets/kabinet/pita.webp"
+          maskSrc="/assets/kabinet/mask-pita.webp"
+          gradientVar={pitaGradient}
+          innerHeight="h-full"
+          className="w-full h-full"
+          imageScale="object-contain"
+        />
+      </div>
+      <div className="absolute inset-0 rotate-6 scale-90 -scale-x-100">
+        <DynamicAsset
+          imageSrc="/assets/kabinet/pita.webp"
+          maskSrc="/assets/kabinet/mask-pita.webp"
+          gradientVar={pitaGradient}
+          innerHeight="h-full"
+          className="w-full h-full"
+          imageScale="object-contain"
+        />
+      </div>
+    </div>
   );
 }

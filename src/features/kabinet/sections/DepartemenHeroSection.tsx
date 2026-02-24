@@ -1,8 +1,12 @@
 import Image from "next/image";
 import { Pita } from "../components/KabinetOrnaments";
 import BreadcrumbSection from "./BreadcrumbSection";
-import { BreadcrumbItemData } from "@/components/ui/breadcrumb";
 import { ColorMap } from "../types";
+
+interface BreadcrumbItemType {
+  display: string;
+  link: string;
+}
 
 interface DepartemenHeroProps {
   nama_dept: string;
@@ -11,7 +15,7 @@ interface DepartemenHeroProps {
   bg_image: string | null;
   kabinet_id: number | string;
   kabinet_nama: string;
-  colorMap: ColorMap
+  colorMap: ColorMap;
 }
 
 export default function DepartemenHeroSection({
@@ -21,9 +25,9 @@ export default function DepartemenHeroSection({
   bg_image,
   kabinet_id,
   kabinet_nama,
-  colorMap
+  colorMap,
 }: DepartemenHeroProps) {
-  const breadcrumbItems: BreadcrumbItemData[] = [
+  const breadcrumbItems: BreadcrumbItemType[] = [
     {
       display: kabinet_nama,
       link: `/kabinet/${kabinet_id}`,
@@ -49,12 +53,8 @@ export default function DepartemenHeroSection({
         </div>
 
         {/* Breadcrumb */}
-        <div className="w-full pt-20 md:pt-35 z-20">
-          <div className="max-w-7xl mx-auto">
-            <div className="w-full h-12 flex items-center">
-              <BreadcrumbSection items={breadcrumbItems} />
-            </div>
-          </div>
+        <div className="w-full z-20">
+          <BreadcrumbSection items={breadcrumbItems} colorMap={colorMap} />
         </div>
 
         <div className="relative flex-1 flex flex-col items-center pt-5 md:pt-10">
@@ -86,8 +86,8 @@ export default function DepartemenHeroSection({
         </div>
       </section>
 
-      <div className="absolute top-full w-full z-10">
-        <Pita pitaGradient={colorMap.pita ?? ''} />
+      <div className="absolute -bottom-2 md:-bottom-8 w-[105%] z-10 left-1/2 -translate-x-1/2 translate-y-1/2 h-100">
+        <Pita pitaGradient={colorMap.pita ?? ""} />
       </div>
     </div>
   );
