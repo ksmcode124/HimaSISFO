@@ -61,8 +61,7 @@ export default function VisiMisiAccordion({
 
               {/* CHEVRON CUSTOM */}
               <div className="absolute -right-1 top-1/2 -translate-y-1/2 z-30 pointer-events-none">
-                <div className="bg-white w-16 h-14 rounded-xl flex items-center justify-center shadow-sm">
-                  {" "}
+                <div className="bg-white w-16 h-14 2xl:w-22 2xl:h-18 rounded-2xl flex items-center justify-center shadow-sm">
                   <svg
                     width="32"
                     height="32"

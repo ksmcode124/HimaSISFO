@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { Pita } from "../components/KabinetOrnaments";
 import BreadcrumbSection from "./BreadcrumbSection";
-// import { BreadcrumbItemData } from "@/components/ui/breadcrumb";
 import { ColorMap } from "../types";
 
 interface BreadcrumbItemType {
@@ -54,12 +53,8 @@ export default function DepartemenHeroSection({
         </div>
 
         {/* Breadcrumb */}
-        <div className="w-full pt-20 md:pt-35 z-20">
-          <div className="max-w-7xl mx-auto">
-            <div className="w-full h-12 flex items-center">
-              <BreadcrumbSection items={breadcrumbItems} colorMap={colorMap} />
-            </div>
-          </div>
+        <div className="w-full z-20">
+          <BreadcrumbSection items={breadcrumbItems} colorMap={colorMap} />
         </div>
 
         <div className="relative flex-1 flex flex-col items-center pt-5 md:pt-10">
@@ -91,7 +86,7 @@ export default function DepartemenHeroSection({
         </div>
       </section>
 
-      <div className="absolute -bottom-4 md:-bottom-10 w-[105%] z-10 left-1/2 -translate-x-1/2 translate-y-1/2 h-100">
+      <div className="absolute -bottom-2 md:-bottom-8 w-[105%] z-10 left-1/2 -translate-x-1/2 translate-y-1/2 h-100">
         <Pita pitaGradient={colorMap.pita ?? ""} />
       </div>
     </div>
