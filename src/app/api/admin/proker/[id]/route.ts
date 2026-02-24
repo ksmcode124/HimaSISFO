@@ -46,7 +46,7 @@ export async function GET(_: Request, { params }: RouteParams) {
 // ==========================
 // PUT /api/proker/:id
 // ==========================
-export async function PUT(req: Request, { params }: RouteParams) {
+export async function PATCH(req: Request, { params }: RouteParams) {
   try {
     const raw = await params;
     const { id } = prokerIdParamSchema.parse(raw);

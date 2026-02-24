@@ -19,7 +19,7 @@ export function ListBreadcrumb({items} : {items?: BreadcrumbItem[]}) {
   if (!items) return
 
   return (
-    <Breadcrumb className="border-b-2 border-b-[#265A8C]">
+    <Breadcrumb className=" w-full border-b-2 border-b-[#265A8C]">
       <BreadcrumbList>
       {items?.map((item, index) => {
         const isLast = index === items.length - 1

@@ -29,7 +29,7 @@ export default function WisudaPage() {
       <HeroSection data={hero} />
       <WisudaYudisiumMainSection setSelectedId={openModal} accordionItems={accordionItems} itemCollectionItems={itemCollectionItems} />
 
-      <Modal open={!!selectedId} onClose={closeModal} selectedId={selectedId} items={itemCollectionItems} />
+      <Modal open={!!selectedId} onCloseAction={closeModal} selectedId={selectedId} items={itemCollectionItems} />
     </>
   )
 }

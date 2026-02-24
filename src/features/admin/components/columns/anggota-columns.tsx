@@ -1,6 +1,5 @@
 import { ColumnDef } from '@tanstack/react-table';
 import { TableActionButtons } from '../TableActionButtons';
-import Link from 'next/link';
 import { AdminAnggotaRow } from '../../types';
 
 interface ColumnActions {

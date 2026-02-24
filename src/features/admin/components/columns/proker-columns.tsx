@@ -1,7 +1,6 @@
 import { ColumnDef } from '@tanstack/react-table';
 import { TableActionButtons } from '../TableActionButtons';
-import Link from 'next/link';
-import { AdminAnggotaRow, AdminProkerRow } from '../../types';
+import { AdminProkerRow } from '../../types';
 
 interface ColumnActions {
   onView?: (id: number) => void

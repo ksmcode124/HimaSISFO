@@ -142,7 +142,6 @@ export default function EventPage() {
         id={modal.id ?? undefined}
         fetchDetail={async (id) => {
           const res = await api.get<EventResponseAdmin>(`/api/admin/event/${id}`);
-          console.log(res.data)
           return res.data;
         }}
         mapDetailToUI={(d) => ({

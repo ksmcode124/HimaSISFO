@@ -5,7 +5,6 @@ import { motion, MotionValue, useMotionValue, useSpring, type HTMLMotionProps } 
 import React, { useCallback, useEffect, useId, useLayoutEffect, useRef } from 'react';
 import { LiquidFilter, LiquidFilterProps } from './Filter';
 import { getValueOrMotion } from '@/lib/utils/ui/liquid-glass';
-import { custom } from 'zod';
 
 /**
  * Safely parse border radius from computed styles, handling edge cases like
@@ -88,7 +87,7 @@ export const useMotionSizeObservers = <T extends HTMLElement = HTMLDivElement>(
     resizeObserver.observe(el);
 
     return () => resizeObserver.disconnect();
-  }, [disabled]);
+  }, [disabled, containerRef, updateDimensions]);
 
   // MutationObserver → untuk update borderRadius ketika style/class berubah
   useEffect(() => {
@@ -155,9 +154,9 @@ export interface LiquidGlassProps<T extends HTMLElement = HTMLDivElement>
   onClick?: () => void;
 }
 
+
 export const useLiquidSurface = <T extends HTMLElement = HTMLDivElement>({
   targetRef,
-  borderRadius: borderRadiusProp,
   ...props
 }: LiquidGlassProps<T>) => {
   const filterId = `glass-${useId()}`;
@@ -171,7 +170,7 @@ export const useLiquidSurface = <T extends HTMLElement = HTMLDivElement>({
   // Gunakan borderRadiusProp kalau ada, tapi width/height dari observer
   const finalWidth = observedWidth ? getValueOrMotion(observedWidth) : 100;
   const finalHeight = observedHeight ? getValueOrMotion(observedHeight) : 100;
-  const finalRadius = borderRadiusProp ?? observedRadius;
+  const finalRadius = observedRadius;
 
   const Filter = () => (
     <LiquidFilter
@@ -252,11 +251,11 @@ export const Glass: React.FC<LiquidGlassProps & HTMLMotionProps<'div'>> = ({
     },
     custom :{
       glassThickness: 100,
-      bezelWidth: 20,
-      blur: 4,
+      bezelWidth: 16,
+      blur: 0.5,
       refractiveIndex: 2,
-      specularOpacity: 10,
-      specularSaturation: 200,
+      specularOpacity: 6,
+      specularSaturation: 160,
       dpr,
     }
   };
@@ -389,3 +388,5 @@ const LiquidDiv = React.forwardRef<HTMLDivElement, { filterId: string, preset: s
     );
   }
 );
+
+LiquidDiv.displayName='LiquidDiv'

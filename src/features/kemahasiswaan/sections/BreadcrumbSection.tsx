@@ -6,11 +6,12 @@ export function BreadcrumbSection({ items }: { items: BreadcrumbItemData[] }) {
     <section
       className="
         w-full
-        px-8 sm:px-12 lg:px-30
-        pt-[72px] lg:pt-[96px]
+        flex justify-center
+        px-8 sm:px-12 lg:px-90
+        mt-36 lg:mt-48
         pb-4
       "
-    >{/* Ubah PT setinggi Navbar*/}
+    >
       <ListBreadcrumb items={items} />
     </section>
   )

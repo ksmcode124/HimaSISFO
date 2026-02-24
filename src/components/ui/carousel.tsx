@@ -8,7 +8,6 @@ import { Triangle } from "lucide-react"
 
 import { cn } from "@/lib/utils/cn"
 import { Button } from "@/components/ui/button"
-import { Glass } from "./Glass"
 
 type CarouselApi = UseEmblaCarouselType[1]
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>

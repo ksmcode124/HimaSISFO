@@ -1,5 +1,4 @@
 import { berandaData } from "..";
-import { HistorySection } from "../types";
 
 export default function History() {
     const { history, statistics } = berandaData;

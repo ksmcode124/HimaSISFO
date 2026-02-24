@@ -10,10 +10,9 @@ import { motion } from 'framer-motion'
 
 interface NavigationBarProps {
   items: NavItem[]
-  className?: string
 }
 
-export default function NavigationBar({ items, className = '' }: NavigationBarProps) {
+export default function NavigationBar({ items}: NavigationBarProps) {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -39,26 +38,32 @@ export default function NavigationBar({ items, className = '' }: NavigationBarPr
     window.scrollTo({ top: 0, behavior: 'auto' })
   }, [pathname])
   return (
-    <div className={`fixed z-99999 w-full justify-center h-fit transition-all duration-500 ease-in pt-5 ${scrolled ? 'md:pt-0' : 'md:pt-5'}`} aria-label="wrapper">
+    <div className={`fixed z-99999 w-full justify-center h-fit transition-all ease-in-out pt-5 ${scrolled ? 'duration-500 md:pt-0' : 'md:pt-5 duration-500'}`} aria-label="wrapper">
       <header
-        className={`w-full md:w-auto lg:mx-10 xl:mx-50 rounded-full justify-center items-center top-5 ${isMobile ? 'bg-transparent' : ''} z-99999 h-fit overflow-hidden ${className}`}
+        className={`w-full md:w-auto lg:mx-10 xl:mx-50 justify-center bg-transparent center top-5 h-fit overflow-hidden`}
         role="banner"
       >
-
-        <Glass preset='hard' disabled={isMobile}>
+        <Glass preset='custom' className={`bg-[#AFAFAF]/80 md:bg-[#101D2F]/50 ${scrolled ? 'duration-700 rounded-t-0 rounded-b-[20px]' : 'rounded-t-[40px] rounded-b-[40px] duration-700'}`} disabled={isMobile}>
           <nav
             className="py-2 px-5 md:px-10 lg:px-20 flex w-full "
             aria-label="Main navigation"
           >
             <div className="flex h-14 justify-center md:justify-between items-center w-full gap-30 md:gap-20 lg:gap-30">
               {/* Logo & Back Button*/}
-              <Link href="/" className={`flex items-center px-0 md:px-7 py-1 ${isMobile ? '' : 'bg-[#525252] lg:bg-transparent xl:bg-[#525252]'} rounded-full gap-0 md:gap-3 lg:gap-5`} aria-label="Home">
-                <Glass className="p-1 rounded-sm shadow-4xl bg-[#AFAFAF]/80 md:bg-white/30 hover:bg-[#AFAFAF]/90" preset="custom">
-                  <Image
-                    src={'/assets/shared/logos/logo-himasisfo.webp'}
-                    alt={'HIMASISFO'}
-                    fill
-                    priority />
+              <Link href="/"
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+                className={`flex items-center px-0 md:px-7 py-1 ${isMobile ? '' : 'bg-[#525252] lg:bg-transparent xl:bg-[#525252]'} rounded-full gap-0 md:gap-3 lg:gap-5`} aria-label="Home">
+                <Glass className="p-2 md:p-1 rounded-sm shadow-4xl size-14 md:size-12 bg-[#AFAFAF]/80 md:bg-white/30 hover:bg-[#AFAFAF]/90" preset="custom">
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={'/assets/shared/logos/logo-himasisfo.webp'}
+                      alt={'HIMASISFO'}
+                      fill
+                      className='object-contain md:fill'
+                      priority />
+                  </div>
                 </Glass>
                 <div className="flex flex-row gap-1 lg:hidden xl:flex">
                   <h1 className="text-xl font-regular text-white hidden md:block">HIMA</h1>

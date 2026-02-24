@@ -50,9 +50,58 @@ export async function PATCH(req: Request, { params }: RouteParams) {
     const body = await req.json();
     const data = updateAnggotaSchema.parse(body);
 
-    const updatedAnggota = await prisma.anggota.update({
+    // Update nama_anggota di tabel anggota
+    if (data.nama_anggota) {
+      await prisma.anggota.update({
+        where: { id_anggota: id },
+        data: { nama_anggota: data.nama_anggota },
+      });
+    }
+
+    // Update foto_anggota & id_jabatan di detail_anggota (jika ada)
+    if (data.foto_anggota || data.id_jabatan || data.id_departemen) {
+      // Cari detail_anggota berdasarkan id_anggota + id_kabinet + id_departemen
+      if (!data.id_kabinet || !data.id_departemen) {
+        return NextResponse.json(
+          { message: "id_kabinet dan id_departemen diperlukan untuk update foto/jabatan" },
+          { status: 400 }
+        );
+      }
+
+      const detailUpdate: any = {};
+      
+      if (data.id_jabatan) detailUpdate.id_jabatan = data.id_jabatan;
+      if (data.foto_anggota) {
+        // Handle upload result
+        let fotoUrl = data.foto_anggota;
+        if (Array.isArray(data.foto_anggota) && data.foto_anggota.length > 0) {
+          const first = data.foto_anggota[0];
+          fotoUrl = first.url || first.fileUrl || first;
+        }
+        detailUpdate.foto_anggota = fotoUrl || null;
+      }
+
+      await prisma.detail_anggota.updateMany({
+        where: {
+          id_anggota: id,
+          id_kabinet: data.id_kabinet,
+          id_departemen: data.id_departemen,
+        },
+        data: detailUpdate,
+      });
+    }
+
+    const updatedAnggota = await prisma.anggota.findUnique({
       where: { id_anggota: id },
-      data,
+      include: {
+        detailAnggota: {
+          include: {
+            kabinet: true,
+            departemen: true,
+            jabatan: true,
+          },
+        },
+      },
     });
 
     return NextResponse.json({
@@ -64,7 +113,6 @@ export async function PATCH(req: Request, { params }: RouteParams) {
       return NextResponse.json({ errors: error.flatten() }, { status: 400 });
     }
 
-    // Prisma: record not found
     if (isPrismaError(error) && error.code === "P2025") {
       return NextResponse.json({ message: "Anggota tidak ditemukan" }, { status: 404 });
     }
