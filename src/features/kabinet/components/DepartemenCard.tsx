@@ -109,7 +109,7 @@ export default function DepartemenCard({
           >
             <Button
               asChild
-              className="w-full mb-1 h-8 md:h-12 rounded-full font-light text-2xs md:text-sm bg-gradient-kabinet hover:shadow-[inset_0_4px_8px_rgba(0,0,0,0.4)] active:shadow-[inset_0_4px_8px_rgba(0,0,0,0.4)]"
+              className="w-full mb-1 h-8 md:h-12 rounded-full font-light text-[8px] md:text-3xs lg:text-2xs md:text-sm bg-gradient-kabinet hover:shadow-[inset_0_4px_8px_rgba(0,0,0,0.4)] active:shadow-[inset_0_4px_8px_rgba(0,0,0,0.4)]"
               style={{
                 "--gradient": colorMap.gradient,
               } as React.CSSProperties}
