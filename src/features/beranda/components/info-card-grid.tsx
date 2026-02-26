@@ -6,14 +6,23 @@ import { parseDate } from '../utils/parseDate';
 import { Skeleton } from '@/components/ui/skeleton';
 
 export default function InfoCardGrid({ events, isLoading }: { events?: EventListResponse[], isLoading?: boolean }) {
-    const [isMobile, setIsMobile] = useState(false);
+    const [screenWidth, setScreenWidth] = useState(0);
 
     useEffect(() => {
-        const checkMobile = () => setIsMobile(window.innerWidth < 768);
-        checkMobile();
-        window.addEventListener("resize", checkMobile);
-        return () => window.removeEventListener("resize", checkMobile);
+        const handleResize = () => setScreenWidth(window.innerWidth);
+
+        handleResize();
+        window.addEventListener("resize", handleResize);
+
+        return () => window.removeEventListener("resize", handleResize);
     }, []);
+    const getTranslateX = () => {
+        if (screenWidth < 400) return 80;     // HP sangat kecil
+        if (screenWidth < 640) return 120;    // HP normal
+        if (screenWidth < 768) return 150;    // tablet kecil
+        return 200;                           // default
+    };
+
     return (
         <>
             {/* MOBILE / TABLET — stacked center carousel */}
@@ -22,7 +31,7 @@ export default function InfoCardGrid({ events, isLoading }: { events?: EventList
                     events?.map((info, i) => {
                         const centerIndex = Math.floor(events.length / 2);
                         const offset = i - centerIndex;
-                        const translateXValue = isMobile ? 150 : 200;
+                        const translateXValue = getTranslateX();
 
                         return (
                             <EventCard
@@ -75,7 +84,7 @@ export function EventCard({
             style={style}
         >
             <div className="relative">
-            <a href={`/kegiatan/agenda/${info?.title ?? undefined}-${info?.id ?? undefined}`} className="absolute inset-0 z-10"></a>
+                <a href={`/kegiatan/agenda/${info?.title ?? undefined}-${info?.id ?? undefined}`} className="absolute inset-0 z-10"></a>
 
                 {isLoading ? (
                     <Skeleton className="w-full aspect-3/2 rounded-xl" />
