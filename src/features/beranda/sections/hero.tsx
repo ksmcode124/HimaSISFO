@@ -20,7 +20,7 @@ export default function HeroBeranda() {
             ]}>
                 <CarouselContent className='w-screen aspect-4/3 min-h-screen m-0 bg-black'>
                 {data.images.map((image, index) => (
-                    <CarouselItem key={index} className="w-full h-full bg-cover" style={{ backgroundImage: `url('/assets/beranda/hero/${image}')` }}></CarouselItem>
+                    <CarouselItem key={index} className="w-full h-full bg-cover bg-center" style={{ backgroundImage: `url('/assets/beranda/hero/${image}')` }}></CarouselItem>
                 ))}
                 </CarouselContent>
             </Carousel>

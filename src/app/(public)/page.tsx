@@ -55,7 +55,7 @@ function BehindTheWeb() {
         <p className="text-lg">{data.behind_the_web.title}</p>
         <div className="flex justify-between w-full items-center">
           <span className="sm:text-7xl text-4xl md:text-[128px]">{data.behind_the_web.author}</span>
-          <a href={data.behind_the_web.url} className="bg-primary-foreground/5 text-lg lg:text-2xl flex flex-items-center rounded-full px-4 py-2 gap-2 items-center border-white border-2">Selengkapnya <ArrowRight className="size-8" /></a>
+          <a href={data.behind_the_web.url} className="bg-primary-foreground/5 hover:bg-primary-foreground/20 transition hover:scale-110 text-lg lg:text-2xl flex flex-items-center rounded-full px-4 py-2 gap-2 items-center border-white border-2">Selengkapnya <ArrowRight className="size-8" /></a>
         </div>
       </div>
 
