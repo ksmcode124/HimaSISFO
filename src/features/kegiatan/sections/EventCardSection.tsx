@@ -11,6 +11,8 @@ import { EventCard } from '../components/EventCard';
 import { formatMonthName } from '../utils/FormatDate';
 import { ShowNextEvent } from '../components/ShowNextEvent';
 import { EventCardEmpty } from '../components/EventCardEmpty';
+import { DynamicRoute } from '../components/DynamicRoute';
+import { ClientOnly } from '../components/ClientOnly';
 
 function EventCardDecoration() {
   return (
@@ -18,19 +20,24 @@ function EventCardDecoration() {
   );
 }
 
-function EventCardContent({ events }: { events: EventCardProps[]}) {
+function EventCardContent({ events }: { events: EventCardProps[] }) {
   const { pastNotGoing, nextOnGoing, futureNotGoing } = sortEvents(events);
   return (
     <div className="relative flex flex-col gap-2 md:gap-5 justify-center w-full max-w-[1120px]">
       <h1 className="w-full h-fit text-center font-bold text-xl md:text-4xl xl:text-6xl text-[var(--color-nile-blue)]">
         Agenda
       </h1>
-      <div className="grid grid-cols-3 md:grid-cols-[2fr_3fr_2fr] gap-1 sm:gap-4 xl:gap-8 items-stretch">
-        <div className="grid grid-rows-[auto_1fr] min-h-full">
-          <h2 className="h-fit w-full text-center uppercase py-5 md:py-10 font-semibold text-[12px] md:text-2xl xl:text-3xl text-[var(--color-nile-blue)]">Sebelum</h2>
-          {pastNotGoing ? <EventCard variant="notGoing" {...pastNotGoing} /> : <EventCardEmpty />}
+      <div className="grid grid-cols-3 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)_minmax(0,2fr)] gap-1 sm:gap-4 xl:gap-8 items-stretch">
+        <div className="flex flex-col">
+          <ClientOnly>
+            <h2 className="h-fit w-full text-center uppercase py-5 md:py-10 font-semibold text-[12px] md:text-2xl xl:text-3xl text-[var(--color-nile-blue)]">Sebelum</h2>
+            {pastNotGoing ?
+              <DynamicRoute route={`/kegiatan/agenda/${pastNotGoing.title}-${pastNotGoing.id}`}>
+                <EventCard variant="notGoing" {...pastNotGoing} />
+              </DynamicRoute> : <EventCardEmpty />}
+          </ClientOnly>
         </div>
-        <div className="grid grid-rows-[auto_1fr] min-h-full">
+        <div className="flex flex-col">
           {Array.isArray(nextOnGoing) && nextOnGoing.length > 0 ? (
             <>
               <div className="flex justify-center items-center gap-1 md:gap-5">
@@ -43,9 +50,14 @@ function EventCardContent({ events }: { events: EventCardProps[]}) {
             <EventCardEmpty />
           )}
         </div>
-        <div className="grid grid-rows-[auto_1fr] min-h-full">
-          <h2 className="h-fit w-full text-center uppercase py-5 md:py-10 font-semibold text-[12px] md:text-2xl xl:text-3xl text-[var(--color-nile-blue)]">Mendatang</h2>
-          {futureNotGoing ? <EventCard variant="notGoing" {...futureNotGoing} /> : <EventCardEmpty />}
+        <div className="flex flex-col">
+          <ClientOnly>
+            <h2 className="h-fit w-full text-center uppercase py-5 md:py-10 font-semibold text-[12px] md:text-2xl xl:text-3xl text-[var(--color-nile-blue)]">Mendatang</h2>
+            {futureNotGoing ?
+              <DynamicRoute route={`/kegiatan/agenda/${futureNotGoing?.title}-${futureNotGoing?.id}`}>
+                <EventCard variant="notGoing" {...futureNotGoing} />
+              </DynamicRoute> : <EventCardEmpty />}
+          </ClientOnly>
         </div>
       </div>
       <div className="w-full justify-center flex flex-row py-5 md:py-10">

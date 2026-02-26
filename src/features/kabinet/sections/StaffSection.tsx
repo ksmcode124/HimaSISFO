@@ -67,7 +67,10 @@ export default function StaffSection({ data, colorMap }: StaffSectionProps) {
       {/* INTI DEPARTEMEN */}
       <div className="relative w-full max-w-7xl px-10 flex flex-col items-center mb-40">
         <div className="relative flex flex-row items-center mb-30">
-          <h2 className="text-lg md:text-3xl font-bold text-[#2D2D51]">
+          <h2 
+            className="text-lg md:text-3xl font-bold"
+            style={{ color: colorMap.text }}
+          >
             Inti Departemen
           </h2>
         </div>
@@ -88,7 +91,7 @@ export default function StaffSection({ data, colorMap }: StaffSectionProps) {
             <div
               className={`w-full flex items-center justify-center ${hasSekben ? "md:max-w-50 lg:max-w-65 md:order-2 md:pb-12" : "md:max-w-45 lg:max-w-55 md:order-1"}`}
             >
-              <StaffCard data={kadep} index={0} customCard={5} />
+              <StaffCard data={kadep} index={0} customCard={5} colorMap={colorMap} />
             </div>
           </div>
         )}
@@ -105,7 +108,7 @@ export default function StaffSection({ data, colorMap }: StaffSectionProps) {
                   : "max-w-[50%] md:max-w-50 lg:max-w-65 -mt-30 md:mt-0 md:order-2"
               }`}
             >
-              <StaffCard data={wakadep} index={1} customCard={2} />
+              <StaffCard data={wakadep} index={1} customCard={2} colorMap={colorMap} />
             </div>
           </div>
         )}
@@ -114,7 +117,7 @@ export default function StaffSection({ data, colorMap }: StaffSectionProps) {
         {sekben && (
           <div className="col-span-1 flex justify-center md:contents">
             <div className="w-full md:max-w-50 lg:max-w-65 md:mt-0 md:order-3 md:mr-0 flex items-center justify-center -mt-30">
-              <StaffCard data={sekben} index={2} customCard={4} />
+              <StaffCard data={sekben} index={2} customCard={4} colorMap={colorMap} />
             </div>
           </div>
         )}
@@ -123,7 +126,10 @@ export default function StaffSection({ data, colorMap }: StaffSectionProps) {
       {/* STAFF DEPARTEMEN */}
       <div className="relative z-10 w-full max-w-7xl px-8 flex flex-col items-center">
         <div className="relative flex flex-row items-center mt-20 mb-20 md:mb-0">
-          <h2 className="text-lg md:text-3xl font-bold text-[#2D2D51]">
+          <h2 
+            className="text-lg md:text-3xl font-bold"
+            style={{ color: colorMap.text }}
+          >
             Staff Departemen
           </h2>
         </div>
@@ -132,7 +138,7 @@ export default function StaffSection({ data, colorMap }: StaffSectionProps) {
           {staffDepartemen.map((staff, i) => (
             <div key={staff.id} className="flex flex-col items-center">
               <div className="relative w-full md:w-52 aspect-3/4 max-w-50 md:max-w-70 -mt-15 md:mt-0 flex items-center justify-center">
-                <StaffCard key={staff.id} data={staff} index={i} />
+                <StaffCard key={staff.id} data={staff} index={i} colorMap={colorMap} />
               </div>
             </div>
           ))}

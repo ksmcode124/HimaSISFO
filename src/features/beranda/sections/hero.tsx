@@ -6,7 +6,7 @@ import Fade from 'embla-carousel-fade'
 import * as motion from "motion/react-client"
 import { type HeroSection } from '@/features/beranda/types'
 import { berandaData } from '..'
-import Pita from '@/components/beranda/pita'
+import Pita from '@/features/beranda/components/pita'
 
 export default function HeroBeranda() {
     const data = berandaData.hero as HeroSection;

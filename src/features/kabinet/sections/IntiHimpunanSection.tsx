@@ -7,15 +7,20 @@ import { ColorMap, DepartemenInti } from "../types";
 
 interface SectionProps {
   data: DepartemenInti;
-  colorMap: ColorMap
+  colorMap: ColorMap;
 }
 
 export default function IntiHimpunanSection({ data, colorMap }: SectionProps) {
   if (!data) return null;
 
   return (
-    <section className="relative w-full aspect-square md:aspect-auto  flex flex-col items-center py-24 overflow-hidden">
-      <div className="relative z-10 flex flex-row items-center gap-4 sm:mb-20 md:mb-0 md:mt-20">
+    <section
+      className="relative w-full min-h-[60vh] flex flex-col items-center py-24 overflow-hidden"
+      style={{
+        backgroundColor: colorMap.background,
+      }}
+    >
+      <div className="relative z-10 flex flex-row items-center gap-4 md:mt-20">
         <div className="relative w-14 h-14">
           <Image
             src={
@@ -28,33 +33,39 @@ export default function IntiHimpunanSection({ data, colorMap }: SectionProps) {
           />
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-bold">Inti Himpunan</h2>
+        <h2
+          className="text-2xl md:text-3xl font-bold"
+          style={{ color: colorMap.text }}
+        >
+          Inti Himpunan
+        </h2>
       </div>
 
       <div className="absolute z-0 top-36 md:top-40 -right-28 md:-right-72 w-100 md:w-250">
-        <Ornament1 gradient={colorMap.ornament1 ?? ''} />
+        <Ornament1 gradient={colorMap.ornament1 ?? ""} />
       </div>
       <div className="absolute z-0 bottom-5 -left-44 md:-left-90 w-md md:w-300">
-        <Ornament4 gradient={colorMap.ornament4 ?? ''} />
+        <Ornament4 gradient={colorMap.ornament4 ?? ""} />
       </div>
 
       {/* Carousel */}
       <div className="relative z-30 w-full max-w-7xl">
-        <CarouselIntiHimpunan 
-          anggota={data.anggota} 
+        <CarouselIntiHimpunan
+          anggota={data.anggota}
           colorMap={{
             carouselButton: "var(--kabinet-gradient-carousel-button)",
             gradientIntiBackground: "var(--kabinet-gradient-inti-background)",
-            pagination: "var(--kabinet-color-pagination)"
-          }} />
+            pagination: "var(--kabinet-color-pagination)",
+          }}
+        />
       </div>
 
-      <div 
+      <div
         className="absolute bottom-6 md:bottom-10 w-[90%] md:w-[80%] h-1"
         style={{
-          backgroundImage: colorMap.borderBottom ?? ''
+          backgroundImage: colorMap.borderBottom ?? "",
         }}
-       />
+      />
     </section>
   );
 }
