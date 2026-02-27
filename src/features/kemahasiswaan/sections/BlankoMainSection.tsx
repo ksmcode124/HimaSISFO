@@ -9,6 +9,7 @@ import {
 } from "@/components/layout/Layer"
 import { BlankoItem } from "../types/ui"
 import { BlankoCarousel } from "../components/BlankoCarousel"
+import { Spinner } from "@/components/ui/spinner"
 
 interface Props {
   items: BlankoItem[]
@@ -30,7 +31,14 @@ export function BlankoMainSection({ items }: Props) {
           <ShellLayer>
             <ContentLayer>
               <div className="flex items-center justify-center lg:min-h-[65vh]">
-                <Suspense fallback={null}>
+                <Suspense
+                  fallback={
+                    <div className="flex flex-col items-center justify-center h-64 w-full gap-4">
+                      <Spinner className="h-10 w-10 text-primary" />
+                      <p className="text-gray-500 text-sm">Memuat konten...</p>
+                    </div>
+                  }
+                >
                   <BlankoCarousel blankoItems={items} />
                 </Suspense>
               </div>

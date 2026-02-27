@@ -76,7 +76,7 @@ export default function SpotifyCarousel({ episodes, error, isLoading }: { episod
     return <div>Error loading data</div>
   }
 
-  const data = episodes?.map((ep, i) => {
+  const data = episodes?.map((ep) => {
     return { title: ep.name, coverImage: ep.images[0].url }
   }) || []
 

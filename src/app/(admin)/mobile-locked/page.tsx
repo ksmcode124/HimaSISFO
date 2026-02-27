@@ -1,5 +1,4 @@
-import { Lock, LockKeyholeIcon } from 'lucide-react'
-import React from 'react'
+import { LockKeyholeIcon } from 'lucide-react'
 
 export default function page() {
   return (

@@ -147,7 +147,7 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
             spaceBetween: -80,
           },
         }}
-        className="!overflow-visible w-[90%] sm:w-[65%] lg:w-full h-[299px] xl:h-[299px]"
+        className="overflow-visible! w-[90%] sm:w-[65%] lg:w-full h-74.75 xl:h-74.75"
       >
         {data.map((item, index) => {
           const isActive = index === activeIndex
@@ -159,8 +159,8 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
               key={item.id}
               className={cn(
                 "flex justify-center transition-all",
-                "w-[300px] h-[300px]",
-                "xl:w-[450px] xl:h-[300px]",
+                "w-75 h-75",
+                "xl:w-112.5 xl:h-75",
                 isActive ? "z-30" : "z-10"
               )}
             >
@@ -263,7 +263,7 @@ export function AlurKemahasiswaanCarousel({ data }: Props) {
                 "rounded-full transition-all duration-300",
                 "focus:outline-none",
                 isActive
-                  ? "bg-gradient-to-r from-[#456882] via-[#1F445F] to-[#1B3C53] h-4 w-4"
+                  ? "bg-linear-to-r from-[#456882] via-[#1F445F] to-[#1B3C53] h-4 w-4"
                   : "bg-neutral-300 hover:bg-[#456882] h-3 w-3"
               )}
             />

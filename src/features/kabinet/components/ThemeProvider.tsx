@@ -1,6 +1,31 @@
 import { CSSProperties, ReactNode } from "react"
 import { KABINET_COLOR_CONFIG, KabinetColorType } from "../styles/KabinetColorConfig"
 
+// ThemeProvider component wraps its children with kabinet-specific theme variables.
+// It accepts `kabinet` as a prop, which is used to fetch the corresponding color configuration
+// from KABINET_COLOR_CONFIG. All color and gradient values are mapped to CSS custom properties
+// (variables) that can be used by nested components for consistent theming.
+//
+// Props:
+// - children: ReactNode - the subtree that will inherit the theme variables
+// - kabinet: KabinetColorType - the selected cabinet theme to apply
+//
+// Implementation details:
+// 1. `colorConfig` retrieves the color configuration for the selected kabinet.
+// 2. `themeVariables` maps each property in colorConfig to a CSS variable.
+// 3. The CSS variables cover backgrounds, text colors, gradients, ornaments, carousel buttons,
+//    borders, pagination colors, and department card styles.
+// 4. The div wrapping `children` applies the `themeVariables` inline, making them accessible
+//    to all nested elements via `var(--kabinet-*)`.
+// 5. Use DynamicAsset component 
+//
+// Notes:
+// - If a new kabinet is added, create a new set of KABINET_COLOR_CONFIG component
+// - This approach avoids the need for a React context for theming.
+// - CSS variables are strings, so the KABINET_COLOR_CONFIG must provide valid CSS values.
+// - Nested components should reference these variables to ensure theme consistency.
+// - Inline styles ensure server-side rendering matches client-side without flash of unstyled content.
+
 interface ThemeProviderProp {
   children: ReactNode
   kabinet: KabinetColorType

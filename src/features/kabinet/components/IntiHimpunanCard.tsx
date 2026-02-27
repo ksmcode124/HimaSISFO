@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import Image from "next/image";
 import { Anggota, ColorMap } from "../types";
 import { DynamicAsset } from "@/components/ui/dynamic-asset";

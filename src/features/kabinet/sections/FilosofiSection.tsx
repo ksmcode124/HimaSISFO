@@ -4,7 +4,7 @@ import { Pita } from "../components/KabinetOrnaments";
 import TentangCard from "../components/TentangCard";
 import VisiMisiAccordion from "../components/VisiMisiAccordion";
 import VisiMisiMobile from "../components/VisiMisiMobile";
-import React, { useState } from "react";
+import { useState } from "react";
 import { ColorMap, Kabinet } from "../types";
 import { LogoMapper } from "../components/LogoMapper";
 import { DynamicAsset } from "@/components/ui/dynamic-asset";

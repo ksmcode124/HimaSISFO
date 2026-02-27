@@ -3,55 +3,10 @@ import { ArrowRight } from "lucide-react";
 import InfoCardGrid from "../components/info-card-grid";
 import useBeranda from "../hooks/useBeranda";
 import Link from "next/link";
-import { EventListResponse } from "@/lib/types/interface";
 
 export default function Information() {
     const { data, isLoading } = useBeranda();
-    const dummyEvents: EventListResponse[] = [
-        {
-            description: 'asd',
-            end: '18-10-22',
-            id: 1,
-            img: '/assets/beranda/kabinet/1.png',
-            start: '18-10-22',
-            title: 'some',
-            type: 'a',
-            kabinet: {
-                id_kabinet: 1,
-                nama_kabinet: 'string',
-                tahun_kerja: '2024',
-            }
-        },
-        {
-            description: 'asd',
-            end: '18-10-22',
-            id: 1,
-            img: '/assets/beranda/kabinet/1.png',
-            start: '18-10-22',
-            title: 'some',
-            type: 'a',
-            kabinet: {
-                id_kabinet: 1,
-                nama_kabinet: 'string',
-                tahun_kerja: '2024',
-            }
-        },
-        {
-            description: 'asd',
-            end: '18-10-22',
-            id: 1,
-            img: '/assets/beranda/kabinet/1.png',
-            start: '18-10-22',
-            title: 'some',
-            type: 'a',
-            kabinet: {
-                id_kabinet: 1,
-                nama_kabinet: 'string',
-                tahun_kerja: '2024',
-            }
-        },
-    ]
-    // console.log(data);
+    
     return (
         <div className="relative md:min-h-screen overflow-hidden">
 

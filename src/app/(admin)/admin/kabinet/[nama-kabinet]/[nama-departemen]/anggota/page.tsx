@@ -33,7 +33,6 @@ export default function AnggotaPage() {
     data,
     isLoading,
     error,
-    create,
     update,
     delete: remove,
     reload
@@ -115,7 +114,7 @@ export default function AnggotaPage() {
 
 if (data.foto_anggota !== undefined) {
   if (Array.isArray(data.foto_anggota) && data.foto_anggota.length > 0) {
-    const first = data.foto_anggota[0] as any   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const first = data.foto_anggota[0] as any    
     fotoUrl = first?.url || first?.fileUrl || (typeof first === "string" ? first : undefined)
   } else if (typeof data.foto_anggota === "string") {
     fotoUrl = data.foto_anggota
