@@ -10,7 +10,6 @@ import Pita from "@/features/beranda/components/pita";
 import { ShellLayer } from "@/components/layout/ShellLayer";
 import { SiteFooter } from "@/components/layout";
 import { berandaData } from "@/features/beranda";
-import Image from "next/image";
 
 
 export default function Page() {
@@ -31,8 +30,8 @@ export default function Page() {
 function Graphics() {
   return <div className="-mt-10 pb-30">
     <div className="relative flex items-center justify-center w-full h-full">
-      <Image src="/assets/beranda/web-prodi.png" className="w-full" alt="" />
-      <div className="absolute bottom-10 md:bottom-20 p-[3px] rounded-full bg-linear-to-b from-columbia-blue to-[#3385FF] hover:scale-105 transition-transform">
+      <img src="/assets/beranda/web-prodi.png" className="w-full" alt="" />
+      <div className="absolute bottom-10 md:bottom-20 p-0.75 rounded-full bg-linear-to-b from-columbia-blue to-[#3385FF] hover:scale-105 transition-transform">
         <a href="http://si.upnyk.ac.id" target="_blank" className="md:text-2xl font-bold text-white bg-linear-to-b from-primary to-[#456882] rounded-full px-4 py-2 block">
           WEB PRODI SISTEM INFORMASI
         </a>
@@ -55,7 +54,7 @@ function BehindTheWeb() {
         <p className="text-lg">{data.behind_the_web.title}</p>
         <div className="flex justify-between w-full items-center">
           <span className="sm:text-7xl text-4xl md:text-[128px]">{data.behind_the_web.author}</span>
-          <a href={data.behind_the_web.url} className="bg-primary-foreground/5 hover:bg-primary-foreground/20 transition hover:scale-110 text-lg lg:text-2xl flex flex-items-center rounded-full px-4 py-2 gap-2 items-center border-white border-2">Selengkapnya <ArrowRight className="size-8" /></a>
+          <a href={data.behind_the_web.url} className="bg-primary-foreground/5 text-lg lg:text-2xl flex flex-items-center rounded-full px-4 py-2 gap-2 items-center border-white border-2">Selengkapnya <ArrowRight className="size-8" /></a>
         </div>
       </div>
 
