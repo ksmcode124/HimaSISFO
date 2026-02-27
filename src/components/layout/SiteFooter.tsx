@@ -42,7 +42,7 @@ export default function SiteFooter() {
     >
       {//tangan
       }
-      <div className={`absolute overflow-hidden inset-0 z-0 lg:transition-transform lg:duration-700 ease-out ${hasTriggered ? "lg:-translate-y-0" : "lg:translate-y-full"}`}>
+      <div className={`absolute overflow-hidden inset-0 z-0 lg:transition-transform lg:duration-700 ease-out ${hasTriggered ? "lg:translate-y-0" : "lg:translate-y-full"}`}>
         <HandIcon className="absolute h-auto -translate-x-20 " />
         <HandIcon mirrorX className="absolute h-auto translate-x-20" />
       </div>
@@ -50,7 +50,7 @@ export default function SiteFooter() {
         ? "lg:delay-900 lg:duration-700 opacity-100 bg-black/50 backdrop-blur-[3px]"
         : "opacity-0"}`}>
         <div className="
-          max-w-[1120px]
+          max-w-280
           relative
           grid
           z-20
@@ -72,7 +72,7 @@ export default function SiteFooter() {
                 />
               </div>
             </div>
-            <div className="flex flex-col items-center lg:items-start gap-3 w-[268px]">
+            <div className="flex flex-col items-center lg:items-start gap-3 w-67">
               <h3 className="text-xl md:text-3xl font-bold">HIMASISFO</h3>
               <p className="hidden lg:block text-xm md:text-sm font-medium text-justify leading-8">
                 Kampus Unit II (Prodi Sistem Informasi) Jl. Babarsari 2, Janti,
