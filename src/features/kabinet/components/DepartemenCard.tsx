@@ -2,27 +2,27 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
-// import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { ColorMap } from "../types";
 
 interface DepartemenCardProps {
   id: string | number;
   nama: string;
   logo: string | null;
   className?: string;
-  buttonGradient: string
+  colorMap: ColorMap;
 }
 
 export default function DepartemenCard({
   id,
   nama,
   logo,
-  className = "",
-  buttonGradient,
+  className = "w-30 h-42 md:w-56 md:h-72",
+  colorMap,
 }: DepartemenCardProps) {
   const { kabinetId } = useParams();
   const [isMobile, setIsMobile] = useState(false);
@@ -57,7 +57,7 @@ export default function DepartemenCard({
 
   if (!mounted)
     return (
-      <div className={`flex justify-center items-center ${className}`} />
+      <div className={`flex justify-center items-center w-fit ${className}`} />
     );
 
   return (
@@ -65,12 +65,12 @@ export default function DepartemenCard({
       initial="rest"
       whileHover={isMobile ? "" : "hover"}
       animate={isMobile ? "hover" : "rest"}
-      className="flex justify-center col-span-2 items-center w-full"
+      className="flex justify-center items-center w-fit"
     >
       <Card
         className={`overflow-hidden aspect-3/4 w-full relative flex flex-col items-center text-center border-gradient-kabinet bg-white/50 backdrop-blur-xl p-1 md:p-6 ${className}`}
         style={{
-          "--gradient": buttonGradient,
+          "--gradient": colorMap.gradient,
         } as React.CSSProperties}
       >
         <CardContent className="flex flex-col items-center w-full p-0 flex-1">
@@ -92,7 +92,12 @@ export default function DepartemenCard({
             transition={{ duration: 0.3 }}
             className="font-bold text-[0.65rem] md:text-[0.85rem] px-2 flex items-center justify-center h-8 md:h-16"
           >
-            <p className="line-clamp-3 md:line-clamp-4 mt-5">{nama}</p>
+            <p
+              className="line-clamp-3 md:line-clamp-4 mt-5"
+              style={{ color: colorMap.text }}
+            >
+              {nama}
+            </p>
           </motion.div>
         </CardContent>
 
@@ -104,9 +109,9 @@ export default function DepartemenCard({
           >
             <Button
               asChild
-              className="w-full h-11 rounded-full font-light text-2xs md:text-sm bg-gradient-kabinet hover:shadow-[inset_0_4px_8px_rgba(0,0,0,0.4)] active:shadow-[inset_0_4px_8px_rgba(0,0,0,0.4)]"
+              className="w-full mb-1 h-8 md:h-12 rounded-full font-light text-[8px] md:text-3xs lg:text-2xs md:text-sm bg-gradient-kabinet hover:shadow-[inset_0_4px_8px_rgba(0,0,0,0.4)] active:shadow-[inset_0_4px_8px_rgba(0,0,0,0.4)]"
               style={{
-                "--gradient": buttonGradient,
+                "--gradient": colorMap.gradient,
               } as React.CSSProperties}
             >
               <Link href={`/kabinet/${kabinetId}/${id}`}>Selengkapnya</Link>

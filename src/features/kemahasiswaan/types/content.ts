@@ -1,23 +1,28 @@
-// types/content.ts
+// Union type for any content block on a page
+// Can be either a simple paragraph or a nested list
 export type ContentBlock =
-  | ListNode
-  | ParagraphNode
+  | ListNode      // Represents a list structure
+  | ParagraphNode // Represents a paragraph of text
 
+// Paragraph node represents a single block of text
 export type ParagraphNode = {
-  type: "paragraph"
-  text: string
+  type: "paragraph" // Discriminator for type-checking
+  text: string      // The paragraph content
 }
 
+// List node represents a nested list, ordered or unordered
 export type ListNode = {
-  type: "list"
-  ordered?: boolean
-  items: ListItem[]
+  type: "list"      // Discriminator for type-checking
+  ordered?: boolean // Optional flag for ordered list (default unordered)
+  items: ListItem[] // Array of list items
 }
 
+// Represents an individual item in a list
 export type ListItem = {
-  text: string
-  ordered?: boolean
-  listStyle?: | "list-disc"
+  text: string       // Text content of the list item
+  ordered?: boolean  // Optional override for ordered flag
+  listStyle?:        // Optional CSS-style list representation
+    | "list-disc"
     | "list-circle"
     | "list-square"
     | "list-decimal"
@@ -25,5 +30,5 @@ export type ListItem = {
     | "list-lower-roman"
     | "list-upper-alpha"
     | "list-lower-alpha"
-  items?: ListItem[]
+  items?: ListItem[] // Optional nested sub-items
 }

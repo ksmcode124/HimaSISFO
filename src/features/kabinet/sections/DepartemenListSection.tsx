@@ -16,7 +16,12 @@ export default function DepartemenListSection({
   colorMap: ColorMap
 }) {
   return (
-    <section className="relative w-full min-h-screen  flex flex-col items-center py-20 pb-185 lg:pb-135 -mb-175 lg:-mb-125 overflow-hidden">
+    <section
+      className="relative w-full min-h-screen flex flex-col items-center py-20 pb-185 lg:pb-135 -mb-175 lg:-mb-125 overflow-hidden"
+      style={{
+        backgroundColor: colorMap.background,
+      }}
+    >
       <div className="absolute right-30 md:right-20 bottom-[40%] md:top-[22%] lg:top-[-15%] w-[700vw] md:w-[400vw] z-0">
         <div className="w-full translate-x-[43%] -rotate-240 md:rotate-0">
           <Ornament5 gradient={colorMap.ornament5 ?? ''} />
@@ -47,25 +52,27 @@ export default function DepartemenListSection({
         </div>
       </div>
 
-      <h2 className="text-2xl mb-10 md:mb-22 md:-mt-18 md:text-3xl font-bold z-30">
+      <h2
+        className="text-2xl mb-10 md:mb-22 md:-mt-18 md:text-3xl font-bold z-30"
+        style={{ color: colorMap.text }}
+      >
         Departemen
       </h2>
 
       <div className="relative z-10 w-full max-w-6xl flex flex-col items-center justify-center gap-10 px-10">
-        <div className="grid grid-cols-4 lg:grid-cols-8 justify-items-center gap-6 md:gap-14 w-full
-          *:last:col-start-2
-          lg:*:last:col-start-4
-        ">
+        <div className="grid grid-cols-2 lg:grid-cols-4 justify-items-center gap-6 md:gap-14 w-full">
           {data &&
             data
-              .filter((dept) => !dept.nama_departemen.toLowerCase().includes("inti"))
+              .filter(
+                (dept) => !dept.nama_departemen.toLowerCase().includes("inti"),
+              )
               .map((dept: DepartemenListItem) => (
                 <DepartemenCard
                   key={dept.id_departemen}
                   id={dept.id_departemen.toString()}
                   nama={dept.nama_departemen}
                   logo={dept.logo_departemen}
-                  buttonGradient={colorMap.buttonGradient ?? ''}
+                  colorMap={colorMap}
                 />
               ))}
         </div>

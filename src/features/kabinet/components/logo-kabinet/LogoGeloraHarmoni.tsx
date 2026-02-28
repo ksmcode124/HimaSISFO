@@ -1,8 +1,8 @@
 "use client";
 import { cn } from "@/lib/utils";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import filosofiLogo from "../data/filosofi-logo.json";
+import filosofiLogo from "../../data/filosofi-logo.json";
 
 export default function LogoGeloraHarmoni() {
   const [active, setActive] = useState<string | null>(null);

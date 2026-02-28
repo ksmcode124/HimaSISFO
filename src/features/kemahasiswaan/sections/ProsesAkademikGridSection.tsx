@@ -11,7 +11,7 @@ interface Props {
 
 export function ProsesAkademikGridSection({ items, selectedId, onSelect }: Props) {
   return (
-    <section className="grid xs:grid-cols-2 lg:*:last:col-start-2 lg:grid-cols-3 gap-y-25 gap-x-10 px-6 lg:px-12 max-w-7xl mx-auto">
+    <section className="grid xs:grid-cols-2 lg:*:last:col-start-2 lg:grid-cols-3 gap-y-25 gap-x-10 px-6 lg:px-12 max-w-7xl mx-auto mt-20 sm:mt-24 md:mt-36 lg:mt-64">
       {items.map(item => (
         <ProsesAkademikCard
           key={item.id}

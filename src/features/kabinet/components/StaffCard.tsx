@@ -1,16 +1,19 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { DepartemenResponse } from "../types";
+import { ColorMap } from "../types";
+import { DynamicAsset } from "@/components/ui/dynamic-asset";
 
 interface StaffCardProps {
   data: DepartemenResponse["anggota"][0];
   index: number;
   customCard?: number;
+  colorMap: ColorMap;
 }
 
-export default function StaffCard({ data, index, customCard }: StaffCardProps) {
+export default function StaffCard({ data, index, customCard, colorMap }: StaffCardProps) {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -83,17 +86,12 @@ export default function StaffCard({ data, index, customCard }: StaffCardProps) {
     >
       <div className="relative w-full h-full">
         {/* LAYER 1: Background Card */}
-        <div
+          <DynamicAsset
+          maskSrc={cardPath} 
+          gradientVar={colorMap.gradientIntiBackground ?? "var(--kabinet-gradient-inti-background)"}
+          innerHeight={"h-full"}
           className={`absolute inset-0 z-10 transition-all duration-300 ease-out ${translateClass}`}
-        >
-          <Image
-            src={cardPath}
-            alt="Background"
-            fill
-            className="object-contain"
-            priority={customCard === 5}
-          />
-        </div>
+        />
 
         {/* LAYER 2: Badan (Terpotong Masking Bawah) */}
         <div
@@ -136,11 +134,17 @@ export default function StaffCard({ data, index, customCard }: StaffCardProps) {
           >
             <div className="absolute inset-0 flex flex-col text-center justify-center -mt-5 md:mt-10 lg:mt-10">
               {!data.jabatan.toLowerCase().includes("staff") && (
-                <span className="text-[#2D2D51] font-bold text-xs md:text-md drop-shadow-md mt-[32%] md:mt-[12%]">
+                <span 
+                  className="font-bold text-xs md:text-md drop-shadow-md mt-[32%] md:mt-[12%]"
+                  style={{ color: colorMap.text }}
+                >
                   {data.jabatan}
                 </span>
               )}
-              <span className="text-[#2D2D51] text-xs md:text-md font-semibold capitalize">
+              <span 
+                className="text-xs md:text-md font-semibold capitalize"
+                style={{ color: colorMap.text }}
+              >
                 {data.nama_anggota.toLowerCase()}
               </span>
             </div>

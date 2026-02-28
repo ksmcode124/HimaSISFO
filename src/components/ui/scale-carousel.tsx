@@ -7,7 +7,7 @@ import {
   CarouselItem,
   type CarouselApi,
 } from '@/components/ui/carousel'
-import type { EmblaCarouselType, EmblaEventType } from 'embla-carousel'
+import type { EmblaCarouselType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 
 const TWEEN_FACTOR = 0.52
