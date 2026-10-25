@@ -1,11 +1,11 @@
 import Image from "next/image"
-import RadialBackground from "@/components/ui/radial-bg"
-import { ShellLayer } from "@/components/layout/ShellLayer"
+import RadialBackground from "@/components/ui/radialBg"
+import { ShellLayer } from "@/components/layout/shellLayer"
 import {
   BackgroundLayer,
   ContentLayer,
   DecorationLayer,
-} from "@/components/layout/Layer"
+} from "@/components/layout/layer"
 import { PembayaranAccordionSection } from "./PembayaranAccordionSection"
 import { ItemDataJSON } from "../types/data"
 

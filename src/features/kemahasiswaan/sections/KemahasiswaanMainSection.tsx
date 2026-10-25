@@ -1,9 +1,9 @@
 import {
   BackgroundLayer,
   ContentLayer,
-} from "@/components/layout/Layer"
-import { ShellLayer } from "@/components/layout/ShellLayer"
-import RadialBackground from "@/components/ui/radial-bg"
+} from "@/components/layout/layer"
+import { ShellLayer } from "@/components/layout/shellLayer"
+import RadialBackground from "@/components/ui/radialBg"
 import { AlurKemahasiswaanCarousel } from "../components/AlurKemahasiswaanCarousel"
 import { CardProps } from "../types/ui"
 import { ShapeDecoration } from "./ShapeDecoration"

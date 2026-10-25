@@ -7,7 +7,7 @@ import Kabinet from "@/features/beranda/sections/kabinet";
 import Spotify from "@/features/beranda/sections/spotify";
 import Awan from "@/features/beranda/components/awan";
 import Pita from "@/features/beranda/components/pita";
-import { ShellLayer } from "@/components/layout/ShellLayer";
+import { ShellLayer } from "@/components/layout/shellLayer";
 import { SiteFooter } from "@/components/layout";
 import { berandaData } from "@/features/beranda";
 

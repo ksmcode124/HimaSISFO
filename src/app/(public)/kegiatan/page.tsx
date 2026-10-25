@@ -1,12 +1,12 @@
 export const dynamic = 'force-dynamic'
-import { CalendarSection } from "@/features/kegiatan/sections/CalendarSection";
-import { EventCardSection } from "@/features/kegiatan/sections/EventCardSection";
-import { BackgroundLayer } from "@/components/layout/Layer";
-import { RoundedBg } from "@/features/kegiatan/components/RoundedBg";
+import { CalendarSection } from "@/features/kegiatan/sections/calendarSection";
+import { EventCardSection } from "@/features/kegiatan/sections/eventCardSection";
+import { BackgroundLayer } from "@/components/layout/layer";
+import { RoundedBg } from "@/features/kegiatan/components/roundedBg";
 import Image from "next/image";
-import { CalendarLeftDecoration } from "../../../../public/assets/kegiatan/decoration/CalendarLeft";
-import { CalendarRightDecoration } from "../../../../public/assets/kegiatan/decoration/CalendarRight";
-import { Suspense} from "react";
+import { CalendarLeftDecoration } from "../../../../public/assets/kegiatan/decoration/calendarLeft";
+import { CalendarRightDecoration } from "../../../../public/assets/kegiatan/decoration/calendarRight";
+import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 
 function PitaDecoration() {
@@ -39,11 +39,11 @@ export default function Page({ searchParams }: PageProps) {
         <RoundedBg align="end" />
       </BackgroundLayer>
       <div className="relative flex-col items-start mt-28">
-        <Suspense fallback={<Skeleton className="w-full h-1/2 md:w-2/3 aspect-square mx-auto"/>}>
+        <Suspense fallback={<Skeleton className="w-full h-1/2 md:w-2/3 aspect-square mx-auto" />}>
           <CalendarSection tahun={tahun} />
         </Suspense>
         <PitaDecoration />
-        <Suspense fallback={<Skeleton className="w-full h-1/2 md:w-2/3 aspect-square mx-auto"/>}>
+        <Suspense fallback={<Skeleton className="w-full h-1/2 md:w-2/3 aspect-square mx-auto" />}>
           <EventCardSection tahun={tahun} />
         </Suspense>
       </div>

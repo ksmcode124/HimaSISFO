@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { DecorationLayer } from "@/components/layout/Layer"
+import { DecorationLayer } from "@/components/layout/layer"
 
 export function WisudaDecorationLayer() {
   return (

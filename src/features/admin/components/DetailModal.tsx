@@ -1,9 +1,9 @@
 'use client';
 
-import { BaseModal } from '@/components/ui/base-modal';
+import { BaseModal } from '@/components/ui/baseModal';
 import Image from 'next/image';
 import { ImageIcon } from 'lucide-react';
-import { TableActionButtons } from './TableActionButtons';
+import { TableActionButtons } from './tableActionButtons';
 import { Spinner } from '@/components/ui/spinner';
 import * as React from 'react';
 

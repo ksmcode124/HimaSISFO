@@ -1,4 +1,4 @@
-import { BreadcrumbItemData } from "@/components/ui/breadcrumb"
+import { BreadcrumbItemData } from "@/components/ui/breadCrumb"
 
 // Represents data needed to render a hero section
 export interface HeroData {

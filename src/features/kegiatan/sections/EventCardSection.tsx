@@ -1,18 +1,18 @@
 import {
   DecorationLayer,
   ContentLayer,
-} from '@/components/layout/Layer'
+} from '@/components/layout/layer'
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react"
 import { getEvents } from '../services/eventService';
 import { EventCardProps } from '../types';
 import { sortEvents } from '../utils/SortEvent';
-import { EventCard } from '../components/EventCard';
+import { EventCard } from '../components/eventCard';
 import { formatMonthName } from '../utils/FormatDate';
-import { ShowNextEvent } from '../components/ShowNextEvent';
-import { EventCardEmpty } from '../components/EventCardEmpty';
-import { DynamicRoute } from '../components/DynamicRoute';
-import { ClientOnly } from '../components/ClientOnly';
+import { ShowNextEvent } from '../components/showNextEvent';
+import { EventCardEmpty } from '../components/eventCardEmpty';
+import { DynamicRoute } from '../components/dynamicRoute';
+import { ClientOnly } from '../components/clientOnly';
 
 function EventCardDecoration() {
   return (

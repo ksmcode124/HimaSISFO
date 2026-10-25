@@ -1,10 +1,10 @@
 import Image from "next/image"
 import { BreadcrumbSection } from "./BreadcrumbSection"
-import { ShellLayer } from "@/components/layout/ShellLayer"
+import { ShellLayer } from "@/components/layout/shellLayer"
 import {
   BackgroundLayer,
   ContentLayer,
-} from "@/components/layout/Layer"
+} from "@/components/layout/layer"
 import { HeroData } from "../types/hero"
 import { useHeroSection } from "../hooks/useHeroSection"
 import { HeroView } from "../components/HeroView"
@@ -48,11 +48,11 @@ export function HeroSection({ data }: HeroSectionProps) {
 
 function PitaDecoration() {
   return (
-    <div 
+    <div
       className={cn(
         "absolute left-0 w-full aspect-[5/1] pointer-events-none z-20",
-        "top-full", 
-        "-translate-y-1/2 md:-translate-y-[40%]" 
+        "top-full",
+        "-translate-y-1/2 md:-translate-y-[40%]"
       )}
     >
       <Image

@@ -8,8 +8,8 @@ import {
   StaffSection,
   ProkerSection,
 } from "@/features/kabinet";
-import { ShellLayer } from "@/components/layout/ShellLayer";
-import { ThemeProvider } from "@/features/kabinet/components/ThemeProvider";
+import { ShellLayer } from "@/components/layout/shellLayer";
+import { ThemeProvider } from "@/features/kabinet/components/themeProvider";
 import { KABINET_ID_MAP } from "@/features/kabinet/styles/KabinetMapping";
 import { KabinetColorType } from "@/features/kabinet/styles/KabinetColorConfig";
 
@@ -51,7 +51,7 @@ export default function DepartemenPage() {
 
   return (
     <ThemeProvider kabinet={kabinetColorKey}>
-      <ShellLayer  backgroundColor={"var(--kabinet-background)"}>
+      <ShellLayer backgroundColor={"var(--kabinet-background)"}>
         <DepartemenHeroSection
           nama_dept={info.nama_departemen}
           deskripsi={info.deskripsi_departemen}
@@ -66,8 +66,8 @@ export default function DepartemenPage() {
             breadcrumbUnderline: "var(--kabinet-breadcrumb-underline)"
           }}
         />
-        <ProkerSection 
-          data={proker} 
+        <ProkerSection
+          data={proker}
           colorMap={{
             pita: "var(--kabinet-gradient-pita)",
             text: "var(--kabinet-color-text)",
@@ -75,8 +75,8 @@ export default function DepartemenPage() {
             ornament2: "var(--kabinet-gradient-ornament-2)",
             ornament3: "var(--kabinet-gradient-ornament-3)"
           }} />
-        <StaffSection 
-          data={anggota} 
+        <StaffSection
+          data={anggota}
           colorMap={{
             text: "var(--kabinet-color-text)",
             ornament1: "var(--kabinet-gradient-ornament-1)",

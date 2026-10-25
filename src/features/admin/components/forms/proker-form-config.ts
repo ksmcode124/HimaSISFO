@@ -1,4 +1,4 @@
-import { FormField } from "../FormModal";
+import { FormField } from "../formModal";
 
 // Create proker form: id_departemen and id_kabinet are auto-populated from URL
 export const createProkerFields: FormField[] = [

@@ -1,4 +1,4 @@
-import { Pagination } from './Pagination';
+import { Pagination } from './pagination';
 import {
   Select,
   SelectContent,

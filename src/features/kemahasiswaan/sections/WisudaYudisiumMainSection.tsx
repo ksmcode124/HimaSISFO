@@ -1,11 +1,11 @@
-import { ShellLayer } from "@/components/layout/ShellLayer";
+import { ShellLayer } from "@/components/layout/shellLayer";
 import { ItemDataJSON } from "../types/data";
-import { BackgroundLayer, ContentLayer } from "@/components/layout/Layer";
-import RadialBackground from "@/components/ui/radial-bg";
+import { BackgroundLayer, ContentLayer } from "@/components/layout/layer";
+import RadialBackground from "@/components/ui/radialBg";
 import { WisudaDecorationLayer } from "./WisudaYudisiumDecorationSection";
 import { WisudaAccordionSection } from "./WisudaYudisiumAccordionSection";
 import { WisudaYudisiumItemsSection } from "./WisudaYudisiumItemsSection";
-import { CloudDecoration } from "@/components/ui/cloud-decoration";
+import { CloudDecoration } from "@/components/ui/cloudDecoration";
 
 interface Props {
   accordionItems: ItemDataJSON[],
@@ -13,7 +13,7 @@ interface Props {
   setSelectedId: (id: string | null) => void
 }
 
-export function WisudaYudisiumMainSection({accordionItems, itemCollectionItems, setSelectedId}: Props) {
+export function WisudaYudisiumMainSection({ accordionItems, itemCollectionItems, setSelectedId }: Props) {
   return (
     <ShellLayer>
       <BackgroundLayer>

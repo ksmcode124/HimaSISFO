@@ -1,9 +1,9 @@
-import { ShellLayer } from "@/components/layout/ShellLayer"
+import { ShellLayer } from "@/components/layout/shellLayer"
 import { VerticalAccordion } from "../components/VerticalAccordion"
 import { ItemDataJSON } from "../types/data"
-import { BackgroundLayer, ContentLayer, DecorationLayer } from "@/components/layout/Layer"
+import { BackgroundLayer, ContentLayer, DecorationLayer } from "@/components/layout/layer"
 import Image from "next/image"
-import RadialBackground from "@/components/ui/radial-bg"
+import RadialBackground from "@/components/ui/radialBg"
 
 interface Props {
   items: ItemDataJSON[]
@@ -11,7 +11,7 @@ interface Props {
 
 export function PelayananAdministratifSection({ items }: Props) {
   return (
-   
+
     <ShellLayer>
       <BackgroundLayer>
         <RadialBackground />

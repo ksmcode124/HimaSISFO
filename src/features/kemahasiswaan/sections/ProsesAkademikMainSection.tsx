@@ -1,9 +1,9 @@
 import { Dispatch, SetStateAction } from "react"
 import { ItemDataJSON } from "../types/data"
-import { ShellLayer } from "@/components/layout/ShellLayer"
-import { BackgroundLayer, ContentLayer } from "@/components/layout/Layer"
-import RadialBackground from "@/components/ui/radial-bg"
-import { CloudDecoration } from "@/components/ui/cloud-decoration"
+import { ShellLayer } from "@/components/layout/shellLayer"
+import { BackgroundLayer, ContentLayer } from "@/components/layout/layer"
+import RadialBackground from "@/components/ui/radialBg"
+import { CloudDecoration } from "@/components/ui/cloudDecoration"
 import { ProsesAkademikGridSection } from "./ProsesAkademikGridSection"
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
   selectedId: string | null
 }
 
-export function ProsesAkademikMainSection({items, selectedId, openModal}: Props) {
+export function ProsesAkademikMainSection({ items, selectedId, openModal }: Props) {
   return (
     <ShellLayer>
       <BackgroundLayer>

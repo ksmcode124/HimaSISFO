@@ -9,7 +9,7 @@ import { ItemDataJSON } from "../types/data";
 import { ContentRenderer } from "./ContentRenderer";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronsUpDown } from "lucide-react";
-import { Glass } from "@/components/ui/Glass";
+import { Glass } from "@/components/ui/glass";
 
 export function HorizontalAccordion({ items }: { items: ItemDataJSON[] }) {
   return (

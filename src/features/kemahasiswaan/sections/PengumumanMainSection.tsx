@@ -1,7 +1,7 @@
-import { BackgroundLayer, ContentLayer, DecorationLayer } from "@/components/layout/Layer"
-import { ShellLayer } from "@/components/layout/ShellLayer"
+import { BackgroundLayer, ContentLayer, DecorationLayer } from "@/components/layout/layer"
+import { ShellLayer } from "@/components/layout/shellLayer"
 import Image from "next/image"
-import RadialBackground from "@/components/ui/radial-bg"
+import RadialBackground from "@/components/ui/radialBg"
 import { HorizontalAccordion } from "../components/HorizontalAccordion"
 import { ItemDataJSON } from "../types/data"
 
@@ -9,7 +9,7 @@ interface Props {
   informasiItems: ItemDataJSON[]
 }
 
-export function PengumumanMainSection({informasiItems}: Props) {
+export function PengumumanMainSection({ informasiItems }: Props) {
   return (
     <ShellLayer>
       <BackgroundLayer>
@@ -17,10 +17,10 @@ export function PengumumanMainSection({informasiItems}: Props) {
       </BackgroundLayer>
       <DecorationLayer>
         <div className="absolute w-full aspect-square sm:aspect-3/1 scale-x-140 lg:scale-y-130 translate-y-[40%]">
-          <Image src={"/assets/kemahasiswaan/bg-shape-1.webp"} alt={""} fill className=""/>
+          <Image src={"/assets/kemahasiswaan/bg-shape-1.webp"} alt={""} fill className="" />
         </div>
         <div className="absolute w-full aspect-square sm:aspect-3/1 scale-x-140 lg:scale-y-130 -translate-y-[25%] rotate-y-180">
-          <Image src={"/assets/kemahasiswaan/bg-shape-1.webp"} alt={""} fill className=""/>
+          <Image src={"/assets/kemahasiswaan/bg-shape-1.webp"} alt={""} fill className="" />
         </div>
       </DecorationLayer>
       <ContentLayer>

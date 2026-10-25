@@ -1,14 +1,14 @@
 'use client'
-import { 
-  Accordion, 
-  AccordionContent, 
-  AccordionItem, 
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
   AccordionTriggerVertical
 } from "@/components/ui/accordion";
 import { ItemDataJSON } from "../types/data";
 import { ContentRenderer } from "./ContentRenderer";
 import { AnimatePresence, motion } from "framer-motion";
-import { Glass } from "@/components/ui/Glass";
+import { Glass } from "@/components/ui/glass";
 
 interface VerticalAccordionProps {
   items: ItemDataJSON[]
@@ -34,7 +34,7 @@ function VerticalAccordionItem({ item }: { item: ItemDataJSON }) {
     <AccordionItem
       value={item.id}
       className="group flex flex-col sm:max-h-150 overflow-hidden p-0 max-w-170"
-    >       
+    >
       {/* Content */}
       <AccordionContent>
         <AnimatePresence initial={false}>
@@ -60,7 +60,7 @@ function VerticalAccordionItem({ item }: { item: ItemDataJSON }) {
       {/* Trigger */}
       <AccordionTriggerVertical
         hasChevron={false}
-        writingMode= "vertical-btt"
+        writingMode="vertical-btt"
         className="
           px-4 py-6
           text-3xs sm:text-xs md:text-sm lg:text-lg

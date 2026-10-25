@@ -1,14 +1,14 @@
 'use client'
 
 import z from 'zod'
-import { HeaderSection } from '@/features/admin/components/HeaderSection'
-import { AdminTable } from '@/features/admin/components/AdminTable'
-import { FormModal } from '@/features/admin/components/FormModal'
-import { DetailModal } from '@/features/admin/components/DetailModal'
-import { ConfirmationModal } from '@/features/admin/components/ConfirmationModal'
+import { HeaderSection } from '@/features/admin/components/headerSection'
+import { AdminTable } from '@/features/admin/components/adminTable'
+import { FormModal } from '@/features/admin/components/formModal'
+import { DetailModal } from '@/features/admin/components/detailModal'
+import { ConfirmationModal } from '@/features/admin/components/confirmationModal'
 import { useAdminModal } from '@/features/admin/hooks/useAdminModal'
 import { useConfirm } from '@/features/admin/hooks/useConfirm'
-import { departemenColumns } from '@/features/admin/components/columns/departemen-columns'
+import { departemenColumns } from '@/features/admin/components/columns/departemenColumns'
 import { createDepartemenFields, updateDepartemenFields } from '@/features/admin/components/forms/departemen-form-config'
 import { createDepartemenSchema, updateDepartemenSchema } from '@/schemas/departemen.schema'
 import { useAdminEntity, useAdminEntityDetail } from '@/features/admin/hooks/useAdminEntity'
@@ -40,7 +40,7 @@ export default function DepartemenPage() {
     DepartemenResponse
   >({
     entity: 'departemen',
-    queryParams: {id_kabinet},
+    queryParams: { id_kabinet },
     mapToRow: (rows) => rows.map(
       (row) => ({
         id: row.id_departemen,
@@ -51,7 +51,7 @@ export default function DepartemenPage() {
         deskripsi_departemen: row.deskripsi_departemen,
         foto_departemen: row.foto_departemen ?? '',
         slug_kabinet: slug_kabinet ?? '1-gelora-harmoni'
-    })),
+      })),
     createSchema: createDepartemenSchema,
     updateSchema: updateDepartemenSchema,
   })
@@ -72,7 +72,7 @@ export default function DepartemenPage() {
   )
 
   const handleDelete = async (id: number) => {
-    const ok =  await confirm.confirm('delete')
+    const ok = await confirm.confirm('delete')
     if (!ok) return
     await remove(id)
     modal.close()
@@ -127,7 +127,7 @@ export default function DepartemenPage() {
         initialData={detail ?? {}}
         submitLabel="Simpan"
         onSubmit={async (data) => {
-          const ok =  await confirm.confirm('save')
+          const ok = await confirm.confirm('save')
           if (!ok) return
           if (!detail?.id) return
           await update({ id: detail.id, data: { ...data } })

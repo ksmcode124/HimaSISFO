@@ -1,8 +1,8 @@
-import { EventDetailSection } from "@/features/kegiatan/sections/EventDetailSection";
-import { BackgroundLayer } from "@/components/layout/Layer";
-import { RoundedBg } from "@/features/kegiatan/components/RoundedBg";
-import { CalendarLeftDecoration } from "../../../../../../public/assets/kegiatan/decoration/CalendarLeft";
-import { CalendarRightDecoration } from "../../../../../../public/assets/kegiatan/decoration/CalendarRight";
+import { EventDetailSection } from "@/features/kegiatan/sections/eventDetailSection";
+import { BackgroundLayer } from "@/components/layout/layer";
+import { RoundedBg } from "@/features/kegiatan/components/roundedBg";
+import { CalendarLeftDecoration } from "../../../../../../public/assets/kegiatan/decoration/calendarLeft";
+import { CalendarRightDecoration } from "../../../../../../public/assets/kegiatan/decoration/calendarRight";
 
 export default async function Page({ params }: { params: Promise<{ detail: string }> }) {
     const { detail } = await params;

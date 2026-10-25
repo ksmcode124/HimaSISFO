@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, PanInfo, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
-import ProkerCard from "@/features/kabinet/components/ProkerCard";
+import ProkerCard from "@/features/kabinet/components/prokerCard";
 import { DepartemenResponse, ColorMap } from "../types";
 
 interface CarouselProkerProps {
@@ -90,14 +90,14 @@ export default function CarouselProker({
     <div className="relative flex flex-col items-center w-full overflow-visible touch-none">
       <div className="flex items-center justify-center gap-4 md:gap-16 min-h-150 w-full overflow-visible">
         <AnimatePresence mode="popLayout">
-          <div 
-            key={`container-${currentIndex}`} 
+          <div
+            key={`container-${currentIndex}`}
             className="flex items-center justify-center gap-4 md:gap-16 w-full overflow-visible"
           >
             {/* KIRI (inactive) */}
             {renderSingleCard(
-              getLoopIndex(isMobile ? currentIndex - 1 : currentIndex), 
-              false, 
+              getLoopIndex(isMobile ? currentIndex - 1 : currentIndex),
+              false,
               "left"
             )}
 
@@ -120,8 +120,8 @@ export default function CarouselProker({
 
             {/* KANAN (inactive) */}
             {renderSingleCard(
-              getLoopIndex(isMobile ? currentIndex + 1 : currentIndex + 3), 
-              false, 
+              getLoopIndex(isMobile ? currentIndex + 1 : currentIndex + 3),
+              false,
               "right"
             )}
           </div>

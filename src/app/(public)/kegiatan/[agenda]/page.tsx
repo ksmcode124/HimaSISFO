@@ -1,15 +1,15 @@
-import { EventListSection } from "@/features/kegiatan/sections/EventListSection";
-import { BackgroundLayer } from "@/components/layout/Layer";
-import { RoundedBg } from "@/features/kegiatan/components/RoundedBg";
-import { CalendarLeftDecoration } from "../../../../../public/assets/kegiatan/decoration/CalendarLeft";
-import { CalendarRightDecoration } from "../../../../../public/assets/kegiatan/decoration/CalendarRight";
+import { EventListSection } from "@/features/kegiatan/sections/eventListSection";
+import { BackgroundLayer } from "@/components/layout/layer";
+import { RoundedBg } from "@/features/kegiatan/components/roundedBg";
+import { CalendarLeftDecoration } from "../../../../../public/assets/kegiatan/decoration/calendarLeft";
+import { CalendarRightDecoration } from "../../../../../public/assets/kegiatan/decoration/calendarRight";
 
 export default async function Page({
   searchParams
 }: {
   searchParams: Promise<{ bulan?: string; tahun?: string }>
 }) {
-  const { bulan} = await searchParams;
+  const { bulan } = await searchParams;
   return (
     <>
       <BackgroundLayer className="w-full h-screen">
@@ -21,7 +21,7 @@ export default async function Page({
         <RoundedBg align="end" />
       </BackgroundLayer>
       <div className="relative flex-col items-start mt-28">
-        <EventListSection filter={bulan}/>
+        <EventListSection filter={bulan} />
       </div>
     </>
 

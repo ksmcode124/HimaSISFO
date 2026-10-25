@@ -1,13 +1,13 @@
 'use client'
 
-import { HeaderSection } from '@/features/admin/components/HeaderSection'
-import { AdminTable } from '@/features/admin/components/AdminTable'
-import { FormModal } from '@/features/admin/components/FormModal'
-import { DetailModal } from '@/features/admin/components/DetailModal'
-import { ConfirmationModal } from '@/features/admin/components/ConfirmationModal'
+import { HeaderSection } from '@/features/admin/components/headerSection'
+import { AdminTable } from '@/features/admin/components/adminTable'
+import { FormModal } from '@/features/admin/components/formModal'
+import { DetailModal } from '@/features/admin/components/detailModal'
+import { ConfirmationModal } from '@/features/admin/components/confirmationModal'
 import { useAdminModal } from '@/features/admin/hooks/useAdminModal'
 import { useConfirm } from '@/features/admin/hooks/useConfirm'
-import { anggotaColumns } from '@/features/admin/components/columns/anggota-columns'
+import { anggotaColumns } from '@/features/admin/components/columns/anggotaColumns'
 import { anggotaCreateFields, anggotaEditFields } from '@/features/admin/components/forms/anggota-form-config'
 import { createAnggotaSchema, updateAnggotaSchema } from '@/schemas/anggota.schema'
 import { useParams } from 'next/navigation'
@@ -53,7 +53,8 @@ export default function AnggotaPage() {
             nama_anggota: r.nama_anggota,
             kabinet: nama_kabinet,
             id_jabatan: da?.id_jabatan ?? -1
-          })}),
+          })
+        }),
     createSchema: createAnggotaSchema,
     updateSchema: updateAnggotaSchema
   })
@@ -70,12 +71,13 @@ export default function AnggotaPage() {
         id_jabatan: da?.id_jabatan ?? -1,
         kabinet: nama_kabinet,
         departemen: nama_departemen
-      })}
+      })
+    }
   )
 
   // Handle delete
   const handleDelete = async (id: number) => {
-    const ok =  await confirm.confirm('delete')
+    const ok = await confirm.confirm('delete')
     if (!ok) return
     await remove(id)
     modal.close()
@@ -84,7 +86,7 @@ export default function AnggotaPage() {
   // Handle create khusus karena 2-step
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleCreateAnggota = async (data: any) => {
-    const ok =  await confirm.confirm('save')
+    const ok = await confirm.confirm('save')
     if (!ok) return
     // 1. Fetch semua anggota
     const allAnggotaRes = await fetch('/api/admin/anggota')
@@ -112,14 +114,14 @@ export default function AnggotaPage() {
     // 4. Create detail anggota
     let fotoUrl: string | undefined
 
-if (data.foto_anggota !== undefined) {
-  if (Array.isArray(data.foto_anggota) && data.foto_anggota.length > 0) {
-    const first = data.foto_anggota[0] as any    
-    fotoUrl = first?.url || first?.fileUrl || (typeof first === "string" ? first : undefined)
-  } else if (typeof data.foto_anggota === "string") {
-    fotoUrl = data.foto_anggota
-  }
-}
+    if (data.foto_anggota !== undefined) {
+      if (Array.isArray(data.foto_anggota) && data.foto_anggota.length > 0) {
+        const first = data.foto_anggota[0] as any
+        fotoUrl = first?.url || first?.fileUrl || (typeof first === "string" ? first : undefined)
+      } else if (typeof data.foto_anggota === "string") {
+        fotoUrl = data.foto_anggota
+      }
+    }
 
 
     const detailPayload = {
@@ -149,7 +151,7 @@ if (data.foto_anggota !== undefined) {
           { label: 'Kabinet', href: '/admin/kabinet' },
           { label: nama_kabinet, href: `/admin/kabinet/${slug_kabinet}` },
           { label: nama_departemen, href: `/admin/kabinet/${slug_kabinet}/` },
-          { label: 'Anggota', href: ''}
+          { label: 'Anggota', href: '' }
         ]}
         title={nama_departemen}
         handleAddRequest={() => modal.open('create')}
@@ -188,16 +190,16 @@ if (data.foto_anggota !== undefined) {
         initialData={detail ?? {}}
         submitLabel="Update Anggota"
         onSubmit={async (data) => {
-          const ok =  await confirm.confirm('save')
+          const ok = await confirm.confirm('save')
           if (!ok) return
           if (!detail?.id) return
 
           // Tambahkan id_kabinet dan id_departemen ke payload
-    const payload = {
-      ...data,
-      id_kabinet,
-      id_departemen,
-    }
+          const payload = {
+            ...data,
+            id_kabinet,
+            id_departemen,
+          }
 
           await update({ id: detail.id, data: payload })
           modal.close()

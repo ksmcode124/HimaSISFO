@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils/cn";
 import { formatDate } from "../utils/FormatDate";
 import { useState } from "react";
 import { useGetCountdown } from "../hooks/useCountDown";
-import { Modal } from "../components/PopUp";
+import { Modal } from "./pPopUp";
 import Image from "next/image";
 
 const eventCard = cva("overflow-hidden transition hover:shadow-md", {
@@ -27,7 +27,7 @@ export const EventCard = (props: WithVariantEventCardProps) => {
   const { id, title, img, start, end, description, variant = "detail", actions, onMouseEnter, onMouseLeave } = props;
   const countDown = useGetCountdown(start);
   const [open, setOpen] = useState(false);
-  
+
   return (
     <div
       key={id}

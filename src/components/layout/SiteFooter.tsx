@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import { footerNavItems } from "@/features/navigation"
 import Image from "next/image"
 import Link from "next/link"
-import HandIcon from "../../../public/assets/shared/decoratives/twemoji_raised-hand"
+import HandIcon from "../../../public/assets/shared/decoratives/twemojiRaisedHand"
 
 export default function SiteFooter() {
   const footerRef = useRef<HTMLElement | null>(null);

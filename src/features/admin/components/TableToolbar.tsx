@@ -8,7 +8,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from '@/components/ui/dropdownMenu';
 import { ArrowUpDown, ChevronDown, Filter } from 'lucide-react';
 import { Table } from '@tanstack/react-table';
 import { useEffect, useState } from 'react';

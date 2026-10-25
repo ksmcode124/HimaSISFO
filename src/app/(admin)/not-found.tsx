@@ -1,6 +1,6 @@
 'use client'
-import { BackgroundLayer, ContentLayer, DecorationLayer } from "@/components/layout/Layer";
-import { ShellLayer } from "@/components/layout/ShellLayer";
+import { BackgroundLayer, ContentLayer, DecorationLayer } from "@/components/layout/layer";
+import { ShellLayer } from "@/components/layout/shellLayer";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";

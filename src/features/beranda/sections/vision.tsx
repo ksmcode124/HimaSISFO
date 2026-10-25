@@ -1,6 +1,6 @@
 import Pita from '@/features/beranda/components/pita';
 import Logo from '../components/logo';
-import VisionAccordion from '../components/vision-accordion';
+import VisionAccordion from '../components/visionAccordion';
 export default function Vision() {
     return <div className="relative">
         <div className="min-h-screen flex items-center justify-center lg:my-30 sm:mx-16 bg-radial from-blue-200 to-transparent to-80%">

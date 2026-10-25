@@ -1,5 +1,5 @@
 "use client";
-import { ScaleCarousel } from "@/components/ui/scale-carousel";
+import { ScaleCarousel } from "@/components/ui/scaleCarousel";
 import { ArrowRight } from "lucide-react";
 import Awan from "../components/awan";
 import { useState } from "react";

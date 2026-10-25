@@ -1,16 +1,16 @@
-import { ShellLayer } from "@/components/layout/ShellLayer"
+import { ShellLayer } from "@/components/layout/shellLayer"
 import { ItemDataJSON } from "../types/data"
-import { BackgroundLayer, ContentLayer } from "@/components/layout/Layer"
-import RadialBackground from "@/components/ui/radial-bg"
+import { BackgroundLayer, ContentLayer } from "@/components/layout/layer"
+import RadialBackground from "@/components/ui/radialBg"
 import { PendaftaranAccordionSection } from "./PendaftaranAccordionSection"
-import { CloudDecoration } from "@/components/ui/cloud-decoration"
+import { CloudDecoration } from "@/components/ui/cloudDecoration"
 import { PendaftaranItemCollectionSection } from "./PendaftaranItemCollectionSection"
 
 interface Props {
   accordionItems: ItemDataJSON[],
   itemCollectionItems: ItemDataJSON[],
 }
-export function PendaftaranMainSection({accordionItems, itemCollectionItems}: Props) {
+export function PendaftaranMainSection({ accordionItems, itemCollectionItems }: Props) {
   return (
     <ShellLayer>
       <BackgroundLayer>

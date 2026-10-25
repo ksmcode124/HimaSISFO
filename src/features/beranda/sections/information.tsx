@@ -1,12 +1,12 @@
 "use client"
 import { ArrowRight } from "lucide-react";
-import InfoCardGrid from "../components/info-card-grid";
+import InfoCardGrid from "../components/infoCardGrid";
 import useBeranda from "../hooks/useBeranda";
 import Link from "next/link";
 
 export default function Information() {
     const { data, isLoading } = useBeranda();
-    
+
     return (
         <div className="relative md:min-h-screen overflow-hidden">
 

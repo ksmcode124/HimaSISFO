@@ -6,19 +6,19 @@ import { toDateKey, getMonthDays } from "../utils/Calculate";
 import { formatMonthName, formatYear } from "../utils/FormatDate";
 import { WEEK_DAYS } from "../data/constant";
 import { DynamicCalendarProps, EventCardProps } from "../types";
-import { Modal } from "./PopUp";
+import { Modal } from "./pPopUp";
 import { parseEventDate } from "../utils/ParseDate";
-import { FilterComp } from "./FilterComp";
+import { FilterComp } from "./filterComp";
 
 export function DynamicCalendar({ className, events }: DynamicCalendarProps) {
   const today = new Date();
   const [year, setYear] = useState(today.getFullYear());
 
-   useEffect(() => {
+  useEffect(() => {
     const newUrl = `${window.location.pathname}?tahun=${year}`;
     window.history.replaceState({}, "", newUrl);
   }, [year]);
-  
+
   const [month, setMonth] = useState(today.getMonth());
   const [open, setOpen] = useState(false);
   type ModalState =
@@ -32,40 +32,40 @@ export function DynamicCalendar({ className, events }: DynamicCalendarProps) {
     return days.length > 35 ? days.slice(0, 35) : days;
   }, [year, month]);
 
-const eventsByDate = useMemo(() => {
-  const map: Record<string, typeof events> = {};
+  const eventsByDate = useMemo(() => {
+    const map: Record<string, typeof events> = {};
 
-  (events || []).forEach(event => {
-    const start = parseEventDate(event.start); // Date
-    // console.log("start", start);
-    const end = event.end ? parseEventDate(event.end) : start; // Date
+    (events || []).forEach(event => {
+      const start = parseEventDate(event.start); // Date
+      // console.log("start", start);
+      const end = event.end ? parseEventDate(event.end) : start; // Date
 
-    // Pastikan kita tidak mutasi start
-    let current = new Date(start);
+      // Pastikan kita tidak mutasi start
+      let current = new Date(start);
 
-    const endDay = new Date(end);
+      const endDay = new Date(end);
 
-    while (current <= endDay) {
-      // Hanya index untuk bulan yang sedang ditampilkan
-      if (current.getFullYear() === year && current.getMonth() === month) {
-        const key = toDateKey(current);
-        if (!map[key]) map[key] = [];
-        // Push salinan event agar tidak conflict di day loop
-        map[key].push({
-          ...event,
-          start: new Date(event.start),
-          end: event.end ? new Date(event.end) : new Date(event.start),
-        });
+      while (current <= endDay) {
+        // Hanya index untuk bulan yang sedang ditampilkan
+        if (current.getFullYear() === year && current.getMonth() === month) {
+          const key = toDateKey(current);
+          if (!map[key]) map[key] = [];
+          // Push salinan event agar tidak conflict di day loop
+          map[key].push({
+            ...event,
+            start: new Date(event.start),
+            end: event.end ? new Date(event.end) : new Date(event.start),
+          });
+        }
+        // increment current sebagai date baru
+        current = new Date(current);
+        current.setDate(current.getDate() + 1);
+        current.setHours(0, 0, 0, 0);
       }
-      // increment current sebagai date baru
-      current = new Date(current);
-      current.setDate(current.getDate() + 1);
-      current.setHours(0, 0, 0, 0);
-    }
-  });
+    });
 
-  return map;
-}, [events, year, month]);
+    return map;
+  }, [events, year, month]);
 
   const goPrevMonth = () => {
     if (month === 0) {
@@ -157,7 +157,7 @@ const eventsByDate = useMemo(() => {
 
                 {(() => {
                   if (visibleEvents.length === 0) return null;
-                    // console.log("visibleEvents", visibleEvents);
+                  // console.log("visibleEvents", visibleEvents);
                   // EFEK TUMPUK (Buku) jika event >= 3
                   if (visibleEvents.length >= 3) {
                     return (
@@ -166,24 +166,24 @@ const eventsByDate = useMemo(() => {
                           const isTopCard = i === visibleEvents.length - 1;
 
                           return (
-                              <div
-                                key={`${ev.id}-${key}`}
-                                style={{ top: `${i * 4}px`, zIndex: i }}
-                                className={clsx(
-                                  "absolute left-0 right-0 h-[15px] md:h-[35px] rounded-[5px]",
-                                  "flex items-center justify-center shadow-lg border border-white/20",
-                                  "-translate-y-[2px] transition-all cursor-pointer hover:z-[99] hover:-translate-y-2",
-                                  ev.type === "Hima" ? "bg-gradient-to-r from-[#1B3C53] to-[#456882]" :
+                            <div
+                              key={`${ev.id}-${key}`}
+                              style={{ top: `${i * 4}px`, zIndex: i }}
+                              className={clsx(
+                                "absolute left-0 right-0 h-[15px] md:h-[35px] rounded-[5px]",
+                                "flex items-center justify-center shadow-lg border border-white/20",
+                                "-translate-y-[2px] transition-all cursor-pointer hover:z-[99] hover:-translate-y-2",
+                                ev.type === "Hima" ? "bg-gradient-to-r from-[#1B3C53] to-[#456882]" :
                                   ev.type === "Beasiswa" ? "bg-gradient-to-r from-[#7F1D1D] to-[#DC2626]" :
-                                  ev.type === "Lomba" ? "bg-gradient-to-r from-[#CA8A04] to-[#EAB308]" : ""
-                                )}
-                                onClick={() => { setModalState({ mode: "multiple", events: visibleEvents });; setOpen(true); }}
-                              >
-                                {isTopCard && (
-                                  <span className="text-white font-bold text-[8px] md:text-sm">+{dayEvents.length}</span>
-                                )}
-                              </div>
-                            );
+                                    ev.type === "Lomba" ? "bg-gradient-to-r from-[#CA8A04] to-[#EAB308]" : ""
+                              )}
+                              onClick={() => { setModalState({ mode: "multiple", events: visibleEvents });; setOpen(true); }}
+                            >
+                              {isTopCard && (
+                                <span className="text-white font-bold text-[8px] md:text-sm">+{dayEvents.length}</span>
+                              )}
+                            </div>
+                          );
                         })}
                       </div>
                     );

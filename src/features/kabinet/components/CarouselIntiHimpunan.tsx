@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import IntiHimpunanCard from "./IntiHimpunanCard";
+import IntiHimpunanCard from "./intiHimpunanCard";
 import { Anggota, ColorMap } from "../types";
 
 interface CarouselProps {
@@ -137,8 +137,8 @@ export default function CarouselIntiHimpunan({ anggota, colorMap }: CarouselProp
             animate={{
               width:
                 currentIndex === idx
-                  ? isMobile? 30: 50
-                  : isMobile? 10: 20,
+                  ? isMobile ? 30 : 50
+                  : isMobile ? 10 : 20,
               height: isMobile ? 10 : 20,
               backgroundColor: currentIndex === idx ? colorMap.pagination : "#FFFFFF",
             }}

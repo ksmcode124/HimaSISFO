@@ -9,9 +9,9 @@ import {
   IntiHimpunanSection,
   DepartemenListSection,
 } from "@/features/kabinet";
-import { ShellLayer } from "@/components/layout/ShellLayer";
-import { ThemeProvider } from "@/features/kabinet/components/ThemeProvider";
-import { translateToSlug } from "@/lib/utils/translate-slug";
+import { ShellLayer } from "@/components/layout/shellLayer";
+import { ThemeProvider } from "@/features/kabinet/components/themeProvider";
+import { translateToSlug } from "@/lib/utils/translateSlug";
 import { KabinetColorType } from "@/features/kabinet/styles/KabinetColorConfig";
 
 export default function Page() {
@@ -40,7 +40,7 @@ export default function Page() {
 
   const { currentKabinet, kabinetList, departemenList, raw } = displayData;
   const kabinet = translateToSlug(currentKabinet.nama_kabinet) as KabinetColorType
-  return ( 
+  return (
     <ThemeProvider kabinet={kabinet}>
       <ShellLayer backgroundColor={"var(--kabinet-background)"}>
         <KabinetHeroSection
@@ -56,8 +56,8 @@ export default function Page() {
             ornament5: "var(--kabinet-gradient-ornament-5)",
           }}
         />
-        <FilosofiSection 
-          data={currentKabinet} 
+        <FilosofiSection
+          data={currentKabinet}
           kabinet={kabinet}
           colorMap={{
             background: "var(--kabinet-background)",
@@ -73,8 +73,8 @@ export default function Page() {
             borderGradient: "var(--kabinet-gradient-dept-card-button)",
           }}
         />
-        <IntiHimpunanSection 
-          data={raw.kabinet.departemenInti} 
+        <IntiHimpunanSection
+          data={raw.kabinet.departemenInti}
           colorMap={{
             text: "var(--kabinet-color-text)",
             carouselButton: "var(--kabinet-gradient-carousel-button)",
@@ -84,8 +84,8 @@ export default function Page() {
             gradientIntiBackground: "var(--kabinet-gradient-inti-background)",
             borderBottom: "var(--kabinet-gradient-tentang-border)"
           }} />
-        <DepartemenListSection 
-          data={departemenList} 
+        <DepartemenListSection
+          data={departemenList}
           colorMap={{
             text: "var(--kabinet-color-text)",
             ornament1: "var(--kabinet-gradient-ornament-1)",

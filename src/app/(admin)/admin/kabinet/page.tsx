@@ -1,14 +1,14 @@
 'use client'
 
 import z from 'zod'
-import { HeaderSection } from '@/features/admin/components/HeaderSection'
-import { AdminTable } from '@/features/admin/components/AdminTable'
-import { FormModal } from '@/features/admin/components/FormModal'
-import { DetailModal } from '@/features/admin/components/DetailModal'
-import { ConfirmationModal } from '@/features/admin/components/ConfirmationModal'
+import { HeaderSection } from '@/features/admin/components/headerSection'
+import { AdminTable } from '@/features/admin/components/adminTable'
+import { FormModal } from '@/features/admin/components/formModal'
+import { DetailModal } from '@/features/admin/components/detailModal'
+import { ConfirmationModal } from '@/features/admin/components/confirmationModal'
 import { useAdminModal } from '@/features/admin/hooks/useAdminModal'
 import { useConfirm } from '@/features/admin/hooks/useConfirm'
-import { kabinetColumns } from '@/features/admin/components/columns/kabinet-columns'
+import { kabinetColumns } from '@/features/admin/components/columns/kabinetColumns'
 import { createKabinetFields, updateKabinetFields } from '@/features/admin/components/forms/kabinet-form-config'
 import { createKabinetSchema, updateKabinetSchema } from '@/schemas/kabinet.schema'
 import { useAdminEntity, useAdminEntityDetail } from '@/features/admin/hooks/useAdminEntity'
@@ -34,7 +34,7 @@ export default function KabinetPage() {
     KabinetResponseAdmin
   >({
     entity: 'kabinet',
-    mapToRow: (rows) => rows.map((row) =>({
+    mapToRow: (rows) => rows.map((row) => ({
       id: row.id_kabinet,
       nama_kabinet: row.nama_kabinet,
       tahun_kerja: row.tahun_kerja ?? '-',

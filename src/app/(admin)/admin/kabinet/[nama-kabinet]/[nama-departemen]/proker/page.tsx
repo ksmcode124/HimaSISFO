@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
-import { HeaderSection } from '@/features/admin/components/HeaderSection'
-import { AdminTable } from '@/features/admin/components/AdminTable'
-import { FormModal } from '@/features/admin/components/FormModal'
-import { DetailModal } from '@/features/admin/components/DetailModal'
-import { ConfirmationModal } from '@/features/admin/components/ConfirmationModal'
+import { HeaderSection } from '@/features/admin/components/headerSection'
+import { AdminTable } from '@/features/admin/components/adminTable'
+import { FormModal } from '@/features/admin/components/formModal'
+import { DetailModal } from '@/features/admin/components/detailModal'
+import { ConfirmationModal } from '@/features/admin/components/confirmationModal'
 import { useAdminModal } from '@/features/admin/hooks/useAdminModal'
 import { useConfirm } from '@/features/admin/hooks/useConfirm'
-import { prokerColumns } from '@/features/admin/components/columns/proker-columns'
+import { prokerColumns } from '@/features/admin/components/columns/prokerColumns'
 import { createProkerFields, updateProkerFields } from '@/features/admin/components/forms/proker-form-config'
 import { createProkerSchema, updateProkerSchema } from '@/schemas/proker.schema'
 import { useAdminEntity, useAdminEntityDetail } from '@/features/admin/hooks/useAdminEntity'
@@ -71,7 +71,7 @@ export default function ProkerPage() {
   )
 
   const handleDelete = async (id_proker: number) => {
-    const ok =  await confirm.confirm('delete')
+    const ok = await confirm.confirm('delete')
     if (!ok) return
     await remove(id_proker)
     modal.close()
@@ -111,9 +111,9 @@ export default function ProkerPage() {
         initialData={{ id_kabinet, id_departemen }}
         submitLabel="Buat Proker"
         onSubmit={async (data) => {
-          const ok =  await confirm.confirm('save')
+          const ok = await confirm.confirm('save')
           if (!ok) return
-          await create({ ...data, id_kabinet, id_departemen})
+          await create({ ...data, id_kabinet, id_departemen })
           modal.close()
         }}
       />
@@ -128,7 +128,7 @@ export default function ProkerPage() {
         initialData={detail ?? {}}
         submitLabel="Update"
         onSubmit={async (data) => {
-          const ok =  await confirm.confirm('save')
+          const ok = await confirm.confirm('save')
           if (!ok) return
           if (!detail?.id) return
           await update({ id: detail.id, data })

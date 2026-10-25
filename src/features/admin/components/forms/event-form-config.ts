@@ -1,4 +1,4 @@
-import { FormField } from "../FormModal";
+import { FormField } from "../formModal";
 
 export const eventFormFields: FormField[] = [
   {

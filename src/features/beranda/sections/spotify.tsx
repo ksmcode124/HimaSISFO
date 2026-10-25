@@ -3,7 +3,7 @@
 
 import "swiper/css";
 import "swiper/css/navigation";
-import SpotifyCarousel from "../components/spotify-carousel";
+import SpotifyCarousel from "../components/spotifyCarousel";
 import useBeranda from "../hooks/useBeranda";
 
 export default function Spotify() {
@@ -18,7 +18,7 @@ export default function Spotify() {
           <img src="/assets/shared/logos/spotify.png" alt="Spotify" className="h-8" />
         </div>
 
-        <SpotifyCarousel error={error} isLoading={isLoading} episodes={data?.episodes}/>
+        <SpotifyCarousel error={error} isLoading={isLoading} episodes={data?.episodes} />
 
       </section>
       <div className="md:rounded-br-[125px] rounded-br-4xl h-[calc(100%-4rem)] rounded-tr-lg absolute right-15 w-full overflow-hidden shadow-xl top-30 z-1 backdrop-blur" />

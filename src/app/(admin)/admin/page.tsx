@@ -12,8 +12,8 @@ import {
 import { ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils/cn';
 import { Spinner } from '@/components/ui/spinner';
-import { HeaderSection } from '@/features/admin/components/HeaderSection';
-import { DashboardChart } from '@/features/admin/components/DashboardChart';
+import { HeaderSection } from '@/features/admin/components/headerSection';
+import { DashboardChart } from '@/features/admin/components/dashboardChart';
 
 import type { DashboardChartResponse, DashboardSummaryResponse } from '@/features/admin/services/dashboard';
 import { getDashboardChart, getDashboardSummary } from '@/features/admin/services/dashboard';

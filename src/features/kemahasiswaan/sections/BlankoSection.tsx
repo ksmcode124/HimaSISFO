@@ -1,6 +1,6 @@
 import Image from "next/image"
-import { ShellLayer } from "@/components/layout/ShellLayer"
-import { BackgroundLayer, ContentLayer } from "@/components/layout/Layer"
+import { ShellLayer } from "@/components/layout/shellLayer"
+import { BackgroundLayer, ContentLayer } from "@/components/layout/layer"
 import { CTASection } from "../types/ui"
 import { useBlankoSection } from "../hooks/useBlankoSection"
 import { BlankoCTA } from "../components/BlankoCTA"
