@@ -172,6 +172,7 @@ model user {
 
   accounts Account[]
   sessions Session[]
+  auditLogs AuditLog[]
 }
 
 model Account {
@@ -216,6 +217,19 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@map("verification_token")
+}
+
+model AuditLog {
+  id_auditlog Int @id @default(autoincrement())
+  userId      String
+  action      String
+  module      String?
+  description String?
+  createdAt   DateTime @default(now())
+
+  user user @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("AuditLog")
 }
 
 enum Role {
