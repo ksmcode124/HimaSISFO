@@ -93,7 +93,7 @@ export default function SpotifyCarousel({ episodes, error, isLoading }: { episod
                 </div>
               }
               return <>
-                <StackedCarousel
+                {/* <StackedCarousel
                   ref={carouselRef}
                   slideComponent={Slide}
                   slideWidth={w}
@@ -105,7 +105,7 @@ export default function SpotifyCarousel({ episodes, error, isLoading }: { episod
                   transitionTime={400}
                   useGrabCursor
                   onActiveSlideChange={(index) => setActiveIndex(index)}
-                />
+                /> */}
               </>
             }}
           />

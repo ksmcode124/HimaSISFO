@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { NavItem } from '@/features/navigation/'
 import Image from 'next/image'
-import { Glass } from '../ui/glass'
+// import { Glass } from '../ui/glass'
 import { motion } from 'framer-motion'
 
 interface NavigationBarProps {
@@ -43,86 +43,86 @@ export default function NavigationBar({ items }: NavigationBarProps) {
         className={`w-full md:w-auto lg:mx-10 xl:mx-50 justify-center bg-transparent center top-5 h-fit overflow-hidden`}
         role="banner"
       >
-        <Glass preset='custom' className={`${!isMobile ? "bg-[#AFAFAF]/80 md:bg-[#101D2F]/50" : 'bg-transparent'} ${scrolled ? 'duration-700 rounded-t-0 rounded-b-[20px]' : 'rounded-t-[40px] rounded-b-[40px] duration-700'}`} disabled={isMobile}>
-          <nav
-            className="py-2 px-5 md:px-10 lg:px-20 flex w-full "
-            aria-label="Main navigation"
-          >
-            <div className="flex h-14 justify-center md:justify-between items-center w-full gap-30 md:gap-20 lg:gap-30">
-              {/* Logo & Back Button*/}
-              <Link href="/"
-                onClick={() => {
-                  window.scrollTo({ top: 0, behavior: 'smooth' })
-                }}
-                className={`flex items-center px-0 md:px-7 py-1 ${isMobile ? '' : 'bg-[#525252] lg:bg-transparent xl:bg-[#525252]'} rounded-full gap-0 md:gap-3 lg:gap-5`} aria-label="Home">
-                <Glass className="p-2 md:p-1 rounded-sm shadow-4xl size-14 md:size-12 bg-[#AFAFAF]/80 md:bg-white/30 hover:bg-[#AFAFAF]/90" preset="custom">
-                  <div className="relative w-full h-full">
-                    <Image
-                      src={'/assets/shared/logos/logo-himasisfo.webp'}
-                      alt={'HIMASISFO'}
-                      fill
-                      className='object-contain md:fill'
-                      priority />
-                  </div>
-                </Glass>
-                <div className="flex flex-row gap-1 lg:hidden xl:flex">
-                  <h1 className="text-xl font-regular text-white hidden md:block">HIMA</h1>
-                  <h1 className="text-xl font-bold text-white hidden md:block">SISFO</h1>
-                </div>
-              </Link>
-              {/* Desktop Navigation */}
-              <div className='hidden lg:grid'>
-                <ul className='flex items-center py-10 gap-x-8'>
-                  {items.map((item) => {
-                    const isActive = item.href === '/' ? pathname === '/' : (pathname === item.href || pathname.startsWith(item.href))
+        {/* <Glass preset='custom' className={`${!isMobile ? "bg-[#AFAFAF]/80 md:bg-[#101D2F]/50" : 'bg-transparent'} ${scrolled ? 'duration-700 rounded-t-0 rounded-b-[20px]' : 'rounded-t-[40px] rounded-b-[40px] duration-700'}`} disabled={isMobile}> */}
+        <nav
+          className="py-2 px-5 md:px-10 lg:px-20 flex w-full "
+          aria-label="Main navigation"
+        >
+          <div className="flex h-14 justify-center md:justify-between items-center w-full gap-30 md:gap-20 lg:gap-30">
+            {/* Logo & Back Button*/}
+            <Link href="/"
+              onClick={() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+              }}
+              className={`flex items-center px-0 md:px-7 py-1 ${isMobile ? '' : 'bg-[#525252] lg:bg-transparent xl:bg-[#525252]'} rounded-full gap-0 md:gap-3 lg:gap-5`} aria-label="Home">
+              {/* <Glass className="p-2 md:p-1 rounded-sm shadow-4xl size-14 md:size-12 bg-[#AFAFAF]/80 md:bg-white/30 hover:bg-[#AFAFAF]/90" preset="custom"> */}
+              <div className="relative w-full h-full">
+                <Image
+                  src={'/assets/shared/logos/logo-himasisfo.webp'}
+                  alt={'HIMASISFO'}
+                  fill
+                  className='object-contain md:fill'
+                  priority />
+              </div>
+              {/* </Glass> */}
+              <div className="flex flex-row gap-1 lg:hidden xl:flex">
+                <h1 className="text-xl font-regular text-white hidden md:block">HIMA</h1>
+                <h1 className="text-xl font-bold text-white hidden md:block">SISFO</h1>
+              </div>
+            </Link>
+            {/* Desktop Navigation */}
+            <div className='hidden lg:grid'>
+              <ul className='flex items-center py-10 gap-x-8'>
+                {items.map((item) => {
+                  const isActive = item.href === '/' ? pathname === '/' : (pathname === item.href || pathname.startsWith(item.href))
 
-                    return (
-                      <li key={item.href}>
-                        <Link
-                          href={item.href}
-                          className={
-                            `shadow-[0_4px_10px_var(--color-neutral-400)] w-full text-center
+                  return (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        className={
+                          `shadow-[0_4px_10px_var(--color-neutral-400)] w-full text-center
                             text-sm font-medium text-white border-2 border-neutral-50/50 rounded-full px-3 py-1 hover:border-white
                             ${!isActive ? "bg-neutral-100" :
-                              "bg-linear-to-r from-[#A6CFE1] to-[#265A8C] "}
+                            "bg-linear-to-r from-[#A6CFE1] to-[#265A8C] "}
                              `}>
-                          {item.label}
-                        </Link>
-                      </li>
-                    )
-                  })}
-                </ul>
-              </div>
-              {/* Mobile Menu Toggle */}
-              <Glass preset='hard'
+                        {item.label}
+                      </Link>
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
+            {/* Mobile Menu Toggle */}
+            {/* <Glass preset='hard'
                 // type="button"
 
                 className={`hover:bg-[#AFAFAF]/90 w-fit lg:hidden ml-auto rounded-lg p-3 md:p-5 z-50 text-white`}
                 aria-label="Toggle menu"
                 aria-expanded={isOpen}
                 aria-controls="mobile-menu"
+              > */}
+            <div onClick={handleToggle}>
+              <svg
+                className="h-8 md:h-12 w-8 md:w-12"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                viewBox="0 0 24 24"
+                aria-hidden="true"
               >
-                <div onClick={handleToggle}>
-                  <svg
-                    className="h-8 md:h-12 w-8 md:w-12"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    {isOpen ? (
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    ) : (
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-                    )}
-                  </svg>
-                </div>
-
-              </Glass>
+                {isOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
             </div>
-          </nav>
-        </Glass>
+
+            {/* </Glass> */}
+          </div>
+        </nav>
+        {/* </Glass> */}
         {/* Mobile Navigation */}
         {isOpen && (
           <motion.aside

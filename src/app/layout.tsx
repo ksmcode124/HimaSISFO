@@ -81,12 +81,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id">
-      <body
-        className={`${jakarta.variable} ${poppins.variable} ${inter.variable} min-h-screen scrollbar scrollbar-lg scrollbar-thumb-[#AFAFAF] scrollbar-track-scrollbar-track`}
-      >
+    <html lang="id" className={`${jakarta.variable} ${poppins.variable} ${inter.variable}`}>
+      <body className="min-h-screen scrollbar scrollbar-lg scrollbar-thumb-[#AFAFAF] scrollbar - track - scrollbar - track">
         {children}
-      </body>
-    </html>
+      </body >
+    </ html >
   );
 }

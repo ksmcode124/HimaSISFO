@@ -4,7 +4,7 @@
 @plugin 'tailwind-scrollbar';
 @import "tw-animate-css";
 
-@theme {
+@theme inline {
   --breakpoint-xs: 30rem;
   /* Warna Descriptive */
   /* Ini buat display H1- H3 */
@@ -13,154 +13,6 @@
   --font-title: var(--font-poppins), "Segoe UI", system-ui, sans-serif;
   /* Ini buat label, caption  */
   --font-label: var(--font-inter), "Segoe UI", system-ui, sans-serif;
-
-  /* Class untuk huruf */
-  .display1 {
-    font-family: var(--font-heading);
-    font-size: 96px;
-    font-weight: 800;
-    line-height: auto;
-  }
-
-  .display2 {
-    font-family: var(--font-heading);
-    font-size: 80px;
-    font-weight: 800;
-    line-height: auto;
-  }
-
-  .display3 {
-    font-family: var(--font-heading);
-    font-size: 72px;
-    font-weight: 700;
-    line-height: auto;
-  }
-
-  .display4 {
-    font-family: var(--font-heading);
-    font-size: 64px;
-    font-weight: 700;
-    line-height: auto;
-  }
-
-  .display5 {
-    font-family: var(--font-heading);
-    font-size: 56px;
-    font-weight: 700;
-    line-height: auto;
-  }
-
-  h1 {
-    font-family: var(--font-heading);
-    font-size: 48px;
-    font-weight: 700;
-    line-height: auto;
-  }
-
-  h2 {
-    font-family: var(--font-heading);
-    font-size: 40px;
-    font-weight: 700;
-    line-height: auto;
-  }
-
-  h3 {
-    font-family: var(--font-heading);
-    font-size: 36px;
-    font-weight: 700;
-    line-height: auto;
-  }
-
-  .title1 {
-    font-family: var(--font-title);
-    font-size: 32px;
-    font-weight: 700;
-    line-height: auto;
-  }
-
-  .title2 {
-    font-family: var(--font-title);
-    font-size: 28px;
-    font-weight: 700;
-    line-height: auto;
-  }
-
-  .title3 {
-    font-family: var(--font-title);
-    font-size: 24px;
-    font-weight: 600;
-    line-height: auto;
-  }
-
-  .title4 {
-    font-family: var(--font-title);
-    font-size: 20px;
-    font-weight: 600;
-    line-height: auto;
-  }
-
-  .body1 {
-    font-family: var(--font-title);
-    font-size: 18px;
-    font-weight: 400;
-    line-height: auto;
-  }
-
-  .body1-bold {
-    font-family: var(--font-title);
-    font-size: 18px;
-    font-weight: 700;
-    line-height: auto;
-  }
-
-  .body2 {
-    font-family: var(--font-title);
-    font-size: 16px;
-    font-weight: 400;
-    line-height: auto;
-  }
-
-  .body2-bold {
-    font-family: var(--font-title);
-    font-size: 18px;
-    font-weight: 700;
-    line-height: auto;
-  }
-
-  .body3 {
-    font-family: var(--font-title);
-    font-size: 14px;
-    font-weight: 400;
-    line-height: auto;
-  }
-
-  .body4 {
-    font-family: var(--font-title);
-    font-size: 12px;
-    font-weight: 400;
-    line-height: auto;
-  }
-
-  .label1 {
-    font-family: var(--font-label);
-    font-size: 16px;
-    font-weight: 700;
-    line-height: auto;
-  }
-
-  .label2 {
-    font-family: var(--font-label);
-    font-size: 14px;
-    font-weight: 500;
-    line-height: auto;
-  }
-
-  .caption {
-    font-family: var(--font-label);
-    font-size: 12px;
-    font-weight: 400;
-    line-height: auto;
-  }
 
   /* Warna Primary Biru */
   --color-primary-blue-light: #E7EDF6;
@@ -302,9 +154,6 @@
 
 /* BASE */
 @layer base {
-  * {
-    @apply m-0 p-0 box-border;
-  }
 
   html,
   body {
@@ -314,161 +163,166 @@
     background-color: var(--color-background);
     scroll-behavior: smooth;
   }
+
+  h1 {
+    font-family: var(--font-heading);
+    font-size: 48px;
+    font-weight: 700;
+    line-height: auto;
+  }
+
+  h2 {
+    font-family: var(--font-heading);
+    font-size: 40px;
+    font-weight: 700;
+    line-height: auto;
+  }
+
+  h3 {
+    font-family: var(--font-heading);
+    font-size: 36px;
+    font-weight: 700;
+    line-height: auto;
+  }
 }
 
 /* TYPOGRAPHY */
-/* Plus Jakarta Sans */
-@utility text-display-1 {
+/* Class untuk huruf */
+@utility display1 {
   font-family: var(--font-heading);
   font-size: 96px;
   font-weight: 800;
-  line-height: 1.1;
+  line-height: auto;
 }
 
-@utility text-display-2 {
+@utility display2 {
   font-family: var(--font-heading);
   font-size: 80px;
   font-weight: 800;
-  line-height: 1.1;
+  line-height: auto;
 }
 
-@utility text-display-3 {
+@utility display3 {
   font-family: var(--font-heading);
   font-size: 72px;
   font-weight: 700;
-  line-height: 1.1;
+  line-height: auto;
 }
 
-@utility text-display-4 {
+@utility display4 {
   font-family: var(--font-heading);
   font-size: 64px;
   font-weight: 700;
-  line-height: 1.15;
+  line-height: auto;
 }
 
-@utility text-display-5 {
+@utility display5 {
   font-family: var(--font-heading);
   font-size: 56px;
   font-weight: 700;
-  line-height: 1.15;
+  line-height: auto;
 }
 
-@utility text-h1 {
-  font-family: var(--font-heading);
-  font-size: 48px;
-  font-weight: 700;
-  line-height: 1.2;
-}
-
-@utility text-h2 {
-  font-family: var(--font-heading);
-  font-size: 40px;
-  font-weight: 700;
-  line-height: 1.2;
-}
-
-@utility text-h3 {
-  font-family: var(--font-heading);
-  font-size: 36px;
-  font-weight: 700;
-  line-height: 1.25;
-}
-
-/* Poppins */
-@utility text-title-1 {
+@utility title1 {
   font-family: var(--font-title);
   font-size: 32px;
   font-weight: 700;
-  line-height: 1.3;
+  line-height: auto;
 }
 
-@utility text-title-2 {
+@utility title2 {
   font-family: var(--font-title);
   font-size: 28px;
   font-weight: 700;
-  line-height: 1.3;
+  line-height: auto;
 }
 
-@utility text-title-3 {
+@utility title3 {
   font-family: var(--font-title);
   font-size: 24px;
   font-weight: 600;
-  line-height: 1.35;
+  line-height: auto;
 }
 
-@utility text-title-4 {
+@utility title4 {
   font-family: var(--font-title);
   font-size: 20px;
   font-weight: 600;
-  line-height: 1.4;
+  line-height: auto;
 }
 
-@utility text-body-1 {
+@utility body1 {
   font-family: var(--font-title);
   font-size: 18px;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: auto;
 }
 
-@utility text-body-1-bold {
+@utility body1-bold {
   font-family: var(--font-title);
   font-size: 18px;
   font-weight: 700;
-  line-height: 1.5;
+  line-height: auto;
 }
 
-@utility text-body-2 {
+@utility body2 {
   font-family: var(--font-title);
   font-size: 16px;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: auto;
 }
 
-@utility text-body-2-bold {
+@utility body2-bold {
   font-family: var(--font-title);
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
-  line-height: 1.5;
+  line-height: auto;
 }
 
-@utility text-body-3 {
+@utility body3 {
   font-family: var(--font-title);
   font-size: 14px;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: auto;
 }
 
-@utility text-body-4 {
+@utility body4 {
   font-family: var(--font-title);
   font-size: 12px;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: auto;
 }
 
-/* Inter */
-@utility text-label-1 {
+@utility body4-bold {
+  font-family: var(--font-title);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: auto;
+}
+
+@utility label1 {
   font-family: var(--font-label);
   font-size: 16px;
   font-weight: 700;
-  line-height: 1.4;
+  line-height: auto;
 }
 
-@utility text-label-2 {
+@utility label2 {
   font-family: var(--font-label);
   font-size: 14px;
   font-weight: 500;
-  line-height: 1.4;
+  line-height: auto;
 }
 
-@utility text-caption {
+@utility caption {
   font-family: var(--font-label);
   font-size: 12px;
   font-weight: 400;
-  line-height: 1.4;
+  line-height: auto;
 }
 
 .flip-card {
-  background: linear-gradient(to right, var(--color-secondary-blue-normal-active), var(--color-primary-normal), var(--color-secondary-dark-hover), var(--color-primary-dark-hover), var(--color-primary-darker));
+  background: linear-gradient(to right, var(--color-secondary-blue-normal-active), var(--color-primary-blue-normal), var(--color-secondary-blue-dark-hover), var(--color-primary-blue-dark-hover), var(--color-primary-blue-darker));
   background-size: 400% 100%;
   background-position: right;
 }
