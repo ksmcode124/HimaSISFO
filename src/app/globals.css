@@ -255,6 +255,13 @@
   line-height: auto;
 }
 
+@utility title5 {
+  font-family: var(--font-title);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: auto;
+}
+
 @utility body1 {
   font-family: var(--font-title);
   font-size: 18px;

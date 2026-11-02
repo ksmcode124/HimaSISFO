@@ -1,80 +1,100 @@
-"use client"
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils/cn";
 
-import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
-import { cva, type VariantProps } from "class-variance-authority"
-import { useRouter } from "next/navigation"
-
-import { cn } from "@/lib/utils/cn"
-
-const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive cursor-pointer text-[10px] md:text-[14px]",
+const button_variants = cva(
+  "inline-flex shrink-0 items-center justify-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+        primary:
+          "bg-blue-normal text-white-light hover:bg-blue-normal-hover active:bg-blue-normal-active",
         outline:
-          "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
-        secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost:
-          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
-        link: "text-primary underline-offset-4 hover:underline",
-        hima: "rounded-full border bg-linear-to-t from-[#456882] to-[#1B3C53] text-white px-4 py-2"
-        
+          "border border-blue-normal text-blue-normal hover:bg-blue-light",
       },
       size: {
-        default: "h-9 px-4 py-2 has-[>svg]:px-3",
-        sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
-        lg: "rounded-full p-2 md:p-4",
-        icon: "size-9",
-        "icon-sm": "size-8",
-        "icon-lg": "size-10",
+        // Selengkapnya, Komunitas Kami: 134x32, padding 4/12, gap 4, radius 24
+        sm: "body3 h-8 gap-1 rounded-4xl px-[12px] py-[4px] [&_svg]:size-4",
+        // Selengkapnya, Agenda Kegiatan: 232x48, padding 8/16, gap 4, radius 24
+        lg: "body1 h-12 gap-1 rounded-4xl px-[16px] py-[8px] [&_svg]:size-5",
+        // Gabung Tim: fixed 168x45, radius 14
+        cta: "body2 h-[45px] w-[168px] gap-1.5 rounded-xl px-[18px] py-[9px] [&_svg]:size-4",
       },
     },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  }
-)
+    defaultVariants: { variant: "primary", size: "sm" },
+  },
+);
 
-export type ButtonProps =
-  React.ComponentProps<"button"> &
-  VariantProps<typeof buttonVariants> & {
-    asChild?: boolean
-    route?: string
-  }
+type base_props = VariantProps<typeof button_variants> & {
+  with_arrow?: boolean;
+  className?: string;
+  children: React.ReactNode;
+};
+
+type as_link = base_props & {
+  href: string;
+} & Omit<
+    React.AnchorHTMLAttributes<HTMLAnchorElement>,
+    "href" | "className" | "children"
+  >;
+
+type as_button = base_props & {
+  href?: undefined;
+} & Omit<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    "className" | "children"
+  >;
+
+export type button_props = as_link | as_button;
 
 function Button({
+  variant,
+  size,
+  with_arrow,
   className,
-  variant = "default",
-  size = "default",
-  asChild = false,
-  route,
-  onClick,
+  children,
   ...props
-}: ButtonProps) {
-  const Comp = asChild ? Slot : "button"
-  const router = useRouter()
+}: button_props) {
+  const classes = cn(button_variants({ variant, size }), className);
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (onClick) onClick(e)
-    if (route) router.push(route)
+  const content = (
+    <>
+      {children}
+      {with_arrow && <ArrowRight className="shrink-0" aria-hidden />}
+    </>
+  );
+
+  if ("href" in props && props.href) {
+    const { href, ...link_props } = props as as_link;
+    const is_external = /^(https?:|mailto:)/.test(href);
+
+    if (is_external) {
+      return (
+        <a
+          href={href}
+          target={href.startsWith("mailto:") ? undefined : "_blank"}
+          rel="noopener noreferrer"
+          className={classes}
+          {...link_props}
+        >
+          {content}
+        </a>
+      );
+    }
+
+    return (
+      <Link href={href} className={classes} {...link_props}>
+        {content}
+      </Link>
+    );
   }
 
   return (
-    <Comp
-      data-slot="button"
-      data-variant={variant}
-      data-size={size}
-      className={cn(buttonVariants({ variant, size, className }))}
-      onClick={handleClick}
-      {...props}
-    />
-  )
+    <button type="button" className={classes} {...(props as as_button)}>
+      {content}
+    </button>
+  );
 }
 
-export { Button, buttonVariants }
+export { Button, button_variants };
