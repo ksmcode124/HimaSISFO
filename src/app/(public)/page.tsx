@@ -2,6 +2,7 @@ import HeroBeranda from "@/features/beranda/sections/hero";
 import { ArrowRight } from "lucide-react";
 import Vision from "@/features/beranda/sections/vision";
 import History from "@/features/beranda/sections/history";
+import Himpunan from "@/features/beranda/sections/himpunan";
 import Information from "@/features/beranda/sections/information";
 import Kabinet from "@/features/beranda/sections/kabinet";
 import Spotify from "@/features/beranda/sections/spotify";
@@ -15,6 +16,7 @@ import { berandaData } from "@/features/beranda";
 export default function Page() {
   return <ShellLayer>
     <HeroBeranda />
+    <Himpunan />
     <Vision />
     <History />
     <Information />
