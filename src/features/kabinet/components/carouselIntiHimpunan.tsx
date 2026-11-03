@@ -7,7 +7,7 @@
 // import { Anggota, ColorMap } from "../types";
 
 // interface CarouselProps {
-//   anggota: Anggota[];
+//   // anggota: Anggota[];
 //   colorMap: ColorMap
 // }
 
