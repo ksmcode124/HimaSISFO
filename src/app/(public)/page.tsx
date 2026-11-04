@@ -5,6 +5,7 @@ import History from "@/features/beranda/sections/history";
 import Himpunan from "@/features/beranda/sections/himpunan";
 import Information from "@/features/beranda/sections/information";
 import Kabinet from "@/features/beranda/sections/kabinet";
+import Komunitas from "@/features/beranda/sections/komunitas";
 import Spotify from "@/features/beranda/sections/spotify";
 import Awan from "@/features/beranda/components/awan";
 import Pita from "@/features/beranda/components/pita";
@@ -22,6 +23,7 @@ export default function Page() {
     <Information />
     <Awan className="" variant={'head'} />
     <Kabinet />
+    <Komunitas />
     <Graphics />
     <BehindTheWeb />
     <Spotify />
