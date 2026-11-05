@@ -6,8 +6,9 @@
 // import IntiHimpunanCard from "./IntiHimpunanCard";
 // import { Anggota, ColorMap } from "../types";
 
-// interface CarouselProps {
+// interface CarouselProps {beranda-himpunankami
 //   // anggota: Anggota[];
+//   anggota: Anggota[]; 
 //   colorMap: ColorMap
 // }
 
