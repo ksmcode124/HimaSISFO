@@ -45,7 +45,6 @@ export default function HeroBeranda() {
                 <a href="#profileKabinet">Lanjut Jelajahi</a> 
                </Button>
             </div>
-
         <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-x-0 -bottom-px z-[5] h-[90px] md:h-[130px] lg:h-[180px] bg-gradient-to-t from-white via-white/60 to-transparent"
