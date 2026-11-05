@@ -35,11 +35,18 @@ const dataHimpunan = [
   },
 ];
 
+// Satu definisi garis dipakai di atas dan bawah -> ukuran & warna selalu sama
+// mobile 280px | tablet selebar grid dikurangi padding kartu (12px kiri-kanan),
+// jadi ujung kiri sejajar dengan icon kartu bawah kiri & ujung kanan sejajar isi kartu bawah kanan
+// | desktop 894px
+const garis =
+  "mx-auto h-0 w-[280px] border-t border-[#6E6B6B] md:w-[calc(100%-1.5rem)] xl:w-[894px]";
+
 export default function Himpunan() {
   return (
     <section
       id="himpunan"
-      className="relative px-[49px] py-12 sm:px-8 md:py-20 lg:px-16"
+      className="relative px-[49px] py-12 md:px-8 md:py-20 lg:px-16"
     >
       {/*
         Mobile  (< md)     : 1 kolom
@@ -50,8 +57,8 @@ export default function Himpunan() {
       <div className="mx-auto grid w-full max-w-md grid-cols-1 md:max-w-3xl md:grid-cols-2 xl:max-w-[956px] xl:grid-cols-3">
         {/* Heading */}
         <div className="col-span-full mb-[10px] text-center md:mb-8 xl:mb-10">
-          {/* Garis atas: mobile 280px | tablet 500px | desktop 894px. Jarak ke judul: 32 / 48 / 96px */}
-          <div className="mx-auto mb-8 h-0 w-[280px] border-t border-[#6E6B6B] md:mb-12 md:w-[500px] xl:mb-24 xl:w-[894px]" />
+          {/* Garis atas: mobile 280px | tablet mengikuti grid | desktop 894px. Jarak ke judul: 32 / 48 / 96px */}
+          <div className={`${garis} mb-8 md:mb-12 xl:mb-24`} />
           {/* Plus Jakarta Sans Bold. Mobile 28px (Figma mobile) | md ke atas 48px = ukuran H1 */}
           <h2 className="whitespace-nowrap bg-gradient-to-r from-[#BADEFB] via-[#145A92] to-[#BADEFB] bg-clip-text font-heading text-[28px] font-bold leading-[35px] text-transparent md:text-[48px] md:leading-[60px]">
             Himpunan Kami
@@ -61,9 +68,10 @@ export default function Himpunan() {
         {/* Item */}
         {dataHimpunan.map((item) => (
           <article key={item.title} className={item.className}>
-            {/* Grid 2 kolom: icon 73px | judul. Deskripsi melebar di bawahnya */}
+            {/* Grid 2 kolom: icon 73px | judul. Deskripsi melebar di bawahnya.
+                Padding kiri-kanan 12px (px-3) di semua ukuran layar -> deskripsi mobile 268px */}
             <div
-              className={`grid grid-cols-[73px_1fr] items-center gap-x-4 gap-y-3 px-3 pb-2 pt-3 md:px-6 md:py-5 ${item.innerClassName}`}
+              className={`grid grid-cols-[73px_1fr] items-center gap-x-4 gap-y-3 px-3 pb-2 pt-3 md:py-5 ${item.innerClassName}`}
             >
               {/* Icon 73x70 */}
               <div className="flex h-[70px] w-[73px] items-center justify-center rounded-xl bg-secondary-blue-normal">
@@ -91,9 +99,9 @@ export default function Himpunan() {
           </article>
         ))}
 
-        {/* Garis bawah: lebar sama dengan garis atas. Jarak dari kartu: 32 / 40 / 72px */}
-        <div className="col-span-full mt-8 md:mt-10 xl:mt-[72px]">
-          <div className="mx-auto h-0 w-[280px] border-t border-[#6E6B6B] md:w-[500px] xl:w-[894px]" />
+        {/* Garis bawah: lebar sama dengan garis atas. Jarak dari kartu: 32 / 48 / 72px */}
+        <div className="col-span-full mt-8 md:mt-12 xl:mt-[72px]">
+          <div className={garis} />
         </div>
       </div>
     </section>
