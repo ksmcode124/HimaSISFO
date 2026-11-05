@@ -20,7 +20,7 @@
 //   items,
 //   colorMap,
 // }: {
-//   // items: BreadcrumbItemData[];
+//   items: BreadcrumbItemData[];
 //   colorMap: ColorMap;
 // }) {
 //   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
