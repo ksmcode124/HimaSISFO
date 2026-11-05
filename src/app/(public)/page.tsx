@@ -23,7 +23,6 @@ export default function Page() {
     <Graphics />
     <BehindTheWeb />
     <Spotify />
-    <SiteFooter />
   </ShellLayer>
 }
 
@@ -65,7 +64,6 @@ function BehindTheWeb() {
         alt=""
       />
 
-      <Pita className="relative z-30 -mb-10 lg:-mb-40" />
     </div>
   )
 
