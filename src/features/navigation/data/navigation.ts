@@ -5,9 +5,9 @@ export type NavItem = {
 
 export const navItems: NavItem[] = [
   { label: 'Beranda', href: '/' },
-  { label: 'Tentang', href: '/kabinet' },
-  { label: 'Kemahasiswaan', href: '/kemahasiswaan' },
+  { label: 'Kabinet', href: '/kabinet' },
   { label: 'Kegiatan', href: '/kegiatan' },
+  { label: 'Administrasi', href: '/administrasi' },
 ]
 
 export const footerNavItems: NavItem[] = [

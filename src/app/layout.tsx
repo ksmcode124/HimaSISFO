@@ -4,7 +4,7 @@ import { Plus_Jakarta_Sans, Poppins, Inter } from "next/font/google";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["700", "800"],
+  weight: ["400", "500", "700", "800"],
   variable: "--font-jakarta",
   display: "swap",
 });
