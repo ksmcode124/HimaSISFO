@@ -9,11 +9,11 @@ const dataHimpunan = [
     // Tablet: melebar 2 kolom (baris atas), garis pemisah di bawah
     className:
       "border-b border-gray-300 md:col-span-2 xl:col-span-1 xl:border-b-0",
-    // Tablet: isi kartu di tengah. Desktop: kembali rata kiri
-    innerClassName:
-      "md:grid-cols-[73px_auto] md:justify-center xl:grid-cols-[73px_1fr] xl:justify-normal",
+    // Tablet: flex-wrap. Icon + judul satu baris di tengah, deskripsi 100% lebar (basis-full) jadi turun ke baris baru di bawahnya.
+    // Desktop (xl): kembali ke grid rata kiri.
+    innerClassName: "md:flex md:flex-wrap md:justify-center xl:grid xl:justify-normal",
     descClassName:
-      "md:w-[28rem] md:justify-self-center md:text-center xl:w-auto xl:justify-self-stretch xl:text-left",
+      "md:basis-full md:px-16 md:text-center xl:basis-auto xl:px-0 xl:text-left",
   },
   {
     title: "Program Kerja",
