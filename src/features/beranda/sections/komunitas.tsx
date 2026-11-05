@@ -14,7 +14,7 @@ const dataKomunitas = [
     title: "Basket",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
-    icon: "/assets/beranda/komunitas/fluent_sport-basketball.svg", // sesuaikan nama file
+    icon: "/assets/beranda/komunitas/fluent_sport-basketball-24-regular.svg", // sesuaikan nama file
     photo: "/assets/beranda/komunitas/basket.jpg", // GANTI dengan foto kamu
     href: "/komunitas/basket",
   },
@@ -45,65 +45,74 @@ export default function Komunitas() {
       {/* Glow biru di atas */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-64 bg-[radial-gradient(ellipse_at_top,#C5CDF5_0%,transparent_70%)] opacity-70" />
 
-      <div className="relative mx-auto w-full max-w-md md:max-w-3xl lg:max-w-4xl">
+      {/* Container: desktop dikunci 782px = 385 + 12 (gap) + 385 */}
+      <div className="relative mx-auto w-full max-w-md md:max-w-3xl lg:max-w-[782px]">
         {/* Heading */}
-        <h2 className="mb-6 text-center font-heading text-[28px] font-bold leading-[35px] bg-gradient-to-r from-[#75AEE0] to-[#2675B5] bg-clip-text text-transparent md:mb-8">
+        <h2 className="mx-auto mb-9 w-fit whitespace-nowrap bg-gradient-to-r from-[#5B93C6] via-[#145A92] to-[#5B93C6] bg-clip-text font-heading text-[28px] font-bold leading-[35px] text-transparent md:text-[48px] md:leading-[60px]">
           Komunitas Kami
         </h2>
 
-        {/* Grid kartu: mobile 1 kolom, tablet/desktop 2 kolom */}
-        <div className="relative grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-3">
+        {/* Grid kartu: mobile 1 kolom, tablet/desktop 2 kolom.
+            auto-rows-[243px] = tinggi semua kartu sama (sesuai Figma) */}
+        <div className="relative grid grid-cols-1 auto-rows-[243px] gap-4 md:grid-cols-2 md:gap-3">
           {dataKomunitas.map((item, index) => {
-            // Genap: foto di kiri | Ganjil: foto di kanan (zig-zag di mobile,
-            // dan otomatis kiri/kanan seperti desain di 2 kolom)
+            // Genap: foto di kiri | Ganjil: foto di kanan
             const photoKanan = index % 2 === 1;
 
             return (
               <article
                 key={item.title}
-                className={`flex rounded-xl bg-white-light shadow-sm ${
+                className={`flex h-full w-full overflow-hidden rounded-xl bg-white-light shadow-sm ${
                   photoKanan ? "flex-row-reverse" : "flex-row"
                 }`}
               >
-                {/* Foto: sisi dalam melengkung + garis biru. Mobile: menonjol 33px keluar kartu */}
-                <div
-                  className={`relative w-[165px] shrink-0 self-stretch overflow-hidden border-secondary-blue-normal md:w-[130px] ${
-                    photoKanan
-                      ? "-mr-[33px] rounded-l-[50%] rounded-r-xl border-l-[3px] md:mr-0"
-                      : "-ml-[33px] rounded-l-xl rounded-r-[50%] border-r-[3px] md:ml-0"
-                  }`}
-                >
-                  <Image
-                    src={item.photo}
-                    alt={item.title}
-                    fill
-                    sizes="165px"
-                    className="object-cover"
-                  />
+                {/* Foto: lingkaran 300px yang dipotong oleh kartu
+                    (overflow-hidden di <article>), sama seperti Figma.
+                    Lebar area: Mobile 165px | Tablet 170px | Desktop 190px */}
+                <div className="relative h-full w-[165px] shrink-0 md:w-[170px] lg:w-[190px]">
+                  <div
+                    className={`absolute top-1/2 h-[300px] w-[300px] -translate-y-1/2 overflow-hidden rounded-full border-[4px] border-secondary-blue-normal ${
+                      photoKanan ? "left-0" : "right-0"
+                    }`}
+                  >
+                    <Image
+                      src={item.photo}
+                      alt={item.title}
+                      fill
+                      sizes="300px"
+                      className="object-cover"
+                    />
+                  </div>
                 </div>
 
-                {/* Konten */}
-                <div className="flex min-w-0 flex-1 flex-col items-start gap-2 p-3">
-                  {/* Icon (SVG sudah punya lingkaran sendiri, tampil penuh) */}
+                {/* Konten
+                    Mobile: p-3
+                    Tablet+: atas-bawah 16px, sisi luar 24px, sisi dekat foto 16px (Figma) */}
+                <div
+                  className={`flex min-w-0 flex-1 flex-col items-start justify-center gap-2 p-3 md:py-4 ${
+                    photoKanan ? "md:pl-6 md:pr-4" : "md:pl-4 md:pr-6"
+                  }`}
+                >
+                  {/* Icon (SVG sudah punya lingkaran sendiri) */}
                   <Image
                     src={item.icon}
                     alt=""
                     width={32}
                     height={32}
-                    className="h-12 w-12 object-contain"
+                    className="h-8 w-8 shrink-0 object-contain"
                   />
 
                   <h3 className="font-heading text-xl font-bold leading-[30px] text-primary-blue-normal">
                     {item.title}
                   </h3>
 
-                  <p className="body4 leading-4 text-black-normal">
+                  <p className="body4 line-clamp-6 leading-4 text-black-normal">
                     {item.description}
                   </p>
 
                   <Link
                     href={item.href}
-                    className="label2 mt-1 inline-flex items-center gap-1.5 rounded-full bg-blue-normal px-3 py-1.5 text-xs text-white-light transition-colors hover:bg-blue-normal-hover"
+                    className="label2 mt-1 inline-flex shrink-0 items-center gap-1.5 rounded-full bg-blue-normal px-3 py-1.5 text-xs text-white-light transition-colors hover:bg-blue-normal-hover"
                   >
                     Selengkapnya
                     <svg
@@ -126,12 +135,13 @@ export default function Komunitas() {
           })}
 
           {/* Icon di tengah antar kartu (hanya tablet/desktop) */}
-          <div className="absolute left-1/2 top-1/2 hidden h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-4 border-white-normal bg-primary-blue-light-active md:flex">
+          <div className="absolute left-1/2 top-1/2 hidden h-[53.25px] w-[53.25px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-4 border-white-normal bg-primary-blue-light-active md:flex">
             <Image
               src="/assets/beranda/komunitas/mdi_account-group.svg" // sesuaikan nama file
               alt=""
-              width={22}
-              height={22}
+              width={36}
+              height={36}
+              className="h-9 w-9 object-contain"
             />
           </div>
         </div>
