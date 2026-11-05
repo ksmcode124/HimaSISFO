@@ -29,16 +29,24 @@ export default function NavigationBar() {
         const prev = document.body.style.overflow;
         document.body.style.overflow = 'hidden';
         const on_key = (e: KeyboardEvent) => e.key === "Escape" && set_open(false);
+        const mq = window.matchMedia("(min-width: 768px)");
+        const on_resize = (e: MediaQueryListEvent) => {
+            if (e.matches) set_open(false);
+        };
+
         window.addEventListener("keydown", on_key);
+        mq.addEventListener("change", on_resize);
         return () => {
             document.body.style.overflow = prev;
             window.removeEventListener("keydown", on_key);
+            mq.removeEventListener("change", on_resize);
         };
     }, [open]);
 
     return (
         <header
             style={navbar_css_vars(theme)} className="fixed inset-x-0 top-4 z-50 px-4 md:top-[41px]">
+
             <div
                 id="mobile-menu"
                 aria-hidden={!open}
@@ -86,7 +94,57 @@ export default function NavigationBar() {
             >
                 {open ? <X className="size-6" /> : <Menu className="size-6" />}
             </button>
+
+            {/* ini desktop */}
+            <nav
+                aria-label="Main navigation"
+                className="mx-auto hidden h-16 -full max-w-[1055px] items-center justify-between gap-4 rounded-2xl bg-(--nav-bg) px-5 shadow-[0_px_20px_rgba(0,0,0,0.12)] md:flex"
+            >
+
+                {/* logo */}
+                <Link href="/" className="flex shrink-0 items-center gap-1.5">
+                    <span className="flex size-12 items-center justify-center rounded-[14px] border border-white bg-black-dark/[0.03] shadow-[0_4px_8px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.9)] backdrop-blur-md">
+                        <Image src="/assets/shared/logos/logo-himasisfo.webp" alt="Logo HIMASISFO" width={40} height={40} />
+                    </span>
+                    <span className="font-heading text-xl font-bold text-black-normal">
+                        HIMA<span className="text-(--nav-brand)">SISFO</span>
+                    </span>
+                </Link>
+
+                {/* menu */}
+                <ul className="flex items-center gap-1 lg:gap-3">
+                    {navItems.map((item) => (
+                        <li key={item.href}>
+                            <Link
+                                href={item.href}
+                                className={cn(
+                                    "body3 relative rounded-lg px-4 py-2 transition-colors",
+                                    is_active(item.href)
+                                        ? "bg-(--nav-active) text-(--nav-active-text)"
+                                        : cn(
+                                            "text-(--nav-link)",
+                                            "after:pointer-events-none after:absolute after:inset-x-2 after:bottom-0.5 after:h-px after:bg-current after:opacity-0 after:transition-opacity hover:after:opacity-60",
+                                        ),
+                                )}
+                            >
+                                {item.label}
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+
+                {/* help */}
+                <Link
+                    href="/bantuan"
+                    className="body3 flex shrink-0 items-center gap-2 rounded-xl bg-(--nav-cta) p-1.5 text-(--nav-cta-text) transition-colors hover:bg-(--nav-cta-hover)"
+                >
+                    <span className="rounded-lg bg-white-light/15 px-6 py-1.5">Bantuan</span>
+                    <span className="flex size-8 items-center justify-center rounded-lg bg-white-light/15">
+                        <ArrowUpRight className="size-5" />
+                    </span>
+                </Link>
+            </nav>
         </header >
-    )
+    );
 }
 
