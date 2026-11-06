@@ -135,15 +135,15 @@ export default function Komunitas() {
           })}
 
           {/* Icon di tengah antar kartu (hanya tablet/desktop) */}
-          <div className="absolute left-1/2 top-1/2 hidden h-[53.25px] w-[53.25px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-4 border-white-normal bg-primary-blue-light-active md:flex">
+            <div className="absolute left-1/2 top-1/2 hidden h-[53.25px] w-[53.25px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-primary-blue-light-active md:flex">
             <Image
-              src="/assets/beranda/komunitas/mdi_account-group.svg" // sesuaikan nama file
-              alt=""
-              width={36}
-              height={36}
-              className="h-9 w-9 object-contain"
+                src="/assets/beranda/komunitas/mdi_account-group.svg" // sesuaikan nama file
+                alt=""
+                width={44}
+                height={44}
+                className="h-11 w-11 object-contain"
             />
-          </div>
+            </div>
         </div>
 
         {/* Garis bawah */}
