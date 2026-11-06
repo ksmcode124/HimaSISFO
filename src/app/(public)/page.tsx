@@ -5,6 +5,7 @@ import History from "@/features/beranda/sections/history";
 import Himpunan from "@/features/beranda/sections/himpunan";
 import Information from "@/features/beranda/sections/information";
 import Kabinet from "@/features/beranda/sections/kabinet";
+import Komunitas from "@/features/beranda/sections/komunitas";
 import Spotify from "@/features/beranda/sections/spotify";
 import Awan from "@/features/beranda/components/awan";
 import Pita from "@/features/beranda/components/pita";
@@ -22,26 +23,27 @@ export default function Page() {
     <Information />
     <Awan className="" variant={'head'} />
     <Kabinet />
-    <Graphics />
+    <Komunitas />
+    {/* <Graphics /> */}
     <BehindTheWeb />
     <Spotify />
   </ShellLayer>
 }
 
-function Graphics() {
-  return <div className="-mt-10 pb-30">
-    <div className="relative flex items-center justify-center w-full h-full">
-      <img src="/assets/beranda/web-prodi.png" className="w-full" alt="" />
-      <div className="absolute bottom-10 md:bottom-20 p-0.75 rounded-full bg-linear-to-b from-columbia-blue to-[#3385FF] hover:scale-105 transition-transform">
-        <a href="http://si.upnyk.ac.id" target="_blank" className="md:text-2xl font-bold text-white bg-linear-to-b from-primary to-[#456882] rounded-full px-4 py-2 block">
-          WEB PRODI SISTEM INFORMASI
-        </a>
-      </div>
-    </div>
-    <Awan variant={'tail'} className="-mt-5 sm:-mt-8 md:-mt-10 -z-1" />
-    <Pita className="mt-20 sm:mt-15 md:mt-20 lg:mt-10" />
-  </div>
-}
+// function Graphics() {
+//   return <div className="-mt-10 pb-30">
+//     <div className="relative flex items-center justify-center w-full h-full">
+//       <img src="/assets/beranda/web-prodi.png" className="w-full" alt="" />
+//       <div className="absolute bottom-10 md:bottom-20 p-0.75 rounded-full bg-linear-to-b from-columbia-blue to-[#3385FF] hover:scale-105 transition-transform">
+//         <a href="http://si.upnyk.ac.id" target="_blank" className="md:text-2xl font-bold text-white bg-linear-to-b from-primary to-[#456882] rounded-full px-4 py-2 block">
+//           WEB PRODI SISTEM INFORMASI
+//         </a>
+//       </div>
+//     </div>
+//     <Awan variant={'tail'} className="-mt-5 sm:-mt-8 md:-mt-10 -z-1" />
+//     <Pita className="mt-20 sm:mt-15 md:mt-20 lg:mt-10" />
+//   </div>
+// }
 
 function BehindTheWeb() {
   const data = berandaData;

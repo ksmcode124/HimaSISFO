@@ -59,8 +59,9 @@ export default function Himpunan() {
         <div className="col-span-full mb-[10px] text-center md:mb-8 xl:mb-10">
           {/* Garis atas: mobile 280px | tablet mengikuti grid | desktop 894px. Jarak ke judul: 32 / 48 / 96px */}
           <div className={`${garis} mb-8 md:mb-12 xl:mb-24`} />
-          {/* Plus Jakarta Sans Bold. Mobile 28px (Figma mobile) | md ke atas 48px = ukuran H1 */}
-          <h2 className="whitespace-nowrap bg-gradient-to-r from-[#BADEFB] via-[#145A92] to-[#BADEFB] bg-clip-text font-heading text-[28px] font-bold leading-[35px] text-transparent md:text-[48px] md:leading-[60px]">
+          {/* w-fit: kotak h2 selebar teks, supaya gradasi (5B93C6 -> 145A92 -> 5B93C6, ujung disamakan dengan tampilan di Figma) membentang di teks, bukan di seluruh lebar kolom.
+              Plus Jakarta Sans Bold. Mobile 28px (Figma mobile) | md ke atas 48px = ukuran H1 */}
+          <h2 className="mx-auto w-fit whitespace-nowrap bg-gradient-to-r from-[#5B93C6] via-[#145A92] to-[#5B93C6] bg-clip-text font-heading text-[28px] font-bold leading-[35px] text-transparent md:text-[48px] md:leading-[60px]">
             Himpunan Kami
           </h2>
         </div>
