@@ -7,7 +7,7 @@ const dataKomunitas = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
     icon: "/assets/beranda/komunitas/fa_futbol-o.svg",
-    photo: "/assets/beranda/komunitas/futsal.jpg", // GANTI dengan foto kamu
+    photo: "/assets/beranda/komunitas/futsal.webp", // GANTI dengan foto kamu
     href: "/komunitas/futsal",
   },
   {
@@ -15,7 +15,7 @@ const dataKomunitas = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
     icon: "/assets/beranda/komunitas/fluent_sport-basketball-24-regular.svg", // sesuaikan nama file
-    photo: "/assets/beranda/komunitas/basket.jpg", // GANTI dengan foto kamu
+    photo: "/assets/beranda/komunitas/basket.webp", // GANTI dengan foto kamu
     href: "/komunitas/basket",
   },
   {
@@ -23,7 +23,7 @@ const dataKomunitas = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
     icon: "/assets/beranda/komunitas/boxicons_shuttlecock.svg", // sesuaikan nama file
-    photo: "/assets/beranda/komunitas/badminton.jpg", // GANTI dengan foto kamu
+    photo: "/assets/beranda/komunitas/badminton.webp", // GANTI dengan foto kamu
     href: "/komunitas/badminton",
   },
   {
@@ -31,7 +31,7 @@ const dataKomunitas = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
     icon: "/assets/beranda/komunitas/lucide_drum.svg",
-    photo: "/assets/beranda/komunitas/arak-arakan.jpg", // GANTI dengan foto kamu
+    photo: "/assets/beranda/komunitas/arak_arakan.webp", // GANTI dengan foto kamu
     href: "/komunitas/arak-arakan",
   },
 ];
