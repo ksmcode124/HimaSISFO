@@ -12,16 +12,14 @@ import Pita from "@/features/beranda/components/pita";
 import { ShellLayer } from "@/components/layout/shellLayer";
 import { SiteFooter } from "@/components/layout";
 import { berandaData } from "@/features/beranda";
+import ProfileIdentitas from "@/features/beranda/sections/profileIdentitas";
 
 
 export default function Page() {
   return <ShellLayer>
     <HeroBeranda />
     <Himpunan />
-    <Vision />
-    <History />
-    <Information />
-    <Awan className="" variant={'head'} />
+    <ProfileIdentitas />
     <Kabinet />
     <Komunitas />
     {/* <Graphics /> */}
