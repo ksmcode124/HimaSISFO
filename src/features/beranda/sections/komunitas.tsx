@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Button } from "@/components/ui/button"; // sesuaikan path file Button kamu
 
 const dataKomunitas = [
   {
@@ -89,11 +89,11 @@ export default function Komunitas() {
                     Mobile: p-3
                     Tablet+: atas-bawah 16px, sisi luar 24px, sisi dekat foto 16px (Figma) */}
                 <div
-                  className={`flex min-w-0 flex-1 flex-col items-start justify-center gap-2 p-3 md:py-4 ${
+                  className={`flex min-w-0 flex-1 flex-col items-start justify-center p-3 md:py-2 ${
                     photoKanan ? "md:pl-6 md:pr-4" : "md:pl-4 md:pr-6"
                   }`}
                 >
-                  {/* Icon (SVG sudah punya lingkaran sendiri) */}
+                  {/* Icon 32x32 */}
                   <Image
                     src={item.icon}
                     alt=""
@@ -102,48 +102,39 @@ export default function Komunitas() {
                     className="h-8 w-8 shrink-0 object-contain"
                   />
 
-                  <h3 className="font-heading text-xl font-bold leading-[30px] text-primary-blue-normal">
+                  {/* Icon ke judul: 4px */}
+                  <h3 className="mt-1 font-heading text-xl font-bold leading-[30px] text-primary-blue-normal">
                     {item.title}
                   </h3>
 
-                  <p className="body4 line-clamp-6 leading-4 text-black-normal">
+                  {/* Judul ke paragraf: 8px */}
+                  <p className="body4 mt-2 line-clamp-6 shrink-0 leading-4 text-black-normal">
                     {item.description}
                   </p>
 
-                  <Link
+                  {/* Paragraf ke tombol: 16px */}
+                  <Button
                     href={item.href}
-                    className="label2 mt-1 inline-flex shrink-0 items-center gap-1.5 rounded-full bg-blue-normal px-3 py-1.5 text-xs text-white-light transition-colors hover:bg-blue-normal-hover"
+                    with_arrow
+                    className="mt-4 font-medium [&_svg]:size-6"
                   >
                     Selengkapnya
-                    <svg
-                      width="12"
-                      height="12"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M5 12h14M13 6l6 6-6 6" />
-                    </svg>
-                  </Link>
+                  </Button>
                 </div>
               </article>
             );
           })}
 
           {/* Icon di tengah antar kartu (hanya tablet/desktop) */}
-            <div className="absolute left-1/2 top-1/2 hidden h-[53.25px] w-[53.25px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-primary-blue-light-active md:flex">
+          <div className="absolute left-1/2 top-1/2 hidden h-[53.25px] w-[53.25px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-primary-blue-light-active md:flex">
             <Image
-                src="/assets/beranda/komunitas/mdi_account-group.svg" // sesuaikan nama file
-                alt=""
-                width={44}
-                height={44}
-                className="h-11 w-11 object-contain"
+              src="/assets/beranda/komunitas/mdi_account-group.svg" // sesuaikan nama file
+              alt=""
+              width={44}
+              height={44}
+              className="h-11 w-11 object-contain"
             />
-            </div>
+          </div>
         </div>
 
         {/* Garis bawah */}

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+// import { ArrowRight } from "lucide-react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils/cn";
 
@@ -15,7 +15,7 @@ const button_variants = cva(
       },
       size: {
         // Selengkapnya, Komunitas Kami: 134x32, padding 4/12, gap 4, radius 24
-        sm: "body3 h-8 gap-1 rounded-4xl px-[12px] py-[4px] [&_svg]:size-4",
+        sm: "h-8 gap-1 rounded-4xl px-[12px] py-[4px] font-medium text-xs [&_svg]:size-6",
         // Selengkapnya, Agenda Kegiatan: 232x48, padding 8/16, gap 4, radius 24
         lg: "body1 h-12 gap-1 rounded-4xl px-[16px] py-[8px] [&_svg]:size-5",
         // Gabung Tim: fixed 168x45, radius 14
@@ -48,6 +48,25 @@ type as_button = base_props & {
 
 export type button_props = as_link | as_button;
 
+function ArrowIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M3 12h18" />
+      <path d="m16 7 5 5-5 5" />
+    </svg>
+  );
+}
+
 function Button({
   variant,
   size,
@@ -61,7 +80,7 @@ function Button({
   const content = (
     <>
       {children}
-      {with_arrow && <ArrowRight className="shrink-0" aria-hidden />}
+      {with_arrow && <ArrowIcon className="shrink-0" />}
     </>
   );
 
