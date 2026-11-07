@@ -98,7 +98,7 @@ export default function NavigationBar() {
             {/* ini desktop */}
             <nav
                 aria-label="Main navigation"
-                className="mx-auto hidden h-16 -full max-w-[1055px] items-center justify-between gap-4 rounded-2xl bg-(--nav-bg) px-5 shadow-[0_px_20px_rgba(0,0,0,0.12)] md:flex"
+                className="mx-auto hidden h-16 w-full max-w-[1055px] items-center justify-between gap-4 rounded-2xl bg-(--nav-bg) px-5 shadow-[0_px_20px_rgba(0,0,0,0.12)] md:flex"
             >
 
                 {/* logo */}
