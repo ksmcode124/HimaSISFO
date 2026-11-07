@@ -8,7 +8,7 @@ const dataHimpunan = [
     icon: "/assets/beranda/himpunan/iconMahasiswa.svg",
     // Tablet: melebar 2 kolom (baris atas), garis pemisah di bawah
     className:
-      "border-b border-gray-300 md:col-span-2 xl:col-span-1 xl:border-b-0",
+      "border-b border-gray-300 md:col-span-2 xl:col-span-1 xl:border-b-0 xl:border-r",
     // Tablet: flex-wrap. Icon + judul satu baris di tengah, deskripsi 100% lebar (basis-full) jadi turun ke baris baru di bawahnya.
     // Desktop (xl): kembali ke grid rata kiri.
     innerClassName: "md:flex md:flex-wrap md:justify-center xl:grid xl:justify-normal",
@@ -20,7 +20,7 @@ const dataHimpunan = [
     description:
       "Memiliki Total 30+ Program Kerja untuk kebutuhan dan pengembangan mahasiswa.",
     icon: "/assets/beranda/himpunan/iconProgramkerja.svg",
-    className: "border-b border-gray-300 md:border-b-0 xl:border-l",
+    className: "border-b border-gray-300 md:border-b-0",
     innerClassName: "",
     descClassName: "",
   },
@@ -40,13 +40,13 @@ const dataHimpunan = [
 // jadi ujung kiri sejajar dengan icon kartu bawah kiri & ujung kanan sejajar isi kartu bawah kanan
 // | desktop 894px
 const garis =
-  "mx-auto h-0 w-[280px] border-t border-[#6E6B6B] md:w-[calc(100%-1.5rem)] xl:w-[894px]";
+  "mx-auto hidden h-0 border-t border-[#6E6B6B] md:block md:w-[calc(100%-1.5rem)] xl:w-[894px]";
 
 export default function Himpunan() {
   return (
     <section
       id="himpunan"
-      className="relative px-[49px] py-12 md:px-8 md:py-20 lg:px-16"
+      className="relative px-[49px] pb-0 pt-12 md:px-8 md:pb-0 md:pt-20 lg:px-16"
     >
       {/*
         Mobile  (< md)     : 1 kolom
@@ -61,9 +61,9 @@ export default function Himpunan() {
           <div className={`${garis} mb-8 md:mb-12 xl:mb-24`} />
           {/* w-fit: kotak h2 selebar teks, supaya gradasi (5B93C6 -> 145A92 -> 5B93C6, ujung disamakan dengan tampilan di Figma) membentang di teks, bukan di seluruh lebar kolom.
               Plus Jakarta Sans Bold. Mobile 28px (Figma mobile) | md ke atas 48px = ukuran H1 */}
-          <h2 className="mx-auto w-fit whitespace-nowrap bg-gradient-to-r from-[#5B93C6] via-[#145A92] to-[#5B93C6] bg-clip-text font-heading text-[28px] font-bold leading-[35px] text-transparent md:text-[48px] md:leading-[60px]">
+          <h1 className="mx-auto w-fit whitespace-nowrap bg-gradient-to-r from-[#5B93C6] via-[#145A92] to-[#5B93C6] bg-clip-text font-heading text-[28px] font-bold leading-[35px] text-transparent md:text-[48px] md:leading-[60px]">
             Himpunan Kami
-          </h2>
+          </h1>
         </div>
 
         {/* Item */}
