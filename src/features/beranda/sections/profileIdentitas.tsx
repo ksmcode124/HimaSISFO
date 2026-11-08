@@ -9,7 +9,7 @@ const items = [
         id: 'persegi',
         icon: `${base}/kotak_merah.svg`,
         title: 'Persegi Berwarna Merah',
-        desc: 'Melambangkan entitas yang kokoh, berani, dan terstruktur.',
+        desc: 'Melambangkan bahwa Sistem Informasi adalah entitas yang kokoh, berani, dan terstruktur.',
         desktop: 'md:col-start-1 md:row-start-1',
         align: '',
     },
@@ -91,7 +91,7 @@ export default function ProfileIdentitas() {
     return (
         <section className='mx-auto w-full max-w-[1055px] px-4 py-0 md:pt-[68px]'>
             <h1 className="mx-auto mb-8 w-fit bg-linear-to-r from-[#5B93C6] via-[#145A92] to-[#5B93C6] bg-clip-text pb-1 text-[28px] text-transparent md:mb-14 md:text-[44px]">
-                Profile & Identitas
+                Profil dan Identitas
             </h1>
 
             <div className='grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-[1fr_auto_1fr] md:gap-x-0 md:gap-y-0'>
@@ -124,20 +124,20 @@ export default function ProfileIdentitas() {
                 <div aria-hidden className="relative hidden md:col-start-1 md:row-start-2 md:block">
                     {/* kiri atas */}
                     <span className={cn(line, dot,
-                        'left-[149px] right-0 top-[7%] bottom-[62%] border-b-[3px] border-l-[3px] before:-left-[7.5px] before:-top-1.5')} />
+                        'left-[149px] right-0 top-[16%] bottom-[62%] border-b-[3px] border-l-[3px] before:-left-[7.5px] before:-top-1.5')} />
                     {/* kiri bawah */}
                     <span className={cn(line, dot,
-                        'left-[208px] right-0 top-[66%] bottom-[3%] border-l-[3px] border-t-[3px] before:-bottom-1.5 before:-left-[7.5px]')} />
+                        'left-[208px] right-0 top-[66%] bottom-[10%] border-l-[3px] border-t-[3px] before:-bottom-1.5 before:-left-[7.5px]')} />
                 </div>
 
                 {/* line kanan */}
                 <div aria-hidden className="relative hidden md:col-start-3 md:row-start-2 md:block">
                     {/* kanan atas */}
                     <span className={cn(line, dot,
-                        'left-0 right-[173px] top-[14%] bottom-[55%] border-b-[3px] border-r-[3px] before:-right-[7.5px] before:-top-1.5')} />
+                        'left-0 right-[173px] top-[20%] bottom-[55%] border-b-[3px] border-r-[3px] before:-right-[7.5px] before:-top-1.5')} />
                     {/* kanan bawah */}
                     <span className={cn(line, dot,
-                        'left-0 right-[196px] top-[70%] bottom-0 border-r-[3px] border-t-[3px] before:-bottom-1.5 before:-right-[7.5px]')} />
+                        'left-0 right-[196px] top-[70%] bottom-[10%] border-r-[3px] border-t-[3px] before:-bottom-1.5 before:-right-[7.5px]')} />
                 </div>
             </div>
 

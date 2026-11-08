@@ -8,7 +8,7 @@ const dataHimpunan = [
     icon: "/assets/beranda/himpunan/iconMahasiswa.svg",
     // Tablet: melebar 2 kolom (baris atas), garis pemisah di bawah
     className:
-      "border-b border-gray-300 md:col-span-2 xl:col-span-1 xl:border-b-0 xl:border-r",
+      "border-b border-gray-300 md:col-span-2 xl:col-span-1 xl:border-b-0 xl:border-x-[1px]",
     // Tablet: flex-wrap. Icon + judul satu baris di tengah, deskripsi 100% lebar (basis-full) jadi turun ke baris baru di bawahnya.
     // Desktop (xl): kembali ke grid rata kiri.
     innerClassName: "md:flex md:flex-wrap md:justify-center xl:grid xl:justify-normal",
