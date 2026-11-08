@@ -7,6 +7,7 @@ import Information from "@/features/beranda/sections/information";
 import Kabinet from "@/features/beranda/sections/kabinet";
 import Ekosistem from "@/features/beranda/sections/ekosistem";
 import Komunitas from "@/features/beranda/sections/komunitas";
+import Aspirasi from "@/features/beranda/sections/aspirasi";
 import Spotify from "@/features/beranda/sections/spotify";
 import Awan from "@/features/beranda/components/awan";
 import Pita from "@/features/beranda/components/pita";
@@ -25,6 +26,7 @@ export default function Page() {
     <Ekosistem />
     {/* <Graphics /> */}
     <Komunitas />
+    <Aspirasi />
     {/* <Graphics /> */}
     <BehindTheWeb />
     <Spotify />
