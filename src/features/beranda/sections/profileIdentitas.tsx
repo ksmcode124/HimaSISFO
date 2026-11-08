@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
+import React from 'react';
 
 const base = '/assets/beranda/profileIdentitas';
 
@@ -42,71 +43,49 @@ const line = 'absolute border-primary-blue-dark';
 const dot =
     "before:absolute before:size-3 before:rounded-full before:bg-primary-blue-dark before:content-['']";
 
-    /* asset visi misi */
-const base_visi_misi = '/assets/beranda/visiMisi'; 
+/* asset visi misi */
+const base_visi_misi = '/assets/beranda/visiMisi';
 
 const visi_misi: { id: string; title: string; desc: string | string[] }[] = [
     {
         id: 'visi',
         title: 'Visi',
-        desc: 'Mewujudkan Himpunan Sistem Informasi yang responsif dan mampu memperjuangkan aspirasi mahasiswa/i serta menjadi wadah pengembangan potensi, baik secara akademik maupun non-akademik, melalui penguatan fondasi internal organisasi.',
+        desc: 'Mewujudkan himpunan yang harmonis dan berdaya saing dengan menjunjung tinggi nilai kekeluargaan serta keseimbangan antara kerja dan istirahat.',
     },
     {
         id: 'misi',
         title: 'Misi',
         desc: [
-            'Membangun sistem kerja internal yang profesional dan kolaboratif melalui penyelarasan tugas dan fungsi, penguatan koordinasi antar-departemen, serta penerapan manajemen organisasi yang efektif dan transparan.',
-            'Meningkatkan kedekatan dan keterhubungan himpunan dengan mahasiswa/i Sistem Informasi melalui penguatan peran advokasi serta kajian isu kampus guna memperjuangkan kebutuhan dan aspirasi mahasiswa.',
-            'Menyediakan wadah pengembangan diri bagi mahasiswa/i melalui penyelenggaraan kegiatan akademik serta menjalin kerja sama dengan Program Studi Sistem Informasi dalam rangka mendukung peningkatan kualitas akademik mahasiswa.',
-            'Mendorong pengembangan potensi non-akademik mahasiswa/i Program Studi Sistem Informasi melalui fasilitasi minat dan bakat serta kegiatan kreatif yang berorientasi pada peningkatan daya inovatif.',
+            'Mengimprovisasi pelaksanaan program agar lebih relevan dan optimal.',
+            'Menyediakan pelayanan yang responsif terhadap kebutuhan akademik, non-akademik, dan aspirasi mahasiswa.',
+            'Membuka ruang partisipasi aktif bagi seluruh mahasiswa.',
+            'Membangun kolaborasi aktif dengan program studi.',
+            'Mengembangkan soft skill dan hard skill mahasiswa Sistem Informasi.'
         ],
     },
 ];
 
-/* data carousel (sampingnya misi) */ 
-const carousel_rows: {
-    id: string;
-    direction: 'left' | 'right';
-    duration: string;
-    lebar: number;
-    photos: { src: string; alt: string }[];
-}[] = [
-    {
-        id: 'row_1',
-        direction: 'left',
-        duration: '5s',
-        lebar: 188,
-        photos: [
-            { src: `${base_visi_misi}/cobafoto.webp`, alt: 'Kegiatan himpunan 1' },
-            { src: `${base_visi_misi}/cobafoto.webp`, alt: 'Kegiatan himpunan 2' },
-            { src: `${base_visi_misi}/cobafoto.webp`, alt: 'Kegiatan himpunan 3' },
-        ],
-    },
-    {
-        id: 'row_2',
-        direction: 'right',
-        duration: '5s',
-        lebar: 188,
-        photos: [
-            { src: `${base_visi_misi}/cobafoto.webp`, alt: 'Kegiatan himpunan 4' },
-            { src: `${base_visi_misi}/cobafoto.webp`, alt: 'Kegiatan himpunan 5' },
-            { src: `${base_visi_misi}/cobafoto.webp`, alt: 'Kegiatan himpunan 6' },
-        ],
-    },
-    {
-        id: 'row_3',
-        direction: 'left',
-        duration: '4s',
-        lebar: 257,
-        photos: [
-            { src: `${base_visi_misi}/cobafoto.webp`, alt: 'Kegiatan himpunan 7' },
-            { src: `${base_visi_misi}/cobafoto.webp`, alt: 'Kegiatan himpunan 8' },
-        ],
-    },
-];
+const carousel_rows = [
+    // ke kiri: A (margin kiri 10) -> B (foto 2 mulai di -7, kanan kosong)
+    { id: 'row_1', sources: ['1-atas.webp', '2-atas.webp', '3-atas.webp'], from: '10px', to: '-240px', duration: '9s', widths: [227, 226, 214] },
+    // ke kanan: A (foto 2 mulai di 10) -> B (foto 1 mulai di 34, kiri kosong)
+    { id: 'row_2', sources: ['1-tengah.webp', '2-tengah.webp', '3-tengah.webp'], from: '-195px', to: '34px', duration: '9s', widths: [199, 233, 226] },
+    // ke kiri, hanya 2 foto: A (menjorok 77) -> B (kanan kosong)
+    { id: 'row_3', sources: ['arak2an.webp', '2-bawah.webp'], from: '77px', to: '-7px', duration: '9s', widths: [226, 226] },
+].map((row) => ({
+    ...row,
+    photos: row.widths.map((width, i) => ({
+        src: `${base_visi_misi}/${row.sources[i]}`,
+        alt: `Kegiatan himpunan ${row.id}-${i + 1}`,
+        width,
+    })),
+}));
 
 /* class judul visi misi */
 const judul = 'text-center text-[32px] font-bold leading-tight text-[#3B7BB8] md:text-[40px]';
+
+const garis =
+    "mx-auto h-0 w-[calc(100%-1.5rem)] border-t border-[#6E6B6B] md:w-[calc(100%-1.5rem)] xl:w-[894px]";
 
 export default function ProfileIdentitas() {
     return (
@@ -167,7 +146,7 @@ export default function ProfileIdentitas() {
                 {/* warna ungu di tengah */}
                 <div
                     aria-hidden
-                    className="pointer-events-none absolute left-1/2 top-1/2 h-[300px] w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-[#C9D6FA] via-[#CDB9F8] to-[#C9D6FA] opacity-70 blur-[70px] md:h-[620px] md:w-[85%] md:blur-[90px]"
+                    className="pointer-events-none absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-[#C9D6FA] via-[#CDB9F8] to-[#C9D6FA] opacity-70 md:block md:h-[620px] md:w-[85%] md:blur-[90px]"
                 />
 
                 {/* jarak visi dan misi*/}
@@ -179,9 +158,9 @@ export default function ProfileIdentitas() {
                                 <div className="grid grid-cols-1 md:grid-cols-2">
                                     {/* teks visi */}
                                     <div className="mx-auto flex w-full max-w-[269px] flex-col gap-[3px] pt-9 md:mx-0 md:max-w-[350px] md:gap-0 md:pt-0">
-                                        <h2 className={judul}>{item.title}</h2>
+                                        <h1 className={judul}>{item.title}</h1>
                                         <div className="md:flex md:flex-1 md:items-center">
-                                            <p className="body3 text-justify leading-relaxed text-primary-blue-dark md:body2 md:text-left">
+                                            <p className="body3 font-medium text-justify leading-relaxed md:title3 md:font-medium md:text-[24px] md:text-left">
                                                 {item.desc as string}
                                             </p>
                                         </div>
@@ -190,10 +169,10 @@ export default function ProfileIdentitas() {
                                     {/* foto visi untuk desktop */}
                                     <div className="relative hidden h-[548px] w-full max-w-[501px] justify-self-end overflow-hidden rounded-[52px] md:block">
                                         <Image
-                                            src={`${base_visi_misi}/cobafoto.webp`}
+                                            src={`${base_visi_misi}/arak2an.webp`}
                                             alt="Foto kegiatan himpunan — Visi"
                                             fill
-                                            className="object-cover"
+                                            className="object-cover object-[100%_center]"
                                             sizes="(min-width: 768px) 501px, 100vw"
                                         />
                                     </div>
@@ -204,16 +183,16 @@ export default function ProfileIdentitas() {
                             {item.id === 'misi' && (
                                 <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-0">
                                     {/* teks misi */}
-                                    <div className="order-first mx-auto flex w-full max-w-[269px] flex-col gap-[3px] md:order-last md:mx-0 md:min-h-[444px] md:max-w-[400px] md:justify-self-end md:gap-4">
+                                    <div className="order-first mx-auto flex w-full max-w-[269px] flex-col gap-[3px] md:order-last md:mx-0 md:min-h-[444px] md:max-w-[400px] md:justify-self-end md:gap-[39px]">
                                         <h2 className={judul}>{item.title}</h2>
                                         <div className="md:flex md:flex-1 md:items-center">
                                             <ol className="flex flex-col gap-2 text-left">
                                                 {(item.desc as string[]).map((poin, idx) => (
-                                                    <li key={idx} className="flex gap-2 text-primary-blue-dark">
-                                                        <span className="body3 shrink-0">
+                                                    <li key={idx} className="flex items-start gap-2">
+                                                        <span className="body3 shrink-0 font-medium md:title4">
                                                             {idx + 1}.
                                                         </span>
-                                                        <p className="body3 text-justify leading-relaxed md:text-left">
+                                                        <p className="body3 font-medium text-justify leading-relaxed md:title4 md:font-medium md:text-left">
                                                             {poin}
                                                         </p>
                                                     </li>
@@ -228,25 +207,31 @@ export default function ProfileIdentitas() {
                                         <div className="flex h-[444px] w-[482px] shrink-0 flex-col gap-1.5 overflow-hidden md:w-full">
                                             {carousel_rows.map((row) => (
                                                 /* container-type biar animasi tahu lebar frame */
-                                                <div key={row.id} className="overflow-hidden [container-type:inline-size]">
+                                                <div
+                                                    key={row.id}
+                                                    className='overflow-hidden'
+                                                >
                                                     <div
                                                         className="slide_track flex w-max gap-1.5 hover:[animation-play-state:paused]"
                                                         style={{
-                                                            animation: `geser_${row.direction} ${row.duration} ease-in-out infinite alternate`,
-                                                        }}
+                                                            '--from': row.from,
+                                                            '--to': row.to,
+                                                            '--dur': row.duration,
+                                                        } as React.CSSProperties
+                                                        }
                                                     >
                                                         {row.photos.map((foto, idx) => (
                                                             <div
                                                                 key={idx}
                                                                 className="relative h-[144px] shrink-0 overflow-hidden rounded-[26px]"
-                                                                style={{ width: row.lebar }}
+                                                                style={{ width: foto.width }}
                                                             >
                                                                 <Image
                                                                     src={foto.src}
                                                                     alt={foto.alt}
                                                                     fill
                                                                     className="object-cover"
-                                                                    sizes={`${row.lebar}px`}
+                                                                    sizes={`${foto.width}px`}
                                                                 />
                                                             </div>
                                                         ))}
@@ -263,7 +248,9 @@ export default function ProfileIdentitas() {
             </div>
 
             {/* batas setelah visi misi */}
-            <hr className="mt-14 border-t border-primary-blue-dark/20 md:mt-[92px]" />
-        </section>
+            <div className="col-span-full mt-8 md:mt-12 xl:mt-[72px]">
+                <div className={garis} />
+            </div>
+        </section >
     );
 }
