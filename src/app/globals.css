@@ -471,8 +471,7 @@
     background: var(--gradient, transparent);
   }
 
-  @media (min-width: 768px) {
-
+ @media (min-width: 768px) {
     .border-gradient-x::before,
     .border-gradient-y::before {
       padding: 4px;
@@ -499,4 +498,17 @@
     }
   }
 
+  .text-gradient-blue {
+    display: inline-block;
+    background-image: linear-gradient(
+      to right, 
+      var(--color-blue-light-active), 
+      var(--color-blue-dark-hover), 
+      var(--color-blue-light-active)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
 }
