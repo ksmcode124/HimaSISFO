@@ -41,8 +41,8 @@ export default function Aspirasi() {
         {/* Card utama */}
         <div className="mx-auto grid min-h-[1037.5px] w-full grid-cols-1 grid-rows-[auto_auto] gap-2 overflow-hidden rounded-[28px] bg-white shadow-[0_8px_25px_rgba(0,0,0,0.12)] md:h-[572.1875px] md:min-h-0 md:max-w-[982px] md:grid-cols-[42%_1fr] md:grid-rows-1 md:gap-3">
           
-          {/* Panel biru */}
-          <div className="relative flex min-h-[487.6px] w-full shrink-0 flex-col overflow-hidden rounded-[20px] bg-primary-blue-normal p-6 text-white md:min-h-0 md:w-full md:rounded-[20px] md:px-7 md:py-7">
+          {/* Panel biru (palette: #0A3981) */}
+          <div className="relative flex min-h-[487.6px] w-full shrink-0 flex-col overflow-hidden rounded-[20px] bg-[#0A3981] p-6 text-white md:min-h-0 md:w-full md:rounded-[20px] md:px-7 md:py-7">
             {/* Watermark logo */}
             <div className="pointer-events-none absolute -bottom-4 right-0 rotate-[-12deg] opacity-[0.08]">
               <Image
@@ -73,7 +73,7 @@ export default function Aspirasi() {
             <div className="relative mt-6 flex flex-col gap-4 md:mt-7 md:gap-5">
               {tahapanAspirasi.map((item) => (
                 <div key={item.nomor} className="flex items-start gap-3">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#9BD0FA] text-xs font-bold text-primary-blue-normal">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#9BD0FA] text-xs font-bold text-[#0A3981]">
                     {item.nomor}
                   </div>
 
@@ -100,7 +100,7 @@ export default function Aspirasi() {
               <div className="flex flex-col gap-2">
                 <label
                   htmlFor="nama"
-                  className="label1 font-semibold text-primary-blue-normal"
+                  className="label1 font-semibold text-[#0A3981]"
                 >
                   Nama{" "}
                   <span className="font-normal text-[#999999]">
@@ -108,6 +108,7 @@ export default function Aspirasi() {
                   </span>
                 </label>
 
+                {/* Placeholder "Contoh: Rizky Pratama" = body2 */}
                 <input
                   id="nama"
                   name="nama"
@@ -116,7 +117,8 @@ export default function Aspirasi() {
                   className="body2 h-9 w-full rounded-lg border border-[#D4DFEF] bg-white px-3 text-[#333333] outline-none placeholder:text-[#AAAAAA] focus:border-[#2675B5] md:h-10"
                 />
 
-                <p className="body2 text-[#999999]">
+                {/* Poppins Regular 13px */}
+                <p className="text-[13px] font-normal text-[#999999]">
                   Kosongkan jika ingin mengirim secara anonim.
                 </p>
               </div>
@@ -125,12 +127,13 @@ export default function Aspirasi() {
               <div className="flex flex-1 flex-col gap-2">
                 <label
                   htmlFor="isi-aspirasi"
-                  className="label1 font-semibold text-primary-blue-normal"
+                  className="label1 font-semibold text-[#0A3981]"
                 >
                   Isi Aspirasi <span className="text-red-500">*</span>
                 </label>
 
                 <div className="relative flex-1">
+                  {/* Placeholder "Ceritakan aspirasimu..." = body2 */}
                   <textarea
                     id="isi-aspirasi"
                     name="aspirasi"
@@ -147,22 +150,26 @@ export default function Aspirasi() {
                   </span>
                 </div>
 
-                <p className="body2 text-[#999999]">
+                <p className="body4 text-[#999999]">
                   Tulis dengan sopan dan jelas agar mudah ditindaklanjuti.
                 </p>
               </div>
 
               {/* Tombol kirim */}
               <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                {/* Figma: 197x52 (hug), fill Biru Navy #0A3981, teks + panah,
+                    drop shadow X0 Y10 blur24 spread-6 warna #0D47A1 45% */}
                 <Button
                   type="submit"
+                  size="lg"
+                  with_arrow
                   disabled={!aspirasi.trim()}
-                  className="w-full md:order-2 md:w-auto"
+                  className="h-[52px] w-full gap-4 rounded-xl bg-[#0A3981] px-[30px] shadow-[0_10px_24px_-6px_rgba(13,71,161,0.45)] hover:bg-[#0A3981]/90 active:bg-[#082F6B] disabled:shadow-none md:order-2 md:w-auto"
                 >
                   Kirim Aspirasi
                 </Button>
 
-                <p className="body2 text-[#999999] md:max-w-[220px]">
+                <p className="body4 text-[#999999] md:max-w-[220px]">
                   Identitasmu hanya dapat dilihat oleh pengurus.
                 </p>
               </div>
