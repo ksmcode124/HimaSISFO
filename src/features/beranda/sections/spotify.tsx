@@ -79,28 +79,28 @@ export default function Spotify() {
   const prev = () => change(-1);
   const next = () => change(1);
 
-  // Mobile (Figma): jarak frame (termasuk kartu putih) ke tepi section =
-  // kanan 31px, bawah 64px. Kartu putih menonjol 13px (kanan) dan 30px
-  // (bawah), jadi padding = 31-13 = 18px dan 64-30 = 34px.
+  // Mobile: padding section kanan 31px, bawah 64px (dari tepi kartu hijau).
   // Desktop (Figma): jarak frame (termasuk kartu putih) ke tepi section =
   // kanan 100px, bawah 133px. Kartu putih sudah menonjol 26px (kanan) dan
   // 24px (bawah), jadi padding = 100-26 = 74px dan 133-24 = 109px.
   return (
     <section
       id="spotify"
-      className="pb-[34px] pr-[18px] pt-12 sm:pr-8 md:py-20 lg:pb-[109px] lg:pr-[74px]"
+      className="pb-[64px] pr-[31px] pt-12 sm:pr-8 md:py-20 lg:pb-[109px] lg:pr-[74px]"
     >
       <div className="relative w-full max-w-[1516px]">
         {/* Kartu putih/abu-abu di belakang (offset kanan-bawah).
-            Desktop (Figma): 1351x407 = mulai 79px dari atas & 191px dari kiri kartu hijau,
-            menonjol 26px ke kanan dan 24px ke bawah */}
+            Selalu mulai dari tepi kiri (left-0) supaya memanjang ke belakang
+            kartu hijau sampai mentok kiri layar.
+            Desktop (Figma): mulai 79px dari atas, menonjol 26px ke kanan dan
+            24px ke bawah. Tablet: 16px ke kanan/bawah. Mobile: 13px/30px. */}
         <div
           aria-hidden="true"
-          className="absolute -bottom-[30px] -right-[13px] left-0 top-[100px] rounded-l-none rounded-tr-2xl rounded-br-[96px] bg-[#F1F1F1] shadow-md md:bottom-0 md:right-0 md:top-0 md:translate-x-4 md:translate-y-4 lg:-bottom-[24px] lg:left-[191px] lg:-right-[26px] lg:top-[79px] lg:translate-x-0 lg:translate-y-0"
+          className="absolute -bottom-[30px] -right-[13px] left-0 top-[100px] rounded-l-none rounded-tr-2xl rounded-br-[96px] bg-[#F1F1F1] shadow-md md:-bottom-4 md:-right-4 md:top-4 lg:-bottom-[24px] lg:-right-[26px] lg:top-[79px]"
         />
 
         {/* Kartu hijau utama */}
-        <div className="relative flex flex-col gap-0 overflow-hidden rounded-l-none rounded-tr-2xl [--cover:min(calc((100vw_-_18px)*0.5),240px)] md:[--cover:220px] lg:[--cover:309px] rounded-br-[96px] bg-linear-to-b from-[#1DB954] to-[#0E5E2A] pb-[9%] pl-[7%] pr-[12.4%] pt-[6.2%] text-white md:flex-row md:items-center md:gap-10 md:rounded-br-[96px] md:p-8 lg:h-[462px] lg:px-12 lg:py-10">
+        <div className="relative flex flex-col gap-0 overflow-hidden rounded-l-none rounded-tr-2xl [--cover:min(calc((100vw_-_31px)*0.5),240px)] md:[--cover:220px] lg:[--cover:309px] rounded-br-[96px] bg-linear-to-b from-[#1DB954] to-[#0E5E2A] pb-[9%] pl-[7%] pr-[12.4%] pt-[6.2%] text-white md:flex-row md:items-center md:gap-10 md:rounded-br-[96px] md:p-8 lg:h-[462px] lg:px-12 lg:py-10">
           {/* Logo Spotify */}
           <Image
             src="/assets/beranda/spotify/spotify_logo.svg"
