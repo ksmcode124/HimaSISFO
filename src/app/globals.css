@@ -478,6 +478,26 @@
     }
   }
 
+  /* animasi carousel Visi Misi (bolak balik) */
+  /* mulai dari kiri, geser sampai foto paling kanan kelihatan */
+  @keyframes geser_left {
+    from { transform: translateX(0); }
+    to   { transform: translateX(calc(100cqw - 100%)); }
+  }
+
+  /* mulai dari kanan, geser sampai foto paling kiri kelihatan */
+  @keyframes geser_right {
+    from { transform: translateX(calc(100cqw - 100%)); }
+    to   { transform: translateX(0); }
+  }
+
+  /* matiin animasi kalau user pakai reduce motion */
+  @media (prefers-reduced-motion: reduce) {
+    .slide_track {
+      animation: none !important;
+    }
+  }
+
   .text-gradient-blue {
     display: inline-block;
     background-image: linear-gradient(
