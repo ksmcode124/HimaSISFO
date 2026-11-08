@@ -23,7 +23,7 @@ export default function Page() {
     <ProfileIdentitas />
     <Kabinet />
     <Ekosistem />
-    <Graphics />
+    {/* <Graphics /> */}
     <Komunitas />
     {/* <Graphics /> */}
     <BehindTheWeb />
