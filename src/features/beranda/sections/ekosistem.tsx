@@ -50,7 +50,7 @@ export default function EkosistemLainnya() {
   const data = ekosistemData[activeTab];
 
   return (
-    <section className="w-full py-8 md:py-12 px-4 sm:px-6 md:px-10 flex flex-col items-center">
+    <section className="w-full pt-8 md:pt-12 px-4 sm:px-6 md:px-10 flex flex-col items-center">
       <h1
         className="text-center text-3xl md:text-5xl font-bold mb-5 md:mb-8 bg-clip-text text-transparent"
         style={{

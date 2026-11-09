@@ -6,8 +6,9 @@ import Kabinet from "@/features/beranda/sections/kabinet";
 import Ekosistem from "@/features/beranda/sections/ekosistem";
 import Komunitas from "@/features/beranda/sections/komunitas";
 import Spotify from "@/features/beranda/sections/spotify";
-import Awan from "@/features/beranda/components/awan";
-import Pita from "@/features/beranda/components/pita";
+import Aspirasi from "@/features/beranda/sections/aspirasi";
+// import Awan from "@/features/beranda/components/awan";
+// import Pita from "@/features/beranda/components/pita";
 import { ShellLayer } from "@/components/layout/shellLayer";
 import { SiteFooter } from "@/components/layout";
 import { berandaData } from "@/features/beranda";
@@ -17,13 +18,20 @@ import ProfileIdentitas from "@/features/beranda/sections/profileIdentitas";
 export default function Page() {
   return <ShellLayer>
     <HeroBeranda />
+    {/* Background tetap, di lapisan paling bawah */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 -z-10 bg-[url('/assets/beranda/Background-Wave.svg')] bg-cover bg-center bg-no-repeat"
+      />
+
     <Himpunan />
     <ProfileIdentitas />
     <Kabinet />
-    <Ekosistem />Z
+    <Ekosistem />
     <Komunitas />
+    <Aspirasi/>
     {/* <Graphics /> */}
-    <BehindTheWeb />
+    {/* <BehindTheWeb /> */}
     <Spotify />
   </ShellLayer>
 }

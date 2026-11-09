@@ -30,7 +30,7 @@ export default function Aspirasi() {
   return (
     <section
       id="aspirasi"
-      className="relative overflow-hidden px-[49px] py-12 sm:px-8 md:py-20 lg:px-16"
+      className="relative overflow-hidden px-[49px] pb-12 sm:pb-8 md:pb-20 lg:pb-16"
     >
       {/* Container utama */}
       <div className="relative mx-auto w-full max-w-[1006px]">

@@ -42,7 +42,8 @@ export default function KabinetPage() {
 
   return (
     <section className="flex w-full flex-col items-center justify-center bg-[#F2F2F2] text-center
-                        min-h-[326px] gap-2 pt-4 md:h-[522px] md:gap-6 md:gap-6 lg:min-h-[718px] lg:gap-8">
+                        min-h-[326px] gap-2 md:h-[522px] md:gap-6 md:gap-6 lg:min-h-[718px] lg:gap-8
+                        mt-6 md:mt-10 lg:mt-14 lg:mb-6 ">
       <div className="w-full min-h-[35px] md:[50px] lg:h-[60px]">
         <h1 className="text-[28px] md:text-4xl lg:text-5xl font-bold text-gradient-blue">
         Kabinet Kami
