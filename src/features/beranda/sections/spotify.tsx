@@ -22,7 +22,7 @@ const episodes: Episode[] = [
     title: "Katanya “Semester Ganjil, Semester Keramat ?!” Mangyea?",
     description:
       "Hai, apa kabar kamu di semester ini? Semoga masih semangat yaa di tengah gempuran projek akhir. Buat kamu yang lagi butuh semangat, episode ini cocok buat jadi teman belajar kamu.",
-    cover: "/assets/beranda/spotify/eps-4.webp",
+    cover: "/assets/beranda/komunitas/futsal.webp", // SEMENTARA, nanti ganti /assets/beranda/spotify/eps-4.webp
     spotify_url: "https://open.spotify.com/",
     follow_url: "https://open.spotify.com/",
   },
@@ -32,7 +32,7 @@ const episodes: Episode[] = [
     title: "Judul episode ketiga",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.",
-    cover: "/assets/beranda/spotify/eps-3.webp",
+    cover: "/assets/beranda/komunitas/basket.webp", // SEMENTARA, nanti ganti /assets/beranda/spotify/eps-3.webp
     spotify_url: "https://open.spotify.com/",
     follow_url: "https://open.spotify.com/",
   },
@@ -42,23 +42,28 @@ const episodes: Episode[] = [
     title: "Judul episode kedua",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.",
-    cover: "/assets/beranda/spotify/eps-2.webp",
+    cover: "/assets/beranda/komunitas/badminton.webp", // SEMENTARA, nanti ganti /assets/beranda/spotify/eps-2.webp
     spotify_url: "https://open.spotify.com/",
     follow_url: "https://open.spotify.com/",
   },
 ];
 
-// Durasi animasi ganti episode (harus sama dengan duration-300 di bawah)
-const TRANSITION_MS = 300;
+// Durasi animasi ganti episode (Figma: Smart animate, Slow, 600ms).
+// Harus sama dengan duration-[600ms] di bawah.
+const TRANSITION_MS = 600;
+
+const SHOW_EPISODE_NAV = true;
 
 export default function Spotify() {
   const [index, setIndex] = useState(0);
   const current = episodes[index];
 
-  // phase "out": cover transparan + piringan geser ke kiri.
-  // Setelah durasi selesai, episode diganti lalu kembali "idle"
-  // (cover baru muncul + piringan kembali ke posisi semula).
+  // phase "out": piringan geser ke kiri selama transisi, lalu kembali "idle"
+  // (piringan kembali ke posisi semula).
   const [phase, setPhase] = useState<"idle" | "out">("idle");
+  // index episode sebelumnya, disimpan selama transisi supaya gambar lama
+  // tetap ada di bawah gambar baru (crossfade, tidak pernah kosong)
+  const [prevIndex, setPrevIndex] = useState<number | null>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -70,9 +75,12 @@ export default function Spotify() {
   const change = (step: 1 | -1) => {
     if (phase === "out") return; // abaikan klik saat animasi berjalan
     setPhase("out");
+    setPrevIndex(index);
+    // episode langsung diganti, gambar baru memudar masuk di atas gambar lama
+    setIndex((i) => (i + step + episodes.length) % episodes.length);
     timer.current = setTimeout(() => {
-      setIndex((i) => (i + step + episodes.length) % episodes.length);
       setPhase("idle");
+      setPrevIndex(null);
     }, TRANSITION_MS);
   };
 
@@ -121,7 +129,7 @@ export default function Spotify() {
                   tidak saling menimpa. */}
               <div
                 aria-hidden="true"
-                className={`absolute left-[46%] top-[6%] size-[89%] md:left-[51.5%] md:top-[1.5%] md:size-[97%] transition-transform duration-300 ease-in-out motion-reduce:transition-none ${
+                className={`absolute left-[46%] top-[6%] size-[89%] md:left-[51.5%] md:top-[1.5%] md:size-[97%] transition-transform duration-[600ms] ease-out motion-reduce:transition-none ${
                   phase === "out" ? "-translate-x-[14%]" : "translate-x-0"
                 }`}
               >
@@ -136,41 +144,54 @@ export default function Spotify() {
                 </div>
               </div>
 
-              {/* Cover */}
-              <div
-                className={`relative z-10 size-full overflow-hidden rounded-xl shadow-lg transition-opacity duration-300 ease-in-out motion-reduce:transition-none ${
-                  phase === "out" ? "opacity-0" : "opacity-100"
-                }`}
-              >
+              {/* Cover: crossfade. Gambar lama tetap di bawah, gambar baru
+                  memudar masuk di atasnya, jadi cover tidak pernah kosong. */}
+              <div className="relative z-10 size-full overflow-hidden rounded-xl shadow-lg">
+                {prevIndex !== null && (
+                  <Image
+                    key={`lama-${episodes[prevIndex].id}`}
+                    src={episodes[prevIndex].cover}
+                    alt=""
+                    fill
+                    sizes="309px"
+                    className="object-cover"
+                  />
+                )}
                 <Image
                   key={current.id}
                   src={current.cover}
                   alt={`Cover ${current.episode} ${current.title}`}
                   fill
                   sizes="309px"
-                  className="object-cover"
+                  className={`object-cover opacity-100 transition-opacity duration-[600ms] ease-out motion-reduce:transition-none ${
+                    prevIndex !== null ? "starting:opacity-0" : ""
+                  }`}
                 />
               </div>
 
-              {/* Prev */}
-              <button
-                type="button"
-                onClick={prev}
-                aria-label="Episode sebelumnya"
-                className="absolute left-0 top-1/2 z-20 flex size-[calc(var(--cover)*0.285)] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#2b2b2b] text-white transition-colors hover:bg-[#1f1f1f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white md:size-10"
-              >
-                <ChevronLeft className="size-6 md:size-5" />
-              </button>
+              {SHOW_EPISODE_NAV && (
+                <>
+                {/* Prev */}
+                <button
+                  type="button"
+                  onClick={prev}
+                  aria-label="Episode sebelumnya"
+                  className="absolute left-0 top-1/2 z-20 flex size-[calc(var(--cover)*0.285)] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#2b2b2b] text-white transition-colors duration-300 ease-out hover:bg-[#1f1f1f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white md:size-10"
+                >
+                  <ChevronLeft className="size-6 md:size-5" />
+                </button>
 
-              {/* Next */}
-              <button
-                type="button"
-                onClick={next}
-                aria-label="Episode berikutnya"
-                className="absolute right-0 top-1/2 z-20 flex size-[calc(var(--cover)*0.285)] -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-[#2b2b2b] text-white transition-colors hover:bg-[#1f1f1f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white md:size-10"
-              >
-                <ChevronRight className="size-6 md:size-5" />
-              </button>
+                {/* Next */}
+                <button
+                  type="button"
+                  onClick={next}
+                  aria-label="Episode berikutnya"
+                  className="absolute right-0 top-1/2 z-20 flex size-[calc(var(--cover)*0.285)] -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-[#2b2b2b] text-white transition-colors duration-300 ease-out hover:bg-[#1f1f1f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white md:size-10"
+                >
+                  <ChevronRight className="size-6 md:size-5" />
+                </button>
+                </>
+              )}
             </div>
           </div>
 
