@@ -94,7 +94,7 @@ export default function Spotify() {
   return (
     <section
       id="spotify"
-      className="pb-[64px] pr-[31px] pt-12 sm:pr-8 md:py-20 lg:pb-[109px] lg:pr-[74px]"
+      className="pb-[64px] pr-[31px] pt- sm:pr-8 md:pb-20 lg:pb-[109px] lg:pr-[74px]"
     >
       <div className="relative w-full max-w-[1516px]">
         {/* Kartu putih/abu-abu di belakang (offset kanan-bawah).
@@ -102,10 +102,10 @@ export default function Spotify() {
             kartu hijau sampai mentok kiri layar.
             Desktop (Figma): mulai 79px dari atas, menonjol 26px ke kanan dan
             24px ke bawah. Tablet: 16px ke kanan/bawah. Mobile: 13px/30px. */}
-        <div
-          aria-hidden="true"
-          className="absolute -bottom-[30px] -right-[13px] left-0 top-[100px] rounded-l-none rounded-tr-2xl rounded-br-[96px] bg-[#F1F1F1] shadow-md md:-bottom-4 md:-right-4 md:top-4 lg:-bottom-[24px] lg:-right-[26px] lg:top-[79px]"
-        />
+      <div
+      aria-hidden="true"
+      className="absolute -bottom-[30px] -right-[13px] left-0 top-[100px] rounded-l-none rounded-tr-2xl rounded-br-[96px] bg-[#F1F1F1] shadow-[0_0_40px_rgba(0,0,0,0.25)] md:-bottom-4 md:-right-4 md:top-4 lg:-bottom-[24px] lg:-right-[26px] lg:top-[79px]"
+      />
 
         {/* Kartu hijau utama */}
         <div className="relative flex flex-col gap-0 overflow-hidden rounded-l-none rounded-tr-2xl [--cover:min(calc((100vw_-_31px)*0.5),240px)] md:[--cover:220px] lg:[--cover:309px] rounded-br-[96px] bg-linear-to-b from-[#1DB954] to-[#0E5E2A] pb-[9%] pl-[7%] pr-[12.4%] pt-[6.2%] text-white md:flex-row md:items-center md:gap-10 md:rounded-br-[96px] md:p-8 lg:h-[462px] lg:px-12 lg:py-10">
