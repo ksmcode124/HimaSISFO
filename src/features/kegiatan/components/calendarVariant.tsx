@@ -6,7 +6,7 @@ import { toDateKey, getMonthDays } from "../utils/Calculate";
 import { formatMonthName, formatYear } from "../utils/FormatDate";
 import { WEEK_DAYS } from "../data/constant";
 import { DynamicCalendarProps, EventCardProps } from "../types";
-import { Modal } from "./pPopUp";
+import { Modal } from "./popUp";
 import { parseEventDate } from "../utils/ParseDate";
 import { FilterComp } from "./filterComp";
 

@@ -9,7 +9,7 @@ import { EventCardProps } from '../types';
 import { sortEvents } from '../utils/SortEvent';
 import { EventCard } from '../components/eventCard';
 import { formatMonthName } from '../utils/FormatDate';
-import { ShowNextEvent } from '../components/ShowNextEvent';
+import { ShowNextEvent } from '../components/showNextEvent';
 import { EventCardEmpty } from '../components/eventCardEmpty';
 import { DynamicRoute } from '../components/dynamicRoute';
 import { ClientOnly } from '../components/clientOnly';
