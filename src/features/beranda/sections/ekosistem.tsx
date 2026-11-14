@@ -38,7 +38,7 @@ export default function EkosistemLainnya() {
 
   return (
     <section
-      className="w-full px-4 sm:px-6 md:px-10 flex flex-col items-center"
+      className="relative isolate w-full px-4 sm:px-6 md:px-10 flex flex-col items-center"
       style={{
         paddingTop: "24px",
         paddingBottom: "24px",
@@ -57,7 +57,7 @@ export default function EkosistemLainnya() {
 
       <div
         aria-hidden
-        className="pointer-events-none absolute left-[50%] top-[64%] hidden -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-[#C9D6FA] via-[#CDB9F8] to-[#C9D6FA] opacity-70 md:block md:h-[450px] md:w-[45%] md:blur-[90px] z-0"
+        className="pointer-events-none absolute left-1/2 top-[82%] z-0 hidden h-[450px] w-[38%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-[#C9D6FA] via-[#CDB9F8] to-[#C9D6FA] opacity-70 blur-[70px] md:block"
       />
 
       <div className="relative w-[334px] h-[264px] md:w-[980px] md:h-[574px] mx-auto mt-0">

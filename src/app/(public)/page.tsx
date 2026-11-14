@@ -13,27 +13,24 @@ import { ShellLayer } from "@/components/layout/shellLayer";
 import { SiteFooter } from "@/components/layout";
 import { berandaData } from "@/features/beranda";
 import ProfileIdentitas from "@/features/beranda/sections/profileIdentitas";
+import BackgroundWave from "@/components/layout/backgroundWave";
 
 
 export default function Page() {
   return <ShellLayer>
     <HeroBeranda />
-    {/* Background tetap, di lapisan paling bawah */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none fixed inset-0 -z-10 bg-[url('/assets/beranda/Background-Wave.svg')] bg-cover bg-center bg-no-repeat"
-      />
-
     <Himpunan />
-    <ProfileIdentitas />
-    <Kabinet />
-    <Ekosistem />
-    <Komunitas />
-    <Aspirasi/>
-    {/* <Graphics /> */}
-    {/* <BehindTheWeb /> */}
-    <Spotify />
-  </ShellLayer>
+    <BackgroundWave>
+      <ProfileIdentitas />
+      <Kabinet />
+      <Ekosistem />
+      <Komunitas />
+      <Aspirasi />
+      {/* <Graphics /> */}
+      {/* <BehindTheWeb /> */}
+      <Spotify />
+    </BackgroundWave>
+  </ShellLayer >
 }
 
 // function Graphics() {
