@@ -1,14 +1,33 @@
 import HeroSection from "@/features/komunitas/sections/hero";
+import { DATA_KOMUNITAS } from "@/features/komunitas/data/komunitasData";
+import { notFound } from "next/navigation";
 
-export default function KomunitasDetailPage() {
-    return (
-        <main>
-            <HeroSection
-                namaKomunitas="Futsal"
-                deskripsi="Komunitas Futsal HIMASISFO merupakan salah satu komunitas mahasiswa yang berada di bawah naungan Departemen Minat dan Bakat HIMASISFO."
-                fotoBanner="/assets/beranda/komunitas/futsal.webp"
-                iconKomunitas="/assets/beranda/komunitas/fa_futbol-o.svg"
-            />
-        </main>
-    );
+interface KomunitasDetailPageProps {
+  params: Promise<{
+    komunitasId: string;
+  }>;
+}
+
+export default async function KomunitasDetailPage({
+  params,
+}: KomunitasDetailPageProps) {
+  const { komunitasId } = await params;
+  const decodedId = decodeURIComponent(komunitasId).toLowerCase();
+  const data = DATA_KOMUNITAS[decodedId];
+
+  if (!data) {
+    notFound();
+  }
+
+  return (
+    <main>
+      <HeroSection
+        namaKomunitas={data.nama}
+        deskripsi={data.deskripsi}
+        fotoBanner={data.fotoBanner}
+        iconKomunitas={data.icon}
+        titleFontSize={data.titleFontSize || "96px"}
+      />
+    </main>
+  );
 }
