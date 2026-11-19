@@ -24,7 +24,7 @@ export default function HeroSection({
 
   return (
     <section
-      className="relative w-full overflow-hidden px-4 pb-12 pt-[88px] md:px-8 md:pt-[130px] lg:px-16"
+      className="relative w-full overflow-hidden px-[30px] pb-12 pt-[100px] md:px-8 md:pt-[130px] lg:px-16"
       style={{
         background: "linear-gradient(180deg, #E6F3FD 0%, #D8EDFD 50%, #CDE7FC 100%)",
       }}
