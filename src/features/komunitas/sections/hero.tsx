@@ -74,6 +74,7 @@ export default function HeroSection({
             style={{
               fontFamily: "'Coolvetica', 'Coolvetica Rg', sans-serif",
               fontSize: titleFontSize,
+              textShadow: "4px 4px 19px rgba(0, 0, 0, 0.3)",
             }}
           >
             KOMUNITAS
@@ -82,7 +83,10 @@ export default function HeroSection({
           {/* Tengah: Logo/Icon berada persis di tengah ruang kosong antar dua kata */}
           {iconKomunitas && (
             <div className="flex flex-1 items-center justify-center">
-              <div className="relative size-[68px] shrink-0">
+              <div
+                className="relative size-[68px] shrink-0 rounded-full"
+                style={{ boxShadow: "4px 4px 19px 0px rgba(0, 0, 0, 0.3)" }}
+              >
                 <Image
                   src={iconKomunitas}
                   alt=""
@@ -99,6 +103,7 @@ export default function HeroSection({
             style={{
               fontFamily: "'Coolvetica', 'Coolvetica Rg', sans-serif",
               fontSize: titleFontSize,
+              textShadow: "4px 4px 19px rgba(0, 0, 0, 0.3)",
             }}
           >
             {namaKomunitas}
