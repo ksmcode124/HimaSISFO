@@ -17,9 +17,14 @@ export default function HeroSection({
   iconKomunitas,
   titleFontSize = "96px",
 }: HeroSectionProps) {
+  const numericFontSize = parseInt(titleFontSize, 10) || 96;
+  const mobileFontSize = `${Math.round((numericFontSize * 331) / 1055)}px`;
+  const smFontSize = `${Math.round((numericFontSize * 560) / 1055)}px`;
+  const mdFontSize = `${Math.round((numericFontSize * 720) / 1055)}px`;
+
   return (
     <section
-      className="relative w-full overflow-hidden px-4 pb-12 pt-[100px] md:px-8 md:pt-[130px] lg:px-16"
+      className="relative w-full overflow-hidden px-4 pb-12 pt-[88px] md:px-8 md:pt-[130px] lg:px-16"
       style={{
         background: "linear-gradient(180deg, #E6F3FD 0%, #D8EDFD 50%, #CDE7FC 100%)",
       }}
@@ -43,10 +48,10 @@ export default function HeroSection({
       </div>
 
       {/* Konten Hero */}
-      <div className="relative mx-auto w-full max-w-[1055px]">
+      <div className="relative mx-auto w-full max-w-[331px] sm:max-w-[560px] md:max-w-[720px] lg:max-w-[1055px]">
 
         {/* Breadcrumb sementara jika belum ada dari bagian breadcrumbs */}
-        <div className="mb-4 flex items-center font-title text-base font-medium leading-none tracking-normal sm:text-xl md:mb-6 md:text-[32px]">
+        <div className="mb-3 flex items-center font-title text-sm font-medium leading-none tracking-normal sm:text-xl md:mb-6 md:text-2xl lg:text-[32px]">
           <Link href="/" className="text-[#1A78C2] no-underline">
             Beranda
           </Link>
@@ -54,26 +59,35 @@ export default function HeroSection({
           <span className="text-[#0F446D]">Komunitas {namaKomunitas}</span>
         </div>
 
-        {/* Gambar Banner: 1055px x 734px (responsif dengan aspect-[1055/734]) */}
-        <div className="relative w-full aspect-[1055/734] max-w-[1055px] max-h-[734px] overflow-hidden rounded-2xl shadow-md">
+        {/* Gambar Banner: Mobile 331x230px, Desktop 1055x734px */}
+        <div className="relative w-full aspect-[331/230] md:aspect-[1055/734] max-w-[331px] sm:max-w-[560px] md:max-w-[720px] lg:max-w-[1055px] lg:max-h-[734px] overflow-hidden rounded-xl md:rounded-2xl shadow-md">
           <Image
             src={fotoBanner}
             alt={`Foto ${namaKomunitas}`}
             fill
-            sizes="(max-width: 1055px) 100vw, 1055px"
+            sizes="(max-width: 640px) 331px, (max-width: 1055px) 100vw, 1055px"
             className="object-cover"
             priority
           />
         </div>
 
         {/* Judul: "KOMUNITAS [icon] NAMAKOM" */}
-        <div className="mt-8 flex w-full items-center justify-between gap-4">
+        <div
+          className="mt-3 flex w-full items-center justify-between gap-1.5 sm:mt-5 sm:gap-3 md:mt-6 lg:mt-8 lg:gap-4"
+          style={
+            {
+              "--title-fs-mobile": mobileFontSize,
+              "--title-fs-sm": smFontSize,
+              "--title-fs-md": mdFontSize,
+              "--title-fs-lg": titleFontSize,
+            } as React.CSSProperties
+          }
+        >
           {/* Sisi Kiri: Teks KOMUNITAS rata kiri */}
           <h1
-            className="font-normal uppercase tracking-normal text-[#1E87DB] leading-none text-left whitespace-nowrap"
+            className="font-normal uppercase tracking-normal text-[#1E87DB] leading-none text-left whitespace-nowrap text-[length:var(--title-fs-mobile)] sm:text-[length:var(--title-fs-sm)] md:text-[length:var(--title-fs-md)] lg:text-[length:var(--title-fs-lg)]"
             style={{
               fontFamily: "'Coolvetica', 'Coolvetica Rg', sans-serif",
-              fontSize: titleFontSize,
               textShadow: "4px 4px 19px rgba(0, 0, 0, 0.3)",
             }}
           >
@@ -84,7 +98,7 @@ export default function HeroSection({
           {iconKomunitas && (
             <div className="flex flex-1 items-center justify-center">
               <div
-                className="relative size-[68px] shrink-0 rounded-full"
+                className="relative size-[22px] sm:size-[36px] md:size-[46px] lg:size-[68px] shrink-0 rounded-full"
                 style={{ boxShadow: "4px 4px 19px 0px rgba(0, 0, 0, 0.3)" }}
               >
                 <Image
@@ -99,10 +113,9 @@ export default function HeroSection({
 
           {/* Sisi Kanan: Teks Nama Komunitas rata kanan */}
           <h1
-            className="font-normal uppercase tracking-normal text-[#1E87DB] leading-none text-right whitespace-nowrap"
+            className="font-normal uppercase tracking-normal text-[#1E87DB] leading-none text-right whitespace-nowrap text-[length:var(--title-fs-mobile)] sm:text-[length:var(--title-fs-sm)] md:text-[length:var(--title-fs-md)] lg:text-[length:var(--title-fs-lg)]"
             style={{
               fontFamily: "'Coolvetica', 'Coolvetica Rg', sans-serif",
-              fontSize: titleFontSize,
               textShadow: "4px 4px 19px rgba(0, 0, 0, 0.3)",
             }}
           >
@@ -111,7 +124,7 @@ export default function HeroSection({
         </div>
 
         {/* Deskripsi (Rata Kiri Kanan / Justify) */}
-        <p className="mt-6 text-justify text-sm leading-relaxed text-[#2B2B2B] sm:text-base md:text-lg">
+        <p className="mt-3 text-justify text-sm leading-relaxed text-[#2B2B2B] sm:mt-4 sm:text-base md:mt-6 lg:text-lg">
           {deskripsi}
         </p>
       </div>
