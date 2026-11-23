@@ -6,9 +6,9 @@ import { toDateKey, getMonthDays } from "../utils/Calculate";
 import { formatMonthName, formatYear } from "../utils/FormatDate";
 import { WEEK_DAYS } from "../data/constant";
 import { DynamicCalendarProps, EventCardProps } from "../types";
-import { Modal } from "./PopUp";
+import { Modal } from "./popUp";
 import { parseEventDate } from "../utils/ParseDate";
-import { FilterComp } from "./FilterComp";
+import { FilterComp } from "./filterComp";
 
 export function DynamicCalendar({ className, events }: DynamicCalendarProps) {
   const today = new Date();

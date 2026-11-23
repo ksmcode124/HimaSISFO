@@ -85,6 +85,9 @@ export default function RootLayout({
       className={`${jakarta.variable} ${poppins.variable} ${inter.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        <link href="https://fonts.cdnfonts.com/css/coolvetica-2" rel="stylesheet" />
+      </head>
       <body className="min-h-screen scrollbar scrollbar-lg scrollbar-thumb-[#AFAFAF] scrollbar-track-scrollbar-track">
         {children}
       </body >
