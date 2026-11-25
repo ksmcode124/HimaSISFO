@@ -9,8 +9,9 @@ import { navItems, useNavbarTheme } from "@/features/navigation";
 import { navbar_css_vars } from "@/lib/theme/kabinetTheme";
 import { cn } from "@/lib/utils/cn";
 
-const btn_offset = 16;
-const btn_end = btn_offset + 44;
+const btn_offset = 30;
+const btn_size = 40;
+const btn_end = btn_offset + btn_size;
 
 const panel_close = `inset(${btn_offset}px calc(100% - ${btn_end}px) calc(100% - ${btn_end}px) ${btn_offset}px round 8px)`;
 const panel_open = "inset(0px 0px 0px 0px round 0px)"
@@ -45,7 +46,7 @@ export default function NavigationBar() {
 
     return (
         <header
-            style={navbar_css_vars(theme)} className="fixed inset-x-0 top-4 z-50 px-4 md:top-[41px]">
+            style={navbar_css_vars(theme)} className="fixed inset-x-0 top-[30px] z-50 px-[30px] md:top-[41px] md:px-4">
 
             <div
                 id="mobile-menu"
@@ -90,7 +91,7 @@ export default function NavigationBar() {
                 aria-expanded={open}
                 aria-controls="mobile-menu"
                 onClick={() => set_open((v) => !v)}
-                className="relative z-10 flex size-11 items-center justify-center rounded-lg text-(--nav-link) md:hidden"
+                className="relative z-10 flex size-10 items-center justify-center rounded-lg text-(--nav-link) md:hidden"
             >
                 {open ? <X className="size-6" /> : <Menu className="size-6" />}
             </button>

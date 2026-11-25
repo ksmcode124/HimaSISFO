@@ -12,7 +12,7 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="overflow-hidden" suppressHydrationWarning>
+      <div className="overflow-clip" suppressHydrationWarning>
         <NavbarThemeProvider>
           <NavigationBar />
           <main className="flex flex-col min-h-screen overflow-visible">

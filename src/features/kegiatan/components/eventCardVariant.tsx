@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils/cn";
 import { formatDate } from "../utils/FormatDate";
 import { useState } from "react";
 import { useGetCountdown } from "../hooks/useCountDown";
-import { Modal } from "./pPopUp";
+import { Modal } from "./popUp";
 import Image from "next/image";
 
 const eventCard = cva("overflow-hidden transition hover:shadow-md", {

@@ -13,20 +13,23 @@ import { ShellLayer } from "@/components/layout/shellLayer";
 import { SiteFooter } from "@/components/layout";
 import { berandaData } from "@/features/beranda";
 import ProfileIdentitas from "@/features/beranda/sections/profileIdentitas";
+import BackgroundWave from "@/components/layout/backgroundWave";
 
 export default function Page() {
   return <ShellLayer>
     <HeroBeranda />
     <Himpunan />
-    <ProfileIdentitas />
-    <Kabinet />
-    <Ekosistem />
-    <Komunitas />
-    <Aspirasi/>
-    {/* <Graphics /> */}
-    {/* <BehindTheWeb /> */}
-    <Spotify />
-  </ShellLayer>
+    <BackgroundWave>
+      <ProfileIdentitas />
+      <Kabinet />
+      <Ekosistem />
+      <Komunitas />
+      <Aspirasi />
+      {/* <Graphics /> */}
+      {/* <BehindTheWeb /> */}
+      <Spotify />
+    </BackgroundWave>
+  </ShellLayer >
 }
 
 // function Graphics() {

@@ -42,9 +42,6 @@ export default function Komunitas() {
       id="komunitas"
       className="relative overflow-hidden px-[49px] py-12 sm:px-8 md:py-20 lg:px-16"
     >
-      {/* Glow biru di atas */}
-      <div className="pointer-events-none absolute left-0 right-0 top-0 mx-auto h-64 w-[334px] lg:w-[1080px] top-0 h-64 bg-[radial-gradient(ellipse_at_top,#C5CDF5_0%,transparent_70%)] opacity-70" />
-
       {/* Container: desktop dikunci 782px = 385 + 12 (gap) + 385 */}
       <div className="relative mx-auto w-full max-w-md md:max-w-3xl lg:max-w-[782px]">
         {/* Heading */}
