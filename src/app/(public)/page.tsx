@@ -15,7 +15,6 @@ import { berandaData } from "@/features/beranda";
 import ProfileIdentitas from "@/features/beranda/sections/profileIdentitas";
 import BackgroundWave from "@/components/layout/backgroundWave";
 
-
 export default function Page() {
   return <ShellLayer>
     <HeroBeranda />

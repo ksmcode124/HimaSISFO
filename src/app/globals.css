@@ -510,11 +510,12 @@
   }
 
   .text-gradient-blue {
-    display: inline-block;
-    background-image: linear-gradient(to right,
-        var(--color-blue-light-active),
-        var(--color-blue-dark-hover),
-        var(--color-blue-light-active));
+    background-image: linear-gradient(
+      to right,
+      #5b93c6 0%,
+      #145a92 50%,
+      #5b93c6 100%
+    );
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
