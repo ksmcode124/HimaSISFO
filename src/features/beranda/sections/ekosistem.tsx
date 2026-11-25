@@ -38,19 +38,19 @@ export default function EkosistemLainnya() {
 
   return (
     <section
-      className="w-full px-4 sm:px-6 md:px-10 flex flex-col items-center"
+      className="w-full pt-4 sm:pt-6 md:pt-10 flex flex-col items-center"
       style={{
         paddingTop: "24px",
-        paddingBottom: "24px",
+        // paddingBottom: "24px",
         gap: "16px",
       }}
     >
       <h1
-        className="text-center text-3xl md:text-5xl font-bold mb-5 md:mb-8 bg-clip-text text-transparent"
-        style={{
-          backgroundImage:
-            "linear-gradient(90deg, var(--color-blue-light-active) 0%, var(--color-blue-dark-hover) 50%, var(--color-blue-light-active) 100%)",
-        }}
+        className="text-center text-3xl md:text-5xl font-bold mb-5 md:mb-8 bg-clip-text text-transparent bg-gradient-to-r from-[#5B93C6] via-[#145A92] to-[#5B93C6] bg-clip-text text-transparent"
+        // style={{
+        //   backgroundImage:
+        //     "linear-gradient(90deg, var(--color-blue-light-active) 0%, var(--color-blue-dark-hover) 50%, var(--color-blue-light-active) 100%)",
+        // }}
       >
         Ekosistem Lainnya
       </h1>

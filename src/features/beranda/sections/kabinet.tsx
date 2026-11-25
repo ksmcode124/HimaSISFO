@@ -41,11 +41,11 @@ export default function KabinetPage() {
   const logoKabinet = fotoLogo[indexLogo] || fotoLogo[0];
 
   return (
-    <section className="flex w-full flex-col items-center justify-center bg-[#F2F2F2] text-center
+    <section className="flex w-full flex-col items-center justify-center text-center
                         min-h-[326px] gap-2 md:h-[522px] md:gap-6 md:gap-6 lg:min-h-[718px] lg:gap-8
-                        mt-6 md:mt-10 lg:mt-14 lg:mb-6 ">
-      <div className="w-full min-h-[35px] md:[50px] lg:h-[60px]">
-        <h1 className="text-[28px] md:text-4xl lg:text-5xl font-bold text-gradient-blue">
+                        mt-6 md:mt-10 lg:mt-14 lg:mb-15 ">
+      <div className="w-full min-h-[35px] md:min-h-[50px] lg:h-[60px]">
+        <h1 className="font-heading text-[28px] leading-[35px] md:text-[48px] md:leading-[60px] font-bold bg-gradient-to-r from-[#5B93C6] via-[#145A92] to-[#5B93C6] bg-clip-text text-transparent inline-block">
         Kabinet Kami
         </h1>
       </div>

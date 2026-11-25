@@ -201,7 +201,7 @@ export default function Spotify() {
             <div aria-live="polite" className="flex flex-col gap-2">
               <p className="body2 md:text-lg">SI Dengar</p>
 
-              <h2 className="font-heading text-xl font-bold leading-[30px] md:text-3xl md:leading-tight">
+              <h2 className="font-title text-xl font-bold leading-[30px] md:text-3xl md:leading-tight">
                 {current.episode} {current.title}
               </h2>
 
