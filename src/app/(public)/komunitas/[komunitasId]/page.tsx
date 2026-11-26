@@ -1,6 +1,7 @@
 import HeroSection from "@/features/komunitas/sections/hero";
 import { DATA_KOMUNITAS } from "@/features/komunitas/data/komunitasData";
 import { notFound } from "next/navigation";
+import Dokumentasi from "@/features/komunitas/sections/dokumentasi";
 
 interface KomunitasDetailPageProps {
   params: Promise<{
@@ -28,6 +29,7 @@ export default async function KomunitasDetailPage({
         iconKomunitas={data.icon}
         titleFontSize={data.titleFontSize || "96px"}
       />
+      <Dokumentasi komunitasId={decodedId} />
     </main>
   );
 }
