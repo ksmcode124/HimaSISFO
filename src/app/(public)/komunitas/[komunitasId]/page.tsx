@@ -1,5 +1,5 @@
 import HeroSection from "@/features/komunitas/sections/hero";
-import { DATA_KOMUNITAS } from "@/features/komunitas/data/komunitasData";
+import { get_komunitas } from "@/features/komunitas/data/komunitas";
 import { notFound } from "next/navigation";
 import Dokumentasi from "@/features/komunitas/sections/dokumentasi";
 
@@ -13,8 +13,8 @@ export default async function KomunitasDetailPage({
   params,
 }: KomunitasDetailPageProps) {
   const { komunitasId } = await params;
-  const decodedId = decodeURIComponent(komunitasId).toLowerCase();
-  const data = DATA_KOMUNITAS[decodedId];
+  const slug = decodeURIComponent(komunitasId).toLowerCase();
+  const data = get_komunitas(slug);
 
   if (!data) {
     notFound();
@@ -23,13 +23,12 @@ export default async function KomunitasDetailPage({
   return (
     <main>
       <HeroSection
-        namaKomunitas={data.nama}
-        deskripsi={data.deskripsi}
-        fotoBanner={data.fotoBanner}
+        namaKomunitas={data.name}
+        deskripsi={data.desc}
+        fotoBanner={data.header}
         iconKomunitas={data.icon}
-        titleFontSize={data.titleFontSize || "96px"}
       />
-      <Dokumentasi komunitasId={decodedId} />
+      <Dokumentasi komunitas={data} />
     </main>
   );
 }
