@@ -1,9 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import { ItemDataJSON } from "@/features/kemahasiswaan"
-import { HorizontalAccordion, FeaturedHorizontalAccordion } from "../components/HorizontalAccordion"
-import { AccordionVisualCarousel } from "../components/AccordionVisualCarousel"
+import { ItemDataJSON } from "@/features/administrasi"
+import { HorizontalAccordion, FeaturedHorizontalAccordion } from "../components/horizontalAccordion"
+import { AccordionVisualCarousel } from "../components/accordionVisualCarousel"
 
 interface Props {
   featuredItems: ItemDataJSON[]

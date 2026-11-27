@@ -2,7 +2,7 @@ import { BackgroundLayer, ContentLayer, DecorationLayer } from "@/components/lay
 import { ShellLayer } from "@/components/layout/shellLayer"
 import Image from "next/image"
 import RadialBackground from "@/components/ui/radialBg"
-import { HorizontalAccordion } from "../components/HorizontalAccordion"
+import { HorizontalAccordion } from "../components/horizontalAccordion"
 import { ItemDataJSON } from "../types/data"
 
 interface Props {

@@ -1,7 +1,7 @@
 // components/FlipCard.tsx
 "use client"
 import { useState } from "react";
-import { useDeviceType } from "./AlurKemahasiswaanCarousel";
+import { useDeviceType } from "./alurKemahasiswaanCarousel";
 
 type FlipCardProps = {
   front: React.ReactNode;

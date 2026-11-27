@@ -1,4 +1,3 @@
-import Link from "next/link"
 import { cn } from "@/lib/utils/cn"
 import { CardProps } from "../types/ui"
 import { motion, AnimatePresence } from "framer-motion"
@@ -71,12 +70,10 @@ export function KemahasiswaanCard({ data, active, device }: KemahasiswaanCardPro
             }}
             className="grid justify-items-center w-full pb-4"
           >
-            <Button variant={"hima"} className={cn(
+            <Button href={`/kemahasiswaan/${data.id}`} variant="hima" className={cn(
               "text-xs lg:text-sm px-1.5 py-1 sm:px-2 sm:py-1.5 md:px-3 md:py-2 lg:px-5 lg:py-4 2xl:px-6 2xl:py-5",
-            )} asChild>
-              <Link href={`/kemahasiswaan/${data.id}`}>
-                Selengkapnya ➔
-              </Link>
+            )}>
+              Selengkapnya ➔
             </Button>
           </motion.div>
         )}

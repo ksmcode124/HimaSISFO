@@ -1,8 +1,8 @@
 import Image from "next/image"
 import { ItemDataJSON } from "../types/data"
 import { ContentBlock } from "../types/content"
-import { ContentRenderer } from "../components/ContentRenderer"
-import { FolderCard } from "../components/FolderCard"
+import { ContentRenderer } from "../components/contentRenderer"
+import { FolderCard } from "../components/folderCard"
 
 interface Props {
   item: ItemDataJSON

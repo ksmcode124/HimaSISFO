@@ -8,18 +8,25 @@ const button_variants = cva(
   {
     variants: {
       variant: {
+        default:
+          "bg-blue-normal text-white-light hover:bg-blue-normal-hover active:bg-blue-normal-active",
         primary:
           "bg-blue-normal text-white-light hover:bg-blue-normal-hover active:bg-blue-normal-active",
+        destructive: "bg-red-600 text-white hover:bg-red-700",
         outline:
           "border border-blue-normal text-blue-normal hover:bg-blue-light",
+        ghost: "text-blue-normal hover:bg-blue-light",
+        hima: "bg-[#323257] text-white hover:bg-[#29294a]",
       },
       size: {
+        default: "h-9 gap-2 rounded-md px-4 py-2",
         // Selengkapnya, Komunitas Kami: 134x32, padding 4/12, gap 4, radius 24
         sm: "h-8 gap-1 rounded-4xl px-[12px] py-[4px] font-medium text-xs [&_svg]:size-6",
         // Selengkapnya, Agenda Kegiatan: 232x48, padding 8/16, gap 4, radius 24
         lg: "body1 h-12 gap-1 rounded-4xl px-[16px] py-[8px] [&_svg]:size-5",
         // Gabung Tim: fixed 168x45, radius 14
         cta: "body2 h-[45px] w-[168px] gap-1.5 rounded-xl px-[18px] py-[9px] [&_svg]:size-4",
+        icon: "size-9 p-0 [&_svg]:size-4",
       },
     },
     defaultVariants: { variant: "primary", size: "sm" },
@@ -116,4 +123,5 @@ function Button({
   );
 }
 
-export { Button, button_variants };
+export { Button, button_variants, button_variants as buttonVariants };
+export type { button_props as ButtonProps };

@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ItemDataJSON } from "@/features/kemahasiswaan"
+import { ItemDataJSON } from "@/features/administrasi"
 
 interface Props {
   item: ItemDataJSON

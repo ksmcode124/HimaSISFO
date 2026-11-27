@@ -4,9 +4,9 @@ import {
 } from "@/components/layout/layer"
 import { ShellLayer } from "@/components/layout/shellLayer"
 import RadialBackground from "@/components/ui/radialBg"
-import { AlurKemahasiswaanCarousel } from "../components/AlurKemahasiswaanCarousel"
+import { AlurKemahasiswaanCarousel } from "../components/alurKemahasiswaanCarousel"
 import { CardProps } from "../types/ui"
-import { ShapeDecoration } from "./ShapeDecoration"
+import { ShapeDecoration } from "./shapeDecoration"
 
 interface KemahasiswaanMainProps {
   items: CardProps[]

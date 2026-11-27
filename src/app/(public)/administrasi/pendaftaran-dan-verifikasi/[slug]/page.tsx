@@ -5,7 +5,7 @@ import {
   BreadcrumbSection,
   getPendaftaranVerifikasiDetail,
   PendaftaranVerifikasiDetailSection,
-} from "@/features/kemahasiswaan"
+} from "@/features/administrasi"
 
 type PageProps = {
   /**

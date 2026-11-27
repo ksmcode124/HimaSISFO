@@ -4,7 +4,7 @@
 import { createCanvas } from './canvas';
 import { motion, MotionValue, useTransform } from 'motion/react';
 import { useEffect, useState } from 'react';
-import { calculateRefractionSpecular, CONVEX, getDisplacementData, getValueOrMotion } from '@/lib/utils/ui/liquid-glass';
+import { calculateRefractionSpecular, CONVEX, getDisplacementData, getValueOrMotion } from '@/lib/utils/ui/liquidGlass';
 
 function imageDataToUrl(imageData: any): string | null {
     if (!imageData) return null; // jangan akses .width/.height kalau null

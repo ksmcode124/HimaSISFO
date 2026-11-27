@@ -4,7 +4,7 @@ import { ShellLayer } from "@/components/layout/shellLayer"
 import { BackgroundLayer, ContentLayer } from "@/components/layout/layer"
 import RadialBackground from "@/components/ui/radialBg"
 import { CloudDecoration } from "@/components/ui/cloudDecoration"
-import { ProsesAkademikGridSection } from "./ProsesAkademikGridSection"
+import { ProsesAkademikGridSection } from "./prosesAkademikGridSection"
 
 interface Props {
   items: ItemDataJSON[]

@@ -1,5 +1,5 @@
 import { ShellLayer } from "@/components/layout/shellLayer"
-import { VerticalAccordion } from "../components/VerticalAccordion"
+import { VerticalAccordion } from "../components/verticalAccordion"
 import { ItemDataJSON } from "../types/data"
 import { BackgroundLayer, ContentLayer, DecorationLayer } from "@/components/layout/layer"
 import Image from "next/image"

@@ -2,7 +2,7 @@ import {
   KemahasiswaanDataFile, 
   Section, 
   SectionType 
-} from "@/features/kemahasiswaan";
+} from "@/features/administrasi";
 
 /**
  * getSectionData

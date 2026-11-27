@@ -6,7 +6,7 @@ import {
   ContentLayer,
   DecorationLayer,
 } from "@/components/layout/layer"
-import { PembayaranAccordionSection } from "./PembayaranAccordionSection"
+import { PembayaranAccordionSection } from "./pembayaranAccordionSection"
 import { ItemDataJSON } from "../types/data"
 
 interface Props {

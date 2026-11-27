@@ -2,9 +2,9 @@ import { ShellLayer } from "@/components/layout/shellLayer";
 import { ItemDataJSON } from "../types/data";
 import { BackgroundLayer, ContentLayer } from "@/components/layout/layer";
 import RadialBackground from "@/components/ui/radialBg";
-import { WisudaDecorationLayer } from "./WisudaYudisiumDecorationSection";
-import { WisudaAccordionSection } from "./WisudaYudisiumAccordionSection";
-import { WisudaYudisiumItemsSection } from "./WisudaYudisiumItemsSection";
+import { WisudaDecorationLayer } from "./wisudaYudisiumDecorationSection";
+import { WisudaAccordionSection } from "./wisudaYudisiumAccordionSection";
+import { WisudaYudisiumItemsSection } from "./wisudaYudisiumItemsSection";
 import { CloudDecoration } from "@/components/ui/cloudDecoration";
 
 interface Props {

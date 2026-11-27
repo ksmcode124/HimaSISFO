@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/carousel"
 
 import { BlankoItem } from "../types/ui"
-import Link from "next/link"
 import { cn } from "@/lib/utils/cn"
 import { Download } from "lucide-react"
 import { useCarouselSync } from "../hooks/useCarouselSync"
@@ -127,13 +126,12 @@ function BlankoCardItem({
               transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
               className="w-full flex items-center justify-center"
             >
-              <Button variant={"hima"} asChild>
-                <Link
-                  href={isGoogleDocs ? `${card.filepath}/export?format=docx` : "#"}
-                  className="flex gap-2 min-w-[70%] items-center text-xs lg:text-sm px-3.5 py-1 sm:px-6 sm:py-1.5 md:px-8.5 md:py-2 lg:px-11 lg:py-4 2xl:px-11 2xl:py-5" 
-                  >
-                  Unduh <Download size={14} />
-                </Link>
+              <Button
+                href={isGoogleDocs ? `${card.filepath}/export?format=docx` : "#"}
+                variant="hima"
+                className="flex gap-2 min-w-[70%] items-center text-xs lg:text-sm px-3.5 py-1 sm:px-6 sm:py-1.5 md:px-8.5 md:py-2 lg:px-11 lg:py-4 2xl:px-11 2xl:py-5"
+              >
+                Unduh <Download size={14} />
               </Button>
             </motion.div>
           </CardAction>

@@ -1,7 +1,7 @@
-import { ContentBlock, ItemDataJSON } from "@/features/kemahasiswaan"
+import { ContentBlock, ItemDataJSON } from "@/features/administrasi"
 import { FlipHorizontal, GraduationCap } from "lucide-react"
-import { FlipCard } from "./Flipcard"
-import { ContentRenderer } from "./ContentRenderer"
+import { FlipCard } from "./flipcard"
+import { ContentRenderer } from "./contentRenderer"
 
 interface Props {
   item: ItemDataJSON

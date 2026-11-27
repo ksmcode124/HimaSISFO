@@ -8,7 +8,7 @@ import {
   DecorationLayer,
 } from "@/components/layout/layer"
 import { BlankoItem } from "../types/ui"
-import { BlankoCarousel } from "../components/BlankoCarousel"
+import { BlankoCarousel } from "../components/blankoCarousel"
 import { Spinner } from "@/components/ui/spinner"
 
 interface Props {

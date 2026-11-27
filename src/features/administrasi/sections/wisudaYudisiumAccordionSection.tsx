@@ -1,5 +1,5 @@
 import { ItemDataJSON } from "../types/data"
-import { HorizontalAccordion } from "../components/HorizontalAccordion"
+import { HorizontalAccordion } from "../components/horizontalAccordion"
 interface Props {
   items: ItemDataJSON[]
 }

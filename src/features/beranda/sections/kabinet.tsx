@@ -125,7 +125,7 @@ export default function KabinetPage() {
                   objectPosition: foto.position,
                   transform:
                     foto.fit === "cover"
-                      ? `scale(${foto.zoom ?? 1.08})`
+                      ? "scale(1.08)"
                       : undefined,
                   transformOrigin: foto.position,
                 }}

@@ -2,9 +2,9 @@ import { ShellLayer } from "@/components/layout/shellLayer"
 import { ItemDataJSON } from "../types/data"
 import { BackgroundLayer, ContentLayer } from "@/components/layout/layer"
 import RadialBackground from "@/components/ui/radialBg"
-import { PendaftaranAccordionSection } from "./PendaftaranAccordionSection"
+import { PendaftaranAccordionSection } from "./pendaftaranAccordionSection"
 import { CloudDecoration } from "@/components/ui/cloudDecoration"
-import { PendaftaranItemCollectionSection } from "./PendaftaranItemCollectionSection"
+import { PendaftaranItemCollectionSection } from "./pendaftaranItemCollectionSection"
 
 interface Props {
   accordionItems: ItemDataJSON[],
