@@ -2,6 +2,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -98,6 +99,8 @@ model detail_anggota {
   kabinet    kabinet    @relation(fields: [id_kabinet], references: [id_kabinet], onDelete: Cascade)
   departemen departemen @relation(fields: [id_departemen], references: [id_departemen], onDelete: Cascade)
 
+  proker proker[]
+
   @@unique([id_anggota, id_kabinet])
   @@map("detail_anggota")
 }
@@ -105,7 +108,7 @@ model detail_anggota {
 model proker {
   id_proker             Int     @id @default(autoincrement())
   id_departemen         Int
-  id_detail_anggota     String?
+  id_detail_anggota     Int
   nama_proker           String
   deskripsi             String?
   foto_proker           String?
