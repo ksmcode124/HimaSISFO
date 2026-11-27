@@ -21,75 +21,80 @@ model kabinet {
   tahun_kerja   String
   visi          String?
   misi          String?
-  deskripsi     String?
+  tentang_kabinet     String?
   foto_kabinet  String?  // di ERD tertulis integer, tapi untuk url/path paling aman String
   gambar_logo   String?
 
-  elemen_logo   elemen_logo[]
+  // elemen_logo   elemen_logo[]
   departemen    departemen[]
   detailAnggota detail_anggota[]
-  event         event[]
-  proker        proker[]
+  agenda         agenda[]
   komunitas     komunitas[]
+  aspirasi      aspirasi[]
+  elemen_kabinet elemen_kabinet[] 
 
   @@map("kabinet")
 }
 
-model elemen_logo {
-  id_elemen_logo   Int     @id @default(autoincrement())
-  id_kabinet       Int
-  nama_elemen      String
-  deskripsi_elemen String?
-  gambar_elemen    String?
+model elemen_kabinet {
+  id_elemen_kabinet   Int     @id @default(autoincrement())
+  id_kabinet              Int
+  nama_elemen             String
+  gambar_logo             String?
+  deskripsi               String?
 
   kabinet kabinet @relation(fields: [id_kabinet], references: [id_kabinet], onDelete: Cascade)
 
-  @@map("elemen_logo")
+  @@map("elemen_kabinet")
 }
 
 model departemen {
-  id_departemen        Int     @id @default(autoincrement())
-  id_kabinet           Int
-  nama_departemen      String
-  deskripsi_departemen String?
-  logo_departemen      String?
-  foto_departemen      String?
+  id_departemen             Int     @id @default(autoincrement())
+  id_kabinet                Int
+  nama_departemen           String
+  deskripsi_departemen      String?
+  logo_departemen           String?
+  foto_departemen           String?
 
   kabinet       kabinet          @relation(fields: [id_kabinet], references: [id_kabinet], onDelete: Cascade)
   detailAnggota detail_anggota[]
   proker        proker[]
+  elemen_departemen elemen_departemen[]
 
   @@map("departemen")
+}
+
+model elemen_departemen {
+  id_elemen_departemen   Int     @id @default(autoincrement())
+  id_departemen   Int
+  nama_elemen     String
+  gambar_logo     String?
+  deskripsi       String?
+
+  departemen departemen @relation(fields: [id_departemen], references: [id_departemen], onDelete: Cascade)
+
+  @@map("elemen_departemen")
 }
 
 model anggota {
   id_anggota   Int    @id @default(autoincrement())
   nama_anggota String
+  NIM          String?
 
   detailAnggota detail_anggota[]
 
   @@map("anggota")
 }
 
-model jabatan {
-  id_jabatan   Int    @id @default(autoincrement())
-  nama_jabatan String
-
-  detailAnggota detail_anggota[]
-
-  @@map("jabatan")
-}
-
 model detail_anggota {
-  id_detail     Int     @id @default(autoincrement())
-  id_anggota    Int
-  id_jabatan    Int
+  id_detail_anggota     Int     @id @default(autoincrement())
   id_kabinet    Int
   id_departemen Int
+  id_anggota    Int
+  nama_jabatan String
   foto_anggota  String? // ERD: text
 
   anggota    anggota    @relation(fields: [id_anggota], references: [id_anggota], onDelete: Cascade)
-  jabatan    jabatan    @relation(fields: [id_jabatan], references: [id_jabatan], onDelete: Cascade)
   kabinet    kabinet    @relation(fields: [id_kabinet], references: [id_kabinet], onDelete: Cascade)
   departemen departemen @relation(fields: [id_departemen], references: [id_departemen], onDelete: Cascade)
 
@@ -98,32 +103,32 @@ model detail_anggota {
 }
 
 model proker {
-  id_proker     Int     @id @default(autoincrement())
-  id_departemen Int
-  id_kabinet    Int
-  nama_proker   String
-  deskripsi     String?
-  foto_proker   String?
+  id_proker             Int     @id @default(autoincrement())
+  id_departemen         Int
+  id_detail_anggota     String?
+  nama_proker           String
+  deskripsi             String?
+  foto_proker           String?
 
   departemen departemen @relation(fields: [id_departemen], references: [id_departemen], onDelete: Cascade)
-  kabinet    kabinet    @relation(fields: [id_kabinet], references: [id_kabinet], onDelete: Cascade)
+  detail_anggota    detail_anggota    @relation(fields: [id_detail_anggota], references: [id_detail_anggota], onDelete: Cascade)
 
   @@map("proker")
 }
 
-model event {
-  id_event         Int      @id @default(autoincrement())
+model agenda {
+  id_agenda        Int      @id @default(autoincrement())
   id_kabinet       Int
-  judul            String
+  kategori         String
+  gambar_agenda    String?
   deskripsi        String?
+  judul            String
   tanggal_mulai    DateTime
   tanggal_berakhir DateTime
-  gambar_event     String?
-  kategori         String?
 
   kabinet kabinet @relation(fields: [id_kabinet], references: [id_kabinet], onDelete: Cascade)
 
-  @@map("event")
+  @@map("agenda")
 }
 
 /**
@@ -135,23 +140,53 @@ model event {
 model komunitas {
   id_komunitas   Int     @id @default(autoincrement())
   id_kabinet     Int
+  nama_komunitas  String
   foto_komunitas String? // ERD: text (bukan json)
+  deskripsi       String?
+  link_gabung     String?
+  foto_jersey     String?
 
   kabinet     kabinet               @relation(fields: [id_kabinet], references: [id_kabinet], onDelete: Cascade)
   pencapaian  komunitas_pencapaian[]
+  dokumentasi      dokumentasi_komunitas[]
 
   @@map("komunitas")
+}
+
+model dokumentasi_komunitas {
+  id_dok_komunitas Int  @id @default(autoincrement())  
+  id_komunitas      Int
+  foto_komunitas    String
+  nama_kegiatan     String
+
+  komunitas komunitas @relation(fields: [id_komunitas], references: [id_komunitas], onDelete: Cascade)
+
+  @@map("dokumentasi_komunitas")
 }
 
 model komunitas_pencapaian {
   id_pencapaian   Int     @id @default(autoincrement())
   id_komunitas    Int
-  judul           String  // ERD: text (prisma tidak punya "text", pakai String)
   foto_pencapaian String? // ERD: text
+  judul           String  // ERD: text (prisma tidak punya "text", pakai String)
+  tanggal_pencapaian DateTime
+  deskripsi       String?
 
   komunitas komunitas @relation(fields: [id_komunitas], references: [id_komunitas], onDelete: Cascade)
 
   @@map("komunitas_pencapaian")
+}
+
+model aspirasi {
+  id_aspirasi     Int     @id @default(autoincrement())
+  id_kabinet    Int
+  nama  String?
+  isi_aspirasi  String   // ERD: text
+  tanggal_dibuat DateTime @default(now())
+
+  kabinet kabinet @relation(fields: [id_kabinet], references: [id_kabinet], onDelete: Cascade)
+
+  @@map("aspirasi")
 }
 
 /**
@@ -172,6 +207,7 @@ model user {
 
   accounts Account[]
   sessions Session[]
+  auditLogs AuditLog[]
 }
 
 model Account {
@@ -216,6 +252,19 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@map("verification_token")
+}
+
+model AuditLog {
+  id_auditlog Int @id @default(autoincrement())
+  userId      String
+  action      String
+  module      String?
+  description String?
+  createdAt   DateTime @default(now())
+
+  user user @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("AuditLog")
 }
 
 enum Role {
