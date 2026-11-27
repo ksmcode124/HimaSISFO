@@ -1,17 +1,17 @@
 import Image from "next/image";
-import { DATA_KOMUNITAS } from "../data/komunitasData";
+import { get_komunitas } from "../data/komunitas";
 
 type DokumentasiProps = {
   komunitasId: string;
 };
 
 export default function Dokumentasi({ komunitasId }: DokumentasiProps) {
-  const komunitas = DATA_KOMUNITAS[komunitasId];
+  const komunitas = get_komunitas(komunitasId);
 
   if (!komunitas) return null;
 
-  const { fotoBanner, nama } = komunitas;
-  const alt = `Dokumentasi komunitas ${nama}`;
+  const { header: fotoBanner, name } = komunitas;
+  const alt = `Dokumentasi ${name}`;
 
   return (
     <section className="flex min-h-[316px] w-full flex-col items-center bg-[#90CAF9] lg:min-h-[613px] lg:gap-6">
