@@ -10,8 +10,8 @@ import {
 } from "@/features/kabinet";
 import { ShellLayer } from "@/components/layout/shellLayer";
 import { ThemeProvider } from "@/features/kabinet/components/themeProvider";
-import { KABINET_ID_MAP } from "@/features/kabinet/styles/KabinetMapping";
-import { KabinetColorType } from "@/features/kabinet/styles/KabinetColorConfig";
+import { KABINET_ID_MAP } from "@/features/kabinet/styles/kabinetMapping";
+import { KabinetColorType } from "@/features/kabinet/styles/kabinetColorConfig";
 
 export default function DepartemenPage() {
   const params = useParams();
