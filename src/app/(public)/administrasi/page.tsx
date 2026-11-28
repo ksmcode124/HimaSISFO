@@ -4,7 +4,7 @@ import {
   BlankoSection,
   HeroSection,
   useKemahasiswaanPage,
-} from "@/features/kemahasiswaan"
+} from "@/features/administrasi"
 import { Suspense } from "react"
 
 /**

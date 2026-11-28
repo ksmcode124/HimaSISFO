@@ -55,7 +55,7 @@ export default function SiteFooter() {
             </a>
 
             {/* alamat */}
-            <a href={map_link} target='_blank' rel='noopener noreferrer' className='font-title font-bold text-[8px] leading-normal col-span-4 flex items-start gap-2 md:col-span-1 md:col-start-2'>
+            <a href={map_link} target='_blank' rel='noopener noreferrer' className='body3 leading-normal col-span-4 flex items-start gap-2 md:col-span-1 md:col-start-2'>
               <MdLocationOn className='mt-0.5 size-4 shrink-0 text-white-light' />
               <span>{address}</span>
             </a>

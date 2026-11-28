@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { BreadcrumbSection } from "./BreadcrumbSection"
+import { BreadcrumbSection } from "./breadcrumbSection"
 import { ShellLayer } from "@/components/layout/shellLayer"
 import {
   BackgroundLayer,
@@ -7,7 +7,7 @@ import {
 } from "@/components/layout/layer"
 import { HeroData } from "../types/hero"
 import { useHeroSection } from "../hooks/useHeroSection"
-import { HeroView } from "../components/HeroView"
+import { HeroView } from "../components/heroView"
 import { cn } from "@/lib/utils/cn"
 
 interface HeroSectionProps {

@@ -3,7 +3,7 @@ import {
   PendaftaranVerifikasi,
   ItemDataJSON,
   KemahasiswaanDataFile,
-} from "@/features/kemahasiswaan"
+} from "@/features/administrasi"
 import { getSectionData } from "../services/getSectionData"
 
 /**

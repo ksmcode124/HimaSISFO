@@ -2,7 +2,7 @@ import {
   HeroSection,
   usePelayananAdministratifPage,
   PelayananAdministratifSection,
-} from "@/features/kemahasiswaan"
+} from "@/features/administrasi"
 
 /**
  * Page: Pelayanan Administratif

@@ -2,7 +2,7 @@ import {
   HeroSection,
   PendaftaranMainSection,
   usePendaftaranVerifikasiPage,
-} from "@/features/kemahasiswaan"
+} from "@/features/administrasi"
 
 /**
  * Page: Pendaftaran & Verifikasi

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { getKabinetTheme } from "@/lib/theme/kabinetTheme";
+import { get_kabinet_theme } from "@/lib/theme/kabinetTheme";
 import { Prisma } from "@prisma/client";
 import { KabinetResponse } from "@/lib/types/interface"; // pastiin ini sama antara response dan interfacemya
 
@@ -38,7 +38,7 @@ export async function GET(
       );
     }
 
-    const theme = getKabinetTheme(kabinetId);
+    const theme = get_kabinet_theme(kabinetId);
 
     // ========================================
     // 1. Ambil semua kabinet untuk navigasi
@@ -111,7 +111,7 @@ export async function GET(
       );
     }
 
-     const response: KabinetResponse = {
+    const response: KabinetResponse = {
       kabinet: {
         id: kabinet.id_kabinet,
         nama_kabinet: kabinet.nama_kabinet,
@@ -127,17 +127,17 @@ export async function GET(
           gambar_elemen: el.gambar_elemen,
           deskripsi_elemen: el.deskripsi_elemen,
         })),
-          departemenInti: {
+        departemenInti: {
           id: departemenInti.id_departemen,
           nama_departemen: departemenInti.nama_departemen,
           logo_departemen: departemenInti.logo_departemen,
-              anggota: departemenInti.detailAnggota.map((d) => ({
-                id: d.id_detail,
-                nama_anggota: d.anggota.nama_anggota,         
-                jabatan: d.jabatan.nama_jabatan,      
-                foto_anggota: d.foto_anggota,                 
-              })),
-            },
+          anggota: departemenInti.detailAnggota.map((d) => ({
+            id: d.id_detail,
+            nama_anggota: d.anggota.nama_anggota,
+            jabatan: d.jabatan.nama_jabatan,
+            foto_anggota: d.foto_anggota,
+          })),
+        },
       },
       departemen,
       kabinetList: allKabinet,

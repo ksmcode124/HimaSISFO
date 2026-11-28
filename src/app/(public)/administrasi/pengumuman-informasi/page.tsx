@@ -2,7 +2,7 @@ import {
   HeroSection,
   PengumumanMainSection,
   usePengumumanPage,
-} from "@/features/kemahasiswaan"
+} from "@/features/administrasi"
 
 /**
  * Page: Pengumuman

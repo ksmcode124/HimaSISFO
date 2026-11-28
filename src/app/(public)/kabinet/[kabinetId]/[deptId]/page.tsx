@@ -10,8 +10,8 @@ import {
 } from "@/features/kabinet";
 import { ShellLayer } from "@/components/layout/shellLayer";
 import { ThemeProvider } from "@/features/kabinet/components/themeProvider";
-import { KABINET_ID_MAP } from "@/features/kabinet/styles/KabinetMapping";
-import { KabinetColorType } from "@/features/kabinet/styles/KabinetColorConfig";
+import { KABINET_ID_MAP } from "@/features/kabinet/styles/kabinetMapping";
+import { get_kabinet_theme } from "@/lib/theme/kabinetTheme";
 
 export default function DepartemenPage() {
   const params = useParams();
@@ -46,11 +46,8 @@ export default function DepartemenPage() {
    */
   const kabinetDisplayName = KABINET_ID_MAP[kabinetId] || "Gelora Harmoni";
 
-  // Transformasi nama (misal: "Gelora Harmoni") jadi slug warna ("gelora-harmoni")
-  const kabinetColorKey = kabinetDisplayName.toLowerCase().replace(/\s+/g, '-') as KabinetColorType;
-
   return (
-    <ThemeProvider kabinet={kabinetColorKey}>
+    <ThemeProvider theme={get_kabinet_theme(Number(kabinetId))}>
       <ShellLayer backgroundColor={"var(--kabinet-background)"}>
         <DepartemenHeroSection
           nama_dept={info.nama_departemen}

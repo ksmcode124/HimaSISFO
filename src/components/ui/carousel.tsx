@@ -5,14 +5,22 @@ import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react"
 import { Triangle } from "lucide-react"
+import type { VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils/cn"
-import { Button } from "@/components/ui/button"
+import { button_variants } from "@/components/ui/button"
 
 type CarouselApi = UseEmblaCarouselType[1]
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
 type CarouselOptions = UseCarouselParameters[0]
 type CarouselPlugin = UseCarouselParameters[1]
+type CarouselButtonProps = Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "children" | "className"
+> &
+  VariantProps<typeof button_variants> & {
+    className?: string
+  }
 
 type CarouselProps = {
   opts?: CarouselOptions
@@ -196,16 +204,15 @@ CarouselItem.displayName = "CarouselItem"
 
 const CarouselPrevious = React.forwardRef<
   HTMLButtonElement,
-  React.ComponentProps<typeof Button>
->(({ className, variant = "outline", size = "icon", ...props }, ref) => {
+  CarouselButtonProps
+>(({ className, variant = "outline", size = "sm", ...props }, ref) => {
   const { orientation, scrollPrev, canScrollPrev } = useCarousel()
 
   return (
-    <Button
+    <button
+      type="button"
       ref={ref}
-      variant={variant}
-      size={size}
-      className={cn(
+      className={cn(button_variants({ variant, size }),
         "absolute h-20 w-20 sm:h-24 sm:w-24 rounded-full",
         orientation === "horizontal"
           ? "-left-12 top-1/2 translate-x-[50%] lg:translate-x-0 -translate-y-1/2"
@@ -227,23 +234,22 @@ const CarouselPrevious = React.forwardRef<
       </svg>
       <Triangle className="-rotate-90 size-12" fill="url(#triangleGradient2)" strokeWidth={0} />
       <span className="sr-only">Previous slide</span>
-    </Button>
+    </button>
   )
 })
 CarouselPrevious.displayName = "CarouselPrevious"
 
 const CarouselNext = React.forwardRef<
   HTMLButtonElement,
-  React.ComponentProps<typeof Button>
->(({ className, variant = "outline", size = "icon", ...props }, ref) => {
+  CarouselButtonProps
+>(({ className, variant = "outline", size = "sm", ...props }, ref) => {
   const { orientation, scrollNext, canScrollNext } = useCarousel()
 
   return (
-    <Button
+    <button
+      type="button"
       ref={ref}
-      variant={variant}
-      size={size}
-      className={cn(
+      className={cn(button_variants({ variant, size }),
         "absolute h-20 w-20 sm:h-24 sm:w-24 rounded-full",
         orientation === "horizontal"
           ? "-right-12 top-1/2 -translate-x-[50%] lg:translate-x-0 -translate-y-1/2"
@@ -265,7 +271,7 @@ const CarouselNext = React.forwardRef<
       </svg>
       <Triangle className="rotate-90 size-12" fill="url(#triangleGradient)" strokeWidth={0}/>
       <span className="sr-only">Next slide</span>
-    </Button>
+    </button>
   )
 })
 CarouselNext.displayName = "CarouselNext"

@@ -1,7 +1,7 @@
 import Image from "next/image"
-import { ItemDataJSON } from "@/features/kemahasiswaan"
-import { PendaftaranItemCard } from "../components/PendaftaranItemCard"
-import { Glass } from "@/components/ui/glass"
+import { ItemDataJSON } from "@/features/administrasi"
+import { PendaftaranItemCard } from "../components/pendaftaranItemCard"
+import { Glass } from "@/components/ui/glassVariant"
 
 interface Props {
   items: ItemDataJSON[]

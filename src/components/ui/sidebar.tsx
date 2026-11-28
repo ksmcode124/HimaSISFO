@@ -253,11 +253,16 @@ function Sidebar({
   );
 }
 
+type SidebarTriggerProps = Omit<
+  Extract<React.ComponentProps<typeof Button>, { href?: undefined }>,
+  "children"
+>;
+
 function SidebarTrigger({
   className,
   onClick,
   ...props
-}: React.ComponentProps<typeof Button>) {
+}: SidebarTriggerProps) {
   const { toggleSidebar } = useSidebar();
 
   return (

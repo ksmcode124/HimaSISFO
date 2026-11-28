@@ -6,10 +6,10 @@ import {
   AccordionTrigger
 } from "@/components/ui/accordion";
 import { ItemDataJSON } from "../types/data";
-import { ContentRenderer } from "./ContentRenderer";
+import { ContentRenderer } from "./contentRenderer";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronsUpDown } from "lucide-react";
-import { Glass } from "@/components/ui/glass";
+import { Glass } from "@/components/ui/glassVariant";
 
 export function HorizontalAccordion({ items }: { items: ItemDataJSON[] }) {
   return (

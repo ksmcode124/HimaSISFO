@@ -1,8 +1,8 @@
 "use client"
 
-import { HeroSection, Modal } from "@/features/kemahasiswaan"
-import { useProsesAkademikPage } from "@/features/kemahasiswaan/hooks/useProsesAkademik"
-import { ProsesAkademikMainSection } from "@/features/kemahasiswaan/sections/ProsesAkademikMainSection"
+import { HeroSection, Modal } from "@/features/administrasi"
+import { useProsesAkademikPage } from "@/features/administrasi/hooks/useProsesAkademik"
+import { ProsesAkademikMainSection } from "@/features/administrasi/sections/prosesAkademikMainSection"
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLocked"
 
 /**

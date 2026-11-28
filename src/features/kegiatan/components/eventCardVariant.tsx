@@ -80,7 +80,7 @@ export const EventCard = (props: WithVariantEventCardProps) => {
           {variant === "onGoing" || variant === "notGoing" ?
             null : variant === "detail" && new Date(start).getTime() < Date.now() ? (
               <Button
-                route={`/kegiatan/agenda/${title}-${id}`}
+                href={`/kegiatan/agenda/${title}-${id}`}
                 className="flex flex-row gap-3 shadow-[4.38px_4.38px_3.5px_0px_rgba(0,0,0,0.25)] cursor-pointer"
                 size={"lg"}
               >

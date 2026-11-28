@@ -1,5 +1,5 @@
-import { ItemDataJSON } from "@/features/kemahasiswaan"
-import { WisudaFlipCard } from "../components/WisudaFlipCard"
+import { ItemDataJSON } from "@/features/administrasi"
+import { WisudaFlipCard } from "../components/wisudaFlipCard"
 
 interface Props {
   items: ItemDataJSON[]

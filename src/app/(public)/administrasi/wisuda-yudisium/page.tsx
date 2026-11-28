@@ -5,7 +5,7 @@ import {
   Modal,
   useWisudaYudisiumPage,
   WisudaYudisiumMainSection,
-} from "@/features/kemahasiswaan"
+} from "@/features/administrasi"
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLocked"
 
 /**

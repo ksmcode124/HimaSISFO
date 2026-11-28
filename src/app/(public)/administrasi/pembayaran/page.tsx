@@ -2,7 +2,7 @@ import {
   HeroSection,
   usePembayaranPage,
   PembayaranMainSection,
-} from "@/features/kemahasiswaan"
+} from "@/features/administrasi"
 
 /**
  * Page: Pembayaran

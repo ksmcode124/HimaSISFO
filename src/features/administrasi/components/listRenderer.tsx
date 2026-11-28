@@ -1,4 +1,4 @@
-import { InlineRenderer } from "./InlineRenderer"
+import { InlineRenderer } from "./inlineRenderer"
 import { ListItem } from "../types/content"
 import { cn } from "@/lib/utils/cn"
 

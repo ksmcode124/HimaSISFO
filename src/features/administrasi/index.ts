@@ -10,22 +10,22 @@ export { default as WisudaYudisium } from "./data/wisuda-yudisium.json"
 
 
 // SECTIONS (PAGE COMPOSITION)
-export { BreadcrumbSection } from "./sections/BreadcrumbSection"
-export { HeroSection } from "./sections/HeroSection"
-export { KemahasiswaanMainSection } from "./sections/KemahasiswaanMainSection"
-export { BlankoSection } from "./sections/BlankoSection"
-export { BlankoMainSection } from "./sections/BlankoMainSection"
-export { ProsesAkademikMainSection } from "./sections/ProsesAkademikMainSection"
-export { WisudaYudisiumMainSection } from "./sections/WisudaYudisiumMainSection"
-export { PembayaranMainSection } from "./sections/PembayaranMainSection"
-export { PelayananAdministratifSection } from "./sections/PelayananAdministratifSection"
-export { PendaftaranMainSection } from "./sections/PendaftaranMainSection"
-export { PengumumanMainSection } from "./sections/PengumumanMainSection"
-export { PendaftaranVerifikasiDetailSection } from "./sections/PendaftaranVerifikasiDetailSection"
+export { BreadcrumbSection } from "./sections/breadcrumbSection"
+export { HeroSection } from "./sections/heroSection"
+export { KemahasiswaanMainSection } from "./sections/kemahasiswaanMainSection"
+export { BlankoSection } from "./sections/blankoSection"
+export { BlankoMainSection } from "./sections/blankoMainSection"
+export { ProsesAkademikMainSection } from "./sections/prosesAkademikMainSection"
+export { WisudaYudisiumMainSection } from "./sections/wisudaYudisiumMainSection"
+export { PembayaranMainSection } from "./sections/pembayaranMainSection"
+export { PelayananAdministratifSection } from "./sections/pelayananAdministratifSection"
+export { PendaftaranMainSection } from "./sections/pendaftaranMainSection"
+export { PengumumanMainSection } from "./sections/pengumumanMainSection"
+export { PendaftaranVerifikasiDetailSection } from "./sections/pendaftaranVerifikasiDetailSection"
 
 
 // COMPONENTS (UI)
-export { Modal } from "./components/Modal"
+export { Modal } from "./components/modal"
 
 
 // HOOKS

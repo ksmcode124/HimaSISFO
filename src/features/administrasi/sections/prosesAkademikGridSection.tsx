@@ -1,7 +1,7 @@
 'use client'
 
-import { ItemDataJSON } from "@/features/kemahasiswaan"
-import { ProsesAkademikCard } from "../components/ProsesAkademikCard"
+import { ItemDataJSON } from "@/features/administrasi"
+import { ProsesAkademikCard } from "../components/prosesAkademikCard"
 
 interface Props {
   items: ItemDataJSON[]

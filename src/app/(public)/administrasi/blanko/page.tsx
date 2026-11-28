@@ -2,7 +2,7 @@ import {
   BlankoMainSection,
   HeroSection,
   useBlankoPage,
-} from "@/features/kemahasiswaan"
+} from "@/features/administrasi"
 
 /**
  * Page: Blanko

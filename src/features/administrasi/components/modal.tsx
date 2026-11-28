@@ -1,7 +1,7 @@
 // components/ui/Modal.tsx
 'use client'
 import { useEffect } from "react";
-import { ContentRenderer } from "./ContentRenderer";
+import { ContentRenderer } from "./contentRenderer";
 import { ContentBlock, ItemDataJSON } from "..";
 
 type ModalProps = {

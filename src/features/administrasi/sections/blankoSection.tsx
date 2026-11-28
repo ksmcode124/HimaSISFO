@@ -3,7 +3,7 @@ import { ShellLayer } from "@/components/layout/shellLayer"
 import { BackgroundLayer, ContentLayer } from "@/components/layout/layer"
 import { CTASection } from "../types/ui"
 import { useBlankoSection } from "../hooks/useBlankoSection"
-import { BlankoCTA } from "../components/BlankoCTA"
+import { BlankoCTA } from "../components/blankoCTA"
 
 export function BlankoSection(data: CTASection) {
   const blanko = useBlankoSection(data)

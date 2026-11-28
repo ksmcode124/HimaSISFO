@@ -2,7 +2,7 @@ import {
   Pengumuman,
   ItemDataJSON,
   KemahasiswaanDataFile,
-} from "@/features/kemahasiswaan"
+} from "@/features/administrasi"
 import { getSectionData } from "../services/getSectionData"
 import { HeroData } from "../types/hero"
 

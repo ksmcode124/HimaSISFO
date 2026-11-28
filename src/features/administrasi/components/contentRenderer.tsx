@@ -1,5 +1,5 @@
 // ContentRenderer.tsx
-import { ListRenderer } from "./ListRenderer"
+import { ListRenderer } from "./listRenderer"
 import { ContentBlock } from "../types/content"
 import { cn } from "@/lib/utils/cn"
 

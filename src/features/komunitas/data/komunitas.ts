@@ -30,7 +30,7 @@ export const komunitas_list: komunitas[] = [
             name: '',
             date: '',
         }],
-        jersey: [''],
+        jersey: ['/assets/komunitas/badminton/jersey/jerseyFutsal.webp'],
         dokumentasi: [
             '/assets/komunitas/futsal/foto/futsal1.webp',
             '/assets/komunitas/futsal/foto/futsal2.webp',
@@ -53,7 +53,7 @@ export const komunitas_list: komunitas[] = [
             name: '',
             date: '',
         }],
-        jersey: [''],
+        jersey: ['/assets/komunitas/badminton/jersey/jerseyBasket.webp'],
         dokumentasi: [
             '/assets/komunitas/basket/foto/basket1.webp',
             '/assets/komunitas/basket/foto/basket2.webp',
