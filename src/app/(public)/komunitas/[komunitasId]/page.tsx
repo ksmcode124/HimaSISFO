@@ -2,6 +2,7 @@ import HeroSection from "@/features/komunitas/sections/hero";
 import { get_komunitas } from "@/features/komunitas/data/komunitas";
 import { notFound } from "next/navigation";
 import Dokumentasi from "@/features/komunitas/sections/dokumentasi";
+import JoinCTA from "@/features/komunitas/sections/joinCTA";
 
 interface KomunitasDetailPageProps {
   params: Promise<{

@@ -2,7 +2,7 @@ import Image from "next/image";
 import { get_komunitas } from "../data/komunitas";
 
 type DokumentasiProps = {
-  komunitasId: string;
+  komunitas: komunitas;
 };
 
 export default function Dokumentasi({ komunitasId }: DokumentasiProps) {
@@ -17,7 +17,7 @@ export default function Dokumentasi({ komunitasId }: DokumentasiProps) {
     <section className="flex min-h-[316px] w-full flex-col items-center bg-[#90CAF9] lg:min-h-[613px] lg:gap-6">
       <div className="mb-[11px] mt-[5px] flex h-[53px] w-full max-w-[332px] items-center lg:mb-[14px] lg:mt-[27px] lg:h-[96px] lg:max-w-[1055px]">
         <h1 style={{ fontFamily: "'Coolvetica', 'Coolvetica Rg', sans-serif" }}
-        className="tracking-[0.02em] flex w-full items-center justify-between whitespace-nowrap text-[31px] leading-none text-[#EEF7FE] drop-shadow-[2px_2px_7px_rgba(0,0,0,0.3)] lg:text-[95px]">
+          className="tracking-[0.02em] flex w-full items-center justify-between whitespace-nowrap text-[31px] leading-none text-[#EEF7FE] drop-shadow-[2px_2px_7px_rgba(0,0,0,0.3)] lg:text-[95px]">
           <span>DOKUMENTASI</span>
           <span>KEGIATAN</span>
         </h1>
@@ -28,7 +28,7 @@ export default function Dokumentasi({ komunitasId }: DokumentasiProps) {
         <div className="hidden grid-rows-2 gap-3 md:grid">
           <div className="relative overflow-hidden rounded-2xl">
             <Image
-              src={fotoBanner}
+              src={firstPhoto}
               alt={alt}
               fill
               sizes="50vw"
@@ -37,7 +37,7 @@ export default function Dokumentasi({ komunitasId }: DokumentasiProps) {
           </div>
           <div className="relative overflow-hidden rounded-2xl">
             <Image
-              src={fotoBanner}
+              src={secondPhoto}
               alt={alt}
               fill
               sizes="50vw"
@@ -49,7 +49,7 @@ export default function Dokumentasi({ komunitasId }: DokumentasiProps) {
         {/* Kanan: selalu tampil (satu-satunya foto di HP) */}
         <div className="relative overflow-hidden rounded-2xl">
           <Image
-            src={fotoBanner}
+            src={thirdPhoto}
             alt={alt}
             fill
             sizes="(max-width: 768px) 340px, 50vw"
