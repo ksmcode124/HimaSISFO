@@ -2,7 +2,7 @@ import Image from "next/image";
 import { get_komunitas } from "../data/komunitas";
 
 type DokumentasiProps = {
-  komunitas: komunitas;
+  komunitasId: string;
 };
 
 export default function Dokumentasi({ komunitasId }: DokumentasiProps) {
@@ -10,7 +10,8 @@ export default function Dokumentasi({ komunitasId }: DokumentasiProps) {
 
   if (!komunitas) return null;
 
-  const { header: fotoBanner, name } = komunitas;
+  const { dokumentasi, name } = komunitas;
+  const [firstPhoto, secondPhoto, thirdPhoto] = dokumentasi;
   const alt = `Dokumentasi ${name}`;
 
   return (

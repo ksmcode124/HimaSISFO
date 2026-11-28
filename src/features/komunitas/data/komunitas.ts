@@ -33,8 +33,8 @@ export const komunitas_list: komunitas[] = [
         jersey: ['/assets/komunitas/badminton/jersey/jerseyFutsal.webp'],
         dokumentasi: [
             '/assets/komunitas/futsal/foto/futsal1.webp',
-            '/assets/komunitas/futsal/foto/futsal2.webp',
-            '/assets/komunitas/futsal/foto/futsal3.webp',
+            '/assets/komunitas/futsal/foto/header.webp',
+            '/assets/komunitas/futsal/foto/futsal1.webp',
         ],
         links: {
             judul: 'MARI BERGABUNG BERSAMA KAMI',
@@ -56,8 +56,8 @@ export const komunitas_list: komunitas[] = [
         jersey: ['/assets/komunitas/badminton/jersey/jerseyBasket.webp'],
         dokumentasi: [
             '/assets/komunitas/basket/foto/basket1.webp',
-            '/assets/komunitas/basket/foto/basket2.webp',
-            '/assets/komunitas/basket/foto/basket3.webp',
+            '/assets/komunitas/basket/foto/header.webp',
+            '/assets/komunitas/basket/foto/basket1.webp',
         ],
         links: {
             judul: 'MARI BERGABUNG BERSAMA KAMI',
@@ -80,9 +80,9 @@ export const komunitas_list: komunitas[] = [
         // ini juga belum ada
         jersey: [''],
         dokumentasi: [
-            '/assets/komunitas/badminton/foto/badminton1.webp',
-            '/assets/komunitas/badminton/foto/badminton2.webp',
-            '/assets/komunitas/badminton/foto/badminton3.webp'
+            '/assets/komunitas/badminton/foto/header.webp',
+            '/assets/komunitas/badminton/foto/header.webp',
+            '/assets/komunitas/badminton/foto/header.webp',
         ],
         links: {
             judul: 'MARI BERGABUNG BERSAMA KAMI',
@@ -104,9 +104,9 @@ export const komunitas_list: komunitas[] = [
         }],
         jersey: [''],
         dokumentasi: [
-            '/assets/komunitas/arakArakan/foto/arak1.webp',
-            '/assets/komunitas/arakArakan/foto/arak2.webp',
-            '/assets/komunitas/arakArakan/foto/arak3.webp'
+            '/assets/komunitas/arakArakan/foto/DSC08218.webp',
+            '/assets/komunitas/arakArakan/foto/DSC08344.webp',
+            '/assets/komunitas/arakArakan/foto/DSC08362.webp'
         ],
         links: {
             judul: 'MARI BERGABUNG BERSAMA KAMI',
