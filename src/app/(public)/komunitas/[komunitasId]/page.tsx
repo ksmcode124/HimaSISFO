@@ -2,6 +2,7 @@ import HeroSection from "@/features/komunitas/sections/hero";
 import { DATA_KOMUNITAS } from "@/features/komunitas/data/komunitasData";
 import { notFound } from "next/navigation";
 import Dokumentasi from "@/features/komunitas/sections/dokumentasi";
+import JoinCTA from "@/features/komunitas/sections/joinCTA";
 
 interface KomunitasDetailPageProps {
   params: Promise<{
@@ -30,6 +31,8 @@ export default async function KomunitasDetailPage({
         titleFontSize={data.titleFontSize || "96px"}
       />
       <Dokumentasi komunitasId={decodedId} />
+
+      <JoinCTA komunitasId={decodedId}/>
     </main>
   );
 }
