@@ -31,6 +31,7 @@ export default async function KomunitasDetailPage({
         titleFontSize={data.slug === "arak-arakan" ? "86px" : "96px"}
       />
       <Dokumentasi komunitasId={data.slug} />
+      <JoinCTA komunitasId={data.slug}/>
     </main>
   );
 }

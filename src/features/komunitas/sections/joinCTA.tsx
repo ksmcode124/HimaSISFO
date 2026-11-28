@@ -5,6 +5,8 @@ type JoinCTAProps = {
 };
 
 export default function JoinCTA({ komunitasId }: JoinCTAProps) {
+  if(komunitasId == "arak-arakan") return null;
+
   const komunitas = get_komunitas(komunitasId);
 
   if (!komunitas) return null;
