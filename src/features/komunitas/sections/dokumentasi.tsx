@@ -1,19 +1,17 @@
 import Image from "next/image";
-import type { komunitas } from "../data/komunitas";
+import { get_komunitas } from "../data/komunitas";
 
 type DokumentasiProps = {
   komunitas: komunitas;
 };
 
-export default function Dokumentasi({ komunitas }: DokumentasiProps) {
-  const photos =
-    komunitas.dokumentasi.length > 0
-      ? komunitas.dokumentasi
-      : [komunitas.header];
-  const firstPhoto = photos[0];
-  const secondPhoto = photos[1] ?? firstPhoto;
-  const thirdPhoto = photos[2] ?? photos[photos.length - 1];
-  const alt = `Dokumentasi komunitas ${komunitas.name}`;
+export default function Dokumentasi({ komunitasId }: DokumentasiProps) {
+  const komunitas = get_komunitas(komunitasId);
+
+  if (!komunitas) return null;
+
+  const { header: fotoBanner, name } = komunitas;
+  const alt = `Dokumentasi ${name}`;
 
   return (
     <section className="flex min-h-[316px] w-full flex-col items-center bg-[#90CAF9] lg:min-h-[613px] lg:gap-6">

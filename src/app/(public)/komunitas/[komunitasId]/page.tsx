@@ -14,8 +14,8 @@ export default async function KomunitasDetailPage({
   params,
 }: KomunitasDetailPageProps) {
   const { komunitasId } = await params;
-  const slug = decodeURIComponent(komunitasId).toLowerCase();
-  const data = get_komunitas(slug);
+  const decodedId = decodeURIComponent(komunitasId).toLowerCase();
+  const data = get_komunitas(decodedId);
 
   if (!data) {
     notFound();
@@ -28,9 +28,9 @@ export default async function KomunitasDetailPage({
         deskripsi={data.desc}
         fotoBanner={data.header}
         iconKomunitas={data.icon}
+        titleFontSize={data.slug === "arak-arakan" ? "86px" : "96px"}
       />
-      <Dokumentasi komunitasId={decodedId} />
-      <JoinCTA komunitasId={decodedId}/>
+      <Dokumentasi komunitasId={data.slug} />
     </main>
   );
 }
