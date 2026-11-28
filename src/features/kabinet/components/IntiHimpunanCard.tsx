@@ -1,42 +1,34 @@
 "use client";
 
-import React from "react";
 import Image from "next/image";
-import { Anggota } from "../types";
+import { Anggota, ColorMap } from "../types";
 import { DynamicAsset } from "@/components/ui/dynamic-asset";
 
 interface CardProps {
   data: Anggota;
   index: number;
-  gradient: string
+  colorMap: ColorMap;
 }
 
-export default function IntiHimpunanCard({ data, index, gradient }: CardProps) {
+export default function IntiHimpunanCard({ data, index, colorMap }: CardProps) {
   const isMirrored = index % 2 !== 0;
 
   const imageStyle = "object-contain scale-[1.3] md:scale-[1.5] translate-y-6";
   const mirrorClass = isMirrored ? "-scale-x-100" : "";
-  // const shadowClass = isMirrored
-  //   ? "drop-shadow-[-15px_10px_7px_rgba(0,0,0,0.3)]"
-  //   : "drop-shadow-[15px_10px_7px_rgba(0,0,0,0.3)]";
+  const shadowClass = isMirrored
+    ? "drop-shadow-[-15px_10px_7px_rgba(0,0,0,0.3)]"
+    : "drop-shadow-[15px_10px_7px_rgba(0,0,0,0.3)]";
 
   return (
     <div className="relative w-full aspect-3/4 sm:aspect-auto sm:h-112 md:h-125 2xl:h-162 flex items-center justify-center mx-auto transition-transform duration-500">
       <div className={`relative w-full h-full ${mirrorClass}`}>
         {/* LAYER 1: Background Card */}
-        {/* <div className="absolute inset-0 z-10">
-          <Image
-            src="/assets/kabinet/card-6.webp"
-            alt=""
-            fill
-            className={`object-contain ${shadowClass}`}
-          />
-        </div> */}
-        <DynamicAsset 
-          maskSrc={"/assets/kabinet/card-6.webp"} 
-          gradientVar={gradient}
+        <DynamicAsset
+          maskSrc={"/assets/kabinet/card-6.webp"}
+          gradientVar={colorMap.gradientIntiBackground ?? ""}
           innerHeight={"h-full"}
-          className="absolute inset-0 z-10"/>
+          className={`absolute inset-0 z-10 ${shadowClass}`}
+        />
 
         {/* LAYER 2: Badan (Terpotong Masking Bawah) */}
         <div
@@ -93,13 +85,14 @@ export default function IntiHimpunanCard({ data, index, gradient }: CardProps) {
 
             <div
               className={`absolute inset-0 flex flex-col items-center justify-center ${mirrorClass}`}
+              style={{ color: colorMap.text }}
             >
               <div className="flex items-center justify-center mt-[53%] md:mt-[22%] h-16 md:h-10 w-[80%]">
-                <h3 className="text-[#2D2D51] text-center font-bold text-2xs md:text-sm leading-tight">
+                <h3 className="text-center font-bold text-2xs md:text-sm leading-tight">
                   {data.nama_anggota}
                 </h3>
               </div>
-              <p className="text-[#2D2D51] md:mt-2 text-2xs md:text-sm font-bold md:font-semibold">
+              <p className="md:mt-2 text-2xs md:text-sm font-bold md:font-semibold">
                 {data.jabatan}
               </p>
             </div>

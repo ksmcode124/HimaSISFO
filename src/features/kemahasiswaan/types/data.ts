@@ -1,25 +1,26 @@
 import { ContentBlock } from "./content"
 import { Section } from "./section"
 
-// types/data.ts
+// Represents a single content item in a section
 export type ItemDataJSON = {
-  id: string
-  title: string
-  content: ContentBlock[]
-  image?: string
+  id: string              // Unique identifier for this item
+  title: string           // Display title
+  content: ContentBlock[] // Array of content blocks (paragraphs, lists)
+  image?: string          // Optional image URL for the item
 }
 
+// Represents the entire JSON file structure for a Kemahasiswaan page
 export type KemahasiswaanDataFile = {
-  schemaVersion: number
-  slug: string
-  seo: {
-    title: string
-    description: string
+  schemaVersion: number   // Version of the JSON schema; for migration/validation
+  slug: string            // Unique slug for the page
+  seo: {                  // SEO metadata
+    title: string         // Meta title
+    description: string   // Meta description
   };
-  hero: {
-    title: string
-    subtitle: string
+  hero: {                 // Hero section configuration
+    title: string         // Hero title
+    subtitle: string      // Hero subtitle
   };
-  sections: Section[];
-  [key: string]: unknown;
+  sections: Section[]     // Array of structured sections (accordions, item-collections, etc.)
+  [key: string]: unknown; // Allow additional dynamic properties for extensibility
 }

@@ -1,11 +1,12 @@
 "use client"
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { MONTHS_NAME } from "../data/constant";
 import clsx from "clsx";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { formatMonthName } from "../utils/FormatDate";
 
 export function FilterComp({ className, type, selected, onChange }: { className?: string, type: string, selected: string, onChange?: (month: number, year?: number) => void }) {
   const router = useRouter();
@@ -73,7 +74,7 @@ export function FilterComp({ className, type, selected, onChange }: { className?
                 />
               </svg>
             </div>
-            <span className={clsx(className, "truncate")}>{selectedBulan ? selectedBulan : "Filter"}</span>
+            <span className={clsx(className, "truncate")}>{selectedBulan ? selectedBulan : formatMonthName(new Date().getMonth())}</span>
           </div>
         ) : type === "calendar" ? (
           <div className="flex items-center justify-center gap-2 md:gap-4 w-full cursor-pointer h-full"

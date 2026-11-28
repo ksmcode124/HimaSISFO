@@ -76,7 +76,8 @@ const data = {
     "behind_the_web": {
         "title": "Behind The Web",
         "author": "CODE124",
-        "image_url": "image_behind_the_web.jpg"
+        "image_url": "image_behind_the_web.jpg",
+        "url": "https://behind-the-web.vercel.app/"
     },
 
     "media": {

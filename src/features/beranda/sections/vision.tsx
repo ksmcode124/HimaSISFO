@@ -1,10 +1,10 @@
-import Pita from '@/components/beranda/pita';
+import Pita from '@/features/beranda/components/pita';
 import Logo from '../components/logo';
 import VisionAccordion from '../components/vision-accordion';
 export default function Vision() {
     return <div className="relative">
         <div className="min-h-screen flex items-center justify-center lg:my-30 sm:mx-16 bg-radial from-blue-200 to-transparent to-80%">
-            <div className="grid md:grid-cols-2 h-full w-full">
+            <div className="grid md:grid-cols-2 h-full w-full my-24">
                 <div className="flex items-center justify-center">
                     <Logo />
                 </div>

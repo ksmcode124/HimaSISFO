@@ -10,12 +10,12 @@ import {
 } from "@/features/kabinet";
 import { ShellLayer } from "@/components/layout/ShellLayer";
 import { ThemeProvider } from "@/features/kabinet/components/ThemeProvider";
-import { translateToSlug } from "@/lib/utils/translate-slug";
+import { KABINET_ID_MAP } from "@/features/kabinet/styles/KabinetMapping";
 import { KabinetColorType } from "@/features/kabinet/styles/KabinetColorConfig";
 
 export default function DepartemenPage() {
   const params = useParams();
-  const kabinetId = params.kabinetId as string;
+  const kabinetId = (params.kabinetId as string) || "1";
   const deptId = params.deptId as string;
 
   const { detailData, isLoading, isError } = useDepartemenDetail(deptId);
@@ -39,32 +39,46 @@ export default function DepartemenPage() {
   }
 
   const { info, proker, anggota } = detailData;
-  // const kabinet = translateToSlug(nama_kabinet) as KabinetColorType
-  const kabinet = 'aksayapatra' // need to change or get the nama_kabinet
+
+  /**
+   * TODO: Hapus mapping manual ini jika API sudah menyediakan field 'nama_kabinet'
+   * Saat ini masih manual via KABINET_ID_MAP karena data di info.nama_kabinet belum ada.
+   */
+  const kabinetDisplayName = KABINET_ID_MAP[kabinetId] || "Gelora Harmoni";
+
+  // Transformasi nama (misal: "Gelora Harmoni") jadi slug warna ("gelora-harmoni")
+  const kabinetColorKey = kabinetDisplayName.toLowerCase().replace(/\s+/g, '-') as KabinetColorType;
+
   return (
-    <ThemeProvider kabinet={kabinet}>
-      <ShellLayer>
+    <ThemeProvider kabinet={kabinetColorKey}>
+      <ShellLayer  backgroundColor={"var(--kabinet-background)"}>
         <DepartemenHeroSection
           nama_dept={info.nama_departemen}
           deskripsi={info.deskripsi_departemen}
           logo_dept={info.logo_departemen}
           bg_image={info.foto_departemen}
           kabinet_id={kabinetId}
-          kabinet_nama="Tentang"
+          kabinet_nama={kabinetDisplayName}
           colorMap={{
             pita: "var(--kabinet-gradient-pita)",
+            hoverText: "var(--kabinet-color-text)",
+            breadcrumbText: "var(--kabinet-breadcrumb-text)",
+            breadcrumbUnderline: "var(--kabinet-breadcrumb-underline)"
           }}
         />
         <ProkerSection 
           data={proker} 
           colorMap={{
             pita: "var(--kabinet-gradient-pita)",
+            text: "var(--kabinet-color-text)",
+            bgOrnament: "var(--kabinet-color-ornament)",
             ornament2: "var(--kabinet-gradient-ornament-2)",
-            ornament: "var(--kabinet-color-ornament)"
+            ornament3: "var(--kabinet-gradient-ornament-3)"
           }} />
         <StaffSection 
           data={anggota} 
           colorMap={{
+            text: "var(--kabinet-color-text)",
             ornament1: "var(--kabinet-gradient-ornament-1)",
             ornament4: "var(--kabinet-gradient-ornament-4)",
             ornament5: "var(--kabinet-gradient-ornament-5)",

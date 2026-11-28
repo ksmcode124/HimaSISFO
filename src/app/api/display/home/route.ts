@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { Episode } from "@/lib/types/interface"; // pastiin ini sama antara response dan interfacemya
-import { audio } from "framer-motion/client";
 
 const prisma = new PrismaClient();
 

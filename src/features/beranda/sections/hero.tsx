@@ -1,12 +1,11 @@
 "use client"
-import React from 'react'
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import Autoplay from 'embla-carousel-autoplay'
 import Fade from 'embla-carousel-fade'
 import * as motion from "motion/react-client"
 import { type HeroSection } from '@/features/beranda/types'
 import { berandaData } from '..'
-import Pita from '@/components/beranda/pita'
+import Pita from '@/features/beranda/components/pita'
 
 export default function HeroBeranda() {
     const data = berandaData.hero as HeroSection;
@@ -20,7 +19,7 @@ export default function HeroBeranda() {
             ]}>
                 <CarouselContent className='w-screen aspect-4/3 min-h-screen m-0 bg-black'>
                 {data.images.map((image, index) => (
-                    <CarouselItem key={index} className="w-full h-full bg-cover" style={{ backgroundImage: `url('/assets/beranda/hero/${image}')` }}></CarouselItem>
+                    <CarouselItem key={index} className="w-full h-full bg-cover bg-center" style={{ backgroundImage: `url('/assets/beranda/hero/${image}')` }}></CarouselItem>
                 ))}
                 </CarouselContent>
             </Carousel>

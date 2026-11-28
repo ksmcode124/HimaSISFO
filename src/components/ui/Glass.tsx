@@ -154,9 +154,9 @@ export interface LiquidGlassProps<T extends HTMLElement = HTMLDivElement>
   onClick?: () => void;
 }
 
+
 export const useLiquidSurface = <T extends HTMLElement = HTMLDivElement>({
   targetRef,
-  borderRadius: borderRadiusProp,
   ...props
 }: LiquidGlassProps<T>) => {
   const filterId = `glass-${useId()}`;
@@ -170,7 +170,7 @@ export const useLiquidSurface = <T extends HTMLElement = HTMLDivElement>({
   // Gunakan borderRadiusProp kalau ada, tapi width/height dari observer
   const finalWidth = observedWidth ? getValueOrMotion(observedWidth) : 100;
   const finalHeight = observedHeight ? getValueOrMotion(observedHeight) : 100;
-  const finalRadius = borderRadiusProp ?? observedRadius;
+  const finalRadius = observedRadius;
 
   const Filter = () => (
     <LiquidFilter

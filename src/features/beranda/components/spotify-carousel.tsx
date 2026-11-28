@@ -10,6 +10,7 @@ import {
 import AudioPlayer from './audio-player'
 import { formatTanggalIndonesia } from '../utils/parseDate'
 import { Skeleton } from '@/components/ui/skeleton'
+import { ExternalLink } from 'lucide-react'
 
 /* ======================
  * SLIDE COMPONENT
@@ -75,7 +76,7 @@ export default function SpotifyCarousel({ episodes, error, isLoading }: { episod
     return <div>Error loading data</div>
   }
 
-  const data = episodes?.map((ep, i) => {
+  const data = episodes?.map((ep) => {
     return { title: ep.name, coverImage: ep.images[0].url }
   }) || []
 
@@ -120,8 +121,9 @@ export default function SpotifyCarousel({ episodes, error, isLoading }: { episod
             </>
           ) : (
             <>
-              <a href={activeEpisode.external_urls.spotify} className='hover:underline'>
+              <a target='_blank' href={activeEpisode.external_urls.spotify} className='hover:underline flex items-bottom gap-2'>
                 <h2 className="md:text-2xl text-sm font-bold mb-2">{activeEpisode.name}</h2>
+                <ExternalLink className="size-6 mt-1" />
               </a>
               <p className="text-sm mb-4">{formatTanggalIndonesia(activeEpisode.release_date)}</p>
             </>
