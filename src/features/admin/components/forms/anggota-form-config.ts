@@ -1,4 +1,4 @@
-import { FormField } from "../FormModal";
+import { FormField } from "../formModal";
 
 export const anggotaCreateFields: FormField[] = [
   { name: 'nama_anggota', label: 'NAMA ANGGOTA', type: 'text', required: true, side: 'left', placeholder: 'Nama Anggota' },

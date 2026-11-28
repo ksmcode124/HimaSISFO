@@ -8,10 +8,10 @@ import {
   StaffSection,
   ProkerSection,
 } from "@/features/kabinet";
-import { ShellLayer } from "@/components/layout/ShellLayer";
-import { ThemeProvider } from "@/features/kabinet/components/ThemeProvider";
-import { KABINET_ID_MAP } from "@/features/kabinet/styles/KabinetMapping";
-import { KabinetColorType } from "@/features/kabinet/styles/KabinetColorConfig";
+import { ShellLayer } from "@/components/layout/shellLayer";
+import { ThemeProvider } from "@/features/kabinet/components/themeProvider";
+import { KABINET_ID_MAP } from "@/features/kabinet/styles/kabinetMapping";
+import { get_kabinet_theme } from "@/lib/theme/kabinetTheme";
 
 export default function DepartemenPage() {
   const params = useParams();
@@ -46,12 +46,9 @@ export default function DepartemenPage() {
    */
   const kabinetDisplayName = KABINET_ID_MAP[kabinetId] || "Gelora Harmoni";
 
-  // Transformasi nama (misal: "Gelora Harmoni") jadi slug warna ("gelora-harmoni")
-  const kabinetColorKey = kabinetDisplayName.toLowerCase().replace(/\s+/g, '-') as KabinetColorType;
-
   return (
-    <ThemeProvider kabinet={kabinetColorKey}>
-      <ShellLayer  backgroundColor={"var(--kabinet-background)"}>
+    <ThemeProvider theme={get_kabinet_theme(Number(kabinetId))}>
+      <ShellLayer backgroundColor={"var(--kabinet-background)"}>
         <DepartemenHeroSection
           nama_dept={info.nama_departemen}
           deskripsi={info.deskripsi_departemen}
@@ -66,8 +63,8 @@ export default function DepartemenPage() {
             breadcrumbUnderline: "var(--kabinet-breadcrumb-underline)"
           }}
         />
-        <ProkerSection 
-          data={proker} 
+        <ProkerSection
+          data={proker}
           colorMap={{
             pita: "var(--kabinet-gradient-pita)",
             text: "var(--kabinet-color-text)",
@@ -75,8 +72,8 @@ export default function DepartemenPage() {
             ornament2: "var(--kabinet-gradient-ornament-2)",
             ornament3: "var(--kabinet-gradient-ornament-3)"
           }} />
-        <StaffSection 
-          data={anggota} 
+        <StaffSection
+          data={anggota}
           colorMap={{
             text: "var(--kabinet-color-text)",
             ornament1: "var(--kabinet-gradient-ornament-1)",

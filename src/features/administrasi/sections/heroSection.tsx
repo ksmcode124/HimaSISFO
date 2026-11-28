@@ -1,0 +1,67 @@
+import Image from "next/image"
+import { BreadcrumbSection } from "./breadcrumbSection"
+import { ShellLayer } from "@/components/layout/shellLayer"
+import {
+  BackgroundLayer,
+  ContentLayer,
+} from "@/components/layout/layer"
+import { HeroData } from "../types/hero"
+import { useHeroSection } from "../hooks/useHeroSection"
+import { HeroView } from "../components/heroView"
+import { cn } from "@/lib/utils/cn"
+
+interface HeroSectionProps {
+  data: HeroData
+}
+
+export function HeroSection({ data }: HeroSectionProps) {
+  const { hasBreadcrumb, minHeightClass } = useHeroSection(data)
+
+  return (
+    <ShellLayer className="z-10 mb-[3svh] md:mb-[2svh] lg:mb-[15vh]">
+      <BackgroundLayer
+        className="
+          bg-[url('/assets/kemahasiswaan/bg-hero.webp')]
+          bg-cover
+          bg-center
+        "
+      >
+      </BackgroundLayer>
+
+      <ContentLayer className={cn(minHeightClass, "relative flex flex-col")}>
+        {hasBreadcrumb && (
+          <BreadcrumbSection items={data.breadcrumbItems!} />
+        )}
+
+        <div className={cn("flex-1 flex justify-center items-center mb-5 sm:mb-10", hasBreadcrumb ? "" : "pt-18 lg:pt-24")}>
+          <HeroView
+            title={data.title}
+            subtitle={data.subtitle}
+          />
+        </div>
+
+        <PitaDecoration />
+      </ContentLayer>
+    </ShellLayer>
+  )
+}
+
+function PitaDecoration() {
+  return (
+    <div
+      className={cn(
+        "absolute left-0 w-full aspect-[5/1] pointer-events-none z-20",
+        "top-full",
+        "-translate-y-1/2 md:-translate-y-[40%]"
+      )}
+    >
+      <Image
+        src="/assets/kemahasiswaan/decoration-pita.webp"
+        alt=""
+        fill
+        className="object-contain"
+        priority
+      />
+    </div>
+  )
+}

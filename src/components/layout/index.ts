@@ -1,2 +1,2 @@
-export {default as NavigationBar } from "./NavigationBar"
-export {default as SiteFooter } from "./SiteFooter"
+export { default as NavigationBar } from "./navigationBar"
+export { default as SiteFooter } from "./siteFooter"

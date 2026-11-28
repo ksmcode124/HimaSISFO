@@ -1,13 +1,13 @@
 'use client';
 
-import { HeaderSection } from '@/features/admin/components/HeaderSection';
-import { AdminTable } from '@/features/admin/components/AdminTable';
-import { FormModal } from '@/features/admin/components/FormModal';
-import { DetailModal } from '@/features/admin/components/DetailModal';
-import { ConfirmationModal } from '@/features/admin/components/ConfirmationModal';
+import { HeaderSection } from '@/features/admin/components/headerSection';
+import { AdminTable } from '@/features/admin/components/adminTable';
+import { FormModal } from '@/features/admin/components/formModal';
+import { DetailModal } from '@/features/admin/components/detailModal';
+import { ConfirmationModal } from '@/features/admin/components/confirmationModal';
 import { useAdminModal } from '@/features/admin/hooks/useAdminModal';
 import { useConfirm } from '@/features/admin/hooks/useConfirm';
-import { kegiatanColumns } from '@/features/admin/components/columns/kegiatan-columns';
+import { kegiatanColumns } from '@/features/admin/components/columns/kegiatanColumns';
 import { eventSchema, updateEventSchema } from '@/schemas/event.schema';
 import { useAdminEntity, useAdminEntityDetail } from '@/features/admin/hooks/useAdminEntity';
 import { AdminEventRow, AdminEventDetail, EventResponseAdmin } from '@/features/admin/types';
@@ -80,7 +80,7 @@ export default function EventPage() {
 
   // Delete
   const handleDelete = async (id: number) => {
-    const ok =  await confirm.confirm('delete')
+    const ok = await confirm.confirm('delete')
     if (!ok) return
     await remove(id);
     modal.close();

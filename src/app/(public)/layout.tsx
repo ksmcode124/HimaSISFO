@@ -1,8 +1,8 @@
 "use client";
-import { NavigationBar } from "@/components/layout";
-import { navItems } from "@/features/navigation";
+import { NavigationBar, SiteFooter } from "@/components/layout";
+import { NavbarThemeProvider, navItems } from "@/features/navigation";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import React from "react";
+import React, { Children } from "react";
 
 interface PublicLayoutProps {
   children: React.ReactNode
@@ -12,13 +12,16 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="overflow-hidden" suppressHydrationWarning>
-        <NavigationBar items={navItems} />
-        <main className="flex flex-col min-h-screen overflow-visible">
-          <div className="relative flex-1">
-            {children}
-          </div>
-        </main>
+      <div className="overflow-clip" suppressHydrationWarning>
+        <NavbarThemeProvider>
+          <NavigationBar />
+          <main className="flex flex-col min-h-screen overflow-visible">
+            <div className="relative flex-1">
+              {children}
+            </div>
+          </main>
+          <SiteFooter />
+        </NavbarThemeProvider>
       </div>
     </QueryClientProvider>
   )

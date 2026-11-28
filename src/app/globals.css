@@ -1,67 +1,143 @@
 @import "tailwindcss";
 
-@plugin "tailwindcss-animate";
 @plugin 'tailwind-scrollbar';
 @import "tw-animate-css";
 
-@theme {
+@theme inline {
   --breakpoint-xs: 30rem;
   /* Warna Descriptive */
-  --color-dodger-blue: #3385FF;
-  --color-columbia-blue: #8DDDFF;
+  /* Ini buat display H1- H3 */
+  --font-heading: var(--font-jakarta), "Segoe UI", system-ui, sans-serif;
+  /* Ini buat title, body */
+  --font-title: var(--font-poppins), "Segoe UI", system-ui, sans-serif;
+  /* Ini buat label, caption  */
+  --font-label: var(--font-inter), "Segoe UI", system-ui, sans-serif;
 
-  --color-nile-blue: #1B3C53;
-  --color-blue-bayoux: #456882;
+  /* Warna Primary Biru */
+  --color-primary-blue-light: #E7EDF6;
+  --color-primary-blue-light-hover: #DBE3F1;
+  --color-primary-blue-light-active: #B4C6E2;
+  --color-primary-blue-normal: #0D47A1;
+  --color-primary-blue-normal-hover: #0C4091;
+  --color-primary-blue-normal-active: #0A3981;
+  --color-primary-blue-dark: #0A3579;
+  --color-primary-blue-dark-hover: #082B61;
+  --color-primary-blue-dark-active: #062048;
+  --color-primary-blue-darker: #051938;
 
-  --color-white: #FFFFFF;
-  --color-porcelain: #EDF3F6;
-  --color-silver-chalice: #AFAFAF;
-  --color-ironside-grey: #666666;
-  --color-smokey-grey: #747474;
-  --color-cloud-burst: #2D2D51;
-  --color-black: #000000;
+  /* Warna Secondary Biru Muda */
+  --color-secondary-blue-light: #F4FAFE;
+  --color-secondary-blue-light-hover: #EEF7FE;
+  --color-secondary-blue-light-active: #DDEFFD;
+  --color-secondary-blue-normal: #90CAF9;
+  --color-secondary-blue-normal-hover: #82B6E0;
+  --color-secondary-blue-normal-active: #73A2C7;
+  --color-secondary-blue-dark: #6C98BB;
+  --color-secondary-blue-dark-hover: #567995;
+  --color-secondary-blue-dark-active: #415B70;
+  --color-secondary-blue-darker: #324757;
 
-  --color-parsley: #0D5125;
-  --color-dark-green-blue: #1D5954;
+  /* Warna Natural Hitam */
+  --color-black-light: #EAEAEA;
+  --color-black-light-hover: #DFDFDF;
+  --color-black-light-active: #BDBDBD;
+  --color-black-normal: #2B2B2B;
+  --color-black-normal-hover: #272727;
+  --color-black-normal-active: #222222;
+  --color-black-dark: #202020;
+  --color-black-dark-hover: #1A1A1A;
+  --color-black-dark-active: #131313;
+  --color-black-darker: #0F0F0F;
 
-  /* Semantic Palette */
-  --color-primary: var(--color-nile-blue);
-  --color-primary-foreground: var(--color-white);
+  /* Warna Natural Putih */
+  --color-white-light: #FEFEFE;
+  --color-white-light-hover: #FDFDFD;
+  --color-white-light-active: #FBFBFB;
+  --color-white-normal: #F2F2F2;
+  --color-white-normal-hover: #DADADA;
+  --color-white-normal-active: #C2C2C2;
+  --color-white-dark: #B6B6B6;
+  --color-white-dark-hover: #919191;
+  --color-white-dark-active: #6D6D6D;
+  --color-white-darker: #555555;
 
-  --color-accent: var(--color-dodger-blue);
-  --color-accent-foreground: var(--color-white);
+  /* Warna Aksen Biru Langit */
+  --color-sky-light: #FCFEFF;
+  --color-sky-light-hover: #FBFDFF;
+  --color-sky-light-active: #F6FBFE;
+  --color-sky-normal: #E3F2FD;
+  --color-sky-normal-hover: #CCDAE4;
+  --color-sky-normal-active: #B6C2CA;
+  --color-sky-dark: #AAB6BE;
+  --color-sky-dark-hover: #889198;
+  --color-sky-dark-active: #666D72;
+  --color-sky-darker: #4F5559;
 
-  --color-secondary: var(--color-blue-bayoux);
-  --color-secondary-foreground: var(--color-white);
+  /* Warna Aksen Biru */
+  --color-blue-light: #E9F5FE;
+  --color-blue-light-hover: #DEEFFD;
+  --color-blue-light-active: #BADEFB;
+  --color-blue-normal: #2196F3;
+  --color-blue-normal-hover: #1E87DB;
+  --color-blue-normal-active: #1A78C2;
+  --color-blue-dark: #1971B6;
+  --color-blue-dark-hover: #145A92;
+  --color-blue-dark-active: #0F446D;
+  --color-blue-darker: #0C3555;
 
-  /* Neutral Scale */
-  --color-neutral-50: var(--color-porcelain);
-  --color-neutral-100: var(--color-silver-chalice);
-  --color-neutral-200: var(--color-ironside-grey);
-  --color-neutral-300: var(--color-smokey-grey);
-  --color-neutral-400: var(--color-cloud-burst);
-  --color-neutral-950: var(--color-black);
+  /* Warna Primary Coklat */
+  --color-primary-brown-light: #FDF0E9;
+  --color-primary-brown-light-hover: #FCE8DE;
+  --color-primary-brown-light-active: #F8CFBB;
+  --color-primary-brown-normal: #E96424;
+  --color-primary-brown-normal-hover: #D25A20;
+  --color-primary-brown-normal-active: #BA501D;
+  --color-primary-brown-dark: #AF4B1B;
+  --color-primary-brown-dark-hover: #8C3C16;
+  --color-primary-brown-dark-active: #692D10;
+  --color-primary-brown-darker: #52230D;
+
+  /* Warna Secondary Violet */
+  --color-secondary-violet-light: #ECEAEC;
+  --color-secondary-violet-light-hover: #E3DFE3;
+  --color-secondary-violet-light-active: #C5BDC4;
+  --color-secondary-violet-normal: #432A41;
+  --color-secondary-violet-normal-hover: #3C263B;
+  --color-secondary-violet-normal-active: #362234;
+  --color-secondary-violet-dark: #322031;
+  --color-secondary-violet-dark-hover: #281927;
+  --color-secondary-violet-dark-active: #1E131D;
+  --color-secondary-violet-darker: #170F17;
 
   /* Base UI Tokens (shadcn) */
-  --color-background: var(--color-neutral-50);
-  --color-foreground: var(--color-neutral-950);
+  --color-primary: var(--color-primary-blue-normal);
+  --color-primary-foreground: var(--color-white-light);
 
-  --color-card: var(--color-neutral-50);
-  --color-card-foreground: var(--color-neutral-950);
+  --color-secondary: var(--color-secondary-blue-normal);
+  --color-secondary-foreground: var(--color-black-darker);
 
-  --color-popover: var(--color-neutral-50);
-  --color-popover-foreground: var(--color-neutral-950);
+  --color-accent: var(--color-blue-normal);
+  --color-accent-foreground: var(--color-white-light);
 
-  --color-muted: var(--color-neutral-100);
-  --color-muted-foreground: var(--color-neutral-300);
+  --color-background: var(--color-white-normal);
+  --color-foreground: var(--color-black-darker);
 
-  --color-border: var(--color-neutral-100);
-  --color-input: var(--color-neutral-100);
-  --color-ring: var(--color-accent);
+  --color-card: var(--color-white-light);
+  --color-card-foreground: var(--color-black-darker);
+
+  --color-popover: var(--color-white-light);
+  --color-popover-foreground: var(--color-black-darker);
+
+  --color-muted: var(--color-white-normal-hover);
+  --color-muted-foreground: var(--color-white-dark-active);
+
+  --color-border: var(--color-white-normal-active);
+  --color-input: var(--color-white-normal-active);
+  --color-ring: var(--color-blue-normal);
 
   /* Destructive (reuse only) */
-  --color-destructive: var(--color-red-900);
-  --color-destructive-foreground: var(--color-white);
+  --color-destructive: var(--color-red-700);
+  --color-destructive-foreground: var(--color-white-light);
 
   /* Radius */
   --radius: 0.625rem;
@@ -72,33 +148,192 @@
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
+  --radius-4xl: calc(var(--radius) + 14px);
+  --radius-5xl: calc(var(--radius) + 16px);
+  --radius-6xl: calc(var(--radius) + 18px);
+  --radius-7xl: calc(var(--radius) + 20px);
+  --radius-8xl: calc(var(--radius) + 22px);
+  --radius-9xl: calc(var(--radius) + 24px);
+}
 
-  /* Font Sizes */
-  --text-3xs: 10px;
-  --text-2xs: 12px;
-  --text-xs: 14px;
-  --text-sm: 16px;
-  --text-md: 18px;
-  --text-lg: 20px;
-  --text-xl: 24px;
-  --text-2xl: 28px;
-  --text-3xl: 32px;
-  --text-4xl: 36px;
-  --text-5xl: 40px;
-  --text-6xl: 48px;
-  --text-7xl: 56px;
-  --text-8xl: 64px;
+/* BASE */
+@layer base {
 
-  /* Headings: geometric / strong */
-  --font-heading: "League Spartan", "Arial Black", "Segoe UI", sans-serif;
+  html,
+  body {
+    @apply antialiased;
+    font-family: var(--font-title);
+    color: var(--color-foreground);
+    background-color: var(--color-background);
+    scroll-behavior: smooth;
+  }
 
-  /* Body: clean UI sans */
-  --font-body: "Poppins", "Inter", "Segoe UI", system-ui, sans-serif;
+  h1 {
+    font-family: var(--font-heading);
+    font-size: 48px;
+    font-weight: 700;
+    line-height: auto;
+  }
+
+  h2 {
+    font-family: var(--font-heading);
+    font-size: 40px;
+    font-weight: 700;
+    line-height: auto;
+  }
+
+  h3 {
+    font-family: var(--font-heading);
+    font-size: 36px;
+    font-weight: 700;
+    line-height: auto;
+  }
+}
+
+/* TYPOGRAPHY */
+/* Class untuk huruf */
+@utility display1 {
+  font-family: var(--font-heading);
+  font-size: 96px;
+  font-weight: 800;
+  line-height: auto;
+}
+
+@utility display2 {
+  font-family: var(--font-heading);
+  font-size: 80px;
+  font-weight: 800;
+  line-height: auto;
+}
+
+@utility display3 {
+  font-family: var(--font-heading);
+  font-size: 72px;
+  font-weight: 700;
+  line-height: auto;
+}
+
+@utility display4 {
+  font-family: var(--font-heading);
+  font-size: 64px;
+  font-weight: 700;
+  line-height: auto;
+}
+
+@utility display5 {
+  font-family: var(--font-heading);
+  font-size: 56px;
+  font-weight: 700;
+  line-height: auto;
+}
+
+@utility title1 {
+  font-family: var(--font-title);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: auto;
+}
+
+@utility title2 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: auto;
+}
+
+@utility title3 {
+  font-family: var(--font-title);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: auto;
+}
+
+@utility title4 {
+  font-family: var(--font-title);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: auto;
+}
+
+@utility title5 {
+  font-family: var(--font-title);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: auto;
+}
+
+@utility body1 {
+  font-family: var(--font-title);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: auto;
+}
+
+@utility body1-bold {
+  font-family: var(--font-title);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: auto;
+}
+
+@utility body2 {
+  font-family: var(--font-title);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: auto;
+}
+
+@utility body2-bold {
+  font-family: var(--font-title);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: auto;
+}
+
+@utility body3 {
+  font-family: var(--font-title);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: auto;
+}
+
+@utility body4 {
+  font-family: var(--font-title);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: auto;
+}
+
+@utility body4-bold {
+  font-family: var(--font-title);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: auto;
+}
+
+@utility label1 {
+  font-family: var(--font-label);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: auto;
+}
+
+@utility label2 {
+  font-family: var(--font-label);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: auto;
+}
+
+@utility caption {
+  font-family: var(--font-label);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: auto;
 }
 
 .flip-card {
-  background: linear-gradient(to right, #A6CFE1, #265A8C 50%, #456882, #1F445F, #1B3C53);
+  background: linear-gradient(to right, var(--color-secondary-blue-normal-active), var(--color-primary-blue-normal), var(--color-secondary-blue-dark-hover), var(--color-primary-blue-dark-hover), var(--color-primary-blue-darker));
   background-size: 400% 100%;
   background-position: right;
 }
@@ -155,21 +390,6 @@
   width: 4px;
 }
 
-@layer base {
-  * {
-    @apply m-0 p-0 box-border;
-  }
-
-  html,
-  body {
-    @apply antialiased;
-    font-family: var(--font-primary);
-    color: var(--color-black);
-    background-color: var(--color-porcelain);
-    scroll-behavior: smooth;
-  }
-}
-
 @layer utilities {
 
   .border-gradient-x,
@@ -193,7 +413,7 @@
   }
 
   .border-gradient-x::before {
-    background: linear-gradient(to right, #1B3C53, #456882);
+    background: linear-gradient(to right, var(--color-primary-blue-dark-hover), var(--color-secondary-blue-dark-hover));
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
@@ -201,8 +421,8 @@
 
   .border-gradient-y::before {
     background: linear-gradient(to bottom,
-        var(--gradient-start, #1B3C53),
-        var(--gradient-end, #456882));
+        var(--gradient-start, var(--color-primary-blue-dark-hover)),
+        var(--gradient-end, var(--color-secondary-blue-dark-hover)));
 
     -webkit-mask:
       linear-gradient(#fff 0 0) content-box,
@@ -213,7 +433,7 @@
 
   .border-gradient-kabinet {
     position: relative;
-    border-radius: 0rem solid transparent;
+    border-radius: 0;
     border: 0px solid transparent;
     overflow: hidden;
     background: transparent;
@@ -257,5 +477,80 @@
     .border-gradient-y::before {
       padding: 4px;
     }
+  }
+
+  /* animasi carousel Visi Misi (bolak balik) */
+  /* mulai dari kiri, geser sampai foto paling kanan kelihatan */
+  @keyframes geser_left {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(calc(100cqw - 100%));
+    }
+  }
+
+  /* mulai dari kanan, geser sampai foto paling kiri kelihatan */
+  @keyframes geser_right {
+    from {
+      transform: translateX(calc(100cqw - 100%));
+    }
+
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  /* matiin animasi kalau user pakai reduce motion */
+  @media (prefers-reduced-motion: reduce) {
+    .slide_track {
+      animation: none !important;
+    }
+  }
+
+  .text-gradient-blue {
+    background-image: linear-gradient(
+      to right,
+      #5b93c6 0%,
+      #145a92 50%,
+      #5b93c6 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+@keyframes carousel_slide {
+
+  0%,
+  10% {
+    transform: translateX(var(--from));
+  }
+
+  /* diam di posisi awal */
+  30%,
+  60% {
+    transform: translateX(var(--to));
+  }
+
+  /* geser, lalu diam */
+  80%,
+  100% {
+    transform: translateX(var(--from));
+  }
+
+  /* geser balik */
+}
+
+.slide_track {
+  animation: carousel_slide var(--dur, 9s) cubic-bezier(0.45, 0, 0.25, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide_track {
+    animation: none;
   }
 }

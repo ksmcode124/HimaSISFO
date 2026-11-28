@@ -1,5 +1,5 @@
-import { ShellLayer } from "@/components/layout/ShellLayer";
-import ComingSoonSection from "@/features/kabinet/sections/ComingSoonSection";
+import { ShellLayer } from "@/components/layout/shellLayer";
+import ComingSoonSection from "@/features/kabinet/sections/comingSoonSection";
 
 export default function Page() {
   return (

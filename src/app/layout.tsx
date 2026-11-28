@@ -1,11 +1,26 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Poppins } from 'next/font/google';
+import { Plus_Jakarta_Sans, Poppins, Inter } from "next/font/google";
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "700", "800"],
+  variable: "--font-jakarta",
+  display: "swap",
+});
 
 const poppins = Poppins({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
-  variable: '--font-primary'
+  variable: '--font-poppins',
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -66,12 +81,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id">
-      <body
-        className={`${poppins.variable} min-h-screen antialiased text-[#323257] scrollbar scrollbar-lg scrollbar-thumb-[#AFAFAF] scrollbar-track-scrollbar-track`}
-      >
+    <html lang="id"
+      className={`${jakarta.variable} ${poppins.variable} ${inter.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <link href="https://fonts.cdnfonts.com/css/coolvetica-2" rel="stylesheet" />
+      </head>
+      <body className="min-h-screen scrollbar scrollbar-lg scrollbar-thumb-[#AFAFAF] scrollbar-track-scrollbar-track">
         {children}
-      </body>
-    </html>
+      </body >
+    </ html >
   );
 }

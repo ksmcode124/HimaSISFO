@@ -1,0 +1,30 @@
+import Image from "next/image"
+import { ShellLayer } from "@/components/layout/shellLayer"
+import { BackgroundLayer, ContentLayer } from "@/components/layout/layer"
+import { CTASection } from "../types/ui"
+import { useBlankoSection } from "../hooks/useBlankoSection"
+import { BlankoCTA } from "../components/blankoCTA"
+
+export function BlankoSection(data: CTASection) {
+  const blanko = useBlankoSection(data)
+
+  return (
+    <ShellLayer>
+      <BackgroundLayer>
+        <div className="absolute w-full h-full z-10">
+          <Image
+            src="/assets/kemahasiswaan/bg-blanko.webp"
+            alt=""
+            fill
+            priority
+            className="object-cover"
+          />
+        </div>
+      </BackgroundLayer>
+
+      <ContentLayer>
+        <BlankoCTA {...blanko} />
+      </ContentLayer>
+    </ShellLayer>
+  )
+}

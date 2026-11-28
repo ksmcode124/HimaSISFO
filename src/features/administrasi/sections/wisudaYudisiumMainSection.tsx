@@ -1,0 +1,38 @@
+import { ShellLayer } from "@/components/layout/shellLayer";
+import { ItemDataJSON } from "../types/data";
+import { BackgroundLayer, ContentLayer } from "@/components/layout/layer";
+import RadialBackground from "@/components/ui/radialBg";
+import { WisudaDecorationLayer } from "./wisudaYudisiumDecorationSection";
+import { WisudaAccordionSection } from "./wisudaYudisiumAccordionSection";
+import { WisudaYudisiumItemsSection } from "./wisudaYudisiumItemsSection";
+import { CloudDecoration } from "@/components/ui/cloudDecoration";
+
+interface Props {
+  accordionItems: ItemDataJSON[],
+  itemCollectionItems: ItemDataJSON[],
+  setSelectedId: (id: string | null) => void
+}
+
+export function WisudaYudisiumMainSection({ accordionItems, itemCollectionItems, setSelectedId }: Props) {
+  return (
+    <ShellLayer>
+      <BackgroundLayer>
+        <RadialBackground />
+      </BackgroundLayer>
+
+      <WisudaDecorationLayer />
+
+      <ContentLayer>
+        <section className="px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 2xl:px-18 min-h-screen pb-10">
+          <ShellLayer>
+            <ContentLayer className="flex flex-col items-center">
+              <WisudaAccordionSection items={accordionItems} />
+              <WisudaYudisiumItemsSection setSelectedId={setSelectedId} items={itemCollectionItems} />
+              <CloudDecoration />
+            </ContentLayer>
+          </ShellLayer>
+        </section>
+      </ContentLayer>
+    </ShellLayer>
+  )
+}

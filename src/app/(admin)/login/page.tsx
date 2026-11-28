@@ -9,7 +9,7 @@ import {
   FieldSet,
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import TextSlideshow from '@/features/admin/components/TextSlideshow';
+import TextSlideshow from '@/features/admin/components/textSlideshow';
 import { useLogin } from '@/features/admin/hooks/useLogin';
 import Image from 'next/image';
 
