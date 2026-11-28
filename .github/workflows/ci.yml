@@ -33,4 +33,4 @@ jobs:
           DATABASE_URL: "postgresql://dummy:dummy@localhost:5432/dummy"
           BETTER_AUTH_SECRET: "ci-dummy-secret-at-least-32-chars-long"
           BETTER_AUTH_URL: "http://localhost:3000"
-        run: npx next build --webpack
+        run: npm run build
